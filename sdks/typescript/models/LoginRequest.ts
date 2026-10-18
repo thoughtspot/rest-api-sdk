@@ -30,7 +30,7 @@ export class LoginRequest {
     */
     'remember_me'?: boolean | null;
     /**
-    * Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
+    * Path on this cluster to land on after a successful login. Pass only the path; a full URL is rejected with 400.   Accepted: `/insights/home/answers`, `/insights/pinboard`, `/`   Rejected: `https://your-cluster.thoughtspot.cloud/#/insights/home/answers`, `//example.com/insights`, `insights/home/answers`   When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
     */
     'redirect_url'?: string;
     /**

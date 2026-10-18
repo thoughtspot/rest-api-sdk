@@ -23,7 +23,10 @@ import com.thoughtspot.client.model.AccessToken;
 import com.thoughtspot.client.model.ActivateUserRequest;
 import com.thoughtspot.client.model.AgentConversation;
 import com.thoughtspot.client.model.AgentConversationHistoryResponse;
+import com.thoughtspot.client.model.AgentConversationV2;
 import com.thoughtspot.client.model.AgentInstructions;
+import com.thoughtspot.client.model.AgentStreamFrame;
+import com.thoughtspot.client.model.AgentTurnResponse;
 import com.thoughtspot.client.model.Analyst;
 import com.thoughtspot.client.model.AnalystDeleteResponse;
 import com.thoughtspot.client.model.AnalystSearchResponse;
@@ -53,9 +56,11 @@ import com.thoughtspot.client.model.ConversationShareStatusResponse;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.CreateAgentConversationRequest;
+import com.thoughtspot.client.model.CreateAgentConversationV2Request;
 import com.thoughtspot.client.model.CreateAnalystRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateCollectionRequest;
+import com.thoughtspot.client.model.CreateCommitRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
 import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
@@ -74,6 +79,7 @@ import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.CreateVersionControlConfigRequest;
 import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
@@ -91,6 +97,7 @@ import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
+import com.thoughtspot.client.model.DeployRevisionRequest;
 import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
@@ -156,6 +163,7 @@ import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
+import com.thoughtspot.client.model.PromoteBranchRequest;
 import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
@@ -167,6 +175,7 @@ import com.thoughtspot.client.model.ResponseCustomAction;
 import com.thoughtspot.client.model.ResponseMessage;
 import com.thoughtspot.client.model.ResponseSchedule;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
+import com.thoughtspot.client.model.RestoreRevisionRequest;
 import com.thoughtspot.client.model.RevertCommitRequest;
 import com.thoughtspot.client.model.RevertResponse;
 import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
@@ -205,12 +214,15 @@ import com.thoughtspot.client.model.SearchUsageDataRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
+import com.thoughtspot.client.model.SearchVersionControlRunsRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.SecuritySettingsResponse;
 import com.thoughtspot.client.model.SemanticIntegrationResponse;
 import com.thoughtspot.client.model.SemanticIntegrationSearchResponse;
 import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
 import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingV2Request;
+import com.thoughtspot.client.model.SendAgentConversationMessageV2Request;
 import com.thoughtspot.client.model.SendAgentMessageRequest;
 import com.thoughtspot.client.model.SendAgentMessageResponse;
 import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
@@ -269,6 +281,7 @@ import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
+import com.thoughtspot.client.model.UpdateVersionControlConfigRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.UsageDataForUserResponse;
 import com.thoughtspot.client.model.UsageDataResponse;
@@ -278,6 +291,13 @@ import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
+import com.thoughtspot.client.model.VersionControlCommitResponse;
+import com.thoughtspot.client.model.VersionControlConfig;
+import com.thoughtspot.client.model.VersionControlConfigList;
+import com.thoughtspot.client.model.VersionControlDeployResponse;
+import com.thoughtspot.client.model.VersionControlPromotionResponse;
+import com.thoughtspot.client.model.VersionControlRestoreResponse;
+import com.thoughtspot.client.model.VersionControlRunList;
 import com.thoughtspot.client.model.VisualizationFontsInput;
 import com.thoughtspot.client.model.WebhookDeleteResponse;
 import com.thoughtspot.client.model.WebhookResponse;
@@ -2049,6 +2069,153 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for createAgentConversationV2
+     * @param createAgentConversationV2Request  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAgentConversationV2Call(CreateAgentConversationV2Request createAgentConversationV2Request, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createAgentConversationV2Request;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/v2/conversation/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAgentConversationV2ValidateBeforeCall(CreateAgentConversationV2Request createAgentConversationV2Request, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createAgentConversationV2Request' is set
+        if (createAgentConversationV2Request == null) {
+            throw new ApiException("Missing the required parameter 'createAgentConversationV2Request' when calling createAgentConversationV2(Async)");
+        }
+
+        return createAgentConversationV2Call(createAgentConversationV2Request, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned &#x60;conversation_identifier&#x60; to &#x60;sendAgentConversationMessageV2&#x60; or &#x60;sendAgentConversationMessageStreamingV2&#x60; to send messages within it.  &#x60;source&#x60; decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - &#x60;source&#x60; (default: &#x60;DATA_SOURCE&#x60;): what the conversation is grounded in.   - &#x60;DATA_SOURCE&#x60;: data sources, set with &#x60;data_source_identifiers&#x60; and optionally &#x60;additional_instructions&#x60;. &#x60;analyst_identifier&#x60; is not allowed.   - &#x60;ANALYST&#x60;: a saved analyst, set with &#x60;analyst_identifier&#x60;, which is then required. The analyst brings its own instructions, data sources and connectors, so &#x60;data_source_identifiers&#x60; and &#x60;additional_instructions&#x60; are not allowed. - &#x60;data_source_identifiers&#x60; (default: &#x60;[]&#x60;): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - &#x60;additional_instructions&#x60;: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, &#x60;\&quot;Answer concisely and always report revenue in thousands.\&quot;&#x60; It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - &#x60;analyst_identifier&#x60;: the saved analyst to create the conversation from.  A parameter that does not apply to the &#x60;source&#x60; fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;DATA_SOURCE\&quot;,   \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;],   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot; } &#x60;&#x60;&#x60;  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;ANALYST\&quot;,   \&quot;analyst_identifier\&quot;: \&quot;0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\&quot; } &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } &#x60;&#x60;&#x60;  Treat &#x60;conversation_identifier&#x60; as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; &#x60;analyst_identifier&#x60; is missing when &#x60;source&#x60; is &#x60;ANALYST&#x60;; a parameter that does not apply to the &#x60;source&#x60; is set; or the analyst in &#x60;analyst_identifier&#x60;, or a data source in &#x60;data_source_identifiers&#x60;, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationV2Request  (required)
+     * @return AgentConversationV2
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public AgentConversationV2 createAgentConversationV2(CreateAgentConversationV2Request createAgentConversationV2Request) throws ApiException {
+        ApiResponse<AgentConversationV2> localVarResp = createAgentConversationV2WithHttpInfo(createAgentConversationV2Request);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned &#x60;conversation_identifier&#x60; to &#x60;sendAgentConversationMessageV2&#x60; or &#x60;sendAgentConversationMessageStreamingV2&#x60; to send messages within it.  &#x60;source&#x60; decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - &#x60;source&#x60; (default: &#x60;DATA_SOURCE&#x60;): what the conversation is grounded in.   - &#x60;DATA_SOURCE&#x60;: data sources, set with &#x60;data_source_identifiers&#x60; and optionally &#x60;additional_instructions&#x60;. &#x60;analyst_identifier&#x60; is not allowed.   - &#x60;ANALYST&#x60;: a saved analyst, set with &#x60;analyst_identifier&#x60;, which is then required. The analyst brings its own instructions, data sources and connectors, so &#x60;data_source_identifiers&#x60; and &#x60;additional_instructions&#x60; are not allowed. - &#x60;data_source_identifiers&#x60; (default: &#x60;[]&#x60;): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - &#x60;additional_instructions&#x60;: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, &#x60;\&quot;Answer concisely and always report revenue in thousands.\&quot;&#x60; It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - &#x60;analyst_identifier&#x60;: the saved analyst to create the conversation from.  A parameter that does not apply to the &#x60;source&#x60; fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;DATA_SOURCE\&quot;,   \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;],   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot; } &#x60;&#x60;&#x60;  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;ANALYST\&quot;,   \&quot;analyst_identifier\&quot;: \&quot;0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\&quot; } &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } &#x60;&#x60;&#x60;  Treat &#x60;conversation_identifier&#x60; as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; &#x60;analyst_identifier&#x60; is missing when &#x60;source&#x60; is &#x60;ANALYST&#x60;; a parameter that does not apply to the &#x60;source&#x60; is set; or the analyst in &#x60;analyst_identifier&#x60;, or a data source in &#x60;data_source_identifiers&#x60;, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationV2Request  (required)
+     * @return ApiResponse&lt;AgentConversationV2&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AgentConversationV2> createAgentConversationV2WithHttpInfo(CreateAgentConversationV2Request createAgentConversationV2Request) throws ApiException {
+        okhttp3.Call localVarCall = createAgentConversationV2ValidateBeforeCall(createAgentConversationV2Request, null);
+        Type localVarReturnType = new TypeToken<AgentConversationV2>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned &#x60;conversation_identifier&#x60; to &#x60;sendAgentConversationMessageV2&#x60; or &#x60;sendAgentConversationMessageStreamingV2&#x60; to send messages within it.  &#x60;source&#x60; decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - &#x60;source&#x60; (default: &#x60;DATA_SOURCE&#x60;): what the conversation is grounded in.   - &#x60;DATA_SOURCE&#x60;: data sources, set with &#x60;data_source_identifiers&#x60; and optionally &#x60;additional_instructions&#x60;. &#x60;analyst_identifier&#x60; is not allowed.   - &#x60;ANALYST&#x60;: a saved analyst, set with &#x60;analyst_identifier&#x60;, which is then required. The analyst brings its own instructions, data sources and connectors, so &#x60;data_source_identifiers&#x60; and &#x60;additional_instructions&#x60; are not allowed. - &#x60;data_source_identifiers&#x60; (default: &#x60;[]&#x60;): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - &#x60;additional_instructions&#x60;: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, &#x60;\&quot;Answer concisely and always report revenue in thousands.\&quot;&#x60; It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - &#x60;analyst_identifier&#x60;: the saved analyst to create the conversation from.  A parameter that does not apply to the &#x60;source&#x60; fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;DATA_SOURCE\&quot;,   \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;],   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot; } &#x60;&#x60;&#x60;  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;ANALYST\&quot;,   \&quot;analyst_identifier\&quot;: \&quot;0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\&quot; } &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } &#x60;&#x60;&#x60;  Treat &#x60;conversation_identifier&#x60; as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; &#x60;analyst_identifier&#x60; is missing when &#x60;source&#x60; is &#x60;ANALYST&#x60;; a parameter that does not apply to the &#x60;source&#x60; is set; or the analyst in &#x60;analyst_identifier&#x60;, or a data source in &#x60;data_source_identifiers&#x60;, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationV2Request  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAgentConversationV2Async(CreateAgentConversationV2Request createAgentConversationV2Request, final ApiCallback<AgentConversationV2> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createAgentConversationV2ValidateBeforeCall(createAgentConversationV2Request, _callback);
+        Type localVarReturnType = new TypeToken<AgentConversationV2>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for createAnalyst
      * @param createAnalystRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -2478,6 +2645,157 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = createCollectionValidateBeforeCall(createCollectionRequest, _callback);
         Type localVarReturnType = new TypeToken<Collection>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createCommit
+     * @param createCommitRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createCommitCall(CreateCommitRequest createCommitRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createCommitRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/commit";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createCommitValidateBeforeCall(CreateCommitRequest createCommitRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createCommitRequest' is set
+        if (createCommitRequest == null) {
+            throw new ApiException("Missing the required parameter 'createCommitRequest' when calling createCommit(Async)");
+        }
+
+        return createCommitCall(createCommitRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createCommitRequest  (required)
+     * @return VersionControlCommitResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlCommitResponse createCommit(CreateCommitRequest createCommitRequest) throws ApiException {
+        ApiResponse<VersionControlCommitResponse> localVarResp = createCommitWithHttpInfo(createCommitRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createCommitRequest  (required)
+     * @return ApiResponse&lt;VersionControlCommitResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlCommitResponse> createCommitWithHttpInfo(CreateCommitRequest createCommitRequest) throws ApiException {
+        okhttp3.Call localVarCall = createCommitValidateBeforeCall(createCommitRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlCommitResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createCommitRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createCommitAsync(CreateCommitRequest createCommitRequest, final ApiCallback<VersionControlCommitResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createCommitValidateBeforeCall(createCommitRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlCommitResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -4801,6 +5119,153 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = createVariableValidateBeforeCall(createVariableRequest, _callback);
         Type localVarReturnType = new TypeToken<Variable>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createVersionControlConfig
+     * @param createVersionControlConfigRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The stored configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createVersionControlConfigCall(CreateVersionControlConfigRequest createVersionControlConfigRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createVersionControlConfigRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/config/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createVersionControlConfigValidateBeforeCall(CreateVersionControlConfigRequest createVersionControlConfigRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createVersionControlConfigRequest' is set
+        if (createVersionControlConfigRequest == null) {
+            throw new ApiException("Missing the required parameter 'createVersionControlConfigRequest' when calling createVersionControlConfig(Async)");
+        }
+
+        return createVersionControlConfigCall(createVersionControlConfigRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send &#x60;disabled_operations&#x60; on the update endpoint instead of deleting the configuration.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createVersionControlConfigRequest  (required)
+     * @return VersionControlConfig
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The stored configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlConfig createVersionControlConfig(CreateVersionControlConfigRequest createVersionControlConfigRequest) throws ApiException {
+        ApiResponse<VersionControlConfig> localVarResp = createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send &#x60;disabled_operations&#x60; on the update endpoint instead of deleting the configuration.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createVersionControlConfigRequest  (required)
+     * @return ApiResponse&lt;VersionControlConfig&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The stored configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlConfig> createVersionControlConfigWithHttpInfo(CreateVersionControlConfigRequest createVersionControlConfigRequest) throws ApiException {
+        okhttp3.Call localVarCall = createVersionControlConfigValidateBeforeCall(createVersionControlConfigRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlConfig>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send &#x60;disabled_operations&#x60; on the update endpoint instead of deleting the configuration.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param createVersionControlConfigRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The stored configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createVersionControlConfigAsync(CreateVersionControlConfigRequest createVersionControlConfigRequest, final ApiCallback<VersionControlConfig> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createVersionControlConfigValidateBeforeCall(createVersionControlConfigRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlConfig>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -9631,6 +10096,135 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for deleteVersionControlConfig
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully revoked version control for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteVersionControlConfigCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/config/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteVersionControlConfigValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return deleteVersionControlConfigCall(_callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set &#x60;disabled_operations&#x60; on the update endpoint instead.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully revoked version control for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteVersionControlConfig() throws ApiException {
+        deleteVersionControlConfigWithHttpInfo();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set &#x60;disabled_operations&#x60; on the update endpoint instead.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully revoked version control for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteVersionControlConfigWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = deleteVersionControlConfigValidateBeforeCall(null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set &#x60;disabled_operations&#x60; on the update endpoint instead.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully revoked version control for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteVersionControlConfigAsync(final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteVersionControlConfigValidateBeforeCall(_callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for deleteWebhookConfigurations
      * @param deleteWebhookConfigurationsRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -9913,6 +10507,157 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = deployCommitValidateBeforeCall(deployCommitRequest, _callback);
         Type localVarReturnType = new TypeToken<List<DeployResponse>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deployRevision
+     * @param deployRevisionRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deployRevisionCall(DeployRevisionRequest deployRevisionRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deployRevisionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/deploy";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deployRevisionValidateBeforeCall(DeployRevisionRequest deployRevisionRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'deployRevisionRequest' is set
+        if (deployRevisionRequest == null) {
+            throw new ApiException("Missing the required parameter 'deployRevisionRequest' when calling deployRevision(Async)");
+        }
+
+        return deployRevisionCall(deployRevisionRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60; and the pinned revision.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param deployRevisionRequest  (required)
+     * @return VersionControlDeployResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlDeployResponse deployRevision(DeployRevisionRequest deployRevisionRequest) throws ApiException {
+        ApiResponse<VersionControlDeployResponse> localVarResp = deployRevisionWithHttpInfo(deployRevisionRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60; and the pinned revision.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param deployRevisionRequest  (required)
+     * @return ApiResponse&lt;VersionControlDeployResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlDeployResponse> deployRevisionWithHttpInfo(DeployRevisionRequest deployRevisionRequest) throws ApiException {
+        okhttp3.Call localVarCall = deployRevisionValidateBeforeCall(deployRevisionRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlDeployResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60; and the pinned revision.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param deployRevisionRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deployRevisionAsync(DeployRevisionRequest deployRevisionRequest, final ApiCallback<VersionControlDeployResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deployRevisionValidateBeforeCall(deployRevisionRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlDeployResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -17513,6 +18258,153 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for promoteBranch
+     * @param promoteBranchRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call promoteBranchCall(PromoteBranchRequest promoteBranchRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = promoteBranchRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/branch/promote";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call promoteBranchValidateBeforeCall(PromoteBranchRequest promoteBranchRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'promoteBranchRequest' is set
+        if (promoteBranchRequest == null) {
+            throw new ApiException("Missing the required parameter 'promoteBranchRequest' when calling promoteBranch(Async)");
+        }
+
+        return promoteBranchCall(promoteBranchRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Merges content from another Org&#39;s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org&#39;s live content changes until a deploy.  &#x60;dry_run&#x60; defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or &#x60;ADMINISTRATION&#x60; privilege in the source Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param promoteBranchRequest  (required)
+     * @return VersionControlPromotionResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlPromotionResponse promoteBranch(PromoteBranchRequest promoteBranchRequest) throws ApiException {
+        ApiResponse<VersionControlPromotionResponse> localVarResp = promoteBranchWithHttpInfo(promoteBranchRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Merges content from another Org&#39;s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org&#39;s live content changes until a deploy.  &#x60;dry_run&#x60; defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or &#x60;ADMINISTRATION&#x60; privilege in the source Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param promoteBranchRequest  (required)
+     * @return ApiResponse&lt;VersionControlPromotionResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlPromotionResponse> promoteBranchWithHttpInfo(PromoteBranchRequest promoteBranchRequest) throws ApiException {
+        okhttp3.Call localVarCall = promoteBranchValidateBeforeCall(promoteBranchRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlPromotionResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Merges content from another Org&#39;s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org&#39;s live content changes until a deploy.  &#x60;dry_run&#x60; defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or &#x60;ADMINISTRATION&#x60; privilege in the source Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param promoteBranchRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call promoteBranchAsync(PromoteBranchRequest promoteBranchRequest, final ApiCallback<VersionControlPromotionResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = promoteBranchValidateBeforeCall(promoteBranchRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlPromotionResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for publishMetadata
      * @param publishMetadataRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -18093,6 +18985,157 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = resetUserPasswordValidateBeforeCall(resetUserPasswordRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for restoreRevision
+     * @param restoreRevisionRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call restoreRevisionCall(RestoreRevisionRequest restoreRevisionRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = restoreRevisionRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/commit/restore";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call restoreRevisionValidateBeforeCall(RestoreRevisionRequest restoreRevisionRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'restoreRevisionRequest' is set
+        if (restoreRevisionRequest == null) {
+            throw new ApiException("Missing the required parameter 'restoreRevisionRequest' when calling restoreRevision(Async)");
+        }
+
+        return restoreRevisionCall(restoreRevisionRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a &#x60;run_id&#x60;.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param restoreRevisionRequest  (required)
+     * @return VersionControlRestoreResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlRestoreResponse restoreRevision(RestoreRevisionRequest restoreRevisionRequest) throws ApiException {
+        ApiResponse<VersionControlRestoreResponse> localVarResp = restoreRevisionWithHttpInfo(restoreRevisionRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a &#x60;run_id&#x60;.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param restoreRevisionRequest  (required)
+     * @return ApiResponse&lt;VersionControlRestoreResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlRestoreResponse> restoreRevisionWithHttpInfo(RestoreRevisionRequest restoreRevisionRequest) throws ApiException {
+        okhttp3.Call localVarCall = restoreRevisionValidateBeforeCall(restoreRevisionRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlRestoreResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a &#x60;run_id&#x60;.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param restoreRevisionRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call restoreRevisionAsync(RestoreRevisionRequest restoreRevisionRequest, final ApiCallback<VersionControlRestoreResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = restoreRevisionValidateBeforeCall(restoreRevisionRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlRestoreResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -22427,6 +23470,282 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for searchVersionControlConfigs
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Zero or one configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchVersionControlConfigsCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/config/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchVersionControlConfigsValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return searchVersionControlConfigsCall(_callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Returns your Org&#39;s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @return VersionControlConfigList
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Zero or one configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlConfigList searchVersionControlConfigs() throws ApiException {
+        ApiResponse<VersionControlConfigList> localVarResp = searchVersionControlConfigsWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Returns your Org&#39;s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @return ApiResponse&lt;VersionControlConfigList&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Zero or one configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlConfigList> searchVersionControlConfigsWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = searchVersionControlConfigsValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<VersionControlConfigList>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Returns your Org&#39;s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Zero or one configuration. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchVersionControlConfigsAsync(final ApiCallback<VersionControlConfigList> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchVersionControlConfigsValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<VersionControlConfigList>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchVersionControlRuns
+     * @param searchVersionControlRunsRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchVersionControlRunsCall(SearchVersionControlRunsRequest searchVersionControlRunsRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = searchVersionControlRunsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/runs/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchVersionControlRunsValidateBeforeCall(SearchVersionControlRunsRequest searchVersionControlRunsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'searchVersionControlRunsRequest' is set
+        if (searchVersionControlRunsRequest == null) {
+            throw new ApiException("Missing the required parameter 'searchVersionControlRunsRequest' when calling searchVersionControlRuns(Async)");
+        }
+
+        return searchVersionControlRunsCall(searchVersionControlRunsRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a &#x60;run_id&#x60;.  Use this to follow a run to completion, to explain a &#x60;PARTIAL_SUCCESS&#x60;, or to read an Org&#39;s commit history by filtering on &#x60;run_type&#x60; &#x60;COMMIT&#x60;. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with &#x60;record_offset&#x60; and &#x60;record_size&#x60;, which accepts between 1 and 100 runs.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param searchVersionControlRunsRequest  (required)
+     * @return VersionControlRunList
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public VersionControlRunList searchVersionControlRuns(SearchVersionControlRunsRequest searchVersionControlRunsRequest) throws ApiException {
+        ApiResponse<VersionControlRunList> localVarResp = searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a &#x60;run_id&#x60;.  Use this to follow a run to completion, to explain a &#x60;PARTIAL_SUCCESS&#x60;, or to read an Org&#39;s commit history by filtering on &#x60;run_type&#x60; &#x60;COMMIT&#x60;. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with &#x60;record_offset&#x60; and &#x60;record_size&#x60;, which accepts between 1 and 100 runs.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param searchVersionControlRunsRequest  (required)
+     * @return ApiResponse&lt;VersionControlRunList&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<VersionControlRunList> searchVersionControlRunsWithHttpInfo(SearchVersionControlRunsRequest searchVersionControlRunsRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchVersionControlRunsValidateBeforeCall(searchVersionControlRunsRequest, null);
+        Type localVarReturnType = new TypeToken<VersionControlRunList>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a &#x60;run_id&#x60;.  Use this to follow a run to completion, to explain a &#x60;PARTIAL_SUCCESS&#x60;, or to read an Org&#39;s commit history by filtering on &#x60;run_type&#x60; &#x60;COMMIT&#x60;. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with &#x60;record_offset&#x60; and &#x60;record_size&#x60;, which accepts between 1 and 100 runs.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param searchVersionControlRunsRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchVersionControlRunsAsync(SearchVersionControlRunsRequest searchVersionControlRunsRequest, final ApiCallback<VersionControlRunList> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchVersionControlRunsValidateBeforeCall(searchVersionControlRunsRequest, _callback);
+        Type localVarReturnType = new TypeToken<VersionControlRunList>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for searchWebhookConfigurations
      * @param searchWebhookConfigurationsRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -22880,6 +24199,300 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = sendAgentConversationMessageStreamingValidateBeforeCall(conversationIdentifier, sendAgentConversationMessageStreamingRequest, _callback);
         Type localVarReturnType = new TypeToken<SendAgentMessageResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessageStreamingV2
+     * @param sendAgentConversationMessageStreamingV2Request  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingV2Call(SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageStreamingV2Request;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/v2/conversation/send/stream";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageStreamingV2ValidateBeforeCall(SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'sendAgentConversationMessageStreamingV2Request' is set
+        if (sendAgentConversationMessageStreamingV2Request == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentConversationMessageStreamingV2Request' when calling sendAgentConversationMessageStreamingV2(Async)");
+        }
+
+        return sendAgentConversationMessageStreamingV2Call(sendAgentConversationMessageStreamingV2Request, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up question can continue the same exchange.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  #### Response format  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;message\&quot;: \&quot;session busy: lease held by invocation 7f3a\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;, not &#x60;message&#x60; — the latter is diagnostic and not written for end users. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE).      
+     * @param sendAgentConversationMessageStreamingV2Request  (required)
+     * @return AgentStreamFrame
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public AgentStreamFrame sendAgentConversationMessageStreamingV2(SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request) throws ApiException {
+        ApiResponse<AgentStreamFrame> localVarResp = sendAgentConversationMessageStreamingV2WithHttpInfo(sendAgentConversationMessageStreamingV2Request);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up question can continue the same exchange.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  #### Response format  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;message\&quot;: \&quot;session busy: lease held by invocation 7f3a\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;, not &#x60;message&#x60; — the latter is diagnostic and not written for end users. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE).      
+     * @param sendAgentConversationMessageStreamingV2Request  (required)
+     * @return ApiResponse&lt;AgentStreamFrame&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AgentStreamFrame> sendAgentConversationMessageStreamingV2WithHttpInfo(SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentConversationMessageStreamingV2ValidateBeforeCall(sendAgentConversationMessageStreamingV2Request, null);
+        Type localVarReturnType = new TypeToken<AgentStreamFrame>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up question can continue the same exchange.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  #### Response format  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;message\&quot;: \&quot;session busy: lease held by invocation 7f3a\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;, not &#x60;message&#x60; — the latter is diagnostic and not written for end users. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE).      
+     * @param sendAgentConversationMessageStreamingV2Request  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingV2Async(SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request, final ApiCallback<AgentStreamFrame> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentConversationMessageStreamingV2ValidateBeforeCall(sendAgentConversationMessageStreamingV2Request, _callback);
+        Type localVarReturnType = new TypeToken<AgentStreamFrame>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessageV2
+     * @param sendAgentConversationMessageV2Request  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageV2Call(SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageV2Request;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/v2/conversation/send";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageV2ValidateBeforeCall(SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'sendAgentConversationMessageV2Request' is set
+        if (sendAgentConversationMessageV2Request == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentConversationMessageV2Request' when calling sendAgentConversationMessageV2(Async)");
+        }
+
+        return sendAgentConversationMessageV2Call(sendAgentConversationMessageV2Request, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreamingV2&#x60; instead.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the &#x60;x-conversation-identifier&#x60; response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  #### Response format  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  &#x60;events&#x60; contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreamingV2&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint&#39;s \&quot;Errors during a turn\&quot; section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use &#x60;sendAgentConversationMessageStreamingV2&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param sendAgentConversationMessageV2Request  (required)
+     * @return AgentTurnResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public AgentTurnResponse sendAgentConversationMessageV2(SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request) throws ApiException {
+        ApiResponse<AgentTurnResponse> localVarResp = sendAgentConversationMessageV2WithHttpInfo(sendAgentConversationMessageV2Request);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreamingV2&#x60; instead.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the &#x60;x-conversation-identifier&#x60; response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  #### Response format  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  &#x60;events&#x60; contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreamingV2&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint&#39;s \&quot;Errors during a turn\&quot; section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use &#x60;sendAgentConversationMessageStreamingV2&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param sendAgentConversationMessageV2Request  (required)
+     * @return ApiResponse&lt;AgentTurnResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AgentTurnResponse> sendAgentConversationMessageV2WithHttpInfo(SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentConversationMessageV2ValidateBeforeCall(sendAgentConversationMessageV2Request, null);
+        Type localVarReturnType = new TypeToken<AgentTurnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreamingV2&#x60; instead.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the &#x60;x-conversation-identifier&#x60; response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  #### Response format  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  &#x60;events&#x60; contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreamingV2&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint&#39;s \&quot;Errors during a turn\&quot; section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use &#x60;sendAgentConversationMessageStreamingV2&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param sendAgentConversationMessageV2Request  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageV2Async(SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request, final ApiCallback<AgentTurnResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentConversationMessageV2ValidateBeforeCall(sendAgentConversationMessageV2Request, _callback);
+        Type localVarReturnType = new TypeToken<AgentTurnResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -29684,6 +31297,145 @@ public class ThoughtSpotRestApi {
     public okhttp3.Call updateVariableValuesAsync(UpdateVariableValuesRequest updateVariableValuesRequest, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = updateVariableValuesValidateBeforeCall(updateVariableValuesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateVersionControlConfig
+     * @param updateVersionControlConfigRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully updated the version control configuration for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateVersionControlConfigCall(UpdateVersionControlConfigRequest updateVersionControlConfigRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateVersionControlConfigRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/version-control/config/update";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateVersionControlConfigValidateBeforeCall(UpdateVersionControlConfigRequest updateVersionControlConfigRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'updateVersionControlConfigRequest' is set
+        if (updateVersionControlConfigRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateVersionControlConfigRequest' when calling updateVersionControlConfig(Async)");
+        }
+
+        return updateVersionControlConfigCall(updateVersionControlConfigRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Changes your Org&#39;s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through &#x60;disabled_operations&#x60;. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param updateVersionControlConfigRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully updated the version control configuration for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void updateVersionControlConfig(UpdateVersionControlConfigRequest updateVersionControlConfigRequest) throws ApiException {
+        updateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest);
+    }
+
+    /**
+     * 
+     *   Version: 26.12.0.cl or later   Changes your Org&#39;s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through &#x60;disabled_operations&#x60;. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param updateVersionControlConfigRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully updated the version control configuration for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> updateVersionControlConfigWithHttpInfo(UpdateVersionControlConfigRequest updateVersionControlConfigRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateVersionControlConfigValidateBeforeCall(updateVersionControlConfigRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.12.0.cl or later   Changes your Org&#39;s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through &#x60;disabled_operations&#x60;. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     * @param updateVersionControlConfigRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully updated the version control configuration for the Org. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateVersionControlConfigAsync(UpdateVersionControlConfigRequest updateVersionControlConfigRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateVersionControlConfigValidateBeforeCall(updateVersionControlConfigRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

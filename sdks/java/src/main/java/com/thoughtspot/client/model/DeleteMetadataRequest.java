@@ -57,6 +57,68 @@ public class DeleteMetadataRequest implements Serializable {
   @javax.annotation.Nullable
   private Boolean deleteDisabledObjects = false;
 
+  /**
+   * How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later 
+   */
+  @JsonAdapter(DeleteModeEnum.Adapter.class)
+  public enum DeleteModeEnum {
+    SOFT_DELETE("SOFT_DELETE"),
+    
+    HARD_DELETE("HARD_DELETE");
+
+    private String value;
+
+    DeleteModeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static DeleteModeEnum fromValue(String value) {
+      for (DeleteModeEnum b : DeleteModeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<DeleteModeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final DeleteModeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public DeleteModeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return DeleteModeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      DeleteModeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_DELETE_MODE = "delete_mode";
+  @SerializedName(SERIALIZED_NAME_DELETE_MODE)
+  @javax.annotation.Nullable
+  private DeleteModeEnum deleteMode;
+
+  public static final String SERIALIZED_NAME_DELETE_REASON = "delete_reason";
+  @SerializedName(SERIALIZED_NAME_DELETE_REASON)
+  @javax.annotation.Nullable
+  private String deleteReason;
+
   public DeleteMetadataRequest() {
   }
 
@@ -103,6 +165,44 @@ public class DeleteMetadataRequest implements Serializable {
 
   public void setDeleteDisabledObjects(@javax.annotation.Nullable Boolean deleteDisabledObjects) {
     this.deleteDisabledObjects = deleteDisabledObjects;
+  }
+
+
+  public DeleteMetadataRequest deleteMode(@javax.annotation.Nullable DeleteModeEnum deleteMode) {
+    this.deleteMode = deleteMode;
+    return this;
+  }
+
+  /**
+   * How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later 
+   * @return deleteMode
+   */
+  @javax.annotation.Nullable
+  public DeleteModeEnum getDeleteMode() {
+    return deleteMode;
+  }
+
+  public void setDeleteMode(@javax.annotation.Nullable DeleteModeEnum deleteMode) {
+    this.deleteMode = deleteMode;
+  }
+
+
+  public DeleteMetadataRequest deleteReason(@javax.annotation.Nullable String deleteReason) {
+    this.deleteReason = deleteReason;
+    return this;
+  }
+
+  /**
+   * Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later 
+   * @return deleteReason
+   */
+  @javax.annotation.Nullable
+  public String getDeleteReason() {
+    return deleteReason;
+  }
+
+  public void setDeleteReason(@javax.annotation.Nullable String deleteReason) {
+    this.deleteReason = deleteReason;
   }
 
   /**
@@ -161,13 +261,15 @@ public class DeleteMetadataRequest implements Serializable {
     }
     DeleteMetadataRequest deleteMetadataRequest = (DeleteMetadataRequest) o;
     return Objects.equals(this.metadata, deleteMetadataRequest.metadata) &&
-        Objects.equals(this.deleteDisabledObjects, deleteMetadataRequest.deleteDisabledObjects)&&
+        Objects.equals(this.deleteDisabledObjects, deleteMetadataRequest.deleteDisabledObjects) &&
+        Objects.equals(this.deleteMode, deleteMetadataRequest.deleteMode) &&
+        Objects.equals(this.deleteReason, deleteMetadataRequest.deleteReason)&&
         Objects.equals(this.additionalProperties, deleteMetadataRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadata, deleteDisabledObjects, additionalProperties);
+    return Objects.hash(metadata, deleteDisabledObjects, deleteMode, deleteReason, additionalProperties);
   }
 
   @Override
@@ -176,6 +278,8 @@ public class DeleteMetadataRequest implements Serializable {
     sb.append("class DeleteMetadataRequest {\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    deleteDisabledObjects: ").append(toIndentedString(deleteDisabledObjects)).append("\n");
+    sb.append("    deleteMode: ").append(toIndentedString(deleteMode)).append("\n");
+    sb.append("    deleteReason: ").append(toIndentedString(deleteReason)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -201,6 +305,8 @@ public class DeleteMetadataRequest implements Serializable {
     openapiFields = new HashSet<String>();
     openapiFields.add("metadata");
     openapiFields.add("delete_disabled_objects");
+    openapiFields.add("delete_mode");
+    openapiFields.add("delete_reason");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -237,6 +343,16 @@ public class DeleteMetadataRequest implements Serializable {
       for (int i = 0; i < jsonArraymetadata.size(); i++) {
         DeleteMetadataTypeInput.validateJsonElement(jsonArraymetadata.get(i));
       };
+      if ((jsonObj.get("delete_mode") != null && !jsonObj.get("delete_mode").isJsonNull()) && !jsonObj.get("delete_mode").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `delete_mode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("delete_mode").toString()));
+      }
+      // validate the optional field `delete_mode`
+      if (jsonObj.get("delete_mode") != null && !jsonObj.get("delete_mode").isJsonNull()) {
+        DeleteModeEnum.validateJsonElement(jsonObj.get("delete_mode"));
+      }
+      if ((jsonObj.get("delete_reason") != null && !jsonObj.get("delete_reason").isJsonNull()) && !jsonObj.get("delete_reason").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `delete_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("delete_reason").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

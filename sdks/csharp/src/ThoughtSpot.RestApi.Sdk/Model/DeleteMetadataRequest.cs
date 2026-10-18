@@ -33,6 +33,33 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class DeleteMetadataRequest : IValidatableObject
     {
         /// <summary>
+        /// How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DeleteModeEnum
+        {
+            /// <summary>
+            /// Enum SOFTDELETE for value: SOFT_DELETE
+            /// </summary>
+            [EnumMember(Value = "SOFT_DELETE")]
+            SOFTDELETE = 1,
+
+            /// <summary>
+            /// Enum HARDDELETE for value: HARD_DELETE
+            /// </summary>
+            [EnumMember(Value = "HARD_DELETE")]
+            HARDDELETE = 2
+        }
+
+
+        /// <summary>
+        /// How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "delete_mode", EmitDefaultValue = false)]
+        public DeleteModeEnum? DeleteMode { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="DeleteMetadataRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -45,7 +72,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// </summary>
         /// <param name="metadata">Metadata objects. (required).</param>
         /// <param name="deleteDisabledObjects">Indicates whether to delete disabled metadata objects. (default to false).</param>
-        public DeleteMetadataRequest(List<DeleteMetadataTypeInput> metadata = default, bool? deleteDisabledObjects = false)
+        /// <param name="deleteMode">How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later .</param>
+        /// <param name="deleteReason">Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later .</param>
+        public DeleteMetadataRequest(List<DeleteMetadataTypeInput> metadata = default, bool? deleteDisabledObjects = false, DeleteModeEnum? deleteMode = default, string deleteReason = default)
         {
             // to ensure "metadata" is required (not null)
             if (metadata == null)
@@ -55,6 +84,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.Metadata = metadata;
             // use default value if no "deleteDisabledObjects" provided
             this.DeleteDisabledObjects = deleteDisabledObjects ?? false;
+            this.DeleteMode = deleteMode;
+            this.DeleteReason = deleteReason;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -73,6 +104,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? DeleteDisabledObjects { get; set; }
 
         /// <summary>
+        /// Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "delete_reason", EmitDefaultValue = false)]
+        public string DeleteReason { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -88,6 +126,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class DeleteMetadataRequest {\n");
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("  DeleteDisabledObjects: ").Append(DeleteDisabledObjects).Append("\n");
+            sb.Append("  DeleteMode: ").Append(DeleteMode).Append("\n");
+            sb.Append("  DeleteReason: ").Append(DeleteReason).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

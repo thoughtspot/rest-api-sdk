@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.delete_metadata_type_input import DeleteMetadataTypeInput
 from typing import Optional, Set
@@ -28,8 +28,20 @@ class DeleteMetadataRequest(BaseModel):
     """ # noqa: E501
     metadata: List[DeleteMetadataTypeInput] = Field(description="Metadata objects.")
     delete_disabled_objects: Optional[StrictBool] = Field(default=False, description="Indicates whether to delete disabled metadata objects.")
+    delete_mode: Optional[StrictStr] = Field(default=None, description="How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later ")
+    delete_reason: Optional[StrictStr] = Field(default=None, description="Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata", "delete_disabled_objects"]
+    __properties: ClassVar[List[str]] = ["metadata", "delete_disabled_objects", "delete_mode", "delete_reason"]
+
+    @field_validator('delete_mode')
+    def delete_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['SOFT_DELETE', 'HARD_DELETE']):
+            raise ValueError("must be one of enum values ('SOFT_DELETE', 'HARD_DELETE')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -102,7 +114,9 @@ class DeleteMetadataRequest(BaseModel):
 
         _obj = cls.model_validate({
             "metadata": [DeleteMetadataTypeInput.from_dict(_item) for _item in obj["metadata"]] if obj.get("metadata") is not None else None,
-            "delete_disabled_objects": obj.get("delete_disabled_objects") if obj.get("delete_disabled_objects") is not None else False
+            "delete_disabled_objects": obj.get("delete_disabled_objects") if obj.get("delete_disabled_objects") is not None else False,
+            "delete_mode": obj.get("delete_mode"),
+            "delete_reason": obj.get("delete_reason")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

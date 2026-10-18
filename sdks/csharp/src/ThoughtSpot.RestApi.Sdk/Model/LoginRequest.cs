@@ -39,7 +39,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="password">Password of the user account.</param>
         /// <param name="orgIdentifier">ID of the Org context to log in to. If Org ID is not specified, the user will be logged in to the Org context of their previous login session..</param>
         /// <param name="rememberMe">A flag to remember the user session. When set to true, a session cookie is created and used in subsequent API requests. (default to false).</param>
-        /// <param name="redirectUrl">Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later .</param>
+        /// <param name="redirectUrl">Path on this cluster to land on after a successful login. Pass only the path; a full URL is rejected with 400.   Accepted: &#x60;/insights/home/answers&#x60;, &#x60;/insights/pinboard&#x60;, &#x60;/&#x60;   Rejected: &#x60;https://your-cluster.thoughtspot.cloud/#/insights/home/answers&#x60;, &#x60;//example.com/insights&#x60;, &#x60;insights/home/answers&#x60;   When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later .</param>
         /// <param name="noUrlRedirection">A flag to suppress the redirect. When set to true, the resolved URL is returned in the location header instead of a 302 redirect. Applies only when redirect_url is set.    Version: 26.12.0.cl or later  (default to false).</param>
         public LoginRequest(string username = default, string password = default, string orgIdentifier = default, bool? rememberMe = false, string redirectUrl = default, bool? noUrlRedirection = false)
         {
@@ -83,9 +83,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? RememberMe { get; set; }
 
         /// <summary>
-        /// Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
+        /// Path on this cluster to land on after a successful login. Pass only the path; a full URL is rejected with 400.   Accepted: &#x60;/insights/home/answers&#x60;, &#x60;/insights/pinboard&#x60;, &#x60;/&#x60;   Rejected: &#x60;https://your-cluster.thoughtspot.cloud/#/insights/home/answers&#x60;, &#x60;//example.com/insights&#x60;, &#x60;insights/home/answers&#x60;   When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later </value>
+        /// <value>Path on this cluster to land on after a successful login. Pass only the path; a full URL is rejected with 400.   Accepted: &#x60;/insights/home/answers&#x60;, &#x60;/insights/pinboard&#x60;, &#x60;/&#x60;   Rejected: &#x60;https://your-cluster.thoughtspot.cloud/#/insights/home/answers&#x60;, &#x60;//example.com/insights&#x60;, &#x60;insights/home/answers&#x60;   When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "redirect_url", EmitDefaultValue = false)]
         public string RedirectUrl { get; set; }
 

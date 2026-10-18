@@ -20,7 +20,10 @@ from thoughtspot_rest_api_sdk.models.access_token import AccessToken
 from thoughtspot_rest_api_sdk.models.activate_user_request import ActivateUserRequest
 from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse
+from thoughtspot_rest_api_sdk.models.agent_conversation_v2 import AgentConversationV2
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions
+from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame
+from thoughtspot_rest_api_sdk.models.agent_turn_response import AgentTurnResponse
 from thoughtspot_rest_api_sdk.models.analyst import Analyst
 from thoughtspot_rest_api_sdk.models.analyst_delete_response import AnalystDeleteResponse
 from thoughtspot_rest_api_sdk.models.analyst_search_response import AnalystSearchResponse
@@ -49,9 +52,11 @@ from thoughtspot_rest_api_sdk.models.conversation_share_status_response import C
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest
+from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import CreateAgentConversationV2Request
 from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest
 from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest
+from thoughtspot_rest_api_sdk.models.create_commit_request import CreateCommitRequest
 from thoughtspot_rest_api_sdk.models.create_config_request import CreateConfigRequest
 from thoughtspot_rest_api_sdk.models.create_connection_configuration_request import CreateConnectionConfigurationRequest
 from thoughtspot_rest_api_sdk.models.create_connection_request import CreateConnectionRequest
@@ -70,6 +75,7 @@ from thoughtspot_rest_api_sdk.models.create_tag_request import CreateTagRequest
 from thoughtspot_rest_api_sdk.models.create_user_group_request import CreateUserGroupRequest
 from thoughtspot_rest_api_sdk.models.create_user_request import CreateUserRequest
 from thoughtspot_rest_api_sdk.models.create_variable_request import CreateVariableRequest
+from thoughtspot_rest_api_sdk.models.create_version_control_config_request import CreateVersionControlConfigRequest
 from thoughtspot_rest_api_sdk.models.create_webhook_configuration_request import CreateWebhookConfigurationRequest
 from thoughtspot_rest_api_sdk.models.dbt_search_response import DbtSearchResponse
 from thoughtspot_rest_api_sdk.models.deactivate_user_request import DeactivateUserRequest
@@ -87,6 +93,7 @@ from thoughtspot_rest_api_sdk.models.delete_variables_request import DeleteVaria
 from thoughtspot_rest_api_sdk.models.delete_webhook_configurations_request import DeleteWebhookConfigurationsRequest
 from thoughtspot_rest_api_sdk.models.deploy_commit_request import DeployCommitRequest
 from thoughtspot_rest_api_sdk.models.deploy_response import DeployResponse
+from thoughtspot_rest_api_sdk.models.deploy_revision_request import DeployRevisionRequest
 from thoughtspot_rest_api_sdk.models.eureka_data_source_suggestion_response import EurekaDataSourceSuggestionResponse
 from thoughtspot_rest_api_sdk.models.eureka_decompose_query_response import EurekaDecomposeQueryResponse
 from thoughtspot_rest_api_sdk.models.eureka_get_nl_instructions_response import EurekaGetNLInstructionsResponse
@@ -149,6 +156,7 @@ from thoughtspot_rest_api_sdk.models.parameterize_metadata_fields_request import
 from thoughtspot_rest_api_sdk.models.parameterize_metadata_request import ParameterizeMetadataRequest
 from thoughtspot_rest_api_sdk.models.permission_of_metadata_response import PermissionOfMetadataResponse
 from thoughtspot_rest_api_sdk.models.permission_of_principals_response import PermissionOfPrincipalsResponse
+from thoughtspot_rest_api_sdk.models.promote_branch_request import PromoteBranchRequest
 from thoughtspot_rest_api_sdk.models.publish_metadata_request import PublishMetadataRequest
 from thoughtspot_rest_api_sdk.models.put_variable_values_request import PutVariableValuesRequest
 from thoughtspot_rest_api_sdk.models.query_get_decomposed_query_request import QueryGetDecomposedQueryRequest
@@ -160,6 +168,7 @@ from thoughtspot_rest_api_sdk.models.response_custom_action import ResponseCusto
 from thoughtspot_rest_api_sdk.models.response_message import ResponseMessage
 from thoughtspot_rest_api_sdk.models.response_schedule import ResponseSchedule
 from thoughtspot_rest_api_sdk.models.response_worksheet_to_model_conversion import ResponseWorksheetToModelConversion
+from thoughtspot_rest_api_sdk.models.restore_revision_request import RestoreRevisionRequest
 from thoughtspot_rest_api_sdk.models.revert_commit_request import RevertCommitRequest
 from thoughtspot_rest_api_sdk.models.revert_response import RevertResponse
 from thoughtspot_rest_api_sdk.models.revoke_refresh_tokens_request import RevokeRefreshTokensRequest
@@ -198,12 +207,15 @@ from thoughtspot_rest_api_sdk.models.search_usage_data_request import SearchUsag
 from thoughtspot_rest_api_sdk.models.search_user_groups_request import SearchUserGroupsRequest
 from thoughtspot_rest_api_sdk.models.search_users_request import SearchUsersRequest
 from thoughtspot_rest_api_sdk.models.search_variables_request import SearchVariablesRequest
+from thoughtspot_rest_api_sdk.models.search_version_control_runs_request import SearchVersionControlRunsRequest
 from thoughtspot_rest_api_sdk.models.search_webhook_configurations_request import SearchWebhookConfigurationsRequest
 from thoughtspot_rest_api_sdk.models.security_settings_response import SecuritySettingsResponse
 from thoughtspot_rest_api_sdk.models.semantic_integration_response import SemanticIntegrationResponse
 from thoughtspot_rest_api_sdk.models.semantic_integration_search_response import SemanticIntegrationSearchResponse
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_v2_request import SendAgentConversationMessageStreamingV2Request
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_v2_request import SendAgentConversationMessageV2Request
 from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_message_response import SendAgentMessageResponse
 from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import SendAgentMessageStreamingRequest
@@ -260,6 +272,7 @@ from thoughtspot_rest_api_sdk.models.update_user_group_request import UpdateUser
 from thoughtspot_rest_api_sdk.models.update_user_request import UpdateUserRequest
 from thoughtspot_rest_api_sdk.models.update_variable_request import UpdateVariableRequest
 from thoughtspot_rest_api_sdk.models.update_variable_values_request import UpdateVariableValuesRequest
+from thoughtspot_rest_api_sdk.models.update_version_control_config_request import UpdateVersionControlConfigRequest
 from thoughtspot_rest_api_sdk.models.update_webhook_configuration_request import UpdateWebhookConfigurationRequest
 from thoughtspot_rest_api_sdk.models.usage_data_for_user_response import UsageDataForUserResponse
 from thoughtspot_rest_api_sdk.models.usage_data_response import UsageDataResponse
@@ -269,6 +282,13 @@ from thoughtspot_rest_api_sdk.models.validate_communication_channel_request impo
 from thoughtspot_rest_api_sdk.models.validate_merge_request import ValidateMergeRequest
 from thoughtspot_rest_api_sdk.models.validate_token_request import ValidateTokenRequest
 from thoughtspot_rest_api_sdk.models.variable import Variable
+from thoughtspot_rest_api_sdk.models.version_control_commit_response import VersionControlCommitResponse
+from thoughtspot_rest_api_sdk.models.version_control_config import VersionControlConfig
+from thoughtspot_rest_api_sdk.models.version_control_config_list import VersionControlConfigList
+from thoughtspot_rest_api_sdk.models.version_control_deploy_response import VersionControlDeployResponse
+from thoughtspot_rest_api_sdk.models.version_control_promotion_response import VersionControlPromotionResponse
+from thoughtspot_rest_api_sdk.models.version_control_restore_response import VersionControlRestoreResponse
+from thoughtspot_rest_api_sdk.models.version_control_run_list import VersionControlRunList
 from thoughtspot_rest_api_sdk.models.webhook_delete_response import WebhookDeleteResponse
 from thoughtspot_rest_api_sdk.models.webhook_response import WebhookResponse
 from thoughtspot_rest_api_sdk.models.webhook_search_response import WebhookSearchResponse
@@ -4979,6 +4999,397 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def create_agent_conversation_v2(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentConversationV2:
+        """create_agent_conversation_v2
+
+         Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.  `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.   - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.   - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed. - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - `analyst_identifier`: the saved analyst to create the conversation from.  A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  ```json {   \"source\": \"DATA_SOURCE\",   \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],   \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\" } ```  ```json {   \"source\": \"ANALYST\",   \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\" } ```  #### Example response  ```json {   \"conversation_identifier\": \"5612260428840173568\" } ```  Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param create_agent_conversation_v2_request: (required)
+        :type create_agent_conversation_v2_request: CreateAgentConversationV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_agent_conversation_v2_serialize(
+            create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentConversationV2",
+            '201': "AgentConversationV2",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_agent_conversation_v2_with_http_info(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentConversationV2]:
+        """create_agent_conversation_v2
+
+         Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.  `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.   - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.   - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed. - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - `analyst_identifier`: the saved analyst to create the conversation from.  A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  ```json {   \"source\": \"DATA_SOURCE\",   \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],   \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\" } ```  ```json {   \"source\": \"ANALYST\",   \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\" } ```  #### Example response  ```json {   \"conversation_identifier\": \"5612260428840173568\" } ```  Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param create_agent_conversation_v2_request: (required)
+        :type create_agent_conversation_v2_request: CreateAgentConversationV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_agent_conversation_v2_serialize(
+            create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentConversationV2",
+            '201': "AgentConversationV2",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_agent_conversation_v2_without_preload_content(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_agent_conversation_v2
+
+         Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.  `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.   - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.   - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed. - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - `analyst_identifier`: the saved analyst to create the conversation from.  A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  ```json {   \"source\": \"DATA_SOURCE\",   \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],   \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\" } ```  ```json {   \"source\": \"ANALYST\",   \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\" } ```  #### Example response  ```json {   \"conversation_identifier\": \"5612260428840173568\" } ```  Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param create_agent_conversation_v2_request: (required)
+        :type create_agent_conversation_v2_request: CreateAgentConversationV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_agent_conversation_v2_serialize(
+            create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentConversationV2",
+            '201': "AgentConversationV2",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def create_agent_conversation_v2_sync(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentConversationV2:
+        """create_agent_conversation_v2 (synchronous)
+
+        Synchronous variant of :meth:`create_agent_conversation_v2`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_agent_conversation_v2(
+                create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_agent_conversation_v2_sync_with_http_info(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentConversationV2]:
+        """create_agent_conversation_v2 (synchronous)
+
+        Synchronous variant of :meth:`create_agent_conversation_v2_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_agent_conversation_v2_with_http_info(
+                create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_agent_conversation_v2_sync_without_preload_content(
+        self,
+        create_agent_conversation_v2_request: CreateAgentConversationV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_agent_conversation_v2 (synchronous)
+
+        Synchronous variant of :meth:`create_agent_conversation_v2_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_agent_conversation_v2_without_preload_content(
+                create_agent_conversation_v2_request=create_agent_conversation_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _create_agent_conversation_v2_serialize(
+        self,
+        create_agent_conversation_v2_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_agent_conversation_v2_request is not None:
+            _body_params = create_agent_conversation_v2_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/ai/agent/v2/conversation/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def create_analyst(
         self,
         create_analyst_request: CreateAnalystRequest,
@@ -6130,6 +6541,400 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/collections/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_commit(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlCommitResponse:
+        """create_commit
+
+          Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_commit_request: (required)
+        :type create_commit_request: CreateCommitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_commit_serialize(
+            create_commit_request=create_commit_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlCommitResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_commit_with_http_info(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlCommitResponse]:
+        """create_commit
+
+          Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_commit_request: (required)
+        :type create_commit_request: CreateCommitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_commit_serialize(
+            create_commit_request=create_commit_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlCommitResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_commit_without_preload_content(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_commit
+
+          Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_commit_request: (required)
+        :type create_commit_request: CreateCommitRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_commit_serialize(
+            create_commit_request=create_commit_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlCommitResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def create_commit_sync(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlCommitResponse:
+        """create_commit (synchronous)
+
+        Synchronous variant of :meth:`create_commit`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_commit(
+                create_commit_request=create_commit_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_commit_sync_with_http_info(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlCommitResponse]:
+        """create_commit (synchronous)
+
+        Synchronous variant of :meth:`create_commit_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_commit_with_http_info(
+                create_commit_request=create_commit_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_commit_sync_without_preload_content(
+        self,
+        create_commit_request: CreateCommitRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_commit (synchronous)
+
+        Synchronous variant of :meth:`create_commit_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_commit_without_preload_content(
+                create_commit_request=create_commit_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _create_commit_serialize(
+        self,
+        create_commit_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_commit_request is not None:
+            _body_params = create_commit_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/commit',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12374,6 +13179,397 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/template/variables/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_version_control_config(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlConfig:
+        """create_version_control_config
+
+          Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_version_control_config_request: (required)
+        :type create_version_control_config_request: CreateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_version_control_config_serialize(
+            create_version_control_config_request=create_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfig",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_version_control_config_with_http_info(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlConfig]:
+        """create_version_control_config
+
+          Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_version_control_config_request: (required)
+        :type create_version_control_config_request: CreateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_version_control_config_serialize(
+            create_version_control_config_request=create_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfig",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_version_control_config_without_preload_content(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_version_control_config
+
+          Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param create_version_control_config_request: (required)
+        :type create_version_control_config_request: CreateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_version_control_config_serialize(
+            create_version_control_config_request=create_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfig",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def create_version_control_config_sync(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlConfig:
+        """create_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`create_version_control_config`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_version_control_config(
+                create_version_control_config_request=create_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_version_control_config_sync_with_http_info(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlConfig]:
+        """create_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`create_version_control_config_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_version_control_config_with_http_info(
+                create_version_control_config_request=create_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def create_version_control_config_sync_without_preload_content(
+        self,
+        create_version_control_config_request: CreateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """create_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`create_version_control_config_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.create_version_control_config_without_preload_content(
+                create_version_control_config_request=create_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _create_version_control_config_serialize(
+        self,
+        create_version_control_config_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_version_control_config_request is not None:
+            _body_params = create_version_control_config_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/config/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -25314,6 +26510,360 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def delete_version_control_config(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_version_control_config
+
+          Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_version_control_config_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_version_control_config_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_version_control_config
+
+          Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_version_control_config_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_version_control_config_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_version_control_config
+
+          Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_version_control_config_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def delete_version_control_config_sync(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`delete_version_control_config`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_version_control_config(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_version_control_config_sync_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`delete_version_control_config_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_version_control_config_with_http_info(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_version_control_config_sync_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`delete_version_control_config_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_version_control_config_without_preload_content(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _delete_version_control_config_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/config/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def delete_webhook_configurations(
         self,
         delete_webhook_configurations_request: DeleteWebhookConfigurationsRequest,
@@ -26074,6 +27624,400 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/vcs/git/commits/deploy',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def deploy_revision(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlDeployResponse:
+        """deploy_revision
+
+          Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param deploy_revision_request: (required)
+        :type deploy_revision_request: DeployRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deploy_revision_serialize(
+            deploy_revision_request=deploy_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlDeployResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def deploy_revision_with_http_info(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlDeployResponse]:
+        """deploy_revision
+
+          Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param deploy_revision_request: (required)
+        :type deploy_revision_request: DeployRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deploy_revision_serialize(
+            deploy_revision_request=deploy_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlDeployResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def deploy_revision_without_preload_content(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """deploy_revision
+
+          Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param deploy_revision_request: (required)
+        :type deploy_revision_request: DeployRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._deploy_revision_serialize(
+            deploy_revision_request=deploy_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlDeployResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def deploy_revision_sync(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlDeployResponse:
+        """deploy_revision (synchronous)
+
+        Synchronous variant of :meth:`deploy_revision`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.deploy_revision(
+                deploy_revision_request=deploy_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def deploy_revision_sync_with_http_info(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlDeployResponse]:
+        """deploy_revision (synchronous)
+
+        Synchronous variant of :meth:`deploy_revision_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.deploy_revision_with_http_info(
+                deploy_revision_request=deploy_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def deploy_revision_sync_without_preload_content(
+        self,
+        deploy_revision_request: DeployRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """deploy_revision (synchronous)
+
+        Synchronous variant of :meth:`deploy_revision_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.deploy_revision_without_preload_content(
+                deploy_revision_request=deploy_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _deploy_revision_serialize(
+        self,
+        deploy_revision_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if deploy_revision_request is not None:
+            _body_params = deploy_revision_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/deploy',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -46421,6 +48365,397 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def promote_branch(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlPromotionResponse:
+        """promote_branch
+
+          Version: 26.12.0.cl or later   Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param promote_branch_request: (required)
+        :type promote_branch_request: PromoteBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._promote_branch_serialize(
+            promote_branch_request=promote_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlPromotionResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def promote_branch_with_http_info(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlPromotionResponse]:
+        """promote_branch
+
+          Version: 26.12.0.cl or later   Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param promote_branch_request: (required)
+        :type promote_branch_request: PromoteBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._promote_branch_serialize(
+            promote_branch_request=promote_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlPromotionResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def promote_branch_without_preload_content(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """promote_branch
+
+          Version: 26.12.0.cl or later   Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param promote_branch_request: (required)
+        :type promote_branch_request: PromoteBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._promote_branch_serialize(
+            promote_branch_request=promote_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlPromotionResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def promote_branch_sync(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlPromotionResponse:
+        """promote_branch (synchronous)
+
+        Synchronous variant of :meth:`promote_branch`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.promote_branch(
+                promote_branch_request=promote_branch_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def promote_branch_sync_with_http_info(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlPromotionResponse]:
+        """promote_branch (synchronous)
+
+        Synchronous variant of :meth:`promote_branch_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.promote_branch_with_http_info(
+                promote_branch_request=promote_branch_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def promote_branch_sync_without_preload_content(
+        self,
+        promote_branch_request: PromoteBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """promote_branch (synchronous)
+
+        Synchronous variant of :meth:`promote_branch_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.promote_branch_without_preload_content(
+                promote_branch_request=promote_branch_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _promote_branch_serialize(
+        self,
+        promote_branch_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if promote_branch_request is not None:
+            _body_params = promote_branch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/branch/promote',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def publish_metadata(
         self,
         publish_metadata_request: PublishMetadataRequest,
@@ -47984,6 +50319,400 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/users/reset-password',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def restore_revision(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlRestoreResponse:
+        """restore_revision
+
+          Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param restore_revision_request: (required)
+        :type restore_revision_request: RestoreRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._restore_revision_serialize(
+            restore_revision_request=restore_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRestoreResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def restore_revision_with_http_info(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlRestoreResponse]:
+        """restore_revision
+
+          Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param restore_revision_request: (required)
+        :type restore_revision_request: RestoreRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._restore_revision_serialize(
+            restore_revision_request=restore_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRestoreResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def restore_revision_without_preload_content(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """restore_revision
+
+          Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param restore_revision_request: (required)
+        :type restore_revision_request: RestoreRevisionRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._restore_revision_serialize(
+            restore_revision_request=restore_revision_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRestoreResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '409': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def restore_revision_sync(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlRestoreResponse:
+        """restore_revision (synchronous)
+
+        Synchronous variant of :meth:`restore_revision`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.restore_revision(
+                restore_revision_request=restore_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def restore_revision_sync_with_http_info(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlRestoreResponse]:
+        """restore_revision (synchronous)
+
+        Synchronous variant of :meth:`restore_revision_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.restore_revision_with_http_info(
+                restore_revision_request=restore_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def restore_revision_sync_without_preload_content(
+        self,
+        restore_revision_request: RestoreRevisionRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """restore_revision (synchronous)
+
+        Synchronous variant of :meth:`restore_revision_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.restore_revision_without_preload_content(
+                restore_revision_request=restore_revision_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _restore_revision_serialize(
+        self,
+        restore_revision_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if restore_revision_request is not None:
+            _body_params = restore_revision_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/commit/restore',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -59697,6 +62426,748 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def search_version_control_configs(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlConfigList:
+        """search_version_control_configs
+
+          Version: 26.12.0.cl or later   Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_configs_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfigList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def search_version_control_configs_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlConfigList]:
+        """search_version_control_configs
+
+          Version: 26.12.0.cl or later   Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_configs_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfigList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def search_version_control_configs_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_version_control_configs
+
+          Version: 26.12.0.cl or later   Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_configs_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlConfigList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def search_version_control_configs_sync(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlConfigList:
+        """search_version_control_configs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_configs`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_configs(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_version_control_configs_sync_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlConfigList]:
+        """search_version_control_configs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_configs_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_configs_with_http_info(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_version_control_configs_sync_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_version_control_configs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_configs_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_configs_without_preload_content(
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _search_version_control_configs_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/config/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def search_version_control_runs(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlRunList:
+        """search_version_control_runs
+
+          Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param search_version_control_runs_request: (required)
+        :type search_version_control_runs_request: SearchVersionControlRunsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_runs_serialize(
+            search_version_control_runs_request=search_version_control_runs_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRunList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def search_version_control_runs_with_http_info(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlRunList]:
+        """search_version_control_runs
+
+          Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param search_version_control_runs_request: (required)
+        :type search_version_control_runs_request: SearchVersionControlRunsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_runs_serialize(
+            search_version_control_runs_request=search_version_control_runs_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRunList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def search_version_control_runs_without_preload_content(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_version_control_runs
+
+          Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param search_version_control_runs_request: (required)
+        :type search_version_control_runs_request: SearchVersionControlRunsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_version_control_runs_serialize(
+            search_version_control_runs_request=search_version_control_runs_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "VersionControlRunList",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def search_version_control_runs_sync(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> VersionControlRunList:
+        """search_version_control_runs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_runs`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_runs(
+                search_version_control_runs_request=search_version_control_runs_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_version_control_runs_sync_with_http_info(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[VersionControlRunList]:
+        """search_version_control_runs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_runs_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_runs_with_http_info(
+                search_version_control_runs_request=search_version_control_runs_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def search_version_control_runs_sync_without_preload_content(
+        self,
+        search_version_control_runs_request: SearchVersionControlRunsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """search_version_control_runs (synchronous)
+
+        Synchronous variant of :meth:`search_version_control_runs_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.search_version_control_runs_without_preload_content(
+                search_version_control_runs_request=search_version_control_runs_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _search_version_control_runs_serialize(
+        self,
+        search_version_control_runs_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if search_version_control_runs_request is not None:
+            _body_params = search_version_control_runs_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/runs/search',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def search_webhook_configurations(
         self,
         search_webhook_configurations_request: SearchWebhookConfigurationsRequest,
@@ -60930,6 +64401,788 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def send_agent_conversation_message_streaming_v2(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentStreamFrame:
+        """send_agent_conversation_message_streaming_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  #### Response format  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
+
+        :param send_agent_conversation_message_streaming_v2_request: (required)
+        :type send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_streaming_v2_serialize(
+            send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentStreamFrame",
+            '201': "AgentStreamFrame",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def send_agent_conversation_message_streaming_v2_with_http_info(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentStreamFrame]:
+        """send_agent_conversation_message_streaming_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  #### Response format  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
+
+        :param send_agent_conversation_message_streaming_v2_request: (required)
+        :type send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_streaming_v2_serialize(
+            send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentStreamFrame",
+            '201': "AgentStreamFrame",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def send_agent_conversation_message_streaming_v2_without_preload_content(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """send_agent_conversation_message_streaming_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  #### Response format  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE).      
+
+        :param send_agent_conversation_message_streaming_v2_request: (required)
+        :type send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_streaming_v2_serialize(
+            send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentStreamFrame",
+            '201': "AgentStreamFrame",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def send_agent_conversation_message_streaming_v2_sync(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentStreamFrame:
+        """send_agent_conversation_message_streaming_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_streaming_v2`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_streaming_v2(
+                send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def send_agent_conversation_message_streaming_v2_sync_with_http_info(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentStreamFrame]:
+        """send_agent_conversation_message_streaming_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_streaming_v2_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_streaming_v2_with_http_info(
+                send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def send_agent_conversation_message_streaming_v2_sync_without_preload_content(
+        self,
+        send_agent_conversation_message_streaming_v2_request: SendAgentConversationMessageStreamingV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """send_agent_conversation_message_streaming_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_streaming_v2_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_streaming_v2_without_preload_content(
+                send_agent_conversation_message_streaming_v2_request=send_agent_conversation_message_streaming_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _send_agent_conversation_message_streaming_v2_serialize(
+        self,
+        send_agent_conversation_message_streaming_v2_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if send_agent_conversation_message_streaming_v2_request is not None:
+            _body_params = send_agent_conversation_message_streaming_v2_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/ai/agent/v2/conversation/send/stream',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def send_agent_conversation_message_v2(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentTurnResponse:
+        """send_agent_conversation_message_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  #### Response format  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param send_agent_conversation_message_v2_request: (required)
+        :type send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_v2_serialize(
+            send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentTurnResponse",
+            '201': "AgentTurnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def send_agent_conversation_message_v2_with_http_info(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentTurnResponse]:
+        """send_agent_conversation_message_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  #### Response format  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param send_agent_conversation_message_v2_request: (required)
+        :type send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_v2_serialize(
+            send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentTurnResponse",
+            '201': "AgentTurnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def send_agent_conversation_message_v2_without_preload_content(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """send_agent_conversation_message_v2
+
+         Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.  #### Usage guidelines  - `message` (required): the question to ask Spotter. - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  #### Response format  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |  > ###### Note: > > - This endpoint is in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+        :param send_agent_conversation_message_v2_request: (required)
+        :type send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_agent_conversation_message_v2_serialize(
+            send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AgentTurnResponse",
+            '201': "AgentTurnResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def send_agent_conversation_message_v2_sync(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AgentTurnResponse:
+        """send_agent_conversation_message_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_v2`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_v2(
+                send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def send_agent_conversation_message_v2_sync_with_http_info(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AgentTurnResponse]:
+        """send_agent_conversation_message_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_v2_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_v2_with_http_info(
+                send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def send_agent_conversation_message_v2_sync_without_preload_content(
+        self,
+        send_agent_conversation_message_v2_request: SendAgentConversationMessageV2Request,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """send_agent_conversation_message_v2 (synchronous)
+
+        Synchronous variant of :meth:`send_agent_conversation_message_v2_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.send_agent_conversation_message_v2_without_preload_content(
+                send_agent_conversation_message_v2_request=send_agent_conversation_message_v2_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _send_agent_conversation_message_v2_serialize(
+        self,
+        send_agent_conversation_message_v2_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if send_agent_conversation_message_v2_request is not None:
+            _body_params = send_agent_conversation_message_v2_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/ai/agent/v2/conversation/send',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -79333,6 +83586,394 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/template/variables/update-values',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_version_control_config(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """update_version_control_config
+
+          Version: 26.12.0.cl or later   Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param update_version_control_config_request: (required)
+        :type update_version_control_config_request: UpdateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_version_control_config_serialize(
+            update_version_control_config_request=update_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_version_control_config_with_http_info(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """update_version_control_config
+
+          Version: 26.12.0.cl or later   Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param update_version_control_config_request: (required)
+        :type update_version_control_config_request: UpdateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_version_control_config_serialize(
+            update_version_control_config_request=update_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_version_control_config_without_preload_content(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_version_control_config
+
+          Version: 26.12.0.cl or later   Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+        :param update_version_control_config_request: (required)
+        :type update_version_control_config_request: UpdateVersionControlConfigRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_version_control_config_serialize(
+            update_version_control_config_request=update_version_control_config_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def update_version_control_config_sync(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """update_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`update_version_control_config`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_version_control_config(
+                update_version_control_config_request=update_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_version_control_config_sync_with_http_info(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """update_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`update_version_control_config_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_version_control_config_with_http_info(
+                update_version_control_config_request=update_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def update_version_control_config_sync_without_preload_content(
+        self,
+        update_version_control_config_request: UpdateVersionControlConfigRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """update_version_control_config (synchronous)
+
+        Synchronous variant of :meth:`update_version_control_config_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.update_version_control_config_without_preload_content(
+                update_version_control_config_request=update_version_control_config_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _update_version_control_config_serialize(
+        self,
+        update_version_control_config_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_version_control_config_request is not None:
+            _body_params = update_version_control_config_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/version-control/config/update',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -33,6 +33,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.users_api import UsersApi
     from thoughtspot_rest_api_sdk.api.variable_api import VariableApi
     from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi
+    from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api
     from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi
     
 else:
@@ -73,6 +74,7 @@ from thoughtspot_rest_api_sdk.api.thought_spot_rest_api import ThoughtSpotRestAp
 from thoughtspot_rest_api_sdk.api.users_api import UsersApi
 from thoughtspot_rest_api_sdk.api.variable_api import VariableApi
 from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi
+from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api
 from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi
 
 """,

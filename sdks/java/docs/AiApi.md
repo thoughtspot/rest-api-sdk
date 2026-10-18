@@ -5,6 +5,7 @@ All URIs are relative to *CLUSTER_URL*
 | Method | HTTP request |
 |------------- | ------------- |
 | [**createAgentConversation**](AiApi.md#createAgentConversation) | **POST** /api/rest/2.0/ai/agent/conversation/create |
+| [**createAgentConversationV2**](AiApi.md#createAgentConversationV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/create |
 | [**createAnalyst**](AiApi.md#createAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |
 | [**createConversation**](AiApi.md#createConversation) | **POST** /api/rest/2.0/ai/conversation/create |
 | [**deleteAnalyst**](AiApi.md#deleteAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |
@@ -27,6 +28,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**searchUsageData**](AiApi.md#searchUsageData) | **POST** /api/rest/2.0/ai/usage-data/search |
 | [**sendAgentConversationMessage**](AiApi.md#sendAgentConversationMessage) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send |
 | [**sendAgentConversationMessageStreaming**](AiApi.md#sendAgentConversationMessageStreaming) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream |
+| [**sendAgentConversationMessageStreamingV2**](AiApi.md#sendAgentConversationMessageStreamingV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send/stream |
+| [**sendAgentConversationMessageV2**](AiApi.md#sendAgentConversationMessageV2) | **POST** /api/rest/2.0/ai/agent/v2/conversation/send |
 | [**sendAgentMessage**](AiApi.md#sendAgentMessage) | **POST** /api/rest/2.0/ai/agent/{conversation_identifier}/converse |
 | [**sendAgentMessageStreaming**](AiApi.md#sendAgentMessageStreaming) | **POST** /api/rest/2.0/ai/agent/converse/sse |
 | [**sendMessage**](AiApi.md#sendMessage) | **POST** /api/rest/2.0/ai/conversation/{conversation_identifier}/converse |
@@ -58,6 +61,43 @@ All URIs are relative to *CLUSTER_URL*
 ### Return type
 
 [**AgentConversation**](AgentConversation.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="createAgentConversationV2"></a>
+# **createAgentConversationV2**
+> AgentConversationV2 createAgentConversationV2(createAgentConversationV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to any data source or analyst specified in the request.  #### Usage guidelines  A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned &#x60;conversation_identifier&#x60; to &#x60;sendAgentConversationMessageV2&#x60; or &#x60;sendAgentConversationMessageStreamingV2&#x60; to send messages within it.  &#x60;source&#x60; decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.  - &#x60;source&#x60; (default: &#x60;DATA_SOURCE&#x60;): what the conversation is grounded in.   - &#x60;DATA_SOURCE&#x60;: data sources, set with &#x60;data_source_identifiers&#x60; and optionally &#x60;additional_instructions&#x60;. &#x60;analyst_identifier&#x60; is not allowed.   - &#x60;ANALYST&#x60;: a saved analyst, set with &#x60;analyst_identifier&#x60;, which is then required. The analyst brings its own instructions, data sources and connectors, so &#x60;data_source_identifiers&#x60; and &#x60;additional_instructions&#x60; are not allowed. - &#x60;data_source_identifiers&#x60; (default: &#x60;[]&#x60;): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored. - &#x60;additional_instructions&#x60;: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, &#x60;\&quot;Answer concisely and always report revenue in thousands.\&quot;&#x60; It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. - &#x60;analyst_identifier&#x60;: the saved analyst to create the conversation from.  A parameter that does not apply to the &#x60;source&#x60; fails the request with a 400 rather than being ignored.  Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.  #### Example requests  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;DATA_SOURCE\&quot;,   \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;],   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot; } &#x60;&#x60;&#x60;  &#x60;&#x60;&#x60;json {   \&quot;source\&quot;: \&quot;ANALYST\&quot;,   \&quot;analyst_identifier\&quot;: \&quot;0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\&quot; } &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } &#x60;&#x60;&#x60;  Treat &#x60;conversation_identifier&#x60; as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.  #### Error responses  | Code | Description                                                                                                                                                                                                                                                                                                                               | | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — the request fails validation; &#x60;analyst_identifier&#x60; is missing when &#x60;source&#x60; is &#x60;ANALYST&#x60;; a parameter that does not apply to the &#x60;source&#x60; is set; or the analyst in &#x60;analyst_identifier&#x60;, or a data source in &#x60;data_source_identifiers&#x60;, does not exist or the caller cannot view it (the message lists those identifiers). | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the analyst.                                                                                                                                                                                                                             | | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **createAgentConversationV2Request** | [**CreateAgentConversationV2Request**](CreateAgentConversationV2Request.md)
+
+### Return type
+
+[**AgentConversationV2**](AgentConversationV2.md)
 
 ### Authorization
 
@@ -873,6 +913,80 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**SendAgentMessageResponse**](SendAgentMessageResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="sendAgentConversationMessageStreamingV2"></a>
+# **sendAgentConversationMessageStreamingV2**
+> AgentStreamFrame sendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and streams the response back as Server-Sent Events.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up question can continue the same exchange.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  #### Response format  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  #### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  #### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the parameter.  #### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;message\&quot;: \&quot;session busy: lease held by invocation 7f3a\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;, not &#x60;message&#x60; — the latter is diagnostic and not written for end users. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                        | | ---- | ------------------------------------------------------------------------------------------------------------------ | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is not a string.               | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation. | | 404  | Not found — no conversation with the given identifier exists for this user.                                        |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE).      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **sendAgentConversationMessageStreamingV2Request** | [**SendAgentConversationMessageStreamingV2Request**](SendAgentConversationMessageStreamingV2Request.md)
+
+### Return type
+
+[**AgentStreamFrame**](AgentStreamFrame.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+<a id="sendAgentConversationMessageV2"></a>
+# **sendAgentConversationMessageV2**
+> AgentTurnResponse sendAgentConversationMessageV2(sendAgentConversationMessageV2Request)
+
+
+
+ Version: 26.12.0.cl or later   Sends a message to Spotter and returns the complete response once the turn has finished.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege, and at least view access to the data sources the conversation is scoped to.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreamingV2&#x60; instead.  #### Usage guidelines  - &#x60;message&#x60; (required): the question to ask Spotter. - &#x60;conversation_identifier&#x60; (optional): the conversation to ask in, as returned by &#x60;createAgentConversationV2&#x60;. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the &#x60;x-conversation-identifier&#x60; response header.  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  #### Response format  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  &#x60;events&#x60; contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreamingV2&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint&#39;s \&quot;Errors during a turn\&quot; section explains how the two differ.  #### Error responses  | Code | Description                                                                                                                                                     | | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;message&#x60; is missing or is not a string, or &#x60;conversation_identifier&#x60; is empty or not a string.                                                   | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, or lacks access to the conversation.                                              | | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     | | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use &#x60;sendAgentConversationMessageStreamingV2&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **sendAgentConversationMessageV2Request** | [**SendAgentConversationMessageV2Request**](SendAgentConversationMessageV2Request.md)
+
+### Return type
+
+[**AgentTurnResponse**](AgentTurnResponse.md)
 
 ### Authorization
 

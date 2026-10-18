@@ -47,4 +47,20 @@ public class DeleteMetadataRequestTest {
         // TODO: test deleteDisabledObjects
     }
 
+    /**
+     * Test the property 'deleteMode'
+     */
+    @Test
+    public void deleteModeTest() {
+        // TODO: test deleteMode
+    }
+
+    /**
+     * Test the property 'deleteReason'
+     */
+    @Test
+    public void deleteReasonTest() {
+        // TODO: test deleteReason
+    }
+
 }

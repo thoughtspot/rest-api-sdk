@@ -159,7 +159,7 @@ public class LoginRequest implements Serializable {
   }
 
   /**
-   * Path on this cluster to redirect to after a successful login, for example /pinboards. It must start with a single /, and an absolute URL is rejected. When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
+   * Path on this cluster to land on after a successful login. Pass only the path; a full URL is rejected with 400.   Accepted: &#x60;/insights/home/answers&#x60;, &#x60;/insights/pinboard&#x60;, &#x60;/&#x60;   Rejected: &#x60;https://your-cluster.thoughtspot.cloud/#/insights/home/answers&#x60;, &#x60;//example.com/insights&#x60;, &#x60;insights/home/answers&#x60;   When omitted, no redirect is issued and the response is unchanged.    Version: 26.12.0.cl or later 
    * @return redirectUrl
    */
   @javax.annotation.Nullable

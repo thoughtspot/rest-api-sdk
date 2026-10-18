@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.31.0"
+__version__ = "2.32.0"
 
 # Define package exports
 __all__ = [
@@ -57,6 +57,7 @@ __all__ = [
     "UsersApi",
     "VariableApi",
     "VersionControlApi",
+    "VersionControlV2Api",
     "WebhooksApi",
     "ApiResponse",
     "ApiClient",
@@ -708,6 +709,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.users_api import UsersApi as UsersApi
     from thoughtspot_rest_api_sdk.api.variable_api import VariableApi as VariableApi
     from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi as VersionControlApi
+    from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api as VersionControlV2Api
     from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi as WebhooksApi
     
     # import ApiClient
@@ -1369,6 +1371,7 @@ from thoughtspot_rest_api_sdk.api.thought_spot_rest_api import ThoughtSpotRestAp
 from thoughtspot_rest_api_sdk.api.users_api import UsersApi as UsersApi
 from thoughtspot_rest_api_sdk.api.variable_api import VariableApi as VariableApi
 from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi as VersionControlApi
+from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api as VersionControlV2Api
 from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi as WebhooksApi
 
 # import ApiClient

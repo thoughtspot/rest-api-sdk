@@ -71,5 +71,23 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'DeleteDisabledObjects'
         }
+
+        /// <summary>
+        /// Test the property 'DeleteMode'
+        /// </summary>
+        [Fact]
+        public void DeleteModeTest()
+        {
+            // TODO unit test for the property 'DeleteMode'
+        }
+
+        /// <summary>
+        /// Test the property 'DeleteReason'
+        /// </summary>
+        [Fact]
+        public void DeleteReasonTest()
+        {
+            // TODO unit test for the property 'DeleteReason'
+        }
     }
 }

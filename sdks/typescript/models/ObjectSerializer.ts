@@ -776,7 +776,7 @@ import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
 import { DeleteManualTranslationsRequest, DeleteManualTranslationsRequestScopeEnum   } from '../models/DeleteManualTranslationsRequest';
-import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
+import { DeleteMetadataRequest  , DeleteMetadataRequestDeleteModeEnum    } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
 import { DeleteStyleFontsRequest, DeleteStyleFontsRequestScopeEnum     } from '../models/DeleteStyleFontsRequest';
@@ -1290,6 +1290,7 @@ let enumsMap: Set<string> = new Set<string>([
     "CreateWebhookConfigurationRequestStatusEnum",
     "CustomActionMetadataTypeInputTypeEnum",
     "DeleteManualTranslationsRequestScopeEnum",
+    "DeleteMetadataRequestDeleteModeEnum",
     "DeleteMetadataTypeInputTypeEnum",
     "DeleteStyleFontsRequestScopeEnum",
     "DeployCommitRequestDeployTypeEnum",

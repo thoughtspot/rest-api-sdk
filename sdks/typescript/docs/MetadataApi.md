@@ -184,6 +184,8 @@ apiInstance.deleteMetadata(
       },
     ],
     delete_disabled_objects: false,
+    delete_mode: "SOFT_DELETE",
+    delete_reason: "delete_reason_example",
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

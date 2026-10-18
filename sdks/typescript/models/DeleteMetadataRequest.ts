@@ -22,6 +22,14 @@ export class DeleteMetadataRequest {
     * Indicates whether to delete disabled metadata objects.
     */
     'delete_disabled_objects'?: boolean | null;
+    /**
+    * How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later 
+    */
+    'delete_mode'?: DeleteMetadataRequestDeleteModeEnum;
+    /**
+    * Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later 
+    */
+    'delete_reason'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,6 +47,18 @@ export class DeleteMetadataRequest {
             "baseName": "delete_disabled_objects",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "delete_mode",
+            "baseName": "delete_mode",
+            "type": "DeleteMetadataRequestDeleteModeEnum",
+            "format": ""
+        },
+        {
+            "name": "delete_reason",
+            "baseName": "delete_reason",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -48,3 +68,6 @@ export class DeleteMetadataRequest {
     public constructor() {
     }
 }
+
+    export type DeleteMetadataRequestDeleteModeEnum = "SOFT_DELETE" | "HARD_DELETE" ;
+
