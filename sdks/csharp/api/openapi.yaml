@@ -40702,7 +40702,9 @@ components:
           type: string
         delete_reason:
           description: "Reason for the delete, recorded with the Recycle Bin entry.\
-            \ At most 32 characters. \n  Version: 27.1.0.cl or later\n"
+            \ At most 32 characters. Required, with at least 5 characters, to move\
+            \ objects you do not own to the Recycle Bin. \n  Version: 27.1.0.cl or\
+            \ later\n"
           type: string
       required:
       - metadata

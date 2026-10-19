@@ -73,7 +73,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="metadata">Metadata objects. (required).</param>
         /// <param name="deleteDisabledObjects">Indicates whether to delete disabled metadata objects. (default to false).</param>
         /// <param name="deleteMode">How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later .</param>
-        /// <param name="deleteReason">Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later .</param>
+        /// <param name="deleteReason">Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later .</param>
         public DeleteMetadataRequest(List<DeleteMetadataTypeInput> metadata = default, bool? deleteDisabledObjects = false, DeleteModeEnum? deleteMode = default, string deleteReason = default)
         {
             // to ensure "metadata" is required (not null)
@@ -104,9 +104,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? DeleteDisabledObjects { get; set; }
 
         /// <summary>
-        /// Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later 
+        /// Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later 
         /// </summary>
-        /// <value>Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later </value>
+        /// <value>Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later </value>
         [DataMember(Name = "delete_reason", EmitDefaultValue = false)]
         public string DeleteReason { get; set; }
 

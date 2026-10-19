@@ -10,7 +10,7 @@
 |**metadata** | [**List&lt;DeleteMetadataTypeInput&gt;**](DeleteMetadataTypeInput.md) | Metadata objects. |  |
 |**deleteDisabledObjects** | **Boolean** | Indicates whether to delete disabled metadata objects. |  [optional] |
 |**deleteMode** | [**DeleteModeEnum**](#DeleteModeEnum) | How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later  |  [optional] |
-|**deleteReason** | **String** | Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later  |  [optional] |
+|**deleteReason** | **String** | Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later  |  [optional] |
 
 
 

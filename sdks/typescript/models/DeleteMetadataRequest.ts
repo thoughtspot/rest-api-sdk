@@ -27,7 +27,7 @@ export class DeleteMetadataRequest {
     */
     'delete_mode'?: DeleteMetadataRequestDeleteModeEnum;
     /**
-    * Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later 
+    * Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later 
     */
     'delete_reason'?: string;
 

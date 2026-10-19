@@ -29,7 +29,7 @@ class DeleteMetadataRequest(BaseModel):
     metadata: List[DeleteMetadataTypeInput] = Field(description="Metadata objects.")
     delete_disabled_objects: Optional[StrictBool] = Field(default=False, description="Indicates whether to delete disabled metadata objects.")
     delete_mode: Optional[StrictStr] = Field(default=None, description="How to delete the objects. SOFT_DELETE moves them to the Recycle Bin, from where they can be restored; HARD_DELETE removes them permanently.    Version: 27.1.0.cl or later ")
-    delete_reason: Optional[StrictStr] = Field(default=None, description="Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters.    Version: 27.1.0.cl or later ")
+    delete_reason: Optional[StrictStr] = Field(default=None, description="Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["metadata", "delete_disabled_objects", "delete_mode", "delete_reason"]
 
