@@ -29986,6 +29986,50 @@
             "description": "Display name of the user who initiated the task.",
             "nullable": true
           }
+        },
+        "example": {
+          "tenant_id": "<tenant_id>",
+          "org_id": 0,
+          "task_id": "3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a",
+          "task_name": "Import sales objects",
+          "import_response": {
+            "object": [
+              {
+                "name": "Sales Table",
+                "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                "request_index": 0,
+                "response": {
+                  "status": {
+                    "status_code": "OK"
+                  },
+                  "header": {
+                    "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                    "name": "Sales Table"
+                  }
+                }
+              },
+              {
+                "name": "Sales Liveboard",
+                "request_index": 1,
+                "response": {
+                  "status": {
+                    "status_code": "ERROR",
+                    "error_message": "<error_message>"
+                  }
+                }
+              }
+            ]
+          },
+          "task_status": "COMPLETED",
+          "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+          "import_policy": "PARTIAL_OBJECT",
+          "created_at": 1760198400000,
+          "in_progress_at": 1760198401000,
+          "completed_at": 1760198405000,
+          "total_object_count": 2,
+          "object_processed_count": 2,
+          "modified_at": 1760198405000,
+          "author_display_name": "<user_display_name>"
         }
       },
       "SqlQueryResponse": {
@@ -31276,6 +31320,27 @@
             "format": "float",
             "description": "Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned."
           }
+        },
+        "example": {
+          "available_data_row_count": 2,
+          "column_names": [
+            "Region",
+            "Total Revenue"
+          ],
+          "data_rows": [
+            [
+              "East",
+              125000
+            ],
+            [
+              "West",
+              98000
+            ]
+          ],
+          "record_offset": 0,
+          "record_size": 10,
+          "returned_data_row_count": 2,
+          "sampling_ratio": 1
         }
       },
       "LiveboardDataResponse": {
@@ -31420,6 +31485,29 @@
             "description": "Name of the visualization.",
             "nullable": true
           }
+        },
+        "example": {
+          "available_data_row_count": 2,
+          "column_names": [
+            "Region",
+            "Total Revenue"
+          ],
+          "data_rows": [
+            [
+              "East",
+              125000
+            ],
+            [
+              "West",
+              98000
+            ]
+          ],
+          "record_offset": 0,
+          "record_size": 10,
+          "returned_data_row_count": 2,
+          "sampling_ratio": 1,
+          "visualization_id": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+          "visualization_name": "Revenue by Region"
         }
       },
       "AnswerDataResponse": {
@@ -32445,6 +32533,58 @@
             },
             "description": "Databases of the connection."
           }
+        },
+        "example": {
+          "databases": [
+            {
+              "name": "SALES_DB",
+              "auto_created": false,
+              "schemas": [
+                {
+                  "name": "PUBLIC",
+                  "tables": [
+                    {
+                      "name": "ORDERS",
+                      "type": "TABLE",
+                      "description": "",
+                      "selected": true,
+                      "linked": true,
+                      "columns": [
+                        {
+                          "name": "ORDER_ID",
+                          "data_type": "INT64",
+                          "can_import": true,
+                          "selected": true,
+                          "is_linked_active": true
+                        },
+                        {
+                          "name": "CUSTOMER_ID",
+                          "data_type": "INT64",
+                          "can_import": true,
+                          "selected": true,
+                          "is_linked_active": true
+                        }
+                      ],
+                      "relationships": [
+                        {
+                          "name": "FK_ORDERS_CUSTOMERS",
+                          "destDatabase": "SALES_DB",
+                          "destSchema": "PUBLIC",
+                          "destTable": "CUSTOMERS",
+                          "relationshipKeys": [
+                            {
+                              "sourceColumnName": "CUSTOMER_ID",
+                              "destColumnName": "CUSTOMER_ID"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "Database": {
@@ -32470,6 +32610,54 @@
             "description": "Determines if the object is auto created.",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "SALES_DB",
+          "auto_created": false,
+          "schemas": [
+            {
+              "name": "PUBLIC",
+              "tables": [
+                {
+                  "name": "ORDERS",
+                  "type": "TABLE",
+                  "description": "",
+                  "selected": true,
+                  "linked": true,
+                  "columns": [
+                    {
+                      "name": "ORDER_ID",
+                      "data_type": "INT64",
+                      "can_import": true,
+                      "selected": true,
+                      "is_linked_active": true
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "data_type": "INT64",
+                      "can_import": true,
+                      "selected": true,
+                      "is_linked_active": true
+                    }
+                  ],
+                  "relationships": [
+                    {
+                      "name": "FK_ORDERS_CUSTOMERS",
+                      "destDatabase": "SALES_DB",
+                      "destSchema": "PUBLIC",
+                      "destTable": "CUSTOMERS",
+                      "relationshipKeys": [
+                        {
+                          "sourceColumnName": "CUSTOMER_ID",
+                          "destColumnName": "CUSTOMER_ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "SchemaObject": {
@@ -32490,6 +32678,48 @@
             "description": "Tables in the schema.",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "PUBLIC",
+          "tables": [
+            {
+              "name": "ORDERS",
+              "type": "TABLE",
+              "description": "",
+              "selected": true,
+              "linked": true,
+              "columns": [
+                {
+                  "name": "ORDER_ID",
+                  "data_type": "INT64",
+                  "can_import": true,
+                  "selected": true,
+                  "is_linked_active": true
+                },
+                {
+                  "name": "CUSTOMER_ID",
+                  "data_type": "INT64",
+                  "can_import": true,
+                  "selected": true,
+                  "is_linked_active": true
+                }
+              ],
+              "relationships": [
+                {
+                  "name": "FK_ORDERS_CUSTOMERS",
+                  "destDatabase": "SALES_DB",
+                  "destSchema": "PUBLIC",
+                  "destTable": "CUSTOMERS",
+                  "relationshipKeys": [
+                    {
+                      "sourceColumnName": "CUSTOMER_ID",
+                      "destColumnName": "CUSTOMER_ID"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "Table": {
@@ -32579,6 +32809,43 @@
             "description": "List of relationships for the table\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "ORDERS",
+          "type": "TABLE",
+          "description": "",
+          "selected": true,
+          "linked": true,
+          "columns": [
+            {
+              "name": "ORDER_ID",
+              "data_type": "INT64",
+              "can_import": true,
+              "selected": true,
+              "is_linked_active": true
+            },
+            {
+              "name": "CUSTOMER_ID",
+              "data_type": "INT64",
+              "can_import": true,
+              "selected": true,
+              "is_linked_active": true
+            }
+          ],
+          "relationships": [
+            {
+              "name": "FK_ORDERS_CUSTOMERS",
+              "destDatabase": "SALES_DB",
+              "destSchema": "PUBLIC",
+              "destTable": "CUSTOMERS",
+              "relationshipKeys": [
+                {
+                  "sourceColumnName": "CUSTOMER_ID",
+                  "destColumnName": "CUSTOMER_ID"
+                }
+              ]
+            }
+          ]
         }
       },
       "Column": {
@@ -32616,6 +32883,13 @@
             "description": "Determines if the table is linked",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "ORDER_ID",
+          "data_type": "INT64",
+          "can_import": true,
+          "selected": true,
+          "is_linked_active": true
         }
       },
       "SearchRoleResponse": {
@@ -33688,7 +33962,160 @@
             "nullable": true
           }
         },
-        "description": "One conversational exchange: an optional user prompt (message and attachments),\nfollowed by the agent's response items for that turn."
+        "description": "One conversational exchange: an optional user prompt (message and attachments),\nfollowed by the agent's response items for that turn.",
+        "example": {
+          "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+          "timestamp_in_millis": 1760198400000,
+          "user_prompt": {
+            "message": {
+              "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+              "content": "What were total sales by region last quarter?"
+            },
+            "attachments": [
+              {
+                "type": "file",
+                "timestamp_in_millis": 1760198400000,
+                "files": [
+                  {
+                    "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+                    "display_name": "regional_targets.csv",
+                    "file_type": "text/csv",
+                    "created_time_in_millis": 1760198390000,
+                    "size_bytes": 2048
+                  }
+                ]
+              },
+              {
+                "type": "resource",
+                "timestamp_in_millis": 1760198400000,
+                "title": "Quarterly sales plan",
+                "uri": "https://www.example.com/docs/sales-plan",
+                "name": "sales-plan",
+                "mime_type": "text/html",
+                "description": "Sales plan document from a connected source",
+                "size": 4096,
+                "connector_id": "f6a7b8c9-0006-4d0e-9f1a-2b3c4d5e6f7a",
+                "connector_name": "<connector_name>",
+                "connector_slug": "<connector_slug>",
+                "transport_type": "STREAMABLE_HTTP"
+              }
+            ]
+          },
+          "response_items": [
+            {
+              "type": "search_datasets",
+              "timestamp_in_millis": 1760198401000,
+              "is_thinking": true,
+              "step_title": "Finding data sources",
+              "text": "Found 1 data source that matches the question.",
+              "data_sources": [
+                {
+                  "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+                  "data_source_name": "Sales Model",
+                  "description": "Sales transactions by region and product",
+                  "confidence": 0.92,
+                  "reasoning": "The model contains sales amounts and a region column.",
+                  "header": {
+                    "display_name": "Sales Model",
+                    "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+                    "description": "Sales transactions by region and product"
+                  },
+                  "related_liveboard_visualizations": [
+                    {
+                      "answer": {
+                        "header": {
+                          "id": "1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c",
+                          "title": "Sales by region"
+                        }
+                      },
+                      "pinboard_header": {
+                        "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                        "title": "Sales Overview"
+                      }
+                    }
+                  ],
+                  "related_answers": [
+                    {
+                      "header": {
+                        "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
+                        "title": "Quarterly sales by region"
+                      }
+                    }
+                  ],
+                  "related_spotter_queries": [
+                    "sales by region last quarter"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tool_call",
+              "timestamp_in_millis": 1760198402000,
+              "is_thinking": true,
+              "step_title": "Querying data",
+              "tool_call_id": "call_0001",
+              "tool_name": "fetch_and_visualize_data",
+              "arguments": {
+                "query": "total sales by region last quarter",
+                "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
+              }
+            },
+            {
+              "type": "tool_result",
+              "timestamp_in_millis": 1760198404000,
+              "is_thinking": true,
+              "step_title": "Querying data",
+              "tool_call_id": "call_0001",
+              "tool_name": "fetch_and_visualize_data",
+              "content": "Returned 4 rows.",
+              "content_type": "TEXT_PLAIN",
+              "success": true
+            },
+            {
+              "type": "answer",
+              "timestamp_in_millis": 1760198405000,
+              "is_thinking": false,
+              "answer_id": "c3d4e5f6-0003-4a7b-8c8d-9e0f1a2b3c4d",
+              "tool_call_id": "call_0001",
+              "tool_name": "fetch_and_visualize_data"
+            },
+            {
+              "type": "file",
+              "timestamp_in_millis": 1760198406000,
+              "is_thinking": false,
+              "files": [
+                {
+                  "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+                  "display_name": "sales_by_region.png",
+                  "file_type": "image/png",
+                  "created_time_in_millis": 1760198406000,
+                  "size_bytes": 51200
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "timestamp_in_millis": 1760198407000,
+              "is_thinking": false,
+              "content": "Here are total sales by region for last quarter.",
+              "content_type": "TEXT_MARKDOWN",
+              "file_reference": {
+                "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+                "display_name": "sales_by_region.png",
+                "created_time_in_millis": 1760198406000
+              }
+            },
+            {
+              "type": "resource",
+              "timestamp_in_millis": 1760198408000,
+              "is_thinking": false,
+              "title": "Sales Overview",
+              "uri": "https://www.example.com/liveboards/sales-overview",
+              "name": "sales-overview",
+              "mime_type": "text/html"
+            }
+          ]
+        }
       },
       "UserPrompt": {
         "type": "object",
@@ -33721,7 +34148,42 @@
             "nullable": true
           }
         },
-        "description": "User-authored prompt for a conversation turn: the user's text message and any\nfiles or connector resources attached to it."
+        "description": "User-authored prompt for a conversation turn: the user's text message and any\nfiles or connector resources attached to it.",
+        "example": {
+          "message": {
+            "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+            "content": "What were total sales by region last quarter?"
+          },
+          "attachments": [
+            {
+              "type": "file",
+              "timestamp_in_millis": 1760198400000,
+              "files": [
+                {
+                  "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+                  "display_name": "regional_targets.csv",
+                  "file_type": "text/csv",
+                  "created_time_in_millis": 1760198390000,
+                  "size_bytes": 2048
+                }
+              ]
+            },
+            {
+              "type": "resource",
+              "timestamp_in_millis": 1760198400000,
+              "title": "Quarterly sales plan",
+              "uri": "https://www.example.com/docs/sales-plan",
+              "name": "sales-plan",
+              "mime_type": "text/html",
+              "description": "Sales plan document from a connected source",
+              "size": 4096,
+              "connector_id": "f6a7b8c9-0006-4d0e-9f1a-2b3c4d5e6f7a",
+              "connector_name": "<connector_name>",
+              "connector_slug": "<connector_slug>",
+              "transport_type": "STREAMABLE_HTTP"
+            }
+          ]
+        }
       },
       "UserMessage": {
         "type": "object",
@@ -33739,7 +34201,11 @@
             "description": "Text body of the user query."
           }
         },
-        "description": "User-authored text message that begins a conversation turn.\nNull when the turn is a synthetic liveboard-started first turn."
+        "description": "User-authored text message that begins a conversation turn.\nNull when the turn is a synthetic liveboard-started first turn.",
+        "example": {
+          "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+          "content": "What were total sales by region last quarter?"
+        }
       },
       "FileResponseItem": {
         "type": "object",
@@ -33778,7 +34244,20 @@
             "nullable": true
           }
         },
-        "description": "Uploaded or generated files attached to a turn."
+        "description": "Uploaded or generated files attached to a turn.",
+        "example": {
+          "type": "file",
+          "timestamp_in_millis": 1760198400000,
+          "files": [
+            {
+              "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+              "display_name": "regional_targets.csv",
+              "file_type": "text/csv",
+              "created_time_in_millis": 1760198390000,
+              "size_bytes": 2048
+            }
+          ]
+        }
       },
       "PublicFileInfo": {
         "type": "object",
@@ -33812,7 +34291,14 @@
             "nullable": true
           }
         },
-        "description": "Sanitized metadata for a file attached to or produced by a conversation turn.\nNever exposes internal Azure or blob-storage identifiers."
+        "description": "Sanitized metadata for a file attached to or produced by a conversation turn.\nNever exposes internal Azure or blob-storage identifiers.",
+        "example": {
+          "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+          "display_name": "regional_targets.csv",
+          "file_type": "text/csv",
+          "created_time_in_millis": 1760198390000,
+          "size_bytes": 2048
+        }
       },
       "ResourceResponseItem": {
         "type": "object",
@@ -33898,7 +34384,21 @@
             "nullable": true
           }
         },
-        "description": "MCP (Model Context Protocol) resource — typically a connector-provided artifact\nsuch as a document excerpt."
+        "description": "MCP (Model Context Protocol) resource — typically a connector-provided artifact\nsuch as a document excerpt.",
+        "example": {
+          "type": "resource",
+          "timestamp_in_millis": 1760198400000,
+          "title": "Quarterly sales plan",
+          "uri": "https://www.example.com/docs/sales-plan",
+          "name": "sales-plan",
+          "mime_type": "text/html",
+          "description": "Sales plan document from a connected source",
+          "size": 4096,
+          "connector_id": "f6a7b8c9-0006-4d0e-9f1a-2b3c4d5e6f7a",
+          "connector_name": "<connector_name>",
+          "connector_slug": "<connector_slug>",
+          "transport_type": "STREAMABLE_HTTP"
+        }
       },
       "TextResponseItem": {
         "type": "object",
@@ -33950,7 +34450,19 @@
             "nullable": true
           }
         },
-        "description": "Agent text output."
+        "description": "Agent text output.",
+        "example": {
+          "type": "text",
+          "timestamp_in_millis": 1760198407000,
+          "is_thinking": false,
+          "content": "Here are total sales by region for last quarter.",
+          "content_type": "TEXT_MARKDOWN",
+          "file_reference": {
+            "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+            "display_name": "sales_by_region.png",
+            "created_time_in_millis": 1760198406000
+          }
+        }
       },
       "FileReference": {
         "type": "object",
@@ -33973,7 +34485,12 @@
             "nullable": true
           }
         },
-        "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map."
+        "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map.",
+        "example": {
+          "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+          "display_name": "sales_by_region.png",
+          "created_time_in_millis": 1760198406000
+        }
       },
       "ToolCallResponseItem": {
         "type": "object",
@@ -34032,7 +34549,19 @@
             }
           }
         },
-        "description": "Agent invoked a tool."
+        "description": "Agent invoked a tool.",
+        "example": {
+          "type": "tool_call",
+          "timestamp_in_millis": 1760198402000,
+          "is_thinking": true,
+          "step_title": "Querying data",
+          "tool_call_id": "call_0001",
+          "tool_name": "fetch_and_visualize_data",
+          "arguments": {
+            "query": "total sales by region last quarter",
+            "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
+          }
+        }
       },
       "ToolResultResponseItem": {
         "type": "object",
@@ -34094,7 +34623,18 @@
             "nullable": true
           }
         },
-        "description": "Result returned from a tool invocation."
+        "description": "Result returned from a tool invocation.",
+        "example": {
+          "type": "tool_result",
+          "timestamp_in_millis": 1760198404000,
+          "is_thinking": true,
+          "step_title": "Querying data",
+          "tool_call_id": "call_0001",
+          "tool_name": "fetch_and_visualize_data",
+          "content": "Returned 4 rows.",
+          "content_type": "TEXT_PLAIN",
+          "success": true
+        }
       },
       "AnswerResponseItem": {
         "type": "object",
@@ -34140,7 +34680,15 @@
             "nullable": true
           }
         },
-        "description": "Slim reference to a saved answer produced by the agent. Full answer payload\n(visualization spec, formulas, session info) is not embedded — fetch separately\nvia `loadAnswer` using `answer_id`."
+        "description": "Slim reference to a saved answer produced by the agent. Full answer payload\n(visualization spec, formulas, session info) is not embedded — fetch separately\nvia `loadAnswer` using `answer_id`.",
+        "example": {
+          "type": "answer",
+          "timestamp_in_millis": 1760198405000,
+          "is_thinking": false,
+          "answer_id": "c3d4e5f6-0003-4a7b-8c8d-9e0f1a2b3c4d",
+          "tool_call_id": "call_0001",
+          "tool_name": "fetch_and_visualize_data"
+        }
       },
       "SearchDatasetsResponseItem": {
         "type": "object",
@@ -34184,7 +34732,53 @@
             "nullable": true
           }
         },
-        "description": "Result of a dataset discovery step."
+        "description": "Result of a dataset discovery step.",
+        "example": {
+          "type": "search_datasets",
+          "timestamp_in_millis": 1760198401000,
+          "is_thinking": true,
+          "step_title": "Finding data sources",
+          "text": "Found 1 data source that matches the question.",
+          "data_sources": [
+            {
+              "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+              "data_source_name": "Sales Model",
+              "description": "Sales transactions by region and product",
+              "confidence": 0.92,
+              "reasoning": "The model contains sales amounts and a region column.",
+              "header": {
+                "display_name": "Sales Model",
+                "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+                "description": "Sales transactions by region and product"
+              },
+              "related_liveboard_visualizations": [
+                {
+                  "answer": {
+                    "header": {
+                      "id": "1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c",
+                      "title": "Sales by region"
+                    }
+                  },
+                  "pinboard_header": {
+                    "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                    "title": "Sales Overview"
+                  }
+                }
+              ],
+              "related_answers": [
+                {
+                  "header": {
+                    "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
+                    "title": "Quarterly sales by region"
+                  }
+                }
+              ],
+              "related_spotter_queries": [
+                "sales by region last quarter"
+              ]
+            }
+          ]
+        }
       },
       "DataSourceInfo": {
         "type": "object",
@@ -34317,7 +34911,44 @@
             "nullable": true
           }
         },
-        "description": "A data source descriptor returned by the agent's `search_datasets` tool."
+        "description": "A data source descriptor returned by the agent's `search_datasets` tool.",
+        "example": {
+          "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+          "data_source_name": "Sales Model",
+          "description": "Sales transactions by region and product",
+          "confidence": 0.92,
+          "reasoning": "The model contains sales amounts and a region column.",
+          "header": {
+            "display_name": "Sales Model",
+            "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+            "description": "Sales transactions by region and product"
+          },
+          "related_liveboard_visualizations": [
+            {
+              "answer": {
+                "header": {
+                  "id": "1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c",
+                  "title": "Sales by region"
+                }
+              },
+              "pinboard_header": {
+                "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                "title": "Sales Overview"
+              }
+            }
+          ],
+          "related_answers": [
+            {
+              "header": {
+                "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
+                "title": "Quarterly sales by region"
+              }
+            }
+          ],
+          "related_spotter_queries": [
+            "sales by region last quarter"
+          ]
+        }
       },
       "DataSourceHeader": {
         "type": "object",
@@ -34338,7 +34969,12 @@
             "nullable": true
           }
         },
-        "description": "Header metadata extracted from a data source proto. `guid` is the canonical\ndata source identifier and `display_name` is its user-facing name."
+        "description": "Header metadata extracted from a data source proto. `guid` is the canonical\ndata source identifier and `display_name` is its user-facing name.",
+        "example": {
+          "display_name": "Sales Model",
+          "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+          "description": "Sales transactions by region and product"
+        }
       },
       "DataSourcePopularity": {
         "type": "object",
@@ -34407,7 +35043,14 @@
             "description": "True when the file is no longer downloadable (storage expired or evicted)."
           }
         },
-        "description": "Sanitized public metadata for a code-execution-generated file. Internal\nstorage identifiers (e.g. Azure blob ids) are deliberately not exposed."
+        "description": "Sanitized public metadata for a code-execution-generated file. Internal\nstorage identifiers (e.g. Azure blob ids) are deliberately not exposed.",
+        "example": {
+          "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+          "display_name": "sales_by_region.png",
+          "file_type": "image/png",
+          "created_time_in_millis": 1760198406000,
+          "expired": false
+        }
       },
       "LoadAnswerResponse": {
         "type": "object",
@@ -34573,6 +35216,37 @@
             "description": "Agent context state for the answer.",
             "nullable": true
           }
+        },
+        "example": {
+          "title": "Total sales by region last quarter",
+          "description": "Total sales for each region in the last quarter",
+          "session_identifier": "e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f",
+          "generation_number": 2,
+          "tokens": [
+            "[sales]",
+            "[region]",
+            "[date].'last quarter'"
+          ],
+          "visualization_type": "CHART",
+          "formulas": [],
+          "parameters": [],
+          "sub_queries": [
+            {
+              "tokens": "[sales] [region] [date].'last quarter'",
+              "formulas": [
+                {
+                  "name": "Profit Margin",
+                  "expression": "sum ( [profit] ) / sum ( [sales] )",
+                  "formula_type": "AI_GENERATED",
+                  "is_auto_generated": true,
+                  "columns_used": [
+                    "profit",
+                    "sales"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "ACState": {
@@ -35530,7 +36204,34 @@
             "description": "Step-by-step instructions to configure the storage destination."
           }
         },
-        "description": "Storage setup configuration for a specific upload path. The populated fields depend on config_type:\nAWS_TO_S3_STORAGE: aws_account_id, trust_policy_template, setup_instructions.\nGCP_TO_S3_STORAGE: gcp_service_account_id, oidc_provider, trust_policy_template, setup_instructions.\nGCP_TO_GCS_STORAGE: service_account_email, required_role, setup_instructions."
+        "description": "Storage setup configuration for a specific upload path. The populated fields depend on config_type:\nAWS_TO_S3_STORAGE: aws_account_id, trust_policy_template, setup_instructions.\nGCP_TO_S3_STORAGE: gcp_service_account_id, oidc_provider, trust_policy_template, setup_instructions.\nGCP_TO_GCS_STORAGE: service_account_email, required_role, setup_instructions.",
+        "example": {
+          "config_type": "AWS_TO_S3_STORAGE",
+          "aws_account_id": "123456789012",
+          "trust_policy_template": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": {
+                  "AWS": "arn:aws:iam::123456789012:root"
+                },
+                "Action": "sts:AssumeRole",
+                "Condition": {
+                  "StringEquals": {
+                    "sts:ExternalId": "ts-webhook-a1b2c3d4-7890"
+                  }
+                }
+              }
+            ]
+          },
+          "setup_instructions": [
+            "1. Create an IAM role in your AWS account",
+            "2. Attach the trust policy template to the role",
+            "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+            "4. Use the role ARN in your webhook storage configuration"
+          ]
+        }
       },
       "WebhookSortOptionsInput": {
         "type": "object",
@@ -35764,6 +36465,51 @@
             "description": "Status of the webhook (ENABLED or DISABLED).\nOnly present when explicitly set. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>",
             "nullable": true
           }
+        },
+        "example": {
+          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+          "name": "Liveboard Schedule Webhook",
+          "description": "Webhook for liveboard schedule notifications",
+          "org": {
+            "id": "0",
+            "name": "Primary"
+          },
+          "url": "https://myapp.example.com/webhooks",
+          "url_params": {
+            "api_key": "abc123"
+          },
+          "events": [
+            "LIVEBOARD_SCHEDULE"
+          ],
+          "authentication": {
+            "BEARER_TOKEN": "***"
+          },
+          "signature_verification": {
+            "type": "HMAC_SHA256",
+            "header": "X-Webhook-Signature",
+            "algorithm": "SHA256",
+            "secret": "***"
+          },
+          "creation_time_in_millis": 1724277430243,
+          "modification_time_in_millis": 1724278215123,
+          "additional_headers": [
+            {
+              "key": "Custom-Header",
+              "value": "value1"
+            },
+            {
+              "key": "Custom-Header-2",
+              "value": "value2"
+            }
+          ],
+          "created_by": {
+            "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+            "name": "sarah_chen"
+          },
+          "last_modified_by": {
+            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+            "name": "alex_kim"
+          }
         }
       },
       "WebhookOrg": {
@@ -35781,6 +36527,10 @@
             "type": "string",
             "description": "Name of the org."
           }
+        },
+        "example": {
+          "id": "0",
+          "name": "Primary"
         }
       },
       "WebhookAuthentication": {
@@ -35806,6 +36556,9 @@
             "description": "Redacted OAuth2 authentication configuration.",
             "nullable": true
           }
+        },
+        "example": {
+          "BEARER_TOKEN": "***"
         }
       },
       "WebhookAuthApiKey": {
@@ -35823,6 +36576,10 @@
             "type": "string",
             "description": "The API key value."
           }
+        },
+        "example": {
+          "key": "X-API-Key",
+          "value": "***"
         }
       },
       "WebhookAuthBasicAuth": {
@@ -35895,6 +36652,12 @@
             "type": "string",
             "description": "Shared secret used for HMAC signature generation."
           }
+        },
+        "example": {
+          "type": "HMAC_SHA256",
+          "header": "X-Webhook-Signature",
+          "algorithm": "SHA256",
+          "secret": "***"
         }
       },
       "WebhookKeyValuePair": {
@@ -35913,7 +36676,11 @@
             "description": "Header value."
           }
         },
-        "description": "Key-value pair for additional webhook headers."
+        "description": "Key-value pair for additional webhook headers.",
+        "example": {
+          "key": "Custom-Header",
+          "value": "value1"
+        }
       },
       "WebhookUser": {
         "type": "object",
@@ -35930,6 +36697,10 @@
             "type": "string",
             "description": "Name of the user."
           }
+        },
+        "example": {
+          "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+          "name": "sarah_chen"
         }
       },
       "StorageDestination": {
@@ -35952,7 +36723,19 @@
             "description": "Storage-specific configuration settings."
           }
         },
-        "description": "Storage destination configuration for webhook payload delivery."
+        "description": "Storage destination configuration for webhook payload delivery.",
+        "example": {
+          "storage_type": "AWS_S3",
+          "storage_config": {
+            "aws_s3_config": {
+              "bucket_name": "my-webhook-files",
+              "region": "us-west-2",
+              "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+              "external_id": "ts-webhook-a1b2c3d4-7890",
+              "path_prefix": "thoughtspot-webhooks/"
+            }
+          }
+        }
       },
       "StorageConfig": {
         "type": "object",
@@ -35968,7 +36751,16 @@
             "nullable": true
           }
         },
-        "description": "Storage configuration containing provider-specific settings."
+        "description": "Storage configuration containing provider-specific settings.",
+        "example": {
+          "aws_s3_config": {
+            "bucket_name": "my-webhook-files",
+            "region": "us-west-2",
+            "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+            "external_id": "ts-webhook-a1b2c3d4-7890",
+            "path_prefix": "thoughtspot-webhooks/"
+          }
+        }
       },
       "AwsS3Config": {
         "type": "object",
@@ -36001,7 +36793,14 @@
             "nullable": true
           }
         },
-        "description": "AWS S3 storage configuration details."
+        "description": "AWS S3 storage configuration details.",
+        "example": {
+          "bucket_name": "my-webhook-files",
+          "region": "us-west-2",
+          "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+          "external_id": "ts-webhook-a1b2c3d4-7890",
+          "path_prefix": "thoughtspot-webhooks/"
+        }
       },
       "GcpGcsConfig": {
         "type": "object",
@@ -36054,6 +36853,12 @@
             "type": "boolean",
             "description": "Indicates whether more records are available beyond the current response."
           }
+        },
+        "example": {
+          "record_offset": 0,
+          "record_size": 50,
+          "total_count": 2,
+          "has_more": false
         }
       },
       "CollectionSearchResponse": {
@@ -42524,6 +43329,10 @@
             "format": "int32",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "Primary",
+          "id": 0
         }
       },
       "Template_Properties_Input_Create": {
