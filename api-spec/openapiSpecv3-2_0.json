@@ -206,6 +206,14 @@
       "description": "Roles for version 10.1.0.cl"
     },
     {
+      "name": "27.1.0.cl",
+      "id": "27.1.0.cl",
+      "tags": [
+        "27.1.0.cl"
+      ],
+      "description": "Roles for version 27.1.0.cl"
+    },
+    {
       "name": "10.9.0.cl",
       "id": "10.9.0.cl",
       "tags": [
@@ -13094,6 +13102,117 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/{metadata_identifier}/search-readiness": {
+      "get": {
+        "operationId": "fetchMetadataSearchReadiness",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nChecks whether a metadata object is available in Search.\n\nAfter you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object's latest version is available, for example before running a search query on a Model you just imported via TML.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nSpecify the GUID of the metadata object in the `metadata_identifier` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).\n\nThe response `state` is one of the following:\n\n* `OBJECT_READY` - The object's latest version is available in Search.\n* `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval.\n* `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked.\n* `OBJECT_NOT_VALID` - The GUID is malformed, or no object with this GUID exists.\n\nThe response also includes `object_version`, the metadata version at which the object was last written, and `ac_served_version`, the metadata version currently served by Search. The object is ready once `ac_served_version` is greater than or equal to `object_version`.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metadata_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the metadata object to check. Supported object types are Tables and\nModels (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is\ndetected automatically from the GUID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the search readiness state of the object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataSearchReadinessResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "state": "OBJECT_READY",
+                      "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": 18342,
+                      "ac_served_version": 18350,
+                      "detail": "Object is available for Search"
+                    }
+                  },
+                  "example_2": {
+                    "value": {
+                      "state": "OBJECT_NOT_READY",
+                      "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": 18342,
+                      "ac_served_version": 18320,
+                      "detail": "Search is serving version 18320, object requires version 18342"
+                    }
+                  },
+                  "example_3": {
+                    "value": {
+                      "state": "OBJECT_NOT_VALID",
+                      "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": -1,
+                      "ac_served_version": -1,
+                      "detail": "Object not found"
+                    }
+                  },
+                  "example_4": {
+                    "value": {
+                      "state": "TYPE_NOT_SUPPORTED",
+                      "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": -1,
+                      "ac_served_version": -1,
+                      "detail": "Object type 'QUESTION_ANSWER_BOOK' is not supported. Supported types: LOGICAL_TABLE, USER, USER_GROUP"
+                    }
+                  }
                 }
               }
             }
@@ -26461,6 +26580,47 @@
           }
         },
         "description": "Response format associated with fetch SQL query api"
+      },
+      "MetadataSearchReadinessResponse": {
+        "type": "object",
+        "required": [
+          "state",
+          "guid",
+          "object_version",
+          "ac_served_version"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "OBJECT_NOT_VALID",
+              "TYPE_NOT_SUPPORTED",
+              "OBJECT_NOT_READY",
+              "OBJECT_READY"
+            ],
+            "description": "Readiness state of the object. OBJECT_READY means the object is available in\nSearch; OBJECT_NOT_READY means Search has not yet indexed its latest version."
+          },
+          "guid": {
+            "type": "string",
+            "description": "GUID of the metadata object that was checked."
+          },
+          "object_version": {
+            "type": "number",
+            "format": "float",
+            "description": "Metadata commit version at which the object was last written. Returns -1 when\nthe state is OBJECT_NOT_VALID or TYPE_NOT_SUPPORTED."
+          },
+          "ac_served_version": {
+            "type": "number",
+            "format": "float",
+            "description": "Metadata version currently served by Search. The object is ready once this is\ngreater than or equal to object_version. Returns -1 when the state is\nOBJECT_NOT_VALID or TYPE_NOT_SUPPORTED, or when the Search service is unavailable."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Human-readable explanation of the readiness state.",
+            "nullable": true
+          }
+        },
+        "description": "Search readiness of a metadata object."
       },
       "PdfOptionsInput": {
         "type": "object",
