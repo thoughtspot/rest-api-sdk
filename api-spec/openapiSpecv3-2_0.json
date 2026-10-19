@@ -647,7 +647,7 @@
                 "SPOTTER_2026_11"
               ]
             },
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+            "description": "Version of the Spotter experience the conversation runs on. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. A conversation stays on the version that created it, so pass the\nvalue used when it was created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           },
           {
             "in": "path",
@@ -1262,7 +1262,7 @@
                 "SPOTTER_2026_11"
               ]
             },
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+            "description": "Version of the Spotter experience whose conversations to list. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. Each version lists only the conversations created on it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         ],
         "responses": {
@@ -37956,7 +37956,7 @@
             "type": "string"
           },
           "spotter_experience_version": {
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Version of the Spotter experience the conversation runs on. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. The conversation stays on this version, so pass the same value on every\nlater request for it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string",
             "enum": [
               "SPOTTER_2026_10",
@@ -38244,7 +38244,7 @@
             }
           },
           "spotter_experience_version": {
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Version of the Spotter experience the conversation runs on. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. A conversation stays on the version that created it, so pass the\nvalue used when it was created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string",
             "enum": [
               "SPOTTER_2026_10",
@@ -38267,7 +38267,7 @@
             }
           },
           "spotter_experience_version": {
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Version of the Spotter experience the conversation runs on. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. A conversation stays on the version that created it, so pass the\nvalue used when it was created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string",
             "enum": [
               "SPOTTER_2026_10",
@@ -38436,7 +38436,7 @@
         "type": "object",
         "properties": {
           "spotter_experience_version": {
-            "description": "Spotter version to run the request on. Defaults to SPOTTER_2026_10; pass\nSPOTTER_2026_11 to use the current version. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Version of the Spotter experience the conversation runs on. Defaults to\nSPOTTER_2026_10, the previous experience. Pass SPOTTER_2026_11 for the\ncurrent one, available once a cluster admin sets Spotter 3 Liveboard\nexperience to Liveboard side panel (New); otherwise the request returns a\n400. A conversation stays on the version that created it, so pass the\nvalue used when it was created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string",
             "enum": [
               "SPOTTER_2026_10",
