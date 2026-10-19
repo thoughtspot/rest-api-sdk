@@ -28208,7 +28208,345 @@
                   "sheets": {
                     "type": "array",
                     "items": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "sheetType": {
+                          "type": "string"
+                        },
+                        "sheetContent": {
+                          "type": "object",
+                          "properties": {
+                            "sheetContentType": {
+                              "type": "string"
+                            },
+                            "pinboardFilterDetails": {
+                              "type": "object",
+                              "properties": {
+                                "pinboardFiltersAnswerIds": {
+                                  "type": "array",
+                                  "items": {}
+                                },
+                                "filterLogicalTableIds": {
+                                  "type": "array",
+                                  "items": {}
+                                },
+                                "logicalTableIdToPinboardFilterVizIds": {
+                                  "type": "object"
+                                },
+                                "filterIdToLinkedFilterIds": {
+                                  "type": "object"
+                                },
+                                "filterIdToExcludedVizs": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            "visualizations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "vizContent": {
+                                    "type": "object",
+                                    "properties": {
+                                      "refAnswerSheetIndex": {
+                                        "type": "integer"
+                                      },
+                                      "refVizId": {
+                                        "type": "string"
+                                      },
+                                      "locked": {
+                                        "type": "boolean"
+                                      },
+                                      "dataOnDemand": {
+                                        "type": "boolean"
+                                      },
+                                      "refAnswerBook": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "sheets": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "vizType": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "relatedLinks": {
+                                    "type": "array",
+                                    "items": {}
+                                  },
+                                  "header": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "indexVersion": {
+                                        "type": "integer"
+                                      },
+                                      "generationNum": {
+                                        "type": "integer"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "author": {
+                                        "type": "string"
+                                      },
+                                      "authorName": {
+                                        "type": "string"
+                                      },
+                                      "hasLenientDiscoverability": {
+                                        "type": "boolean"
+                                      },
+                                      "authorDisplayName": {
+                                        "type": "string"
+                                      },
+                                      "created": {
+                                        "type": "integer"
+                                      },
+                                      "modified": {
+                                        "type": "integer"
+                                      },
+                                      "modifiedBy": {
+                                        "type": "string"
+                                      },
+                                      "owner": {
+                                        "type": "string"
+                                      },
+                                      "isDeleted": {
+                                        "type": "boolean"
+                                      },
+                                      "isHidden": {
+                                        "type": "boolean"
+                                      },
+                                      "tags": {
+                                        "type": "array",
+                                        "items": {}
+                                      },
+                                      "configs": {
+                                        "type": "array",
+                                        "items": {}
+                                      },
+                                      "isConnectionConfigurationDisabled": {
+                                        "type": "boolean"
+                                      },
+                                      "aiAnswerGenerationDisabled": {
+                                        "type": "boolean"
+                                      },
+                                      "isExternal": {
+                                        "type": "boolean"
+                                      },
+                                      "isDeprecated": {
+                                        "type": "boolean"
+                                      },
+                                      "isSharedViaConnection": {
+                                        "type": "boolean"
+                                      },
+                                      "syncWithSource": {
+                                        "type": "boolean"
+                                      },
+                                      "isParameterized": {
+                                        "type": "boolean"
+                                      },
+                                      "cachedDataAsOf": {
+                                        "type": "integer"
+                                      },
+                                      "isVerified": {
+                                        "type": "boolean"
+                                      },
+                                      "isVersioningEnabled": {
+                                        "type": "boolean"
+                                      },
+                                      "contentUpgradeId": {
+                                        "type": "string"
+                                      },
+                                      "headerUpgradeId": {
+                                        "type": "string"
+                                      },
+                                      "isPublished": {
+                                        "type": "boolean"
+                                      },
+                                      "csrProtected": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  },
+                                  "complete": {
+                                    "type": "boolean"
+                                  },
+                                  "incompleteDetail": {
+                                    "type": "array",
+                                    "items": {}
+                                  }
+                                }
+                              }
+                            },
+                            "layout": {
+                              "type": "object",
+                              "properties": {
+                                "layoutMode": {
+                                  "type": "string"
+                                },
+                                "tiles": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "x": {
+                                        "type": "integer"
+                                      },
+                                      "y": {
+                                        "type": "integer"
+                                      },
+                                      "width": {
+                                        "type": "integer"
+                                      },
+                                      "height": {
+                                        "type": "integer"
+                                      },
+                                      "order": {
+                                        "type": "integer"
+                                      },
+                                      "size": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "vizLayout": {
+                              "type": "string"
+                            },
+                            "canGenerateLeafData": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "header": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "indexVersion": {
+                              "type": "integer"
+                            },
+                            "generationNum": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "author": {
+                              "type": "string"
+                            },
+                            "authorName": {
+                              "type": "string"
+                            },
+                            "hasLenientDiscoverability": {
+                              "type": "boolean"
+                            },
+                            "authorDisplayName": {
+                              "type": "string"
+                            },
+                            "created": {
+                              "type": "integer"
+                            },
+                            "modified": {
+                              "type": "integer"
+                            },
+                            "modifiedBy": {
+                              "type": "string"
+                            },
+                            "owner": {
+                              "type": "string"
+                            },
+                            "isDeleted": {
+                              "type": "boolean"
+                            },
+                            "isHidden": {
+                              "type": "boolean"
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "configs": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "isConnectionConfigurationDisabled": {
+                              "type": "boolean"
+                            },
+                            "aiAnswerGenerationDisabled": {
+                              "type": "boolean"
+                            },
+                            "isExternal": {
+                              "type": "boolean"
+                            },
+                            "isDeprecated": {
+                              "type": "boolean"
+                            },
+                            "isSharedViaConnection": {
+                              "type": "boolean"
+                            },
+                            "syncWithSource": {
+                              "type": "boolean"
+                            },
+                            "isParameterized": {
+                              "type": "boolean"
+                            },
+                            "cachedDataAsOf": {
+                              "type": "integer"
+                            },
+                            "isVerified": {
+                              "type": "boolean"
+                            },
+                            "isVersioningEnabled": {
+                              "type": "boolean"
+                            },
+                            "contentUpgradeId": {
+                              "type": "string"
+                            },
+                            "headerUpgradeId": {
+                              "type": "string"
+                            },
+                            "isPublished": {
+                              "type": "boolean"
+                            },
+                            "csrProtected": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean"
+                        },
+                        "incompleteDetail": {
+                          "type": "array",
+                          "items": {}
+                        }
+                      }
                     }
                   }
                 },
@@ -28294,18 +28632,421 @@
                     "type": "integer"
                   },
                   "resolvedObjects": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "reportContent": {
+                          "type": "object",
+                          "properties": {
+                            "sheets": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "sheetType": {
+                                    "type": "string"
+                                  },
+                                  "sheetContent": {
+                                    "type": "object",
+                                    "properties": {
+                                      "headlineVisibilityMap": {
+                                        "type": "object"
+                                      },
+                                      "defaultQueryableSource": {
+                                        "type": "string"
+                                      },
+                                      "querableSources": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "externalQueryableDataSource": {
+                                        "type": "string"
+                                      },
+                                      "displayMode": {
+                                        "type": "string"
+                                      },
+                                      "bestDisplayMode": {
+                                        "type": "string"
+                                      },
+                                      "canGenerateLeafData": {
+                                        "type": "boolean"
+                                      },
+                                      "sheetContentType": {
+                                        "type": "string"
+                                      },
+                                      "filter": {
+                                        "type": "object"
+                                      },
+                                      "question": {
+                                        "type": "object"
+                                      },
+                                      "visualizations": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "header": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "indexVersion": {
+                                        "type": "integer"
+                                      },
+                                      "generationNum": {
+                                        "type": "integer"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "author": {
+                                        "type": "string"
+                                      },
+                                      "authorName": {
+                                        "type": "string"
+                                      },
+                                      "hasLenientDiscoverability": {
+                                        "type": "boolean"
+                                      },
+                                      "authorDisplayName": {
+                                        "type": "string"
+                                      },
+                                      "created": {
+                                        "type": "integer"
+                                      },
+                                      "modified": {
+                                        "type": "integer"
+                                      },
+                                      "modifiedBy": {
+                                        "type": "string"
+                                      },
+                                      "owner": {
+                                        "type": "string"
+                                      },
+                                      "isDeleted": {
+                                        "type": "boolean"
+                                      },
+                                      "isHidden": {
+                                        "type": "boolean"
+                                      },
+                                      "tags": {
+                                        "type": "array",
+                                        "items": {}
+                                      },
+                                      "configs": {
+                                        "type": "array",
+                                        "items": {}
+                                      },
+                                      "isConnectionConfigurationDisabled": {
+                                        "type": "boolean"
+                                      },
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "aiAnswerGenerationDisabled": {
+                                        "type": "boolean"
+                                      },
+                                      "isExternal": {
+                                        "type": "boolean"
+                                      },
+                                      "isDeprecated": {
+                                        "type": "boolean"
+                                      },
+                                      "isSharedViaConnection": {
+                                        "type": "boolean"
+                                      },
+                                      "syncWithSource": {
+                                        "type": "boolean"
+                                      },
+                                      "isParameterized": {
+                                        "type": "boolean"
+                                      },
+                                      "cachedDataAsOf": {
+                                        "type": "integer"
+                                      },
+                                      "isVerified": {
+                                        "type": "boolean"
+                                      },
+                                      "isVersioningEnabled": {
+                                        "type": "boolean"
+                                      },
+                                      "contentUpgradeId": {
+                                        "type": "string"
+                                      },
+                                      "headerUpgradeId": {
+                                        "type": "string"
+                                      },
+                                      "isPublished": {
+                                        "type": "boolean"
+                                      },
+                                      "csrProtected": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  },
+                                  "complete": {
+                                    "type": "boolean"
+                                  },
+                                  "incompleteDetail": {
+                                    "type": "array",
+                                    "items": {}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "header": {
+                          "type": "object",
+                          "properties": {
+                            "isTimeSeriesKPI": {
+                              "type": "boolean"
+                            },
+                            "referencedVizType": {
+                              "type": "string"
+                            },
+                            "chartType": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "indexVersion": {
+                              "type": "integer"
+                            },
+                            "generationNum": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "author": {
+                              "type": "string"
+                            },
+                            "authorName": {
+                              "type": "string"
+                            },
+                            "hasLenientDiscoverability": {
+                              "type": "boolean"
+                            },
+                            "descriptionAutoGenerated": {
+                              "type": "boolean"
+                            },
+                            "authorDisplayName": {
+                              "type": "string"
+                            },
+                            "created": {
+                              "type": "integer"
+                            },
+                            "modified": {
+                              "type": "integer"
+                            },
+                            "modifiedBy": {
+                              "type": "string"
+                            },
+                            "owner": {
+                              "type": "string"
+                            },
+                            "isDeleted": {
+                              "type": "boolean"
+                            },
+                            "isHidden": {
+                              "type": "boolean"
+                            },
+                            "isAutoCreated": {
+                              "type": "boolean"
+                            },
+                            "isAutoDelete": {
+                              "type": "boolean"
+                            },
+                            "ownerOrgId": {
+                              "type": "integer"
+                            },
+                            "resolvedObjects": {
+                              "type": "object"
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "configs": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "isConnectionConfigurationDisabled": {
+                              "type": "boolean"
+                            },
+                            "aiAnswerGenerationDisabled": {
+                              "type": "boolean"
+                            },
+                            "isExternal": {
+                              "type": "boolean"
+                            },
+                            "isDeprecated": {
+                              "type": "boolean"
+                            },
+                            "isSharedViaConnection": {
+                              "type": "boolean"
+                            },
+                            "syncWithSource": {
+                              "type": "boolean"
+                            },
+                            "isParameterized": {
+                              "type": "boolean"
+                            },
+                            "cachedDataAsOf": {
+                              "type": "integer"
+                            },
+                            "isVerified": {
+                              "type": "boolean"
+                            },
+                            "isVersioningEnabled": {
+                              "type": "boolean"
+                            },
+                            "datasetId": {
+                              "type": "string"
+                            },
+                            "subType": {
+                              "type": "string"
+                            },
+                            "reportId": {
+                              "type": "string"
+                            },
+                            "viewId": {
+                              "type": "string"
+                            },
+                            "contentUpgradeId": {
+                              "type": "string"
+                            },
+                            "headerUpgradeId": {
+                              "type": "string"
+                            },
+                            "isPublished": {
+                              "type": "boolean"
+                            },
+                            "csrProtected": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean"
+                        },
+                        "incompleteDetail": {
+                          "type": "array",
+                          "items": {}
+                        }
+                      }
+                    }
                   },
                   "tags": {
                     "type": "array",
                     "items": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "indexVersion": {
+                          "type": "integer"
+                        },
+                        "generationNum": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "author": {
+                          "type": "string"
+                        },
+                        "created": {
+                          "type": "integer"
+                        },
+                        "modified": {
+                          "type": "integer"
+                        },
+                        "modifiedBy": {
+                          "type": "string"
+                        },
+                        "owner": {
+                          "type": "string"
+                        },
+                        "isDeleted": {
+                          "type": "boolean"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        },
+                        "clientState": {
+                          "type": "object",
+                          "properties": {
+                            "color": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "orgIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "aiAnswerGenerationDisabled": {
+                          "type": "boolean"
+                        },
+                        "isExternal": {
+                          "type": "boolean"
+                        },
+                        "isDeprecated": {
+                          "type": "boolean"
+                        },
+                        "isSharedViaConnection": {
+                          "type": "boolean"
+                        }
+                      }
                     }
                   },
                   "configs": {
                     "type": "array",
                     "items": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "author": {
+                          "type": "string"
+                        },
+                        "created": {
+                          "type": "integer"
+                        },
+                        "modified": {
+                          "type": "integer"
+                        },
+                        "isDeleted": {
+                          "type": "boolean"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        }
+                      }
                     }
                   },
                   "isConnectionConfigurationDisabled": {
@@ -28387,7 +29128,98 @@
                       "type": "string"
                     },
                     "header": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "indexVersion": {
+                          "type": "integer"
+                        },
+                        "generationNum": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "author": {
+                          "type": "string"
+                        },
+                        "created": {
+                          "type": "integer"
+                        },
+                        "modified": {
+                          "type": "integer"
+                        },
+                        "modifiedBy": {
+                          "type": "string"
+                        },
+                        "isDeleted": {
+                          "type": "boolean"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        },
+                        "ownerOrgId": {
+                          "type": "integer"
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "configs": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "isConnectionConfigurationDisabled": {
+                          "type": "boolean"
+                        },
+                        "aiAnswerGenerationDisabled": {
+                          "type": "boolean"
+                        },
+                        "isExternal": {
+                          "type": "boolean"
+                        },
+                        "isDeprecated": {
+                          "type": "boolean"
+                        },
+                        "isSharedViaConnection": {
+                          "type": "boolean"
+                        },
+                        "syncWithSource": {
+                          "type": "boolean"
+                        },
+                        "isParameterized": {
+                          "type": "boolean"
+                        },
+                        "cachedDataAsOf": {
+                          "type": "integer"
+                        },
+                        "isVerified": {
+                          "type": "boolean"
+                        },
+                        "isVersioningEnabled": {
+                          "type": "boolean"
+                        },
+                        "objId": {
+                          "type": "string"
+                        },
+                        "contentUpgradeId": {
+                          "type": "string"
+                        },
+                        "headerUpgradeId": {
+                          "type": "string"
+                        },
+                        "isPublished": {
+                          "type": "boolean"
+                        },
+                        "csrProtected": {
+                          "type": "boolean"
+                        }
+                      }
                     },
                     "type": {
                       "type": "string"
@@ -28599,7 +29431,12 @@
                       "type": "boolean"
                     },
                     "clientState": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "color": {
+                          "type": "string"
+                        }
+                      }
                     },
                     "orgIds": {
                       "type": "array",
@@ -28768,7 +29605,77 @@
                 "type": "object",
                 "properties": {
                   "dataLoadStatistics": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                      "scheduled": {
+                        "type": "boolean"
+                      },
+                      "connectionType": {
+                        "type": "string"
+                      },
+                      "connectionDisplayName": {
+                        "type": "string"
+                      },
+                      "dataLoadStatusList": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "header": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "indexVersion": {
+                            "type": "integer"
+                          },
+                          "generationNum": {
+                            "type": "integer"
+                          },
+                          "author": {
+                            "type": "string"
+                          },
+                          "owner": {
+                            "type": "string"
+                          },
+                          "isDeleted": {
+                            "type": "boolean"
+                          },
+                          "isHidden": {
+                            "type": "boolean"
+                          },
+                          "orgIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "aiAnswerGenerationDisabled": {
+                            "type": "boolean"
+                          },
+                          "isExternal": {
+                            "type": "boolean"
+                          },
+                          "isDeprecated": {
+                            "type": "boolean"
+                          },
+                          "isSharedViaConnection": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "complete": {
+                        "type": "boolean"
+                      },
+                      "incompleteDetail": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    }
                   }
                 },
                 "description": "Returned when metadata_type is CONNECTION."
@@ -28809,7 +29716,12 @@
                   "type": "object",
                   "properties": {
                     "value": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        }
+                      }
                     }
                   },
                   "description": "Returned when metadata_type is LIVEBOARD."
@@ -33035,14 +33947,16 @@
             "nullable": true
           },
           "creation_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Creation time of the role in milliseconds.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "modification_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Last modified time of the role in milliseconds.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "deleted": {
             "type": "boolean",
@@ -33912,7 +34826,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch for the turn."
+            "description": "Milliseconds since Unix epoch for the turn.",
+            "format": "int64"
           },
           "user_prompt": {
             "$ref": "#/components/schemas/UserPrompt",
@@ -34223,7 +35138,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34282,7 +35198,8 @@
           "created_time_in_millis": {
             "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "size_bytes": {
             "type": "integer",
@@ -34318,7 +35235,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34417,7 +35335,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34482,7 +35401,8 @@
           "created_time_in_millis": {
             "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           }
         },
         "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map.",
@@ -34509,7 +35429,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34580,7 +35501,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34653,7 +35575,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -34707,7 +35630,8 @@
           },
           "timestamp_in_millis": {
             "type": "integer",
-            "description": "Milliseconds since Unix epoch when this item was produced."
+            "description": "Milliseconds since Unix epoch when this item was produced.",
+            "format": "int64"
           },
           "is_thinking": {
             "type": "boolean",
@@ -35036,7 +35960,8 @@
           "created_time_in_millis": {
             "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "expired": {
             "type": "boolean",
@@ -35443,24 +36368,28 @@
             "description": "Entity the pool meters."
           },
           "usage": {
-            "type": "object",
+            "type": "integer",
             "description": "Number of Spotter questions consumed from the pool.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "warning_limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Usage level at which users drawing from the pool are warned that they\nare approaching the limit. Absent when no warning is configured.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Maximum number of Spotter questions the pool allows. Absent when the pool\nis unlimited.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "updated_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Epoch milliseconds of the last change to the pool's configuration.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "updated_by": {
             "type": "string",
@@ -35523,24 +36452,28 @@
             "description": "The individual pools the user draws from."
           },
           "total_usage": {
-            "type": "object",
+            "type": "integer",
             "description": "Questions consumed across all of the user's pools.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "total_warning_limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Sum of the warning limits of the user's pools.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "total_limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Sum of the limits of the user's pools.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "total_remaining": {
-            "type": "object",
+            "type": "integer",
             "description": "Questions the user can still ask before reaching the limit. Absent when\n`has_unlimited_pool` is `true`.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "is_at_warning": {
             "type": "boolean",
@@ -37804,7 +38737,26 @@
             "description": "Feature details within this group. Each entry contains the fields relevant to\nthe requested scope; org-admin-only and cluster-admin-only fields are null in\nthe other view."
           }
         },
-        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view)."
+        "description": "A named group of related features. Returned by searchFeatures; the contents of\nfeatures depend on the requested scope (cluster-admin vs. org-admin view).",
+        "example": {
+          "feature_group": "search",
+          "docs_url": null,
+          "features": [
+            {
+              "feature_id": "orion.embraceConfig.doIndexing",
+              "feature_name": "index_columns",
+              "assigned_orgs": [
+                {
+                  "org_id": 0,
+                  "org_name": "Primary"
+                }
+              ],
+              "is_org_aware": true,
+              "feature_value": null,
+              "docs_url": null
+            }
+          ]
+        }
       },
       "FeatureDetail": {
         "type": "object",
@@ -37846,8 +38798,17 @@
           },
           "element_config": {
             "type": "object",
-            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.",
-            "nullable": true
+            "description": "UI element configuration for the feature. Populated in the org-admin view.\nAn opaque blob whose structure varies by `element_type`; a `label` string is\nthe common envelope field.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "label": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "label": "Index columns"
+            }
           },
           "element_value": {
             "type": "string",
@@ -37860,7 +38821,20 @@
             "nullable": true
           }
         },
-        "description": "Detail for a single feature. Fields are populated according to the scope of the\nsearch: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,\nand (for non-org-aware features) feature_value; org-admin (ORG) responses\npopulate element_type, element_config, and element_value."
+        "description": "Detail for a single feature. Fields are populated according to the scope of the\nsearch: cluster-admin (CLUSTER) responses populate assigned_orgs, is_org_aware,\nand (for non-org-aware features) feature_value; org-admin (ORG) responses\npopulate element_type, element_config, and element_value.",
+        "example": {
+          "feature_id": "orion.embraceConfig.doIndexing",
+          "feature_name": "index_columns",
+          "assigned_orgs": [
+            {
+              "org_id": 0,
+              "org_name": "Primary"
+            }
+          ],
+          "is_org_aware": true,
+          "feature_value": null,
+          "docs_url": null
+        }
       },
       "FeatureOrgInfo": {
         "type": "object",
@@ -37879,7 +38853,11 @@
             "description": "Display name of the Org."
           }
         },
-        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change."
+        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change.",
+        "example": {
+          "org_id": 0,
+          "org_name": "Primary"
+        }
       },
       "GenericInfo": {
         "type": "object",
@@ -41010,14 +41988,16 @@
             "nullable": true
           },
           "creation_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Creation time of the role in milliseconds.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "modification_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Last modified time of the role in milliseconds.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "deleted": {
             "type": "boolean",
@@ -41226,8 +42206,9 @@
             "description": "Author of the schedule."
           },
           "creation_time_in_millis": {
-            "type": "object",
-            "description": "Schedule creation time in milliseconds."
+            "type": "integer",
+            "description": "Schedule creation time in milliseconds.",
+            "format": "int64"
           },
           "description": {
             "type": "string",
@@ -42151,7 +43132,17 @@
             "nullable": true
           }
         },
-        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
+        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it.",
+        "example": {
+          "tool_call": {
+            "id": "toolu_01AMjCrr",
+            "name": "spotter_tools_fetch_and_visualize_data",
+            "args": {
+              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "english_query": "total sales by region last quarter"
+            }
+          }
+        }
       },
       "AgentEvent": {
         "type": "object",
@@ -42184,7 +43175,21 @@
             "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "Text from Spotter — its reasoning or its answer."
+        "description": "Text from Spotter — its reasoning or its answer.",
+        "example": {
+          "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+          "partial": true,
+          "content": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "The user is asking for data",
+                "thought": true
+              }
+            ]
+          }
+        }
       },
       "AgentEventContent": {
         "type": "object",
@@ -42205,7 +43210,16 @@
             "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "The content of one agent event."
+        "description": "The content of one agent event.",
+        "example": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The user is asking for data",
+              "thought": true
+            }
+          ]
+        }
       },
       "AgentEventPart": {
         "type": "object",
@@ -42223,7 +43237,11 @@
             "nullable": true
           }
         },
-        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
+        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself.",
+        "example": {
+          "text": "The user is asking for data",
+          "thought": true
+        }
       },
       "AgentToolCall": {
         "type": "object",
@@ -42240,11 +43258,32 @@
           },
           "args": {
             "type": "object",
-            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
+            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "dataset_id": {
+                "type": "string"
+              },
+              "english_query": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "english_query": "total sales by region last quarter"
+            }
           }
         },
-        "description": "A step Spotter started, such as querying a data source."
+        "description": "A step Spotter started, such as querying a data source.",
+        "example": {
+          "id": "toolu_01AMjCrr",
+          "name": "spotter_tools_fetch_and_visualize_data",
+          "args": {
+            "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+            "english_query": "total sales by region last quarter"
+          }
+        }
       },
       "AgentProgress": {
         "type": "object",
@@ -42267,7 +43306,12 @@
             "nullable": true
           }
         },
-        "description": "A stage of a step in flight, so you can show what Spotter is doing."
+        "description": "A stage of a step in flight, so you can show what Spotter is doing.",
+        "example": {
+          "code": "TML_GEN",
+          "message": "Translating the request with the Reasoning Engine",
+          "tool_call_id": "toolu_01AMjCrr"
+        }
       },
       "AgentToolResult": {
         "type": "object",
@@ -42294,11 +43338,77 @@
           },
           "answer": {
             "type": "object",
-            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
+            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "session_id": {
+                "type": "string"
+              },
+              "gen_no": {
+                "type": "integer"
+              },
+              "worksheet_id": {
+                "type": "string"
+              },
+              "sage_query": {
+                "type": "string"
+              },
+              "visualization": {
+                "type": "object",
+                "properties": {
+                  "chart_type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "table_data": {
+                "type": "object",
+                "properties": {
+                  "total_rows": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "title": "total sales by region last quarter",
+              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+              "gen_no": 2,
+              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "sage_query": "[sales] [region] [date] = 'last quarter'",
+              "visualization": {
+                "chart_type": "ADVANCED_COLUMN"
+              },
+              "table_data": {
+                "total_rows": 5
+              }
+            }
           }
         },
-        "description": "What a step produced, including any answer."
+        "description": "What a step produced, including any answer.",
+        "example": {
+          "id": "toolu_01AMjCrr",
+          "name": "spotter_tools_fetch_and_visualize_data",
+          "is_error": false,
+          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+          "answer": {
+            "title": "total sales by region last quarter",
+            "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+            "gen_no": 2,
+            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+            "sage_query": "[sales] [region] [date] = 'last quarter'",
+            "visualization": {
+              "chart_type": "ADVANCED_COLUMN"
+            },
+            "table_data": {
+              "total_rows": 5
+            }
+          }
+        }
       },
       "AgentStreamError": {
         "type": "object",
@@ -42329,7 +43439,14 @@
             "nullable": true
           }
         },
-        "description": "A failure that ended the turn."
+        "description": "A failure that ended the turn.",
+        "example": {
+          "code": "409",
+          "message": "session busy: lease held by invocation 7f3a",
+          "source": "transport",
+          "display_message": "Another request is still running in this conversation.",
+          "error_bucket": "RETRY"
+        }
       },
       "AgentStreamDone": {
         "type": "object",
@@ -42342,7 +43459,10 @@
             "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "End of turn. Always last."
+        "description": "End of turn. Always last.",
+        "example": {
+          "conversation_identifier": "5612260428840173568"
+        }
       },
       "AgentTurnResponse": {
         "type": "object",
@@ -42363,7 +43483,86 @@
             "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
+        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected.",
+        "example": {
+          "conversation_identifier": "5612260428840173568",
+          "events": [
+            {
+              "tool_call": {
+                "id": "toolu_01AMjCrr",
+                "name": "spotter_tools_fetch_and_visualize_data",
+                "args": {
+                  "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                  "english_query": "total sales by region last quarter"
+                }
+              }
+            },
+            {
+              "progress": {
+                "code": "TML_GEN",
+                "message": "Translating the request with the Reasoning Engine",
+                "tool_call_id": "toolu_01AMjCrr"
+              }
+            },
+            {
+              "tool_result": {
+                "id": "toolu_01AMjCrr",
+                "name": "spotter_tools_fetch_and_visualize_data",
+                "is_error": false,
+                "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+                "answer": {
+                  "title": "total sales by region last quarter",
+                  "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+                  "gen_no": 2,
+                  "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                  "sage_query": "[sales] [region] [date] = 'last quarter'",
+                  "visualization": {
+                    "chart_type": "ADVANCED_COLUMN"
+                  },
+                  "table_data": {
+                    "total_rows": 5
+                  }
+                }
+              }
+            },
+            {
+              "event": {
+                "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+                "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                "partial": true,
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "The user is asking for data",
+                      "thought": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "event": {
+                "id": "10552f5a-c275-4e06-8af3-596676cbff71",
+                "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                "partial": true,
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Total sales last quarter were highest in the West region."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "done": {
+                "conversation_identifier": "5612260428840173568"
+              }
+            }
+          ]
+        }
       },
       "SendAgentMessageResponse": {
         "type": "object",
@@ -42496,9 +43695,10 @@
             "description": "User-defined starter prompts, in display order."
           },
           "updated_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Epoch milliseconds of the last update.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "created_by": {
             "type": "string",
@@ -42656,14 +43856,16 @@
             "description": "Starter prompts in display order, including the fixed prompt."
           },
           "updated_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Epoch milliseconds of the last update.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "last_accessed_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Epoch milliseconds of the caller's last interaction with the analyst.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "created_by": {
             "$ref": "#/components/schemas/AnalystUser",
@@ -42793,19 +43995,22 @@
             "description": "Pool to create or update."
           },
           "limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Maximum number of Spotter questions the pool allows.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "warning_limit": {
-            "type": "object",
+            "type": "integer",
             "description": "Usage level at which users drawing from the pool are warned that they are\napproaching the limit.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           },
           "usage": {
-            "type": "object",
+            "type": "integer",
             "description": "Number of questions consumed from the pool. Set to `0` to reset the pool's\nusage, for example at the start of a billing period.",
-            "nullable": true
+            "nullable": true,
+            "format": "int64"
           }
         },
         "description": "A change to one Spotter usage pool. The pool is created if it does not\nexist. Fields that are omitted keep their current value."
