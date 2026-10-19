@@ -182,6 +182,14 @@
       "description": "Roles for version 10.10.0.cl"
     },
     {
+      "name": "27.1.0.cl",
+      "id": "27.1.0.cl",
+      "tags": [
+        "27.1.0.cl"
+      ],
+      "description": "Roles for version 27.1.0.cl"
+    },
+    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -12432,6 +12440,82 @@
         "responses": {
           "204": {
             "description": "Successfully imported manual translations."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/{logical_table_identifier}/build-index": {
+      "post": {
+        "operationId": "buildMetadataIndex",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires tenant administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table. A table that is not yet loaded into the search index is picked up on the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuildMetadataIndexRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "logical_table_identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID, name, or custom object ID of the logical table (such as a table, view, or model) whose search index to rebuild."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Reindex of the logical table is queued and will run in the background."
           },
           "400": {
             "description": "Operation failed",
@@ -41195,6 +41279,15 @@
               "ORG",
               "CLUSTER"
             ]
+          }
+        }
+      },
+      "BuildMetadataIndexRequest": {
+        "type": "object",
+        "properties": {
+          "org_identifier": {
+            "description": "Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.",
+            "type": "string"
           }
         }
       },
