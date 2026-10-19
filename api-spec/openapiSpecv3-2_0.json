@@ -41282,7 +41282,7 @@
             ]
           },
           "delete_reason": {
-            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "type": "string"
           }
         },
