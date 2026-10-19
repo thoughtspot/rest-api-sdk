@@ -26295,9 +26295,12 @@
             "nullable": true
           },
           "incomplete_details": {
-            "type": "object",
+            "type": "array",
             "description": "Incomplete details of user if any present.",
-            "nullable": true
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
           },
           "is_first_login": {
             "type": "boolean",
@@ -26406,8 +26409,20 @@
           },
           "org_privileges": {
             "type": "object",
-            "description": "Privileges which are assigned to the user with org.",
-            "nullable": true
+            "description": "Privileges which are assigned to the user with org.\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "example": {
+              "0": [
+                "AUTHORING",
+                "DATADOWNLOADING"
+              ]
+            }
           },
           "preferred_locale": {
             "type": "string",
@@ -26421,28 +26436,316 @@
           },
           "extended_properties": {
             "type": "object",
-            "description": "Properties for the user",
-            "nullable": true
+            "description": "Properties for the user\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "displayNameLastUpdatedBy": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "displayNameLastUpdatedBy": "ADMIN"
+            }
           },
           "extended_preferences": {
             "type": "object",
-            "description": "Preferences for the user",
-            "nullable": true
+            "description": "Preferences for the user\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "<preference_key>": "<preference_value>"
+            }
           },
           "user_parameters": {
             "type": "object",
-            "description": "User Parameters which are specified for the user via JWToken",
-            "nullable": true
+            "description": "User Parameters which are specified for the user via JWToken\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "runtime_filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "column_name": {
+                        "type": "string"
+                      },
+                      "operator": {
+                        "type": "string"
+                      },
+                      "values": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "parameters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "values": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "example": {
+              "0": {
+                "runtime_filters": [
+                  {
+                    "column_name": "Region",
+                    "operator": "EQ",
+                    "values": [
+                      "East"
+                    ]
+                  }
+                ],
+                "parameters": [
+                  {
+                    "name": "Discount Rate",
+                    "values": [
+                      "0.1"
+                    ]
+                  }
+                ]
+              }
+            }
           },
           "access_control_properties": {
             "type": "object",
-            "description": "Access Control Properties which are specified for the user via JWToken",
-            "nullable": true
+            "description": "Access Control Properties which are specified for the user via JWToken\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "filter_rules": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "column_name": {
+                          "type": "string"
+                        },
+                        "operator": {
+                          "type": "string"
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "parameter_values": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "example": {
+              "0": {
+                "ALL": {
+                  "filter_rules": [
+                    {
+                      "column_name": "Region",
+                      "operator": "EQ",
+                      "values": [
+                        "East"
+                      ]
+                    }
+                  ],
+                  "parameter_values": [
+                    {
+                      "name": "Discount Rate",
+                      "values": [
+                        "0.1"
+                      ]
+                    }
+                  ]
+                },
+                "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b": {
+                  "filter_rules": [
+                    {
+                      "column_name": "Product",
+                      "operator": "IN",
+                      "values": [
+                        "Bags",
+                        "Shoes"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
           },
           "variable_values": {
             "type": "object",
-            "description": "Formula Variables which are specified for the user via JWToken",
-            "nullable": true
+            "description": "Formula Variables which are specified for the user via JWToken\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "variable_values": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "example": {
+              "0": {
+                "ALL": {
+                  "variable_values": [
+                    {
+                      "name": "color",
+                      "values": [
+                        "red"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "id": "9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a",
+          "name": "<username>",
+          "display_name": "<user_display_name>",
+          "visibility": "SHARABLE",
+          "incomplete_details": [
+            "<incomplete_detail_message>"
+          ],
+          "org_privileges": {
+            "0": [
+              "AUTHORING",
+              "DATADOWNLOADING"
+            ]
+          },
+          "extended_properties": {
+            "displayNameLastUpdatedBy": "ADMIN"
+          },
+          "extended_preferences": {
+            "<preference_key>": "<preference_value>"
+          },
+          "user_parameters": {
+            "0": {
+              "runtime_filters": [
+                {
+                  "column_name": "Region",
+                  "operator": "EQ",
+                  "values": [
+                    "East"
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "name": "Discount Rate",
+                  "values": [
+                    "0.1"
+                  ]
+                }
+              ]
+            }
+          },
+          "access_control_properties": {
+            "0": {
+              "ALL": {
+                "filter_rules": [
+                  {
+                    "column_name": "Region",
+                    "operator": "EQ",
+                    "values": [
+                      "East"
+                    ]
+                  }
+                ],
+                "parameter_values": [
+                  {
+                    "name": "Discount Rate",
+                    "values": [
+                      "0.1"
+                    ]
+                  }
+                ]
+              },
+              "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b": {
+                "filter_rules": [
+                  {
+                    "column_name": "Product",
+                    "operator": "IN",
+                    "values": [
+                      "Bags",
+                      "Shoes"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "variable_values": {
+            "0": {
+              "ALL": {
+                "variable_values": [
+                  {
+                    "name": "color",
+                    "values": [
+                      "red"
+                    ]
+                  }
+                ]
+              }
+            }
           }
         }
       },
@@ -26750,7 +27053,68 @@
         "properties": {
           "config_override_info": {
             "type": "object",
-            "nullable": true
+            "nullable": true,
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "string"
+                    },
+                    "dataType": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "current": {
+                      "oneOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "regex": {
+                      "type": "string"
+                    },
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "example": {
+              "maxTableRowsPerPage": 500,
+              "enableCustomCalendar": true,
+              "allowMultipleOrgs": true,
+              "sessionTimeout": 3600
+            },
+            "description": "Keyed by name; every value has the shape described here."
+          }
+        },
+        "example": {
+          "config_override_info": {
+            "maxTableRowsPerPage": 500,
+            "enableCustomCalendar": true,
+            "allowMultipleOrgs": true,
+            "sessionTimeout": 3600
           }
         }
       },
@@ -27665,8 +28029,9 @@
           },
           "dependent_objects": {
             "type": "object",
-            "description": "Details of dependent objects of the metadata objects.",
-            "nullable": true
+            "description": "Details of dependent objects of the metadata objects.\n\nKeyed by object GUID. Returned when metadata_type is LIVEBOARD or COLLECTION.",
+            "nullable": true,
+            "additionalProperties": true
           },
           "dependent_objects_is_last_batch": {
             "type": "boolean",
@@ -27676,36 +28041,1678 @@
           "incomplete_objects": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is COLLECTION."
+                },
+                "codeNumber": {
+                  "type": "integer",
+                  "description": "Returned when metadata_type is COLLECTION."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is COLLECTION."
+                },
+                "header": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "indexVersion": {
+                      "type": "integer"
+                    },
+                    "generationNum": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "modifiedBy": {
+                      "type": "string"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "ownerOrgId": {
+                      "type": "integer"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "configs": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "isConnectionConfigurationDisabled": {
+                      "type": "boolean"
+                    },
+                    "aiAnswerGenerationDisabled": {
+                      "type": "boolean"
+                    },
+                    "isExternal": {
+                      "type": "boolean"
+                    },
+                    "isDeprecated": {
+                      "type": "boolean"
+                    },
+                    "isSharedViaConnection": {
+                      "type": "boolean"
+                    },
+                    "syncWithSource": {
+                      "type": "boolean"
+                    },
+                    "isParameterized": {
+                      "type": "boolean"
+                    },
+                    "cachedDataAsOf": {
+                      "type": "integer"
+                    },
+                    "isVerified": {
+                      "type": "boolean"
+                    },
+                    "isVersioningEnabled": {
+                      "type": "boolean"
+                    },
+                    "objId": {
+                      "type": "string"
+                    },
+                    "contentUpgradeId": {
+                      "type": "string"
+                    },
+                    "headerUpgradeId": {
+                      "type": "string"
+                    },
+                    "isPublished": {
+                      "type": "boolean"
+                    },
+                    "csrProtected": {
+                      "type": "boolean"
+                    }
+                  },
+                  "description": "Returned when metadata_type is COLLECTION."
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is COLLECTION."
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "code": "BASE_OBJECT_MISSING",
+                "codeNumber": 10005,
+                "message": "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
+                "header": {
+                  "id": "00000019-0000-4000-8000-000000000019",
+                  "indexVersion": 156,
+                  "generationNum": 156,
+                  "name": "Sales collection",
+                  "description": "",
+                  "author": "00000006-0000-4000-8000-000000000006",
+                  "created": 1791476207822,
+                  "modified": 1791476219803,
+                  "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                  "isDeleted": false,
+                  "isHidden": false,
+                  "ownerOrgId": 0,
+                  "tags": [],
+                  "configs": [],
+                  "isConnectionConfigurationDisabled": false,
+                  "aiAnswerGenerationDisabled": false,
+                  "isExternal": false,
+                  "isDeprecated": false,
+                  "isSharedViaConnection": false,
+                  "syncWithSource": false,
+                  "isParameterized": false,
+                  "cachedDataAsOf": 0,
+                  "isVerified": false,
+                  "isVersioningEnabled": false,
+                  "objId": "sales-collection-4d4a779a",
+                  "contentUpgradeId": "<upgrade id>",
+                  "headerUpgradeId": "<upgrade id>",
+                  "isPublished": false,
+                  "csrProtected": false
+                },
+                "type": "FOLDER"
+              }
             },
-            "description": "Details of incomplete information of the metadata objects if any.",
+            "description": "Details of incomplete information of the metadata objects if any.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is COLLECTION.",
             "nullable": true
           },
           "metadata_detail": {
             "type": "object",
-            "description": "Complete details of the metadata objects.",
-            "nullable": true
+            "description": "Complete details of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD or COLLECTION.",
+            "nullable": true,
+            "properties": {
+              "reportContent": {
+                "type": "object",
+                "properties": {
+                  "sheets": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "type": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "header": {
+                "type": "object",
+                "properties": {
+                  "hasTabs": {
+                    "type": "boolean"
+                  },
+                  "modelVersion": {
+                    "type": "string"
+                  },
+                  "hasMandatoryFilter": {
+                    "type": "boolean"
+                  },
+                  "isMandatoryFilterValueSelected": {
+                    "type": "boolean"
+                  },
+                  "totalContainerCount": {
+                    "type": "integer"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "indexVersion": {
+                    "type": "integer"
+                  },
+                  "generationNum": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "authorName": {
+                    "type": "string"
+                  },
+                  "hasLenientDiscoverability": {
+                    "type": "boolean"
+                  },
+                  "descriptionAutoGenerated": {
+                    "type": "boolean"
+                  },
+                  "authorDisplayName": {
+                    "type": "string"
+                  },
+                  "created": {
+                    "type": "integer"
+                  },
+                  "modified": {
+                    "type": "integer"
+                  },
+                  "modifiedBy": {
+                    "type": "string"
+                  },
+                  "owner": {
+                    "type": "string"
+                  },
+                  "isDeleted": {
+                    "type": "boolean"
+                  },
+                  "isHidden": {
+                    "type": "boolean"
+                  },
+                  "isAutoCreated": {
+                    "type": "boolean"
+                  },
+                  "isAutoDelete": {
+                    "type": "boolean"
+                  },
+                  "ownerOrgId": {
+                    "type": "integer"
+                  },
+                  "resolvedObjects": {
+                    "type": "object"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "configs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "isConnectionConfigurationDisabled": {
+                    "type": "boolean"
+                  },
+                  "aiAnswerGenerationDisabled": {
+                    "type": "boolean"
+                  },
+                  "isExternal": {
+                    "type": "boolean"
+                  },
+                  "isDeprecated": {
+                    "type": "boolean"
+                  },
+                  "isSharedViaConnection": {
+                    "type": "boolean"
+                  },
+                  "syncWithSource": {
+                    "type": "boolean"
+                  },
+                  "isParameterized": {
+                    "type": "boolean"
+                  },
+                  "cachedDataAsOf": {
+                    "type": "integer"
+                  },
+                  "isVerified": {
+                    "type": "boolean"
+                  },
+                  "isVersioningEnabled": {
+                    "type": "boolean"
+                  },
+                  "datasetId": {
+                    "type": "string"
+                  },
+                  "subType": {
+                    "type": "string"
+                  },
+                  "reportId": {
+                    "type": "string"
+                  },
+                  "viewId": {
+                    "type": "string"
+                  },
+                  "contentUpgradeId": {
+                    "type": "string"
+                  },
+                  "headerUpgradeId": {
+                    "type": "string"
+                  },
+                  "isPublished": {
+                    "type": "boolean"
+                  },
+                  "csrProtected": {
+                    "type": "boolean"
+                  },
+                  "objId": {
+                    "type": "string"
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "complete": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "incompleteDetail": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "codeNumber": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "header": {
+                      "type": "object"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "personalised_views": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "guid": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "authorDisplayName": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "integer"
+                    },
+                    "updatedAt": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "folderContent": {
+                "type": "object",
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "assignedEntities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "inheritedFolders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "state": {
+                "type": "string",
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "visibility": {
+                "type": "string",
+                "description": "Returned when metadata_type is COLLECTION."
+              }
+            },
+            "additionalProperties": true
           },
           "metadata_header": {
             "type": "object",
-            "description": "Header information of the metadata objects.",
-            "nullable": true
+            "description": "Header information of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys.",
+            "nullable": true,
+            "properties": {
+              "hasTabs": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "modelVersion": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "hasMandatoryFilter": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "isMandatoryFilterValueSelected": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "totalContainerCount": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "id": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "indexVersion": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "generationNum": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "name": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "description": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, or LOGICAL_RELATIONSHIP."
+              },
+              "author": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "authorName": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, or CONNECTION."
+              },
+              "hasLenientDiscoverability": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
+              },
+              "descriptionAutoGenerated": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "authorDisplayName": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, or CONNECTION."
+              },
+              "created": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "modified": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "modifiedBy": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "owner": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+              },
+              "isDeleted": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "isHidden": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "isAutoCreated": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
+              },
+              "isAutoDelete": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
+              },
+              "ownerOrgId": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "resolvedObjects": {
+                "type": "object",
+                "description": "Returned when metadata_type is LIVEBOARD, CONNECTION, or USER_GROUP."
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "indexVersion": {
+                      "type": "integer"
+                    },
+                    "generationNum": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "modifiedBy": {
+                      "type": "string"
+                    },
+                    "owner": {
+                      "type": "string"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "clientState": {
+                      "type": "object"
+                    },
+                    "orgIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "aiAnswerGenerationDisabled": {
+                      "type": "boolean"
+                    },
+                    "isExternal": {
+                      "type": "boolean"
+                    },
+                    "isDeprecated": {
+                      "type": "boolean"
+                    },
+                    "isSharedViaConnection": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "configs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "isConnectionConfigurationDisabled": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "type": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, LOGICAL_TABLE, CONNECTION, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+              },
+              "aiAnswerGenerationDisabled": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "isExternal": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "isDeprecated": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "isSharedViaConnection": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
+              },
+              "syncWithSource": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "isParameterized": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "cachedDataAsOf": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "isVerified": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "isVersioningEnabled": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "datasetId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "subType": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "reportId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "viewId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "contentUpgradeId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "headerUpgradeId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "isPublished": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "csrProtected": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+              },
+              "objId": {
+                "type": "string",
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "clientState": {
+                "type": "object",
+                "properties": {
+                  "queryState": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string"
+                  }
+                },
+                "description": "Returned when metadata_type is ANSWER or TAG."
+              },
+              "orgIds": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "Returned when metadata_type is ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+              },
+              "dataUploadEnabled": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is CONNECTION."
+              },
+              "relationWithUser": {
+                "type": "string",
+                "description": "Returned when metadata_type is CONNECTION."
+              },
+              "statistics": {
+                "type": "object",
+                "properties": {
+                  "dataLoadStatistics": {
+                    "type": "object"
+                  }
+                },
+                "description": "Returned when metadata_type is CONNECTION."
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Returned when metadata_type is USER or USER_GROUP."
+              },
+              "belongToAllOrgs": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is USER."
+              },
+              "numDefaultPinboards": {
+                "type": "integer",
+                "description": "Returned when metadata_type is USER_GROUP."
+              },
+              "numMemberUsers": {
+                "type": "integer",
+                "description": "Returned when metadata_type is USER_GROUP."
+              }
+            },
+            "additionalProperties": true
           },
           "visualization_headers": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "vizType": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "title": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "object"
+                    }
+                  },
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "author": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "created": {
+                  "type": "integer",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "modified": {
+                  "type": "integer",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "modifiedBy": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "Returned when metadata_type is LIVEBOARD."
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "size": "xs",
+                "vizType": "CHART",
+                "title": {
+                  "value": {
+                    "text": "Chart 0"
+                  }
+                },
+                "id": "00000005-0000-4000-8000-000000000005",
+                "name": "Total Partial Revenue",
+                "author": "00000006-0000-4000-8000-000000000006",
+                "created": 1760198400000,
+                "modified": 1760198460000,
+                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                "owner": "00000001-0000-4000-8000-000000000001"
+              }
             },
-            "description": "Visualization header information of the metadata objects.",
+            "description": "Visualization header information of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD.",
             "nullable": true
           },
           "stats": {
             "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.",
-            "nullable": true
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD.",
+            "nullable": true,
+            "properties": {
+              "views": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "favorites": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              },
+              "last_accessed": {
+                "type": "integer",
+                "description": "Returned when metadata_type is LIVEBOARD."
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "views": 42,
+              "favorites": 3,
+              "last_accessed": 1760198460000
+            }
           }
         },
-        "description": "Metadata Search Response Object."
+        "description": "Metadata Search Response Object.",
+        "example": {
+          "metadata_id": "00000001-0000-4000-8000-000000000001",
+          "metadata_name": "Parameters Liveboard",
+          "metadata_type": "LIVEBOARD",
+          "metadata_obj_id": null,
+          "dependent_objects": {
+            "00000001-0000-4000-8000-000000000001": {}
+          },
+          "dependent_objects_is_last_batch": null,
+          "incomplete_objects": null,
+          "metadata_detail": {
+            "reportContent": {
+              "sheets": [
+                {
+                  "sheetType": "PINBOARD",
+                  "sheetContent": {
+                    "sheetContentType": "PINBOARD",
+                    "pinboardFilterDetails": {
+                      "pinboardFiltersAnswerIds": [],
+                      "filterLogicalTableIds": [],
+                      "logicalTableIdToPinboardFilterVizIds": {},
+                      "filterIdToLinkedFilterIds": {},
+                      "filterIdToExcludedVizs": {}
+                    },
+                    "visualizations": [
+                      {
+                        "vizContent": {
+                          "refAnswerSheetIndex": 0,
+                          "refVizId": "00000002-0000-4000-8000-000000000002",
+                          "locked": false,
+                          "dataOnDemand": false,
+                          "refAnswerBook": {
+                            "id": "00000003-0000-4000-8000-000000000003",
+                            "name": "Total Partial Revenue",
+                            "sheets": [
+                              {
+                                "id": "00000004-0000-4000-8000-000000000004",
+                                "name": "Total Partial Revenue",
+                                "owner": "00000003-0000-4000-8000-000000000003"
+                              }
+                            ]
+                          },
+                          "vizType": "PINBOARD_VIZ"
+                        },
+                        "relatedLinks": [],
+                        "header": {
+                          "id": "00000005-0000-4000-8000-000000000005",
+                          "indexVersion": 27,
+                          "generationNum": 28,
+                          "name": "Answer: Total Partial Revenue Viz: Chart Viz holiday ytd",
+                          "author": "00000006-0000-4000-8000-000000000006",
+                          "authorName": "<username>",
+                          "hasLenientDiscoverability": false,
+                          "authorDisplayName": "<user_display_name>",
+                          "created": 1760198400000,
+                          "modified": 1760198460000,
+                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                          "owner": "00000001-0000-4000-8000-000000000001",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "complete": true,
+                        "incompleteDetail": []
+                      }
+                    ],
+                    "layout": {
+                      "layoutMode": "auto",
+                      "tiles": [
+                        {
+                          "id": "00000005-0000-4000-8000-000000000005",
+                          "x": 0,
+                          "y": 0,
+                          "width": 0,
+                          "height": 0,
+                          "order": 0,
+                          "size": "xs"
+                        }
+                      ]
+                    },
+                    "vizLayout": "<encoded layout>",
+                    "canGenerateLeafData": false
+                  },
+                  "header": {
+                    "id": "00000007-0000-4000-8000-000000000007",
+                    "indexVersion": 28,
+                    "generationNum": 28,
+                    "name": "Parameters Liveboard",
+                    "description": "",
+                    "author": "00000006-0000-4000-8000-000000000006",
+                    "authorName": "<username>",
+                    "hasLenientDiscoverability": false,
+                    "authorDisplayName": "<user_display_name>",
+                    "created": 1760198400000,
+                    "modified": 1760198460000,
+                    "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                    "owner": "00000001-0000-4000-8000-000000000001",
+                    "isDeleted": false,
+                    "isHidden": false,
+                    "tags": [],
+                    "configs": [],
+                    "isConnectionConfigurationDisabled": false,
+                    "aiAnswerGenerationDisabled": false,
+                    "isExternal": false,
+                    "isDeprecated": false,
+                    "isSharedViaConnection": false,
+                    "syncWithSource": false,
+                    "isParameterized": false,
+                    "cachedDataAsOf": 0,
+                    "isVerified": false,
+                    "isVersioningEnabled": false,
+                    "contentUpgradeId": "<upgrade id>",
+                    "headerUpgradeId": "<upgrade id>",
+                    "isPublished": false,
+                    "csrProtected": false
+                  },
+                  "complete": true,
+                  "incompleteDetail": []
+                }
+              ]
+            },
+            "type": "PINBOARD",
+            "header": {
+              "hasTabs": false,
+              "modelVersion": "V1",
+              "hasMandatoryFilter": false,
+              "isMandatoryFilterValueSelected": true,
+              "totalContainerCount": 4,
+              "id": "00000001-0000-4000-8000-000000000001",
+              "indexVersion": 28,
+              "generationNum": 28,
+              "name": "Parameters Liveboard",
+              "description": "",
+              "author": "00000006-0000-4000-8000-000000000006",
+              "authorName": "<username>",
+              "hasLenientDiscoverability": false,
+              "descriptionAutoGenerated": false,
+              "authorDisplayName": "<user_display_name>",
+              "created": 1760198400000,
+              "modified": 1760198460000,
+              "modifiedBy": "00000006-0000-4000-8000-000000000006",
+              "owner": "00000001-0000-4000-8000-000000000001",
+              "isDeleted": false,
+              "isHidden": false,
+              "isAutoCreated": false,
+              "isAutoDelete": false,
+              "ownerOrgId": 0,
+              "resolvedObjects": {
+                "00000002-0000-4000-8000-000000000002": {
+                  "reportContent": {
+                    "sheets": [
+                      {
+                        "sheetType": "QUESTION",
+                        "sheetContent": {
+                          "headlineVisibilityMap": {
+                            "00000008-0000-4000-8000-000000000008": false
+                          },
+                          "defaultQueryableSource": "FALCON",
+                          "querableSources": [
+                            "FALCON"
+                          ],
+                          "externalQueryableDataSource": "DEFAULT",
+                          "displayMode": "CHART_MODE",
+                          "bestDisplayMode": "CHART_MODE",
+                          "canGenerateLeafData": true,
+                          "sheetContentType": "QUESTION",
+                          "filter": {
+                            "filterContent": {
+                              "rows": [
+                                {
+                                  "column": {
+                                    "isUserSorted": false,
+                                    "aggrTypeOverride": "NONE",
+                                    "typeOverride": "UNKNOWN",
+                                    "dataTypeOverride": "UNKNOWN",
+                                    "formatTypeOverride": "NONE",
+                                    "uniqueValues": 0,
+                                    "sageOutputColumnId": "00000009-0000-4000-8000-000000000009",
+                                    "outputIdsWithMatchingLogicalKey": [],
+                                    "aggrApplied": false,
+                                    "isVisible": true,
+                                    "columnToFormatPatternType": {},
+                                    "effectiveAggrType": "NONE",
+                                    "effectiveDataType": "BOOL",
+                                    "effectiveType": "ATTRIBUTE",
+                                    "id": "00000009-0000-4000-8000-000000000009",
+                                    "effectiveColumnGuid": "0000000a-0000-4000-8000-00000000000a",
+                                    "effectiveColumnIdString": "0000000b-0000-4000-8000-00000000000b#NONE#ATTRIBUTE#null",
+                                    "baseColumnName": "Holiday YTD",
+                                    "baseColumnFormulaId": "0000000c-0000-4000-8000-00000000000c",
+                                    "baseAggrType": "NONE",
+                                    "baseDataType": "BOOL",
+                                    "baseType": "ATTRIBUTE",
+                                    "isBaseColumnFormulaColumn": true,
+                                    "isBaseColumnAdditive": false,
+                                    "referencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "referencedColumnHeaders": [
+                                      {
+                                        "id": "0000000e-0000-4000-8000-00000000000e",
+                                        "name": "Commit Date"
+                                      }
+                                    ],
+                                    "allLevelReferencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "allLevelReferencedColumnHeaders": [
+                                      {
+                                        "id": "0000000e-0000-4000-8000-00000000000e",
+                                        "name": "Commit Date"
+                                      }
+                                    ]
+                                  },
+                                  "oper": "EQ",
+                                  "values": [
+                                    {
+                                      "key": "true",
+                                      "selected": true
+                                    }
+                                  ],
+                                  "negation": false,
+                                  "applyOnTablesGuids": [],
+                                  "type": "SIMPLE"
+                                }
+                              ]
+                            },
+                            "header": {
+                              "id": "0000000f-0000-4000-8000-00000000000f",
+                              "indexVersion": 27,
+                              "generationNum": 28,
+                              "name": "Filter holiday ytd = true partial revenue",
+                              "author": "00000006-0000-4000-8000-000000000006",
+                              "authorName": "<username>",
+                              "hasLenientDiscoverability": false,
+                              "authorDisplayName": "<user_display_name>",
+                              "created": 1760198400000,
+                              "modified": 1760198460000,
+                              "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                              "owner": "00000004-0000-4000-8000-000000000004",
+                              "isDeleted": false,
+                              "isHidden": false,
+                              "tags": [],
+                              "configs": [],
+                              "isConnectionConfigurationDisabled": false,
+                              "type": "QUESTION",
+                              "aiAnswerGenerationDisabled": false,
+                              "isExternal": false,
+                              "isDeprecated": false,
+                              "isSharedViaConnection": false,
+                              "syncWithSource": false,
+                              "isParameterized": false,
+                              "cachedDataAsOf": 0,
+                              "isVerified": false,
+                              "isVersioningEnabled": false,
+                              "contentUpgradeId": "<upgrade id>",
+                              "headerUpgradeId": "<upgrade id>",
+                              "isPublished": false,
+                              "csrProtected": false
+                            },
+                            "complete": true,
+                            "incompleteDetail": []
+                          },
+                          "question": {
+                            "sageContextProto": "<encoded search context>",
+                            "sageContextIndex": 0,
+                            "text": "holiday ytd = true partial revenue",
+                            "isChasmTrapQuery": false
+                          },
+                          "visualizations": [
+                            {
+                              "vizContent": {
+                                "chartType": "KPI",
+                                "axisConfigs": [
+                                  {
+                                    "y": [
+                                      "00000008-0000-4000-8000-000000000008"
+                                    ]
+                                  }
+                                ],
+                                "bestAxisConfigs": {
+                                  "KPI": [
+                                    {
+                                      "y": [
+                                        "00000008-0000-4000-8000-000000000008"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "title": {
+                                  "value": {
+                                    "text": "Chart 0"
+                                  }
+                                },
+                                "customTitle": false,
+                                "locked": false,
+                                "dataOnDemand": false,
+                                "columns": [
+                                  {
+                                    "isUserSorted": false,
+                                    "aggrTypeOverride": "SUM",
+                                    "typeOverride": "MEASURE",
+                                    "dataTypeOverride": "UNKNOWN",
+                                    "formatTypeOverride": "NONE",
+                                    "groupBy": false,
+                                    "uniqueValues": -1,
+                                    "sageOutputColumnId": "00000008-0000-4000-8000-000000000008",
+                                    "outputIdsWithMatchingLogicalKey": [],
+                                    "aggrApplied": true,
+                                    "isVisible": true,
+                                    "columnToFormatPatternType": {},
+                                    "effectiveAggrType": "SUM",
+                                    "effectiveDataType": "DOUBLE",
+                                    "effectiveType": "MEASURE",
+                                    "id": "00000008-0000-4000-8000-000000000008",
+                                    "effectiveColumnGuid": "00000010-0000-4000-8000-000000000010",
+                                    "effectiveColumnIdString": "00000011-0000-4000-8000-000000000011#SUM#MEASURE#null",
+                                    "baseColumnName": "Partial Revenue",
+                                    "baseColumnFormulaId": "00000012-0000-4000-8000-000000000012",
+                                    "baseAggrType": "SUM",
+                                    "baseDataType": "DOUBLE",
+                                    "baseType": "MEASURE",
+                                    "isBaseColumnFormulaColumn": true,
+                                    "isBaseColumnAdditive": true,
+                                    "referencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "referencedColumnHeaders": [
+                                      {
+                                        "id": "00000013-0000-4000-8000-000000000013",
+                                        "name": "Revenue"
+                                      }
+                                    ],
+                                    "allLevelReferencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "allLevelReferencedColumnHeaders": [
+                                      {
+                                        "id": "00000013-0000-4000-8000-000000000013",
+                                        "name": "Revenue"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "vizType": "CHART"
+                              },
+                              "relatedLinks": [],
+                              "header": {
+                                "id": "00000002-0000-4000-8000-000000000002",
+                                "indexVersion": 27,
+                                "generationNum": 28,
+                                "name": "Chart Viz holiday ytd = true partial revenue",
+                                "author": "00000006-0000-4000-8000-000000000006",
+                                "authorName": "<username>",
+                                "hasLenientDiscoverability": false,
+                                "authorDisplayName": "<user_display_name>",
+                                "created": 1760198400000,
+                                "modified": 1760198460000,
+                                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                "owner": "00000004-0000-4000-8000-000000000004",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "QUESTION",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "complete": true,
+                              "incompleteDetail": []
+                            },
+                            {
+                              "vizContent": {
+                                "vizType": "TABLE",
+                                "columns": [
+                                  {
+                                    "isUserSorted": false,
+                                    "aggrTypeOverride": "SUM",
+                                    "typeOverride": "MEASURE",
+                                    "dataTypeOverride": "UNKNOWN",
+                                    "formatTypeOverride": "NONE",
+                                    "groupBy": false,
+                                    "uniqueValues": -1,
+                                    "sageOutputColumnId": "00000008-0000-4000-8000-000000000008",
+                                    "outputIdsWithMatchingLogicalKey": [],
+                                    "aggrApplied": true,
+                                    "isVisible": true,
+                                    "columnToFormatPatternType": {},
+                                    "effectiveAggrType": "SUM",
+                                    "effectiveDataType": "DOUBLE",
+                                    "effectiveType": "MEASURE",
+                                    "id": "00000008-0000-4000-8000-000000000008",
+                                    "effectiveColumnGuid": "00000010-0000-4000-8000-000000000010",
+                                    "effectiveColumnIdString": "00000011-0000-4000-8000-000000000011#SUM#MEASURE#null",
+                                    "baseColumnName": "Partial Revenue",
+                                    "baseColumnFormulaId": "00000012-0000-4000-8000-000000000012",
+                                    "baseAggrType": "SUM",
+                                    "baseDataType": "DOUBLE",
+                                    "baseType": "MEASURE",
+                                    "isBaseColumnFormulaColumn": true,
+                                    "isBaseColumnAdditive": true,
+                                    "referencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "referencedColumnHeaders": [
+                                      {
+                                        "id": "00000013-0000-4000-8000-000000000013",
+                                        "name": "Revenue"
+                                      }
+                                    ],
+                                    "allLevelReferencedTableHeaders": [
+                                      {
+                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                        "name": "Parameters WS"
+                                      }
+                                    ],
+                                    "allLevelReferencedColumnHeaders": [
+                                      {
+                                        "id": "00000013-0000-4000-8000-000000000013",
+                                        "name": "Revenue"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "title": {
+                                  "value": {
+                                    "text": "Table 1"
+                                  }
+                                },
+                                "customTitle": false,
+                                "locked": false
+                              },
+                              "relatedLinks": [],
+                              "header": {
+                                "id": "00000014-0000-4000-8000-000000000014",
+                                "indexVersion": 27,
+                                "generationNum": 28,
+                                "name": "Table Viz holiday ytd = true partial revenue",
+                                "author": "00000006-0000-4000-8000-000000000006",
+                                "authorName": "<username>",
+                                "hasLenientDiscoverability": false,
+                                "authorDisplayName": "<user_display_name>",
+                                "created": 1760198400000,
+                                "modified": 1760198460000,
+                                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                "owner": "00000004-0000-4000-8000-000000000004",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "QUESTION",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "complete": true,
+                              "incompleteDetail": []
+                            },
+                            {
+                              "vizContent": {
+                                "vizType": "FILTER",
+                                "compoundRowIndices": [
+                                  0
+                                ],
+                                "dataOnDemand": true
+                              },
+                              "relatedLinks": [],
+                              "header": {
+                                "id": "00000015-0000-4000-8000-000000000015",
+                                "indexVersion": 27,
+                                "generationNum": 28,
+                                "name": "Filter Viz output id: 00000009-0000-4000-8000-000000000009",
+                                "author": "00000006-0000-4000-8000-000000000006",
+                                "authorName": "<username>",
+                                "hasLenientDiscoverability": false,
+                                "authorDisplayName": "<user_display_name>",
+                                "created": 1760198400000,
+                                "modified": 1760198460000,
+                                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                "owner": "00000004-0000-4000-8000-000000000004",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "QUESTION",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "complete": true,
+                              "incompleteDetail": []
+                            }
+                          ]
+                        },
+                        "header": {
+                          "id": "00000004-0000-4000-8000-000000000004",
+                          "indexVersion": 27,
+                          "generationNum": 28,
+                          "name": "Total Partial Revenue",
+                          "author": "00000006-0000-4000-8000-000000000006",
+                          "authorName": "<username>",
+                          "hasLenientDiscoverability": false,
+                          "authorDisplayName": "<user_display_name>",
+                          "created": 1760198400000,
+                          "modified": 1760198460000,
+                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                          "owner": "00000003-0000-4000-8000-000000000003",
+                          "isDeleted": false,
+                          "isHidden": true,
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "QUESTION",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "complete": true,
+                        "incompleteDetail": []
+                      }
+                    ]
+                  },
+                  "type": "QUESTION",
+                  "header": {
+                    "isTimeSeriesKPI": false,
+                    "referencedVizType": "CHART",
+                    "chartType": "KPI",
+                    "id": "00000003-0000-4000-8000-000000000003",
+                    "indexVersion": 27,
+                    "generationNum": 28,
+                    "name": "Total Partial Revenue",
+                    "author": "00000006-0000-4000-8000-000000000006",
+                    "authorName": "<username>",
+                    "hasLenientDiscoverability": false,
+                    "descriptionAutoGenerated": false,
+                    "authorDisplayName": "<user_display_name>",
+                    "created": 1760198400000,
+                    "modified": 1760198460000,
+                    "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                    "owner": "00000001-0000-4000-8000-000000000001",
+                    "isDeleted": false,
+                    "isHidden": true,
+                    "isAutoCreated": false,
+                    "isAutoDelete": false,
+                    "ownerOrgId": 0,
+                    "resolvedObjects": {},
+                    "tags": [],
+                    "configs": [],
+                    "isConnectionConfigurationDisabled": false,
+                    "aiAnswerGenerationDisabled": false,
+                    "isExternal": false,
+                    "isDeprecated": false,
+                    "isSharedViaConnection": false,
+                    "syncWithSource": false,
+                    "isParameterized": false,
+                    "cachedDataAsOf": 0,
+                    "isVerified": false,
+                    "isVersioningEnabled": false,
+                    "datasetId": "",
+                    "subType": "",
+                    "reportId": "",
+                    "viewId": "",
+                    "contentUpgradeId": "<upgrade id>",
+                    "headerUpgradeId": "<upgrade id>",
+                    "isPublished": false,
+                    "csrProtected": false
+                  },
+                  "complete": true,
+                  "incompleteDetail": []
+                }
+              },
+              "tags": [
+                {
+                  "id": "00000016-0000-4000-8000-000000000016",
+                  "indexVersion": 0,
+                  "generationNum": 38,
+                  "name": "try me",
+                  "author": "00000006-0000-4000-8000-000000000006",
+                  "created": 1412881252884,
+                  "modified": 1412881301302,
+                  "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                  "owner": "00000016-0000-4000-8000-000000000016",
+                  "isDeleted": false,
+                  "isHidden": false,
+                  "clientState": {
+                    "color": "#fbc17c"
+                  },
+                  "orgIds": [
+                    0
+                  ],
+                  "tags": [],
+                  "aiAnswerGenerationDisabled": false,
+                  "isExternal": false,
+                  "isDeprecated": false,
+                  "isSharedViaConnection": false
+                }
+              ],
+              "configs": [
+                {
+                  "id": "00000017-0000-4000-8000-000000000017",
+                  "name": "Connection configuration",
+                  "author": "00000006-0000-4000-8000-000000000006",
+                  "created": 1760198400000,
+                  "modified": 1760198400000,
+                  "isDeleted": false,
+                  "isHidden": false
+                }
+              ],
+              "isConnectionConfigurationDisabled": false,
+              "aiAnswerGenerationDisabled": false,
+              "isExternal": false,
+              "isDeprecated": false,
+              "isSharedViaConnection": false,
+              "syncWithSource": false,
+              "isParameterized": false,
+              "cachedDataAsOf": 0,
+              "isVerified": false,
+              "isVersioningEnabled": false,
+              "datasetId": "",
+              "subType": "",
+              "reportId": "",
+              "viewId": "",
+              "contentUpgradeId": "<upgrade id>",
+              "headerUpgradeId": "<upgrade id>",
+              "isPublished": false,
+              "csrProtected": false
+            },
+            "complete": true,
+            "incompleteDetail": [],
+            "personalised_views": [
+              {
+                "guid": "00000018-0000-4000-8000-000000000018",
+                "name": "My view",
+                "isPublic": false,
+                "author": "00000006-0000-4000-8000-000000000006",
+                "authorDisplayName": "<user_display_name>",
+                "createdAt": 1760198460000,
+                "updatedAt": 1760198460000
+              }
+            ]
+          },
+          "metadata_header": {
+            "hasTabs": false,
+            "modelVersion": "V1",
+            "hasMandatoryFilter": false,
+            "isMandatoryFilterValueSelected": true,
+            "totalContainerCount": 4,
+            "id": "00000001-0000-4000-8000-000000000001",
+            "indexVersion": 28,
+            "generationNum": 28,
+            "name": "Parameters Liveboard",
+            "description": "",
+            "author": "00000006-0000-4000-8000-000000000006",
+            "authorName": "<username>",
+            "hasLenientDiscoverability": false,
+            "descriptionAutoGenerated": false,
+            "authorDisplayName": "<user_display_name>",
+            "created": 1760198400000,
+            "modified": 1760198460000,
+            "modifiedBy": "00000006-0000-4000-8000-000000000006",
+            "owner": "00000001-0000-4000-8000-000000000001",
+            "isDeleted": false,
+            "isHidden": false,
+            "isAutoCreated": false,
+            "isAutoDelete": false,
+            "ownerOrgId": 0,
+            "resolvedObjects": {},
+            "tags": [
+              {
+                "id": "00000016-0000-4000-8000-000000000016",
+                "indexVersion": 0,
+                "generationNum": 38,
+                "name": "try me",
+                "author": "00000006-0000-4000-8000-000000000006",
+                "created": 1412881252884,
+                "modified": 1412881301302,
+                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                "owner": "00000016-0000-4000-8000-000000000016",
+                "isDeleted": false,
+                "isHidden": false,
+                "clientState": {
+                  "color": "#fbc17c"
+                },
+                "orgIds": [
+                  0
+                ],
+                "tags": [],
+                "aiAnswerGenerationDisabled": false,
+                "isExternal": false,
+                "isDeprecated": false,
+                "isSharedViaConnection": false
+              }
+            ],
+            "configs": [
+              {
+                "id": "00000017-0000-4000-8000-000000000017",
+                "name": "Connection configuration",
+                "author": "00000006-0000-4000-8000-000000000006",
+                "created": 1760198400000,
+                "modified": 1760198400000,
+                "isDeleted": false,
+                "isHidden": false
+              }
+            ],
+            "isConnectionConfigurationDisabled": false,
+            "type": "",
+            "aiAnswerGenerationDisabled": false,
+            "isExternal": false,
+            "isDeprecated": false,
+            "isSharedViaConnection": false,
+            "syncWithSource": false,
+            "isParameterized": false,
+            "cachedDataAsOf": 0,
+            "isVerified": false,
+            "isVersioningEnabled": false,
+            "datasetId": "",
+            "subType": "",
+            "reportId": "",
+            "viewId": "",
+            "contentUpgradeId": "<upgrade id>",
+            "headerUpgradeId": "<upgrade id>",
+            "isPublished": false,
+            "csrProtected": false
+          },
+          "visualization_headers": [
+            {
+              "size": "xs",
+              "vizType": "CHART",
+              "title": {
+                "value": {
+                  "text": "Chart 0"
+                }
+              },
+              "id": "00000005-0000-4000-8000-000000000005",
+              "name": "Total Partial Revenue",
+              "author": "00000006-0000-4000-8000-000000000006",
+              "created": 1760198400000,
+              "modified": 1760198460000,
+              "modifiedBy": "00000006-0000-4000-8000-000000000006",
+              "owner": "00000001-0000-4000-8000-000000000001"
+            }
+          ],
+          "stats": {
+            "views": 42,
+            "favorites": 3,
+            "last_accessed": 1760198460000
+          }
+        }
       },
       "GetAsyncImportStatusResponse": {
         "type": "object",
@@ -27723,6 +29730,77 @@
             "description": "Indicates whether there are more task statuses to fetch.",
             "nullable": true
           }
+        },
+        "example": {
+          "status_list": [
+            {
+              "tenant_id": "<tenant_id>",
+              "org_id": 0,
+              "task_id": "3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a",
+              "task_name": "Import sales objects",
+              "import_response": {
+                "object": [
+                  {
+                    "name": "Sales Table",
+                    "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                    "request_index": 0,
+                    "response": {
+                      "status": {
+                        "status_code": "OK"
+                      },
+                      "header": {
+                        "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                        "name": "Sales Table"
+                      }
+                    }
+                  },
+                  {
+                    "name": "Sales Liveboard",
+                    "request_index": 1,
+                    "response": {
+                      "status": {
+                        "status_code": "ERROR",
+                        "error_message": "<error_message>"
+                      }
+                    }
+                  }
+                ]
+              },
+              "task_status": "COMPLETED",
+              "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "import_policy": "PARTIAL_OBJECT",
+              "created_at": 1760198400000,
+              "in_progress_at": 1760198401000,
+              "completed_at": 1760198405000,
+              "total_object_count": 2,
+              "object_processed_count": 2,
+              "modified_at": 1760198405000,
+              "author_display_name": "<user_display_name>"
+            },
+            {
+              "tenant_id": "<tenant_id>",
+              "org_id": 0,
+              "task_id": "5f6a7b8c-9d0e-4f1a-8b2c-3d4e5f6a7b8c",
+              "task_name": "Import finance objects",
+              "import_response": {
+                "status": {
+                  "status_code": "ERROR",
+                  "error_message": "<error_message>"
+                }
+              },
+              "task_status": "FAILED",
+              "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "import_policy": "ALL_OR_NONE",
+              "created_at": 1760198500000,
+              "in_progress_at": 1760198501000,
+              "completed_at": 1760198502000,
+              "total_object_count": 3,
+              "object_processed_count": 0,
+              "modified_at": 1760198502000,
+              "author_display_name": "<user_display_name>"
+            }
+          ],
+          "last_batch": true
         }
       },
       "ImportEPackAsyncTaskStatus": {
@@ -27751,8 +29829,94 @@
           },
           "import_response": {
             "type": "object",
-            "description": "Response of imported objects so far.",
-            "nullable": true
+            "description": "Response of imported objects so far.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "object": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "guid": {
+                      "type": "string"
+                    },
+                    "request_index": {
+                      "type": "integer"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "object",
+                          "properties": {
+                            "status_code": {
+                              "type": "string"
+                            },
+                            "error_message": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "header": {
+                          "type": "object",
+                          "properties": {
+                            "id_guid": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "status": {
+                "type": "object",
+                "properties": {
+                  "status_code": {
+                    "type": "string"
+                  },
+                  "error_message": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "object": [
+                {
+                  "name": "Sales Table",
+                  "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                  "request_index": 0,
+                  "response": {
+                    "status": {
+                      "status_code": "OK"
+                    },
+                    "header": {
+                      "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "name": "Sales Table"
+                    }
+                  }
+                },
+                {
+                  "name": "Sales Liveboard",
+                  "request_index": 1,
+                  "response": {
+                    "status": {
+                      "status_code": "ERROR",
+                      "error_message": "<error_message>"
+                    }
+                  }
+                }
+              ]
+            }
           },
           "task_status": {
             "type": "string",
@@ -28368,18 +30532,330 @@
         "type": "object",
         "properties": {
           "principal_permission_details": {
-            "type": "object",
-            "nullable": true
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "principal_id": {
+                  "type": "string"
+                },
+                "principal_name": {
+                  "type": "string"
+                },
+                "principal_type": {
+                  "type": "string"
+                },
+                "principal_sub_type": {
+                  "type": "string"
+                },
+                "metadata_permission_info": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "metadata_type": {
+                        "type": "string"
+                      },
+                      "metadata_permissions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "metadata_id": {
+                              "type": "string"
+                            },
+                            "metadata_name": {
+                              "type": "string"
+                            },
+                            "metadata_owner": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "metadata_author": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "permission": {
+                              "type": "string"
+                            },
+                            "shared_permission": {
+                              "type": "string"
+                            },
+                            "group_permission": {
+                              "type": "array",
+                              "items": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "principal_id": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+                "principal_name": "test_user",
+                "principal_type": "USER",
+                "principal_sub_type": "LOCAL_USER",
+                "metadata_permission_info": [
+                  {
+                    "metadata_type": "LIVEBOARD",
+                    "metadata_permissions": [
+                      {
+                        "metadata_id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                        "metadata_name": "Learn how to use ThoughtSpot",
+                        "metadata_owner": {
+                          "id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                          "name": "Learn how to use ThoughtSpot"
+                        },
+                        "metadata_author": {
+                          "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                          "name": "tsadmin"
+                        },
+                        "permission": "READ_ONLY",
+                        "shared_permission": "NO_ACCESS",
+                        "group_permission": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
           }
+        },
+        "example": {
+          "principal_permission_details": [
+            {
+              "principal_id": "7f5e7f87-09a1-487c-a1da-c4bb35e45270",
+              "principal_name": "test_user",
+              "principal_type": "USER",
+              "principal_sub_type": "LOCAL_USER",
+              "metadata_permission_info": [
+                {
+                  "metadata_type": "LIVEBOARD",
+                  "metadata_permissions": [
+                    {
+                      "metadata_id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                      "metadata_name": "Learn how to use ThoughtSpot",
+                      "metadata_owner": {
+                        "id": "2ff57a24-cf90-485f-8b4b-45fc17474c6f",
+                        "name": "Learn how to use ThoughtSpot"
+                      },
+                      "metadata_author": {
+                        "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "name": "tsadmin"
+                      },
+                      "permission": "READ_ONLY",
+                      "shared_permission": "NO_ACCESS",
+                      "group_permission": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "PermissionOfMetadataResponse": {
         "type": "object",
         "properties": {
           "metadata_permission_details": {
-            "type": "object",
-            "nullable": true
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "metadata_id": {
+                  "type": "string"
+                },
+                "metadata_name": {
+                  "type": "string"
+                },
+                "metadata_type": {
+                  "type": "string"
+                },
+                "metadata_owner": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "metadata_author": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "principal_permission_info": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "principal_type": {
+                        "type": "string"
+                      },
+                      "principal_sub_type": {
+                        "type": "string"
+                      },
+                      "principal_permissions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "principal_id": {
+                              "type": "string"
+                            },
+                            "principal_name": {
+                              "type": "string"
+                            },
+                            "permission": {
+                              "type": "string"
+                            },
+                            "shared_permission": {
+                              "type": "string"
+                            },
+                            "group_permission": {
+                              "type": "array",
+                              "items": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "metadata_id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+                "metadata_name": "testing",
+                "metadata_type": "LIVEBOARD",
+                "metadata_owner": {
+                  "id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+                  "name": "testing"
+                },
+                "metadata_author": {
+                  "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                  "name": "tsadmin"
+                },
+                "principal_permission_info": [
+                  {
+                    "principal_type": "USER_GROUP",
+                    "principal_sub_type": "LOCAL_GROUP",
+                    "principal_permissions": [
+                      {
+                        "principal_id": "d0326b56-ef23-4c8a-8327-a30e99bcc72b",
+                        "principal_name": "Administrator",
+                        "permission": "MODIFY",
+                        "shared_permission": "NO_ACCESS",
+                        "group_permission": []
+                      }
+                    ]
+                  },
+                  {
+                    "principal_type": "USER",
+                    "principal_sub_type": "LOCAL_USER",
+                    "principal_permissions": [
+                      {
+                        "principal_id": "0f0dd0f7-7411-4195-a4aa-0dc6b58413c9",
+                        "principal_name": "su",
+                        "permission": "MODIFY",
+                        "shared_permission": "NO_ACCESS",
+                        "group_permission": []
+                      },
+                      {
+                        "principal_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                        "principal_name": "tsadmin",
+                        "permission": "MODIFY",
+                        "shared_permission": "NO_ACCESS",
+                        "group_permission": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
           }
+        },
+        "example": {
+          "metadata_permission_details": [
+            {
+              "metadata_id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+              "metadata_name": "testing",
+              "metadata_type": "LIVEBOARD",
+              "metadata_owner": {
+                "id": "a62a5bf3-9f16-45b2-a174-7d30b3b577a9",
+                "name": "testing"
+              },
+              "metadata_author": {
+                "id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                "name": "tsadmin"
+              },
+              "principal_permission_info": [
+                {
+                  "principal_type": "USER_GROUP",
+                  "principal_sub_type": "LOCAL_GROUP",
+                  "principal_permissions": [
+                    {
+                      "principal_id": "d0326b56-ef23-4c8a-8327-a30e99bcc72b",
+                      "principal_name": "Administrator",
+                      "permission": "MODIFY",
+                      "shared_permission": "NO_ACCESS",
+                      "group_permission": []
+                    }
+                  ]
+                },
+                {
+                  "principal_type": "USER",
+                  "principal_sub_type": "LOCAL_USER",
+                  "principal_permissions": [
+                    {
+                      "principal_id": "0f0dd0f7-7411-4195-a4aa-0dc6b58413c9",
+                      "principal_name": "su",
+                      "permission": "MODIFY",
+                      "shared_permission": "NO_ACCESS",
+                      "group_permission": []
+                    },
+                    {
+                      "principal_id": "59481331-ee53-42be-a548-bd87be6ddd4a",
+                      "principal_name": "tsadmin",
+                      "permission": "MODIFY",
+                      "shared_permission": "NO_ACCESS",
+                      "group_permission": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "ObjectPrivilegesMetadataInput": {
@@ -28406,9 +30882,118 @@
         "type": "object",
         "properties": {
           "metadata_object_privileges": {
-            "type": "object",
-            "nullable": true
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "metadata_id": {
+                  "type": "string"
+                },
+                "metadata_name": {
+                  "type": "string"
+                },
+                "metadata_type": {
+                  "type": "string"
+                },
+                "principal_object_privilege_info": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "principal_type": {
+                        "type": "string"
+                      },
+                      "principal_object_privileges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "principal_id": {
+                              "type": "string"
+                            },
+                            "principal_name": {
+                              "type": "string"
+                            },
+                            "principal_sub_type": {
+                              "type": "string"
+                            },
+                            "object_privileges": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
+                "metadata_name": "Sales Model",
+                "metadata_type": "LOGICAL_TABLE",
+                "principal_object_privilege_info": [
+                  {
+                    "principal_type": "USER_GROUP",
+                    "principal_object_privileges": [
+                      {
+                        "principal_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e",
+                        "principal_name": "<group_name>",
+                        "principal_sub_type": "LOCAL_GROUP",
+                        "object_privileges": "[SPOTTER_COACHING_PRIVILEGE]"
+                      }
+                    ]
+                  },
+                  {
+                    "principal_type": "USER",
+                    "principal_object_privileges": [
+                      {
+                        "principal_id": "8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f",
+                        "principal_name": "<username>",
+                        "principal_sub_type": "LOCAL_USER",
+                        "object_privileges": "[]"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
           }
+        },
+        "example": {
+          "metadata_object_privileges": [
+            {
+              "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
+              "metadata_name": "Sales Model",
+              "metadata_type": "LOGICAL_TABLE",
+              "principal_object_privilege_info": [
+                {
+                  "principal_type": "USER_GROUP",
+                  "principal_object_privileges": [
+                    {
+                      "principal_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e",
+                      "principal_name": "<group_name>",
+                      "principal_sub_type": "LOCAL_GROUP",
+                      "object_privileges": "[SPOTTER_COACHING_PRIVILEGE]"
+                    }
+                  ]
+                },
+                {
+                  "principal_type": "USER",
+                  "principal_object_privileges": [
+                    {
+                      "principal_id": "8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f",
+                      "principal_name": "<username>",
+                      "principal_sub_type": "LOCAL_USER",
+                      "object_privileges": "[]"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "PrincipalsInput": {
@@ -28586,7 +31171,32 @@
             "description": "Data content of metadata objects"
           }
         },
-        "description": "Response format associated with the search data API."
+        "description": "Response format associated with the search data API.",
+        "example": {
+          "contents": [
+            {
+              "available_data_row_count": 2,
+              "column_names": [
+                "Region",
+                "Total Revenue"
+              ],
+              "data_rows": [
+                [
+                  "East",
+                  125000
+                ],
+                [
+                  "West",
+                  98000
+                ]
+              ],
+              "record_offset": 0,
+              "record_size": 10,
+              "returned_data_row_count": 2,
+              "sampling_ratio": 1
+            }
+          ]
+        }
       },
       "AnswerContent": {
         "type": "object",
@@ -28615,9 +31225,36 @@
           "data_rows": {
             "type": "array",
             "items": {
-              "type": "object"
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  }
+                }
+              ]
             },
-            "description": "Rows of data set."
+            "description": "Rows of data set.\n\nItems can take any of the shapes listed here."
           },
           "record_offset": {
             "type": "integer",
@@ -28664,6 +31301,35 @@
             },
             "description": "Data content of metadata objects"
           }
+        },
+        "example": {
+          "metadata_id": "1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e",
+          "metadata_name": "Sales Overview",
+          "contents": [
+            {
+              "available_data_row_count": 2,
+              "column_names": [
+                "Region",
+                "Total Revenue"
+              ],
+              "data_rows": [
+                [
+                  "East",
+                  125000
+                ],
+                [
+                  "West",
+                  98000
+                ]
+              ],
+              "record_offset": 0,
+              "record_size": 10,
+              "returned_data_row_count": 2,
+              "sampling_ratio": 1,
+              "visualization_id": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+              "visualization_name": "Revenue by Region"
+            }
+          ]
         }
       },
       "LiveboardContent": {
@@ -28693,9 +31359,36 @@
           "data_rows": {
             "type": "array",
             "items": {
-              "type": "object"
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  }
+                }
+              ]
             },
-            "description": "Rows of data set."
+            "description": "Rows of data set.\n\nItems can take any of the shapes listed here."
           },
           "record_offset": {
             "type": "integer",
@@ -28753,7 +31446,34 @@
             "description": "Data content of metadata objects"
           }
         },
-        "description": "Response format associated with fetch data api"
+        "description": "Response format associated with fetch data api",
+        "example": {
+          "metadata_id": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+          "metadata_name": "Revenue by Region",
+          "contents": [
+            {
+              "available_data_row_count": 2,
+              "column_names": [
+                "Region",
+                "Total Revenue"
+              ],
+              "data_rows": [
+                [
+                  "East",
+                  125000
+                ],
+                [
+                  "West",
+                  98000
+                ]
+              ],
+              "record_offset": 0,
+              "record_size": 10,
+              "returned_data_row_count": 2,
+              "sampling_ratio": 1
+            }
+          ]
+        }
       },
       "LogResponse": {
         "type": "object",
@@ -29345,8 +32065,370 @@
           },
           "details": {
             "type": "object",
-            "description": "Details of the connection.",
-            "nullable": true
+            "description": "Details of the connection.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "scheduled": {
+                "type": "boolean"
+              },
+              "configuration": {
+                "type": "string"
+              },
+              "isExternal": {
+                "type": "boolean"
+              },
+              "isDeprecated": {
+                "type": "boolean"
+              },
+              "isDeleted": {
+                "type": "boolean"
+              },
+              "isHidden": {
+                "type": "boolean"
+              },
+              "indexVersion": {
+                "type": "integer"
+              },
+              "generationNum": {
+                "type": "integer"
+              },
+              "created": {
+                "type": "integer"
+              },
+              "modified": {
+                "type": "integer"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "modifiedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "tables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "schemaStripe": {
+                      "type": "string"
+                    },
+                    "databaseStripe": {
+                      "type": "string"
+                    },
+                    "isExternal": {
+                      "type": "boolean"
+                    },
+                    "isDeprecated": {
+                      "type": "boolean"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "indexVersion": {
+                      "type": "integer"
+                    },
+                    "generationNum": {
+                      "type": "integer"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "modifiedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "name": "Snowflake Sales",
+              "description": "Snowflake connection for the sales warehouse",
+              "type": "RDBMS_SNOWFLAKE",
+              "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+              "scheduled": false,
+              "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+              "isExternal": false,
+              "isDeprecated": false,
+              "isDeleted": false,
+              "isHidden": false,
+              "indexVersion": 2,
+              "generationNum": 2,
+              "created": 1760198400000,
+              "modified": 1760198460000,
+              "author": {
+                "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                "name": "<username>"
+              },
+              "modifiedBy": {
+                "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                "name": "<username>"
+              },
+              "owner": {
+                "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+                "name": "Snowflake Sales"
+              },
+              "tags": [
+                {
+                  "id": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+                  "name": "Finance"
+                }
+              ],
+              "tables": [
+                {
+                  "name": "ORDERS",
+                  "type": "ONE_TO_ONE_LOGICAL",
+                  "id": "8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d",
+                  "schemaStripe": "PUBLIC",
+                  "databaseStripe": "SALES_DB",
+                  "isExternal": true,
+                  "isDeprecated": false,
+                  "isDeleted": false,
+                  "isHidden": false,
+                  "indexVersion": 1,
+                  "generationNum": 1,
+                  "created": 1760198460000,
+                  "modified": 1760198460000,
+                  "author": {
+                    "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                    "name": "<username>"
+                  },
+                  "modifiedBy": {
+                    "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                    "name": "<username>"
+                  },
+                  "owner": {
+                    "id": "8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d",
+                    "name": "ORDERS"
+                  },
+                  "tags": []
+                }
+              ]
+            }
+          }
+        },
+        "example": {
+          "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+          "name": "Snowflake Sales",
+          "description": "Snowflake connection for the sales warehouse",
+          "data_warehouse_type": "SNOWFLAKE",
+          "data_warehouse_objects": {
+            "databases": [
+              {
+                "name": "SALES_DB",
+                "auto_created": false,
+                "schemas": [
+                  {
+                    "name": "PUBLIC",
+                    "tables": [
+                      {
+                        "name": "ORDERS",
+                        "type": "TABLE",
+                        "description": "",
+                        "selected": true,
+                        "linked": true,
+                        "columns": [
+                          {
+                            "name": "ORDER_ID",
+                            "data_type": "INT64",
+                            "can_import": true,
+                            "selected": true,
+                            "is_linked_active": true
+                          },
+                          {
+                            "name": "CUSTOMER_ID",
+                            "data_type": "INT64",
+                            "can_import": true,
+                            "selected": true,
+                            "is_linked_active": true
+                          }
+                        ],
+                        "relationships": [
+                          {
+                            "name": "FK_ORDERS_CUSTOMERS",
+                            "destDatabase": "SALES_DB",
+                            "destSchema": "PUBLIC",
+                            "destTable": "CUSTOMERS",
+                            "relationshipKeys": [
+                              {
+                                "sourceColumnName": "CUSTOMER_ID",
+                                "destColumnName": "CUSTOMER_ID"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "details": {
+            "name": "Snowflake Sales",
+            "description": "Snowflake connection for the sales warehouse",
+            "type": "RDBMS_SNOWFLAKE",
+            "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+            "scheduled": false,
+            "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+            "isExternal": false,
+            "isDeprecated": false,
+            "isDeleted": false,
+            "isHidden": false,
+            "indexVersion": 2,
+            "generationNum": 2,
+            "created": 1760198400000,
+            "modified": 1760198460000,
+            "author": {
+              "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "name": "<username>"
+            },
+            "modifiedBy": {
+              "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "name": "<username>"
+            },
+            "owner": {
+              "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+              "name": "Snowflake Sales"
+            },
+            "tags": [
+              {
+                "id": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+                "name": "Finance"
+              }
+            ],
+            "tables": [
+              {
+                "name": "ORDERS",
+                "type": "ONE_TO_ONE_LOGICAL",
+                "id": "8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d",
+                "schemaStripe": "PUBLIC",
+                "databaseStripe": "SALES_DB",
+                "isExternal": true,
+                "isDeprecated": false,
+                "isDeleted": false,
+                "isHidden": false,
+                "indexVersion": 1,
+                "generationNum": 1,
+                "created": 1760198460000,
+                "modified": 1760198460000,
+                "author": {
+                  "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                  "name": "<username>"
+                },
+                "modifiedBy": {
+                  "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                  "name": "<username>"
+                },
+                "owner": {
+                  "id": "8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d",
+                  "name": "ORDERS"
+                },
+                "tags": []
+              }
+            ]
           }
         }
       },
@@ -29451,9 +32533,50 @@
           "relationships": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "destDatabase": {
+                  "type": "string"
+                },
+                "destSchema": {
+                  "type": "string"
+                },
+                "destTable": {
+                  "type": "string"
+                },
+                "relationshipKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sourceColumnName": {
+                        "type": "string"
+                      },
+                      "destColumnName": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "name": "FK_ORDERS_CUSTOMERS",
+                "destDatabase": "SALES_DB",
+                "destSchema": "PUBLIC",
+                "destTable": "CUSTOMERS",
+                "relationshipKeys": [
+                  {
+                    "sourceColumnName": "CUSTOMER_ID",
+                    "destColumnName": "CUSTOMER_ID"
+                  }
+                ]
+              }
             },
-            "description": "List of relationships for the table",
+            "description": "List of relationships for the table\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
           }
         }
@@ -30334,7 +33457,173 @@
             "nullable": true
           }
         },
-        "description": "Response body of getConversation. `messages` is ordered oldest to newest.\n`code_execution_files` is a list of sanitized code-execution file metadata\nentries, keyed in upstream by `file_id`."
+        "description": "Response body of getConversation. `messages` is ordered oldest to newest.\n`code_execution_files` is a list of sanitized code-execution file metadata\nentries, keyed in upstream by `file_id`.",
+        "example": {
+          "messages": [
+            {
+              "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+              "timestamp_in_millis": 1760198400000,
+              "user_prompt": {
+                "message": {
+                  "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+                  "content": "What were total sales by region last quarter?"
+                },
+                "attachments": [
+                  {
+                    "type": "file",
+                    "timestamp_in_millis": 1760198400000,
+                    "files": [
+                      {
+                        "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+                        "display_name": "regional_targets.csv",
+                        "file_type": "text/csv",
+                        "created_time_in_millis": 1760198390000,
+                        "size_bytes": 2048
+                      }
+                    ]
+                  },
+                  {
+                    "type": "resource",
+                    "timestamp_in_millis": 1760198400000,
+                    "title": "Quarterly sales plan",
+                    "uri": "https://www.example.com/docs/sales-plan",
+                    "name": "sales-plan",
+                    "mime_type": "text/html",
+                    "description": "Sales plan document from a connected source",
+                    "size": 4096,
+                    "connector_id": "f6a7b8c9-0006-4d0e-9f1a-2b3c4d5e6f7a",
+                    "connector_name": "<connector_name>",
+                    "connector_slug": "<connector_slug>",
+                    "transport_type": "STREAMABLE_HTTP"
+                  }
+                ]
+              },
+              "response_items": [
+                {
+                  "type": "search_datasets",
+                  "timestamp_in_millis": 1760198401000,
+                  "is_thinking": true,
+                  "step_title": "Finding data sources",
+                  "text": "Found 1 data source that matches the question.",
+                  "data_sources": [
+                    {
+                      "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+                      "data_source_name": "Sales Model",
+                      "description": "Sales transactions by region and product",
+                      "confidence": 0.92,
+                      "reasoning": "The model contains sales amounts and a region column.",
+                      "header": {
+                        "display_name": "Sales Model",
+                        "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+                        "description": "Sales transactions by region and product"
+                      },
+                      "related_liveboard_visualizations": [
+                        {
+                          "answer": {
+                            "header": {
+                              "id": "1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c",
+                              "title": "Sales by region"
+                            }
+                          },
+                          "pinboard_header": {
+                            "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                            "title": "Sales Overview"
+                          }
+                        }
+                      ],
+                      "related_answers": [
+                        {
+                          "header": {
+                            "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
+                            "title": "Quarterly sales by region"
+                          }
+                        }
+                      ],
+                      "related_spotter_queries": [
+                        "sales by region last quarter"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tool_call",
+                  "timestamp_in_millis": 1760198402000,
+                  "is_thinking": true,
+                  "step_title": "Querying data",
+                  "tool_call_id": "call_0001",
+                  "tool_name": "fetch_and_visualize_data",
+                  "arguments": {
+                    "query": "total sales by region last quarter",
+                    "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
+                  }
+                },
+                {
+                  "type": "tool_result",
+                  "timestamp_in_millis": 1760198404000,
+                  "is_thinking": true,
+                  "step_title": "Querying data",
+                  "tool_call_id": "call_0001",
+                  "tool_name": "fetch_and_visualize_data",
+                  "content": "Returned 4 rows.",
+                  "content_type": "TEXT_PLAIN",
+                  "success": true
+                },
+                {
+                  "type": "answer",
+                  "timestamp_in_millis": 1760198405000,
+                  "is_thinking": false,
+                  "answer_id": "c3d4e5f6-0003-4a7b-8c8d-9e0f1a2b3c4d",
+                  "tool_call_id": "call_0001",
+                  "tool_name": "fetch_and_visualize_data"
+                },
+                {
+                  "type": "file",
+                  "timestamp_in_millis": 1760198406000,
+                  "is_thinking": false,
+                  "files": [
+                    {
+                      "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+                      "display_name": "sales_by_region.png",
+                      "file_type": "image/png",
+                      "created_time_in_millis": 1760198406000,
+                      "size_bytes": 51200
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "timestamp_in_millis": 1760198407000,
+                  "is_thinking": false,
+                  "content": "Here are total sales by region for last quarter.",
+                  "content_type": "TEXT_MARKDOWN",
+                  "file_reference": {
+                    "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+                    "display_name": "sales_by_region.png",
+                    "created_time_in_millis": 1760198406000
+                  }
+                },
+                {
+                  "type": "resource",
+                  "timestamp_in_millis": 1760198408000,
+                  "is_thinking": false,
+                  "title": "Sales Overview",
+                  "uri": "https://www.example.com/liveboards/sales-overview",
+                  "name": "sales-overview",
+                  "mime_type": "text/html"
+                }
+              ]
+            }
+          ],
+          "code_execution_files": [
+            {
+              "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+              "display_name": "sales_by_region.png",
+              "file_type": "image/png",
+              "created_time_in_millis": 1760198406000,
+              "expired": false
+            }
+          ]
+        }
       },
       "ConversationMessage": {
         "type": "object",
@@ -30348,7 +33637,7 @@
             "description": "Stable identifier for the turn. For liveboard-started synthetic first turns,\nthis is the root node identifier."
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch for the turn."
           },
           "user_prompt": {
@@ -30359,9 +33648,43 @@
           "response_items": {
             "type": "array",
             "items": {
-              "type": "object"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/TextResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/ToolCallResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/ToolResultResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/AnswerResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/FileResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/ResourceResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/SearchDatasetsResponseItem"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "text": "#/components/schemas/TextResponseItem",
+                  "tool_call": "#/components/schemas/ToolCallResponseItem",
+                  "tool_result": "#/components/schemas/ToolResultResponseItem",
+                  "answer": "#/components/schemas/AnswerResponseItem",
+                  "file": "#/components/schemas/FileResponseItem",
+                  "resource": "#/components/schemas/ResourceResponseItem",
+                  "search_datasets": "#/components/schemas/SearchDatasetsResponseItem"
+                }
+              }
             },
-            "description": "Agent-side output produced in response to this turn. Empty array for\nin-progress turns where the agent has not yet produced output.",
+            "description": "Agent-side output produced in response to this turn. Empty array for\nin-progress turns where the agent has not yet produced output.\n\nEach item is one of the variants listed here, selected by type.",
             "nullable": true
           }
         },
@@ -30378,9 +33701,23 @@
           "attachments": {
             "type": "array",
             "items": {
-              "type": "object"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/FileResponseItem"
+                },
+                {
+                  "$ref": "#/components/schemas/ResourceResponseItem"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "file": "#/components/schemas/FileResponseItem",
+                  "resource": "#/components/schemas/ResourceResponseItem"
+                }
+              }
             },
-            "description": "Files or connector resources attached to the user message. Empty array when\nthere are no attachments.",
+            "description": "Files or connector resources attached to the user message. Empty array when\nthere are no attachments.\n\nEach item is one of the variants listed here, selected by type.",
             "nullable": true
           }
         },
@@ -30413,10 +33750,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"file\"`."
+            "description": "Variant discriminator. Always `\"file\"`.",
+            "enum": [
+              "file"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30461,7 +33801,7 @@
             "nullable": true
           },
           "created_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           },
@@ -30485,10 +33825,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"resource\"`."
+            "description": "Variant discriminator. Always `\"resource\"`.",
+            "enum": [
+              "resource"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30567,10 +33910,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"text\"`."
+            "description": "Variant discriminator. Always `\"text\"`.",
+            "enum": [
+              "text"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30622,7 +33968,7 @@
             "nullable": true
           },
           "created_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           }
@@ -30639,10 +33985,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"tool_call\"`."
+            "description": "Variant discriminator. Always `\"tool_call\"`.",
+            "enum": [
+              "tool_call"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30667,7 +34016,20 @@
           },
           "arguments": {
             "type": "object",
-            "description": "Input arguments passed to the tool. Shape depends on the tool."
+            "description": "Input arguments passed to the tool. Shape depends on the tool.\n\nKeys are documented from a sample; other keys may be returned.",
+            "properties": {
+              "query": {
+                "type": "string"
+              },
+              "data_source_identifier": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "query": "total sales by region last quarter",
+              "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
+            }
           }
         },
         "description": "Agent invoked a tool."
@@ -30682,10 +34044,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"tool_result\"`."
+            "description": "Variant discriminator. Always `\"tool_result\"`.",
+            "enum": [
+              "tool_result"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30741,10 +34106,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"answer\"`."
+            "description": "Variant discriminator. Always `\"answer\"`.",
+            "enum": [
+              "answer"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30784,10 +34152,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Variant discriminator. Always `\"search_datasets\"`."
+            "description": "Variant discriminator. Always `\"search_datasets\"`.",
+            "enum": [
+              "search_datasets"
+            ]
           },
           "timestamp_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when this item was produced."
           },
           "is_thinking": {
@@ -30852,17 +34223,79 @@
           "related_liveboard_visualizations": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "answer": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "pinboard_header": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "answer": {
+                  "header": {
+                    "id": "1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c",
+                    "title": "Sales by region"
+                  }
+                },
+                "pinboard_header": {
+                  "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+                  "title": "Sales Overview"
+                }
+              }
             },
-            "description": "Related liveboard visualizations for this data source. Open-ended JSON shape\ndriven by the underlying proto.",
+            "description": "Related liveboard visualizations for this data source. Open-ended JSON shape\ndriven by the underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
           },
           "related_answers": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "header": {
+                  "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
+                  "title": "Quarterly sales by region"
+                }
+              }
             },
-            "description": "Related saved answers for this data source. Open-ended JSON shape driven by\nthe underlying proto.",
+            "description": "Related saved answers for this data source. Open-ended JSON shape driven by\nthe underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
           },
           "related_spotter_queries": {
@@ -30965,7 +34398,7 @@
             "nullable": true
           },
           "created_time_in_millis": {
-            "type": "object",
+            "type": "integer",
             "description": "Milliseconds since Unix epoch when the file was created.",
             "nullable": true
           },
@@ -30983,6 +34416,39 @@
             "$ref": "#/components/schemas/AnswerDetails",
             "description": "Answer details for the loaded message.",
             "nullable": true
+          }
+        },
+        "example": {
+          "answer": {
+            "title": "Total sales by region last quarter",
+            "description": "Total sales for each region in the last quarter",
+            "session_identifier": "e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f",
+            "generation_number": 2,
+            "tokens": [
+              "[sales]",
+              "[region]",
+              "[date].'last quarter'"
+            ],
+            "visualization_type": "CHART",
+            "formulas": [],
+            "parameters": [],
+            "sub_queries": [
+              {
+                "tokens": "[sales] [region] [date].'last quarter'",
+                "formulas": [
+                  {
+                    "name": "Profit Margin",
+                    "expression": "sum ( [profit] ) / sum ( [sales] )",
+                    "formula_type": "AI_GENERATED",
+                    "is_auto_generated": true,
+                    "columns_used": [
+                      "profit",
+                      "sales"
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         }
       },
@@ -31050,9 +34516,56 @@
           "sub_queries": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "tokens": {
+                  "type": "string"
+                },
+                "formulas": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "expression": {
+                        "type": "string"
+                      },
+                      "formula_type": {
+                        "type": "string"
+                      },
+                      "is_auto_generated": {
+                        "type": "boolean"
+                      },
+                      "columns_used": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "tokens": "[sales] [region] [date].'last quarter'",
+                "formulas": [
+                  {
+                    "name": "Profit Margin",
+                    "expression": "sum ( [profit] ) / sum ( [sales] )",
+                    "formula_type": "AI_GENERATED",
+                    "is_auto_generated": true,
+                    "columns_used": [
+                      "profit",
+                      "sales"
+                    ]
+                  }
+                ]
+              }
             },
-            "description": "List of sub-queries used in the answer.",
+            "description": "List of sub-queries used in the answer.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
           },
           "ac_state": {
@@ -31685,7 +35198,33 @@
           },
           "configuration": {
             "type": "object",
-            "nullable": true
+            "nullable": true,
+            "properties": {
+              "accountName": {
+                "type": "string",
+                "description": "Returned when data_warehouse_type is SNOWFLAKE. These are all the types documented here."
+              },
+              "user": {
+                "type": "string",
+                "description": "Returned when data_warehouse_type is SNOWFLAKE. These are all the types documented here."
+              },
+              "role": {
+                "type": "string",
+                "description": "Returned when data_warehouse_type is SNOWFLAKE. These are all the types documented here."
+              },
+              "warehouse": {
+                "type": "string",
+                "description": "Returned when data_warehouse_type is SNOWFLAKE. These are all the types documented here."
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "accountName": "<account_name>",
+              "user": "<username>",
+              "role": "<role>",
+              "warehouse": "<warehouse>"
+            },
+            "description": "Keys are the union of what each data_warehouse_type returns; each key says which data_warehouse_type values return it. Types not listed may return other keys."
           },
           "policy_principals": {
             "type": "array",
@@ -31767,6 +35306,23 @@
             "$ref": "#/components/schemas/PolicyProcessOptions",
             "nullable": true
           }
+        },
+        "example": {
+          "configuration_identifier": "7d6c5b4a-3e2f-4a1b-9c8d-7e6f5a4b3c2d",
+          "name": "Sales Analysts Warehouse",
+          "description": "Routes queries for sales analysts to a dedicated warehouse",
+          "configuration": {
+            "accountName": "<account_name>",
+            "user": "<username>",
+            "role": "<role>",
+            "warehouse": "<warehouse>"
+          },
+          "policy_principals": [],
+          "policy_processes": [],
+          "disabled": false,
+          "data_warehouse_type": "SNOWFLAKE",
+          "policy_type": "NO_POLICY",
+          "same_as_parent": false
         }
       },
       "UserPrincipal": {
@@ -31823,7 +35379,38 @@
             "description": "Setup configuration specific to the upload path."
           }
         },
-        "description": "Cluster-level storage setup information for configuring customer-managed storage."
+        "description": "Cluster-level storage setup information for configuring customer-managed storage.",
+        "example": {
+          "storage_type": "OBJECT_STORAGE",
+          "provider": "AWS_S3",
+          "config": {
+            "config_type": "AWS_TO_S3_STORAGE",
+            "aws_account_id": "123456789012",
+            "trust_policy_template": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "AWS": "arn:aws:iam::123456789012:root"
+                  },
+                  "Action": "sts:AssumeRole",
+                  "Condition": {
+                    "StringEquals": {
+                      "sts:ExternalId": "ts-webhook-a1b2c3d4-7890"
+                    }
+                  }
+                }
+              ]
+            },
+            "setup_instructions": [
+              "1. Create an IAM role in your AWS account",
+              "2. Attach the trust policy template to the role",
+              "3. Attach S3 permissions (s3:PutObject, s3:PutObjectAcl) to the role",
+              "4. Use the role ARN in your webhook storage configuration"
+            ]
+          }
+        }
       },
       "WebhookStorageSetupConfig": {
         "type": "object",
@@ -31858,8 +35445,72 @@
           },
           "trust_policy_template": {
             "type": "object",
-            "description": "Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE and GCP_TO_S3_STORAGE.",
-            "nullable": true
+            "description": "Sample IAM trust policy JSON. Populated for AWS_TO_S3_STORAGE and GCP_TO_S3_STORAGE.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "Version": {
+                "type": "string"
+              },
+              "Statement": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Effect": {
+                      "type": "string"
+                    },
+                    "Principal": {
+                      "type": "object",
+                      "properties": {
+                        "AWS": {
+                          "type": "string"
+                        },
+                        "Federated": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Action": {
+                      "type": "string"
+                    },
+                    "Condition": {
+                      "type": "object",
+                      "properties": {
+                        "StringEquals": {
+                          "type": "object",
+                          "properties": {
+                            "sts:ExternalId": {
+                              "type": "string"
+                            },
+                            "accounts.google.com:sub": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Principal": {
+                    "AWS": "arn:aws:iam::123456789012:root"
+                  },
+                  "Action": "sts:AssumeRole",
+                  "Condition": {
+                    "StringEquals": {
+                      "sts:ExternalId": "ts-webhook-a1b2c3d4-7890"
+                    }
+                  }
+                }
+              ]
+            }
           },
           "service_account_email": {
             "type": "string",
@@ -31925,6 +35576,86 @@
             "$ref": "#/components/schemas/WebhookPagination",
             "description": "Pagination information."
           }
+        },
+        "example": {
+          "webhooks": [
+            {
+              "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+              "name": "Liveboard Schedule Webhook",
+              "description": "Webhook for liveboard schedule notifications",
+              "org": {
+                "id": "0",
+                "name": "Primary"
+              },
+              "url": "https://myapp.example.com/webhooks",
+              "url_params": {
+                "api_key": "abc123"
+              },
+              "events": [
+                "LIVEBOARD_SCHEDULE"
+              ],
+              "authentication": {
+                "BEARER_TOKEN": "***"
+              },
+              "signature_verification": {
+                "type": "HMAC_SHA256",
+                "header": "X-Webhook-Signature",
+                "algorithm": "SHA256",
+                "secret": "***"
+              },
+              "creation_time_in_millis": 1724277430243,
+              "modification_time_in_millis": 1724278215123,
+              "additional_headers": [
+                {
+                  "key": "Custom-Header",
+                  "value": "value1"
+                },
+                {
+                  "key": "Custom-Header-2",
+                  "value": "value2"
+                }
+              ],
+              "created_by": {
+                "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+                "name": "sarah_chen"
+              },
+              "last_modified_by": {
+                "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                "name": "alex_kim"
+              }
+            },
+            {
+              "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "name": "API Key Webhook",
+              "description": "Webhook with API key authentication",
+              "org": {
+                "id": "0",
+                "name": "Primary"
+              },
+              "url": "https://api.example.com/notifications",
+              "events": [
+                "LIVEBOARD_SCHEDULE"
+              ],
+              "authentication": {
+                "API_KEY": {
+                  "key": "X-API-Key",
+                  "value": "***"
+                }
+              },
+              "creation_time_in_millis": 1724275845987,
+              "modification_time_in_millis": 1724275845987,
+              "created_by": {
+                "id": "7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d",
+                "name": "mike_rodriguez"
+              }
+            }
+          ],
+          "pagination": {
+            "record_offset": 0,
+            "record_size": 50,
+            "total_count": 2,
+            "has_more": false
+          }
         }
       },
       "WebhookResponse": {
@@ -31962,8 +35693,14 @@
           },
           "url_params": {
             "type": "object",
-            "description": "Additional URL parameters as key-value pairs.",
-            "nullable": true
+            "description": "Additional URL parameters as key-value pairs.\n\nKeyed by name; every value has the shape described here.",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "api_key": "abc123"
+            }
           },
           "events": {
             "type": "array",
@@ -35986,8 +39723,297 @@
           },
           "details": {
             "type": "object",
-            "description": "Details of the connection.",
-            "nullable": true
+            "description": "Details of the connection.\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "scheduled": {
+                "type": "boolean"
+              },
+              "configuration": {
+                "type": "string"
+              },
+              "isExternal": {
+                "type": "boolean"
+              },
+              "isDeprecated": {
+                "type": "boolean"
+              },
+              "isDeleted": {
+                "type": "boolean"
+              },
+              "isHidden": {
+                "type": "boolean"
+              },
+              "indexVersion": {
+                "type": "integer"
+              },
+              "generationNum": {
+                "type": "integer"
+              },
+              "created": {
+                "type": "integer"
+              },
+              "modified": {
+                "type": "integer"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "modifiedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "tags": {
+                "type": "array",
+                "items": {}
+              },
+              "tables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "schemaStripe": {
+                      "type": "string"
+                    },
+                    "databaseStripe": {
+                      "type": "string"
+                    },
+                    "isExternal": {
+                      "type": "boolean"
+                    },
+                    "isDeprecated": {
+                      "type": "boolean"
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "indexVersion": {
+                      "type": "integer"
+                    },
+                    "generationNum": {
+                      "type": "integer"
+                    },
+                    "created": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "integer"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "modifiedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "owner": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "name": "Snowflake Sales",
+              "description": "Snowflake connection for the sales warehouse",
+              "type": "RDBMS_SNOWFLAKE",
+              "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+              "scheduled": false,
+              "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+              "isExternal": false,
+              "isDeprecated": false,
+              "isDeleted": false,
+              "isHidden": false,
+              "indexVersion": 1,
+              "generationNum": 1,
+              "created": 1760198400000,
+              "modified": 1760198400000,
+              "author": {
+                "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                "name": "<username>"
+              },
+              "modifiedBy": {
+                "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                "name": "<username>"
+              },
+              "owner": {
+                "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+                "name": "Snowflake Sales"
+              },
+              "tags": [],
+              "tables": [
+                {
+                  "name": "allDatatypes",
+                  "type": "ONE_TO_ONE_LOGICAL",
+                  "id": "6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c",
+                  "schemaStripe": "alldatatypes",
+                  "databaseStripe": "AllDatatypes",
+                  "isExternal": true,
+                  "isDeprecated": false,
+                  "isDeleted": false,
+                  "isHidden": false,
+                  "indexVersion": 1,
+                  "generationNum": 1,
+                  "created": 1760198400000,
+                  "modified": 1760198400000,
+                  "author": {
+                    "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                    "name": "<username>"
+                  },
+                  "modifiedBy": {
+                    "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                    "name": "<username>"
+                  },
+                  "owner": {
+                    "id": "6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c",
+                    "name": "allDatatypes"
+                  },
+                  "tags": []
+                }
+              ]
+            }
+          }
+        },
+        "example": {
+          "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+          "name": "Snowflake Sales",
+          "data_warehouse_type": "SNOWFLAKE",
+          "details": {
+            "name": "Snowflake Sales",
+            "description": "Snowflake connection for the sales warehouse",
+            "type": "RDBMS_SNOWFLAKE",
+            "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+            "scheduled": false,
+            "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+            "isExternal": false,
+            "isDeprecated": false,
+            "isDeleted": false,
+            "isHidden": false,
+            "indexVersion": 1,
+            "generationNum": 1,
+            "created": 1760198400000,
+            "modified": 1760198400000,
+            "author": {
+              "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "name": "<username>"
+            },
+            "modifiedBy": {
+              "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "name": "<username>"
+            },
+            "owner": {
+              "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+              "name": "Snowflake Sales"
+            },
+            "tags": [],
+            "tables": [
+              {
+                "name": "allDatatypes",
+                "type": "ONE_TO_ONE_LOGICAL",
+                "id": "6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c",
+                "schemaStripe": "alldatatypes",
+                "databaseStripe": "AllDatatypes",
+                "isExternal": true,
+                "isDeprecated": false,
+                "isDeleted": false,
+                "isHidden": false,
+                "indexVersion": 1,
+                "generationNum": 1,
+                "created": 1760198400000,
+                "modified": 1760198400000,
+                "author": {
+                  "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                  "name": "<username>"
+                },
+                "modifiedBy": {
+                  "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                  "name": "<username>"
+                },
+                "owner": {
+                  "id": "6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c",
+                  "name": "allDatatypes"
+                },
+                "tags": []
+              }
+            ]
           }
         }
       },
@@ -38327,7 +42353,162 @@
           },
           "template_properties": {
             "type": "object",
-            "description": "Customization configuration for the email"
+            "description": "Customization configuration for the email\n\nKeys are documented from a sample; other keys may be returned.",
+            "properties": {
+              "cta_button_bg_color": {
+                "type": "string"
+              },
+              "cta_text_font_color": {
+                "type": "string"
+              },
+              "primary_bg_color": {
+                "type": "string"
+              },
+              "home_url": {
+                "type": "string"
+              },
+              "logo_url": {
+                "type": "string"
+              },
+              "font_family": {
+                "type": "string"
+              },
+              "product_name": {
+                "type": "string"
+              },
+              "footer_address": {
+                "type": "string"
+              },
+              "footer_phone": {
+                "type": "string"
+              },
+              "replacement_value_for_liveboard": {
+                "type": "string"
+              },
+              "replacement_value_for_answer": {
+                "type": "string"
+              },
+              "replacement_value_for_spot_iq": {
+                "type": "string"
+              },
+              "hide_footer_address": {
+                "type": "boolean"
+              },
+              "hide_footer_phone": {
+                "type": "boolean"
+              },
+              "hide_manage_notification": {
+                "type": "boolean"
+              },
+              "hide_mobile_app_nudge": {
+                "type": "boolean"
+              },
+              "hide_privacy_policy": {
+                "type": "boolean"
+              },
+              "hide_product_name": {
+                "type": "boolean"
+              },
+              "hide_ts_vocabulary_definitions": {
+                "type": "boolean"
+              },
+              "hide_notification_status": {
+                "type": "boolean"
+              },
+              "hide_error_message": {
+                "type": "boolean"
+              },
+              "hide_unsubscribe_link": {
+                "type": "boolean"
+              },
+              "hide_modify_alert": {
+                "type": "boolean"
+              },
+              "company_privacy_policy_url": {
+                "type": "string"
+              },
+              "company_website_url": {
+                "type": "string"
+              },
+              "contact_support_url": {
+                "type": "string"
+              },
+              "hide_contact_support_url": {
+                "type": "boolean"
+              },
+              "hide_logo_url": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "cta_button_bg_color": "#444dea",
+              "cta_text_font_color": "#ffffff",
+              "primary_bg_color": "#d3def0",
+              "home_url": "https://www.example.com",
+              "logo_url": "https://www.example.com/logo.png",
+              "font_family": "Arial, sans-serif",
+              "product_name": "<product_name>",
+              "footer_address": "<company_address>",
+              "footer_phone": "<company_phone>",
+              "replacement_value_for_liveboard": "Dashboard",
+              "replacement_value_for_answer": "Chart",
+              "replacement_value_for_spot_iq": "AI Insights",
+              "hide_footer_address": false,
+              "hide_footer_phone": false,
+              "hide_manage_notification": false,
+              "hide_mobile_app_nudge": false,
+              "hide_privacy_policy": false,
+              "hide_product_name": false,
+              "hide_ts_vocabulary_definitions": false,
+              "hide_notification_status": false,
+              "hide_error_message": false,
+              "hide_unsubscribe_link": false,
+              "hide_modify_alert": false,
+              "company_privacy_policy_url": "https://www.example.com/privacy",
+              "company_website_url": "https://www.example.com",
+              "contact_support_url": "https://www.example.com/support",
+              "hide_contact_support_url": false,
+              "hide_logo_url": false
+            }
+          }
+        },
+        "example": {
+          "tenant_id": "<tenant_id>",
+          "org": {
+            "name": "Primary",
+            "id": 0
+          },
+          "name": "<customization_name>",
+          "template_properties": {
+            "cta_button_bg_color": "#444dea",
+            "cta_text_font_color": "#ffffff",
+            "primary_bg_color": "#d3def0",
+            "home_url": "https://www.example.com",
+            "logo_url": "https://www.example.com/logo.png",
+            "font_family": "Arial, sans-serif",
+            "product_name": "<product_name>",
+            "footer_address": "<company_address>",
+            "footer_phone": "<company_phone>",
+            "replacement_value_for_liveboard": "Dashboard",
+            "replacement_value_for_answer": "Chart",
+            "replacement_value_for_spot_iq": "AI Insights",
+            "hide_footer_address": false,
+            "hide_footer_phone": false,
+            "hide_manage_notification": false,
+            "hide_mobile_app_nudge": false,
+            "hide_privacy_policy": false,
+            "hide_product_name": false,
+            "hide_ts_vocabulary_definitions": false,
+            "hide_notification_status": false,
+            "hide_error_message": false,
+            "hide_unsubscribe_link": false,
+            "hide_modify_alert": false,
+            "company_privacy_policy_url": "https://www.example.com/privacy",
+            "company_website_url": "https://www.example.com",
+            "contact_support_url": "https://www.example.com/support",
+            "hide_contact_support_url": false,
+            "hide_logo_url": false
           }
         }
       },
@@ -42717,7 +46898,7 @@
             ]
           },
           "delete_reason": {
-            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "type": "string"
           }
         },
