@@ -27595,8 +27595,17 @@
           },
           "content": {
             "type": "object",
-            "description": "Content details of the group",
-            "nullable": true
+            "description": "Content details of the group\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "schemaVersion": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "schemaVersion": "3.1.0"
+            }
           },
           "creation_time_in_millis": {
             "type": "number",
@@ -27770,6 +27779,48 @@
             "description": "List of roles assgined to the user",
             "nullable": true
           }
+        },
+        "example": {
+          "id": "7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e",
+          "obj_id": "7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e",
+          "name": "<group_name>",
+          "display_name": "<group_display_name>",
+          "description": "Group created for the sales analysts.",
+          "visibility": "SHARABLE",
+          "type": "LOCAL_GROUP",
+          "parent_type": "GROUP",
+          "content": {
+            "schemaVersion": "3.1.0"
+          },
+          "privileges": [
+            "DATADOWNLOADING",
+            "USERDATAUPLOADING"
+          ],
+          "complete_detail": true,
+          "deleted": false,
+          "deprecated": false,
+          "external": false,
+          "hidden": false,
+          "system_group": false,
+          "generation_number": 1,
+          "index_version": 1,
+          "metadata_version": 1,
+          "creation_time_in_millis": 1760198400000,
+          "modification_time_in_millis": 1760198400000,
+          "author_id": "8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f",
+          "modifier_id": "8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f",
+          "owner_id": "7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e",
+          "users": [],
+          "sub_groups": [],
+          "default_liveboards": [],
+          "tags": [],
+          "orgs": [
+            {
+              "id": "0",
+              "name": "Primary"
+            }
+          ],
+          "roles": []
         }
       },
       "Role": {
@@ -28231,13 +28282,31 @@
                                   "items": {}
                                 },
                                 "logicalTableIdToPinboardFilterVizIds": {
-                                  "type": "object"
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
                                 },
                                 "filterIdToLinkedFilterIds": {
-                                  "type": "object"
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
                                 },
                                 "filterIdToExcludedVizs": {
-                                  "type": "object"
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
                                 }
                               }
                             },
@@ -28273,7 +28342,18 @@
                                           "sheets": {
                                             "type": "array",
                                             "items": {
-                                              "type": "object"
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                },
+                                                "owner": {
+                                                  "type": "string"
+                                                }
+                                              }
                                             }
                                           }
                                         }
@@ -28651,7 +28731,10 @@
                                     "type": "object",
                                     "properties": {
                                       "headlineVisibilityMap": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "additionalProperties": {
+                                          "type": "boolean"
+                                        }
                                       },
                                       "defaultQueryableSource": {
                                         "type": "string"
@@ -28678,15 +28761,63 @@
                                         "type": "string"
                                       },
                                       "filter": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "properties": {
+                                          "filterContent": {
+                                            "type": "object"
+                                          },
+                                          "header": {
+                                            "type": "object"
+                                          },
+                                          "complete": {
+                                            "type": "boolean"
+                                          },
+                                          "incompleteDetail": {
+                                            "type": "array",
+                                            "items": {}
+                                          }
+                                        }
                                       },
                                       "question": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "properties": {
+                                          "sageContextProto": {
+                                            "type": "string"
+                                          },
+                                          "sageContextIndex": {
+                                            "type": "integer"
+                                          },
+                                          "text": {
+                                            "type": "string"
+                                          },
+                                          "isChasmTrapQuery": {
+                                            "type": "boolean"
+                                          }
+                                        }
                                       },
                                       "visualizations": {
                                         "type": "array",
                                         "items": {
-                                          "type": "object"
+                                          "type": "object",
+                                          "properties": {
+                                            "vizContent": {
+                                              "type": "object"
+                                            },
+                                            "relatedLinks": {
+                                              "type": "array",
+                                              "items": {}
+                                            },
+                                            "header": {
+                                              "type": "object"
+                                            },
+                                            "complete": {
+                                              "type": "boolean"
+                                            },
+                                            "incompleteDetail": {
+                                              "type": "array",
+                                              "items": {}
+                                            }
+                                          }
                                         }
                                       }
                                     }
@@ -29260,6 +29391,11 @@
               },
               "folderContent": {
                 "type": "object",
+                "properties": {
+                  "schemaVersion": {
+                    "type": "string"
+                  }
+                },
                 "description": "Returned when metadata_type is COLLECTION."
               },
               "assignedEntities": {
@@ -29823,9 +29959,22 @@
                     "pinboardFilterDetails": {
                       "pinboardFiltersAnswerIds": [],
                       "filterLogicalTableIds": [],
-                      "logicalTableIdToPinboardFilterVizIds": {},
-                      "filterIdToLinkedFilterIds": {},
-                      "filterIdToExcludedVizs": {}
+                      "logicalTableIdToPinboardFilterVizIds": {
+                        "2b3c4d5e-0003-4f6a-9b7c-8d9e0f1a2b3c": [
+                          "3c4d5e6f-0004-4a7b-8c8d-9e0f1a2b3c4d",
+                          "4d5e6f7a-0005-4b8c-9d9e-0f1a2b3c4d5e"
+                        ]
+                      },
+                      "filterIdToLinkedFilterIds": {
+                        "1a2b3c4d-0001-4e5f-8a6b-7c8d9e0f1a2b": [
+                          "1a2b3c4d-0002-4e5f-8a6b-7c8d9e0f1a2b"
+                        ]
+                      },
+                      "filterIdToExcludedVizs": {
+                        "1a2b3c4d-0001-4e5f-8a6b-7c8d9e0f1a2b": [
+                          "4d5e6f7a-0005-4b8c-9d9e-0f1a2b3c4d5e"
+                        ]
+                      }
                     },
                     "visualizations": [
                       {
@@ -38883,6 +39032,10 @@
             "type": "string",
             "nullable": true
           }
+        },
+        "example": {
+          "id": "0",
+          "name": "Primary"
         }
       },
       "TokenScopeInput": {
