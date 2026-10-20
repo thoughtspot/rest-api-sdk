@@ -25989,7 +25989,9 @@
         "properties": {
           "error": {
             "type": "object",
-            "nullable": true
+            "nullable": true,
+            "additionalProperties": {},
+            "description": "Free-form object: its keys are not fixed by the API and are passed through as given."
           }
         }
       },
@@ -28202,7 +28204,7 @@
                     }
                   },
                   "description": "Returned when metadata_type is COLLECTION.",
-                  "title": "Metadata Search Response Incomplete Objects Header"
+                  "title": "Incomplete Objects Header"
                 },
                 "type": {
                   "type": "string",
@@ -28313,7 +28315,7 @@
                                   }
                                 }
                               },
-                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Pinboard Filter Details"
+                              "title": "Sheet Content Pinboard Filter Details"
                             },
                             "visualizations": {
                               "type": "array",
@@ -28359,17 +28361,17 @@
                                                   "type": "string"
                                                 }
                                               },
-                                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content Ref Answer Book Sheets"
+                                              "title": "Ref Answer Book Sheets"
                                             }
                                           }
                                         },
-                                        "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content Ref Answer Book"
+                                        "title": "Viz Content Ref Answer Book"
                                       },
                                       "vizType": {
                                         "type": "string"
                                       }
                                     },
-                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content"
+                                    "title": "Visualizations Viz Content"
                                   },
                                   "relatedLinks": {
                                     "type": "array",
@@ -28471,7 +28473,7 @@
                                         "type": "boolean"
                                       }
                                     },
-                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Header"
+                                    "title": "Visualizations Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -28481,7 +28483,7 @@
                                     "items": {}
                                   }
                                 },
-                                "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations"
+                                "title": "Sheet Content Visualizations"
                               }
                             },
                             "layout": {
@@ -28517,11 +28519,11 @@
                                         "type": "string"
                                       }
                                     },
-                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Layout Tiles"
+                                    "title": "Layout Tiles"
                                   }
                                 }
                               },
-                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Layout"
+                              "title": "Sheet Content Layout"
                             },
                             "vizLayout": {
                               "type": "string"
@@ -28530,7 +28532,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content"
+                          "title": "Sheets Sheet Content"
                         },
                         "header": {
                           "type": "object",
@@ -28631,7 +28633,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Header"
+                          "title": "Sheets Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -28641,12 +28643,12 @@
                           "items": {}
                         }
                       },
-                      "title": "Metadata Search Response Metadata Detail Report Content Sheets"
+                      "title": "Report Content Sheets"
                     }
                   }
                 },
                 "description": "Returned when metadata_type is LIVEBOARD.",
-                "title": "Metadata Search Response Metadata Detail Report Content"
+                "title": "Metadata Detail Report Content"
               },
               "type": {
                 "type": "string",
@@ -29141,7 +29143,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Header Tags Client State"
+                          "title": "Tags Client State"
                         },
                         "orgIds": {
                           "type": "array",
@@ -29166,7 +29168,7 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "Metadata Search Response Metadata Detail Header Tags"
+                      "title": "Header Tags"
                     }
                   },
                   "configs": {
@@ -29196,7 +29198,7 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "Metadata Search Response Metadata Detail Header Configs"
+                      "title": "Header Configs"
                     }
                   },
                   "isConnectionConfigurationDisabled": {
@@ -29258,7 +29260,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION.",
-                "title": "Metadata Search Response Metadata Detail Header"
+                "title": "Metadata Detail Header"
               },
               "complete": {
                 "type": "boolean",
@@ -29371,13 +29373,13 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "Metadata Search Response Metadata Detail Incomplete Detail Header"
+                      "title": "Incomplete Detail Header"
                     },
                     "type": {
                       "type": "string"
                     }
                   },
-                  "title": "Metadata Search Response Metadata Detail Incomplete Detail"
+                  "title": "Metadata Detail Incomplete Detail"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29408,7 +29410,7 @@
                       "type": "integer"
                     }
                   },
-                  "title": "Metadata Search Response Metadata Detail Personalised Views"
+                  "title": "Metadata Detail Personalised Views"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD."
               },
@@ -29420,7 +29422,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is COLLECTION.",
-                "title": "Metadata Search Response Metadata Detail Folder Content"
+                "title": "Metadata Detail Folder Content"
               },
               "assignedEntities": {
                 "type": "array",
@@ -29598,7 +29600,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Metadata Search Response Metadata Header Tags Client State"
+                      "title": "Metadata Header Tags Client State"
                     },
                     "orgIds": {
                       "type": "array",
@@ -29623,7 +29625,7 @@
                       "type": "boolean"
                     }
                   },
-                  "title": "Metadata Search Response Metadata Header Tags"
+                  "title": "Metadata Header Tags"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
               },
@@ -29654,7 +29656,7 @@
                       "type": "boolean"
                     }
                   },
-                  "title": "Metadata Search Response Metadata Header Configs"
+                  "title": "Metadata Header Configs"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29749,7 +29751,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is ANSWER or TAG.",
-                "title": "Metadata Search Response Metadata Header Client State"
+                "title": "Metadata Header Client State"
               },
               "orgIds": {
                 "type": "array",
@@ -29832,7 +29834,7 @@
                             "type": "boolean"
                           }
                         },
-                        "title": "Metadata Search Response Metadata Header Statistics Data Load Statistics Header"
+                        "title": "Data Load Statistics Header"
                       },
                       "complete": {
                         "type": "boolean"
@@ -29842,11 +29844,11 @@
                         "items": {}
                       }
                     },
-                    "title": "Metadata Search Response Metadata Header Statistics Data Load Statistics"
+                    "title": "Statistics Data Load Statistics"
                   }
                 },
                 "description": "Returned when metadata_type is CONNECTION.",
-                "title": "Metadata Search Response Metadata Header Statistics"
+                "title": "Metadata Header Statistics"
               },
               "displayName": {
                 "type": "string",
@@ -29891,11 +29893,11 @@
                           "type": "string"
                         }
                       },
-                      "title": "Metadata Search Response Visualization Headers Title Value"
+                      "title": "Title Value"
                     }
                   },
                   "description": "Returned when metadata_type is LIVEBOARD.",
-                  "title": "Metadata Search Response Visualization Headers Title"
+                  "title": "Visualization Headers Title"
                 },
                 "id": {
                   "type": "string",
@@ -30957,7 +30959,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Import E Pack Async Task Status Import Response Object Response Status"
+                          "title": "Response Status"
                         },
                         "header": {
                           "type": "object",
@@ -30969,13 +30971,13 @@
                               "type": "string"
                             }
                           },
-                          "title": "Import E Pack Async Task Status Import Response Object Response Header"
+                          "title": "Response Header"
                         }
                       },
-                      "title": "Import E Pack Async Task Status Import Response Object Response"
+                      "title": "Object Response"
                     }
                   },
-                  "title": "Import E Pack Async Task Status Import Response Object"
+                  "title": "Import Response Object"
                 }
               },
               "status": {
@@ -30988,7 +30990,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Import E Pack Async Task Status Import Response Status"
+                "title": "Import Response Status"
               }
             },
             "additionalProperties": true,
@@ -31020,7 +31022,7 @@
                 }
               ]
             },
-            "title": "Import E Pack Async Task Status Import Response"
+            "title": "Import EPack Async Task Status Import Response"
           },
           "task_status": {
             "type": "string",
@@ -31726,7 +31728,7 @@
                                   "type": "string"
                                 }
                               },
-                              "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions Metadata Owner"
+                              "title": "Metadata Permissions Metadata Owner"
                             },
                             "metadata_author": {
                               "type": "object",
@@ -31738,7 +31740,7 @@
                                   "type": "string"
                                 }
                               },
-                              "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions Metadata Author"
+                              "title": "Metadata Permissions Metadata Author"
                             },
                             "permission": {
                               "type": "string"
@@ -31751,11 +31753,11 @@
                               "items": {}
                             }
                           },
-                          "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions"
+                          "title": "Metadata Permission Info Metadata Permissions"
                         }
                       }
                     },
-                    "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info"
+                    "title": "Principal Permission Details Metadata Permission Info"
                   }
                 }
               },
@@ -31854,7 +31856,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Permission Of Metadata Response Metadata Permission Details Metadata Owner"
+                  "title": "Metadata Permission Details Metadata Owner"
                 },
                 "metadata_author": {
                   "type": "object",
@@ -31866,7 +31868,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Permission Of Metadata Response Metadata Permission Details Metadata Author"
+                  "title": "Metadata Permission Details Metadata Author"
                 },
                 "principal_permission_info": {
                   "type": "array",
@@ -31901,11 +31903,11 @@
                               "items": {}
                             }
                           },
-                          "title": "Permission Of Metadata Response Metadata Permission Details Principal Permission Info Principal Permissions"
+                          "title": "Principal Permission Info Principal Permissions"
                         }
                       }
                     },
-                    "title": "Permission Of Metadata Response Metadata Permission Details Principal Permission Info"
+                    "title": "Metadata Permission Details Principal Permission Info"
                   }
                 }
               },
@@ -32080,11 +32082,11 @@
                               "type": "string"
                             }
                           },
-                          "title": "Object Privileges Of Metadata Response Metadata Object Privileges Principal Object Privilege Info Principal Object Privileges"
+                          "title": "Principal Object Privilege Info Principal Object Privileges"
                         }
                       }
                     },
-                    "title": "Object Privileges Of Metadata Response Metadata Object Privileges Principal Object Privilege Info"
+                    "title": "Metadata Object Privileges Principal Object Privilege Info"
                   }
                 }
               },
@@ -33363,7 +33365,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Search Connection Response Details Tags"
+                  "title": "Details Tags"
                 }
               },
               "tables": {
@@ -33420,7 +33422,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Search Connection Response Details Tables Author"
+                      "title": "Details Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -33432,7 +33434,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Search Connection Response Details Tables Modified By"
+                      "title": "Details Tables Modified By"
                     },
                     "owner": {
                       "type": "object",
@@ -33444,7 +33446,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Search Connection Response Details Tables Owner"
+                      "title": "Details Tables Owner"
                     },
                     "tags": {
                       "type": "array",
@@ -33915,7 +33917,7 @@
                         "type": "string"
                       }
                     },
-                    "title": "Table Relationships Relationship Keys"
+                    "title": "Relationships Relationship Keys"
                   }
                 }
               },
@@ -35973,10 +35975,10 @@
                           "type": "string"
                         }
                       },
-                      "title": "Data Source Info Related Liveboard Visualizations Answer Header"
+                      "title": "Answer Header"
                     }
                   },
-                  "title": "Data Source Info Related Liveboard Visualizations Answer"
+                  "title": "Related Liveboard Visualizations Answer"
                 },
                 "pinboard_header": {
                   "type": "object",
@@ -35988,7 +35990,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Data Source Info Related Liveboard Visualizations Pinboard Header"
+                  "title": "Related Liveboard Visualizations Pinboard Header"
                 }
               },
               "additionalProperties": true,
@@ -36024,7 +36026,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Data Source Info Related Answers Header"
+                  "title": "Related Answers Header"
                 }
               },
               "additionalProperties": true,
@@ -36336,7 +36338,7 @@
                         }
                       }
                     },
-                    "title": "Answer Details Sub Queries Formulas"
+                    "title": "Sub Queries Formulas"
                   }
                 }
               },
@@ -37302,7 +37304,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Webhook Storage Setup Config Trust Policy Template Statement Principal"
+                      "title": "Statement Principal"
                     },
                     "Action": {
                       "type": "string"
@@ -37320,13 +37322,13 @@
                               "type": "string"
                             }
                           },
-                          "title": "Webhook Storage Setup Config Trust Policy Template Statement Condition String Equals"
+                          "title": "Condition String Equals"
                         }
                       },
-                      "title": "Webhook Storage Setup Config Trust Policy Template Statement Condition"
+                      "title": "Statement Condition"
                     }
                   },
-                  "title": "Webhook Storage Setup Config Trust Policy Template Statement"
+                  "title": "Trust Policy Template Statement"
                 }
               }
             },
@@ -39179,18 +39181,21 @@
         "properties": {
           "runtime_filter": {
             "type": "object",
-            "description": "Runtime filter parameter type in JWT.",
-            "nullable": true
+            "description": "Runtime filter parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "nullable": true,
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "type": "object",
-            "description": "Runtime sort parameter type in JWT.",
-            "nullable": true
+            "description": "Runtime sort parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "nullable": true,
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "type": "object",
-            "description": "Runtime param override type in JWT.",
-            "nullable": true
+            "description": "Runtime param override type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "nullable": true,
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -41797,7 +41802,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Create Connection Response Details Author"
+                "title": "Details Author"
               },
               "modifiedBy": {
                 "type": "object",
@@ -41809,7 +41814,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Create Connection Response Details Modified By"
+                "title": "Details Modified By"
               },
               "owner": {
                 "type": "object",
@@ -41821,7 +41826,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Create Connection Response Details Owner"
+                "title": "Details Owner"
               },
               "tags": {
                 "type": "array",
@@ -41881,7 +41886,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Create Connection Response Details Tables Author"
+                      "title": "Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -41893,7 +41898,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Create Connection Response Details Tables Modified By"
+                      "title": "Tables Modified By"
                     },
                     "owner": {
                       "type": "object",
@@ -41905,14 +41910,14 @@
                           "type": "string"
                         }
                       },
-                      "title": "Create Connection Response Details Tables Owner"
+                      "title": "Tables Owner"
                     },
                     "tags": {
                       "type": "array",
                       "items": {}
                     }
                   },
-                  "title": "Create Connection Response Details Tables"
+                  "title": "Details Tables"
                 }
               }
             },
@@ -43608,7 +43613,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Agent Tool Result Answer Visualization"
+                "title": "Answer Visualization"
               },
               "table_data": {
                 "type": "object",
@@ -43617,7 +43622,7 @@
                     "type": "integer"
                   }
                 },
-                "title": "Agent Tool Result Answer Table Data"
+                "title": "Answer Table Data"
               }
             },
             "additionalProperties": true,
@@ -46010,7 +46015,8 @@
         "properties": {
           "runtime_filter": {
             "type": "object",
-            "description": "Runtime filter parameter type in JWT."
+            "description": "Runtime filter parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -46020,7 +46026,8 @@
         "properties": {
           "runtime_sort": {
             "type": "object",
-            "description": "Runtime sort parameter type in JWT."
+            "description": "Runtime sort parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -46030,7 +46037,8 @@
         "properties": {
           "runtime_param_override": {
             "type": "object",
-            "description": "Runtime param override type in JWT."
+            "description": "Runtime param override type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -47209,8 +47217,9 @@
             ]
           },
           "configuration": {
-            "description": "Configuration properties in JSON.",
-            "type": "object"
+            "description": "Configuration properties in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "policy_type": {
             "description": "Type of policy.",
@@ -47311,8 +47320,9 @@
             ]
           },
           "configuration": {
-            "description": "Configuration properties in JSON.",
-            "type": "object"
+            "description": "Configuration properties in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "policy_type": {
             "description": "Type of policy.",
@@ -47405,8 +47415,9 @@
             ]
           },
           "data_warehouse_config": {
-            "description": "Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.",
-            "type": "object"
+            "description": "Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Validates the connection metadata if tables are included. If you are creating a connection without tables, specify `false`.",
@@ -47555,8 +47566,9 @@
             "nullable": true
           },
           "configuration": {
-            "description": "Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.",
-            "type": "object"
+            "description": "Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "authentication_type": {
             "description": "List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.",
@@ -47589,8 +47601,9 @@
         "type": "object",
         "properties": {
           "tables": {
-            "description": "Array of tables to sync. Each element can be:\n- String: Table identifier (GUID or name) to sync\n  all columns for that table.\n- Object: {tableId: [columnIds]} to sync specific\n  columns.\nIf not provided, syncs all tables in the connection.",
-            "type": "object"
+            "description": "Array of tables to sync. Each element can be:\n- String: Table identifier (GUID or name) to sync\n  all columns for that table.\n- Object: {tableId: [columnIds]} to sync specific\n  columns.\nIf not provided, syncs all tables in the connection.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "sync_attributes": {
             "description": "List of sync_attributes to sync from CDW.\nThe default value is DESCRIPTION.",
@@ -47623,8 +47636,9 @@
             "type": "string"
           },
           "data_warehouse_config": {
-            "description": "Configuration of the data warehouse in JSON.",
-            "type": "object"
+            "description": "Configuration of the data warehouse in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Indicates whether to validate the connection details.",
@@ -47663,8 +47677,9 @@
             "type": "string"
           },
           "data_warehouse_config": {
-            "description": "Configuration of the data warehouse in JSON.",
-            "type": "object"
+            "description": "Configuration of the data warehouse in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Indicates whether to validate the connection details.",
@@ -48123,16 +48138,19 @@
             "format": "int32"
           },
           "runtime_filter": {
-            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
-            "type": "object"
+            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_sort": {
-            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
-            "type": "object"
+            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_param_override": {
-            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
-            "type": "object"
+            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -48179,16 +48197,19 @@
             "format": "int32"
           },
           "runtime_filter": {
-            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
-            "type": "object"
+            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_sort": {
-            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
-            "type": "object"
+            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_param_override": {
-            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
-            "type": "object"
+            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -48228,16 +48249,19 @@
             "format": "int32"
           },
           "runtime_filter": {
-            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
-            "type": "object"
+            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_sort": {
-            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
-            "type": "object"
+            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_param_override": {
-            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
-            "type": "object"
+            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -49944,16 +49968,19 @@
             ]
           },
           "runtime_filter": {
-            "description": "JSON string representing runtime filter.\n{ col1:region, op1: EQ, val1: northeast }",
-            "type": "object"
+            "description": "JSON string representing runtime filter.\n{ col1:region, op1: EQ, val1: northeast }\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_sort": {
-            "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }",
-            "type": "object"
+            "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_param_override": {
-            "description": "JSON object for setting values of parameters in runtime.",
-            "type": "object"
+            "description": "JSON object for setting values of parameters in runtime.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "regional_settings": {
             "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
@@ -50027,16 +50054,19 @@
             ]
           },
           "runtime_filter": {
-            "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
-            "type": "object"
+            "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "override_filters": {
-            "description": "Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.\nFollowing example illustrate different kinds of filters:\n{\n  \"override_filters\": [\n    {\n      \"column_name\": \"Color\",\n      \"generic_filter\": {\n        \"op\": \"IN\",\n        \"values\": [\n          \"almond\",\n          \"turquoise\"\n        ]\n      },\n      \"negate\": false\n    },\n    {\n      \"column_name\": \"Commit Date\",\n      \"date_filter\": {\n        \"datePeriod\": \"HOUR\",\n        \"number\": 3,\n        \"type\": \"LAST_N_PERIOD\",\n        \"op\": \"EQ\"\n      }\n    },\n    {\n      \"column_name\": \"Sales\",\n      \"generic_filter\": {\n        \"op\": \"BW_INC\",\n        \"values\": [\n          \"100000\",\n          \"70000\"\n        ]\n      },\n      \"negate\": true\n    }\n  ]\n}",
-            "type": "object"
+            "description": "Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.\nFollowing example illustrate different kinds of filters:\n{\n  \"override_filters\": [\n    {\n      \"column_name\": \"Color\",\n      \"generic_filter\": {\n        \"op\": \"IN\",\n        \"values\": [\n          \"almond\",\n          \"turquoise\"\n        ]\n      },\n      \"negate\": false\n    },\n    {\n      \"column_name\": \"Commit Date\",\n      \"date_filter\": {\n        \"datePeriod\": \"HOUR\",\n        \"number\": 3,\n        \"type\": \"LAST_N_PERIOD\",\n        \"op\": \"EQ\"\n      }\n    },\n    {\n      \"column_name\": \"Sales\",\n      \"generic_filter\": {\n        \"op\": \"BW_INC\",\n        \"values\": [\n          \"100000\",\n          \"70000\"\n        ]\n      },\n      \"negate\": true\n    }\n  ]\n}\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "runtime_sort": {
-            "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
-            "type": "object"
+            "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "pdf_options": {
             "description": "Options for PDF export.",
@@ -50055,8 +50085,9 @@
             ]
           },
           "runtime_param_override": {
-            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
-            "type": "object"
+            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "regional_settings": {
             "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
@@ -52498,8 +52529,9 @@
         "type": "object",
         "properties": {
           "configuration": {
-            "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.",
-            "type": "object"
+            "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -52809,12 +52841,14 @@
             "nullable": true
           },
           "extended_properties": {
-            "description": "Properties for the user",
-            "type": "object"
+            "description": "Properties for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "extended_preferences": {
-            "description": "Preferences for the user",
-            "type": "object"
+            "description": "Preferences for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "trigger_welcome_email": {
             "description": "Flag to indicate whether a welcome email should be sent to the user. This parameter applies only on clusters where IAMv2 is not enabled. If the flag details are not specified, then it defaults to true. However, a welcome email is sent only when welcome email notifications are enabled on the cluster and the user has a valid email address.",
@@ -53236,12 +53270,14 @@
             "nullable": true
           },
           "extended_properties": {
-            "description": "Properties for the user",
-            "type": "object"
+            "description": "Properties for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "extended_preferences": {
-            "description": "Preferences for the user",
-            "type": "object"
+            "description": "Preferences for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           }
         }
       },
@@ -53914,8 +53950,9 @@
             "type": "string"
           },
           "url_params": {
-            "description": "Additional URL parameters as key-value pairs.",
-            "type": "object"
+            "description": "Additional URL parameters as key-value pairs.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "events": {
             "description": "List of events to subscribe to.",
@@ -54052,8 +54089,9 @@
             "type": "string"
           },
           "url_params": {
-            "description": "Additional URL parameters as key-value pairs.",
-            "type": "object"
+            "description": "Additional URL parameters as key-value pairs.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
+            "type": "object",
+            "additionalProperties": {}
           },
           "events": {
             "description": "List of events to subscribe to.",
