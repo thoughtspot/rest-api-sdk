@@ -12223,7 +12223,7 @@
     "/api/rest/2.0/localizations/manual-translation/export": {
       "post": {
         "operationId": "exportManualTranslations",
-        "description": "\nExport manual translations as a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads all manual translations for the org as a CSV file.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The response is a CSV file with columns: `content`, `locale`, `translated-content`.\n- Defaults to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to export translations from the All-Org context.\n- Returns a `404` error if no translations exist for the targeted org or cluster scope.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nExport manual translations as a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nDownloads all manual translations for the org as a CSV file.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The response is a CSV file with columns: `content`, `locale`, `translated-content`.\n- Defaults to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to export translations from the All-Org context.\n- `scope` accepts only `ORG` (default) and `CLUSTER`, in uppercase. Any other value returns a `400` error.\n- Returns a `400` error if no translations exist for the targeted org or cluster scope.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Manual Translation",
           "26.7.0.cl"
@@ -12311,7 +12311,7 @@
     "/api/rest/2.0/localizations/manual-translation/locales/{locale}/export": {
       "post": {
         "operationId": "getManualTranslationBundle",
-        "description": "\nGet translations bundle for a locale. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves all translations for a specific locale as a JSON map.\n\nAvailable to all authenticated users. No additional privileges are required.\n\n#### Usage guidelines\n\n- `locale` parameter must be a hyphenated locale code (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns a JSON object with a `translations` map where each key is the original string and each value is the translated string.\n- If the org has no translations for the requested locale, the endpoint falls back to cluster-level translations.\n- Returns an empty `translations` map (not an error) if no entries exist at either level.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nGet translations bundle for a locale. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves all translations for a specific locale as a JSON map.\n\nAvailable to all authenticated users. No additional privileges are required.\n\n#### Usage guidelines\n\n- `locale` parameter must be a hyphenated locale code, in any case (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns a JSON object with a `translations` map where each key is the original string and each value is the translated string.\n- If the org has no translations for the requested locale, the endpoint falls back to cluster-level translations.\n- Returns an empty `translations` map (not an error) if no entries exist at either level.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Manual Translation",
           "26.7.0.cl"
@@ -12394,7 +12394,7 @@
     "/api/rest/2.0/localizations/manual-translation/import": {
       "post": {
         "operationId": "importManualTranslations",
-        "description": "\nImport manual translations from a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a CSV file containing manual translations and upserts them into the database.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The CSV file must have exactly three columns in this order: `content`, `locale`, `translated-content`.\n- Maximum file size: **30 MB**. Maximum rows: **10,000**.\n- Only `.csv` files are accepted.\n- The import performs an **upsert**: existing entries matched by `(org_id, locale, content)` are updated; new entries are inserted. Entries not in the upload are left untouched.\n- Set `scope` to `CLUSTER` to upload translations to the All-Org context. Cluster-level translations act as defaults for orgs that have no translations for a locale.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nImport manual translations from a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUploads a CSV file containing manual translations and upserts them into the database.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The CSV file must have exactly three columns in this order: `content`, `locale`, `translated-content`.\n- Maximum file size: **30 MB**. Maximum rows: **10,000**.\n- Only `.csv` files are accepted.\n- The import performs an **upsert**: existing entries matched by `(org_id, locale, content)` are updated; new entries are inserted. Entries not in the upload are left untouched.\n- Set `scope` to `CLUSTER` to upload translations to the All-Org context. Cluster-level translations act as defaults for orgs that have no translations for a locale.\n- `scope` accepts only `ORG` (default) and `CLUSTER`, in uppercase. Any other value returns a `400` error.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Manual Translation",
           "26.7.0.cl"
@@ -26125,6 +26125,48 @@
           }
         },
         "description": "Favorite object options."
+      },
+      "LiveboardDetailsInput": {
+        "type": "object",
+        "properties": {
+          "liveboard_filters": {
+            "type": "boolean",
+            "default": true,
+            "description": "Includes Liveboard filters.",
+            "nullable": true
+          },
+          "liveboard_tabs": {
+            "type": "boolean",
+            "default": true,
+            "description": "Includes Liveboard tabs.",
+            "nullable": true
+          },
+          "container_layouts": {
+            "type": "boolean",
+            "default": true,
+            "description": "Includes the layout of Liveboard visualizations.",
+            "nullable": true
+          },
+          "visualizations": {
+            "type": "boolean",
+            "default": true,
+            "description": "Includes Liveboard visualizations.",
+            "nullable": true
+          },
+          "parameter_overrides": {
+            "type": "boolean",
+            "default": true,
+            "description": "Includes parameter overrides.",
+            "nullable": true
+          },
+          "personalized_views": {
+            "type": "boolean",
+            "default": false,
+            "description": "Includes personalised views. Personalised views are also included when\ninclude_personalised_views is true.",
+            "nullable": true
+          }
+        },
+        "description": "Parts of a Liveboard's metadata_detail to return in a metadata search."
       },
       "MetadataSearchSortOptions": {
         "type": "object",
@@ -41704,10 +41746,18 @@
             "nullable": true
           },
           "include_personalised_views": {
-            "description": "When set to true and include_details is also true, includes personalised views\nin the metadata_detail for LIVEBOARD objects.",
+            "description": "When set to true and include_details is also true, includes personalised views\nin the metadata_detail for LIVEBOARD objects. Personalised views are also included\nwhen liveboard_details.personalized_views is true.",
             "default": false,
             "type": "boolean",
             "nullable": true
+          },
+          "liveboard_details": {
+            "description": "<div><span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span></div>\n\nSelects which parts of a Liveboard's `metadata_detail` are returned, so that a request can skip the parts it does not need.\n\nApplies only to `LIVEBOARD` objects, and only when `include_details` is `true` and `liveboard_response_version` is `V2`. Otherwise it is ignored.\n\n* `liveboard_filters`, `liveboard_tabs`, `container_layouts`, `visualizations`, `parameter_overrides`: default to `true`. Set a field to `false` to exclude that part of the Liveboard.\n* `personalized_views`: defaults to `false`. Personalised views are included when either this field or `include_personalised_views` is `true`.\n\nThe Liveboard header, type, and style are always returned. Excluded collections are returned empty.\n\nTo fetch only the personalised views of a Liveboard, set every other field to `false`. The Liveboard definition is then not loaded, and `metadata_detail` contains only `personalised_views`:\n\n```json\n\"liveboard_details\": {\n  \"liveboard_filters\": false,\n  \"liveboard_tabs\": false,\n  \"container_layouts\": false,\n  \"visualizations\": false,\n  \"parameter_overrides\": false,\n  \"personalized_views\": true\n}\n```",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LiveboardDetailsInput"
+              }
+            ]
           },
           "include_headers": {
             "description": "Includes headers of the metadata objects.",

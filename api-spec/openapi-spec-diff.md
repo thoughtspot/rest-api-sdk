@@ -73,6 +73,10 @@
 -  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
 
 
+### POST /api/rest/2.0/metadata/search
+-  added the new optional request property `liveboard_details`
+
+
 ### POST /api/rest/2.0/version-control/branch/promote
 -  endpoint added
 
