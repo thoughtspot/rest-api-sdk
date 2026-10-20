@@ -442,6 +442,78 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/usage-data/delete:
+    post:
+      description: "\nDeletes Spotter usage pools. Users who no longer draw from any\
+        \ pool are\nno longer metered: their Spotter usage is unlimited, not blocked.\n\
+        Requires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl or later\n\n\n\
+        Deletes Spotter usage pools. Use this API to remove a limit from a user, user\
+        \ group, or Org, or to clear every pool before switching the scope the cluster\
+        \ meters at.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\
+        \ Users with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level\
+        \ `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe\
+        \ request must include `keys`, with at least one entry. Each key has an `entity_type`\
+        \ (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of\
+        \ the user or user group, or the ID of the Org).\n\nDeleting a pool removes\
+        \ its limit rather than blocking its users. A user who no longer draws from\
+        \ any pool is not metered and can use Spotter without a limit.\n\nIf the request\
+        \ is successful, the response contains `deleted_keys`, the keys of the pools\
+        \ that existed and were deleted. Keys that matched no pool are omitted.\n\n\
+        #### Error conditions\n\n- `400` — `keys` is empty, or a key is missing its\
+        \ `entity_type` or `entity_identifier`.\n- `401` — authentication token is\
+        \ missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION`\
+        \ privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta.\
+        \ Breaking changes may be introduced before the endpoint is made Generally\
+        \ Available.\n> - This operation cannot be undone. Recreate a pool with `updateUsageData`;\
+        \ its usage restarts from `0`.\n\n\n\n\n\n"
+      operationId: deleteUsageData
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteUsageDataRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteUsageDataResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteUsageDataResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/memory/export:
     post:
       description: "\nExports memory entries (rules, recipes, and always-apply rules)\
@@ -1030,6 +1102,123 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    messages:
+                    - message_id: a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b
+                      timestamp_in_millis: 1760198400000
+                      user_prompt:
+                        message:
+                          message_id: a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b
+                          content: What were total sales by region last quarter?
+                        attachments:
+                        - type: file
+                          timestamp_in_millis: 1760198400000
+                          files:
+                          - file_id: b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c
+                            display_name: regional_targets.csv
+                            file_type: text/csv
+                            created_time_in_millis: 1760198390000
+                            size_bytes: 2048
+                        - type: resource
+                          timestamp_in_millis: 1760198400000
+                          title: Quarterly sales plan
+                          uri: https://www.example.com/docs/sales-plan
+                          name: sales-plan
+                          mime_type: text/html
+                          description: Sales plan document from a connected source
+                          size: 4096
+                          connector_id: f6a7b8c9-0006-4d0e-9f1a-2b3c4d5e6f7a
+                          connector_name: <connector_name>
+                          connector_slug: <connector_slug>
+                          transport_type: STREAMABLE_HTTP
+                      response_items:
+                      - type: search_datasets
+                        timestamp_in_millis: 1760198401000
+                        is_thinking: true
+                        step_title: Finding data sources
+                        text: Found 1 data source that matches the question.
+                        data_sources:
+                        - data_source_identifier: 0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b
+                          data_source_name: Sales Model
+                          description: Sales transactions by region and product
+                          confidence: 0.92
+                          reasoning: The model contains sales amounts and a region
+                            column.
+                          header:
+                            display_name: Sales Model
+                            guid: 0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b
+                            description: Sales transactions by region and product
+                          related_liveboard_visualizations:
+                          - answer:
+                              header:
+                                id: 1f2a3b4c-5d6e-4f7a-8b9c-0d1e2f3a4b5c
+                                title: Sales by region
+                            pinboard_header:
+                              id: 2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d
+                              title: Sales Overview
+                          related_answers:
+                          - header:
+                              id: 3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e
+                              title: Quarterly sales by region
+                          related_spotter_queries:
+                          - sales by region last quarter
+                      - type: tool_call
+                        timestamp_in_millis: 1760198402000
+                        is_thinking: true
+                        step_title: Querying data
+                        tool_call_id: call_0001
+                        tool_name: fetch_and_visualize_data
+                        arguments:
+                          query: total sales by region last quarter
+                          data_source_identifier: 0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b
+                      - type: tool_result
+                        timestamp_in_millis: 1760198404000
+                        is_thinking: true
+                        step_title: Querying data
+                        tool_call_id: call_0001
+                        tool_name: fetch_and_visualize_data
+                        content: Returned 4 rows.
+                        content_type: TEXT_PLAIN
+                        success: true
+                      - type: answer
+                        timestamp_in_millis: 1760198405000
+                        is_thinking: false
+                        answer_id: c3d4e5f6-0003-4a7b-8c8d-9e0f1a2b3c4d
+                        tool_call_id: call_0001
+                        tool_name: fetch_and_visualize_data
+                      - type: file
+                        timestamp_in_millis: 1760198406000
+                        is_thinking: false
+                        files:
+                        - file_id: d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e
+                          display_name: sales_by_region.png
+                          file_type: image/png
+                          created_time_in_millis: 1760198406000
+                          size_bytes: 51200
+                      - type: text
+                        timestamp_in_millis: 1760198407000
+                        is_thinking: false
+                        content: Here are total sales by region for last quarter.
+                        content_type: TEXT_MARKDOWN
+                        file_reference:
+                          file_id: d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e
+                          display_name: sales_by_region.png
+                          created_time_in_millis: 1760198406000
+                      - type: resource
+                        timestamp_in_millis: 1760198408000
+                        is_thinking: false
+                        title: Sales Overview
+                        uri: https://www.example.com/liveboards/sales-overview
+                        name: sales-overview
+                        mime_type: text/html
+                    code_execution_files:
+                    - file_id: d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e
+                      display_name: sales_by_region.png
+                      file_type: image/png
+                      created_time_in_millis: 1760198406000
+                      expired: false
               schema:
                 $ref: "#/components/schemas/ConversationMessageResponse"
           description: Common successful response
@@ -1657,6 +1846,91 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/usage-data/user:
+    get:
+      description: "\nRetrieves a user's combined Spotter usage position: every pool\
+        \ the user\ndraws from, with usage, warning limits, and limits summed across\
+        \ them.\nAny user can retrieve their own usage. Retrieving another user's\
+        \ usage\nrequires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl or later\n\
+        \n\nRetrieves a user's combined Spotter usage: every usage pool the user draws\
+        \ from, with usage, warning limits, and limits summed across them. Use this\
+        \ API to show users how many Spotter questions they have left, or to check\
+        \ whether a user is blocked by a usage limit.\n\nAny user can retrieve their\
+        \ own usage. Retrieving another user's usage requires `ADMINISTRATION` (Can\
+        \ administer ThoughtSpot) privilege; `CAN_MANAGE_SPOTTER` is not sufficient.\n\
+        \n#### Usage guidelines\n\n- Omit `user_identifier` to retrieve the usage\
+        \ of the authenticated user.\n- Pass `user_identifier` with a user GUID to\
+        \ retrieve that user's usage.\n\nA user draws from every pool that meters\
+        \ them: their own pool, the pools of the user groups they belong to (including\
+        \ inherited groups), or their Org's pool, depending on the scope the cluster\
+        \ meters at. The totals in the response are sums over those pools. For example,\
+        \ a user in two groups with limits of 100 and 50 has a `total_limit` of 150.\n\
+        \nIf the request is successful, the response contains `summary`:\n\n- `pools`:\
+        \ the individual pools the user draws from.\n- `total_usage`, `total_warning_limit`,\
+        \ and `total_limit`: sums across the pools.\n- `total_remaining`: questions\
+        \ the user can still ask. Absent when `has_unlimited_pool` is `true`.\n- `is_at_warning`:\
+        \ `true` when usage has reached the combined warning limit.\n- `is_at_limit`:\
+        \ `true` when usage has reached the combined limit and further Spotter questions\
+        \ are blocked.\n- `has_unlimited_pool`: `true` when any of the user's pools\
+        \ has no limit, which makes the user unlimited.\n\nA user who draws from no\
+        \ pool is not metered: `pools` is empty and `is_at_limit` is `false`.\n\n\
+        #### Error conditions\n\n- `401` — authentication token is missing, expired,\
+        \ or invalid.\n- `403` — the caller requested another user's usage without\
+        \ `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently\
+        \ in Beta. Breaking changes may be introduced before the endpoint is made\
+        \ Generally Available.\n\n\n\n\n\n"
+      operationId: getUsageDataForUser
+      parameters:
+      - description: |-
+          GUID of the user whose usage to retrieve. Defaults to the authenticated
+          user. Passing another user's GUID requires `ADMINISTRATION` privilege.
+        explode: true
+        in: query
+        name: user_identifier
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataForUserResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataForUserResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/memory/import:
     post:
       description: "\nImports memory entries (rules, recipes, and always-apply rules)\
@@ -2049,6 +2323,31 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    answer:
+                      title: Total sales by region last quarter
+                      description: Total sales for each region in the last quarter
+                      session_identifier: e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f
+                      generation_number: 2
+                      tokens:
+                      - "[sales]"
+                      - "[region]"
+                      - "[date].'last quarter'"
+                      visualization_type: CHART
+                      formulas: []
+                      parameters: []
+                      sub_queries:
+                      - tokens: "[sales] [region] [date].'last quarter'"
+                        formulas:
+                        - name: Profit Margin
+                          expression: "sum ( [profit] ) / sum ( [sales] )"
+                          formula_type: AI_GENERATED
+                          is_auto_generated: true
+                          columns_used:
+                          - profit
+                          - sales
               schema:
                 $ref: "#/components/schemas/LoadAnswerResponse"
           description: Common successful response
@@ -2237,6 +2536,85 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnalystSearchResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/usage-data/search:
+    post:
+      description: "\nRetrieves Spotter usage pools: the question allowance configured\
+        \ for each\nuser, user group, or Org and how much of it has been consumed.\
+        \ Pass `keys`\nto fetch specific pools, or omit it to fetch every pool on\
+        \ the cluster.\nRequires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl\
+        \ or later\n\n\nRetrieves Spotter usage pools. A usage pool is the Spotter\
+        \ question allowance configured for a user, user group, or Org, together with\
+        \ how many questions have been consumed from it. Use this API to monitor usage\
+        \ across your users, for example to find pools that are close to their limit.\n\
+        \nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users\
+        \ with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level\
+        \ `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nA cluster\
+        \ meters Spotter usage at exactly one scope: per user, per user group, or\
+        \ per Org. Every pool on a cluster therefore has the same `entity_type`.\n\
+        \n- To retrieve every pool on the cluster, send an empty request body.\n-\
+        \ To retrieve specific pools, pass `keys`, each with an `entity_type` (`USER`,\
+        \ `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of the user\
+        \ or user group, or the ID of the Org). Keys that match no pool are omitted\
+        \ from the response.\n\nIf the request is successful, the response contains\
+        \ `usage_data`, one entry per pool:\n\n- `key`: the entity the pool meters.\n\
+        - `usage`: questions consumed from the pool.\n- `warning_limit`: usage level\
+        \ at which users are warned. Absent when no warning is configured.\n- `limit`:\
+        \ maximum questions the pool allows. Absent when the pool is unlimited.\n\
+        - `updated_time_in_millis` and `updated_by`: when and by whom the pool was\
+        \ last configured.\n\n#### Error conditions\n\n- `401` — authentication token\
+        \ is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION`\
+        \ privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta.\
+        \ Breaking changes may be introduced before the endpoint is made Generally\
+        \ Available.\n> - Use `getUsageDataForUser` to see the combined usage of a\
+        \ single user across every pool they draw from.\n\n\n\n\n\n"
+      operationId: searchUsageData
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchUsageDataRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataResponse"
           description: Common error response
         "400":
           content:
@@ -3534,6 +3912,87 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/usage-data/update:
+    post:
+      description: "\nCreates or updates Spotter usage pools, setting the question\
+        \ allowance\nfor a user, user group, or Org. A pool that does not exist is\
+        \ created;\nfields omitted from an update keep their current value.\nEvery\
+        \ key must use the scope the cluster meters at. Switching scope\nrequires\
+        \ deleting the existing pools first.\nRequires `ADMINISTRATION` privilege.\
+        \ \n Version: 26.11.0.cl or later\n\n\nCreates or updates Spotter usage pools.\
+        \ A usage pool sets how many Spotter questions a user, user group, or Org\
+        \ can ask. Use this API to provision limits for new users or groups, raise\
+        \ or lower an existing limit, or reset usage at the start of a billing period.\n\
+        \nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege. Users\
+        \ with only `CAN_MANAGE_SPOTTER`, and Org administrators without cluster-level\
+        \ `ADMINISTRATION`, cannot call this API.\n\n#### Usage guidelines\n\nThe\
+        \ request must include `updates`, with at least one entry. Each entry contains:\n\
+        \n- `key` (required): the pool to create or update, with an `entity_type`\
+        \ (`USER`, `USER_GROUP`, or `ORG`) and an `entity_identifier` (the GUID of\
+        \ the user or user group, or the ID of the Org).\n- `limit` (optional): maximum\
+        \ Spotter questions the pool allows.\n- `warning_limit` (optional): usage\
+        \ level at which users are warned that they are approaching the limit.\n-\
+        \ `usage` (optional): questions consumed so far. Set to `0` to reset the pool.\n\
+        \nA pool that does not exist is created. Fields omitted from an entry keep\
+        \ their current value.\n\nA cluster meters Spotter usage at exactly one scope.\
+        \ The first pool created sets the scope, and every later key must use the\
+        \ same `entity_type`. To switch scope, delete the existing pools with `deleteUsageData`\
+        \ first.\n\nIf the request is successful, the response contains `usage_data`,\
+        \ with each updated pool as it stands after the change.\n\n#### Error conditions\n\
+        \n- `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`,\
+        \ or a key uses a different `entity_type` from the cluster's existing pools.\n\
+        - `401` — authentication token is missing, expired, or invalid.\n- `403` —\
+        \ the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n\
+        >\n> - This endpoint is currently in Beta. Breaking changes may be introduced\
+        \ before the endpoint is made Generally Available.\n\n\n\n\n\n"
+      operationId: updateUsageData
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUsageDataRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageDataResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/auth/configure:
     post:
       description: |2+
@@ -3689,6 +4148,14 @@ paths:
                     deprecated: false
                     account_type: LOCAL_USER
                     account_status: ACTIVE
+                    incomplete_details: []
+                    org_privileges:
+                      "0":
+                      - ADMINISTRATION
+                      - AUTHORING
+                      - DATADOWNLOADING
+                    extended_properties:
+                      displayNameLastUpdatedBy: ADMIN
                     email: tsadmin@example.com
                 example_2:
                   description: Current user info for a SAML user switched to a non-primary
@@ -5285,6 +5752,24 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - configuration_identifier: 7d6c5b4a-3e2f-4a1b-9c8d-7e6f5a4b3c2d
+                    name: Sales Analysts Warehouse
+                    description: Routes queries for sales analysts to a dedicated
+                      warehouse
+                    configuration:
+                      accountName: <account_name>
+                      user: <username>
+                      role: <role>
+                      warehouse: <warehouse>
+                    policy_principals: []
+                    policy_processes: []
+                    disabled: false
+                    data_warehouse_type: SNOWFLAKE
+                    policy_type: NO_POLICY
+                    same_as_parent: false
               schema:
                 items:
                   $ref: "#/components/schemas/ConnectionConfigurationResponse"
@@ -5348,6 +5833,23 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    configuration_identifier: 7d6c5b4a-3e2f-4a1b-9c8d-7e6f5a4b3c2d
+                    name: Sales Analysts Warehouse
+                    description: Routes queries for sales analysts to a dedicated
+                      warehouse
+                    configuration:
+                      user: <username>
+                      role: <role>
+                      warehouse: <warehouse>
+                    policy_principals: []
+                    policy_processes: []
+                    disabled: false
+                    data_warehouse_type: SNOWFLAKE
+                    policy_type: NO_POLICY
+                    same_as_parent: false
               schema:
                 $ref: "#/components/schemas/ConnectionConfigurationResponse"
           description: Connection configuration successfully created.
@@ -5641,6 +6143,63 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                    name: Snowflake Sales
+                    data_warehouse_type: SNOWFLAKE
+                    details:
+                      name: Snowflake Sales
+                      description: Snowflake connection for the sales warehouse
+                      type: RDBMS_SNOWFLAKE
+                      id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                      scheduled: false
+                      configuration: "{\"accountName\":\"<account_name>\",\"user\"\
+                        :\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"\
+                        }"
+                      isExternal: false
+                      isDeprecated: false
+                      isDeleted: false
+                      isHidden: false
+                      indexVersion: 1
+                      generationNum: 1
+                      created: 1760198400000
+                      modified: 1760198400000
+                      author:
+                        id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                        name: <username>
+                      modifiedBy:
+                        id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                        name: <username>
+                      owner:
+                        id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                        name: Snowflake Sales
+                      tags: []
+                      tables:
+                      - name: allDatatypes
+                        type: ONE_TO_ONE_LOGICAL
+                        id: 6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c
+                        schemaStripe: alldatatypes
+                        databaseStripe: AllDatatypes
+                        isExternal: true
+                        isDeprecated: false
+                        isDeleted: false
+                        isHidden: false
+                        indexVersion: 1
+                        generationNum: 1
+                        created: 1760198400000
+                        modified: 1760198400000
+                        author:
+                          id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                          name: <username>
+                        modifiedBy:
+                          id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                          name: <username>
+                        owner:
+                          id: 6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c
+                          name: allDatatypes
+                        tags: []
               schema:
                 $ref: "#/components/schemas/CreateConnectionResponse"
           description: Connection to the datasource successfully created.
@@ -6073,6 +6632,97 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                    name: Snowflake Sales
+                    description: Snowflake connection for the sales warehouse
+                    data_warehouse_type: SNOWFLAKE
+                    data_warehouse_objects:
+                      databases:
+                      - name: SALES_DB
+                        auto_created: false
+                        schemas:
+                        - name: PUBLIC
+                          tables:
+                          - name: ORDERS
+                            type: TABLE
+                            description: ""
+                            selected: true
+                            linked: true
+                            columns:
+                            - name: ORDER_ID
+                              data_type: INT64
+                              can_import: true
+                              selected: true
+                              is_linked_active: true
+                            - name: CUSTOMER_ID
+                              data_type: INT64
+                              can_import: true
+                              selected: true
+                              is_linked_active: true
+                            relationships:
+                            - name: FK_ORDERS_CUSTOMERS
+                              destDatabase: SALES_DB
+                              destSchema: PUBLIC
+                              destTable: CUSTOMERS
+                              relationshipKeys:
+                              - sourceColumnName: CUSTOMER_ID
+                                destColumnName: CUSTOMER_ID
+                    details:
+                      name: Snowflake Sales
+                      description: Snowflake connection for the sales warehouse
+                      type: RDBMS_SNOWFLAKE
+                      id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                      scheduled: false
+                      configuration: "{\"accountName\":\"<account_name>\",\"user\"\
+                        :\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"\
+                        }"
+                      isExternal: false
+                      isDeprecated: false
+                      isDeleted: false
+                      isHidden: false
+                      indexVersion: 2
+                      generationNum: 2
+                      created: 1760198400000
+                      modified: 1760198460000
+                      author:
+                        id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                        name: <username>
+                      modifiedBy:
+                        id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                        name: <username>
+                      owner:
+                        id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                        name: Snowflake Sales
+                      tags:
+                      - id: 3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c
+                        name: Finance
+                      tables:
+                      - name: ORDERS
+                        type: ONE_TO_ONE_LOGICAL
+                        id: 8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d
+                        schemaStripe: PUBLIC
+                        databaseStripe: SALES_DB
+                        isExternal: true
+                        isDeprecated: false
+                        isDeleted: false
+                        isHidden: false
+                        indexVersion: 1
+                        generationNum: 1
+                        created: 1760198460000
+                        modified: 1760198460000
+                        author:
+                          id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                          name: <username>
+                        modifiedBy:
+                          id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                          name: <username>
+                        owner:
+                          id: 8c7b6a5d-4e3f-4a2b-9c1d-0e9f8a7b6c5d
+                          name: ORDERS
+                        tags: []
               schema:
                 items:
                   $ref: "#/components/schemas/SearchConnectionResponse"
@@ -7342,6 +7992,47 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: "data_format COMPACT (default): each row is an array of\
+                    \ values in column_names order"
+                  value:
+                    metadata_id: 0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d
+                    metadata_name: Revenue by Region
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - - East
+                        - 125000
+                      - - West
+                        - 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
+                example_2:
+                  summary: "data_format FULL: each row is an object keyed by column\
+                    \ name"
+                  value:
+                    metadata_id: 0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d
+                    metadata_name: Revenue by Region
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - Region: East
+                        Total Revenue: 125000
+                      - Region: West
+                        Total Revenue: 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
               schema:
                 $ref: "#/components/schemas/AnswerDataResponse"
           description: Fetching data of specified metadata object is successful.
@@ -7400,6 +8091,51 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: "data_format COMPACT (default): each row is an array of\
+                    \ values in column_names order"
+                  value:
+                    metadata_id: 1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e
+                    metadata_name: Sales Overview
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - - East
+                        - 125000
+                      - - West
+                        - 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
+                      visualization_id: 2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f
+                      visualization_name: Revenue by Region
+                example_2:
+                  summary: "data_format FULL: each row is an object keyed by column\
+                    \ name"
+                  value:
+                    metadata_id: 1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e
+                    metadata_name: Sales Overview
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - Region: East
+                        Total Revenue: 125000
+                      - Region: West
+                        Total Revenue: 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
+                      visualization_id: 2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f
+                      visualization_name: Revenue by Region
               schema:
                 $ref: "#/components/schemas/LiveboardDataResponse"
           description: Fetching data of specified metadata object is successful.
@@ -7460,6 +8196,43 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: "data_format COMPACT (default): each row is an array of\
+                    \ values in column_names order"
+                  value:
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - - East
+                        - 125000
+                      - - West
+                        - 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
+                example_2:
+                  summary: "data_format FULL: each row is an object keyed by column\
+                    \ name"
+                  value:
+                    contents:
+                    - available_data_row_count: 2
+                      column_names:
+                      - Region
+                      - Total Revenue
+                      data_rows:
+                      - Region: East
+                        Total Revenue: 125000
+                      - Region: West
+                        Total Revenue: 98000
+                      record_offset: 0
+                      record_size: 10
+                      returned_data_row_count: 2
+                      sampling_ratio: 1
               schema:
                 $ref: "#/components/schemas/SearchDataResponse"
           description: Fetching data of specified metadata object is successful.
@@ -7906,6 +8679,43 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    tenant_id: <tenant_id>
+                    org:
+                      name: Primary
+                      id: 0
+                    name: <customization_name>
+                    template_properties:
+                      cta_button_bg_color: "#444dea"
+                      cta_text_font_color: "#ffffff"
+                      primary_bg_color: "#d3def0"
+                      home_url: https://www.example.com
+                      logo_url: https://www.example.com/logo.png
+                      font_family: "Arial, sans-serif"
+                      product_name: <product_name>
+                      footer_address: <company_address>
+                      footer_phone: <company_phone>
+                      replacement_value_for_liveboard: Dashboard
+                      replacement_value_for_answer: Chart
+                      replacement_value_for_spot_iq: AI Insights
+                      hide_footer_address: false
+                      hide_footer_phone: false
+                      hide_manage_notification: false
+                      hide_mobile_app_nudge: false
+                      hide_privacy_policy: false
+                      hide_product_name: false
+                      hide_ts_vocabulary_definitions: false
+                      hide_notification_status: false
+                      hide_error_message: false
+                      hide_unsubscribe_link: false
+                      hide_modify_alert: false
+                      company_privacy_policy_url: https://www.example.com/privacy
+                      company_website_url: https://www.example.com
+                      contact_support_url: https://www.example.com/support
+                      hide_contact_support_url: false
+                      hide_logo_url: false
               schema:
                 $ref: "#/components/schemas/CreateEmailCustomizationResponse"
           description: OK
@@ -8085,6 +8895,51 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - tenant_id: <tenant_id>
+                    org:
+                      name: Primary
+                      id: 0
+                    name: <customization_name>
+                    template_properties:
+                      cta_button_bg_color: "#444dea"
+                      cta_text_font_color: "#ffffff"
+                      primary_bg_color: "#d3def0"
+                      home_url: https://www.example.com
+                      logo_url: https://www.example.com/logo.png
+                      font_family: "Arial, sans-serif"
+                      product_name: <product_name>
+                      footer_address: <company_address>
+                      footer_phone: <company_phone>
+                      replacement_value_for_liveboard: Dashboard
+                      replacement_value_for_answer: Chart
+                      replacement_value_for_spot_iq: AI Insights
+                      hide_footer_address: false
+                      hide_footer_phone: false
+                      hide_manage_notification: false
+                      hide_mobile_app_nudge: false
+                      hide_privacy_policy: false
+                      hide_product_name: false
+                      hide_ts_vocabulary_definitions: false
+                      hide_notification_status: false
+                      hide_error_message: false
+                      hide_unsubscribe_link: false
+                      hide_modify_alert: false
+                      company_privacy_policy_url: https://www.example.com/privacy
+                      company_website_url: https://www.example.com
+                      contact_support_url: https://www.example.com/support
+                      hide_contact_support_url: false
+                      hide_logo_url: false
+                  - tenant_id: <tenant_id>
+                    org:
+                      name: <org_name>
+                      id: 1234567890
+                    name: <customization_name>
+                    template_properties:
+                      product_name: <product_name>
+                      hide_mobile_app_nudge: true
               schema:
                 items:
                   $ref: "#/components/schemas/CreateEmailCustomizationResponse"
@@ -10157,8 +11012,10 @@ paths:
         \ application**) privilege.\n\n#### Usage guidelines\n\n- The response is\
         \ a CSV file with columns: `content`, `locale`, `translated-content`.\n- Defaults\
         \ to `ORG` scope if not specified.\n- Set `scope` to `CLUSTER` to export translations\
-        \ from the All-Org context.\n- Returns a `404` error if no translations exist\
-        \ for the targeted org or cluster scope.\n\n\n\n\n\n"
+        \ from the All-Org context.\n- `scope` accepts only `ORG` (default) and `CLUSTER`,\
+        \ in uppercase. Any other value returns a `400` error.\n- Returns a `400`\
+        \ error if no translations exist for the targeted org or cluster scope.\n\n\
+        \n\n\n\n"
       operationId: exportManualTranslations
       parameters: []
       requestBody:
@@ -10222,10 +11079,10 @@ paths:
         \ or later\n\n\nRetrieves all translations for a specific locale as a JSON\
         \ map.\n\nAvailable to all authenticated users. No additional privileges are\
         \ required.\n\n#### Usage guidelines\n\n- `locale` parameter must be a hyphenated\
-        \ locale code (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns a JSON\
-        \ object with a `translations` map where each key is the original string and\
-        \ each value is the translated string.\n- If the org has no translations for\
-        \ the requested locale, the endpoint falls back to cluster-level translations.\n\
+        \ locale code, in any case (for example, `fr-fr`, `de-de`, `JA-JP`).\n- Returns\
+        \ a JSON object with a `translations` map where each key is the original string\
+        \ and each value is the translated string.\n- If the org has no translations\
+        \ for the requested locale, the endpoint falls back to cluster-level translations.\n\
         - Returns an empty `translations` map (not an error) if no entries exist at\
         \ either level.\n\n\n\n\n\n"
       operationId: getManualTranslationBundle
@@ -10292,7 +11149,8 @@ paths:
         \ are inserted. Entries not in the upload are left untouched.\n- Set `scope`\
         \ to `CLUSTER` to upload translations to the All-Org context. Cluster-level\
         \ translations act as defaults for orgs that have no translations for a locale.\n\
-        \n\n\n\n\n"
+        - `scope` accepts only `ORG` (default) and `CLUSTER`, in uppercase. Any other\
+        \ value returns a `400` error.\n\n\n\n\n\n"
       operationId: importManualTranslations
       parameters: []
       requestBody:
@@ -10743,6 +11601,60 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    status_list:
+                    - tenant_id: <tenant_id>
+                      org_id: 0
+                      task_id: 3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a
+                      task_name: Import sales objects
+                      import_response:
+                        object:
+                        - name: Sales Table
+                          guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                          request_index: 0
+                          response:
+                            status:
+                              status_code: OK
+                            header:
+                              id_guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                              name: Sales Table
+                        - name: Sales Liveboard
+                          request_index: 1
+                          response:
+                            status:
+                              status_code: ERROR
+                              error_message: <error_message>
+                      task_status: COMPLETED
+                      author_id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                      import_policy: PARTIAL_OBJECT
+                      created_at: 1760198400000
+                      in_progress_at: 1760198401000
+                      completed_at: 1760198405000
+                      total_object_count: 2
+                      object_processed_count: 2
+                      modified_at: 1760198405000
+                      author_display_name: <user_display_name>
+                    - tenant_id: <tenant_id>
+                      org_id: 0
+                      task_id: 5f6a7b8c-9d0e-4f1a-8b2c-3d4e5f6a7b8c
+                      task_name: Import finance objects
+                      import_response:
+                        status:
+                          status_code: ERROR
+                          error_message: <error_message>
+                      task_status: FAILED
+                      author_id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                      import_policy: ALL_OR_NONE
+                      created_at: 1760198500000
+                      in_progress_at: 1760198501000
+                      completed_at: 1760198502000
+                      total_object_count: 3
+                      object_processed_count: 0
+                      modified_at: 1760198502000
+                      author_display_name: <user_display_name>
+                    last_batch: true
               schema:
                 $ref: "#/components/schemas/GetAsyncImportStatusResponse"
           description: Async TML Import Task statuses fetched successfully.
@@ -10958,6 +11870,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    tenant_id: <tenant_id>
+                    org_id: 0
+                    task_id: 3d4e5f6a-7b8c-4d9e-8f0a-1b2c3d4e5f6a
+                    task_name: Import sales objects
+                    task_status: IN_QUEUE
+                    author_id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                    import_policy: PARTIAL_OBJECT
+                    created_at: 1760198400000
+                    total_object_count: 2
+                    object_processed_count: 0
+                    modified_at: 1760198400000
+                    author_display_name: <user_display_name>
               schema:
                 $ref: "#/components/schemas/ImportEPackAsyncTaskStatus"
           description: Async TML Import Task submitted successfully.
@@ -11153,6 +12080,1120 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - metadata_id: 00000001-0000-4000-8000-000000000001
+                    metadata_name: Parameters Liveboard
+                    metadata_type: LIVEBOARD
+                    metadata_obj_id: null
+                    dependent_objects:
+                      "00000001-0000-4000-8000-000000000001": {}
+                    dependent_objects_is_last_batch: null
+                    incomplete_objects: null
+                    metadata_detail:
+                      reportContent:
+                        sheets:
+                        - sheetType: PINBOARD
+                          sheetContent:
+                            sheetContentType: PINBOARD
+                            pinboardFilterDetails:
+                              pinboardFiltersAnswerIds: []
+                              filterLogicalTableIds: []
+                              logicalTableIdToPinboardFilterVizIds: {}
+                              filterIdToLinkedFilterIds: {}
+                              filterIdToExcludedVizs: {}
+                            visualizations:
+                            - vizContent:
+                                refAnswerSheetIndex: 0
+                                refVizId: 00000002-0000-4000-8000-000000000002
+                                locked: false
+                                dataOnDemand: false
+                                refAnswerBook:
+                                  id: 00000003-0000-4000-8000-000000000003
+                                  name: Total Partial Revenue
+                                  sheets:
+                                  - id: 00000004-0000-4000-8000-000000000004
+                                    name: Total Partial Revenue
+                                    owner: 00000003-0000-4000-8000-000000000003
+                                vizType: PINBOARD_VIZ
+                              relatedLinks: []
+                              header:
+                                id: 00000005-0000-4000-8000-000000000005
+                                indexVersion: 27
+                                generationNum: 28
+                                name: "Answer: Total Partial Revenue Viz: Chart Viz\
+                                  \ holiday ytd"
+                                author: 00000006-0000-4000-8000-000000000006
+                                authorName: <username>
+                                hasLenientDiscoverability: false
+                                authorDisplayName: <user_display_name>
+                                created: 1760198400000
+                                modified: 1760198460000
+                                modifiedBy: 00000006-0000-4000-8000-000000000006
+                                owner: 00000001-0000-4000-8000-000000000001
+                                isDeleted: false
+                                isHidden: false
+                                tags: []
+                                configs: []
+                                isConnectionConfigurationDisabled: false
+                                aiAnswerGenerationDisabled: false
+                                isExternal: false
+                                isDeprecated: false
+                                isSharedViaConnection: false
+                                syncWithSource: false
+                                isParameterized: false
+                                cachedDataAsOf: 0
+                                isVerified: false
+                                isVersioningEnabled: false
+                                contentUpgradeId: <upgrade id>
+                                headerUpgradeId: <upgrade id>
+                                isPublished: false
+                                csrProtected: false
+                              complete: true
+                              incompleteDetail: []
+                            layout:
+                              layoutMode: auto
+                              tiles:
+                              - id: 00000005-0000-4000-8000-000000000005
+                                x: 0
+                                "y": 0
+                                width: 0
+                                height: 0
+                                order: 0
+                                size: xs
+                            vizLayout: <encoded layout>
+                            canGenerateLeafData: false
+                          header:
+                            id: 00000007-0000-4000-8000-000000000007
+                            indexVersion: 28
+                            generationNum: 28
+                            name: Parameters Liveboard
+                            description: ""
+                            author: 00000006-0000-4000-8000-000000000006
+                            authorName: <username>
+                            hasLenientDiscoverability: false
+                            authorDisplayName: <user_display_name>
+                            created: 1760198400000
+                            modified: 1760198460000
+                            modifiedBy: 00000006-0000-4000-8000-000000000006
+                            owner: 00000001-0000-4000-8000-000000000001
+                            isDeleted: false
+                            isHidden: false
+                            tags: []
+                            configs: []
+                            isConnectionConfigurationDisabled: false
+                            aiAnswerGenerationDisabled: false
+                            isExternal: false
+                            isDeprecated: false
+                            isSharedViaConnection: false
+                            syncWithSource: false
+                            isParameterized: false
+                            cachedDataAsOf: 0
+                            isVerified: false
+                            isVersioningEnabled: false
+                            contentUpgradeId: <upgrade id>
+                            headerUpgradeId: <upgrade id>
+                            isPublished: false
+                            csrProtected: false
+                          complete: true
+                          incompleteDetail: []
+                      type: PINBOARD
+                      header:
+                        hasTabs: false
+                        modelVersion: V1
+                        hasMandatoryFilter: false
+                        isMandatoryFilterValueSelected: true
+                        totalContainerCount: 4
+                        id: 00000001-0000-4000-8000-000000000001
+                        indexVersion: 28
+                        generationNum: 28
+                        name: Parameters Liveboard
+                        description: ""
+                        author: 00000006-0000-4000-8000-000000000006
+                        authorName: <username>
+                        hasLenientDiscoverability: false
+                        descriptionAutoGenerated: false
+                        authorDisplayName: <user_display_name>
+                        created: 1760198400000
+                        modified: 1760198460000
+                        modifiedBy: 00000006-0000-4000-8000-000000000006
+                        owner: 00000001-0000-4000-8000-000000000001
+                        isDeleted: false
+                        isHidden: false
+                        isAutoCreated: false
+                        isAutoDelete: false
+                        ownerOrgId: 0
+                        resolvedObjects:
+                          "00000002-0000-4000-8000-000000000002":
+                            reportContent:
+                              sheets:
+                              - sheetType: QUESTION
+                                sheetContent:
+                                  headlineVisibilityMap:
+                                    "00000008-0000-4000-8000-000000000008": false
+                                  defaultQueryableSource: FALCON
+                                  querableSources:
+                                  - FALCON
+                                  externalQueryableDataSource: DEFAULT
+                                  displayMode: CHART_MODE
+                                  bestDisplayMode: CHART_MODE
+                                  canGenerateLeafData: true
+                                  sheetContentType: QUESTION
+                                  filter:
+                                    filterContent:
+                                      rows:
+                                      - column:
+                                          isUserSorted: false
+                                          aggrTypeOverride: NONE
+                                          typeOverride: UNKNOWN
+                                          dataTypeOverride: UNKNOWN
+                                          formatTypeOverride: NONE
+                                          uniqueValues: 0
+                                          sageOutputColumnId: 00000009-0000-4000-8000-000000000009
+                                          outputIdsWithMatchingLogicalKey: []
+                                          aggrApplied: false
+                                          isVisible: true
+                                          columnToFormatPatternType: {}
+                                          effectiveAggrType: NONE
+                                          effectiveDataType: BOOL
+                                          effectiveType: ATTRIBUTE
+                                          id: 00000009-0000-4000-8000-000000000009
+                                          effectiveColumnGuid: 0000000a-0000-4000-8000-00000000000a
+                                          effectiveColumnIdString: 0000000b-0000-4000-8000-00000000000b#NONE#ATTRIBUTE#null
+                                          baseColumnName: Holiday YTD
+                                          baseColumnFormulaId: 0000000c-0000-4000-8000-00000000000c
+                                          baseAggrType: NONE
+                                          baseDataType: BOOL
+                                          baseType: ATTRIBUTE
+                                          isBaseColumnFormulaColumn: true
+                                          isBaseColumnAdditive: false
+                                          referencedTableHeaders:
+                                          - id: 0000000d-0000-4000-8000-00000000000d
+                                            name: Parameters WS
+                                          referencedColumnHeaders:
+                                          - id: 0000000e-0000-4000-8000-00000000000e
+                                            name: Commit Date
+                                          allLevelReferencedTableHeaders:
+                                          - id: 0000000d-0000-4000-8000-00000000000d
+                                            name: Parameters WS
+                                          allLevelReferencedColumnHeaders:
+                                          - id: 0000000e-0000-4000-8000-00000000000e
+                                            name: Commit Date
+                                        oper: EQ
+                                        values:
+                                        - key: "true"
+                                          selected: true
+                                        negation: false
+                                        applyOnTablesGuids: []
+                                        type: SIMPLE
+                                    header:
+                                      id: 0000000f-0000-4000-8000-00000000000f
+                                      indexVersion: 27
+                                      generationNum: 28
+                                      name: Filter holiday ytd = true partial revenue
+                                      author: 00000006-0000-4000-8000-000000000006
+                                      authorName: <username>
+                                      hasLenientDiscoverability: false
+                                      authorDisplayName: <user_display_name>
+                                      created: 1760198400000
+                                      modified: 1760198460000
+                                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                                      owner: 00000004-0000-4000-8000-000000000004
+                                      isDeleted: false
+                                      isHidden: false
+                                      tags: []
+                                      configs: []
+                                      isConnectionConfigurationDisabled: false
+                                      type: QUESTION
+                                      aiAnswerGenerationDisabled: false
+                                      isExternal: false
+                                      isDeprecated: false
+                                      isSharedViaConnection: false
+                                      syncWithSource: false
+                                      isParameterized: false
+                                      cachedDataAsOf: 0
+                                      isVerified: false
+                                      isVersioningEnabled: false
+                                      contentUpgradeId: <upgrade id>
+                                      headerUpgradeId: <upgrade id>
+                                      isPublished: false
+                                      csrProtected: false
+                                    complete: true
+                                    incompleteDetail: []
+                                  question:
+                                    sageContextProto: <encoded search context>
+                                    sageContextIndex: 0
+                                    text: holiday ytd = true partial revenue
+                                    isChasmTrapQuery: false
+                                  visualizations:
+                                  - vizContent:
+                                      chartType: KPI
+                                      axisConfigs:
+                                      - "y":
+                                        - 00000008-0000-4000-8000-000000000008
+                                      bestAxisConfigs:
+                                        KPI:
+                                        - "y":
+                                          - 00000008-0000-4000-8000-000000000008
+                                      title:
+                                        value:
+                                          text: Chart 0
+                                      customTitle: false
+                                      locked: false
+                                      dataOnDemand: false
+                                      columns:
+                                      - isUserSorted: false
+                                        aggrTypeOverride: SUM
+                                        typeOverride: MEASURE
+                                        dataTypeOverride: UNKNOWN
+                                        formatTypeOverride: NONE
+                                        groupBy: false
+                                        uniqueValues: -1
+                                        sageOutputColumnId: 00000008-0000-4000-8000-000000000008
+                                        outputIdsWithMatchingLogicalKey: []
+                                        aggrApplied: true
+                                        isVisible: true
+                                        columnToFormatPatternType: {}
+                                        effectiveAggrType: SUM
+                                        effectiveDataType: DOUBLE
+                                        effectiveType: MEASURE
+                                        id: 00000008-0000-4000-8000-000000000008
+                                        effectiveColumnGuid: 00000010-0000-4000-8000-000000000010
+                                        effectiveColumnIdString: 00000011-0000-4000-8000-000000000011#SUM#MEASURE#null
+                                        baseColumnName: Partial Revenue
+                                        baseColumnFormulaId: 00000012-0000-4000-8000-000000000012
+                                        baseAggrType: SUM
+                                        baseDataType: DOUBLE
+                                        baseType: MEASURE
+                                        isBaseColumnFormulaColumn: true
+                                        isBaseColumnAdditive: true
+                                        referencedTableHeaders:
+                                        - id: 0000000d-0000-4000-8000-00000000000d
+                                          name: Parameters WS
+                                        referencedColumnHeaders:
+                                        - id: 00000013-0000-4000-8000-000000000013
+                                          name: Revenue
+                                        allLevelReferencedTableHeaders:
+                                        - id: 0000000d-0000-4000-8000-00000000000d
+                                          name: Parameters WS
+                                        allLevelReferencedColumnHeaders:
+                                        - id: 00000013-0000-4000-8000-000000000013
+                                          name: Revenue
+                                      vizType: CHART
+                                    relatedLinks: []
+                                    header:
+                                      id: 00000002-0000-4000-8000-000000000002
+                                      indexVersion: 27
+                                      generationNum: 28
+                                      name: Chart Viz holiday ytd = true partial revenue
+                                      author: 00000006-0000-4000-8000-000000000006
+                                      authorName: <username>
+                                      hasLenientDiscoverability: false
+                                      authorDisplayName: <user_display_name>
+                                      created: 1760198400000
+                                      modified: 1760198460000
+                                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                                      owner: 00000004-0000-4000-8000-000000000004
+                                      isDeleted: false
+                                      isHidden: false
+                                      tags: []
+                                      configs: []
+                                      isConnectionConfigurationDisabled: false
+                                      type: QUESTION
+                                      aiAnswerGenerationDisabled: false
+                                      isExternal: false
+                                      isDeprecated: false
+                                      isSharedViaConnection: false
+                                      syncWithSource: false
+                                      isParameterized: false
+                                      cachedDataAsOf: 0
+                                      isVerified: false
+                                      isVersioningEnabled: false
+                                      contentUpgradeId: <upgrade id>
+                                      headerUpgradeId: <upgrade id>
+                                      isPublished: false
+                                      csrProtected: false
+                                    complete: true
+                                    incompleteDetail: []
+                                  - vizContent:
+                                      vizType: TABLE
+                                      columns:
+                                      - isUserSorted: false
+                                        aggrTypeOverride: SUM
+                                        typeOverride: MEASURE
+                                        dataTypeOverride: UNKNOWN
+                                        formatTypeOverride: NONE
+                                        groupBy: false
+                                        uniqueValues: -1
+                                        sageOutputColumnId: 00000008-0000-4000-8000-000000000008
+                                        outputIdsWithMatchingLogicalKey: []
+                                        aggrApplied: true
+                                        isVisible: true
+                                        columnToFormatPatternType: {}
+                                        effectiveAggrType: SUM
+                                        effectiveDataType: DOUBLE
+                                        effectiveType: MEASURE
+                                        id: 00000008-0000-4000-8000-000000000008
+                                        effectiveColumnGuid: 00000010-0000-4000-8000-000000000010
+                                        effectiveColumnIdString: 00000011-0000-4000-8000-000000000011#SUM#MEASURE#null
+                                        baseColumnName: Partial Revenue
+                                        baseColumnFormulaId: 00000012-0000-4000-8000-000000000012
+                                        baseAggrType: SUM
+                                        baseDataType: DOUBLE
+                                        baseType: MEASURE
+                                        isBaseColumnFormulaColumn: true
+                                        isBaseColumnAdditive: true
+                                        referencedTableHeaders:
+                                        - id: 0000000d-0000-4000-8000-00000000000d
+                                          name: Parameters WS
+                                        referencedColumnHeaders:
+                                        - id: 00000013-0000-4000-8000-000000000013
+                                          name: Revenue
+                                        allLevelReferencedTableHeaders:
+                                        - id: 0000000d-0000-4000-8000-00000000000d
+                                          name: Parameters WS
+                                        allLevelReferencedColumnHeaders:
+                                        - id: 00000013-0000-4000-8000-000000000013
+                                          name: Revenue
+                                      title:
+                                        value:
+                                          text: Table 1
+                                      customTitle: false
+                                      locked: false
+                                    relatedLinks: []
+                                    header:
+                                      id: 00000014-0000-4000-8000-000000000014
+                                      indexVersion: 27
+                                      generationNum: 28
+                                      name: Table Viz holiday ytd = true partial revenue
+                                      author: 00000006-0000-4000-8000-000000000006
+                                      authorName: <username>
+                                      hasLenientDiscoverability: false
+                                      authorDisplayName: <user_display_name>
+                                      created: 1760198400000
+                                      modified: 1760198460000
+                                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                                      owner: 00000004-0000-4000-8000-000000000004
+                                      isDeleted: false
+                                      isHidden: false
+                                      tags: []
+                                      configs: []
+                                      isConnectionConfigurationDisabled: false
+                                      type: QUESTION
+                                      aiAnswerGenerationDisabled: false
+                                      isExternal: false
+                                      isDeprecated: false
+                                      isSharedViaConnection: false
+                                      syncWithSource: false
+                                      isParameterized: false
+                                      cachedDataAsOf: 0
+                                      isVerified: false
+                                      isVersioningEnabled: false
+                                      contentUpgradeId: <upgrade id>
+                                      headerUpgradeId: <upgrade id>
+                                      isPublished: false
+                                      csrProtected: false
+                                    complete: true
+                                    incompleteDetail: []
+                                  - vizContent:
+                                      vizType: FILTER
+                                      compoundRowIndices:
+                                      - 0
+                                      dataOnDemand: true
+                                    relatedLinks: []
+                                    header:
+                                      id: 00000015-0000-4000-8000-000000000015
+                                      indexVersion: 27
+                                      generationNum: 28
+                                      name: "Filter Viz output id: 00000009-0000-4000-8000-000000000009"
+                                      author: 00000006-0000-4000-8000-000000000006
+                                      authorName: <username>
+                                      hasLenientDiscoverability: false
+                                      authorDisplayName: <user_display_name>
+                                      created: 1760198400000
+                                      modified: 1760198460000
+                                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                                      owner: 00000004-0000-4000-8000-000000000004
+                                      isDeleted: false
+                                      isHidden: false
+                                      tags: []
+                                      configs: []
+                                      isConnectionConfigurationDisabled: false
+                                      type: QUESTION
+                                      aiAnswerGenerationDisabled: false
+                                      isExternal: false
+                                      isDeprecated: false
+                                      isSharedViaConnection: false
+                                      syncWithSource: false
+                                      isParameterized: false
+                                      cachedDataAsOf: 0
+                                      isVerified: false
+                                      isVersioningEnabled: false
+                                      contentUpgradeId: <upgrade id>
+                                      headerUpgradeId: <upgrade id>
+                                      isPublished: false
+                                      csrProtected: false
+                                    complete: true
+                                    incompleteDetail: []
+                                header:
+                                  id: 00000004-0000-4000-8000-000000000004
+                                  indexVersion: 27
+                                  generationNum: 28
+                                  name: Total Partial Revenue
+                                  author: 00000006-0000-4000-8000-000000000006
+                                  authorName: <username>
+                                  hasLenientDiscoverability: false
+                                  authorDisplayName: <user_display_name>
+                                  created: 1760198400000
+                                  modified: 1760198460000
+                                  modifiedBy: 00000006-0000-4000-8000-000000000006
+                                  owner: 00000003-0000-4000-8000-000000000003
+                                  isDeleted: false
+                                  isHidden: true
+                                  tags: []
+                                  configs: []
+                                  isConnectionConfigurationDisabled: false
+                                  type: QUESTION
+                                  aiAnswerGenerationDisabled: false
+                                  isExternal: false
+                                  isDeprecated: false
+                                  isSharedViaConnection: false
+                                  syncWithSource: false
+                                  isParameterized: false
+                                  cachedDataAsOf: 0
+                                  isVerified: false
+                                  isVersioningEnabled: false
+                                  contentUpgradeId: <upgrade id>
+                                  headerUpgradeId: <upgrade id>
+                                  isPublished: false
+                                  csrProtected: false
+                                complete: true
+                                incompleteDetail: []
+                            type: QUESTION
+                            header:
+                              isTimeSeriesKPI: false
+                              referencedVizType: CHART
+                              chartType: KPI
+                              id: 00000003-0000-4000-8000-000000000003
+                              indexVersion: 27
+                              generationNum: 28
+                              name: Total Partial Revenue
+                              author: 00000006-0000-4000-8000-000000000006
+                              authorName: <username>
+                              hasLenientDiscoverability: false
+                              descriptionAutoGenerated: false
+                              authorDisplayName: <user_display_name>
+                              created: 1760198400000
+                              modified: 1760198460000
+                              modifiedBy: 00000006-0000-4000-8000-000000000006
+                              owner: 00000001-0000-4000-8000-000000000001
+                              isDeleted: false
+                              isHidden: true
+                              isAutoCreated: false
+                              isAutoDelete: false
+                              ownerOrgId: 0
+                              resolvedObjects: {}
+                              tags: []
+                              configs: []
+                              isConnectionConfigurationDisabled: false
+                              aiAnswerGenerationDisabled: false
+                              isExternal: false
+                              isDeprecated: false
+                              isSharedViaConnection: false
+                              syncWithSource: false
+                              isParameterized: false
+                              cachedDataAsOf: 0
+                              isVerified: false
+                              isVersioningEnabled: false
+                              datasetId: ""
+                              subType: ""
+                              reportId: ""
+                              viewId: ""
+                              contentUpgradeId: <upgrade id>
+                              headerUpgradeId: <upgrade id>
+                              isPublished: false
+                              csrProtected: false
+                            complete: true
+                            incompleteDetail: []
+                        tags:
+                        - id: 00000016-0000-4000-8000-000000000016
+                          indexVersion: 0
+                          generationNum: 38
+                          name: try me
+                          author: 00000006-0000-4000-8000-000000000006
+                          created: 1412881252884
+                          modified: 1412881301302
+                          modifiedBy: 00000006-0000-4000-8000-000000000006
+                          owner: 00000016-0000-4000-8000-000000000016
+                          isDeleted: false
+                          isHidden: false
+                          clientState:
+                            color: "#fbc17c"
+                          orgIds:
+                          - 0
+                          tags: []
+                          aiAnswerGenerationDisabled: false
+                          isExternal: false
+                          isDeprecated: false
+                          isSharedViaConnection: false
+                        configs:
+                        - id: 00000017-0000-4000-8000-000000000017
+                          name: Connection configuration
+                          author: 00000006-0000-4000-8000-000000000006
+                          created: 1760198400000
+                          modified: 1760198400000
+                          isDeleted: false
+                          isHidden: false
+                        isConnectionConfigurationDisabled: false
+                        aiAnswerGenerationDisabled: false
+                        isExternal: false
+                        isDeprecated: false
+                        isSharedViaConnection: false
+                        syncWithSource: false
+                        isParameterized: false
+                        cachedDataAsOf: 0
+                        isVerified: false
+                        isVersioningEnabled: false
+                        datasetId: ""
+                        subType: ""
+                        reportId: ""
+                        viewId: ""
+                        contentUpgradeId: <upgrade id>
+                        headerUpgradeId: <upgrade id>
+                        isPublished: false
+                        csrProtected: false
+                      complete: true
+                      incompleteDetail: []
+                      personalised_views:
+                      - guid: 00000018-0000-4000-8000-000000000018
+                        name: My view
+                        isPublic: false
+                        author: 00000006-0000-4000-8000-000000000006
+                        authorDisplayName: <user_display_name>
+                        createdAt: 1760198460000
+                        updatedAt: 1760198460000
+                    metadata_header:
+                      hasTabs: false
+                      modelVersion: V1
+                      hasMandatoryFilter: false
+                      isMandatoryFilterValueSelected: true
+                      totalContainerCount: 4
+                      id: 00000001-0000-4000-8000-000000000001
+                      indexVersion: 28
+                      generationNum: 28
+                      name: Parameters Liveboard
+                      description: ""
+                      author: 00000006-0000-4000-8000-000000000006
+                      authorName: <username>
+                      hasLenientDiscoverability: false
+                      descriptionAutoGenerated: false
+                      authorDisplayName: <user_display_name>
+                      created: 1760198400000
+                      modified: 1760198460000
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 00000001-0000-4000-8000-000000000001
+                      isDeleted: false
+                      isHidden: false
+                      isAutoCreated: false
+                      isAutoDelete: false
+                      ownerOrgId: 0
+                      resolvedObjects: {}
+                      tags:
+                      - id: 00000016-0000-4000-8000-000000000016
+                        indexVersion: 0
+                        generationNum: 38
+                        name: try me
+                        author: 00000006-0000-4000-8000-000000000006
+                        created: 1412881252884
+                        modified: 1412881301302
+                        modifiedBy: 00000006-0000-4000-8000-000000000006
+                        owner: 00000016-0000-4000-8000-000000000016
+                        isDeleted: false
+                        isHidden: false
+                        clientState:
+                          color: "#fbc17c"
+                        orgIds:
+                        - 0
+                        tags: []
+                        aiAnswerGenerationDisabled: false
+                        isExternal: false
+                        isDeprecated: false
+                        isSharedViaConnection: false
+                      configs:
+                      - id: 00000017-0000-4000-8000-000000000017
+                        name: Connection configuration
+                        author: 00000006-0000-4000-8000-000000000006
+                        created: 1760198400000
+                        modified: 1760198400000
+                        isDeleted: false
+                        isHidden: false
+                      isConnectionConfigurationDisabled: false
+                      type: ""
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                      syncWithSource: false
+                      isParameterized: false
+                      cachedDataAsOf: 0
+                      isVerified: false
+                      isVersioningEnabled: false
+                      datasetId: ""
+                      subType: ""
+                      reportId: ""
+                      viewId: ""
+                      contentUpgradeId: <upgrade id>
+                      headerUpgradeId: <upgrade id>
+                      isPublished: false
+                      csrProtected: false
+                    visualization_headers:
+                    - size: xs
+                      vizType: CHART
+                      title:
+                        value:
+                          text: Chart 0
+                      id: 00000005-0000-4000-8000-000000000005
+                      name: Total Partial Revenue
+                      author: 00000006-0000-4000-8000-000000000006
+                      created: 1760198400000
+                      modified: 1760198460000
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 00000001-0000-4000-8000-000000000001
+                    stats:
+                      views: 42
+                      favorites: 3
+                      last_accessed: 1760198460000
+                  - metadata_id: 00000019-0000-4000-8000-000000000019
+                    metadata_name: Sales collection
+                    metadata_type: COLLECTION
+                    metadata_obj_id: sales-collection-4d4a779a
+                    dependent_objects:
+                      "00000019-0000-4000-8000-000000000019": {}
+                    dependent_objects_is_last_batch: true
+                    incomplete_objects:
+                    - code: BASE_OBJECT_MISSING
+                      codeNumber: 10005
+                      message: "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\"\
+                        ,\"name\":\"Sales collection\",\"type\":\"Folder\"}"
+                      header:
+                        id: 00000019-0000-4000-8000-000000000019
+                        indexVersion: 156
+                        generationNum: 156
+                        name: Sales collection
+                        description: ""
+                        author: 00000006-0000-4000-8000-000000000006
+                        created: 1791476207822
+                        modified: 1791476219803
+                        modifiedBy: 00000006-0000-4000-8000-000000000006
+                        isDeleted: false
+                        isHidden: false
+                        ownerOrgId: 0
+                        tags: []
+                        configs: []
+                        isConnectionConfigurationDisabled: false
+                        aiAnswerGenerationDisabled: false
+                        isExternal: false
+                        isDeprecated: false
+                        isSharedViaConnection: false
+                        syncWithSource: false
+                        isParameterized: false
+                        cachedDataAsOf: 0
+                        isVerified: false
+                        isVersioningEnabled: false
+                        objId: sales-collection-4d4a779a
+                        contentUpgradeId: <upgrade id>
+                        headerUpgradeId: <upgrade id>
+                        isPublished: false
+                        csrProtected: false
+                      type: FOLDER
+                    metadata_detail:
+                      folderContent: {}
+                      assignedEntities:
+                      - 0000001a-0000-4000-8000-00000000001a
+                      - 00000001-0000-4000-8000-000000000001
+                      inheritedFolders:
+                      - 0000001b-0000-4000-8000-00000000001b
+                      state: ACTIVE
+                      visibility: SHARABLE
+                      header:
+                        id: 00000019-0000-4000-8000-000000000019
+                        indexVersion: 156
+                        generationNum: 156
+                        name: Sales collection
+                        description: ""
+                        author: 00000006-0000-4000-8000-000000000006
+                        created: 1791476207822
+                        modified: 1791476219803
+                        modifiedBy: 00000006-0000-4000-8000-000000000006
+                        isDeleted: false
+                        isHidden: false
+                        ownerOrgId: 0
+                        tags: []
+                        configs: []
+                        isConnectionConfigurationDisabled: false
+                        aiAnswerGenerationDisabled: false
+                        isExternal: false
+                        isDeprecated: false
+                        isSharedViaConnection: false
+                        syncWithSource: false
+                        isParameterized: false
+                        cachedDataAsOf: 0
+                        isVerified: false
+                        isVersioningEnabled: false
+                        objId: sales-collection-4d4a779a
+                        contentUpgradeId: <upgrade id>
+                        headerUpgradeId: <upgrade id>
+                        isPublished: false
+                        csrProtected: false
+                      complete: false
+                      incompleteDetail:
+                      - code: BASE_OBJECT_MISSING
+                        codeNumber: 10005
+                        message: "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\"\
+                          ,\"name\":\"Sales collection\",\"type\":\"Folder\"}"
+                        header:
+                          id: 00000019-0000-4000-8000-000000000019
+                          indexVersion: 156
+                          generationNum: 156
+                          name: Sales collection
+                          description: ""
+                          author: 00000006-0000-4000-8000-000000000006
+                          created: 1791476207822
+                          modified: 1791476219803
+                          modifiedBy: 00000006-0000-4000-8000-000000000006
+                          isDeleted: false
+                          isHidden: false
+                          ownerOrgId: 0
+                          tags: []
+                          configs: []
+                          isConnectionConfigurationDisabled: false
+                          aiAnswerGenerationDisabled: false
+                          isExternal: false
+                          isDeprecated: false
+                          isSharedViaConnection: false
+                          syncWithSource: false
+                          isParameterized: false
+                          cachedDataAsOf: 0
+                          isVerified: false
+                          isVersioningEnabled: false
+                          objId: sales-collection-4d4a779a
+                          contentUpgradeId: <upgrade id>
+                          headerUpgradeId: <upgrade id>
+                          isPublished: false
+                          csrProtected: false
+                        type: FOLDER
+                    metadata_header:
+                      id: 00000019-0000-4000-8000-000000000019
+                      indexVersion: 156
+                      generationNum: 156
+                      name: Sales collection
+                      description: ""
+                      author: 00000006-0000-4000-8000-000000000006
+                      authorName: <username>
+                      authorDisplayName: <user_display_name>
+                      created: 1791476207822
+                      modified: 1791476219803
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      isDeleted: false
+                      isHidden: false
+                      ownerOrgId: 0
+                      tags: []
+                      configs: []
+                      isConnectionConfigurationDisabled: false
+                      type: ""
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                      syncWithSource: false
+                      isParameterized: false
+                      cachedDataAsOf: 0
+                      isVerified: false
+                      isVersioningEnabled: false
+                      subType: ""
+                      objId: sales-collection-4d4a779a
+                      contentUpgradeId: <upgrade id>
+                      headerUpgradeId: <upgrade id>
+                      isPublished: false
+                      csrProtected: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 0000001c-0000-4000-8000-00000000001c
+                    metadata_name: <metadata_name>
+                    metadata_type: ANSWER
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 0000001c-0000-4000-8000-00000000001c
+                      indexVersion: 36
+                      generationNum: 36
+                      name: <name>
+                      description: ""
+                      author: 00000006-0000-4000-8000-000000000006
+                      authorName: <authorName>
+                      hasLenientDiscoverability: false
+                      authorDisplayName: <authorDisplayName>
+                      created: 1519761648892
+                      modified: 1583190990050
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 0000001c-0000-4000-8000-00000000001c
+                      isDeleted: false
+                      isHidden: false
+                      isAutoCreated: false
+                      isAutoDelete: false
+                      clientState:
+                        queryState: FALCON
+                      orgIds:
+                      - 0
+                      tags: []
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 0000001d-0000-4000-8000-00000000001d
+                    metadata_name: <metadata_name>
+                    metadata_type: LOGICAL_TABLE
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 0000001d-0000-4000-8000-00000000001d
+                      indexVersion: 34
+                      generationNum: 34
+                      name: <name>
+                      author: 00000006-0000-4000-8000-000000000006
+                      authorName: <authorName>
+                      authorDisplayName: <authorDisplayName>
+                      created: 1455598151033
+                      modified: 1455598151033
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 0000001d-0000-4000-8000-00000000001d
+                      isDeleted: false
+                      isHidden: false
+                      orgIds:
+                      - 0
+                      tags: []
+                      type: WORKSHEET
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 0000001e-0000-4000-8000-00000000001e
+                    metadata_name: <metadata_name>
+                    metadata_type: LOGICAL_COLUMN
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 0000001e-0000-4000-8000-00000000001e
+                      indexVersion: 34
+                      generationNum: 34
+                      name: <name>
+                      author: 00000006-0000-4000-8000-000000000006
+                      created: 1455598151033
+                      modified: 1455598151033
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 0000001d-0000-4000-8000-00000000001d
+                      isDeleted: false
+                      isHidden: false
+                      orgIds:
+                      - 0
+                      tags: []
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 0000001f-0000-4000-8000-00000000001f
+                    metadata_name: <metadata_name>
+                    metadata_type: CONNECTION
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      dataUploadEnabled: false
+                      id: 0000001f-0000-4000-8000-00000000001f
+                      indexVersion: 29
+                      generationNum: 29
+                      name: <name>
+                      description: ""
+                      author: 00000006-0000-4000-8000-000000000006
+                      authorName: <authorName>
+                      hasLenientDiscoverability: false
+                      authorDisplayName: <authorDisplayName>
+                      created: 1565611520983
+                      modified: 1565611520983
+                      relationWithUser: ADMINISTRATOR
+                      modifiedBy: 00000020-0000-4000-8000-000000000020
+                      owner: 0000001f-0000-4000-8000-00000000001f
+                      isDeleted: false
+                      isHidden: false
+                      isAutoCreated: false
+                      isAutoDelete: false
+                      statistics:
+                        dataLoadStatistics:
+                          scheduled: false
+                          connectionType: ""
+                          connectionDisplayName: ""
+                          dataLoadStatusList: []
+                          header:
+                            id: 00000021-0000-4000-8000-000000000021
+                            indexVersion: 29
+                            generationNum: 29
+                            author: 00000006-0000-4000-8000-000000000006
+                            owner: 0000001f-0000-4000-8000-00000000001f
+                            isDeleted: false
+                            isHidden: false
+                            orgIds:
+                            - 0
+                            tags: []
+                            aiAnswerGenerationDisabled: false
+                            isExternal: false
+                            isDeprecated: false
+                            isSharedViaConnection: false
+                          complete: true
+                          incompleteDetail: []
+                      orgIds:
+                      - 0
+                      resolvedObjects: {}
+                      tags: []
+                      type: RDBMS_SNOWFLAKE
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 00000016-0000-4000-8000-000000000016
+                    metadata_name: <metadata_name>
+                    metadata_type: TAG
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 00000016-0000-4000-8000-000000000016
+                      indexVersion: 0
+                      generationNum: 38
+                      name: <name>
+                      author: 00000006-0000-4000-8000-000000000006
+                      created: 1412881252884
+                      modified: 1412881301302
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 00000016-0000-4000-8000-000000000016
+                      isDeleted: false
+                      isHidden: false
+                      clientState:
+                        color: <color>
+                      orgIds:
+                      - 0
+                      tags: []
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 00000020-0000-4000-8000-000000000020
+                    metadata_name: <metadata_name>
+                    metadata_type: USER
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 00000020-0000-4000-8000-000000000020
+                      indexVersion: 169
+                      generationNum: 169
+                      name: <name>
+                      displayName: <displayName>
+                      author: 00000020-0000-4000-8000-000000000020
+                      created: 1354006445722
+                      modified: 1354006445987
+                      modifiedBy: 00000020-0000-4000-8000-000000000020
+                      owner: 00000020-0000-4000-8000-000000000020
+                      isDeleted: false
+                      isHidden: false
+                      orgIds:
+                      - 0
+                      belongToAllOrgs: true
+                      tags: []
+                      type: LOCAL_USER
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 00000022-0000-4000-8000-000000000022
+                    metadata_name: <metadata_name>
+                    metadata_type: USER_GROUP
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      numDefaultPinboards: 0
+                      numMemberUsers: 3
+                      id: 00000022-0000-4000-8000-000000000022
+                      indexVersion: 25
+                      generationNum: 27
+                      name: <name>
+                      displayName: <displayName>
+                      author: 00000006-0000-4000-8000-000000000006
+                      hasLenientDiscoverability: false
+                      created: 1354006445722
+                      modified: 1354006445987
+                      modifiedBy: 00000020-0000-4000-8000-000000000020
+                      owner: 00000022-0000-4000-8000-000000000022
+                      isDeleted: false
+                      isHidden: false
+                      isAutoCreated: false
+                      isAutoDelete: false
+                      orgIds:
+                      - 0
+                      resolvedObjects: {}
+                      tags: []
+                      type: LOCAL_GROUP
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
+                  - metadata_id: 00000023-0000-4000-8000-000000000023
+                    metadata_name: <metadata_name>
+                    metadata_type: LOGICAL_RELATIONSHIP
+                    dependent_objects: null
+                    incomplete_objects: null
+                    metadata_detail: null
+                    metadata_header:
+                      id: 00000023-0000-4000-8000-000000000023
+                      indexVersion: 35
+                      generationNum: 35
+                      name: <name>
+                      description: ""
+                      author: 00000006-0000-4000-8000-000000000006
+                      created: 1460535074875
+                      modified: 1504281966956
+                      modifiedBy: 00000006-0000-4000-8000-000000000006
+                      owner: 00000024-0000-4000-8000-000000000024
+                      isDeleted: false
+                      isHidden: false
+                      orgIds:
+                      - 0
+                      tags: []
+                      type: USER_DEFINED
+                      aiAnswerGenerationDisabled: false
+                      isExternal: false
+                      isDeprecated: false
+                      isSharedViaConnection: false
+                    visualization_headers: null
+                    stats: null
               schema:
                 items:
                   $ref: "#/components/schemas/MetadataSearchResponse"
@@ -12494,6 +14535,26 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    metadata_object_privileges:
+                    - metadata_id: 6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d
+                      metadata_name: Sales Model
+                      metadata_type: LOGICAL_TABLE
+                      principal_object_privilege_info:
+                      - principal_type: USER_GROUP
+                        principal_object_privileges:
+                        - principal_id: 7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e
+                          principal_name: <group_name>
+                          principal_sub_type: LOCAL_GROUP
+                          object_privileges: "[SPOTTER_COACHING_PRIVILEGE]"
+                      - principal_type: USER
+                        principal_object_privileges:
+                        - principal_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                          principal_name: <username>
+                          principal_sub_type: LOCAL_USER
+                          object_privileges: "[]"
               schema:
                 $ref: "#/components/schemas/ObjectPrivilegesOfMetadataResponse"
           description: Fetching defined object privileges of metadata objects is successful.
@@ -14938,6 +16999,42 @@ paths:
                   description: No configuration overrides applied
                   value:
                     config_override_info: {}
+                example_3:
+                  description: "Configuration overrides with setting details. Each\
+                    \ key is a configuration key; each value describes the setting\
+                    \ (category, dataType, description) and holds its current value\
+                    \ in current. STRING settings also return regex, and ENUM settings\
+                    \ return the allowed values."
+                  value:
+                    config_override_info:
+                      batchSize:
+                        category: MAIN
+                        dataType: INTEGER
+                        description: Data result set batch size. Data is exported
+                          in batches of batchSize upto a maximum of maxNumPaginatedRows.
+                        current: 1000
+                      fetchPivotSummaryFromBackend:
+                        category: MAIN
+                        dataType: BOOLEAN
+                        description: Enable fetching Pivot Summary data from backend
+                        current: true
+                      serpVersion:
+                        category: MAIN
+                        dataType: STRING
+                        description: "Flag to specify the SERP version (v1, v2)"
+                        regex: .*
+                        current: v2
+                      asyncTMLConfig.importPolicy:
+                        category: MAIN
+                        dataType: ENUM
+                        description: TML import policy to be used during async tml
+                          import.
+                        values:
+                        - PARTIAL
+                        - ALL_OR_NONE
+                        - VALIDATE_ONLY
+                        - PARTIAL_OBJECT
+                        current: PARTIAL_OBJECT
               schema:
                 $ref: "#/components/schemas/SystemOverrideInfo"
           description: Cluster configuration which can be overridden.
@@ -16394,6 +18491,60 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - id: 9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a
+                    name: <username>
+                    display_name: <user_display_name>
+                    visibility: SHARABLE
+                    incomplete_details:
+                    - <incomplete_detail_message>
+                    org_privileges:
+                      "0":
+                      - AUTHORING
+                      - DATADOWNLOADING
+                    extended_properties:
+                      displayNameLastUpdatedBy: ADMIN
+                    extended_preferences:
+                      <preference_key>: <preference_value>
+                    user_parameters:
+                      "0":
+                        runtime_filters:
+                        - column_name: Region
+                          operator: EQ
+                          values:
+                          - East
+                        parameters:
+                        - name: Discount Rate
+                          values:
+                          - "0.1"
+                    access_control_properties:
+                      "0":
+                        ALL:
+                          filter_rules:
+                          - column_name: Region
+                            operator: EQ
+                            values:
+                            - East
+                          parameter_values:
+                          - name: Discount Rate
+                            values:
+                            - "0.1"
+                        "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b":
+                          filter_rules:
+                          - column_name: Product
+                            operator: IN
+                            values:
+                            - Bags
+                            - Shoes
+                    variable_values:
+                      "0":
+                        ALL:
+                          variable_values:
+                          - name: color
+                            values:
+                            - red
               schema:
                 items:
                   $ref: "#/components/schemas/User"
@@ -20079,6 +22230,43 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    LiveboardDetailsInput:
+      description: Parts of a Liveboard's metadata_detail to return in a metadata
+        search.
+      properties:
+        liveboard_filters:
+          default: true
+          description: Includes Liveboard filters.
+          nullable: true
+          type: boolean
+        liveboard_tabs:
+          default: true
+          description: Includes Liveboard tabs.
+          nullable: true
+          type: boolean
+        container_layouts:
+          default: true
+          description: Includes the layout of Liveboard visualizations.
+          nullable: true
+          type: boolean
+        visualizations:
+          default: true
+          description: Includes Liveboard visualizations.
+          nullable: true
+          type: boolean
+        parameter_overrides:
+          default: true
+          description: Includes parameter overrides.
+          nullable: true
+          type: boolean
+        personalized_views:
+          default: false
+          description: |-
+            Includes personalised views. Personalised views are also included when
+            include_personalised_views is true.
+          nullable: true
+          type: boolean
       type: object
     MetadataSearchSortOptions:
       description: Sort options.
@@ -24062,6 +26250,224 @@ components:
       - data_sources
       - messages
       - shared_conversation_id
+      type: object
+    UsagePoolKeyInput:
+      description: Identifies a Spotter usage pool by the entity it meters.
+      example:
+        entity_type: USER
+        entity_identifier: entity_identifier
+      properties:
+        entity_type:
+          description: |-
+            Type of entity the pool meters: `USER`, `USER_GROUP`, or `ORG`. Must
+            match the scope the cluster meters at.
+          enum:
+          - USER
+          - USER_GROUP
+          - ORG
+          type: string
+        entity_identifier:
+          description: |-
+            GUID of the user or user group, or the ID of the Org, that the pool
+            meters.
+          type: string
+      required:
+      - entity_identifier
+      - entity_type
+      type: object
+    UsageDataResponse:
+      description: Response returned by `searchUsageData` and `updateUsageData`.
+      example:
+        usage_data:
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          usage: ""
+          warning_limit: ""
+          limit: ""
+          updated_time_in_millis: ""
+          updated_by: updated_by
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          usage: ""
+          warning_limit: ""
+          limit: ""
+          updated_time_in_millis: ""
+          updated_by: updated_by
+      properties:
+        usage_data:
+          description: "The requested Spotter usage pools, as they stand after the\
+            \ request."
+          items:
+            $ref: "#/components/schemas/UsageData"
+          type: array
+      required:
+      - usage_data
+      type: object
+    UsageData:
+      description: |-
+        A Spotter usage pool: the question allowance configured for a user, user
+        group, or Org, and how much of it has been consumed.
+      example:
+        key:
+          entity_type: USER
+          entity_identifier: entity_identifier
+        usage: ""
+        warning_limit: ""
+        limit: ""
+        updated_time_in_millis: ""
+        updated_by: updated_by
+      properties:
+        key:
+          $ref: "#/components/schemas/UsagePoolKey"
+        usage:
+          description: Number of Spotter questions consumed from the pool.
+          nullable: true
+        warning_limit:
+          description: |-
+            Usage level at which users drawing from the pool are warned that they
+            are approaching the limit. Absent when no warning is configured.
+          nullable: true
+        limit:
+          description: |-
+            Maximum number of Spotter questions the pool allows. Absent when the pool
+            is unlimited.
+          nullable: true
+        updated_time_in_millis:
+          description: Epoch milliseconds of the last change to the pool's configuration.
+          nullable: true
+        updated_by:
+          description: ID of the user who last changed the pool's configuration.
+          nullable: true
+          type: string
+      required:
+      - key
+      type: object
+    UsagePoolKey:
+      description: Identifies a Spotter usage pool by the entity it meters.
+      example:
+        entity_type: USER
+        entity_identifier: entity_identifier
+      properties:
+        entity_type:
+          description: Type of entity the pool meters.
+          enum:
+          - USER
+          - USER_GROUP
+          - ORG
+          type: string
+        entity_identifier:
+          description: |-
+            GUID of the user or user group, or the ID of the Org, that the pool
+            meters.
+          type: string
+      required:
+      - entity_identifier
+      - entity_type
+      type: object
+    UsageDataForUserResponse:
+      description: Response returned by `getUsageDataForUser`.
+      example:
+        summary:
+          pools:
+          - key:
+              entity_type: USER
+              entity_identifier: entity_identifier
+            usage: ""
+            warning_limit: ""
+            limit: ""
+            updated_time_in_millis: ""
+            updated_by: updated_by
+          - key:
+              entity_type: USER
+              entity_identifier: entity_identifier
+            usage: ""
+            warning_limit: ""
+            limit: ""
+            updated_time_in_millis: ""
+            updated_by: updated_by
+          total_usage: ""
+          total_warning_limit: ""
+          total_limit: ""
+          total_remaining: ""
+          is_at_warning: true
+          is_at_limit: true
+          has_unlimited_pool: true
+      properties:
+        summary:
+          $ref: "#/components/schemas/UsageSummary"
+      required:
+      - summary
+      type: object
+    UsageSummary:
+      description: |-
+        A user's combined Spotter usage position across every pool they draw from.
+        Totals are sums over the pools: a user in two groups with limits of 100 and
+        50 has a total limit of 150.
+      example:
+        pools:
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          usage: ""
+          warning_limit: ""
+          limit: ""
+          updated_time_in_millis: ""
+          updated_by: updated_by
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          usage: ""
+          warning_limit: ""
+          limit: ""
+          updated_time_in_millis: ""
+          updated_by: updated_by
+        total_usage: ""
+        total_warning_limit: ""
+        total_limit: ""
+        total_remaining: ""
+        is_at_warning: true
+        is_at_limit: true
+        has_unlimited_pool: true
+      properties:
+        pools:
+          description: The individual pools the user draws from.
+          items:
+            $ref: "#/components/schemas/UsageData"
+          type: array
+        total_usage:
+          description: Questions consumed across all of the user's pools.
+          nullable: true
+        total_warning_limit:
+          description: Sum of the warning limits of the user's pools.
+          nullable: true
+        total_limit:
+          description: Sum of the limits of the user's pools.
+          nullable: true
+        total_remaining:
+          description: |-
+            Questions the user can still ask before reaching the limit. Absent when
+            `has_unlimited_pool` is `true`.
+          nullable: true
+        is_at_warning:
+          description: '`true` when usage has reached the combined warning limit.'
+          type: boolean
+        is_at_limit:
+          description: |-
+            `true` when usage has reached the combined limit and further Spotter
+            questions are blocked.
+          type: boolean
+        has_unlimited_pool:
+          description: |-
+            `true` when at least one of the user's pools has no limit, which makes the
+            user unlimited.
+          type: boolean
+      required:
+      - has_unlimited_pool
+      - is_at_limit
+      - is_at_warning
+      - pools
       type: object
     RiseGQLArgWrapper:
       properties:
@@ -30373,6 +32779,55 @@ components:
       - id
       - name
       type: object
+    UsageDataUpdateInput:
+      description: |-
+        A change to one Spotter usage pool. The pool is created if it does not
+        exist. Fields that are omitted keep their current value.
+      example:
+        key:
+          entity_type: USER
+          entity_identifier: entity_identifier
+        limit: ""
+        warning_limit: ""
+        usage: ""
+      properties:
+        key:
+          $ref: "#/components/schemas/UsagePoolKeyInput"
+        limit:
+          description: Maximum number of Spotter questions the pool allows.
+          nullable: true
+        warning_limit:
+          description: |-
+            Usage level at which users drawing from the pool are warned that they are
+            approaching the limit.
+          nullable: true
+        usage:
+          description: |-
+            Number of questions consumed from the pool. Set to `0` to reset the pool's
+            usage, for example at the start of a billing period.
+          nullable: true
+      required:
+      - key
+      type: object
+    DeleteUsageDataResponse:
+      description: Response returned by `deleteUsageData`.
+      example:
+        deleted_keys:
+        - entity_type: USER
+          entity_identifier: entity_identifier
+        - entity_type: USER
+          entity_identifier: entity_identifier
+      properties:
+        deleted_keys:
+          description: |-
+            Keys of the pools that existed and were deleted. Keys that matched no pool
+            are omitted.
+          items:
+            $ref: "#/components/schemas/UsagePoolKey"
+          type: array
+      required:
+      - deleted_keys
+      type: object
     PrincipalRefInput:
       description: |-
         Input reference to a principal (user or group) used when granting or revoking
@@ -32190,6 +34645,22 @@ components:
       required:
       - metadata_identifier
       type: object
+    DeleteUsageDataRequest:
+      example:
+        keys:
+        - entity_type: USER
+          entity_identifier: entity_identifier
+        - entity_type: USER
+          entity_identifier: entity_identifier
+      properties:
+        keys:
+          description: Pools to delete. At least one is required.
+          items:
+            $ref: "#/components/schemas/UsagePoolKeyInput"
+          type: array
+      required:
+      - keys
+      type: object
     ExportMemoryRequest:
       example:
         sources:
@@ -32389,6 +34860,22 @@ components:
           - CREATED_BY_ME
           - SHARED_TO_ME
           type: string
+      type: object
+    SearchUsageDataRequest:
+      example:
+        keys:
+        - entity_type: USER
+          entity_identifier: entity_identifier
+        - entity_type: USER
+          entity_identifier: entity_identifier
+      properties:
+        keys:
+          description: |-
+            Pools to retrieve. Omit to retrieve every pool on the cluster. Keys that
+            match no pool are ignored.
+          items:
+            $ref: "#/components/schemas/UsagePoolKeyInput"
+          type: array
       type: object
     SendAgentConversationMessageRequest:
       example:
@@ -32672,6 +35159,30 @@ components:
             \ 26.10.0.cl or later\n"
           nullable: true
           type: boolean
+      type: object
+    UpdateUsageDataRequest:
+      example:
+        updates:
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          limit: ""
+          warning_limit: ""
+          usage: ""
+        - key:
+            entity_type: USER
+            entity_identifier: entity_identifier
+          limit: ""
+          warning_limit: ""
+          usage: ""
+      properties:
+        updates:
+          description: "Changes to apply, one entry per pool. At least one is required."
+          items:
+            $ref: "#/components/schemas/UsageDataUpdateInput"
+          type: array
+      required:
+      - updates
       type: object
     ConfigureAuthSettingsRequest:
       example:
@@ -35871,6 +38382,7 @@ components:
         dependent_objects_record_offset: 6
         include_details: false
         include_personalised_views: false
+        liveboard_details: ""
         include_headers: true
         include_hidden_objects: false
         include_incomplete_objects: false
@@ -35962,9 +38474,38 @@ components:
           default: false
           description: |-
             When set to true and include_details is also true, includes personalised views
-            in the metadata_detail for LIVEBOARD objects.
+            in the metadata_detail for LIVEBOARD objects. Personalised views are also included
+            when liveboard_details.personalized_views is true.
           nullable: true
           type: boolean
+        liveboard_details:
+          allOf:
+          - $ref: "#/components/schemas/LiveboardDetailsInput"
+          description: |-
+            <div>Version: 26.10.0.cl or later
+            </div>
+
+            Selects which parts of a Liveboard's `metadata_detail` are returned, so that a request can skip the parts it does not need.
+
+            Applies only to `LIVEBOARD` objects, and only when `include_details` is `true` and `liveboard_response_version` is `V2`. Otherwise it is ignored.
+
+            * `liveboard_filters`, `liveboard_tabs`, `container_layouts`, `visualizations`, `parameter_overrides`: default to `true`. Set a field to `false` to exclude that part of the Liveboard.
+            * `personalized_views`: defaults to `false`. Personalised views are included when either this field or `include_personalised_views` is `true`.
+
+            The Liveboard header, type, and style are always returned. Excluded collections are returned empty.
+
+            To fetch only the personalised views of a Liveboard, set every other field to `false`. The Liveboard definition is then not loaded, and `metadata_detail` contains only `personalised_views`:
+
+            ```json
+            "liveboard_details": {
+              "liveboard_filters": false,
+              "liveboard_tabs": false,
+              "container_layouts": false,
+              "visualizations": false,
+              "parameter_overrides": false,
+              "personalized_views": true
+            }
+            ```
         include_headers:
           default: true
           description: Includes headers of the metadata objects.
@@ -40835,6 +43376,11 @@ x-roles:
   tags:
   - 26.7.0.cl
   description: Roles for version 26.7.0.cl
+- name: 26.11.0.cl
+  id: 26.11.0.cl
+  tags:
+  - 26.11.0.cl
+  description: Roles for version 26.11.0.cl
 - name: 26.8.0.cl
   id: 26.8.0.cl
   tags:
@@ -40915,11 +43461,6 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
-- name: 26.11.0.cl
-  id: 26.11.0.cl
-  tags:
-  - 26.11.0.cl
-  description: Roles for version 26.11.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:
