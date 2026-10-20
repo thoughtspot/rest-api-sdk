@@ -25990,7 +25990,7 @@
           "error": {
             "type": "object",
             "nullable": true,
-            "additionalProperties": true,
+            "additionalProperties": {},
             "description": "Free-form object: its keys are not fixed by the API and are passed through as given."
           }
         }
@@ -39100,19 +39100,19 @@
             "type": "object",
             "description": "Runtime filter parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "nullable": true,
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "type": "object",
             "description": "Runtime sort parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "nullable": true,
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "type": "object",
             "description": "Runtime param override type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "nullable": true,
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -45920,7 +45920,7 @@
           "runtime_filter": {
             "type": "object",
             "description": "Runtime filter parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -45931,7 +45931,7 @@
           "runtime_sort": {
             "type": "object",
             "description": "Runtime sort parameter type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -45942,7 +45942,7 @@
           "runtime_param_override": {
             "type": "object",
             "description": "Runtime param override type in JWT.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "description": "List of runtime parameters need to set during the session."
@@ -47123,7 +47123,7 @@
           "configuration": {
             "description": "Configuration properties in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "policy_type": {
             "description": "Type of policy.",
@@ -47226,7 +47226,7 @@
           "configuration": {
             "description": "Configuration properties in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "policy_type": {
             "description": "Type of policy.",
@@ -47321,7 +47321,7 @@
           "data_warehouse_config": {
             "description": "Connection configuration attributes in JSON format. To create a connection with tables, include table attributes. See the documentation above for sample JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Validates the connection metadata if tables are included. If you are creating a connection without tables, specify `false`.",
@@ -47472,7 +47472,7 @@
           "configuration": {
             "description": "Configuration values. If empty we are fetching configuration from datasource based on given connection id. If required you can provide config details to fetch specific details. Example input: {}, {\"warehouse\":\"SMALL_WH\",\"database\":\"DEVELOPMENT\"}. This is only applicable when data_warehouse_object_type is selected.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "authentication_type": {
             "description": "List of authentication types to fetch data_ware_house_objects from external Data warehouse. This is only applicable when data_warehouse_object_type is selected.",
@@ -47507,7 +47507,7 @@
           "tables": {
             "description": "Array of tables to sync. Each element can be:\n- String: Table identifier (GUID or name) to sync\n  all columns for that table.\n- Object: {tableId: [columnIds]} to sync specific\n  columns.\nIf not provided, syncs all tables in the connection.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "sync_attributes": {
             "description": "List of sync_attributes to sync from CDW.\nThe default value is DESCRIPTION.",
@@ -47542,7 +47542,7 @@
           "data_warehouse_config": {
             "description": "Configuration of the data warehouse in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Indicates whether to validate the connection details.",
@@ -47583,7 +47583,7 @@
           "data_warehouse_config": {
             "description": "Configuration of the data warehouse in JSON.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "validate": {
             "description": "Indicates whether to validate the connection details.",
@@ -48044,17 +48044,17 @@
           "runtime_filter": {
             "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -48103,17 +48103,17 @@
           "runtime_filter": {
             "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -48155,17 +48155,17 @@
           "runtime_filter": {
             "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -49874,17 +49874,17 @@
           "runtime_filter": {
             "description": "JSON string representing runtime filter.\n{ col1:region, op1: EQ, val1: northeast }\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "description": "JSON string representing runtime sort.\n{ sortCol1: region, asc1 :true, sortCol2 : date }\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_param_override": {
             "description": "JSON object for setting values of parameters in runtime.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "regional_settings": {
             "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
@@ -49960,17 +49960,17 @@
           "runtime_filter": {
             "description": "JSON object with representing filter condition to apply filters at runtime. For example, {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"northeast\" }. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "override_filters": {
             "description": "Applied to the liveboard and overrides any filters already applied on the same columns in liveboard.\nFollowing example illustrate different kinds of filters:\n{\n  \"override_filters\": [\n    {\n      \"column_name\": \"Color\",\n      \"generic_filter\": {\n        \"op\": \"IN\",\n        \"values\": [\n          \"almond\",\n          \"turquoise\"\n        ]\n      },\n      \"negate\": false\n    },\n    {\n      \"column_name\": \"Commit Date\",\n      \"date_filter\": {\n        \"datePeriod\": \"HOUR\",\n        \"number\": 3,\n        \"type\": \"LAST_N_PERIOD\",\n        \"op\": \"EQ\"\n      }\n    },\n    {\n      \"column_name\": \"Sales\",\n      \"generic_filter\": {\n        \"op\": \"BW_INC\",\n        \"values\": [\n          \"100000\",\n          \"70000\"\n        ]\n      },\n      \"negate\": true\n    }\n  ]\n}\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "runtime_sort": {
             "description": "JSON string representing runtime sort. For example, {\"sortCol1\": \"region\", \"asc1\" : true}. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "pdf_options": {
             "description": "Options for PDF export.",
@@ -49991,7 +49991,7 @@
           "runtime_param_override": {
             "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "regional_settings": {
             "description": "Options for specific region specific overrides to support date/number/string/currency formatting.",
@@ -52435,7 +52435,7 @@
           "configuration": {
             "description": "Configuration JSON with the key-value pair of configuration attributes to be updated.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -52747,12 +52747,12 @@
           "extended_properties": {
             "description": "Properties for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "extended_preferences": {
             "description": "Preferences for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "trigger_welcome_email": {
             "description": "Flag to indicate whether a welcome email should be sent to the user. This parameter applies only on clusters where IAMv2 is not enabled. If the flag details are not specified, then it defaults to true. However, a welcome email is sent only when welcome email notifications are enabled on the cluster and the user has a valid email address.",
@@ -53176,12 +53176,12 @@
           "extended_properties": {
             "description": "Properties for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "extended_preferences": {
             "description": "Preferences for the user\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           }
         }
       },
@@ -53856,7 +53856,7 @@
           "url_params": {
             "description": "Additional URL parameters as key-value pairs.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "events": {
             "description": "List of events to subscribe to.",
@@ -53995,7 +53995,7 @@
           "url_params": {
             "description": "Additional URL parameters as key-value pairs.\n\nFree-form object: its keys are not fixed by the API and are passed through as given.",
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": {}
           },
           "events": {
             "description": "List of events to subscribe to.",
