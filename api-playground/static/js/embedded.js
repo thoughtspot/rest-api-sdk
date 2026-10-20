@@ -88,6 +88,7 @@ const setAPIMaticPortalConfig = () => {
     isApiMaticPortalReady = true;
     _setConfig = setConfig;
     applyRequestedThemeMode();
+    document.documentElement.dataset.restApiPlaygroundReady = '1';
     window.parent.postMessage({ type: 'api-playground-ready' }, '*', [
       channel.port2,
     ]);

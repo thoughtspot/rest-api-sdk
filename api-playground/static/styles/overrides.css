@@ -93,7 +93,6 @@ strong {
     font-weight: normal;
     background: grey;
 }
-
 [role='main'] {
     border-top: none !important;
 }
@@ -104,11 +103,9 @@ strong {
 
 body {
     opacity: 0;
-    animation: ts-reveal-body 0.1s linear 0.5s forwards;
+    transition: opacity 0.1s linear;
 }
 
-@keyframes ts-reveal-body {
-    to {
-        opacity: 1;
-    }
+html[data-rest-api-playground-ready] body {
+    opacity: 1;
 }
