@@ -26448,7 +26448,8 @@
             "additionalProperties": true,
             "example": {
               "displayNameLastUpdatedBy": "ADMIN"
-            }
+            },
+            "title": "Extended Properties"
           },
           "extended_preferences": {
             "type": "object",
@@ -27607,7 +27608,8 @@
             "additionalProperties": true,
             "example": {
               "schemaVersion": "3.1.0"
-            }
+            },
+            "title": "Content"
           },
           "creation_time_in_millis": {
             "type": "number",
@@ -28201,7 +28203,8 @@
                       "type": "boolean"
                     }
                   },
-                  "description": "Returned when metadata_type is COLLECTION."
+                  "description": "Returned when metadata_type is COLLECTION.",
+                  "title": "Incomplete Objects Header"
                 },
                 "type": {
                   "type": "string",
@@ -28245,7 +28248,8 @@
                   "csrProtected": false
                 },
                 "type": "FOLDER"
-              }
+              },
+              "title": "Incomplete Objects"
             },
             "description": "Details of incomplete information of the metadata objects if any.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is COLLECTION.",
             "nullable": true
@@ -28310,7 +28314,8 @@
                                     }
                                   }
                                 }
-                              }
+                              },
+                              "title": "SheetContent PinboardFilterDetails"
                             },
                             "visualizations": {
                               "type": "array",
@@ -28363,7 +28368,8 @@
                                       "vizType": {
                                         "type": "string"
                                       }
-                                    }
+                                    },
+                                    "title": "Visualizations VizContent"
                                   },
                                   "relatedLinks": {
                                     "type": "array",
@@ -28464,7 +28470,8 @@
                                       "csrProtected": {
                                         "type": "boolean"
                                       }
-                                    }
+                                    },
+                                    "title": "Visualizations Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -28473,7 +28480,8 @@
                                     "type": "array",
                                     "items": {}
                                   }
-                                }
+                                },
+                                "title": "SheetContent Visualizations"
                               }
                             },
                             "layout": {
@@ -28508,10 +28516,12 @@
                                       "size": {
                                         "type": "string"
                                       }
-                                    }
+                                    },
+                                    "title": "Layout Tiles"
                                   }
                                 }
-                              }
+                              },
+                              "title": "SheetContent Layout"
                             },
                             "vizLayout": {
                               "type": "string"
@@ -28519,7 +28529,8 @@
                             "canGenerateLeafData": {
                               "type": "boolean"
                             }
-                          }
+                          },
+                          "title": "Sheets SheetContent"
                         },
                         "header": {
                           "type": "object",
@@ -28619,7 +28630,8 @@
                             "csrProtected": {
                               "type": "boolean"
                             }
-                          }
+                          },
+                          "title": "Sheets Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -28628,11 +28640,13 @@
                           "type": "array",
                           "items": {}
                         }
-                      }
+                      },
+                      "title": "ReportContent Sheets"
                     }
                   }
                 },
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD.",
+                "title": "Metadata Detail ReportContent"
               },
               "type": {
                 "type": "string",
@@ -29126,7 +29140,8 @@
                             "color": {
                               "type": "string"
                             }
-                          }
+                          },
+                          "title": "Tags ClientState"
                         },
                         "orgIds": {
                           "type": "array",
@@ -29150,7 +29165,8 @@
                         "isSharedViaConnection": {
                           "type": "boolean"
                         }
-                      }
+                      },
+                      "title": "Header Tags"
                     }
                   },
                   "configs": {
@@ -29179,7 +29195,8 @@
                         "isHidden": {
                           "type": "boolean"
                         }
-                      }
+                      },
+                      "title": "Header Configs"
                     }
                   },
                   "isConnectionConfigurationDisabled": {
@@ -29240,7 +29257,8 @@
                     "type": "string"
                   }
                 },
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION.",
+                "title": "Metadata Detail Header"
               },
               "complete": {
                 "type": "boolean",
@@ -29352,12 +29370,14 @@
                         "csrProtected": {
                           "type": "boolean"
                         }
-                      }
+                      },
+                      "title": "IncompleteDetail Header"
                     },
                     "type": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Metadata Detail IncompleteDetail"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29387,7 +29407,8 @@
                     "updatedAt": {
                       "type": "integer"
                     }
-                  }
+                  },
+                  "title": "Metadata Detail Personalised Views"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD."
               },
@@ -29398,7 +29419,8 @@
                     "type": "string"
                   }
                 },
-                "description": "Returned when metadata_type is COLLECTION."
+                "description": "Returned when metadata_type is COLLECTION.",
+                "title": "Metadata Detail FolderContent"
               },
               "assignedEntities": {
                 "type": "array",
@@ -29423,7 +29445,8 @@
                 "description": "Returned when metadata_type is COLLECTION."
               }
             },
-            "additionalProperties": true
+            "additionalProperties": true,
+            "title": "Metadata Detail"
           },
           "metadata_header": {
             "type": "object",
@@ -29574,7 +29597,8 @@
                         "color": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tags ClientState"
                     },
                     "orgIds": {
                       "type": "array",
@@ -29598,7 +29622,8 @@
                     "isSharedViaConnection": {
                       "type": "boolean"
                     }
-                  }
+                  },
+                  "title": "Metadata Header Tags"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
               },
@@ -29628,7 +29653,8 @@
                     "isHidden": {
                       "type": "boolean"
                     }
-                  }
+                  },
+                  "title": "Metadata Header Configs"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29722,7 +29748,8 @@
                     "type": "string"
                   }
                 },
-                "description": "Returned when metadata_type is ANSWER or TAG."
+                "description": "Returned when metadata_type is ANSWER or TAG.",
+                "title": "Metadata Header ClientState"
               },
               "orgIds": {
                 "type": "array",
@@ -29804,7 +29831,8 @@
                           "isSharedViaConnection": {
                             "type": "boolean"
                           }
-                        }
+                        },
+                        "title": "DataLoadStatistics Header"
                       },
                       "complete": {
                         "type": "boolean"
@@ -29813,10 +29841,12 @@
                         "type": "array",
                         "items": {}
                       }
-                    }
+                    },
+                    "title": "Statistics DataLoadStatistics"
                   }
                 },
-                "description": "Returned when metadata_type is CONNECTION."
+                "description": "Returned when metadata_type is CONNECTION.",
+                "title": "Metadata Header Statistics"
               },
               "displayName": {
                 "type": "string",
@@ -29835,7 +29865,8 @@
                 "description": "Returned when metadata_type is USER_GROUP."
               }
             },
-            "additionalProperties": true
+            "additionalProperties": true,
+            "title": "Metadata Header"
           },
           "visualization_headers": {
             "type": "array",
@@ -29859,10 +29890,12 @@
                         "text": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Title Value"
                     }
                   },
-                  "description": "Returned when metadata_type is LIVEBOARD."
+                  "description": "Returned when metadata_type is LIVEBOARD.",
+                  "title": "Visualization Headers Title"
                 },
                 "id": {
                   "type": "string",
@@ -29909,7 +29942,8 @@
                 "modified": 1760198460000,
                 "modifiedBy": "00000006-0000-4000-8000-000000000006",
                 "owner": "00000001-0000-4000-8000-000000000001"
-              }
+              },
+              "title": "Visualization Headers"
             },
             "description": "Visualization header information of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD.",
             "nullable": true
@@ -29937,7 +29971,8 @@
               "views": 42,
               "favorites": 3,
               "last_accessed": 1760198460000
-            }
+            },
+            "title": "Stats"
           }
         },
         "description": "Metadata Search Response Object.",
@@ -30921,7 +30956,8 @@
                             "error_message": {
                               "type": "string"
                             }
-                          }
+                          },
+                          "title": "Response Status"
                         },
                         "header": {
                           "type": "object",
@@ -30932,11 +30968,14 @@
                             "name": {
                               "type": "string"
                             }
-                          }
+                          },
+                          "title": "Response Header"
                         }
-                      }
+                      },
+                      "title": "Object Response"
                     }
-                  }
+                  },
+                  "title": "Import Response Object"
                 }
               },
               "status": {
@@ -30948,7 +30987,8 @@
                   "error_message": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Import Response Status"
               }
             },
             "additionalProperties": true,
@@ -30979,7 +31019,8 @@
                   }
                 }
               ]
-            }
+            },
+            "title": "Import Response"
           },
           "task_status": {
             "type": "string",
@@ -31684,7 +31725,8 @@
                                 "name": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "title": "Metadata Permissions Metadata Owner"
                             },
                             "metadata_author": {
                               "type": "object",
@@ -31695,7 +31737,8 @@
                                 "name": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "title": "Metadata Permissions Metadata Author"
                             },
                             "permission": {
                               "type": "string"
@@ -31707,10 +31750,12 @@
                               "type": "array",
                               "items": {}
                             }
-                          }
+                          },
+                          "title": "Metadata Permission Info Metadata Permissions"
                         }
                       }
-                    }
+                    },
+                    "title": "Principal Permission Details Metadata Permission Info"
                   }
                 }
               },
@@ -31742,7 +31787,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "title": "Principal Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -31807,7 +31853,8 @@
                     "name": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Metadata Permission Details Metadata Owner"
                 },
                 "metadata_author": {
                   "type": "object",
@@ -31818,7 +31865,8 @@
                     "name": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Metadata Permission Details Metadata Author"
                 },
                 "principal_permission_info": {
                   "type": "array",
@@ -31852,10 +31900,12 @@
                               "type": "array",
                               "items": {}
                             }
-                          }
+                          },
+                          "title": "Principal Permission Info Principal Permissions"
                         }
                       }
-                    }
+                    },
+                    "title": "Metadata Permission Details Principal Permission Info"
                   }
                 }
               },
@@ -31907,7 +31957,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "title": "Metadata Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -32028,10 +32079,12 @@
                             "object_privileges": {
                               "type": "string"
                             }
-                          }
+                          },
+                          "title": "Principal Object Privilege Info Principal Object Privileges"
                         }
                       }
-                    }
+                    },
+                    "title": "Metadata Object Privileges Principal Object Privilege Info"
                   }
                 }
               },
@@ -32064,7 +32117,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "title": "Metadata Object Privileges"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -33270,7 +33324,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details Author"
               },
               "modifiedBy": {
                 "type": "object",
@@ -33281,7 +33336,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details ModifiedBy"
               },
               "owner": {
                 "type": "object",
@@ -33292,7 +33348,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details Owner"
               },
               "tags": {
                 "type": "array",
@@ -33305,7 +33362,8 @@
                     "name": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Details Tags"
                 }
               },
               "tables": {
@@ -33361,7 +33419,8 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -33372,7 +33431,8 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables ModifiedBy"
                     },
                     "owner": {
                       "type": "object",
@@ -33383,13 +33443,15 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables Owner"
                     },
                     "tags": {
                       "type": "array",
                       "items": {}
                     }
-                  }
+                  },
+                  "title": "Details Tables"
                 }
               }
             },
@@ -33457,7 +33519,8 @@
                   "tags": []
                 }
               ]
-            }
+            },
+            "title": "Details"
           }
         },
         "example": {
@@ -33851,7 +33914,8 @@
                       "destColumnName": {
                         "type": "string"
                       }
-                    }
+                    },
+                    "title": "Relationships RelationshipKeys"
                   }
                 }
               },
@@ -33867,7 +33931,8 @@
                     "destColumnName": "CUSTOMER_ID"
                   }
                 ]
-              }
+              },
+              "title": "Relationships"
             },
             "description": "List of relationships for the table\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -35618,7 +35683,8 @@
             "example": {
               "query": "total sales by region last quarter",
               "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
-            }
+            },
+            "title": "Arguments"
           }
         },
         "description": "Agent invoked a tool.",
@@ -35906,9 +35972,11 @@
                         "title": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Answer Header"
                     }
-                  }
+                  },
+                  "title": "Related Liveboard Visualizations Answer"
                 },
                 "pinboard_header": {
                   "type": "object",
@@ -35919,7 +35987,8 @@
                     "title": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Related Liveboard Visualizations Pinboard Header"
                 }
               },
               "additionalProperties": true,
@@ -35934,7 +36003,8 @@
                   "id": "2a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
                   "title": "Sales Overview"
                 }
-              }
+              },
+              "title": "Related Liveboard Visualizations"
             },
             "description": "Related liveboard visualizations for this data source. Open-ended JSON shape\ndriven by the underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -35953,7 +36023,8 @@
                     "title": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "title": "Related Answers Header"
                 }
               },
               "additionalProperties": true,
@@ -35962,7 +36033,8 @@
                   "id": "3b4c5d6e-7f8a-4b9c-8d0e-1f2a3b4c5d6e",
                   "title": "Quarterly sales by region"
                 }
-              }
+              },
+              "title": "Related Answers"
             },
             "description": "Related saved answers for this data source. Open-ended JSON shape driven by\nthe underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -36263,7 +36335,8 @@
                           "type": "string"
                         }
                       }
-                    }
+                    },
+                    "title": "Sub Queries Formulas"
                   }
                 }
               },
@@ -36282,7 +36355,8 @@
                     ]
                   }
                 ]
-              }
+              },
+              "title": "Sub Queries"
             },
             "description": "List of sub-queries used in the answer.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -36982,7 +37056,8 @@
               "role": "<role>",
               "warehouse": "<warehouse>"
             },
-            "description": "Keys are the union of what each data_warehouse_type returns; each key says which data_warehouse_type values return it. Types not listed may return other keys."
+            "description": "Keys are the union of what each data_warehouse_type returns; each key says which data_warehouse_type values return it. Types not listed may return other keys.",
+            "title": "Configuration"
           },
           "policy_principals": {
             "type": "array",
@@ -37226,7 +37301,8 @@
                         "Federated": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Statement Principal"
                     },
                     "Action": {
                       "type": "string"
@@ -37243,11 +37319,14 @@
                             "accounts.google.com:sub": {
                               "type": "string"
                             }
-                          }
+                          },
+                          "title": "Condition StringEquals"
                         }
-                      }
+                      },
+                      "title": "Statement Condition"
                     }
-                  }
+                  },
+                  "title": "Trust Policy Template Statement"
                 }
               }
             },
@@ -37268,7 +37347,8 @@
                   }
                 }
               ]
-            }
+            },
+            "title": "Trust Policy Template"
           },
           "service_account_email": {
             "type": "string",
@@ -38959,7 +39039,8 @@
             "additionalProperties": true,
             "example": {
               "label": "Index columns"
-            }
+            },
+            "title": "Element Config"
           },
           "element_value": {
             "type": "string",
@@ -41718,7 +41799,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details Author"
               },
               "modifiedBy": {
                 "type": "object",
@@ -41729,7 +41811,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details ModifiedBy"
               },
               "owner": {
                 "type": "object",
@@ -41740,7 +41823,8 @@
                   "name": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Details Owner"
               },
               "tags": {
                 "type": "array",
@@ -41799,7 +41883,8 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -41810,7 +41895,8 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables ModifiedBy"
                     },
                     "owner": {
                       "type": "object",
@@ -41821,13 +41907,15 @@
                         "name": {
                           "type": "string"
                         }
-                      }
+                      },
+                      "title": "Tables Owner"
                     },
                     "tags": {
                       "type": "array",
                       "items": {}
                     }
-                  }
+                  },
+                  "title": "Details Tables"
                 }
               }
             },
@@ -41890,7 +41978,8 @@
                   "tags": []
                 }
               ]
-            }
+            },
+            "title": "Details"
           }
         },
         "example": {
@@ -43430,7 +43519,8 @@
             "example": {
               "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
               "english_query": "total sales by region last quarter"
-            }
+            },
+            "title": "Args"
           }
         },
         "description": "A step Spotter started, such as querying a data source.",
@@ -43520,7 +43610,8 @@
                   "chart_type": {
                     "type": "string"
                   }
-                }
+                },
+                "title": "Answer Visualization"
               },
               "table_data": {
                 "type": "object",
@@ -43528,7 +43619,8 @@
                   "total_rows": {
                     "type": "integer"
                   }
-                }
+                },
+                "title": "Answer Table Data"
               }
             },
             "additionalProperties": true,
@@ -43544,7 +43636,8 @@
               "table_data": {
                 "total_rows": 5
               }
-            }
+            },
+            "title": "Answer"
           }
         },
         "description": "What a step produced, including any answer.",
@@ -44638,7 +44731,8 @@
               "contact_support_url": "https://www.example.com/support",
               "hide_contact_support_url": false,
               "hide_logo_url": false
-            }
+            },
+            "title": "Template Properties"
           }
         },
         "example": {
