@@ -26447,7 +26447,7 @@
             "example": {
               "displayNameLastUpdatedBy": "ADMIN"
             },
-            "title": "Extended Properties"
+            "title": "User Extended Properties"
           },
           "extended_preferences": {
             "type": "object",
@@ -27607,7 +27607,7 @@
             "example": {
               "schemaVersion": "3.1.0"
             },
-            "title": "Content"
+            "title": "User Group Response Content"
           },
           "creation_time_in_millis": {
             "type": "number",
@@ -28202,7 +28202,7 @@
                     }
                   },
                   "description": "Returned when metadata_type is COLLECTION.",
-                  "title": "Incomplete Objects Header"
+                  "title": "Metadata Search Response Incomplete Objects Header"
                 },
                 "type": {
                   "type": "string",
@@ -28247,7 +28247,7 @@
                 },
                 "type": "FOLDER"
               },
-              "title": "Incomplete Objects"
+              "title": "Metadata Search Response Incomplete Objects"
             },
             "description": "Details of incomplete information of the metadata objects if any.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is COLLECTION.",
             "nullable": true
@@ -28313,7 +28313,7 @@
                                   }
                                 }
                               },
-                              "title": "SheetContent PinboardFilterDetails"
+                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Pinboard Filter Details"
                             },
                             "visualizations": {
                               "type": "array",
@@ -28358,16 +28358,18 @@
                                                 "owner": {
                                                   "type": "string"
                                                 }
-                                              }
+                                              },
+                                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content Ref Answer Book Sheets"
                                             }
                                           }
-                                        }
+                                        },
+                                        "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content Ref Answer Book"
                                       },
                                       "vizType": {
                                         "type": "string"
                                       }
                                     },
-                                    "title": "Visualizations VizContent"
+                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Viz Content"
                                   },
                                   "relatedLinks": {
                                     "type": "array",
@@ -28469,7 +28471,7 @@
                                         "type": "boolean"
                                       }
                                     },
-                                    "title": "Visualizations Header"
+                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -28479,7 +28481,7 @@
                                     "items": {}
                                   }
                                 },
-                                "title": "SheetContent Visualizations"
+                                "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations"
                               }
                             },
                             "layout": {
@@ -28515,11 +28517,11 @@
                                         "type": "string"
                                       }
                                     },
-                                    "title": "Layout Tiles"
+                                    "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Layout Tiles"
                                   }
                                 }
                               },
-                              "title": "SheetContent Layout"
+                              "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Layout"
                             },
                             "vizLayout": {
                               "type": "string"
@@ -28528,7 +28530,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Sheets SheetContent"
+                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content"
                         },
                         "header": {
                           "type": "object",
@@ -28629,7 +28631,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Sheets Header"
+                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -28639,12 +28641,12 @@
                           "items": {}
                         }
                       },
-                      "title": "ReportContent Sheets"
+                      "title": "Metadata Search Response Metadata Detail Report Content Sheets"
                     }
                   }
                 },
                 "description": "Returned when metadata_type is LIVEBOARD.",
-                "title": "Metadata Detail ReportContent"
+                "title": "Metadata Search Response Metadata Detail Report Content"
               },
               "type": {
                 "type": "string",
@@ -29139,7 +29141,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Tags ClientState"
+                          "title": "Metadata Search Response Metadata Detail Header Tags Client State"
                         },
                         "orgIds": {
                           "type": "array",
@@ -29164,7 +29166,7 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "Header Tags"
+                      "title": "Metadata Search Response Metadata Detail Header Tags"
                     }
                   },
                   "configs": {
@@ -29194,7 +29196,7 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "Header Configs"
+                      "title": "Metadata Search Response Metadata Detail Header Configs"
                     }
                   },
                   "isConnectionConfigurationDisabled": {
@@ -29256,7 +29258,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION.",
-                "title": "Metadata Detail Header"
+                "title": "Metadata Search Response Metadata Detail Header"
               },
               "complete": {
                 "type": "boolean",
@@ -29369,13 +29371,13 @@
                           "type": "boolean"
                         }
                       },
-                      "title": "IncompleteDetail Header"
+                      "title": "Metadata Search Response Metadata Detail Incomplete Detail Header"
                     },
                     "type": {
                       "type": "string"
                     }
                   },
-                  "title": "Metadata Detail IncompleteDetail"
+                  "title": "Metadata Search Response Metadata Detail Incomplete Detail"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29406,7 +29408,7 @@
                       "type": "integer"
                     }
                   },
-                  "title": "Metadata Detail Personalised Views"
+                  "title": "Metadata Search Response Metadata Detail Personalised Views"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD."
               },
@@ -29418,7 +29420,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is COLLECTION.",
-                "title": "Metadata Detail FolderContent"
+                "title": "Metadata Search Response Metadata Detail Folder Content"
               },
               "assignedEntities": {
                 "type": "array",
@@ -29444,7 +29446,7 @@
               }
             },
             "additionalProperties": true,
-            "title": "Metadata Detail"
+            "title": "Metadata Search Response Metadata Detail"
           },
           "metadata_header": {
             "type": "object",
@@ -29596,7 +29598,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tags ClientState"
+                      "title": "Metadata Search Response Metadata Header Tags Client State"
                     },
                     "orgIds": {
                       "type": "array",
@@ -29621,7 +29623,7 @@
                       "type": "boolean"
                     }
                   },
-                  "title": "Metadata Header Tags"
+                  "title": "Metadata Search Response Metadata Header Tags"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP. These are all the types documented here."
               },
@@ -29652,7 +29654,7 @@
                       "type": "boolean"
                     }
                   },
-                  "title": "Metadata Header Configs"
+                  "title": "Metadata Search Response Metadata Header Configs"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
               },
@@ -29747,7 +29749,7 @@
                   }
                 },
                 "description": "Returned when metadata_type is ANSWER or TAG.",
-                "title": "Metadata Header ClientState"
+                "title": "Metadata Search Response Metadata Header Client State"
               },
               "orgIds": {
                 "type": "array",
@@ -29830,7 +29832,7 @@
                             "type": "boolean"
                           }
                         },
-                        "title": "DataLoadStatistics Header"
+                        "title": "Metadata Search Response Metadata Header Statistics Data Load Statistics Header"
                       },
                       "complete": {
                         "type": "boolean"
@@ -29840,11 +29842,11 @@
                         "items": {}
                       }
                     },
-                    "title": "Statistics DataLoadStatistics"
+                    "title": "Metadata Search Response Metadata Header Statistics Data Load Statistics"
                   }
                 },
                 "description": "Returned when metadata_type is CONNECTION.",
-                "title": "Metadata Header Statistics"
+                "title": "Metadata Search Response Metadata Header Statistics"
               },
               "displayName": {
                 "type": "string",
@@ -29864,7 +29866,7 @@
               }
             },
             "additionalProperties": true,
-            "title": "Metadata Header"
+            "title": "Metadata Search Response Metadata Header"
           },
           "visualization_headers": {
             "type": "array",
@@ -29889,11 +29891,11 @@
                           "type": "string"
                         }
                       },
-                      "title": "Title Value"
+                      "title": "Metadata Search Response Visualization Headers Title Value"
                     }
                   },
                   "description": "Returned when metadata_type is LIVEBOARD.",
-                  "title": "Visualization Headers Title"
+                  "title": "Metadata Search Response Visualization Headers Title"
                 },
                 "id": {
                   "type": "string",
@@ -29941,7 +29943,7 @@
                 "modifiedBy": "00000006-0000-4000-8000-000000000006",
                 "owner": "00000001-0000-4000-8000-000000000001"
               },
-              "title": "Visualization Headers"
+              "title": "Metadata Search Response Visualization Headers"
             },
             "description": "Visualization header information of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD.",
             "nullable": true
@@ -29970,7 +29972,7 @@
               "favorites": 3,
               "last_accessed": 1760198460000
             },
-            "title": "Stats"
+            "title": "Metadata Search Response Stats"
           }
         },
         "description": "Metadata Search Response Object.",
@@ -30955,7 +30957,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Response Status"
+                          "title": "Import E Pack Async Task Status Import Response Object Response Status"
                         },
                         "header": {
                           "type": "object",
@@ -30967,13 +30969,13 @@
                               "type": "string"
                             }
                           },
-                          "title": "Response Header"
+                          "title": "Import E Pack Async Task Status Import Response Object Response Header"
                         }
                       },
-                      "title": "Object Response"
+                      "title": "Import E Pack Async Task Status Import Response Object Response"
                     }
                   },
-                  "title": "Import Response Object"
+                  "title": "Import E Pack Async Task Status Import Response Object"
                 }
               },
               "status": {
@@ -30986,7 +30988,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Import Response Status"
+                "title": "Import E Pack Async Task Status Import Response Status"
               }
             },
             "additionalProperties": true,
@@ -31018,7 +31020,7 @@
                 }
               ]
             },
-            "title": "Import Response"
+            "title": "Import E Pack Async Task Status Import Response"
           },
           "task_status": {
             "type": "string",
@@ -31724,7 +31726,7 @@
                                   "type": "string"
                                 }
                               },
-                              "title": "Metadata Permissions Metadata Owner"
+                              "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions Metadata Owner"
                             },
                             "metadata_author": {
                               "type": "object",
@@ -31736,7 +31738,7 @@
                                   "type": "string"
                                 }
                               },
-                              "title": "Metadata Permissions Metadata Author"
+                              "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions Metadata Author"
                             },
                             "permission": {
                               "type": "string"
@@ -31749,11 +31751,11 @@
                               "items": {}
                             }
                           },
-                          "title": "Metadata Permission Info Metadata Permissions"
+                          "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info Metadata Permissions"
                         }
                       }
                     },
-                    "title": "Principal Permission Details Metadata Permission Info"
+                    "title": "Permission Of Principals Response Principal Permission Details Metadata Permission Info"
                   }
                 }
               },
@@ -31786,7 +31788,7 @@
                   }
                 ]
               },
-              "title": "Principal Permission Details"
+              "title": "Permission Of Principals Response Principal Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -31852,7 +31854,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Metadata Permission Details Metadata Owner"
+                  "title": "Permission Of Metadata Response Metadata Permission Details Metadata Owner"
                 },
                 "metadata_author": {
                   "type": "object",
@@ -31864,7 +31866,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Metadata Permission Details Metadata Author"
+                  "title": "Permission Of Metadata Response Metadata Permission Details Metadata Author"
                 },
                 "principal_permission_info": {
                   "type": "array",
@@ -31899,11 +31901,11 @@
                               "items": {}
                             }
                           },
-                          "title": "Principal Permission Info Principal Permissions"
+                          "title": "Permission Of Metadata Response Metadata Permission Details Principal Permission Info Principal Permissions"
                         }
                       }
                     },
-                    "title": "Metadata Permission Details Principal Permission Info"
+                    "title": "Permission Of Metadata Response Metadata Permission Details Principal Permission Info"
                   }
                 }
               },
@@ -31956,7 +31958,7 @@
                   }
                 ]
               },
-              "title": "Metadata Permission Details"
+              "title": "Permission Of Metadata Response Metadata Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -32078,11 +32080,11 @@
                               "type": "string"
                             }
                           },
-                          "title": "Principal Object Privilege Info Principal Object Privileges"
+                          "title": "Object Privileges Of Metadata Response Metadata Object Privileges Principal Object Privilege Info Principal Object Privileges"
                         }
                       }
                     },
-                    "title": "Metadata Object Privileges Principal Object Privilege Info"
+                    "title": "Object Privileges Of Metadata Response Metadata Object Privileges Principal Object Privilege Info"
                   }
                 }
               },
@@ -32116,7 +32118,7 @@
                   }
                 ]
               },
-              "title": "Metadata Object Privileges"
+              "title": "Object Privileges Of Metadata Response Metadata Object Privileges"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -33323,7 +33325,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details Author"
+                "title": "Search Connection Response Details Author"
               },
               "modifiedBy": {
                 "type": "object",
@@ -33335,7 +33337,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details ModifiedBy"
+                "title": "Search Connection Response Details Modified By"
               },
               "owner": {
                 "type": "object",
@@ -33347,7 +33349,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details Owner"
+                "title": "Search Connection Response Details Owner"
               },
               "tags": {
                 "type": "array",
@@ -33361,7 +33363,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Details Tags"
+                  "title": "Search Connection Response Details Tags"
                 }
               },
               "tables": {
@@ -33418,7 +33420,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables Author"
+                      "title": "Search Connection Response Details Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -33430,7 +33432,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables ModifiedBy"
+                      "title": "Search Connection Response Details Tables Modified By"
                     },
                     "owner": {
                       "type": "object",
@@ -33442,14 +33444,14 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables Owner"
+                      "title": "Search Connection Response Details Tables Owner"
                     },
                     "tags": {
                       "type": "array",
                       "items": {}
                     }
                   },
-                  "title": "Details Tables"
+                  "title": "Search Connection Response Details Tables"
                 }
               }
             },
@@ -33518,7 +33520,7 @@
                 }
               ]
             },
-            "title": "Details"
+            "title": "Search Connection Response Details"
           }
         },
         "example": {
@@ -33913,7 +33915,7 @@
                         "type": "string"
                       }
                     },
-                    "title": "Relationships RelationshipKeys"
+                    "title": "Table Relationships Relationship Keys"
                   }
                 }
               },
@@ -33930,7 +33932,7 @@
                   }
                 ]
               },
-              "title": "Relationships"
+              "title": "Table Relationships"
             },
             "description": "List of relationships for the table\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -35682,7 +35684,7 @@
               "query": "total sales by region last quarter",
               "data_source_identifier": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b"
             },
-            "title": "Arguments"
+            "title": "Tool Call Response Item Arguments"
           }
         },
         "description": "Agent invoked a tool.",
@@ -35971,10 +35973,10 @@
                           "type": "string"
                         }
                       },
-                      "title": "Answer Header"
+                      "title": "Data Source Info Related Liveboard Visualizations Answer Header"
                     }
                   },
-                  "title": "Related Liveboard Visualizations Answer"
+                  "title": "Data Source Info Related Liveboard Visualizations Answer"
                 },
                 "pinboard_header": {
                   "type": "object",
@@ -35986,7 +35988,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Related Liveboard Visualizations Pinboard Header"
+                  "title": "Data Source Info Related Liveboard Visualizations Pinboard Header"
                 }
               },
               "additionalProperties": true,
@@ -36002,7 +36004,7 @@
                   "title": "Sales Overview"
                 }
               },
-              "title": "Related Liveboard Visualizations"
+              "title": "Data Source Info Related Liveboard Visualizations"
             },
             "description": "Related liveboard visualizations for this data source. Open-ended JSON shape\ndriven by the underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -36022,7 +36024,7 @@
                       "type": "string"
                     }
                   },
-                  "title": "Related Answers Header"
+                  "title": "Data Source Info Related Answers Header"
                 }
               },
               "additionalProperties": true,
@@ -36032,7 +36034,7 @@
                   "title": "Quarterly sales by region"
                 }
               },
-              "title": "Related Answers"
+              "title": "Data Source Info Related Answers"
             },
             "description": "Related saved answers for this data source. Open-ended JSON shape driven by\nthe underlying proto.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -36334,7 +36336,7 @@
                         }
                       }
                     },
-                    "title": "Sub Queries Formulas"
+                    "title": "Answer Details Sub Queries Formulas"
                   }
                 }
               },
@@ -36354,7 +36356,7 @@
                   }
                 ]
               },
-              "title": "Sub Queries"
+              "title": "Answer Details Sub Queries"
             },
             "description": "List of sub-queries used in the answer.\n\nKeys are documented from a sample; other keys may be returned.",
             "nullable": true
@@ -37055,7 +37057,7 @@
               "warehouse": "<warehouse>"
             },
             "description": "Keys are the union of what each data_warehouse_type returns; each key says which data_warehouse_type values return it. Types not listed may return other keys.",
-            "title": "Configuration"
+            "title": "Connection Configuration Response Configuration"
           },
           "policy_principals": {
             "type": "array",
@@ -37300,7 +37302,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Statement Principal"
+                      "title": "Webhook Storage Setup Config Trust Policy Template Statement Principal"
                     },
                     "Action": {
                       "type": "string"
@@ -37318,13 +37320,13 @@
                               "type": "string"
                             }
                           },
-                          "title": "Condition StringEquals"
+                          "title": "Webhook Storage Setup Config Trust Policy Template Statement Condition String Equals"
                         }
                       },
-                      "title": "Statement Condition"
+                      "title": "Webhook Storage Setup Config Trust Policy Template Statement Condition"
                     }
                   },
-                  "title": "Trust Policy Template Statement"
+                  "title": "Webhook Storage Setup Config Trust Policy Template Statement"
                 }
               }
             },
@@ -37346,7 +37348,7 @@
                 }
               ]
             },
-            "title": "Trust Policy Template"
+            "title": "Webhook Storage Setup Config Trust Policy Template"
           },
           "service_account_email": {
             "type": "string",
@@ -39038,7 +39040,7 @@
             "example": {
               "label": "Index columns"
             },
-            "title": "Element Config"
+            "title": "Feature Detail Element Config"
           },
           "element_value": {
             "type": "string",
@@ -41795,7 +41797,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details Author"
+                "title": "Create Connection Response Details Author"
               },
               "modifiedBy": {
                 "type": "object",
@@ -41807,7 +41809,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details ModifiedBy"
+                "title": "Create Connection Response Details Modified By"
               },
               "owner": {
                 "type": "object",
@@ -41819,7 +41821,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Details Owner"
+                "title": "Create Connection Response Details Owner"
               },
               "tags": {
                 "type": "array",
@@ -41879,7 +41881,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables Author"
+                      "title": "Create Connection Response Details Tables Author"
                     },
                     "modifiedBy": {
                       "type": "object",
@@ -41891,7 +41893,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables ModifiedBy"
+                      "title": "Create Connection Response Details Tables Modified By"
                     },
                     "owner": {
                       "type": "object",
@@ -41903,14 +41905,14 @@
                           "type": "string"
                         }
                       },
-                      "title": "Tables Owner"
+                      "title": "Create Connection Response Details Tables Owner"
                     },
                     "tags": {
                       "type": "array",
                       "items": {}
                     }
                   },
-                  "title": "Details Tables"
+                  "title": "Create Connection Response Details Tables"
                 }
               }
             },
@@ -41974,7 +41976,7 @@
                 }
               ]
             },
-            "title": "Details"
+            "title": "Create Connection Response Details"
           }
         },
         "example": {
@@ -43515,7 +43517,7 @@
               "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
               "english_query": "total sales by region last quarter"
             },
-            "title": "Args"
+            "title": "Agent Tool Call Args"
           }
         },
         "description": "A step Spotter started, such as querying a data source.",
@@ -43606,7 +43608,7 @@
                     "type": "string"
                   }
                 },
-                "title": "Answer Visualization"
+                "title": "Agent Tool Result Answer Visualization"
               },
               "table_data": {
                 "type": "object",
@@ -43615,7 +43617,7 @@
                     "type": "integer"
                   }
                 },
-                "title": "Answer Table Data"
+                "title": "Agent Tool Result Answer Table Data"
               }
             },
             "additionalProperties": true,
@@ -43632,7 +43634,7 @@
                 "total_rows": 5
               }
             },
-            "title": "Answer"
+            "title": "Agent Tool Result Answer"
           }
         },
         "description": "What a step produced, including any answer.",
@@ -44727,7 +44729,7 @@
               "hide_contact_support_url": false,
               "hide_logo_url": false
             },
-            "title": "Template Properties"
+            "title": "Create Email Customization Response Template Properties"
           }
         },
         "example": {
