@@ -45221,9 +45221,10 @@
             "nullable": true
           },
           "last_active_time_in_millis": {
-            "description": "Filters users whose last active session occurred at or before this timestamp (epoch time in milliseconds).\nFor example, to retrieve users inactive for 30 or more days, pass the current time minus 30 days: `current_epoch_millis - 2592000000`.\nUsers who have never logged in are also included when no last-active record exists.\nEnable Tracking flag should be set to true in the cluster for this filter to work. <br/>  <span class=\"since-beta-tag\">Version: 26.13.0.cl or later</span>",
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "description": "Timestamp of the last active session of the user in milliseconds. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "nullable": true
           }
         }
       },
