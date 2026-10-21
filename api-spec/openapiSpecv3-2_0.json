@@ -28628,7 +28628,7 @@
                                     "items": {}
                                   }
                                 },
-                                "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations"
+                                "title": "Report Content Sheets Sheet Content Visualizations"
                               }
                             },
                             "layout": {
@@ -28677,7 +28677,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content"
+                          "title": "Report Content Sheets Sheet Content"
                         },
                         "header": {
                           "type": "object",
@@ -28778,7 +28778,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Header"
+                          "title": "Metadata Detail Report Content Sheets Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -28788,7 +28788,7 @@
                           "items": {}
                         }
                       },
-                      "title": "Metadata Search Response Metadata Detail Report Content Sheets"
+                      "title": "Metadata Detail Report Content Sheets"
                     }
                   }
                 },
@@ -28983,11 +28983,11 @@
                                               "items": {}
                                             }
                                           },
-                                          "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Sheet Content Visualizations"
+                                          "title": "Report Content Sheets Sheet Content 2"
                                         }
                                       }
                                     },
-                                    "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Sheet Content"
+                                    "title": "Value Report Content Sheets Sheet Content"
                                   },
                                   "header": {
                                     "type": "object",
@@ -29088,7 +29088,7 @@
                                         "type": "boolean"
                                       }
                                     },
-                                    "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Header"
+                                    "title": "Value Report Content Sheets Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -29098,7 +29098,7 @@
                                     "items": {}
                                   }
                                 },
-                                "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets"
+                                "title": "Resolved Objects Value Report Content Sheets"
                               }
                             }
                           },
@@ -29297,7 +29297,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Metadata Search Response Metadata Detail Header Tags Client State"
+                          "title": "Metadata Detail Header Tags Client State"
                         },
                         "orgIds": {
                           "type": "array",
@@ -29754,7 +29754,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Metadata Search Response Metadata Header Tags Client State"
+                      "title": "Metadata Header Tags Client State"
                     },
                     "orgIds": {
                       "type": "array",
@@ -31911,7 +31911,7 @@
                         }
                       }
                     },
-                    "title": "Principal Permission Details Metadata Permission Info"
+                    "title": "Metadata Permission Info"
                   }
                 }
               },
@@ -31944,7 +31944,7 @@
                   }
                 ]
               },
-              "title": "Permission Of Principals Response Principal Permission Details"
+              "title": "Principal Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -32061,7 +32061,7 @@
                         }
                       }
                     },
-                    "title": "Metadata Permission Details Principal Permission Info"
+                    "title": "Principal Permission Info"
                   }
                 }
               },
@@ -32114,7 +32114,7 @@
                   }
                 ]
               },
-              "title": "Permission Of Metadata Response Metadata Permission Details"
+              "title": "Metadata Permission Details"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -32236,11 +32236,11 @@
                               "type": "string"
                             }
                           },
-                          "title": "Principal Object Privilege Info Principal Object Privileges"
+                          "title": "Principal Object Privileges"
                         }
                       }
                     },
-                    "title": "Metadata Object Privileges Principal Object Privilege Info"
+                    "title": "Principal Object Privilege Info"
                   }
                 }
               },
@@ -32274,7 +32274,7 @@
                   }
                 ]
               },
-              "title": "Object Privileges Of Metadata Response Metadata Object Privileges"
+              "title": "Metadata Object Privileges"
             },
             "description": "Keys are documented from a sample; other keys may be returned."
           }
@@ -33588,7 +33588,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Search Connection Response Details Tables Modified By"
+                      "title": "Details Tables Modified By 2"
                     },
                     "owner": {
                       "type": "object",
@@ -42068,7 +42068,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Create Connection Response Details Tables Modified By"
+                      "title": "Details Tables Modified By"
                     },
                     "owner": {
                       "type": "object",
@@ -44904,7 +44904,7 @@
               "hide_contact_support_url": false,
               "hide_logo_url": false
             },
-            "title": "Create Email Customization Response Template Properties"
+            "title": "Template Properties"
           }
         },
         "example": {
