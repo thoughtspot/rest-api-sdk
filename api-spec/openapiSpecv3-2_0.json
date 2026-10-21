@@ -2233,6 +2233,10 @@
                         "description": "Total sales for each region in the last quarter",
                         "session_identifier": "e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f",
                         "generation_number": 2,
+                        "ac_state": {
+                          "transaction_identifier": "a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+                          "generation_number": 2
+                        },
                         "tokens": [
                           "[sales]",
                           "[region]",
@@ -3299,6 +3303,55 @@
               "application/json": {
                 "schema": {
                   "type": "object"
+                },
+                "examples": {
+                  "example": {
+                    "summary": "Agent reply containing a text message and an answer",
+                    "value": {
+                      "messages": [
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "Let me look at the sales columns in the dataset.",
+                          "agent_context": ""
+                        },
+                        {
+                          "metadata": {
+                            "output": "<base64-encoded-protobuf-output>",
+                            "worksheet_id": "b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c",
+                            "assumptions": "",
+                            "chart_type": "COLUMN",
+                            "interrupted": false,
+                            "data_awareness_enabled": true
+                          },
+                          "internal": {},
+                          "type": "answer",
+                          "title": "Total sales by region",
+                          "description": "",
+                          "session_id": "c8d9e0f1-0008-4a2b-9c3d-5e6f7a8b9c0d",
+                          "gen_no": 1,
+                          "sage_query": "[sales] [region]",
+                          "tml_tokens": [
+                            "[sales]",
+                            "[region]"
+                          ],
+                          "formulas": [],
+                          "parameters": [],
+                          "subqueries": [],
+                          "viz_suggestion": "CAEQIBomEiQwYTFiMmMzZC00ZTVmLTRhNmItOGM3ZC05ZTBmMWEyYjNjNGQoATIA",
+                          "ac_state": null
+                        },
+                        {
+                          "metadata": {},
+                          "internal": {},
+                          "type": "text",
+                          "text": "The chart shows total sales for each region.",
+                          "agent_context": ""
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -26484,7 +26537,8 @@
                           "type": "string"
                         }
                       }
-                    }
+                    },
+                    "title": "Value Runtime Filters"
                   }
                 },
                 "parameters": {
@@ -26501,10 +26555,12 @@
                           "type": "string"
                         }
                       }
-                    }
+                    },
+                    "title": "Value Parameters"
                   }
                 }
-              }
+              },
+              "title": "User Parameters Value"
             },
             "example": {
               "0": {
@@ -26554,7 +26610,8 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "title": "Value Filter Rules"
                     }
                   },
                   "parameter_values": {
@@ -26571,10 +26628,12 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "title": "Value Parameter Values"
                     }
                   }
-                }
+                },
+                "title": "User Access Control Properties Value Value"
               }
             },
             "example": {
@@ -26636,10 +26695,12 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "title": "Value Variable Values"
                     }
                   }
-                }
+                },
+                "title": "User Variable Values Value Value"
               }
             },
             "example": {
@@ -26663,6 +26724,77 @@
           "name": "<username>",
           "display_name": "<user_display_name>",
           "visibility": "SHARABLE",
+          "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+          "owner_id": "9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a",
+          "modifier_id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+          "tenant_id": "3c4d5e6f-7a8b-4c9d-8e0f-2a3b4c5d6e7f",
+          "parent_type": "USER",
+          "account_type": "LOCAL_USER",
+          "account_status": "ACTIVE",
+          "email": "user@example.com",
+          "complete_detail": true,
+          "can_change_password": true,
+          "current_org": {
+            "id": 0,
+            "name": "Primary"
+          },
+          "orgs": [
+            {
+              "id": 0,
+              "name": "Primary"
+            }
+          ],
+          "privileges": [
+            "AUTHORING",
+            "DATADOWNLOADING"
+          ],
+          "user_groups": [
+            {
+              "id": "7a8b9c0d-1e2f-4a3b-8c4d-6e7f8a9b0c1d",
+              "name": "Sales"
+            }
+          ],
+          "user_inherited_groups": [
+            {
+              "id": "8b9c0d1e-2f3a-4b4c-9d5e-7f8a9b0c1d2e",
+              "name": "All"
+            }
+          ],
+          "home_liveboard": {
+            "id": "4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a",
+            "name": "Sales Overview"
+          },
+          "favorite_metadata": [
+            {
+              "id": "5e6f7a8b-9c0d-4e1f-8a2b-4c5d6e7f8a9b",
+              "name": "Quarterly Revenue",
+              "type": "LIVEBOARD"
+            }
+          ],
+          "tags": [
+            {
+              "id": "6f7a8b9c-0d1e-4f2a-9b3c-5d6e7f8a9b0c",
+              "name": "certified"
+            }
+          ],
+          "group_mask": 2,
+          "preferred_locale": "en-US",
+          "use_browser_language": false,
+          "notify_on_share": true,
+          "welcome_email_sent": true,
+          "onboarding_experience_completed": true,
+          "show_onboarding_experience": false,
+          "is_first_login": false,
+          "super_user": false,
+          "system_user": false,
+          "external": false,
+          "hidden": false,
+          "deleted": false,
+          "deprecated": false,
+          "creation_time_in_millis": 1760198400000,
+          "modification_time_in_millis": 1760198460000,
+          "first_login_time_in_millis": 1760198500000,
+          "expiration_time_in_millis": 1791734400000,
           "incomplete_details": [
             "<incomplete_detail_message>"
           ],
@@ -26767,7 +26899,11 @@
             "description": "Name of the object."
           }
         },
-        "description": "The current Org context of the user."
+        "description": "The current Org context of the user.",
+        "example": {
+          "id": 0,
+          "name": "Primary"
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -26800,6 +26936,11 @@
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
+        },
+        "example": {
+          "id": "5e6f7a8b-9c0d-4e1f-8a2b-4c5d6e7f8a9b",
+          "name": "Quarterly Revenue",
+          "type": "LIVEBOARD"
         }
       },
       "Object_ID_And_Name": {
@@ -26816,7 +26957,11 @@
             "nullable": true
           }
         },
-        "description": "The object representation with ID and Name."
+        "description": "The object representation with ID and Name.",
+        "example": {
+          "id": "4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a",
+          "name": "Sales Overview"
+        }
       },
       "FavoriteMetadataInput": {
         "type": "object",
@@ -27097,7 +27242,8 @@
                         "type": "string"
                       }
                     }
-                  }
+                  },
+                  "title": "Value Variant 3"
                 }
               ]
             },
@@ -27805,6 +27951,7 @@
           "hidden": false,
           "system_group": false,
           "generation_number": 1,
+          "index": 0,
           "index_version": 1,
           "metadata_version": 1,
           "creation_time_in_millis": 1760198400000,
@@ -28481,7 +28628,7 @@
                                     "items": {}
                                   }
                                 },
-                                "title": "Sheet Content Visualizations"
+                                "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content Visualizations"
                               }
                             },
                             "layout": {
@@ -28530,7 +28677,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Sheets Sheet Content"
+                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Sheet Content"
                         },
                         "header": {
                           "type": "object",
@@ -28631,7 +28778,7 @@
                               "type": "boolean"
                             }
                           },
-                          "title": "Sheets Header"
+                          "title": "Metadata Search Response Metadata Detail Report Content Sheets Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -28641,7 +28788,7 @@
                           "items": {}
                         }
                       },
-                      "title": "Report Content Sheets"
+                      "title": "Metadata Search Response Metadata Detail Report Content Sheets"
                     }
                   }
                 },
@@ -28792,7 +28939,8 @@
                                             "type": "array",
                                             "items": {}
                                           }
-                                        }
+                                        },
+                                        "title": "Sheet Content Filter"
                                       },
                                       "question": {
                                         "type": "object",
@@ -28809,7 +28957,8 @@
                                           "isChasmTrapQuery": {
                                             "type": "boolean"
                                           }
-                                        }
+                                        },
+                                        "title": "Sheet Content Question"
                                       },
                                       "visualizations": {
                                         "type": "array",
@@ -28833,10 +28982,12 @@
                                               "type": "array",
                                               "items": {}
                                             }
-                                          }
+                                          },
+                                          "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Sheet Content Visualizations"
                                         }
                                       }
-                                    }
+                                    },
+                                    "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Sheet Content"
                                   },
                                   "header": {
                                     "type": "object",
@@ -28936,7 +29087,8 @@
                                       "csrProtected": {
                                         "type": "boolean"
                                       }
-                                    }
+                                    },
+                                    "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -28945,10 +29097,12 @@
                                     "type": "array",
                                     "items": {}
                                   }
-                                }
+                                },
+                                "title": "Metadata Search Response Metadata Detail Header Resolved Objects Value Report Content Sheets"
                               }
                             }
-                          }
+                          },
+                          "title": "Value Report Content"
                         },
                         "type": {
                           "type": "string"
@@ -29084,7 +29238,8 @@
                             "csrProtected": {
                               "type": "boolean"
                             }
-                          }
+                          },
+                          "title": "Value Header"
                         },
                         "complete": {
                           "type": "boolean"
@@ -29093,7 +29248,8 @@
                           "type": "array",
                           "items": {}
                         }
-                      }
+                      },
+                      "title": "Resolved Objects Value"
                     }
                   },
                   "tags": {
@@ -33525,6 +33681,7 @@
         },
         "example": {
           "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+          "obj_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
           "name": "Snowflake Sales",
           "description": "Snowflake connection for the sales warehouse",
           "data_warehouse_type": "SNOWFLAKE",
@@ -36215,6 +36372,10 @@
             "description": "Total sales for each region in the last quarter",
             "session_identifier": "e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f",
             "generation_number": 2,
+            "ac_state": {
+              "transaction_identifier": "a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+              "generation_number": 2
+            },
             "tokens": [
               "[sales]",
               "[region]",
@@ -36372,6 +36533,10 @@
           "description": "Total sales for each region in the last quarter",
           "session_identifier": "e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f",
           "generation_number": 2,
+          "ac_state": {
+            "transaction_identifier": "a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+            "generation_number": 2
+          },
           "tokens": [
             "[sales]",
             "[region]",
@@ -36413,6 +36578,10 @@
             "description": "Generation number of the transaction.",
             "nullable": true
           }
+        },
+        "example": {
+          "transaction_identifier": "a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+          "generation_number": 2
         }
       },
       "ConversationShareStatusResponse": {
@@ -37152,6 +37321,9 @@
           },
           "policy_principals": [],
           "policy_processes": [],
+          "policy_process_options": {
+            "impersonate_user": "<username>"
+          },
           "disabled": false,
           "data_warehouse_type": "SNOWFLAKE",
           "policy_type": "NO_POLICY",
@@ -37182,6 +37354,9 @@
             "type": "string",
             "nullable": true
           }
+        },
+        "example": {
+          "impersonate_user": "<username>"
         }
       },
       "WebhookStorageConfigInfo": {
@@ -49161,7 +49336,7 @@
             ]
           },
           "delete_reason": {
-            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "type": "string"
           }
         },
