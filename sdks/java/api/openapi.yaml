@@ -4935,6 +4935,69 @@ paths:
                     account_type: SAML_USER
                     account_status: ACTIVE
                     email: sales_analyst@example.com
+                example_3:
+                  description: "Current user info for a SAML user switched to a non-primary\
+                    \ Org, with a home Liveboard and a preferred locale"
+                  value:
+                    id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
+                    name: sales_analyst
+                    display_name: Sales Analyst
+                    visibility: SHARABLE
+                    author_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
+                    can_change_password: false
+                    complete_detail: true
+                    creation_time_in_millis: 1699900000000
+                    current_org:
+                      id: 583464508
+                      name: sales_org
+                    deleted: false
+                    deprecated: false
+                    account_type: SAML_USER
+                    account_status: ACTIVE
+                    email: sales_analyst@example.com
+                    external: false
+                    favorite_metadata: []
+                    first_login_time_in_millis: 1699900005000
+                    hidden: false
+                    home_liveboard:
+                      id: c8e4d2a1-6b3f-4e7a-9d5c-2f1a8b7e6d4c
+                      name: Regional Sales
+                    is_first_login: false
+                    modification_time_in_millis: 1724277430000
+                    modifier_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
+                    notify_on_share: true
+                    onboarding_experience_completed: true
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    - id: 583464508
+                      name: sales_org
+                    owner_id: 7e4c9f2a-8b5d-4a1e-9c3b-6d8e2f5a7b4c
+                    parent_type: USER
+                    privileges:
+                    - AUTHORING
+                    - DATADOWNLOADING
+                    show_onboarding_experience: false
+                    super_user: false
+                    system_user: false
+                    tags: []
+                    user_groups:
+                    - id: 4f8a2c6e-1d3b-4a5f-8e7c-9b0d2a4c6e8f
+                      name: Sales Analysts
+                    user_inherited_groups:
+                    - id: 4f8a2c6e-1d3b-4a5f-8e7c-9b0d2a4c6e8f
+                      name: Sales Analysts
+                    - id: b9e7d5c3-2f1a-4e8d-9c6b-0a3d7f2e1b5c
+                      name: All Analysts
+                    welcome_email_sent: false
+                    org_privileges:
+                      "583464508":
+                      - AUTHORING
+                      - DATADOWNLOADING
+                    preferred_locale: en-GB
+                    use_browser_language: false
+                    extended_properties:
+                      displayNameLastUpdatedBy: AUTO
               schema:
                 $ref: '#/components/schemas/User'
           description: Fetch current session user detail successful.
@@ -5061,6 +5124,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                impersonation_session:
+                  description: An administrator who is impersonating another user
+                    cannot fetch a token for that user.
+                  summary: Token requested during an Act As You session
+                  value:
+                    error:
+                      message:
+                        code: 10125
+                        incident_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        trace_id_guid: c3d4e5f6-7890-1234-cdef-345678901234
+                        debug: Authentication tokens cannot be fetched during an 'Act
+                          As You' session.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden access.
@@ -5391,6 +5467,20 @@ paths:
                         name: sales-org
                       - id: 3
                         name: marketing-org
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    valid_for_username: tsadmin
+                example_4:
+                  description: "Full-access token authorized for all member Orgs (Tenant\
+                    \ Admin). The token is not bound to one Org, so org_id is -1 and\
+                    \ org_ids is omitted."
+                  value:
+                    token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.example_all_orgs_token.signature
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: -1
+                      org_scope: ALL_MEMBER_ORGS
                     valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
                     valid_for_username: tsadmin
               schema:
@@ -6157,6 +6247,17 @@ paths:
                         name: marketing-org
                     valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
                     token_type: BEARER
+                example_4:
+                  description: Valid custom access (ABAC) token issued by POST /api/rest/2.0/auth/token/custom.
+                    Custom tokens are JWTs.
+                  value:
+                    creation_time_in_millis: 1724277430000
+                    expiration_time_in_millis: 1724277730000
+                    scope:
+                      access_type: FULL
+                      org_id: 0
+                    valid_for_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    token_type: JWT
               schema:
                 $ref: '#/components/schemas/TokenValidationResponse'
           description: Token validation successful.
@@ -17027,6 +17128,11 @@ paths:
                         font_id: null
                         font_name: null
                         is_overridden: false
+                      advanced_chart_visualization_fonts:
+                      - visualization_area: ADVANCED_CHART_LABELS
+                        font_id: null
+                        font_name: null
+                        is_overridden: false
                   - scope: ORG
                     org:
                       id: 1234567890
@@ -17113,6 +17219,11 @@ paths:
                         font_name: "Optimo-Plain, Helvetica Neue, Helvetica, Arial,\
                           \ sans-serif"
                         is_overridden: false
+                      advanced_chart_visualization_fonts:
+                      - visualization_area: ADVANCED_CHART_LABELS
+                        font_id: c3d4e5f6-1111-1111-1111-111111111111
+                        font_name: Acme Sans
+                        is_overridden: true
               schema:
                 items:
                   $ref: '#/components/schemas/StylePreference'
@@ -18054,6 +18165,40 @@ paths:
                     accept_language: undefined
                     all_user_group_member_user_count: 13
                     logical_model_version: 43
+                example_2:
+                  description: Cluster information with an upcoming maintenance window.
+                    maintenance_schedule describes the next scheduled window and is
+                    null when no maintenance is scheduled.
+                  value:
+                    id: a1b2c3d4-5e6f-11ee-8c90-0242ac120002
+                    name: my-cluster
+                    release_version: 26.11.0.cl-15
+                    time_zone: America/Los_Angeles
+                    locale: en_US
+                    date_format: MM/dd/yyyy
+                    api_version: v1
+                    type: SAAS
+                    environment: PROD
+                    license: EAE
+                    date_time_format: MM/dd/yyyy HH:mm:ss
+                    time_format: HH:mm:ss
+                    system_user_id: 67e15c06-d153-4924-a4cd-ff615393b60f
+                    super_user_id: 0f0dd0f7-7411-4195-a4aa-0dc6b58413c9
+                    hidden_object_id: 31745bb4-defd-4e8b-8de9-8fd01db78827
+                    system_group_id: 179d8867-cf36-4a8d-a019-63a226fd3196
+                    tsadmin_user_id: 59481331-ee53-42be-a548-bd87be6ddd4a
+                    admin_group_id: d0326b56-ef23-4c8a-8327-a30e99bcc72b
+                    all_tables_connection_id: bfc6feb4-8dac-402c-8ae8-78b43d318777
+                    all_user_group_id: b25ee394-9d13-49e3-9385-cd97f5b253b4
+                    accept_language: "en-US,en;q=0.9"
+                    all_user_group_member_user_count: 13
+                    logical_model_version: 43
+                    maintenance_schedule:
+                      start_time_in_millis: 1794722400000
+                      duration_in_seconds: 3600
+                      status: SCHEDULED
+                      type: UPGRADE
+                      description: Scheduled upgrade to the next ThoughtSpot release.
               schema:
                 $ref: '#/components/schemas/SystemInfo'
           description: Cluster information.
@@ -18437,6 +18582,42 @@ paths:
                         groups_with_access:
                         - id: "1234567890"
                           name: Group Name
+                example_2:
+                  description: "Orgs disabled. Only cluster_preferences is populated,\
+                    \ and non_embed_access lists the groups that keep full application\
+                    \ access while block_full_app_access is true."
+                  value:
+                    cluster_preferences:
+                      enable_partitioned_cookies: false
+                      cors_whitelisted_urls:
+                      - example.com
+                      csp_settings:
+                        connect_src_urls:
+                        - https://connect.example.com
+                        font_src_urls:
+                        - https://font.example.com
+                        visual_embed_hosts:
+                        - https://embed.example.com
+                        iframe_src_urls:
+                        - https://embed.example.com
+                        img_src_urls:
+                        - https://img.example.com
+                        script_src_urls:
+                          enabled: true
+                          urls:
+                          - https://script.example.com
+                        style_src_urls:
+                        - https://style.example.com
+                      saml_redirect_urls:
+                      - https://saml.example.com
+                      non_embed_access:
+                        block_full_app_access: true
+                        groups_with_access:
+                        - id: d0326b56-ef23-4c8a-8327-a30e99bcc72b
+                          name: Administration Group
+                        - id: 7f6e5d4c-3b2a-4190-8f7e-6d5c4b3a2918
+                          name: Embed Power Users
+                      trusted_auth_status: ENABLED
               schema:
                 $ref: '#/components/schemas/SecuritySettingsResponse'
           description: Successfully retrieved the list of security settings.
@@ -18701,6 +18882,31 @@ paths:
                       error_message: Access denied. Ensure the IAM role has s3:PutObject
                         permission on the target bucket.
                       aws_s3_info: null
+                example_4:
+                  description: Successful webhook validation with both HTTP and GCS
+                    storage checks
+                  value:
+                    channel_type: WEBHOOK
+                    channel_id: e5f67890-1234-5678-efab-567890123456
+                    channel_name: GCS Storage Webhook
+                    event_type: LIVEBOARD_SCHEDULE
+                    job_id: f6789012-3456-7890-fabc-678901234567
+                    result_code: SUCCESS
+                    details:
+                    - validation_step: HTTP_CONNECTION_CHECK
+                      status: SUCCESS
+                      http_status: 200
+                      error_message: null
+                      aws_s3_info: null
+                    - validation_step: STORAGE_FILE_UPLOAD_CHECK
+                      status: SUCCESS
+                      http_status: null
+                      error_message: null
+                      aws_s3_info: null
+                      gcp_gcs_info:
+                        bucket_name: my-webhook-files
+                        file_name: validation_dummy_20240821_153045.pdf
+                        object_key: webhooks/validation_dummy_20240821_153045.pdf
               schema:
                 $ref: '#/components/schemas/CommunicationChannelValidateResponse'
           description: communication channel configuration validated successfully.
@@ -22377,6 +22583,76 @@ paths:
                       record_offset: 0
                       record_size: 50
                       total_count: 0
+                      has_more: false
+                example_4:
+                  description: "Cross-Org search returning webhooks with OAuth2 authentication,\
+                    \ Basic authentication, and a GCP GCS storage destination"
+                  value:
+                    webhooks:
+                    - id: d3c2b1a0-9f8e-4d7c-b6a5-4f3e2d1c0b9a
+                      name: Basic Auth Webhook
+                      description: Webhook created disabled until the receiving endpoint
+                        is ready
+                      org:
+                        id: "1983046125"
+                        name: Marketing
+                      url: https://hooks.example.com/thoughtspot
+                      events:
+                      - LIVEBOARD_SCHEDULE
+                      authentication:
+                        BASIC_AUTH:
+                          username: webhook_user
+                          password: '***'
+                      status: DISABLED
+                      creation_time_in_millis: 1724280730912
+                      modification_time_in_millis: 1724280730912
+                      created_by:
+                        id: 4c3d2e1f-0a9b-4c8d-7e6f-5a4b3c2d1e0f
+                        name: lucas_moreau
+                    - id: c9d8e7f6-a5b4-4321-9876-fedcba012345
+                      name: GCS Storage Webhook
+                      description: Webhook that uploads payloads to a GCS bucket
+                      org:
+                        id: "1574427524"
+                        name: Sales
+                      url: https://api.example.com/webhooks
+                      events:
+                      - LIVEBOARD_SCHEDULE
+                      storage_destination:
+                        storage_type: GCP_GCS
+                        storage_config:
+                          gcp_gcs_config:
+                            bucket_name: my-webhook-files
+                            service_account_email: my-sa@my-project.iam.gserviceaccount.com
+                            path_prefix: webhooks/
+                      creation_time_in_millis: 1724279630456
+                      modification_time_in_millis: 1724279630456
+                      created_by:
+                        id: 3a2b1c4d-5e6f-7890-abcd-ef0123456789
+                        name: priya_sharma
+                    - id: b2c3d4e5-f6a7-4890-bcde-f23456789012
+                      name: OAuth2 Webhook
+                      description: Webhook with OAuth2 client credentials
+                      org:
+                        id: "0"
+                        name: Primary
+                      url: https://api.example.com/webhooks
+                      events:
+                      - LIVEBOARD_SCHEDULE
+                      authentication:
+                        OAUTH2:
+                          authorization_url: https://auth.example.com/oauth2/authorize
+                          client_id: client_123
+                          client_secret: '***'
+                      creation_time_in_millis: 1724278530123
+                      modification_time_in_millis: 1724278530123
+                      created_by:
+                        id: 7d5e9f2a-4b8c-4d6e-9a3b-5c7e1f4a8b2d
+                        name: mike_rodriguez
+                    pagination:
+                      record_offset: 0
+                      record_size: 50
+                      total_count: 3
                       has_more: false
               schema:
                 $ref: '#/components/schemas/WebhookSearchResponse'
