@@ -182,6 +182,14 @@
       "description": "Roles for version 10.10.0.cl"
     },
     {
+      "name": "27.1.0.cl",
+      "id": "27.1.0.cl",
+      "tags": [
+        "27.1.0.cl"
+      ],
+      "description": "Roles for version 27.1.0.cl"
+    },
+    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -12277,6 +12285,101 @@
           },
           "403": {
             "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/localizations/manual-translation/template/export": {
+      "post": {
+        "operationId": "exportManualTranslationTemplate",
+        "description": "\nExport a CSV template of the translatable strings of Liveboards. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nExports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.\n\n#### Usage guidelines\n\n- The CSV file has the same columns as the import file: `content`, `locale`, `translated-content`. Each row lists one string in `content` and leaves `locale` and `translated-content` empty. Fill them in, then upload the file with `POST /api/rest/2.0/localizations/manual-translation/import`.\n- The template includes the Liveboard title and description, tab names, the names of the Liveboard's personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles.\n- Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated.\n- A string that appears more than once is listed once.\n- Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with `=`, `+`, `-`, `@`, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the `X-ThoughtSpot-Excluded-Content-Count` response header.\n- Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Manual Translation",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportManualTranslationTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Translation template downloaded successfully.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=manual-translation-template.csv"
+                }
+              },
+              "X-ThoughtSpot-Excluded-Content-Count": {
+                "description": "Number of strings left out of the template because the import would reject them.",
+                "schema": {
+                  "type": "integer",
+                  "example": 0
+                }
+              }
+            },
+            "content": {
+              "text/csv": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request, or a Liveboard was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access, or no access to a Liveboard.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "More than one Liveboard has the given name.",
             "content": {
               "application/json": {
                 "schema": {
@@ -41187,6 +41290,21 @@
             ]
           }
         }
+      },
+      "ExportManualTranslationTemplateRequest": {
+        "type": "object",
+        "properties": {
+          "liveboard_identifiers": {
+            "description": "GUIDs or names of the Liveboards whose translatable strings go into the\ntemplate. Names are resolved in the current Org. Specify 1 to 50 Liveboards.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "liveboard_identifiers"
+        ]
       },
       "ConvertWorksheetToModelRequest": {
         "type": "object",
