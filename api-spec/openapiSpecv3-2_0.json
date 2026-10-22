@@ -22425,7 +22425,7 @@
     "/api/rest/2.0/version-control/commit": {
       "post": {
         "operationId": "createCommit",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.\n\nAdmission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.\n\nAdmission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -22531,7 +22531,7 @@
     "/api/rest/2.0/version-control/config/create": {
       "post": {
         "operationId": "createVersionControlConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nConfigures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.\n\nUse this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nConfigures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.\n\nUse this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -22644,7 +22644,7 @@
     "/api/rest/2.0/version-control/config/delete": {
       "post": {
         "operationId": "deleteVersionControlConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nRevokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.\n\nUse this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nRevokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.\n\nUse this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -22700,7 +22700,7 @@
     "/api/rest/2.0/version-control/deploy": {
       "post": {
         "operationId": "deployRevision",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -22804,7 +22804,7 @@
     "/api/rest/2.0/version-control/branch/promote": {
       "post": {
         "operationId": "promoteBranch",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nMerges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.\n\n`dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nMerges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.\n\n`dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -22970,7 +22970,7 @@
     "/api/rest/2.0/version-control/commit/restore": {
       "post": {
         "operationId": "restoreRevision",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.\n\nUse this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nStarts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.\n\nUse this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -23073,7 +23073,7 @@
     "/api/rest/2.0/version-control/config/search": {
       "post": {
         "operationId": "searchVersionControlConfigs",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.\n\nUse this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.\n\nUse this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -23170,7 +23170,7 @@
     "/api/rest/2.0/version-control/runs/search": {
       "post": {
         "operationId": "searchVersionControlRuns",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.\n\nUse this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nReturns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.\n\nUse this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
@@ -23285,7 +23285,7 @@
     "/api/rest/2.0/version-control/config/update": {
       "post": {
         "operationId": "updateVersionControlConfig",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nChanges your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.\n\nUse this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nChanges your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.\n\nUse this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Version Control V2",
           "26.12.0.cl"
