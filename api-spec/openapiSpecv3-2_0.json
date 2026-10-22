@@ -24842,6 +24842,12 @@
             "description": "Timestamp of the first login session of the user in milliseconds.",
             "nullable": true
           },
+           "last_active_time_in_millis": {
+            "type": "number",
+            "format": "float",
+            "description": "Timestamp of the last active session of the user in milliseconds. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "nullable": true
+          },
           "group_mask": {
             "type": "integer",
             "format": "int32",
