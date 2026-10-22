@@ -25,7 +25,6 @@ public class ApiClientConfiguration {
     private static final String DEFAULT_BASE_PATH = "https://localhost:443";
     private static final int DEFAULT_CONNECT_TIMEOUT_MILLIS = 60000; // 1 minute
     private static final int DEFAULT_READ_WRITE_TIMEOUT_MILLIS = 300000; // 5 minutes
-
     private final String basePath;
     private final Supplier<String> bearerTokenSupplier;
     private final Map<String, String> defaultHeaderMap;
@@ -38,6 +37,9 @@ public class ApiClientConfiguration {
     private final int connectTimeoutMillis;
     private final int readTimeoutMillis;
     private final int writeTimeoutMillis;
+    private final Supplier<TokenResult> getToken;
+    private final boolean enableTokenCaching;
+    private final long refreshBufferMs;
 
     /**
      * Default constructor that initializes the configuration with default values. Sets base path to
@@ -164,6 +166,40 @@ public class ApiClientConfiguration {
             final int connectTimeoutMillis,
             final int readTimeoutMillis,
             final int writeTimeoutMillis) {
+        this(
+                basePath,
+                bearerTokenSupplier,
+                defaultHeaderMap,
+                defaultCookieMap,
+                verifyingSsl,
+                sslCaCert,
+                hostnameVerification,
+                keyManagers,
+                downloadPath,
+                connectTimeoutMillis,
+                readTimeoutMillis,
+                writeTimeoutMillis,
+                null,
+                false,
+                TokenProvider.DEFAULT_REFRESH_BUFFER_MS);
+    }
+
+    public ApiClientConfiguration(
+            final String basePath,
+            final Supplier<String> bearerTokenSupplier,
+            final Map<String, String> defaultHeaderMap,
+            final Map<String, String> defaultCookieMap,
+            final boolean verifyingSsl,
+            final InputStream sslCaCert,
+            final boolean hostnameVerification,
+            final List<KeyManager> keyManagers,
+            final String downloadPath,
+            final int connectTimeoutMillis,
+            final int readTimeoutMillis,
+            final int writeTimeoutMillis,
+            final Supplier<TokenResult> getToken,
+            final boolean enableTokenCaching,
+            final long refreshBufferMs) {
         this.basePath = normalizeBasePath(basePath);
         this.bearerTokenSupplier = bearerTokenSupplier;
         this.defaultHeaderMap =
@@ -185,6 +221,9 @@ public class ApiClientConfiguration {
         this.connectTimeoutMillis = connectTimeoutMillis;
         this.readTimeoutMillis = readTimeoutMillis;
         this.writeTimeoutMillis = writeTimeoutMillis;
+        this.getToken = getToken;
+        this.enableTokenCaching = enableTokenCaching;
+        this.refreshBufferMs = refreshBufferMs;
     }
 
     /**
@@ -267,6 +306,23 @@ public class ApiClientConfiguration {
         return writeTimeoutMillis;
     }
 
+    /**
+     * @return The token supplier function, or null if not configured. Returns {@link TokenResult}.
+     */
+    public Supplier<TokenResult> getGetToken() {
+        return getToken;
+    }
+
+    /** @return Whether token caching is enabled. Defaults to true. */
+    public boolean isEnableTokenCaching() {
+        return enableTokenCaching;
+    }
+
+    /** @return Milliseconds before token expiry to trigger a proactive refresh. Defaults to 30000. */
+    public long getRefreshBufferMs() {
+        return refreshBufferMs;
+    }
+
     /** @return A string representation of the client configuration. */
     @Override
     public String toString() {
@@ -321,6 +377,9 @@ public class ApiClientConfiguration {
         private int connectTimeoutMillis;
         private int readTimeoutMillis;
         private int writeTimeoutMillis;
+        private Supplier<TokenResult> getToken;
+        private boolean enableTokenCaching;
+        private long refreshBufferMs;
 
         /**
          * Default constructor that initializes the builder with default values. Sets base path to
@@ -339,6 +398,9 @@ public class ApiClientConfiguration {
             this.connectTimeoutMillis = DEFAULT_CONNECT_TIMEOUT_MILLIS;
             this.readTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
             this.writeTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
+            this.getToken = null;
+            this.enableTokenCaching = false;
+            this.refreshBufferMs = TokenProvider.DEFAULT_REFRESH_BUFFER_MS;
         }
 
         /**
@@ -359,6 +421,9 @@ public class ApiClientConfiguration {
             this.connectTimeoutMillis = config.getConnectTimeoutMillis();
             this.readTimeoutMillis = config.getReadTimeoutMillis();
             this.writeTimeoutMillis = config.getWriteTimeoutMillis();
+            this.getToken = config.getGetToken();
+            this.enableTokenCaching = config.isEnableTokenCaching();
+            this.refreshBufferMs = config.getRefreshBufferMs();
         }
 
         /**
@@ -545,6 +610,50 @@ public class ApiClientConfiguration {
         }
 
         /**
+         * Sets the token supplier function. The SDK caches the result and calls it again before
+         * expiry (if {@code expiresAt} is provided in the {@link TokenResult}) or on 401.
+         *
+         * <p>The supplier can return:
+         * <ul>
+         *   <li>{@code TokenResult.of(tokenString)} — token only, refreshed on 401.
+         *   <li>{@code TokenResult.of(tokenString, expiresAtMs)} — token with expiry, refreshed
+         *       proactively before expiry.
+         * </ul>
+         *
+         * @param getToken A supplier that returns a {@link TokenResult}.
+         * @return The builder instance.
+         */
+        public Builder getToken(Supplier<TokenResult> getToken) {
+            this.getToken = getToken;
+            return this;
+        }
+
+        /**
+         * Enables or disables token caching. When enabled (default), the SDK caches the token and
+         * reuses it until near-expiry or 401. When disabled, {@code getToken} is called on every
+         * request.
+         *
+         * @param enableTokenCaching true to enable caching (default), false to disable.
+         * @return The builder instance.
+         */
+        public Builder enableTokenCaching(boolean enableTokenCaching) {
+            this.enableTokenCaching = enableTokenCaching;
+            return this;
+        }
+
+        /**
+         * Sets how many milliseconds before token expiry the SDK should proactively refresh.
+         * Defaults to 30000 (30 seconds).
+         *
+         * @param refreshBufferMs Buffer in milliseconds before expiry to trigger refresh.
+         * @return The builder instance.
+         */
+        public Builder refreshBufferMs(long refreshBufferMs) {
+            this.refreshBufferMs = refreshBufferMs;
+            return this;
+        }
+
+        /**
          * Builds a {@link ApiClientConfiguration} instance with the current builder values.
          *
          * @return A new {@link ApiClientConfiguration} instance.
@@ -562,7 +671,10 @@ public class ApiClientConfiguration {
                     downloadPath,
                     connectTimeoutMillis,
                     readTimeoutMillis,
-                    writeTimeoutMillis);
+                    writeTimeoutMillis,
+                    getToken,
+                    enableTokenCaching,
+                    refreshBufferMs);
         }
     }
 }

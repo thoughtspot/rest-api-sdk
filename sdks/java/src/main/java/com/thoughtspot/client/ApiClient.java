@@ -91,6 +91,8 @@ public class ApiClient {
     private JSON json;
 
     private HttpLoggingInterceptor loggingInterceptor;
+    private TokenRefreshInterceptor tokenRefreshInterceptor;
+    private TokenProvider tokenProvider;
 
     /** Basic constructor for ApiClient */
     public ApiClient() {
@@ -157,6 +159,23 @@ public class ApiClient {
             setConnectTimeout(apiClientConfiguration.getConnectTimeoutMillis());
             setReadTimeout(apiClientConfiguration.getReadTimeoutMillis());
             setWriteTimeout(apiClientConfiguration.getWriteTimeoutMillis());
+
+            // Wire token provider and refresh interceptor
+            if (apiClientConfiguration.getGetToken() != null) {
+                tokenProvider = new TokenProvider(
+                        apiClientConfiguration.getGetToken(),
+                        apiClientConfiguration.getRefreshBufferMs(),
+                        apiClientConfiguration.isEnableTokenCaching());
+
+                OkHttpClient.Builder builder = httpClient.newBuilder();
+                // Remove existing token refresh interceptor if present
+                if (tokenRefreshInterceptor != null) {
+                    builder.interceptors().remove(tokenRefreshInterceptor);
+                }
+                tokenRefreshInterceptor = new TokenRefreshInterceptor(tokenProvider);
+                builder.addInterceptor(tokenRefreshInterceptor);
+                httpClient = builder.build();
+            }
         }
     }
 
