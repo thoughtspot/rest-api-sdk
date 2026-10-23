@@ -21210,7 +21210,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.
@@ -21298,7 +21298,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.
@@ -21389,7 +21389,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.
@@ -21438,7 +21438,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.
@@ -21521,7 +21521,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.
@@ -21659,7 +21659,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.
@@ -21744,7 +21744,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.
@@ -21821,7 +21821,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.
@@ -21916,7 +21916,7 @@ paths:
     post:
       description: |2+
 
-         Version: 26.12.0.cl or later
+        Version: 26.12.0.cl or later
 
 
         Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.

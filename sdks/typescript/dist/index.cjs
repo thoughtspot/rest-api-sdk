@@ -42938,7 +42938,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest 
    */
   async createCommit(createCommitRequest, _options) {
@@ -43522,7 +43522,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest 
    */
   async createVersionControlConfig(createVersionControlConfigRequest, _options) {
@@ -44633,7 +44633,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   async deleteVersionControlConfig(_options) {
     let _config = _options || this.configuration;
@@ -44722,7 +44722,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest 
    */
   async deployRevision(deployRevisionRequest, _options) {
@@ -46381,7 +46381,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest 
    */
   async promoteBranch(promoteBranchRequest, _options) {
@@ -46557,7 +46557,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest 
    */
   async restoreRevision(restoreRevisionRequest, _options) {
@@ -47621,7 +47621,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   async searchVersionControlConfigs(_options) {
     let _config = _options || this.configuration;
@@ -47642,7 +47642,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest 
    */
   async searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
@@ -49575,7 +49575,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest 
    */
   async updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
@@ -65215,7 +65215,7 @@ var VersionControlApiResponseProcessor = class {
 // apis/VersionControlV2Api.ts
 var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest 
    */
   async createCommit(createCommitRequest, _options) {
@@ -65249,7 +65249,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest 
    */
   async createVersionControlConfig(createVersionControlConfigRequest, _options) {
@@ -65283,7 +65283,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   async deleteVersionControlConfig(_options) {
     let _config = _options || this.configuration;
@@ -65304,7 +65304,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest 
    */
   async deployRevision(deployRevisionRequest, _options) {
@@ -65338,7 +65338,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest 
    */
   async promoteBranch(promoteBranchRequest, _options) {
@@ -65372,7 +65372,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest 
    */
   async restoreRevision(restoreRevisionRequest, _options) {
@@ -65406,7 +65406,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   async searchVersionControlConfigs(_options) {
     let _config = _options || this.configuration;
@@ -65427,7 +65427,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest 
    */
   async searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
@@ -65461,7 +65461,7 @@ var VersionControlV2ApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest 
    */
   async updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
@@ -71929,7 +71929,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.createCollectionWithHttpInfo(createCollectionRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommitWithHttpInfo(createCommitRequest, _options) {
@@ -71948,7 +71948,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommit(createCommitRequest, _options) {
@@ -72373,7 +72373,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.createVariableWithHttpInfo(createVariableRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest, _options) {
@@ -72392,7 +72392,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfig(createVersionControlConfigRequest, _options) {
@@ -73289,7 +73289,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.deleteVariablesWithHttpInfo(deleteVariablesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfigWithHttpInfo(_options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -73307,7 +73307,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfig(_options) {
     return this.deleteVersionControlConfigWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
@@ -73365,7 +73365,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.deployCommitWithHttpInfo(deployCommitRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevisionWithHttpInfo(deployRevisionRequest, _options) {
@@ -73384,7 +73384,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevision(deployRevisionRequest, _options) {
@@ -74763,7 +74763,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.parameterizeMetadataFieldsWithHttpInfo(parameterizeMetadataFieldsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranchWithHttpInfo(promoteBranchRequest, _options) {
@@ -74782,7 +74782,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranch(promoteBranchRequest, _options) {
@@ -74895,7 +74895,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.resetUserPasswordWithHttpInfo(resetUserPasswordRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevisionWithHttpInfo(restoreRevisionRequest, _options) {
@@ -74914,7 +74914,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevision(restoreRevisionRequest, _options) {
@@ -75705,7 +75705,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchVariablesWithHttpInfo(searchVariablesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigsWithHttpInfo(_options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -75723,13 +75723,13 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigs(_options) {
     return this.searchVersionControlConfigsWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest, _options) {
@@ -75748,7 +75748,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
@@ -77141,7 +77141,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateVariableValuesWithHttpInfo(updateVariableValuesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest, _options) {
@@ -77160,7 +77160,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
@@ -78045,7 +78045,7 @@ var ObservableVersionControlV2Api = class {
     this.responseProcessor = responseProcessor || new VersionControlV2ApiResponseProcessor();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommitWithHttpInfo(createCommitRequest, _options) {
@@ -78064,14 +78064,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommit(createCommitRequest, _options) {
     return this.createCommitWithHttpInfo(createCommitRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest, _options) {
@@ -78090,14 +78090,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfig(createVersionControlConfigRequest, _options) {
     return this.createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfigWithHttpInfo(_options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -78115,13 +78115,13 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfig(_options) {
     return this.deleteVersionControlConfigWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevisionWithHttpInfo(deployRevisionRequest, _options) {
@@ -78140,14 +78140,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevision(deployRevisionRequest, _options) {
     return this.deployRevisionWithHttpInfo(deployRevisionRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranchWithHttpInfo(promoteBranchRequest, _options) {
@@ -78166,14 +78166,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranch(promoteBranchRequest, _options) {
     return this.promoteBranchWithHttpInfo(promoteBranchRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevisionWithHttpInfo(restoreRevisionRequest, _options) {
@@ -78192,14 +78192,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevision(restoreRevisionRequest, _options) {
     return this.restoreRevisionWithHttpInfo(restoreRevisionRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigsWithHttpInfo(_options) {
     const _config = mergeConfiguration(this.configuration, _options);
@@ -78217,13 +78217,13 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigs(_options) {
     return this.searchVersionControlConfigsWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest, _options) {
@@ -78242,14 +78242,14 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
     return this.searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest, _options) {
@@ -78268,7 +78268,7 @@ var ObservableVersionControlV2Api = class {
     }));
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
@@ -82186,7 +82186,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommitWithHttpInfo(createCommitRequest, _options) {
@@ -82195,7 +82195,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommit(createCommitRequest, _options) {
@@ -82494,7 +82494,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest, _options) {
@@ -82503,7 +82503,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfig(createVersionControlConfigRequest, _options) {
@@ -83138,7 +83138,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfigWithHttpInfo(_options) {
     const observableOptions = wrapOptions(_options);
@@ -83146,7 +83146,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfig(_options) {
     const observableOptions = wrapOptions(_options);
@@ -83190,7 +83190,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevisionWithHttpInfo(deployRevisionRequest, _options) {
@@ -83199,7 +83199,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevision(deployRevisionRequest, _options) {
@@ -84156,7 +84156,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranchWithHttpInfo(promoteBranchRequest, _options) {
@@ -84165,7 +84165,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranch(promoteBranchRequest, _options) {
@@ -84248,7 +84248,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevisionWithHttpInfo(restoreRevisionRequest, _options) {
@@ -84257,7 +84257,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevision(restoreRevisionRequest, _options) {
@@ -84810,7 +84810,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigsWithHttpInfo(_options) {
     const observableOptions = wrapOptions(_options);
@@ -84818,7 +84818,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigs(_options) {
     const observableOptions = wrapOptions(_options);
@@ -84826,7 +84826,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest, _options) {
@@ -84835,7 +84835,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
@@ -85830,7 +85830,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest, _options) {
@@ -85839,7 +85839,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
@@ -86462,7 +86462,7 @@ var PromiseVersionControlV2Api = class {
     this.api = new ObservableVersionControlV2Api(configuration, requestFactory, responseProcessor);
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommitWithHttpInfo(createCommitRequest, _options) {
@@ -86471,7 +86471,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createCommitRequest
    */
   createCommit(createCommitRequest, _options) {
@@ -86480,7 +86480,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfigWithHttpInfo(createVersionControlConfigRequest, _options) {
@@ -86489,7 +86489,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param createVersionControlConfigRequest
    */
   createVersionControlConfig(createVersionControlConfigRequest, _options) {
@@ -86498,7 +86498,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfigWithHttpInfo(_options) {
     const observableOptions = wrapOptions(_options);
@@ -86506,7 +86506,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   deleteVersionControlConfig(_options) {
     const observableOptions = wrapOptions(_options);
@@ -86514,7 +86514,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevisionWithHttpInfo(deployRevisionRequest, _options) {
@@ -86523,7 +86523,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param deployRevisionRequest
    */
   deployRevision(deployRevisionRequest, _options) {
@@ -86532,7 +86532,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranchWithHttpInfo(promoteBranchRequest, _options) {
@@ -86541,7 +86541,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param promoteBranchRequest
    */
   promoteBranch(promoteBranchRequest, _options) {
@@ -86550,7 +86550,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevisionWithHttpInfo(restoreRevisionRequest, _options) {
@@ -86559,7 +86559,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param restoreRevisionRequest
    */
   restoreRevision(restoreRevisionRequest, _options) {
@@ -86568,7 +86568,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigsWithHttpInfo(_options) {
     const observableOptions = wrapOptions(_options);
@@ -86576,7 +86576,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    */
   searchVersionControlConfigs(_options) {
     const observableOptions = wrapOptions(_options);
@@ -86584,7 +86584,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest, _options) {
@@ -86593,7 +86593,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param searchVersionControlRunsRequest
    */
   searchVersionControlRuns(searchVersionControlRunsRequest, _options) {
@@ -86602,7 +86602,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest, _options) {
@@ -86611,7 +86611,7 @@ var PromiseVersionControlV2Api = class {
     return result.toPromise();
   }
   /**
-   *   Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+   *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
    * @param updateVersionControlConfigRequest
    */
   updateVersionControlConfig(updateVersionControlConfigRequest, _options) {
