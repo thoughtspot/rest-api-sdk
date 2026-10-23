@@ -4799,6 +4799,76 @@ paths:
                     deprecated: false
                     account_type: LOCAL_USER
                     account_status: ACTIVE
+                    owner_id: 3c4d5e6f-0001-4a2b-8c3d-4e5f6a7b8c9d
+                    modifier_id: 3c4d5e6f-0002-4b3c-9d4e-5f6a7b8c9d0e
+                    tenant_id: 3c4d5e6f-0003-4c4d-8e5f-6a7b8c9d0e1f
+                    parent_type: USER
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    privileges:
+                    - ADMINISTRATION
+                    - AUTHORING
+                    - DATADOWNLOADING
+                    user_groups:
+                    - id: 3c4d5e6f-0004-4d5e-9f6a-7b8c9d0e1f2a
+                      name: Administrators
+                    user_inherited_groups:
+                    - id: 3c4d5e6f-0005-4e6f-8a7b-8c9d0e1f2a3b
+                      name: All
+                    home_liveboard:
+                      id: 3c4d5e6f-0006-4f7a-9b8c-9d0e1f2a3b4c
+                      name: Cluster Health
+                    favorite_metadata:
+                    - id: 3c4d5e6f-0007-4a8b-8c9d-0e1f2a3b4c5d
+                      name: Quarterly Revenue
+                      type: LIVEBOARD
+                    tags:
+                    - id: 3c4d5e6f-0008-4b9c-9d0e-1f2a3b4c5d6e
+                      name: certified
+                    group_mask: 6
+                    preferred_locale: en-US
+                    use_browser_language: false
+                    notify_on_share: true
+                    welcome_email_sent: true
+                    onboarding_experience_completed: true
+                    show_onboarding_experience: false
+                    is_first_login: false
+                    super_user: true
+                    system_user: false
+                    external: false
+                    hidden: false
+                    modification_time_in_millis: 1699900060000
+                    first_login_time_in_millis: 1699900100000
+                    expiration_time_in_millis: 1731522000000
+                    extended_preferences:
+                      <preference_key>: <preference_value>
+                    user_parameters:
+                      "0":
+                        runtime_filters:
+                        - column_name: Region
+                          operator: EQ
+                          values:
+                          - East
+                        parameters:
+                        - name: Discount Rate
+                          values:
+                          - "0.1"
+                    access_control_properties:
+                      "0":
+                        ALL:
+                          filter_rules:
+                          - column_name: Region
+                            operator: EQ
+                            values:
+                            - East
+                    variable_values:
+                      "0":
+                        ALL:
+                          variable_values:
+                          - name: color
+                            values:
+                            - red
                     incomplete_details: []
                     org_privileges:
                       "0":
@@ -6536,6 +6606,8 @@ paths:
                       warehouse: <warehouse>
                     policy_principals: []
                     policy_processes: []
+                    policy_process_options:
+                      impersonate_user: <username>
                     disabled: false
                     data_warehouse_type: SNOWFLAKE
                     policy_type: NO_POLICY
@@ -6616,6 +6688,8 @@ paths:
                       warehouse: <warehouse>
                     policy_principals: []
                     policy_processes: []
+                    policy_process_options:
+                      impersonate_user: <username>
                     disabled: false
                     data_warehouse_type: SNOWFLAKE
                     policy_type: NO_POLICY
@@ -7406,6 +7480,7 @@ paths:
                 example:
                   value:
                   - id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                    obj_id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
                     name: Snowflake Sales
                     description: Snowflake connection for the sales warehouse
                     data_warehouse_type: SNOWFLAKE
@@ -9072,6 +9147,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: DBT connection created for a Snowflake connection
+                  value:
+                    dbt_connection_identifier: d3e4f5a6-0003-4b7c-8d9e-0f1a2b3c4d5e
+                    connection_id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
               schema: {}
           description: Succesfully created DBT Connection.
         "400":
@@ -9133,6 +9214,42 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: Regenerated TML after syncing a DBT model
+                  value:
+                    worksheet_tmls:
+                      Marketing Model: |
+                        guid: b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c
+                        worksheet:
+                          name: Marketing Model
+                    table_tmls:
+                    - guid: c8d9e0f1-0008-4a2b-9c3d-5e6f7a8b9c0d
+                      name: CAMPAIGNS
+                    - guid: d9e0f1a2-0009-4b3c-8d4e-6f7a8b9c0d1e
+                      name: LEADS
+                    failed_table_tmls: []
+                    semantic_report:
+                    - model_name: Marketing Model
+                      model_id: b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c
+                      semantic_components:
+                      - name: Campaign Spend
+                        semantic_type: MEASURE
+                        import_status: IMPORTED
+                        sql_expression: sum(campaigns.spend)
+                        translated_formula: "sum ( [spend] )"
+                      - name: Cost Per Lead
+                        semantic_type: METRIC
+                        import_status: IMPORTED
+                        sql_expression: "sum(campaigns.spend) / nullif(count(leads.lead_id),\
+                          \ 0)"
+                        translated_formula: "sum ( [spend] ) / safe_divide ( count\
+                          \ ( [lead_id] ) )"
+                      - name: Channel
+                        semantic_type: DIMENSION
+                        import_status: SKIPPED
+                        sql_expression: campaigns.channel_group
+                        translated_formula: ""
               schema: {}
           description: Sync Table and Worksheet TML's are successfully generated.
         "400":
@@ -9197,6 +9314,37 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: "Generated TML for a DBT model, including the semantic\
+                    \ report"
+                  value:
+                    worksheet_tmls:
+                      Sales Model: |
+                        guid: e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f
+                        worksheet:
+                          name: Sales Model
+                    table_tmls:
+                    - guid: f5a6b7c8-0005-4d9e-8f0a-2b3c4d5e6f7a
+                      name: ORDERS
+                    - guid: a6b7c8d9-0006-4e0f-9a1b-3c4d5e6f7a8b
+                      name: CUSTOMERS
+                    failed_table_tmls:
+                    - RETURNS
+                    semantic_report:
+                    - model_name: Sales Model
+                      model_id: e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f
+                      semantic_components:
+                      - name: Total Sales
+                        semantic_type: MEASURE
+                        import_status: IMPORTED
+                        sql_expression: sum(orders.sales)
+                        translated_formula: "sum ( [sales] )"
+                      - name: Region
+                        semantic_type: DIMENSION
+                        import_status: SKIPPED
+                        sql_expression: customers.region
+                        translated_formula: ""
               schema: {}
           description: Required Table and Worksheet TML's are successfully generated.
         "400":
@@ -10343,6 +10491,45 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                    id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    obj_id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    name: <group_name>
+                    display_name: <group_display_name>
+                    description: Group created for the sales analysts.
+                    visibility: SHARABLE
+                    type: LOCAL_GROUP
+                    parent_type: GROUP
+                    content:
+                      schemaVersion: 3.1.0
+                    privileges:
+                    - DATADOWNLOADING
+                    - USERDATAUPLOADING
+                    complete_detail: true
+                    deleted: false
+                    deprecated: false
+                    external: false
+                    hidden: false
+                    system_group: false
+                    generation_number: 1
+                    index: 0
+                    index_version: 1
+                    metadata_version: 1
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198400000
+                    author_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    modifier_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    owner_id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    users: []
+                    sub_groups: []
+                    default_liveboards: []
+                    tags: []
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    roles: []
               schema:
                 $ref: "#/components/schemas/UserGroupResponse"
           description: User group successfully created.
@@ -10530,6 +10717,82 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  value:
+                  - id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    obj_id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    name: <group_name>
+                    display_name: <group_display_name>
+                    description: Group created for the sales analysts.
+                    visibility: SHARABLE
+                    type: LOCAL_GROUP
+                    parent_type: GROUP
+                    content:
+                      schemaVersion: 3.1.0
+                    privileges:
+                    - DATADOWNLOADING
+                    - USERDATAUPLOADING
+                    complete_detail: true
+                    deleted: false
+                    deprecated: false
+                    external: false
+                    hidden: false
+                    system_group: false
+                    generation_number: 1
+                    index: 0
+                    index_version: 1
+                    metadata_version: 1
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198400000
+                    author_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    modifier_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    owner_id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                    users: []
+                    sub_groups: []
+                    default_liveboards: []
+                    tags: []
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    roles: []
+                  - id: 9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a
+                    obj_id: 9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a
+                    name: <group_name_2>
+                    display_name: <group_display_name_2>
+                    description: Group with LDAP-sourced membership.
+                    visibility: SHARABLE
+                    type: LDAP_GROUP
+                    parent_type: GROUP
+                    content:
+                      schemaVersion: 3.1.0
+                    privileges:
+                    - DATADOWNLOADING
+                    complete_detail: true
+                    deleted: false
+                    deprecated: false
+                    external: true
+                    hidden: false
+                    system_group: false
+                    generation_number: 1
+                    index: 0
+                    index_version: 1
+                    metadata_version: 1
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198400000
+                    author_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    modifier_id: 8c9d0e1f-2a3b-4c4d-8e5f-6a7b8c9d0e1f
+                    owner_id: 9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a
+                    users: []
+                    sub_groups:
+                    - id: 7b8c9d0e-1f2a-4b3c-8d4e-5f6a7b8c9d0e
+                      name: <group_name>
+                    default_liveboards: []
+                    tags: []
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    roles: []
               schema:
                 items:
                   $ref: "#/components/schemas/UserGroupResponse"
@@ -11869,6 +12132,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: Manual translation bundle for a locale
+                  value:
+                    translations:
+                      liveboard.title.sales_overview: Resumen de ventas
+                      column.label.total_sales: Ventas totales
               schema: {}
           description: Translation bundle retrieved successfully.
         "400":
@@ -12175,6 +12445,93 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: Two objects exported successfully
+                  value:
+                  - info:
+                      name: Total sales by region
+                      filename: Total sales by region.answer.tml
+                      status:
+                        status_code: OK
+                      type: ANSWER
+                      id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                      dependency:
+                      - name: Sales Model
+                        filename: Sales Model.worksheet.tml
+                    edoc: |
+                      guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                      answer:
+                        name: Total sales by region
+                        description: Total sales for each region
+                        tables:
+                        - id: Sales Model
+                        search_query: "[sales] [region]"
+                        answer_columns:
+                        - name: region
+                        - name: Total sales
+                        display_mode: CHART_MODE
+                  - info:
+                      name: Snowflake Sales
+                      filename: Snowflake Sales.connection.tml
+                      status:
+                        status_code: OK
+                      type: CONNECTION
+                      id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                      dependency: []
+                      tables:
+                      - name: ORDERS
+                        filename: ORDERS.table.tml
+                    edoc: |
+                      guid: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                      connection:
+                        name: Snowflake Sales
+                        type: RDBMS_SNOWFLAKE
+                        authentication_type: SERVICE_ACCOUNT
+                        properties:
+                        - key: accountName
+                          value: "<account_name>"
+                        - key: role
+                          value: "<role>"
+                example_2:
+                  summary: "One object exported, one failed"
+                  value:
+                  - info:
+                      name: Total sales by region
+                      filename: Total sales by region.answer.tml
+                      status:
+                        status_code: OK
+                      type: ANSWER
+                      id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                      dependency:
+                      - name: Sales Model
+                        filename: Sales Model.worksheet.tml
+                    edoc: |
+                      guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                      answer:
+                        name: Total sales by region
+                        description: Total sales for each region
+                        tables:
+                        - id: Sales Model
+                        search_query: "[sales] [region]"
+                        answer_columns:
+                        - name: region
+                        - name: Total sales
+                        display_mode: CHART_MODE
+                  - info:
+                      name: Finance Liveboard
+                      status:
+                        status_code: ERROR
+                        error_code: 10002
+                        error_message: Object not found or not accessible.
+                      type: ANSWER
+                      id: 6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d
+                      dependency:
+                      - name: Finance Model
+                        status:
+                          status_code: ERROR
+                          error_message: Dependency could not be exported.
+                    edoc: ""
               schema:
                 items: {}
                 type: array
@@ -12245,6 +12602,79 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example_1:
+                  summary: First batch of a batched TML export
+                  value:
+                    result:
+                    - info:
+                        name: Total sales by region
+                        filename: Total sales by region.answer.tml
+                        status:
+                          status_code: OK
+                        type: ANSWER
+                        id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                        dependency:
+                        - name: Sales Model
+                          filename: Sales Model.worksheet.tml
+                      edoc: |
+                        guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                        answer:
+                          name: Total sales by region
+                          description: Total sales for each region
+                          tables:
+                          - id: Sales Model
+                          search_query: "[sales] [region]"
+                          answer_columns:
+                          - name: region
+                          - name: Total sales
+                          display_mode: CHART_MODE
+                    - info:
+                        name: Snowflake Sales
+                        filename: Snowflake Sales.connection.tml
+                        status:
+                          status_code: OK
+                        type: CONNECTION
+                        id: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                        dependency: []
+                        tables:
+                        - name: ORDERS
+                          filename: ORDERS.table.tml
+                      edoc: |
+                        guid: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c
+                        connection:
+                          name: Snowflake Sales
+                          type: RDBMS_SNOWFLAKE
+                          authentication_type: SERVICE_ACCOUNT
+                          properties:
+                          - key: accountName
+                            value: "<account_name>"
+                          - key: role
+                            value: "<role>"
+                    isLastBatch: false
+                    batch_offset: 0
+                    batch_size: 2
+                example_2:
+                  summary: "Final batch, with one object that failed to export"
+                  value:
+                    result:
+                    - info:
+                        name: Finance Liveboard
+                        status:
+                          status_code: ERROR
+                          error_code: 10002
+                          error_message: Object not found or not accessible.
+                        type: ANSWER
+                        id: 6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d
+                        dependency:
+                        - name: Finance Model
+                          status:
+                            status_code: ERROR
+                            error_message: Dependency could not be exported.
+                      edoc: ""
+                    isLastBatch: true
+                    batch_offset: 2
+                    batch_size: 2
               schema: {}
           description: Export TMLs of specified metadata objects is successful.
         "400":
@@ -12573,6 +13003,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: "One object imported, one rejected"
+                  value:
+                  - name: Sales Table
+                    guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                    request_index: 0
+                    response:
+                      status:
+                        status_code: OK
+                      header:
+                        id_guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                        name: Sales Table
+                  - name: Sales Liveboard
+                    request_index: 1
+                    response:
+                      status:
+                        status_code: ERROR
+                        error_message: <error_message>
               schema:
                 items: {}
                 type: array
@@ -12869,9 +13318,16 @@ paths:
                             pinboardFilterDetails:
                               pinboardFiltersAnswerIds: []
                               filterLogicalTableIds: []
-                              logicalTableIdToPinboardFilterVizIds: {}
-                              filterIdToLinkedFilterIds: {}
-                              filterIdToExcludedVizs: {}
+                              logicalTableIdToPinboardFilterVizIds:
+                                "2b3c4d5e-0003-4f6a-9b7c-8d9e0f1a2b3c":
+                                - 3c4d5e6f-0004-4a7b-8c8d-9e0f1a2b3c4d
+                                - 4d5e6f7a-0005-4b8c-9d9e-0f1a2b3c4d5e
+                              filterIdToLinkedFilterIds:
+                                "1a2b3c4d-0001-4e5f-8a6b-7c8d9e0f1a2b":
+                                - 1a2b3c4d-0002-4e5f-8a6b-7c8d9e0f1a2b
+                              filterIdToExcludedVizs:
+                                "1a2b3c4d-0001-4e5f-8a6b-7c8d9e0f1a2b":
+                                - 4d5e6f7a-0005-4b8c-9d9e-0f1a2b3c4d5e
                             visualizations:
                             - vizContent:
                                 refAnswerSheetIndex: 0
@@ -13577,7 +14033,8 @@ paths:
                         csrProtected: false
                       type: FOLDER
                     metadata_detail:
-                      folderContent: {}
+                      folderContent:
+                        schemaVersion: 3.1.0
                       assignedEntities:
                       - 0000001a-0000-4000-8000-00000000001a
                       - 00000001-0000-4000-8000-000000000001
@@ -18904,6 +19361,113 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: Previously deactivated user reactivated
+                  value:
+                    id: c2d3e4f5-0002-4a6b-9c7d-8e9f0a1b2c3d
+                    name: ops_analyst
+                    display_name: Ops Analyst
+                    visibility: SHARABLE
+                    author_id: c2d3e4f5-0002-4a6b-9c7d-8e9f0a1b2c3d
+                    owner_id: c2d3e4f5-0002-4a6b-9c7d-8e9f0a1b2c3d
+                    modifier_id: c2d3e4f5-0002-4a6b-9c7d-8e9f0a1b2c3d
+                    tenant_id: 3c4d5e6f-7a8b-4c9d-8e0f-2a3b4c5d6e7f
+                    parent_type: USER
+                    account_type: LOCAL_USER
+                    account_status: ACTIVE
+                    email: ops.analyst@example.com
+                    complete_detail: true
+                    can_change_password: true
+                    current_org:
+                      id: 0
+                      name: Primary
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    privileges:
+                    - AUTHORING
+                    - DATADOWNLOADING
+                    user_groups:
+                    - id: 7a8b9c0d-1e2f-4a3b-8c4d-6e7f8a9b0c1d
+                      name: Sales
+                    user_inherited_groups:
+                    - id: 8b9c0d1e-2f3a-4b4c-9d5e-7f8a9b0c1d2e
+                      name: All
+                    home_liveboard:
+                      id: 4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a
+                      name: Sales Overview
+                    favorite_metadata:
+                    - id: 5e6f7a8b-9c0d-4e1f-8a2b-4c5d6e7f8a9b
+                      name: Quarterly Revenue
+                      type: LIVEBOARD
+                    tags:
+                    - id: 6f7a8b9c-0d1e-4f2a-9b3c-5d6e7f8a9b0c
+                      name: certified
+                    group_mask: 2
+                    preferred_locale: en-US
+                    use_browser_language: false
+                    notify_on_share: true
+                    welcome_email_sent: true
+                    onboarding_experience_completed: true
+                    show_onboarding_experience: false
+                    is_first_login: false
+                    super_user: false
+                    system_user: false
+                    external: false
+                    hidden: false
+                    deleted: false
+                    deprecated: false
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198460000
+                    first_login_time_in_millis: 1760198500000
+                    expiration_time_in_millis: 1791734400000
+                    incomplete_details: []
+                    org_privileges:
+                      "0":
+                      - AUTHORING
+                      - DATADOWNLOADING
+                    extended_properties:
+                      displayNameLastUpdatedBy: ADMIN
+                    extended_preferences:
+                      notificationChannel: EMAIL
+                    user_parameters:
+                      "0":
+                        runtime_filters:
+                        - column_name: Region
+                          operator: EQ
+                          values:
+                          - East
+                        parameters:
+                        - name: Discount Rate
+                          values:
+                          - "0.1"
+                    access_control_properties:
+                      "0":
+                        ALL:
+                          filter_rules:
+                          - column_name: Region
+                            operator: EQ
+                            values:
+                            - East
+                          parameter_values:
+                          - name: Discount Rate
+                            values:
+                            - "0.1"
+                        "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b":
+                          filter_rules:
+                          - column_name: Product
+                            operator: IN
+                            values:
+                            - Bags
+                            - Shoes
+                    variable_values:
+                      "0":
+                        ALL:
+                          variable_values:
+                          - name: color
+                            values:
+                            - red
               schema:
                 $ref: "#/components/schemas/User"
           description: User activated successfully.
@@ -19018,6 +19582,110 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                example:
+                  summary: User created in the primary org
+                  value:
+                    id: b1c2d3e4-0001-4f5a-8b6c-7d8e9f0a1b2c
+                    name: finance_analyst
+                    display_name: Finance Analyst
+                    visibility: SHARABLE
+                    author_id: b1c2d3e4-0001-4f5a-8b6c-7d8e9f0a1b2c
+                    owner_id: b1c2d3e4-0001-4f5a-8b6c-7d8e9f0a1b2c
+                    modifier_id: b1c2d3e4-0001-4f5a-8b6c-7d8e9f0a1b2c
+                    tenant_id: 3c4d5e6f-7a8b-4c9d-8e0f-2a3b4c5d6e7f
+                    parent_type: USER
+                    account_type: LOCAL_USER
+                    account_status: ACTIVE
+                    email: finance.analyst@example.com
+                    complete_detail: true
+                    can_change_password: true
+                    current_org:
+                      id: 0
+                      name: Primary
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    privileges:
+                    - AUTHORING
+                    - DATADOWNLOADING
+                    user_groups:
+                    - id: 7a8b9c0d-1e2f-4a3b-8c4d-6e7f8a9b0c1d
+                      name: Sales
+                    user_inherited_groups:
+                    - id: 8b9c0d1e-2f3a-4b4c-9d5e-7f8a9b0c1d2e
+                      name: All
+                    home_liveboard:
+                      id: 4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a
+                      name: Sales Overview
+                    favorite_metadata: []
+                    tags:
+                    - id: 6f7a8b9c-0d1e-4f2a-9b3c-5d6e7f8a9b0c
+                      name: certified
+                    group_mask: 2
+                    preferred_locale: en-US
+                    use_browser_language: false
+                    notify_on_share: true
+                    welcome_email_sent: true
+                    onboarding_experience_completed: true
+                    show_onboarding_experience: false
+                    is_first_login: true
+                    super_user: false
+                    system_user: false
+                    external: false
+                    hidden: false
+                    deleted: false
+                    deprecated: false
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198460000
+                    first_login_time_in_millis: 0
+                    expiration_time_in_millis: 1791734400000
+                    incomplete_details: []
+                    org_privileges:
+                      "0":
+                      - AUTHORING
+                      - DATADOWNLOADING
+                    extended_properties:
+                      displayNameLastUpdatedBy: ADMIN
+                    extended_preferences:
+                      notificationChannel: EMAIL
+                    user_parameters:
+                      "0":
+                        runtime_filters:
+                        - column_name: Region
+                          operator: EQ
+                          values:
+                          - East
+                        parameters:
+                        - name: Discount Rate
+                          values:
+                          - "0.1"
+                    access_control_properties:
+                      "0":
+                        ALL:
+                          filter_rules:
+                          - column_name: Region
+                            operator: EQ
+                            values:
+                            - East
+                          parameter_values:
+                          - name: Discount Rate
+                            values:
+                            - "0.1"
+                        "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b":
+                          filter_rules:
+                          - column_name: Product
+                            operator: IN
+                            values:
+                            - Bags
+                            - Shoes
+                    variable_values:
+                      "0":
+                        ALL:
+                          variable_values:
+                          - name: color
+                            values:
+                            - red
               schema:
                 $ref: "#/components/schemas/User"
           description: User successfully created.
@@ -19375,6 +20043,59 @@ paths:
                     name: <username>
                     display_name: <user_display_name>
                     visibility: SHARABLE
+                    author_id: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                    owner_id: 9d0e1f2a-3b4c-4d5e-8f6a-7b8c9d0e1f2a
+                    modifier_id: 2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e
+                    tenant_id: 3c4d5e6f-7a8b-4c9d-8e0f-2a3b4c5d6e7f
+                    parent_type: USER
+                    account_type: LOCAL_USER
+                    account_status: ACTIVE
+                    email: user@example.com
+                    complete_detail: true
+                    can_change_password: true
+                    current_org:
+                      id: 0
+                      name: Primary
+                    orgs:
+                    - id: 0
+                      name: Primary
+                    privileges:
+                    - AUTHORING
+                    - DATADOWNLOADING
+                    user_groups:
+                    - id: 7a8b9c0d-1e2f-4a3b-8c4d-6e7f8a9b0c1d
+                      name: Sales
+                    user_inherited_groups:
+                    - id: 8b9c0d1e-2f3a-4b4c-9d5e-7f8a9b0c1d2e
+                      name: All
+                    home_liveboard:
+                      id: 4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a
+                      name: Sales Overview
+                    favorite_metadata:
+                    - id: 5e6f7a8b-9c0d-4e1f-8a2b-4c5d6e7f8a9b
+                      name: Quarterly Revenue
+                      type: LIVEBOARD
+                    tags:
+                    - id: 6f7a8b9c-0d1e-4f2a-9b3c-5d6e7f8a9b0c
+                      name: certified
+                    group_mask: 2
+                    preferred_locale: en-US
+                    use_browser_language: false
+                    notify_on_share: true
+                    welcome_email_sent: true
+                    onboarding_experience_completed: true
+                    show_onboarding_experience: false
+                    is_first_login: false
+                    super_user: false
+                    system_user: false
+                    external: false
+                    hidden: false
+                    deleted: false
+                    deprecated: false
+                    creation_time_in_millis: 1760198400000
+                    modification_time_in_millis: 1760198460000
+                    first_login_time_in_millis: 1760198500000
+                    expiration_time_in_millis: 1791734400000
                     incomplete_details:
                     - <incomplete_detail_message>
                     org_privileges:
