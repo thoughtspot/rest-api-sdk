@@ -26850,7 +26850,11 @@
             "description": "Name of the object."
           }
         },
-        "description": "The current Org context of the user."
+        "description": "The current Org context of the user.",
+        "example": {
+          "id": 0,
+          "name": "Primary"
+        }
       },
       "FavoriteMetadataItem": {
         "type": "object",
@@ -26883,6 +26887,11 @@
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier."
           }
+        },
+        "example": {
+          "id": "5e6f7a8b-9c0d-4e1f-8a2b-4c5d6e7f8a9b",
+          "name": "Quarterly Revenue",
+          "type": "LIVEBOARD"
         }
       },
       "Object_ID_And_Name": {
@@ -26899,7 +26908,11 @@
             "nullable": true
           }
         },
-        "description": "The object representation with ID and Name."
+        "description": "The object representation with ID and Name.",
+        "example": {
+          "id": "4d5e6f7a-8b9c-4d0e-9f1a-3b4c5d6e7f8a",
+          "name": "Sales Overview"
+        }
       },
       "FavoriteMetadataInput": {
         "type": "object",
@@ -33754,6 +33767,58 @@
             },
             "description": "Databases of the connection."
           }
+        },
+        "example": {
+          "databases": [
+            {
+              "name": "SALES_DB",
+              "auto_created": false,
+              "schemas": [
+                {
+                  "name": "PUBLIC",
+                  "tables": [
+                    {
+                      "name": "ORDERS",
+                      "type": "TABLE",
+                      "description": "",
+                      "selected": true,
+                      "linked": true,
+                      "columns": [
+                        {
+                          "name": "ORDER_ID",
+                          "data_type": "INT64",
+                          "can_import": true,
+                          "selected": true,
+                          "is_linked_active": true
+                        },
+                        {
+                          "name": "CUSTOMER_ID",
+                          "data_type": "INT64",
+                          "can_import": true,
+                          "selected": true,
+                          "is_linked_active": true
+                        }
+                      ],
+                      "relationships": [
+                        {
+                          "name": "FK_ORDERS_CUSTOMERS",
+                          "destDatabase": "SALES_DB",
+                          "destSchema": "PUBLIC",
+                          "destTable": "CUSTOMERS",
+                          "relationshipKeys": [
+                            {
+                              "sourceColumnName": "CUSTOMER_ID",
+                              "destColumnName": "CUSTOMER_ID"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "Database": {
@@ -33779,6 +33844,54 @@
             "description": "Determines if the object is auto created.",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "SALES_DB",
+          "auto_created": false,
+          "schemas": [
+            {
+              "name": "PUBLIC",
+              "tables": [
+                {
+                  "name": "ORDERS",
+                  "type": "TABLE",
+                  "description": "",
+                  "selected": true,
+                  "linked": true,
+                  "columns": [
+                    {
+                      "name": "ORDER_ID",
+                      "data_type": "INT64",
+                      "can_import": true,
+                      "selected": true,
+                      "is_linked_active": true
+                    },
+                    {
+                      "name": "CUSTOMER_ID",
+                      "data_type": "INT64",
+                      "can_import": true,
+                      "selected": true,
+                      "is_linked_active": true
+                    }
+                  ],
+                  "relationships": [
+                    {
+                      "name": "FK_ORDERS_CUSTOMERS",
+                      "destDatabase": "SALES_DB",
+                      "destSchema": "PUBLIC",
+                      "destTable": "CUSTOMERS",
+                      "relationshipKeys": [
+                        {
+                          "sourceColumnName": "CUSTOMER_ID",
+                          "destColumnName": "CUSTOMER_ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "SchemaObject": {
@@ -33799,6 +33912,48 @@
             "description": "Tables in the schema.",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "PUBLIC",
+          "tables": [
+            {
+              "name": "ORDERS",
+              "type": "TABLE",
+              "description": "",
+              "selected": true,
+              "linked": true,
+              "columns": [
+                {
+                  "name": "ORDER_ID",
+                  "data_type": "INT64",
+                  "can_import": true,
+                  "selected": true,
+                  "is_linked_active": true
+                },
+                {
+                  "name": "CUSTOMER_ID",
+                  "data_type": "INT64",
+                  "can_import": true,
+                  "selected": true,
+                  "is_linked_active": true
+                }
+              ],
+              "relationships": [
+                {
+                  "name": "FK_ORDERS_CUSTOMERS",
+                  "destDatabase": "SALES_DB",
+                  "destSchema": "PUBLIC",
+                  "destTable": "CUSTOMERS",
+                  "relationshipKeys": [
+                    {
+                      "sourceColumnName": "CUSTOMER_ID",
+                      "destColumnName": "CUSTOMER_ID"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "Table": {
@@ -33964,6 +34119,13 @@
             "description": "Determines if the table is linked",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "ORDER_ID",
+          "data_type": "INT64",
+          "can_import": true,
+          "selected": true,
+          "is_linked_active": true
         }
       },
       "SearchRoleResponse": {
@@ -35278,7 +35440,11 @@
             "description": "Text body of the user query."
           }
         },
-        "description": "User-authored text message that begins a conversation turn.\nNull when the turn is a synthetic liveboard-started first turn."
+        "description": "User-authored text message that begins a conversation turn.\nNull when the turn is a synthetic liveboard-started first turn.",
+        "example": {
+          "message_id": "a1b2c3d4-0001-4e5f-8a6b-7c8d9e0f1a2b",
+          "content": "What were total sales by region last quarter?"
+        }
       },
       "FileResponseItem": {
         "type": "object",
@@ -35366,7 +35532,14 @@
             "nullable": true
           }
         },
-        "description": "Sanitized metadata for a file attached to or produced by a conversation turn.\nNever exposes internal Azure or blob-storage identifiers."
+        "description": "Sanitized metadata for a file attached to or produced by a conversation turn.\nNever exposes internal Azure or blob-storage identifiers.",
+        "example": {
+          "file_id": "b2c3d4e5-0002-4f6a-9b7c-8d9e0f1a2b3c",
+          "display_name": "regional_targets.csv",
+          "file_type": "text/csv",
+          "created_time_in_millis": 1760198390000,
+          "size_bytes": 2048
+        }
       },
       "ResourceResponseItem": {
         "type": "object",
@@ -35556,7 +35729,12 @@
             "format": "int64"
           }
         },
-        "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map."
+        "description": "Pointer to a code-execution-generated file referenced from a text response item.\nFull metadata (including expiry) is in the top-level `code_execution_files` map.",
+        "example": {
+          "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+          "display_name": "sales_by_region.png",
+          "created_time_in_millis": 1760198406000
+        }
       },
       "ToolCallResponseItem": {
         "type": "object",
@@ -36046,7 +36224,12 @@
             "nullable": true
           }
         },
-        "description": "Header metadata extracted from a data source proto. `guid` is the canonical\ndata source identifier and `display_name` is its user-facing name."
+        "description": "Header metadata extracted from a data source proto. `guid` is the canonical\ndata source identifier and `display_name` is its user-facing name.",
+        "example": {
+          "display_name": "Sales Model",
+          "guid": "0e1f2a3b-4c5d-4e6f-9a7b-8c9d0e1f2a3b",
+          "description": "Sales transactions by region and product"
+        }
       },
       "DataSourcePopularity": {
         "type": "object",
@@ -36116,7 +36299,14 @@
             "description": "True when the file is no longer downloadable (storage expired or evicted)."
           }
         },
-        "description": "Sanitized public metadata for a code-execution-generated file. Internal\nstorage identifiers (e.g. Azure blob ids) are deliberately not exposed."
+        "description": "Sanitized public metadata for a code-execution-generated file. Internal\nstorage identifiers (e.g. Azure blob ids) are deliberately not exposed.",
+        "example": {
+          "file_id": "d4e5f6a7-0004-4b8c-9d9e-0f1a2b3c4d5e",
+          "display_name": "sales_by_region.png",
+          "file_type": "image/png",
+          "created_time_in_millis": 1760198406000,
+          "expired": false
+        }
       },
       "LoadAnswerResponse": {
         "type": "object",
@@ -36339,6 +36529,10 @@
             "description": "Generation number of the transaction.",
             "nullable": true
           }
+        },
+        "example": {
+          "transaction_identifier": "a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+          "generation_number": 2
         }
       },
       "ConversationShareStatusResponse": {
@@ -37111,6 +37305,9 @@
             "type": "string",
             "nullable": true
           }
+        },
+        "example": {
+          "impersonate_user": "<username>"
         }
       },
       "WebhookStorageConfigInfo": {
@@ -37620,6 +37817,10 @@
             "type": "string",
             "description": "Name of the org."
           }
+        },
+        "example": {
+          "id": "0",
+          "name": "Primary"
         }
       },
       "WebhookAuthentication": {
@@ -37645,6 +37846,9 @@
             "description": "Redacted OAuth2 authentication configuration.",
             "nullable": true
           }
+        },
+        "example": {
+          "BEARER_TOKEN": "***"
         }
       },
       "WebhookAuthApiKey": {
@@ -37662,6 +37866,10 @@
             "type": "string",
             "description": "The API key value."
           }
+        },
+        "example": {
+          "key": "X-API-Key",
+          "value": "***"
         }
       },
       "WebhookAuthBasicAuth": {
@@ -37679,6 +37887,10 @@
             "type": "string",
             "description": "Password for basic authentication."
           }
+        },
+        "example": {
+          "username": "webhook_user",
+          "password": "***"
         }
       },
       "WebhookAuthOAuth2": {
@@ -37701,6 +37913,11 @@
             "type": "string",
             "description": "OAuth2 client secret key."
           }
+        },
+        "example": {
+          "authorization_url": "https://auth.example.com/oauth2/authorize",
+          "client_id": "client_123",
+          "client_secret": "***"
         }
       },
       "WebhookSignatureVerification": {
@@ -37734,6 +37951,12 @@
             "type": "string",
             "description": "Shared secret used for HMAC signature generation."
           }
+        },
+        "example": {
+          "type": "HMAC_SHA256",
+          "header": "X-Webhook-Signature",
+          "algorithm": "SHA256",
+          "secret": "***"
         }
       },
       "WebhookKeyValuePair": {
@@ -37752,7 +37975,11 @@
             "description": "Header value."
           }
         },
-        "description": "Key-value pair for additional webhook headers."
+        "description": "Key-value pair for additional webhook headers.",
+        "example": {
+          "key": "Custom-Header",
+          "value": "value1"
+        }
       },
       "WebhookUser": {
         "type": "object",
@@ -37769,6 +37996,10 @@
             "type": "string",
             "description": "Name of the user."
           }
+        },
+        "example": {
+          "id": "8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b",
+          "name": "sarah_chen"
         }
       },
       "StorageDestination": {
@@ -37791,7 +38022,19 @@
             "description": "Storage-specific configuration settings."
           }
         },
-        "description": "Storage destination configuration for webhook payload delivery."
+        "description": "Storage destination configuration for webhook payload delivery.",
+        "example": {
+          "storage_type": "AWS_S3",
+          "storage_config": {
+            "aws_s3_config": {
+              "bucket_name": "my-webhook-files",
+              "region": "us-west-2",
+              "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+              "external_id": "ts-webhook-a1b2c3d4-7890",
+              "path_prefix": "thoughtspot-webhooks/"
+            }
+          }
+        }
       },
       "StorageConfig": {
         "type": "object",
@@ -37807,7 +38050,16 @@
             "nullable": true
           }
         },
-        "description": "Storage configuration containing provider-specific settings."
+        "description": "Storage configuration containing provider-specific settings.",
+        "example": {
+          "aws_s3_config": {
+            "bucket_name": "my-webhook-files",
+            "region": "us-west-2",
+            "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+            "external_id": "ts-webhook-a1b2c3d4-7890",
+            "path_prefix": "thoughtspot-webhooks/"
+          }
+        }
       },
       "AwsS3Config": {
         "type": "object",
@@ -37840,7 +38092,14 @@
             "nullable": true
           }
         },
-        "description": "AWS S3 storage configuration details."
+        "description": "AWS S3 storage configuration details.",
+        "example": {
+          "bucket_name": "my-webhook-files",
+          "region": "us-west-2",
+          "role_arn": "arn:aws:iam::123456789012:role/ThoughtSpotDeliveryRole",
+          "external_id": "ts-webhook-a1b2c3d4-7890",
+          "path_prefix": "thoughtspot-webhooks/"
+        }
       },
       "GcpGcsConfig": {
         "type": "object",
@@ -37863,7 +38122,12 @@
             "nullable": true
           }
         },
-        "description": "GCP GCS storage configuration details."
+        "description": "GCP GCS storage configuration details.",
+        "example": {
+          "bucket_name": "my-webhook-files",
+          "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
+          "path_prefix": "webhooks/"
+        }
       },
       "WebhookPagination": {
         "type": "object",
@@ -37893,6 +38157,12 @@
             "type": "boolean",
             "description": "Indicates whether more records are available beyond the current response."
           }
+        },
+        "example": {
+          "record_offset": 0,
+          "record_size": 50,
+          "total_count": 2,
+          "has_more": false
         }
       },
       "CollectionSearchResponse": {
@@ -38955,7 +39225,11 @@
             "description": "Display name of the Org."
           }
         },
-        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change."
+        "description": "Lightweight Org identifier and display name, as returned in feature\nassignment responses.\nThe field names org_id / org_name intentionally deviate from the bare id /\nname used by the shared Org type: they are the literal wire keys emitted by\nthe Callosum backend, so they are load-bearing for Prism's response field\nmapping and cannot be renamed without a backend change.",
+        "example": {
+          "org_id": 0,
+          "org_name": "Primary"
+        }
       },
       "GenericInfo": {
         "type": "object",
@@ -38981,6 +39255,10 @@
             "type": "string",
             "nullable": true
           }
+        },
+        "example": {
+          "id": 0,
+          "name": "Primary"
         }
       },
       "TokenScopeInput": {
@@ -43281,7 +43559,21 @@
             "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "Text from Spotter — its reasoning or its answer."
+        "description": "Text from Spotter — its reasoning or its answer.",
+        "example": {
+          "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+          "partial": true,
+          "content": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "The user is asking for data",
+                "thought": true
+              }
+            ]
+          }
+        }
       },
       "AgentEventContent": {
         "type": "object",
@@ -43302,7 +43594,16 @@
             "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "The content of one agent event."
+        "description": "The content of one agent event.",
+        "example": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The user is asking for data",
+              "thought": true
+            }
+          ]
+        }
       },
       "AgentEventPart": {
         "type": "object",
@@ -43320,7 +43621,11 @@
             "nullable": true
           }
         },
-        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
+        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself.",
+        "example": {
+          "text": "The user is asking for data",
+          "thought": true
+        }
       },
       "AgentToolCall": {
         "type": "object",
@@ -43386,7 +43691,12 @@
             "nullable": true
           }
         },
-        "description": "A stage of a step in flight, so you can show what Spotter is doing."
+        "description": "A stage of a step in flight, so you can show what Spotter is doing.",
+        "example": {
+          "code": "TML_GEN",
+          "message": "Translating the request with the Reasoning Engine",
+          "tool_call_id": "toolu_01AMjCrr"
+        }
       },
       "AgentToolResult": {
         "type": "object",
@@ -43517,7 +43827,14 @@
             "nullable": true
           }
         },
-        "description": "A failure that ended the turn."
+        "description": "A failure that ended the turn.",
+        "example": {
+          "code": "409",
+          "message": "session busy: lease held by invocation 7f3a",
+          "source": "transport",
+          "display_message": "Another request is still running in this conversation.",
+          "error_bucket": "RETRY"
+        }
       },
       "AgentStreamDone": {
         "type": "object",
@@ -43530,7 +43847,10 @@
             "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "End of turn. Always last."
+        "description": "End of turn. Always last.",
+        "example": {
+          "conversation_identifier": "5612260428840173568"
+        }
       },
       "AgentTurnResponse": {
         "type": "object",
@@ -44603,6 +44923,10 @@
             "format": "int32",
             "nullable": true
           }
+        },
+        "example": {
+          "name": "Primary",
+          "id": 0
         }
       },
       "Template_Properties_Input_Create": {
