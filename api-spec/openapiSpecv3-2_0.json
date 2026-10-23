@@ -41429,7 +41429,7 @@
             "type": "string"
           },
           "answer_tml": {
-            "description": "TML of an unsaved Answer to compile into SQL without saving or executing it. Takes precedence over <code>query_string</code>.\n\n**Note: importing TML in YAML format, when coming directly from our Playground, is currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)** <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "TML of an unsaved Answer to compile into SQL without saving or executing it. Takes precedence over <code>query_string</code>.\n\n**Note: Passing TML in YAML format directly from the Playground currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)** <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "type": "string"
           }
         }
