@@ -21073,6 +21073,14 @@ declare class SearchOrgsRequest {
     * GUIDs or names of the users for which you want to retrieve the Orgs data
     */
     'user_identifiers'?: Array<string>;
+    /**
+    * The starting record number from where the records should be included.    Version: 27.1.0.cl or later
+    */
+    'record_offset'?: number;
+    /**
+    * The number of records that should be included.    Version: 27.1.0.cl or later
+    */
+    'record_size'?: number;
     static readonly discriminator: string | undefined;
     static readonly mapping: {
         [index: string]: string;
@@ -31602,7 +31610,7 @@ declare class OrgsApiRequestFactory extends BaseAPIRequestFactory {
      */
     deleteOrg(orgIdentifier: string, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -33103,7 +33111,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     searchMetadata(searchMetadataRequest: SearchMetadataRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -37328,12 +37336,12 @@ declare class PromiseOrgsApi {
      */
     deleteOrg(orgIdentifier: string, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgsWithHttpInfo(searchOrgsRequest: SearchOrgsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<OrgResponse>>>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: PromiseConfigurationOptions): Promise<Array<OrgResponse>>;
@@ -39399,12 +39407,12 @@ declare class PromiseThoughtSpotRestApi {
      */
     searchMetadata(searchMetadataRequest: SearchMetadataRequest, _options?: PromiseConfigurationOptions): Promise<Array<MetadataSearchResponse>>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgsWithHttpInfo(searchOrgsRequest: SearchOrgsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Array<OrgResponse>>>;
     /**
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: `record_size` (default `10`) sets the number of Orgs returned and `record_offset` (default `0`) sets the starting record. To retrieve all Orgs, increase `record_offset` by `record_size` until a page returns fewer than `record_size` Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `ORG_ADMINISTRATION` (**Can manage Orgs**) privilege is required.
      * @param searchOrgsRequest
      */
     searchOrgs(searchOrgsRequest: SearchOrgsRequest, _options?: PromiseConfigurationOptions): Promise<Array<OrgResponse>>;

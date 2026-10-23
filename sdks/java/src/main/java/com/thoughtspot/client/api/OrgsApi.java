@@ -446,7 +446,7 @@ public class OrgsApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of Orgs returned and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record. To retrieve all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a page returns fewer than &#x60;record_size&#x60; Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
      * @param searchOrgsRequest  (required)
      * @return List&lt;OrgResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -468,7 +468,7 @@ public class OrgsApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of Orgs returned and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record. To retrieve all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a page returns fewer than &#x60;record_size&#x60; Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
      * @param searchOrgsRequest  (required)
      * @return ApiResponse&lt;List&lt;OrgResponse&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -491,7 +491,7 @@ public class OrgsApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
+     *   Version: 9.0.0.cl or later   Gets a list of Orgs configured on the ThoughtSpot system. To get details of a specific Org, specify the Org ID or name. You can also pass parameters such as status, visibility, and user identifiers to get a specific list of Orgs.  Results are paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of Orgs returned and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record. To retrieve all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a page returns fewer than &#x60;record_size&#x60; Orgs.  Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.      
      * @param searchOrgsRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call

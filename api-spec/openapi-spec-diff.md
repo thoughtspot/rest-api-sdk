@@ -20,6 +20,11 @@
 -  endpoint added
 
 
+### POST /api/rest/2.0/orgs/search
+-  added the new optional request property `record_offset`
+-  added the new optional request property `record_size`
+
+
 ### POST /api/rest/2.0/roles/search
 - :warning: added the new `CAN_CREATE_DATA_APP` enum value to the `items/privileges/items/` response property for the response status `200`
 - :warning: added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the `items/privileges/items/` response property for the response status `200`

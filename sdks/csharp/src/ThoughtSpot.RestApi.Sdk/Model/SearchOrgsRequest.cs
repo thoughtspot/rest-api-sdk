@@ -94,13 +94,17 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="visibility">Visibility of the Org.</param>
         /// <param name="status">Status of the Org.</param>
         /// <param name="userIdentifiers">GUIDs or names of the users for which you want to retrieve the Orgs data.</param>
-        public SearchOrgsRequest(string orgIdentifier = default, string description = default, VisibilityEnum? visibility = default, StatusEnum? status = default, List<string> userIdentifiers = default)
+        /// <param name="recordOffset">The starting record number from where the records should be included.    Version: 27.1.0.cl or later  (default to 0).</param>
+        /// <param name="recordSize">The number of records that should be included.    Version: 27.1.0.cl or later  (default to 10).</param>
+        public SearchOrgsRequest(string orgIdentifier = default, string description = default, VisibilityEnum? visibility = default, StatusEnum? status = default, List<string> userIdentifiers = default, int recordOffset = 0, int recordSize = 10)
         {
             this.OrgIdentifier = orgIdentifier;
             this.Description = description;
             this.Visibility = visibility;
             this.Status = status;
             this.UserIdentifiers = userIdentifiers;
+            this.RecordOffset = recordOffset;
+            this.RecordSize = recordSize;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -126,6 +130,20 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public List<string> UserIdentifiers { get; set; }
 
         /// <summary>
+        /// The starting record number from where the records should be included.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>The starting record number from where the records should be included.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "record_offset", EmitDefaultValue = false)]
+        public int RecordOffset { get; set; }
+
+        /// <summary>
+        /// The number of records that should be included.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>The number of records that should be included.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "record_size", EmitDefaultValue = false)]
+        public int RecordSize { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -144,6 +162,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  Visibility: ").Append(Visibility).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  UserIdentifiers: ").Append(UserIdentifiers).Append("\n");
+            sb.Append("  RecordOffset: ").Append(RecordOffset).Append("\n");
+            sb.Append("  RecordSize: ").Append(RecordSize).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

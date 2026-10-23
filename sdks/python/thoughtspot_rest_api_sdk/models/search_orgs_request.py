@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,8 +30,10 @@ class SearchOrgsRequest(BaseModel):
     visibility: Optional[StrictStr] = Field(default=None, description="Visibility of the Org")
     status: Optional[StrictStr] = Field(default=None, description="Status of the Org")
     user_identifiers: Optional[List[StrictStr]] = Field(default=None, description="GUIDs or names of the users for which you want to retrieve the Orgs data")
+    record_offset: Optional[StrictInt] = Field(default=0, description="The starting record number from where the records should be included.    Version: 27.1.0.cl or later ")
+    record_size: Optional[StrictInt] = Field(default=10, description="The number of records that should be included.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["org_identifier", "description", "visibility", "status", "user_identifiers"]
+    __properties: ClassVar[List[str]] = ["org_identifier", "description", "visibility", "status", "user_identifiers", "record_offset", "record_size"]
 
     @field_validator('visibility')
     def visibility_validate_enum(cls, value):
@@ -115,7 +117,9 @@ class SearchOrgsRequest(BaseModel):
             "description": obj.get("description"),
             "visibility": obj.get("visibility"),
             "status": obj.get("status"),
-            "user_identifiers": obj.get("user_identifiers")
+            "user_identifiers": obj.get("user_identifiers"),
+            "record_offset": obj.get("record_offset") if obj.get("record_offset") is not None else 0,
+            "record_size": obj.get("record_size") if obj.get("record_size") is not None else 10
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

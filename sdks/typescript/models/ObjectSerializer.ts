@@ -1011,7 +1011,7 @@ import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizat
 import { SearchFeaturesRequest, SearchFeaturesRequestScopeEnum   , SearchFeaturesRequestCategoryEnum   } from '../models/SearchFeaturesRequest';
 import { SearchLinkCustomizationsRequest, SearchLinkCustomizationsRequestScopeEnum   } from '../models/SearchLinkCustomizationsRequest';
 import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                        , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
-import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
+import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum      } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
 import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRolesRequestPermissionsEnum   } from '../models/SearchRolesRequest';
 import { SearchSchedulesRequest } from '../models/SearchSchedulesRequest';
