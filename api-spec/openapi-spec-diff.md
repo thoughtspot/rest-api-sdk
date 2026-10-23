@@ -15,22 +15,6 @@
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/usage-data/delete
--  endpoint added
-
-
-### POST /api/rest/2.0/ai/usage-data/search
--  endpoint added
-
-
-### POST /api/rest/2.0/ai/usage-data/update
--  endpoint added
-
-
-### GET /api/rest/2.0/ai/usage-data/user
--  endpoint added
-
-
 ### POST /api/rest/2.0/auth/session/login
 -  added the new optional request property `no_url_redirection`
 -  added the new optional request property `redirect_url`
@@ -71,10 +55,6 @@
 ### POST /api/rest/2.0/customization/styles/update
 -  added the new optional request property `app_color_theme`
 -  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
-
-
-### POST /api/rest/2.0/metadata/search
--  added the new optional request property `liveboard_details`
 
 
 ### POST /api/rest/2.0/version-control/branch/promote
