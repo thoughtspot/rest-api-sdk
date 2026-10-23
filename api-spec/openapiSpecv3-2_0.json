@@ -3303,55 +3303,6 @@
               "application/json": {
                 "schema": {
                   "type": "object"
-                },
-                "examples": {
-                  "example": {
-                    "summary": "Agent reply containing a text message and an answer",
-                    "value": {
-                      "messages": [
-                        {
-                          "metadata": {},
-                          "internal": {},
-                          "type": "text",
-                          "text": "Let me look at the sales columns in the dataset.",
-                          "agent_context": ""
-                        },
-                        {
-                          "metadata": {
-                            "output": "<base64-encoded-protobuf-output>",
-                            "worksheet_id": "b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c",
-                            "assumptions": "",
-                            "chart_type": "COLUMN",
-                            "interrupted": false,
-                            "data_awareness_enabled": true
-                          },
-                          "internal": {},
-                          "type": "answer",
-                          "title": "Total sales by region",
-                          "description": "",
-                          "session_id": "c8d9e0f1-0008-4a2b-9c3d-5e6f7a8b9c0d",
-                          "gen_no": 1,
-                          "sage_query": "[sales] [region]",
-                          "tml_tokens": [
-                            "[sales]",
-                            "[region]"
-                          ],
-                          "formulas": [],
-                          "parameters": [],
-                          "subqueries": [],
-                          "viz_suggestion": "CAEQIBomEiQwYTFiMmMzZC00ZTVmLTRhNmItOGM3ZC05ZTBmMWEyYjNjNGQoATIA",
-                          "ac_state": null
-                        },
-                        {
-                          "metadata": {},
-                          "internal": {},
-                          "type": "text",
-                          "text": "The chart shows total sales for each region.",
-                          "agent_context": ""
-                        }
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -27965,7 +27916,7 @@
           "tags": [],
           "orgs": [
             {
-              "id": "0",
+              "id": 0,
               "name": "Primary"
             }
           ],
@@ -37936,6 +37887,10 @@
             "type": "string",
             "description": "Password for basic authentication."
           }
+        },
+        "example": {
+          "username": "webhook_user",
+          "password": "***"
         }
       },
       "WebhookAuthOAuth2": {
@@ -37958,6 +37913,11 @@
             "type": "string",
             "description": "OAuth2 client secret key."
           }
+        },
+        "example": {
+          "authorization_url": "https://auth.example.com/oauth2/authorize",
+          "client_id": "client_123",
+          "client_secret": "***"
         }
       },
       "WebhookSignatureVerification": {
@@ -38162,7 +38122,12 @@
             "nullable": true
           }
         },
-        "description": "GCP GCS storage configuration details."
+        "description": "GCP GCS storage configuration details.",
+        "example": {
+          "bucket_name": "my-webhook-files",
+          "service_account_email": "my-sa@my-project.iam.gserviceaccount.com",
+          "path_prefix": "webhooks/"
+        }
       },
       "WebhookPagination": {
         "type": "object",
@@ -39292,7 +39257,7 @@
           }
         },
         "example": {
-          "id": "0",
+          "id": 0,
           "name": "Primary"
         }
       },
