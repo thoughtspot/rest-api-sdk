@@ -268,6 +268,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient
     from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent
     from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse
+    from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput
     from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions
     from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse
@@ -813,6 +814,7 @@ from thoughtspot_rest_api_sdk.models.jwt_user_options_full import JWTUserOptions
 from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient
 from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse
+from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput
 from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions
 from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse

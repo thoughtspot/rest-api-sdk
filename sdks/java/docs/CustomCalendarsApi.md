@@ -113,7 +113,7 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Generate custom calendar data based on specifications, as a CSV file. |  -  |
+| **200** | Generate custom calendar data based on specifications, as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

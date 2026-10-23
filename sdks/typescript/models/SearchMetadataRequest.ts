@@ -12,6 +12,7 @@
 
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
 import { FavoriteObjectOptionsInput } from '../models/FavoriteObjectOptionsInput';
+import { LiveboardDetailsInput } from '../models/LiveboardDetailsInput';
 import { MetadataListItemInput } from '../models/MetadataListItemInput';
 import { MetadataSearchSortOptions } from '../models/MetadataSearchSortOptions';
 import { PermissionInput } from '../models/PermissionInput';
@@ -59,9 +60,13 @@ export class SearchMetadataRequest {
     */
     'include_details'?: boolean | null;
     /**
-    * When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects.
+    * When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. Personalised views are also included when liveboard_details.personalized_views is true.
     */
     'include_personalised_views'?: boolean | null;
+    /**
+    * <div>Version: 26.10.0.cl or later </div>  Selects which parts of a Liveboard\'s `metadata_detail` are returned, so that a request can skip the parts it does not need.  Applies only to `LIVEBOARD` objects, and only when `include_details` is `true` and `liveboard_response_version` is `V2`. Otherwise it is ignored.  * `liveboard_filters`, `liveboard_tabs`, `container_layouts`, `visualizations`, `parameter_overrides`: default to `true`. Set a field to `false` to exclude that part of the Liveboard. * `personalized_views`: defaults to `false`. Personalised views are included when either this field or `include_personalised_views` is `true`.  The Liveboard header, type, and style are always returned. Excluded collections are returned empty.  To fetch only the personalised views of a Liveboard, set every other field to `false`. The Liveboard definition is then not loaded, and `metadata_detail` contains only `personalised_views`:  ```json \"liveboard_details\": {   \"liveboard_filters\": false,   \"liveboard_tabs\": false,   \"container_layouts\": false,   \"visualizations\": false,   \"parameter_overrides\": false,   \"personalized_views\": true } ```
+    */
+    'liveboard_details'?: LiveboardDetailsInput;
     /**
     * Includes headers of the metadata objects.
     */
@@ -192,6 +197,12 @@ export class SearchMetadataRequest {
             "name": "include_personalised_views",
             "baseName": "include_personalised_views",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "liveboard_details",
+            "baseName": "liveboard_details",
+            "type": "LiveboardDetailsInput",
             "format": ""
         },
         {

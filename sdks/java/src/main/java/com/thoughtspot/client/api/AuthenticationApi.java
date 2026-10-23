@@ -1610,7 +1610,23 @@ public class AuthenticationApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -1638,7 +1654,23 @@ public class AuthenticationApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -1668,7 +1700,23 @@ public class AuthenticationApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @param _callback The callback to be executed when the API call finishes

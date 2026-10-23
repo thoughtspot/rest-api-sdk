@@ -254,6 +254,7 @@ export * from '../models/JWTUserOptionsFull';
 export * from '../models/JobRecipient';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
+export * from '../models/LiveboardDetailsInput';
 export * from '../models/LiveboardOptions';
 export * from '../models/LiveboardOptionsInput';
 export * from '../models/LoadAnswerResponse';
@@ -792,6 +793,7 @@ import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JobRecipient, JobRecipientTypeEnum      } from '../models/JobRecipient';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
+import { LiveboardDetailsInput } from '../models/LiveboardDetailsInput';
 import { LiveboardOptions } from '../models/LiveboardOptions';
 import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
@@ -908,7 +910,7 @@ import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
 import { SearchFeaturesRequest, SearchFeaturesRequestScopeEnum   , SearchFeaturesRequestCategoryEnum   } from '../models/SearchFeaturesRequest';
-import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                      , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
+import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                       , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
 import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRolesRequestPermissionsEnum   } from '../models/SearchRolesRequest';
@@ -1649,6 +1651,7 @@ let typeMap: {[index: string]: any} = {
     "JobRecipient": JobRecipient,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
+    "LiveboardDetailsInput": LiveboardDetailsInput,
     "LiveboardOptions": LiveboardOptions,
     "LiveboardOptionsInput": LiveboardOptionsInput,
     "LoadAnswerResponse": LoadAnswerResponse,

@@ -278,7 +278,7 @@ public class ManualTranslationApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -365,8 +365,9 @@ public class ManualTranslationApi {
      * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
      * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
      * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
-     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
-     * org or cluster scope.
+     * All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and
+     * &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns
+     * a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @return File
@@ -376,7 +377,7 @@ public class ManualTranslationApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -399,8 +400,9 @@ public class ManualTranslationApi {
      * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
      * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
      * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
-     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
-     * org or cluster scope.
+     * All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and
+     * &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns
+     * a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -410,7 +412,7 @@ public class ManualTranslationApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -434,8 +436,10 @@ public class ManualTranslationApi {
      * application**) privilege. #### Usage guidelines - The response is a CSV file with columns:
      * &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to
      * &#x60;ORG&#x60; scope if not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to
-     * export translations from the All-Org context. - Returns a &#x60;404&#x60; error if no
-     * translations exist for the targeted org or cluster scope.
+     * export translations from the All-Org context. - &#x60;scope&#x60; accepts only
+     * &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a
+     * &#x60;400&#x60; error. - Returns a &#x60;400&#x60; error if no translations exist for the
+     * targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -446,7 +450,7 @@ public class ManualTranslationApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -561,7 +565,7 @@ public class ManualTranslationApi {
      * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
      * for a specific locale as a JSON map. Available to all authenticated users. No additional
      * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
-     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
      * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
      * key is the original string and each value is the translated string. - If the org has no
      * translations for the requested locale, the endpoint falls back to cluster-level translations.
@@ -594,7 +598,7 @@ public class ManualTranslationApi {
      * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
      * for a specific locale as a JSON map. Available to all authenticated users. No additional
      * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
-     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
      * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
      * key is the original string and each value is the translated string. - If the org has no
      * translations for the requested locale, the endpoint falls back to cluster-level translations.
@@ -629,12 +633,12 @@ public class ManualTranslationApi {
      * (asynchronously) Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves
      * all translations for a specific locale as a JSON map. Available to all authenticated users.
      * No additional privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter
-     * must be a hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
-     * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
-     * key is the original string and each value is the translated string. - If the org has no
-     * translations for the requested locale, the endpoint falls back to cluster-level translations.
-     * - Returns an empty &#x60;translations&#x60; map (not an error) if no entries exist at either
-     * level.
+     * must be a hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;,
+     * &#x60;de-de&#x60;, &#x60;JA-JP&#x60;). - Returns a JSON object with a
+     * &#x60;translations&#x60; map where each key is the original string and each value is the
+     * translated string. - If the org has no translations for the requested locale, the endpoint
+     * falls back to cluster-level translations. - Returns an empty &#x60;translations&#x60; map
+     * (not an error) if no entries exist at either level.
      *
      * @param locale Locale code for which to retrieve translations. For example, &#x60;fr-fr&#x60;,
      *     &#x60;de-de&#x60;, &#x60;JA-JP&#x60;. (required)
@@ -772,7 +776,9 @@ public class ManualTranslationApi {
      * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
      * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
      * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
-     * act as defaults for orgs that have no translations for a locale.
+     * act as defaults for orgs that have no translations for a locale. - &#x60;scope&#x60; accepts
+     * only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns
+     * a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:
@@ -809,7 +815,9 @@ public class ManualTranslationApi {
      * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
      * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
      * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
-     * act as defaults for orgs that have no translations for a locale.
+     * act as defaults for orgs that have no translations for a locale. - &#x60;scope&#x60; accepts
+     * only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns
+     * a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:
@@ -850,7 +858,9 @@ public class ManualTranslationApi {
      * **upsert**: existing entries matched by &#x60;(org_id, locale, content)&#x60; are updated;
      * new entries are inserted. Entries not in the upload are left untouched. - Set
      * &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload translations to the All-Org context.
-     * Cluster-level translations act as defaults for orgs that have no translations for a locale.
+     * Cluster-level translations act as defaults for orgs that have no translations for a locale. -
+     * &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in
+     * uppercase. Any other value returns a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:

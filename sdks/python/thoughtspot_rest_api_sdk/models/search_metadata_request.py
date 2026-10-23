@@ -19,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput
 from thoughtspot_rest_api_sdk.models.favorite_object_options_input import FavoriteObjectOptionsInput
+from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput
 from thoughtspot_rest_api_sdk.models.metadata_list_item_input import MetadataListItemInput
 from thoughtspot_rest_api_sdk.models.metadata_search_sort_options import MetadataSearchSortOptions
 from thoughtspot_rest_api_sdk.models.permission_input import PermissionInput
@@ -40,7 +41,8 @@ class SearchMetadataRequest(BaseModel):
     include_dependent_objects: Optional[StrictBool] = Field(default=False, description="Includes dependents of the metadata object specified in the API request. For example, a worksheet can consist of dependent objects such as Liveboards or Answers.")
     dependent_objects_record_size: Optional[StrictInt] = Field(default=50, description="The maximum number of dependents to include per metadata object.")
     include_details: Optional[StrictBool] = Field(default=False, description="Includes complete details of the metadata objects.")
-    include_personalised_views: Optional[StrictBool] = Field(default=False, description="When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects.")
+    include_personalised_views: Optional[StrictBool] = Field(default=False, description="When set to true and include_details is also true, includes personalised views in the metadata_detail for LIVEBOARD objects. Personalised views are also included when liveboard_details.personalized_views is true.")
+    liveboard_details: Optional[LiveboardDetailsInput] = Field(default=None, description="<div>Version: 26.10.0.cl or later </div>  Selects which parts of a Liveboard's `metadata_detail` are returned, so that a request can skip the parts it does not need.  Applies only to `LIVEBOARD` objects, and only when `include_details` is `true` and `liveboard_response_version` is `V2`. Otherwise it is ignored.  * `liveboard_filters`, `liveboard_tabs`, `container_layouts`, `visualizations`, `parameter_overrides`: default to `true`. Set a field to `false` to exclude that part of the Liveboard. * `personalized_views`: defaults to `false`. Personalised views are included when either this field or `include_personalised_views` is `true`.  The Liveboard header, type, and style are always returned. Excluded collections are returned empty.  To fetch only the personalised views of a Liveboard, set every other field to `false`. The Liveboard definition is then not loaded, and `metadata_detail` contains only `personalised_views`:  ```json \"liveboard_details\": {   \"liveboard_filters\": false,   \"liveboard_tabs\": false,   \"container_layouts\": false,   \"visualizations\": false,   \"parameter_overrides\": false,   \"personalized_views\": true } ```")
     include_headers: Optional[StrictBool] = Field(default=True, description="Includes headers of the metadata objects.")
     include_hidden_objects: Optional[StrictBool] = Field(default=False, description="Includes details of the hidden objects, such as a column in a worksheet or a table.")
     include_incomplete_objects: Optional[StrictBool] = Field(default=False, description="Includes objects with incomplete metadata.")
@@ -57,7 +59,7 @@ class SearchMetadataRequest(BaseModel):
     liveboard_response_version: Optional[StrictStr] = Field(default='V1', description="Indicates the model version of Liveboard to be attached in metadata detail.")
     include_only_published_objects: Optional[StrictBool] = Field(default=False, description="<div>Version: 10.11.0.cl or later </div>  If only published objects should be returned")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata", "permissions", "created_by_user_identifiers", "dependent_object_version", "exclude_objects", "favorite_object_options", "include_auto_created_objects", "include_dependent_objects", "dependent_objects_record_size", "include_details", "include_personalised_views", "include_headers", "include_hidden_objects", "include_incomplete_objects", "include_visualization_headers", "include_worksheet_search_assist_data", "modified_by_user_identifiers", "record_offset", "record_size", "sort_options", "tag_identifiers", "include_stats", "include_discoverable_objects", "show_resolved_parameters", "liveboard_response_version", "include_only_published_objects"]
+    __properties: ClassVar[List[str]] = ["metadata", "permissions", "created_by_user_identifiers", "dependent_object_version", "exclude_objects", "favorite_object_options", "include_auto_created_objects", "include_dependent_objects", "dependent_objects_record_size", "include_details", "include_personalised_views", "liveboard_details", "include_headers", "include_hidden_objects", "include_incomplete_objects", "include_visualization_headers", "include_worksheet_search_assist_data", "modified_by_user_identifiers", "record_offset", "record_size", "sort_options", "tag_identifiers", "include_stats", "include_discoverable_objects", "show_resolved_parameters", "liveboard_response_version", "include_only_published_objects"]
 
     @field_validator('dependent_object_version')
     def dependent_object_version_validate_enum(cls, value):
@@ -144,6 +146,9 @@ class SearchMetadataRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of favorite_object_options
         if self.favorite_object_options:
             _dict['favorite_object_options'] = self.favorite_object_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of liveboard_details
+        if self.liveboard_details:
+            _dict['liveboard_details'] = self.liveboard_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of sort_options
         if self.sort_options:
             _dict['sort_options'] = self.sort_options.to_dict()
@@ -240,6 +245,7 @@ class SearchMetadataRequest(BaseModel):
             "dependent_objects_record_size": obj.get("dependent_objects_record_size") if obj.get("dependent_objects_record_size") is not None else 50,
             "include_details": obj.get("include_details") if obj.get("include_details") is not None else False,
             "include_personalised_views": obj.get("include_personalised_views") if obj.get("include_personalised_views") is not None else False,
+            "liveboard_details": LiveboardDetailsInput.from_dict(obj["liveboard_details"]) if obj.get("liveboard_details") is not None else None,
             "include_headers": obj.get("include_headers") if obj.get("include_headers") is not None else True,
             "include_hidden_objects": obj.get("include_hidden_objects") if obj.get("include_hidden_objects") is not None else False,
             "include_incomplete_objects": obj.get("include_incomplete_objects") if obj.get("include_incomplete_objects") is not None else False,

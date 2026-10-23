@@ -44,8 +44,9 @@ public class ManualTranslationApiTest {
      * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
      * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
      * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
-     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
-     * org or cluster scope.
+     * All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and
+     * &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns
+     * a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.
      *
      * @throws ApiException if the Api call fails
      */
@@ -60,7 +61,7 @@ public class ManualTranslationApiTest {
      * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
      * for a specific locale as a JSON map. Available to all authenticated users. No additional
      * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
-     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
      * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
      * key is the original string and each value is the translated string. - If the org has no
      * translations for the requested locale, the endpoint falls back to cluster-level translations.
@@ -88,7 +89,9 @@ public class ManualTranslationApiTest {
      * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
      * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
      * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
-     * act as defaults for orgs that have no translations for a locale.
+     * act as defaults for orgs that have no translations for a locale. - &#x60;scope&#x60; accepts
+     * only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns
+     * a &#x60;400&#x60; error.
      *
      * @throws ApiException if the Api call fails
      */

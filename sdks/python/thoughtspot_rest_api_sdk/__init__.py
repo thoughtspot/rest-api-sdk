@@ -21,7 +21,7 @@ _ts_warnings.filterwarnings(
 """  # noqa: E501
 
 
-__version__ = "2.29.0"
+__version__ = "2.29.1"
 
 # Define package exports
 __all__ = [
@@ -321,6 +321,7 @@ __all__ = [
     "JobRecipient",
     "LiveboardContent",
     "LiveboardDataResponse",
+    "LiveboardDetailsInput",
     "LiveboardOptions",
     "LiveboardOptionsInput",
     "LoadAnswerResponse",
@@ -906,6 +907,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient as JobRecipient
     from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
     from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
+    from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput as LiveboardDetailsInput
     from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
     from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput as LiveboardOptionsInput
     from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse
@@ -1497,6 +1499,7 @@ from thoughtspot_rest_api_sdk.models.jwt_user_options_full import JWTUserOptions
 from thoughtspot_rest_api_sdk.models.job_recipient import JobRecipient as JobRecipient
 from thoughtspot_rest_api_sdk.models.liveboard_content import LiveboardContent as LiveboardContent
 from thoughtspot_rest_api_sdk.models.liveboard_data_response import LiveboardDataResponse as LiveboardDataResponse
+from thoughtspot_rest_api_sdk.models.liveboard_details_input import LiveboardDetailsInput as LiveboardDetailsInput
 from thoughtspot_rest_api_sdk.models.liveboard_options import LiveboardOptions as LiveboardOptions
 from thoughtspot_rest_api_sdk.models.liveboard_options_input import LiveboardOptionsInput as LiveboardOptionsInput
 from thoughtspot_rest_api_sdk.models.load_answer_response import LoadAnswerResponse as LoadAnswerResponse
