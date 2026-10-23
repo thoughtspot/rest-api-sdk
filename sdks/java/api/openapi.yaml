@@ -23015,7 +23015,7 @@ components:
         - privileges
         preferred_locale: preferred_locale
         account_type: LOCAL_USER
-        group_mask: 5
+        group_mask: 2
         onboarding_experience_completed: true
         user_inherited_groups:
         - name: name
@@ -23030,7 +23030,7 @@ components:
         owner_id: owner_id
         deprecated: true
         access_control_properties: ""
-        modification_time_in_millis: 2.302136
+        modification_time_in_millis: 7.0614014
         account_status: ACTIVE
         home_liveboard:
           name: name
@@ -23049,6 +23049,7 @@ components:
         incomplete_details: ""
         extended_preferences: ""
         email: email
+        last_active_time_in_millis: 5.637377
         welcome_email_sent: true
         org_privileges: ""
         visibility: SHARABLE
@@ -23169,6 +23170,12 @@ components:
           type: array
         first_login_time_in_millis:
           description: Timestamp of the first login session of the user in milliseconds.
+          format: float
+          nullable: true
+          type: number
+        last_active_time_in_millis:
+          description: "Timestamp of the last active session of the user in milliseconds.\
+            \ \n  Version: 27.1.0.cl or later\n"
           format: float
           nullable: true
           type: number

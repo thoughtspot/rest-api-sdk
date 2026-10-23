@@ -20869,6 +20869,12 @@ _User.attributeTypeMap = [
     "format": "float"
   },
   {
+    "name": "last_active_time_in_millis",
+    "baseName": "last_active_time_in_millis",
+    "type": "number",
+    "format": "float"
+  },
+  {
     "name": "group_mask",
     "baseName": "group_mask",
     "type": "number",

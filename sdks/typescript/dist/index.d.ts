@@ -27446,6 +27446,10 @@ declare class User {
     */
     'first_login_time_in_millis'?: number | null;
     /**
+    * Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later
+    */
+    'last_active_time_in_millis'?: number | null;
+    /**
     * Group mask of the user.
     */
     'group_mask'?: number | null;

@@ -46,6 +46,7 @@ class User(BaseModel):
     external: Optional[StrictBool] = Field(default=None, description="Indicates whether the user is external.")
     favorite_metadata: Optional[List[FavoriteMetadataItem]] = Field(default=None, description="Metadata objects to add to the users' favorites list.")
     first_login_time_in_millis: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp of the first login session of the user in milliseconds.")
+    last_active_time_in_millis: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later ")
     group_mask: Optional[StrictInt] = Field(default=None, description="Group mask of the user.")
     hidden: Optional[StrictBool] = Field(default=None, description="Indicates whether the user is hidden.")
     home_liveboard: Optional[ObjectIDAndName] = None
@@ -76,7 +77,7 @@ class User(BaseModel):
     access_control_properties: Optional[Any] = Field(default=None, description="Access Control Properties which are specified for the user via JWToken")
     variable_values: Optional[Any] = Field(default=None, description="Formula Variables which are specified for the user via JWToken")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "display_name", "visibility", "author_id", "can_change_password", "complete_detail", "creation_time_in_millis", "current_org", "deleted", "deprecated", "account_type", "account_status", "email", "expiration_time_in_millis", "external", "favorite_metadata", "first_login_time_in_millis", "group_mask", "hidden", "home_liveboard", "incomplete_details", "is_first_login", "modification_time_in_millis", "modifier_id", "notify_on_share", "onboarding_experience_completed", "orgs", "owner_id", "parent_type", "privileges", "show_onboarding_experience", "super_user", "system_user", "tags", "tenant_id", "user_groups", "user_inherited_groups", "welcome_email_sent", "org_privileges", "preferred_locale", "use_browser_language", "extended_properties", "extended_preferences", "user_parameters", "access_control_properties", "variable_values"]
+    __properties: ClassVar[List[str]] = ["id", "name", "display_name", "visibility", "author_id", "can_change_password", "complete_detail", "creation_time_in_millis", "current_org", "deleted", "deprecated", "account_type", "account_status", "email", "expiration_time_in_millis", "external", "favorite_metadata", "first_login_time_in_millis", "last_active_time_in_millis", "group_mask", "hidden", "home_liveboard", "incomplete_details", "is_first_login", "modification_time_in_millis", "modifier_id", "notify_on_share", "onboarding_experience_completed", "orgs", "owner_id", "parent_type", "privileges", "show_onboarding_experience", "super_user", "system_user", "tags", "tenant_id", "user_groups", "user_inherited_groups", "welcome_email_sent", "org_privileges", "preferred_locale", "use_browser_language", "extended_properties", "extended_preferences", "user_parameters", "access_control_properties", "variable_values"]
 
     @field_validator('visibility')
     def visibility_validate_enum(cls, value):
@@ -267,6 +268,11 @@ class User(BaseModel):
         if self.first_login_time_in_millis is None and "first_login_time_in_millis" in self.model_fields_set:
             _dict['first_login_time_in_millis'] = None
 
+        # set to None if last_active_time_in_millis (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_active_time_in_millis is None and "last_active_time_in_millis" in self.model_fields_set:
+            _dict['last_active_time_in_millis'] = None
+
         # set to None if group_mask (nullable) is None
         # and model_fields_set contains the field
         if self.group_mask is None and "group_mask" in self.model_fields_set:
@@ -437,6 +443,7 @@ class User(BaseModel):
             "external": obj.get("external"),
             "favorite_metadata": [FavoriteMetadataItem.from_dict(_item) for _item in obj["favorite_metadata"]] if obj.get("favorite_metadata") is not None else None,
             "first_login_time_in_millis": obj.get("first_login_time_in_millis"),
+            "last_active_time_in_millis": obj.get("last_active_time_in_millis"),
             "group_mask": obj.get("group_mask"),
             "hidden": obj.get("hidden"),
             "home_liveboard": ObjectIDAndName.from_dict(obj["home_liveboard"]) if obj.get("home_liveboard") is not None else None,

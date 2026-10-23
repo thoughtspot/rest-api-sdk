@@ -309,6 +309,11 @@ public class User implements Serializable {
   @javax.annotation.Nullable
   private Float firstLoginTimeInMillis;
 
+  public static final String SERIALIZED_NAME_LAST_ACTIVE_TIME_IN_MILLIS = "last_active_time_in_millis";
+  @SerializedName(SERIALIZED_NAME_LAST_ACTIVE_TIME_IN_MILLIS)
+  @javax.annotation.Nullable
+  private Float lastActiveTimeInMillis;
+
   public static final String SERIALIZED_NAME_GROUP_MASK = "group_mask";
   @SerializedName(SERIALIZED_NAME_GROUP_MASK)
   @javax.annotation.Nullable
@@ -856,6 +861,25 @@ public class User implements Serializable {
 
   public void setFirstLoginTimeInMillis(@javax.annotation.Nullable Float firstLoginTimeInMillis) {
     this.firstLoginTimeInMillis = firstLoginTimeInMillis;
+  }
+
+
+  public User lastActiveTimeInMillis(@javax.annotation.Nullable Float lastActiveTimeInMillis) {
+    this.lastActiveTimeInMillis = lastActiveTimeInMillis;
+    return this;
+  }
+
+  /**
+   * Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later 
+   * @return lastActiveTimeInMillis
+   */
+  @javax.annotation.Nullable
+  public Float getLastActiveTimeInMillis() {
+    return lastActiveTimeInMillis;
+  }
+
+  public void setLastActiveTimeInMillis(@javax.annotation.Nullable Float lastActiveTimeInMillis) {
+    this.lastActiveTimeInMillis = lastActiveTimeInMillis;
   }
 
 
@@ -1522,6 +1546,7 @@ public class User implements Serializable {
         Objects.equals(this.external, user.external) &&
         Objects.equals(this.favoriteMetadata, user.favoriteMetadata) &&
         Objects.equals(this.firstLoginTimeInMillis, user.firstLoginTimeInMillis) &&
+        Objects.equals(this.lastActiveTimeInMillis, user.lastActiveTimeInMillis) &&
         Objects.equals(this.groupMask, user.groupMask) &&
         Objects.equals(this.hidden, user.hidden) &&
         Objects.equals(this.homeLiveboard, user.homeLiveboard) &&
@@ -1556,7 +1581,7 @@ public class User implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, useBrowserLanguage, extendedProperties, extendedPreferences, userParameters, accessControlProperties, variableValues, additionalProperties);
+    return Objects.hash(id, name, displayName, visibility, authorId, canChangePassword, completeDetail, creationTimeInMillis, currentOrg, deleted, deprecated, accountType, accountStatus, email, expirationTimeInMillis, external, favoriteMetadata, firstLoginTimeInMillis, lastActiveTimeInMillis, groupMask, hidden, homeLiveboard, incompleteDetails, isFirstLogin, modificationTimeInMillis, modifierId, notifyOnShare, onboardingExperienceCompleted, orgs, ownerId, parentType, privileges, showOnboardingExperience, superUser, systemUser, tags, tenantId, userGroups, userInheritedGroups, welcomeEmailSent, orgPrivileges, preferredLocale, useBrowserLanguage, extendedProperties, extendedPreferences, userParameters, accessControlProperties, variableValues, additionalProperties);
   }
 
   @Override
@@ -1581,6 +1606,7 @@ public class User implements Serializable {
     sb.append("    external: ").append(toIndentedString(external)).append("\n");
     sb.append("    favoriteMetadata: ").append(toIndentedString(favoriteMetadata)).append("\n");
     sb.append("    firstLoginTimeInMillis: ").append(toIndentedString(firstLoginTimeInMillis)).append("\n");
+    sb.append("    lastActiveTimeInMillis: ").append(toIndentedString(lastActiveTimeInMillis)).append("\n");
     sb.append("    groupMask: ").append(toIndentedString(groupMask)).append("\n");
     sb.append("    hidden: ").append(toIndentedString(hidden)).append("\n");
     sb.append("    homeLiveboard: ").append(toIndentedString(homeLiveboard)).append("\n");
@@ -1651,6 +1677,7 @@ public class User implements Serializable {
     openapiFields.add("external");
     openapiFields.add("favorite_metadata");
     openapiFields.add("first_login_time_in_millis");
+    openapiFields.add("last_active_time_in_millis");
     openapiFields.add("group_mask");
     openapiFields.add("hidden");
     openapiFields.add("home_liveboard");

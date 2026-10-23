@@ -217,6 +217,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'LastActiveTimeInMillis'
+        /// </summary>
+        [Fact]
+        public void LastActiveTimeInMillisTest()
+        {
+            // TODO unit test for the property 'LastActiveTimeInMillis'
+        }
+
+        /// <summary>
         /// Test the property 'GroupMask'
         /// </summary>
         [Fact]

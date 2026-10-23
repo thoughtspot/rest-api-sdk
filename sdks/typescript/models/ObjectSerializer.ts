@@ -1147,7 +1147,7 @@ import { UsageDataUpdateInput } from '../models/UsageDataUpdateInput';
 import { UsagePoolKey, UsagePoolKeyEntityTypeEnum    } from '../models/UsagePoolKey';
 import { UsagePoolKeyInput, UsagePoolKeyInputEntityTypeEnum    } from '../models/UsagePoolKeyInput';
 import { UsageSummary } from '../models/UsageSummary';
-import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
+import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                   , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                      , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
 import { UserInfo } from '../models/UserInfo';

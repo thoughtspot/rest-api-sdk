@@ -22412,14 +22412,15 @@ components:
           name: name
           type: LIVEBOARD
         first_login_time_in_millis: 5.962134
-        group_mask: 5
+        last_active_time_in_millis: 5.637377
+        group_mask: 2
         hidden: true
         home_liveboard:
           id: id
           name: name
         incomplete_details: ""
         is_first_login: true
-        modification_time_in_millis: 2.302136
+        modification_time_in_millis: 7.0614014
         modifier_id: modifier_id
         notify_on_share: true
         onboarding_experience_completed: true
@@ -22547,6 +22548,12 @@ components:
           type: array
         first_login_time_in_millis:
           description: Timestamp of the first login session of the user in milliseconds.
+          format: float
+          nullable: true
+          type: number
+        last_active_time_in_millis:
+          description: "Timestamp of the last active session of the user in milliseconds.\
+            \ \n  Version: 27.1.0.cl or later\n"
           format: float
           nullable: true
           type: number
