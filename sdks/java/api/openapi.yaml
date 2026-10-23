@@ -2515,6 +2515,9 @@ paths:
                       description: Total sales for each region in the last quarter
                       session_identifier: e5f6a7b8-0005-4c9d-8e0f-1a2b3c4d5e6f
                       generation_number: 2
+                      ac_state:
+                        transaction_identifier: a7b8c9d0-1e2f-4a3b-8c4d-5e6f7a8b9c0d
+                        generation_number: 2
                       tokens:
                       - "[sales]"
                       - "[region]"
