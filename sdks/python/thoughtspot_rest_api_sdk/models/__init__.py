@@ -78,6 +78,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.aws_s3_config_input import AwsS3ConfigInput
     from thoughtspot_rest_api_sdk.models.basic_auth import BasicAuth
     from thoughtspot_rest_api_sdk.models.basic_auth_input import BasicAuthInput
+    from thoughtspot_rest_api_sdk.models.build_metadata_index_request import BuildMetadataIndexRequest
     from thoughtspot_rest_api_sdk.models.callback import CALLBACK
     from thoughtspot_rest_api_sdk.models.callback_input import CALLBACKInput
     from thoughtspot_rest_api_sdk.models.callback_input_mandatory import CALLBACKInputMandatory
@@ -691,6 +692,7 @@ from thoughtspot_rest_api_sdk.models.aws_s3_config import AwsS3Config
 from thoughtspot_rest_api_sdk.models.aws_s3_config_input import AwsS3ConfigInput
 from thoughtspot_rest_api_sdk.models.basic_auth import BasicAuth
 from thoughtspot_rest_api_sdk.models.basic_auth_input import BasicAuthInput
+from thoughtspot_rest_api_sdk.models.build_metadata_index_request import BuildMetadataIndexRequest
 from thoughtspot_rest_api_sdk.models.callback import CALLBACK
 from thoughtspot_rest_api_sdk.models.callback_input import CALLBACKInput
 from thoughtspot_rest_api_sdk.models.callback_input_mandatory import CALLBACKInputMandatory

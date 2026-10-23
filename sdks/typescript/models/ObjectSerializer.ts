@@ -64,6 +64,7 @@ export * from '../models/AwsS3Config';
 export * from '../models/AwsS3ConfigInput';
 export * from '../models/BasicAuth';
 export * from '../models/BasicAuthInput';
+export * from '../models/BuildMetadataIndexRequest';
 export * from '../models/CALLBACK';
 export * from '../models/CALLBACKInput';
 export * from '../models/CALLBACKInputMandatory';
@@ -670,6 +671,7 @@ import { AwsS3Config } from '../models/AwsS3Config';
 import { AwsS3ConfigInput } from '../models/AwsS3ConfigInput';
 import { BasicAuth } from '../models/BasicAuth';
 import { BasicAuthInput } from '../models/BasicAuthInput';
+import { BuildMetadataIndexRequest } from '../models/BuildMetadataIndexRequest';
 import { CALLBACK } from '../models/CALLBACK';
 import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
@@ -1630,6 +1632,7 @@ let typeMap: {[index: string]: any} = {
     "AwsS3ConfigInput": AwsS3ConfigInput,
     "BasicAuth": BasicAuth,
     "BasicAuthInput": BasicAuthInput,
+    "BuildMetadataIndexRequest": BuildMetadataIndexRequest,
     "CALLBACK": CALLBACK,
     "CALLBACKInput": CALLBACKInput,
     "CALLBACKInputMandatory": CALLBACKInputMandatory,

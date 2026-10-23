@@ -12,6 +12,10 @@
 -  added the new optional request property `delete_reason`
 
 
+### POST /api/rest/2.0/metadata/{logical_table_identifier}/build-index
+-  endpoint added
+
+
 ### POST /api/rest/2.0/roles/search
 - :warning: added the new `CAN_CREATE_DATA_APP` enum value to the `items/privileges/items/` response property for the response status `200`
 - :warning: added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the `items/privileges/items/` response property for the response status `200`

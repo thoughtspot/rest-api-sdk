@@ -150,6 +150,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.AwsS3ConfigInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.BasicAuth.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.BasicAuthInput.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.BuildMetadataIndexRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.CALLBACK.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.CALLBACKInput.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.thoughtspot.client.model.CALLBACKInputMandatory.CustomTypeAdapterFactory());

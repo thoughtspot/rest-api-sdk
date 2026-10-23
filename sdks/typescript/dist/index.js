@@ -2535,6 +2535,26 @@ _BasicAuthInput.attributeTypeMap = [
 ];
 var BasicAuthInput = _BasicAuthInput;
 
+// models/BuildMetadataIndexRequest.ts
+var _BuildMetadataIndexRequest = class _BuildMetadataIndexRequest {
+  static getAttributeTypeMap() {
+    return _BuildMetadataIndexRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_BuildMetadataIndexRequest.discriminator = void 0;
+_BuildMetadataIndexRequest.mapping = void 0;
+_BuildMetadataIndexRequest.attributeTypeMap = [
+  {
+    "name": "org_identifier",
+    "baseName": "org_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var BuildMetadataIndexRequest = _BuildMetadataIndexRequest;
+
 // models/CALLBACK.ts
 var _CALLBACK = class _CALLBACK {
   static getAttributeTypeMap() {
@@ -23967,6 +23987,7 @@ var typeMap = {
   "AwsS3ConfigInput": AwsS3ConfigInput,
   "BasicAuth": BasicAuth,
   "BasicAuthInput": BasicAuthInput,
+  "BuildMetadataIndexRequest": BuildMetadataIndexRequest,
   "CALLBACK": CALLBACK,
   "CALLBACKInput": CALLBACKInput,
   "CALLBACKInputMandatory": CALLBACKInputMandatory,
@@ -86153,6 +86174,7 @@ export {
   BasicAuth,
   BasicAuthInput,
   BearerAuthAuthentication,
+  BuildMetadataIndexRequest,
   CALLBACK,
   CALLBACKInput,
   CALLBACKInputMandatory,

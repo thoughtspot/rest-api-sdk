@@ -41508,6 +41508,14 @@ components:
           - CLUSTER
           type: string
       type: object
+    BuildMetadataIndexRequest:
+      properties:
+        org_identifier:
+          description: Unique ID or name of the Org that contains the logical table.
+            Defaults to the Org of the current session. Reindexing a table in another
+            Org requires tenant administrator privileges.
+          type: string
+      type: object
     ConvertWorksheetToModelRequest:
       example:
         worksheet_ids:
@@ -47469,6 +47477,11 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
+- name: 27.1.0.cl
+  id: 27.1.0.cl
+  tags:
+  - 27.1.0.cl
+  description: Roles for version 27.1.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:

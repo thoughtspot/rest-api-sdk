@@ -68,6 +68,7 @@ import { AwsS3Config } from '../models/AwsS3Config';
 import { AwsS3ConfigInput } from '../models/AwsS3ConfigInput';
 import { BasicAuth } from '../models/BasicAuth';
 import { BasicAuthInput } from '../models/BasicAuthInput';
+import { BuildMetadataIndexRequest } from '../models/BuildMetadataIndexRequest';
 import { CALLBACK } from '../models/CALLBACK';
 import { CALLBACKInput } from '../models/CALLBACKInput';
 import { CALLBACKInputMandatory } from '../models/CALLBACKInputMandatory';
