@@ -326,6 +326,7 @@ models/JWTUserOptionsFull.ts
 models/JobRecipient.ts
 models/LiveboardContent.ts
 models/LiveboardDataResponse.ts
+models/LiveboardDetailsInput.ts
 models/LiveboardOptions.ts
 models/LiveboardOptionsInput.ts
 models/LoadAnswerResponse.ts

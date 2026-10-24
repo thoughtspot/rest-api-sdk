@@ -67,6 +67,10 @@
 -  added the optional property `scope/org_scope` to the response with the `200` status
 
 
+### POST /api/rest/2.0/calendars/generate-csv
+-  the response header `content-disposition` was added for the status `200`
+
+
 ### POST /api/rest/2.0/configurations/features/assignments/update
 -  endpoint added
 
@@ -79,9 +83,17 @@
 -  endpoint added
 
 
+### POST /api/rest/2.0/localizations/manual-translation/export
+-  the response header `content-disposition` was added for the status `200`
+
+
 ### POST /api/rest/2.0/metadata/headers/update
 -  added the new `ROLE` enum value to the request property `headers_update/items/type`
 -  added the new `TEMPLATE_VARIABLE` enum value to the request property `headers_update/items/type`
+
+
+### POST /api/rest/2.0/metadata/search
+-  added the new optional request property `liveboard_details`
 
 
 ### POST /api/rest/2.0/metadata/tml/export

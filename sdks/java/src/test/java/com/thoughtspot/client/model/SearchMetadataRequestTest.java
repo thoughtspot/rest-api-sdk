@@ -82,6 +82,12 @@ public class SearchMetadataRequestTest {
         // TODO: test includePersonalisedViews
     }
 
+    /** Test the property 'liveboardDetails' */
+    @Test
+    public void liveboardDetailsTest() {
+        // TODO: test liveboardDetails
+    }
+
     /** Test the property 'includeHeaders' */
     @Test
     public void includeHeadersTest() {

@@ -274,6 +274,7 @@ docs/JobRecipient.md
 docs/JobsApi.md
 docs/LiveboardContent.md
 docs/LiveboardDataResponse.md
+docs/LiveboardDetailsInput.md
 docs/LiveboardOptions.md
 docs/LiveboardOptionsInput.md
 docs/LoadAnswerResponse.md
@@ -891,6 +892,7 @@ src/main/java/com/thoughtspot/client/model/JWTUserOptionsFull.java
 src/main/java/com/thoughtspot/client/model/JobRecipient.java
 src/main/java/com/thoughtspot/client/model/LiveboardContent.java
 src/main/java/com/thoughtspot/client/model/LiveboardDataResponse.java
+src/main/java/com/thoughtspot/client/model/LiveboardDetailsInput.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptions.java
 src/main/java/com/thoughtspot/client/model/LiveboardOptionsInput.java
 src/main/java/com/thoughtspot/client/model/LoadAnswerResponse.java
@@ -1458,6 +1460,7 @@ src/test/java/com/thoughtspot/client/model/JWTUserOptionsTest.java
 src/test/java/com/thoughtspot/client/model/JobRecipientTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardContentTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardDataResponseTest.java
+src/test/java/com/thoughtspot/client/model/LiveboardDetailsInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsInputTest.java
 src/test/java/com/thoughtspot/client/model/LiveboardOptionsTest.java
 src/test/java/com/thoughtspot/client/model/LoadAnswerResponseTest.java

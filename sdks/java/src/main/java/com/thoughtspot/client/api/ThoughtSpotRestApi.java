@@ -4655,19 +4655,22 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Creates a custom action that appears as a menu action on a saved
-     * Answer or Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has Developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. #### Usage Guidelines The API lets you create the following types of custom
-     * actions: * URL-based action Allows pushing data to an external URL. * Callback action
-     * Triggers a callback to the host application and initiates a response payload on an embedded
-     * ThoughtSpot instance. By default, custom actions are visible to only administrator or
-     * developer users. To make a custom action available to other users, and specify the groups in
-     * &#x60;group_identifiers&#x60;. By default, the custom action is set as a _global_ action on
-     * all visualizations and saved Answers. To assign a custom action to specific Liveboard
-     * visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Creates a custom action that appears as a menu action on a saved Answer or
+     * Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
+     * Guidelines The API lets you create the following types of custom actions: * URL-based action
+     * Allows pushing data to an external URL. * Callback action Triggers a callback to the host
+     * application and initiates a response payload on an embedded ThoughtSpot instance. By default,
+     * custom actions are visible to only administrator or developer users. To make a custom action
+     * available to other users, and specify the groups in &#x60;group_identifiers&#x60;. By
+     * default, the custom action is set as a _global_ action on all visualizations and saved
+     * Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or
+     * Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in
      * &#x60;default_action_config&#x60; property and specify the GUID or name of the object in
      * &#x60;associate_metadata&#x60;. For more information, see [Custom
      * actions](https://developers.thoughtspot.com/docs/custom-action-intro).
@@ -4695,19 +4698,22 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Creates a custom action that appears as a menu action on a saved
-     * Answer or Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has Developer
-     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
-     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
-     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
-     * required. #### Usage Guidelines The API lets you create the following types of custom
-     * actions: * URL-based action Allows pushing data to an external URL. * Callback action
-     * Triggers a callback to the host application and initiates a response payload on an embedded
-     * ThoughtSpot instance. By default, custom actions are visible to only administrator or
-     * developer users. To make a custom action available to other users, and specify the groups in
-     * &#x60;group_identifiers&#x60;. By default, the custom action is set as a _global_ action on
-     * all visualizations and saved Answers. To assign a custom action to specific Liveboard
-     * visualization, saved Answer, or Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Creates a custom action that appears as a menu action on a saved Answer or
+     * Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
+     * Guidelines The API lets you create the following types of custom actions: * URL-based action
+     * Allows pushing data to an external URL. * Callback action Triggers a callback to the host
+     * application and initiates a response payload on an embedded ThoughtSpot instance. By default,
+     * custom actions are visible to only administrator or developer users. To make a custom action
+     * available to other users, and specify the groups in &#x60;group_identifiers&#x60;. By
+     * default, the custom action is set as a _global_ action on all visualizations and saved
+     * Answers. To assign a custom action to specific Liveboard visualization, saved Answer, or
+     * Worksheet, set &#x60;visibility&#x60; to &#x60;false&#x60; in
      * &#x60;default_action_config&#x60; property and specify the GUID or name of the object in
      * &#x60;associate_metadata&#x60;. For more information, see [Custom
      * actions](https://developers.thoughtspot.com/docs/custom-action-intro).
@@ -4736,12 +4742,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.6.0.cl or later Creates a custom action that appears as a menu
-     * action on a saved Answer or Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has
-     * Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
+     * (asynchronously) Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from
+     * 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Creates a custom action that appears as a menu action on a saved Answer or
+     * Liveboard visualization. Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or
+     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
+     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
+     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
      * Guidelines The API lets you create the following types of custom actions: * URL-based action
      * Allows pushing data to an external URL. * Callback action Triggers a callback to the host
      * application and initiates a response payload on an embedded ThoughtSpot instance. By default,
@@ -9802,7 +9810,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Removes the custom action specified in the API request. Requires
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Removes the custom action specified in the API request. Requires
      * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
@@ -9827,7 +9838,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Removes the custom action specified in the API request. Requires
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Removes the custom action specified in the API request. Requires
      * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
@@ -9856,11 +9870,14 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.6.0.cl or later Removes the custom action specified in the API
-     * request. Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or
-     * &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.
+     * (asynchronously) Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from
+     * 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Removes the custom action specified in the API request. Requires
+     * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.
      *
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -13685,7 +13702,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -13772,8 +13789,9 @@ public class ThoughtSpotRestApi {
      * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
      * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
      * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
-     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
-     * org or cluster scope.
+     * All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and
+     * &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns
+     * a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @return File
@@ -13783,7 +13801,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -13806,8 +13824,9 @@ public class ThoughtSpotRestApi {
      * guidelines - The response is a CSV file with columns: &#x60;content&#x60;,
      * &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if
      * not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the
-     * All-Org context. - Returns a &#x60;404&#x60; error if no translations exist for the targeted
-     * org or cluster scope.
+     * All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and
+     * &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns
+     * a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @return ApiResponse&lt;File&gt;
@@ -13817,7 +13836,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -13841,8 +13860,10 @@ public class ThoughtSpotRestApi {
      * application**) privilege. #### Usage guidelines - The response is a CSV file with columns:
      * &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to
      * &#x60;ORG&#x60; scope if not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to
-     * export translations from the All-Org context. - Returns a &#x60;404&#x60; error if no
-     * translations exist for the targeted org or cluster scope.
+     * export translations from the All-Org context. - &#x60;scope&#x60; accepts only
+     * &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a
+     * &#x60;400&#x60; error. - Returns a &#x60;400&#x60; error if no translations exist for the
+     * targeted org or cluster scope.
      *
      * @param exportManualTranslationsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -13853,7 +13874,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -17463,7 +17484,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -17560,7 +17581,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -17593,7 +17614,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -17629,7 +17650,7 @@ public class ThoughtSpotRestApi {
      *     <table border="1">
      * <caption>Response Details</caption>
      * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  -  </td></tr>
+     * <tr><td> 200 </td><td> Generate custom calendar data based on specifications, as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
      * <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
      * <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
      * <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -20145,7 +20166,7 @@ public class ThoughtSpotRestApi {
      * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
      * for a specific locale as a JSON map. Available to all authenticated users. No additional
      * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
-     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
      * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
      * key is the original string and each value is the translated string. - If the org has no
      * translations for the requested locale, the endpoint falls back to cluster-level translations.
@@ -20178,7 +20199,7 @@ public class ThoughtSpotRestApi {
      * Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves all translations
      * for a specific locale as a JSON map. Available to all authenticated users. No additional
      * privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter must be a
-     * hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
+     * hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
      * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
      * key is the original string and each value is the translated string. - If the org has no
      * translations for the requested locale, the endpoint falls back to cluster-level translations.
@@ -20213,12 +20234,12 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Get translations bundle for a locale. Version: 26.7.0.cl or later Retrieves
      * all translations for a specific locale as a JSON map. Available to all authenticated users.
      * No additional privileges are required. #### Usage guidelines - &#x60;locale&#x60; parameter
-     * must be a hyphenated locale code (for example, &#x60;fr-fr&#x60;, &#x60;de-de&#x60;,
-     * &#x60;JA-JP&#x60;). - Returns a JSON object with a &#x60;translations&#x60; map where each
-     * key is the original string and each value is the translated string. - If the org has no
-     * translations for the requested locale, the endpoint falls back to cluster-level translations.
-     * - Returns an empty &#x60;translations&#x60; map (not an error) if no entries exist at either
-     * level.
+     * must be a hyphenated locale code, in any case (for example, &#x60;fr-fr&#x60;,
+     * &#x60;de-de&#x60;, &#x60;JA-JP&#x60;). - Returns a JSON object with a
+     * &#x60;translations&#x60; map where each key is the original string and each value is the
+     * translated string. - If the org has no translations for the requested locale, the endpoint
+     * falls back to cluster-level translations. - Returns an empty &#x60;translations&#x60; map
+     * (not an error) if no entries exist at either level.
      *
      * @param locale Locale code for which to retrieve translations. For example, &#x60;fr-fr&#x60;,
      *     &#x60;de-de&#x60;, &#x60;JA-JP&#x60;. (required)
@@ -22133,7 +22154,9 @@ public class ThoughtSpotRestApi {
      * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
      * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
      * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
-     * act as defaults for orgs that have no translations for a locale.
+     * act as defaults for orgs that have no translations for a locale. - &#x60;scope&#x60; accepts
+     * only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns
+     * a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:
@@ -22170,7 +22193,9 @@ public class ThoughtSpotRestApi {
      * entries matched by &#x60;(org_id, locale, content)&#x60; are updated; new entries are
      * inserted. Entries not in the upload are left untouched. - Set &#x60;scope&#x60; to
      * &#x60;CLUSTER&#x60; to upload translations to the All-Org context. Cluster-level translations
-     * act as defaults for orgs that have no translations for a locale.
+     * act as defaults for orgs that have no translations for a locale. - &#x60;scope&#x60; accepts
+     * only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns
+     * a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:
@@ -22211,7 +22236,9 @@ public class ThoughtSpotRestApi {
      * **upsert**: existing entries matched by &#x60;(org_id, locale, content)&#x60; are updated;
      * new entries are inserted. Entries not in the upload are left untouched. - Set
      * &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to upload translations to the All-Org context.
-     * Cluster-level translations act as defaults for orgs that have no translations for a locale.
+     * Cluster-level translations act as defaults for orgs that have no translations for a locale. -
+     * &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in
+     * uppercase. Any other value returns a &#x60;400&#x60; error.
      *
      * @param translationsFile CSV file containing translations. The file must have three columns:
      *     &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Max file size:
@@ -24502,7 +24529,23 @@ public class ThoughtSpotRestApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
@@ -24530,7 +24573,23 @@ public class ThoughtSpotRestApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @return ApiResponse&lt;Void&gt;
@@ -24560,7 +24619,23 @@ public class ThoughtSpotRestApi {
      * context. **Note**: If Multi-Factor Authentication (MFA) is enabled on your instance, the API
      * login request with basic authentication (&#x60;username&#x60; and &#x60;password&#x60; )
      * returns an error. Contact ThoughtSpot Support for assistance. A successful login returns a
-     * session cookie that can be used in your subsequent API requests.
+     * session cookie that can be used in your subsequent API requests. #### Redirecting after login
+     * To send a browser to a specific page once the session is created, pass
+     * &#x60;redirect_url&#x60;. It must be a path on the same ThoughtSpot instance that served the
+     * login request, for example &#x60;/pinboards&#x60;. An absolute URL is rejected with
+     * &#x60;400&#x60;, so that a login cannot be used to forward a newly issued session cookie to
+     * another host. The path is resolved against the host the caller actually reached, which means
+     * the same request works unchanged on a custom domain, behind a proxy, or on an Org-specific
+     * subdomain. * **Browser flows** — omit &#x60;no_url_redirection&#x60;. The API answers
+     * &#x60;302&#x60; with the resolved path in the &#x60;location&#x60; header, and the browser
+     * follows it on its own. This is the usual choice when the login is submitted as an HTML form
+     * or opened as a top-level navigation. * **SPA and non-browser clients** — set
+     * &#x60;no_url_redirection&#x60; to &#x60;true&#x60;. The API keeps its normal &#x60;204&#x60;
+     * response and returns the resolved path in the &#x60;location&#x60; header without
+     * redirecting, leaving the client to decide when and where to navigate. Use this from
+     * &#x60;fetch&#x60;/&#x60;XMLHttpRequest&#x60; calls, which follow a &#x60;302&#x60; internally
+     * and never expose it to your code. When &#x60;redirect_url&#x60; is omitted the response is
+     * unchanged, and &#x60;no_url_redirection&#x60; has no effect on its own.
      *
      * @param loginRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -29002,7 +29077,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Gets custom actions configured on the cluster. Requires
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Gets custom actions configured on the cluster. Requires
      * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
@@ -29031,7 +29109,10 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Gets custom actions configured on the cluster. Requires
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Gets custom actions configured on the cluster. Requires
      * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
      * administer ThoughtSpot**) privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
@@ -29061,9 +29142,12 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.6.0.cl or later Gets custom actions configured on the cluster.
-     * Requires &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60;
-     * (**Can administer ThoughtSpot**) privilege. If [Role-Based Access Control
+     * (asynchronously) Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from
+     * 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Gets custom actions configured on the cluster. Requires
+     * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
+     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required.
      *
@@ -30090,8 +30174,12 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Gets a list of Orgs configured on the ThoughtSpot system. To get
      * details of a specific Org, specify the Org ID or name. You can also pass parameters such as
-     * status, visibility, and user identifiers to get a specific list of Orgs. Requires cluster
-     * administration (**Can administer Org**) privileges. If [Role-Based Access Control
+     * status, visibility, and user identifiers to get a specific list of Orgs. Results are
+     * paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of Orgs returned
+     * and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record. To retrieve
+     * all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a page returns
+     * fewer than &#x60;record_size&#x60; Orgs. Requires cluster administration (**Can administer
+     * Org**) privileges. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.
      *
@@ -30118,8 +30206,12 @@ public class ThoughtSpotRestApi {
     /**
      * Version: 9.0.0.cl or later Gets a list of Orgs configured on the ThoughtSpot system. To get
      * details of a specific Org, specify the Org ID or name. You can also pass parameters such as
-     * status, visibility, and user identifiers to get a specific list of Orgs. Requires cluster
-     * administration (**Can administer Org**) privileges. If [Role-Based Access Control
+     * status, visibility, and user identifiers to get a specific list of Orgs. Results are
+     * paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of Orgs returned
+     * and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record. To retrieve
+     * all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a page returns
+     * fewer than &#x60;record_size&#x60; Orgs. Requires cluster administration (**Can administer
+     * Org**) privileges. If [Role-Based Access Control
      * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
      * &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.
      *
@@ -30149,9 +30241,13 @@ public class ThoughtSpotRestApi {
      * (asynchronously) Version: 9.0.0.cl or later Gets a list of Orgs configured on the ThoughtSpot
      * system. To get details of a specific Org, specify the Org ID or name. You can also pass
      * parameters such as status, visibility, and user identifiers to get a specific list of Orgs.
-     * Requires cluster administration (**Can administer Org**) privileges. If [Role-Based Access
-     * Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance,
-     * the &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.
+     * Results are paginated: &#x60;record_size&#x60; (default &#x60;10&#x60;) sets the number of
+     * Orgs returned and &#x60;record_offset&#x60; (default &#x60;0&#x60;) sets the starting record.
+     * To retrieve all Orgs, increase &#x60;record_offset&#x60; by &#x60;record_size&#x60; until a
+     * page returns fewer than &#x60;record_size&#x60; Orgs. Requires cluster administration (**Can
+     * administer Org**) privileges. If [Role-Based Access Control
+     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
+     * &#x60;ORG_ADMINISTRATION&#x60; (**Can manage Orgs**) privilege is required.
      *
      * @param searchOrgsRequest (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -39259,14 +39355,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Updates a custom action. Requires &#x60;DEVELOPER&#x60; (**Has
-     * Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
-     * Guidelines The API allows you to modify the following properties: * Name of the custom action
-     * * Action availability to groups * Association to metadata objects * Authentication settings
-     * for a URL-based action For more information, see [Custom
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Updates a custom action. Requires &#x60;DEVELOPER&#x60; (**Has Developer
+     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
+     * required. #### Usage Guidelines The API allows you to modify the following properties: * Name
+     * of the custom action * Action availability to groups * Association to metadata objects *
+     * Authentication settings for a URL-based action For more information, see [Custom
      * actions](https://developers.thoughtspot.com/docs/custom-action-intro).
      *
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
@@ -39291,14 +39389,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * Version: 9.6.0.cl or later Updates a custom action. Requires &#x60;DEVELOPER&#x60; (**Has
-     * Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**)
-     * privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
-     * Guidelines The API allows you to modify the following properties: * Name of the custom action
-     * * Action availability to groups * Association to metadata objects * Authentication settings
-     * for a URL-based action For more information, see [Custom
+     * Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from 26.12.0.cl and will
+     * be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Updates a custom action. Requires &#x60;DEVELOPER&#x60; (**Has Developer
+     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
+     * required. #### Usage Guidelines The API allows you to modify the following properties: * Name
+     * of the custom action * Action availability to groups * Association to metadata objects *
+     * Authentication settings for a URL-based action For more information, see [Custom
      * actions](https://developers.thoughtspot.com/docs/custom-action-intro).
      *
      * @param customActionIdentifier Unique ID or name of the custom action. (required)
@@ -39327,14 +39427,16 @@ public class ThoughtSpotRestApi {
     }
 
     /**
-     * (asynchronously) Version: 9.6.0.cl or later Updates a custom action. Requires
-     * &#x60;DEVELOPER&#x60; (**Has Developer privilege**) or &#x60;ADMINISTRATION&#x60; (**Can
-     * administer ThoughtSpot**) privilege. If [Role-Based Access Control
-     * (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the
-     * &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is required. #### Usage
-     * Guidelines The API allows you to modify the following properties: * Name of the custom action
-     * * Action availability to groups * Association to metadata objects * Authentication settings
-     * for a URL-based action For more information, see [Custom
+     * (asynchronously) Version: 9.6.0.cl or later **Note:** This API endpoint is deprecated from
+     * 26.12.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [code-based custom
+     * actions](https://developers.thoughtspot.com/docs/code-based-custom-action) in the Visual
+     * Embed SDK instead. Updates a custom action. Requires &#x60;DEVELOPER&#x60; (**Has Developer
+     * privilege**) or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege. If
+     * [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled
+     * on your instance, the &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege is
+     * required. #### Usage Guidelines The API allows you to modify the following properties: * Name
+     * of the custom action * Action availability to groups * Association to metadata objects *
+     * Authentication settings for a URL-based action For more information, see [Custom
      * actions](https://developers.thoughtspot.com/docs/custom-action-intro).
      *
      * @param customActionIdentifier Unique ID or name of the custom action. (required)

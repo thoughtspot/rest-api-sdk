@@ -272,6 +272,7 @@ docs/JobRecipient.md
 docs/JobsApi.md
 docs/LiveboardContent.md
 docs/LiveboardDataResponse.md
+docs/LiveboardDetailsInput.md
 docs/LiveboardOptions.md
 docs/LiveboardOptionsInput.md
 docs/LoadAnswerResponse.md
@@ -857,6 +858,7 @@ src/ThoughtSpot.RestApi.Sdk.Test/Model/JWTUserOptionsTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/JobRecipientTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/LiveboardContentTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/LiveboardDataResponseTests.cs
+src/ThoughtSpot.RestApi.Sdk.Test/Model/LiveboardDetailsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/LiveboardOptionsInputTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/LiveboardOptionsTests.cs
 src/ThoughtSpot.RestApi.Sdk.Test/Model/LoadAnswerResponseTests.cs
@@ -1446,6 +1448,7 @@ src/ThoughtSpot.RestApi.Sdk/Model/JWTUserOptionsFull.cs
 src/ThoughtSpot.RestApi.Sdk/Model/JobRecipient.cs
 src/ThoughtSpot.RestApi.Sdk/Model/LiveboardContent.cs
 src/ThoughtSpot.RestApi.Sdk/Model/LiveboardDataResponse.cs
+src/ThoughtSpot.RestApi.Sdk/Model/LiveboardDetailsInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/LiveboardOptions.cs
 src/ThoughtSpot.RestApi.Sdk/Model/LiveboardOptionsInput.cs
 src/ThoughtSpot.RestApi.Sdk/Model/LoadAnswerResponse.cs

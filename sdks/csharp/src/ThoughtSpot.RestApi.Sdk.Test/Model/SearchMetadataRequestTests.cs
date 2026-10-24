@@ -154,6 +154,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'LiveboardDetails'
+        /// </summary>
+        [Fact]
+        public void LiveboardDetailsTest()
+        {
+            // TODO unit test for the property 'LiveboardDetails'
+        }
+
+        /// <summary>
         /// Test the property 'IncludeHeaders'
         /// </summary>
         [Fact]
