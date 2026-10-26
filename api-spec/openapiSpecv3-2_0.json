@@ -28450,7 +28450,8 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
               "CONNECTION",
-              "COLLECTION"
+              "COLLECTION",
+              "PERSONALISED_VIEW"
             ],
             "description": "  Type of metadata object.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
@@ -45510,7 +45511,8 @@
               "LOGICAL_TABLE",
               "LOGICAL_COLUMN",
               "CONNECTION",
-              "COLLECTION"
+              "COLLECTION",
+              "PERSONALISED_VIEW"
             ]
           }
         },
@@ -45645,7 +45647,7 @@
         "type": "object",
         "properties": {
           "metadata_type": {
-            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection\n6. Collection\n7. PERSONALISED_VIEW for a personalized view of a Liveboard. Identify it by GUID; it can only be shared with READ_ONLY access, by its author or an administrator, with users and groups who can access the Liveboard.",
+            "description": "Type of metadata. Required if identifier in metadata_identifies is a name.\n1. Liveboard\n2. Answers\n3. LOGICAL_TABLE for any data object such as table, worksheet or view.\n4. LOGICAL_COLUMN\n5. Connection\n6. Collection\n7. PERSONALISED_VIEW",
             "type": "string",
             "enum": [
               "LIVEBOARD",
