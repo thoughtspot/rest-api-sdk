@@ -25,7 +25,7 @@ class BuildMetadataIndexRequest(BaseModel):
     """
     BuildMetadataIndexRequest
     """ # noqa: E501
-    org_identifier: Optional[StrictStr] = Field(default=None, description="Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.")
+    org_identifier: Optional[StrictStr] = Field(default=None, description="Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["org_identifier"]
 

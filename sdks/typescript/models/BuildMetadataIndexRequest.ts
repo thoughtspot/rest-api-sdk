@@ -14,7 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class BuildMetadataIndexRequest {
     /**
-    * Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.
+    * Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.
     */
     'org_identifier'?: string;
 

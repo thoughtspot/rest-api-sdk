@@ -35,7 +35,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BuildMetadataIndexRequest" /> class.
         /// </summary>
-        /// <param name="orgIdentifier">Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges..</param>
+        /// <param name="orgIdentifier">Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session..</param>
         public BuildMetadataIndexRequest(string orgIdentifier = default)
         {
             this.OrgIdentifier = orgIdentifier;
@@ -43,9 +43,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.
+        /// Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.
         /// </summary>
-        /// <value>Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.</value>
+        /// <value>Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.</value>
         [DataMember(Name = "org_identifier", EmitDefaultValue = false)]
         public string OrgIdentifier { get; set; }
 

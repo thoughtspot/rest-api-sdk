@@ -42245,8 +42245,7 @@ components:
       properties:
         org_identifier:
           description: Unique ID or name of the Org that contains the logical table.
-            Defaults to the Org of the current session. Reindexing a table in another
-            Org requires tenant administrator privileges.
+            Defaults to the Org of the current session.
           type: string
       type: object
     ConvertWorksheetToModelRequest:
