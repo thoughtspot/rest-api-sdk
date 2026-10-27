@@ -25,8 +25,8 @@ class AppColorThemeInput(BaseModel):
     """
     App color theme configuration -- the same stored color navigation_panel writes, expressed as a brand color plus how it is applied.
     """ # noqa: E501
-    brand_color: Optional[StrictStr] = Field(default=None, description="Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\"APP_COLOR_THEME\"].    Version: 26.10.0.cl or later ")
-    apply_as_top_nav_color: Optional[StrictBool] = Field(default=None, description="Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.10.0.cl or later ")
+    brand_color: Optional[StrictStr] = Field(default=None, description="Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\"APP_COLOR_THEME\"].    Version: 26.12.0.cl or later ")
+    apply_as_top_nav_color: Optional[StrictBool] = Field(default=None, description="Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["brand_color", "apply_as_top_nav_color"]
 

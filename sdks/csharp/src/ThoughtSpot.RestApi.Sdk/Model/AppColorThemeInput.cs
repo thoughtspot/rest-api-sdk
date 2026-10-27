@@ -35,8 +35,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AppColorThemeInput" /> class.
         /// </summary>
-        /// <param name="brandColor">Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.10.0.cl or later .</param>
-        /// <param name="applyAsTopNavColor">Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.10.0.cl or later .</param>
+        /// <param name="brandColor">Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.12.0.cl or later .</param>
+        /// <param name="applyAsTopNavColor">Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.12.0.cl or later .</param>
         public AppColorThemeInput(string brandColor = default, bool? applyAsTopNavColor = default)
         {
             this.BrandColor = brandColor;
@@ -45,16 +45,16 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.10.0.cl or later 
+        /// Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.10.0.cl or later </value>
+        /// <value>Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "brand_color", EmitDefaultValue = true)]
         public string BrandColor { get; set; }
 
         /// <summary>
-        /// Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.10.0.cl or later 
+        /// Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.10.0.cl or later </value>
+        /// <value>Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "apply_as_top_nav_color", EmitDefaultValue = true)]
         public bool? ApplyAsTopNavColor { get; set; }
 

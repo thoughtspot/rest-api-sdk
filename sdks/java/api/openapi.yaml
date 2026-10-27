@@ -17488,7 +17488,7 @@ paths:
         - Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.
         - Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.
         - Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).
-        - `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.
+        - `app_color_theme` (_available from 26.12.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.
 
 
 
@@ -17942,7 +17942,7 @@ paths:
 
         #### App color theme
 
-        `app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.
+        `app_color_theme` (_available from 26.12.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.
 
         - `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.
         - `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.
@@ -38382,14 +38382,14 @@ components:
         brand_color:
           description: "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit\
             \ to leave the\nstored color unchanged. To clear it, use operation RESET\
-            \ with\nreset_options.style: [\"APP_COLOR_THEME\"]. \n  Version: 26.10.0.cl\
+            \ with\nreset_options.style: [\"APP_COLOR_THEME\"]. \n  Version: 26.12.0.cl\
             \ or later\n"
           nullable: true
           type: string
         apply_as_top_nav_color:
           description: "Whether the brand color is painted on the top navigation bar\
             \ literally,\ninstead of the surface shade derived from it. Omit to leave\
-            \ the stored\nchoice unchanged. \n  Version: 26.10.0.cl or later\n"
+            \ the stored\nchoice unchanged. \n  Version: 26.12.0.cl or later\n"
           nullable: true
           type: boolean
       type: object
@@ -48024,7 +48024,7 @@ components:
             if omitted. To clear the brand color, use operation RESET with\nreset_options.style:\
             \ [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled\
             \ on the cluster. Must not be provided together\nwith navigation_panel.\
-            \ \n  Version: 26.10.0.cl or later\n"
+            \ \n  Version: 26.12.0.cl or later\n"
         chart_color_palette:
           allOf:
           - $ref: '#/components/schemas/StyleColorPaletteInput'

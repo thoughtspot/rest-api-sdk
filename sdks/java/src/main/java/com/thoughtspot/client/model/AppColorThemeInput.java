@@ -63,7 +63,7 @@ public class AppColorThemeInput implements Serializable {
   }
 
   /**
-   * Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.10.0.cl or later 
+   * Brand color as a 6-digit hex string (e.g. \&quot;#2359B6\&quot;). Omit to leave the stored color unchanged. To clear it, use operation RESET with reset_options.style: [\&quot;APP_COLOR_THEME\&quot;].    Version: 26.12.0.cl or later 
    * @return brandColor
    */
   @javax.annotation.Nullable
@@ -82,7 +82,7 @@ public class AppColorThemeInput implements Serializable {
   }
 
   /**
-   * Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.10.0.cl or later 
+   * Whether the brand color is painted on the top navigation bar literally, instead of the surface shade derived from it. Omit to leave the stored choice unchanged.    Version: 26.12.0.cl or later 
    * @return applyAsTopNavColor
    */
   @javax.annotation.Nullable
