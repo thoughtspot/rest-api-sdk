@@ -2,8 +2,6 @@ const fs = require('fs');
 
 const SPEC_PATH = './spec/openapiSpecv3-2_0.json';
 const CONFIG_PATH = './api-playground-config.json';
-const SCHEMA_REF_PREFIX = '#/components/schemas/';
-const HTTP_METHODS = new Set(['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace']);
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -128,57 +126,17 @@ function hideFieldsInOperation(spec, op, fields) {
   return hidden;
 }
 
-//Returns the names of component schemas reachable from the spec's paths, following $refs through schemas.
-function findReachableSchemas(spec) {
-  const schemas = (spec.components && spec.components.schemas) || {};
-  const reachable = new Set();
-  const visit = (node) => {
-    if (Array.isArray(node)) {
-      node.forEach(visit);
-      return;
-    }
-    if (!isObject(node)) return;
-    for (const [key, value] of Object.entries(node)) {
-      if (key === '$ref' && typeof value === 'string' && value.startsWith(SCHEMA_REF_PREFIX)) {
-        const name = value.slice(SCHEMA_REF_PREFIX.length).split('/')[0].replace(/~1/g, '/').replace(/~0/g, '~');
-        if (!reachable.has(name)) {
-          reachable.add(name);
-          visit(schemas[name]);
-        }
-      } else {
-        visit(value);
+//Removes operations marked deprecated, and paths left with no operations.
+function hideDeprecatedOperations(spec) {
+  for (const [pathKey, pathItem] of Object.entries(spec.paths)) {
+    for (const [method, op] of Object.entries(pathItem)) {
+      if (op.deprecated === true) {
+        console.log(`Hiding deprecated operation: ${op.operationId} (${method.toUpperCase()} ${pathKey})`);
+        delete pathItem[method];
       }
     }
-  };
-  visit(spec.paths);
-  return reachable;
-}
-
-//Removes deprecated operations, then the component schemas only they used; already-unreferenced schemas stay.
-function hideDeprecatedOperations(spec) {
-  const reachableBefore = findReachableSchemas(spec);
-  const operations = [];
-
-  for (const [pathKey, pathItem] of Object.entries(spec.paths)) {
-    for (const method of Object.keys(pathItem)) {
-      if (!HTTP_METHODS.has(method) || pathItem[method].deprecated !== true) continue;
-      console.log(`Hiding deprecated operation: ${pathItem[method].operationId} (${method.toUpperCase()} ${pathKey})`);
-      operations.push(pathItem[method].operationId);
-      delete pathItem[method];
-    }
-    if (!Object.keys(pathItem).some((key) => HTTP_METHODS.has(key))) {
-      delete spec.paths[pathKey];
-    }
+    if (Object.keys(pathItem).length === 0) delete spec.paths[pathKey];
   }
-
-  const reachableAfter = findReachableSchemas(spec);
-  const schemas = [...reachableBefore].filter((name) => !reachableAfter.has(name));
-  for (const name of schemas) {
-    delete spec.components.schemas[name];
-  }
-
-  console.log(`Hid ${operations.length} deprecated operations and ${schemas.length} schemas used only by them`);
-  return { operations, schemas };
 }
 
 async function processOpenApiSpec() {
@@ -194,10 +152,7 @@ async function processOpenApiSpec() {
     const configContent = fs.readFileSync(CONFIG_PATH, 'utf8');
     const config = JSON.parse(configContent);
 
-    // hideApiFields edits shared component schemas in place, so drop deprecated operations first:
-    // a configured operation that is about to be removed must not change a schema a live one uses.
     if (config.hideDeprecatedOperations) {
-      console.log('\n=== Hiding Deprecated Operations in Spec ===');
       hideDeprecatedOperations(spec);
     }
 
@@ -227,7 +182,6 @@ if (require.main === module) {
 
 module.exports = { 
   processOpenApiSpec, 
-  hideApiFields,
-  hideDeprecatedOperations
+  hideApiFields
 };
 
