@@ -14277,11 +14277,11 @@
                         "metadata_id": "00000001-0000-4000-8000-000000000001",
                         "metadata_name": "Parameters Liveboard",
                         "metadata_type": "LIVEBOARD",
-                        "metadata_obj_id": null,
+                        "metadata_obj_id": "parameters-liveboard-4e5f6a7b",
                         "dependent_objects": {
                           "00000001-0000-4000-8000-000000000001": {}
                         },
-                        "dependent_objects_is_last_batch": null,
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
                         "metadata_detail": {
                           "reportContent": {
@@ -15088,7 +15088,7 @@
                           "subType": "",
                           "reportId": "",
                           "viewId": "",
-                          "objId": "SalesLiveboard-4e5f6a7b",
+                          "objId": "parameters-liveboard-4e5f6a7b",
                           "contentUpgradeId": "<upgrade id>",
                           "headerUpgradeId": "<upgrade id>",
                           "isPublished": false,
@@ -15310,7 +15310,7 @@
                                     "FALCON"
                                   ],
                                   "externalQueryableDataSource": "DEFAULT",
-                                  "displayMode": "TABLE_MODE",
+                                  "displayMode": "CHART_MODE",
                                   "bestDisplayMode": "CHART_MODE",
                                   "canGenerateLeafData": true,
                                   "question": {
@@ -15327,7 +15327,8 @@
                                   "visualizations": [
                                     {
                                       "vizContent": {
-                                        "vizType": "TABLE",
+                                        "chartType": "COLUMN",
+                                        "vizType": "CHART",
                                         "locked": false
                                       },
                                       "relatedLinks": [],
@@ -15414,8 +15415,8 @@
                           "type": "QUESTION",
                           "header": {
                             "isTimeSeriesKPI": false,
-                            "referencedVizType": "TABLE",
-                            "chartType": "KPI",
+                            "referencedVizType": "CHART",
+                            "chartType": "COLUMN",
                             "id": "0000001c-0000-4000-8000-00000000001c",
                             "indexVersion": 36,
                             "generationNum": 36,
@@ -15486,8 +15487,8 @@
                           "isDeprecated": false,
                           "isSharedViaConnection": false,
                           "isTimeSeriesKPI": false,
-                          "referencedVizType": "TABLE",
-                          "chartType": "KPI",
+                          "referencedVizType": "CHART",
+                          "chartType": "COLUMN",
                           "ownerOrgId": 0,
                           "resolvedObjects": {},
                           "configs": [],
@@ -15546,7 +15547,8 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "objId": "worksheet-3e4f5a6b"
                         },
                         "visualization_headers": null,
                         "stats": null,
@@ -15582,7 +15584,9 @@
                           "isSharedViaConnection": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "0000001f-0000-4000-8000-00000000001f",
@@ -15669,7 +15673,9 @@
                           "csrProtected": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "00000016-0000-4000-8000-000000000016",
@@ -15703,7 +15709,9 @@
                           "isSharedViaConnection": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "00000020-0000-4000-8000-000000000020",
@@ -15750,7 +15758,9 @@
                           "csrProtected": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "00000022-0000-4000-8000-000000000022",
@@ -15807,7 +15817,9 @@
                           "csrProtected": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "00000023-0000-4000-8000-000000000023",
@@ -15840,7 +15852,9 @@
                           "isSharedViaConnection": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects_is_last_batch": true
                       }
                     ]
                   }
@@ -28796,6 +28810,9 @@
                                       },
                                       "vizType": {
                                         "type": "string"
+                                      },
+                                      "chartType": {
+                                        "type": "string"
                                       }
                                     },
                                     "title": "Visualizations Viz Content"
@@ -30250,7 +30267,7 @@
               },
               "objId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, or LOGICAL_TABLE."
               },
               "contentUpgradeId": {
                 "type": "string",
@@ -30522,11 +30539,11 @@
           "metadata_id": "00000001-0000-4000-8000-000000000001",
           "metadata_name": "Parameters Liveboard",
           "metadata_type": "LIVEBOARD",
-          "metadata_obj_id": null,
+          "metadata_obj_id": "parameters-liveboard-4e5f6a7b",
           "dependent_objects": {
             "00000001-0000-4000-8000-000000000001": {}
           },
-          "dependent_objects_is_last_batch": null,
+          "dependent_objects_is_last_batch": true,
           "incomplete_objects": null,
           "metadata_detail": {
             "reportContent": {
@@ -31333,7 +31350,7 @@
             "subType": "",
             "reportId": "",
             "viewId": "",
-            "objId": "SalesLiveboard-4e5f6a7b",
+            "objId": "parameters-liveboard-4e5f6a7b",
             "contentUpgradeId": "<upgrade id>",
             "headerUpgradeId": "<upgrade id>",
             "isPublished": false,
