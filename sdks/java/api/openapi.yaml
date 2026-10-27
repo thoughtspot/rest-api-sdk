@@ -11678,7 +11678,7 @@ paths:
         * This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.
         * The `rows` array must contain at least one row; an empty `rows` array is rejected.
 
-        The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).
+        The request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, a value is not compatible with its column's data type (including a date value in neither accepted form for its column), or two rows carry the same key. Keys are compared exactly as sent, so `999` and `0999` are different keys; the same key text may appear only once per payload.
 
         #### Response
 
