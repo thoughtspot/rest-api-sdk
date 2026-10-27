@@ -4501,6 +4501,7 @@
                       "hidden": false,
                       "modification_time_in_millis": 1699900060000,
                       "first_login_time_in_millis": 1699900100000,
+                      "last_active_time_in_millis": 1699900200000,
                       "expiration_time_in_millis": 1731522000000,
                       "extended_preferences": {
                         "<preference_key>": "<preference_value>"
@@ -4614,6 +4615,7 @@
                       "external": false,
                       "favorite_metadata": [],
                       "first_login_time_in_millis": 1699900005000,
+                      "last_active_time_in_millis": 1699900105000,
                       "hidden": false,
                       "home_liveboard": {
                         "id": "c8e4d2a1-6b3f-4e7a-9d5c-2f1a8b7e6d4c",
@@ -6900,11 +6902,13 @@
                         "type": "RDBMS_SNOWFLAKE",
                         "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                         "scheduled": false,
+                        "connectionType": "",
                         "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                         "isExternal": false,
                         "isDeprecated": false,
                         "isDeleted": false,
                         "isHidden": false,
+                        "complete": true,
                         "indexVersion": 1,
                         "generationNum": 1,
                         "created": 1760198400000,
@@ -7477,11 +7481,13 @@
                           "type": "RDBMS_SNOWFLAKE",
                           "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                           "scheduled": false,
+                          "connectionType": "",
                           "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                           "isExternal": false,
                           "isDeprecated": false,
                           "isDeleted": false,
                           "isHidden": false,
+                          "complete": true,
                           "indexVersion": 2,
                           "generationNum": 2,
                           "created": 1760198400000,
@@ -11890,7 +11896,7 @@
     "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
       "post": {
         "operationId": "updateInputTable",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, a value is not compatible with its column's data type (including a date value in neither accepted form for its column), or two rows carry the same key. Keys are compared exactly as sent, so `999` and `0999` are different keys; the same key text may appear only once per payload.\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Input Tables",
           "26.11.0.cl"
@@ -12985,7 +12991,7 @@
     "/api/rest/2.0/metadata/{logical_table_identifier}/build-index": {
       "post": {
         "operationId": "buildMetadataIndex",
-        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires tenant administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table. A table that is not yet loaded into the search index is picked up on the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.\n\nNote: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "27.1.0.cl"
@@ -13719,7 +13725,12 @@
                                     "status_code": "OK"
                                   },
                                   "header": {
+                                    "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                                     "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                                    "is_versioning_enabled": false,
+                                    "metadata_type": "LOGICAL_TABLE",
+                                    "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                                    "description": "",
                                     "name": "Sales Table"
                                   }
                                 }
@@ -13936,7 +13947,12 @@
                             "status_code": "OK"
                           },
                           "header": {
+                            "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                             "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                            "is_versioning_enabled": false,
+                            "metadata_type": "LOGICAL_TABLE",
+                            "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                            "description": "",
                             "name": "Sales Table"
                           }
                         }
@@ -14330,6 +14346,9 @@
                                         "owner": "00000001-0000-4000-8000-000000000001",
                                         "isDeleted": false,
                                         "isHidden": false,
+                                        "orgIds": [
+                                          0
+                                        ],
                                         "tags": [],
                                         "configs": [],
                                         "isConnectionConfigurationDisabled": false,
@@ -14384,6 +14403,9 @@
                                   "owner": "00000001-0000-4000-8000-000000000001",
                                   "isDeleted": false,
                                   "isHidden": false,
+                                  "orgIds": [
+                                    0
+                                  ],
                                   "tags": [],
                                   "configs": [],
                                   "isConnectionConfigurationDisabled": false,
@@ -15009,6 +15031,9 @@
                           "isHidden": false,
                           "isAutoCreated": false,
                           "isAutoDelete": false,
+                          "orgIds": [
+                            0
+                          ],
                           "ownerOrgId": 0,
                           "resolvedObjects": {},
                           "tags": [
@@ -15063,6 +15088,7 @@
                           "subType": "",
                           "reportId": "",
                           "viewId": "",
+                          "objId": "SalesLiveboard-4e5f6a7b",
                           "contentUpgradeId": "<upgrade id>",
                           "headerUpgradeId": "<upgrade id>",
                           "isPublished": false,
@@ -15269,7 +15295,167 @@
                         "metadata_type": "ANSWER",
                         "dependent_objects": null,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "reportContent": {
+                            "sheets": [
+                              {
+                                "sheetType": "QUESTION",
+                                "sheetContent": {
+                                  "sheetContentType": "QUESTION",
+                                  "headlineVisibilityMap": {
+                                    "0000001e-0000-4000-8000-00000000001e": true
+                                  },
+                                  "defaultQueryableSource": "FALCON",
+                                  "querableSources": [
+                                    "FALCON"
+                                  ],
+                                  "externalQueryableDataSource": "DEFAULT",
+                                  "displayMode": "TABLE_MODE",
+                                  "bestDisplayMode": "CHART_MODE",
+                                  "canGenerateLeafData": true,
+                                  "question": {
+                                    "sageContextIndex": -1,
+                                    "text": "revenue by region",
+                                    "isChasmTrapQuery": false,
+                                    "sageContextProto": "<base64_encoded_sage_context>"
+                                  },
+                                  "filter": {
+                                    "filterContent": {
+                                      "rows": []
+                                    }
+                                  },
+                                  "visualizations": [
+                                    {
+                                      "vizContent": {
+                                        "vizType": "TABLE",
+                                        "locked": false
+                                      },
+                                      "relatedLinks": [],
+                                      "header": {
+                                        "id": "0000001e-0000-4000-8000-00000000001e",
+                                        "indexVersion": 36,
+                                        "generationNum": 36,
+                                        "name": "<name>",
+                                        "author": "00000006-0000-4000-8000-000000000006",
+                                        "authorName": "<authorName>",
+                                        "hasLenientDiscoverability": false,
+                                        "authorDisplayName": "<authorDisplayName>",
+                                        "created": 1519761648892,
+                                        "modified": 1583190990050,
+                                        "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                        "owner": "0000001c-0000-4000-8000-00000000001c",
+                                        "isDeleted": false,
+                                        "isHidden": false,
+                                        "tags": [],
+                                        "configs": [],
+                                        "isConnectionConfigurationDisabled": false,
+                                        "type": "QUESTION_ANSWER_BOOK",
+                                        "aiAnswerGenerationDisabled": false,
+                                        "isExternal": false,
+                                        "isDeprecated": false,
+                                        "isSharedViaConnection": false,
+                                        "syncWithSource": false,
+                                        "isParameterized": false,
+                                        "cachedDataAsOf": 0,
+                                        "isVerified": false,
+                                        "isVersioningEnabled": false,
+                                        "isPublished": false,
+                                        "csrProtected": false,
+                                        "contentUpgradeId": "<upgrade id>",
+                                        "headerUpgradeId": "<upgrade id>",
+                                        "orgIds": [
+                                          0
+                                        ]
+                                      },
+                                      "complete": true,
+                                      "incompleteDetail": []
+                                    }
+                                  ]
+                                },
+                                "header": {
+                                  "id": "0000001d-0000-4000-8000-00000000001d",
+                                  "indexVersion": 36,
+                                  "generationNum": 36,
+                                  "name": "<name>",
+                                  "author": "00000006-0000-4000-8000-000000000006",
+                                  "authorName": "<authorName>",
+                                  "hasLenientDiscoverability": false,
+                                  "authorDisplayName": "<authorDisplayName>",
+                                  "created": 1519761648892,
+                                  "modified": 1583190990050,
+                                  "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                  "owner": "0000001c-0000-4000-8000-00000000001c",
+                                  "isDeleted": false,
+                                  "isHidden": false,
+                                  "tags": [],
+                                  "configs": [],
+                                  "isConnectionConfigurationDisabled": false,
+                                  "type": "QUESTION_ANSWER_BOOK",
+                                  "aiAnswerGenerationDisabled": false,
+                                  "isExternal": false,
+                                  "isDeprecated": false,
+                                  "isSharedViaConnection": false,
+                                  "syncWithSource": false,
+                                  "isParameterized": false,
+                                  "cachedDataAsOf": 0,
+                                  "isVerified": false,
+                                  "isVersioningEnabled": false,
+                                  "isPublished": false,
+                                  "csrProtected": false,
+                                  "orgIds": [
+                                    0
+                                  ]
+                                },
+                                "complete": true,
+                                "incompleteDetail": []
+                              }
+                            ]
+                          },
+                          "type": "QUESTION",
+                          "header": {
+                            "isTimeSeriesKPI": false,
+                            "referencedVizType": "TABLE",
+                            "chartType": "KPI",
+                            "id": "0000001c-0000-4000-8000-00000000001c",
+                            "indexVersion": 36,
+                            "generationNum": 36,
+                            "name": "<name>",
+                            "author": "00000006-0000-4000-8000-000000000006",
+                            "authorName": "<authorName>",
+                            "hasLenientDiscoverability": false,
+                            "descriptionAutoGenerated": false,
+                            "authorDisplayName": "<authorDisplayName>",
+                            "created": 1519761648892,
+                            "modified": 1583190990050,
+                            "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                            "owner": "0000001c-0000-4000-8000-00000000001c",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "isAutoCreated": false,
+                            "isAutoDelete": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "datasetId": "",
+                            "subType": "",
+                            "reportId": "",
+                            "viewId": "",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": []
+                        },
                         "metadata_header": {
                           "id": "0000001c-0000-4000-8000-00000000001c",
                           "indexVersion": 36,
@@ -15298,10 +15484,38 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "isTimeSeriesKPI": false,
+                          "referencedVizType": "TABLE",
+                          "chartType": "KPI",
+                          "ownerOrgId": 0,
+                          "resolvedObjects": {},
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "descriptionAutoGenerated": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "objId": "answer-1c2d3e4f",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": {
+                          "views": 18,
+                          "favorites": 2
+                        },
+                        "metadata_obj_id": "answer-1c2d3e4f",
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "0000001d-0000-4000-8000-00000000001d",
@@ -15335,7 +15549,9 @@
                           "isSharedViaConnection": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": null,
+                        "metadata_obj_id": "worksheet-3e4f5a6b",
+                        "dependent_objects_is_last_batch": true
                       },
                       {
                         "metadata_id": "0000001e-0000-4000-8000-00000000001e",
@@ -15431,7 +15647,26 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "parameterizedConnection": false,
+                          "connectionDisabled": false,
+                          "ownerOrgId": 0,
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "descriptionAutoGenerated": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
@@ -15499,7 +15734,20 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "ownerOrgId": -1,
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
@@ -15538,7 +15786,25 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "numInheritedAssignedRoles": 1,
+                          "ownerOrgId": 0,
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "descriptionAutoGenerated": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
@@ -18297,7 +18563,7 @@
     "/api/rest/2.0/customization/styles/search": {
       "post": {
         "operationId": "searchStyleCustomizations",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.12.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -18881,7 +19147,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.12.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -18927,7 +19193,7 @@
                     ]
                   },
                   "app_color_theme": {
-                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/AppColorThemeInput"
@@ -21792,6 +22058,7 @@
                       "creation_time_in_millis": 1760198400000,
                       "modification_time_in_millis": 1760198460000,
                       "first_login_time_in_millis": 0,
+                      "last_active_time_in_millis": 0,
                       "expiration_time_in_millis": 1791734400000,
                       "incomplete_details": [],
                       "org_privileges": {
@@ -21801,10 +22068,12 @@
                         ]
                       },
                       "extended_properties": {
-                        "displayNameLastUpdatedBy": "ADMIN"
+                        "displayNameLastUpdatedBy": "ADMIN",
+                        "department": "finance"
                       },
                       "extended_preferences": {
-                        "notificationChannel": "EMAIL"
+                        "notificationChannel": "EMAIL",
+                        "theme": "dark"
                       },
                       "user_parameters": {
                         "0": {
@@ -22377,6 +22646,7 @@
                         "creation_time_in_millis": 1760198400000,
                         "modification_time_in_millis": 1760198460000,
                         "first_login_time_in_millis": 1760198500000,
+                        "last_active_time_in_millis": 1760198600000,
                         "expiration_time_in_millis": 1791734400000,
                         "incomplete_details": [
                           "<incomplete_detail_message>"
@@ -25047,6 +25317,28 @@
                           "id": "b9e3d8f2-4c7a-4e1b-8d3c-5f9a2b7e4c6d",
                           "name": "Old Webhook 1",
                           "description": "First webhook to be deleted",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
+                          "status": null,
+                          "storage_destination": null,
                           "org": {
                             "id": "0",
                             "name": "Primary"
@@ -25069,6 +25361,28 @@
                           "id": "e7c4a1f8-2b5d-4a9e-7c3f-8b1e5d4a7c9b",
                           "name": "Old Webhook 2",
                           "description": "Second webhook to be deleted",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
+                          "status": null,
+                          "storage_destination": null,
                           "org": {
                             "id": "0",
                             "name": "Primary"
@@ -25104,6 +25418,28 @@
                           "id": "c8f2a5e9-3d6b-4f1e-a8c2-7e4b1d9f5a3c",
                           "name": "Successfully Deleted Webhook",
                           "description": "This webhook was deleted successfully",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
+                          "status": null,
+                          "storage_destination": null,
                           "org": {
                             "id": "0",
                             "name": "Primary"
@@ -26745,6 +27081,7 @@
           "creation_time_in_millis": 1760198400000,
           "modification_time_in_millis": 1760198460000,
           "first_login_time_in_millis": 1760198500000,
+          "last_active_time_in_millis": 1760198600000,
           "expiration_time_in_millis": 1791734400000,
           "incomplete_details": [
             "<incomplete_detail_message>"
@@ -28352,7 +28689,7 @@
           },
           "metadata_detail": {
             "type": "object",
-            "description": "Complete details of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD or COLLECTION.",
+            "description": "Complete details of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER.",
             "nullable": true,
             "properties": {
               "reportContent": {
@@ -28518,6 +28855,12 @@
                                       "isHidden": {
                                         "type": "boolean"
                                       },
+                                      "orgIds": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "integer"
+                                        }
+                                      },
                                       "tags": {
                                         "type": "array",
                                         "items": {}
@@ -28567,6 +28910,9 @@
                                       },
                                       "csrProtected": {
                                         "type": "boolean"
+                                      },
+                                      "type": {
+                                        "type": "string"
                                       }
                                     },
                                     "title": "Visualizations Header"
@@ -28626,6 +28972,64 @@
                             },
                             "canGenerateLeafData": {
                               "type": "boolean"
+                            },
+                            "headlineVisibilityMap": {
+                              "type": "object",
+                              "additionalProperties": {
+                                "type": "boolean"
+                              }
+                            },
+                            "defaultQueryableSource": {
+                              "type": "string"
+                            },
+                            "querableSources": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "externalQueryableDataSource": {
+                              "type": "string"
+                            },
+                            "displayMode": {
+                              "type": "string"
+                            },
+                            "bestDisplayMode": {
+                              "type": "string"
+                            },
+                            "question": {
+                              "type": "object",
+                              "properties": {
+                                "sageContextIndex": {
+                                  "type": "integer"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "isChasmTrapQuery": {
+                                  "type": "boolean"
+                                },
+                                "sageContextProto": {
+                                  "type": "string"
+                                }
+                              },
+                              "title": "Report Content Sheets Sheet Content Question"
+                            },
+                            "filter": {
+                              "type": "object",
+                              "properties": {
+                                "filterContent": {
+                                  "type": "object",
+                                  "properties": {
+                                    "rows": {
+                                      "type": "array",
+                                      "items": {}
+                                    }
+                                  },
+                                  "title": "Filter Filter Content"
+                                }
+                              },
+                              "title": "Report Content Sheets Sheet Content Filter"
                             }
                           },
                           "title": "Report Content Sheets Sheet Content"
@@ -28678,6 +29082,12 @@
                             "isHidden": {
                               "type": "boolean"
                             },
+                            "orgIds": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
                             "tags": {
                               "type": "array",
                               "items": {}
@@ -28727,6 +29137,9 @@
                             },
                             "csrProtected": {
                               "type": "boolean"
+                            },
+                            "type": {
+                              "type": "string"
                             }
                           },
                           "title": "Metadata Detail Report Content Sheets Header"
@@ -28743,12 +29156,12 @@
                     }
                   }
                 },
-                "description": "Returned when metadata_type is LIVEBOARD.",
+                "description": "Returned when metadata_type is LIVEBOARD or ANSWER.",
                 "title": "Metadata Detail Report Content"
               },
               "type": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD or ANSWER."
               },
               "header": {
                 "type": "object",
@@ -28891,7 +29304,7 @@
                                             "items": {}
                                           }
                                         },
-                                        "title": "Sheet Content Filter"
+                                        "title": "Value Report Content Sheets Sheet Content Filter"
                                       },
                                       "question": {
                                         "type": "object",
@@ -28909,7 +29322,7 @@
                                             "type": "boolean"
                                           }
                                         },
-                                        "title": "Sheet Content Question"
+                                        "title": "Value Report Content Sheets Sheet Content Question"
                                       },
                                       "visualizations": {
                                         "type": "array",
@@ -29362,14 +29775,23 @@
                   },
                   "objId": {
                     "type": "string"
+                  },
+                  "isTimeSeriesKPI": {
+                    "type": "boolean"
+                  },
+                  "referencedVizType": {
+                    "type": "string"
+                  },
+                  "chartType": {
+                    "type": "string"
                   }
                 },
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION.",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER.",
                 "title": "Metadata Detail Header"
               },
               "complete": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER."
               },
               "incompleteDetail": {
                 "type": "array",
@@ -29486,7 +29908,7 @@
                   },
                   "title": "Metadata Detail Incomplete Detail"
                 },
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER."
               },
               "personalised_views": {
                 "type": "array",
@@ -29614,7 +30036,7 @@
               },
               "descriptionAutoGenerated": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
               "authorDisplayName": {
                 "type": "string",
@@ -29652,13 +30074,20 @@
                 "type": "boolean",
                 "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
+              "orgIds": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+              },
               "ownerOrgId": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "resolvedObjects": {
                 "type": "object",
-                "description": "Returned when metadata_type is LIVEBOARD, CONNECTION, or USER_GROUP."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
               "tags": {
                 "type": "array",
@@ -29763,15 +30192,15 @@
                   },
                   "title": "Metadata Header Configs"
                 },
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "isConnectionConfigurationDisabled": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "type": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, LOGICAL_TABLE, CONNECTION, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, CONNECTION, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
               },
               "aiAnswerGenerationDisabled": {
                 "type": "boolean",
@@ -29791,59 +30220,59 @@
               },
               "syncWithSource": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "isParameterized": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "cachedDataAsOf": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "isVerified": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "isVersioningEnabled": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "datasetId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
               "subType": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "reportId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
               "viewId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD."
-              },
-              "contentUpgradeId": {
-                "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
-              },
-              "headerUpgradeId": {
-                "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
-              },
-              "isPublished": {
-                "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
-              },
-              "csrProtected": {
-                "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD or COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, or USER_GROUP."
               },
               "objId": {
                 "type": "string",
-                "description": "Returned when metadata_type is COLLECTION."
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, or ANSWER."
+              },
+              "contentUpgradeId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
+              },
+              "headerUpgradeId": {
+                "type": "string",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
+              },
+              "isPublished": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
+              },
+              "csrProtected": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, USER, or USER_GROUP."
               },
               "clientState": {
                 "type": "object",
@@ -29858,12 +30287,17 @@
                 "description": "Returned when metadata_type is ANSWER or TAG.",
                 "title": "Metadata Header Client State"
               },
-              "orgIds": {
-                "type": "array",
-                "items": {
-                  "type": "integer"
-                },
-                "description": "Returned when metadata_type is ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+              "isTimeSeriesKPI": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is ANSWER."
+              },
+              "referencedVizType": {
+                "type": "string",
+                "description": "Returned when metadata_type is ANSWER."
+              },
+              "chartType": {
+                "type": "string",
+                "description": "Returned when metadata_type is ANSWER."
               },
               "dataUploadEnabled": {
                 "type": "boolean",
@@ -29955,6 +30389,14 @@
                 "description": "Returned when metadata_type is CONNECTION.",
                 "title": "Metadata Header Statistics"
               },
+              "parameterizedConnection": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is CONNECTION."
+              },
+              "connectionDisabled": {
+                "type": "boolean",
+                "description": "Returned when metadata_type is CONNECTION."
+              },
               "displayName": {
                 "type": "string",
                 "description": "Returned when metadata_type is USER or USER_GROUP."
@@ -29968,6 +30410,10 @@
                 "description": "Returned when metadata_type is USER_GROUP."
               },
               "numMemberUsers": {
+                "type": "integer",
+                "description": "Returned when metadata_type is USER_GROUP."
+              },
+              "numInheritedAssignedRoles": {
                 "type": "integer",
                 "description": "Returned when metadata_type is USER_GROUP."
               }
@@ -30057,16 +30503,16 @@
           },
           "stats": {
             "type": "object",
-            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD.",
+            "description": "Stats of the metadata object. Includes views, favorites, last_accessed.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD or ANSWER.",
             "nullable": true,
             "properties": {
               "views": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD or ANSWER."
               },
               "favorites": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD."
+                "description": "Returned when metadata_type is LIVEBOARD or ANSWER."
               },
               "last_accessed": {
                 "type": "integer",
@@ -30074,11 +30520,6 @@
               }
             },
             "additionalProperties": true,
-            "example": {
-              "views": 42,
-              "favorites": 3,
-              "last_accessed": 1760198460000
-            },
             "title": "Metadata Search Response Stats"
           }
         },
@@ -30156,6 +30597,9 @@
                           "owner": "00000001-0000-4000-8000-000000000001",
                           "isDeleted": false,
                           "isHidden": false,
+                          "orgIds": [
+                            0
+                          ],
                           "tags": [],
                           "configs": [],
                           "isConnectionConfigurationDisabled": false,
@@ -30210,6 +30654,9 @@
                     "owner": "00000001-0000-4000-8000-000000000001",
                     "isDeleted": false,
                     "isHidden": false,
+                    "orgIds": [
+                      0
+                    ],
                     "tags": [],
                     "configs": [],
                     "isConnectionConfigurationDisabled": false,
@@ -30835,6 +31282,9 @@
             "isHidden": false,
             "isAutoCreated": false,
             "isAutoDelete": false,
+            "orgIds": [
+              0
+            ],
             "ownerOrgId": 0,
             "resolvedObjects": {},
             "tags": [
@@ -30889,6 +31339,7 @@
             "subType": "",
             "reportId": "",
             "viewId": "",
+            "objId": "SalesLiveboard-4e5f6a7b",
             "contentUpgradeId": "<upgrade id>",
             "headerUpgradeId": "<upgrade id>",
             "isPublished": false,
@@ -30954,7 +31405,12 @@
                         "status_code": "OK"
                       },
                       "header": {
+                        "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                         "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                        "is_versioning_enabled": false,
+                        "metadata_type": "LOGICAL_TABLE",
+                        "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                        "description": "",
                         "name": "Sales Table"
                       }
                     }
@@ -31069,7 +31525,22 @@
                         "header": {
                           "type": "object",
                           "properties": {
+                            "author_guid": {
+                              "type": "string"
+                            },
                             "id_guid": {
+                              "type": "string"
+                            },
+                            "is_versioning_enabled": {
+                              "type": "boolean"
+                            },
+                            "metadata_type": {
+                              "type": "string"
+                            },
+                            "owner_guid": {
+                              "type": "string"
+                            },
+                            "description": {
                               "type": "string"
                             },
                             "name": {
@@ -31110,7 +31581,12 @@
                       "status_code": "OK"
                     },
                     "header": {
+                      "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                       "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "is_versioning_enabled": false,
+                      "metadata_type": "LOGICAL_TABLE",
+                      "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "description": "",
                       "name": "Sales Table"
                     }
                   }
@@ -31214,7 +31690,12 @@
                     "status_code": "OK"
                   },
                   "header": {
+                    "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                     "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                    "is_versioning_enabled": false,
+                    "metadata_type": "LOGICAL_TABLE",
+                    "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                    "description": "",
                     "name": "Sales Table"
                   }
                 }
@@ -33395,6 +33876,9 @@
               "scheduled": {
                 "type": "boolean"
               },
+              "connectionType": {
+                "type": "string"
+              },
               "configuration": {
                 "type": "string"
               },
@@ -33408,6 +33892,9 @@
                 "type": "boolean"
               },
               "isHidden": {
+                "type": "boolean"
+              },
+              "complete": {
                 "type": "boolean"
               },
               "indexVersion": {
@@ -33569,11 +34056,13 @@
               "type": "RDBMS_SNOWFLAKE",
               "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
               "scheduled": false,
+              "connectionType": "",
               "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
               "isExternal": false,
               "isDeprecated": false,
               "isDeleted": false,
               "isHidden": false,
+              "complete": true,
               "indexVersion": 2,
               "generationNum": 2,
               "created": 1760198400000,
@@ -33694,11 +34183,13 @@
             "type": "RDBMS_SNOWFLAKE",
             "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
             "scheduled": false,
+            "connectionType": "",
             "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
             "isExternal": false,
             "isDeprecated": false,
             "isDeleted": false,
             "isHidden": false,
+            "complete": true,
             "indexVersion": 2,
             "generationNum": 2,
             "created": 1760198400000,
@@ -38478,7 +38969,7 @@
           },
           "app_color_theme": {
             "$ref": "#/components/schemas/StyleAppColorTheme",
-            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           },
           "chart_color_palette": {
@@ -41900,6 +42391,9 @@
               "scheduled": {
                 "type": "boolean"
               },
+              "connectionType": {
+                "type": "string"
+              },
               "configuration": {
                 "type": "string"
               },
@@ -41913,6 +42407,9 @@
                 "type": "boolean"
               },
               "isHidden": {
+                "type": "boolean"
+              },
+              "complete": {
                 "type": "boolean"
               },
               "indexVersion": {
@@ -42063,11 +42560,13 @@
               "type": "RDBMS_SNOWFLAKE",
               "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
               "scheduled": false,
+              "connectionType": "",
               "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
               "isExternal": false,
               "isDeprecated": false,
               "isDeleted": false,
               "isHidden": false,
+              "complete": true,
               "indexVersion": 1,
               "generationNum": 1,
               "created": 1760198400000,
@@ -42129,11 +42628,13 @@
             "type": "RDBMS_SNOWFLAKE",
             "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
             "scheduled": false,
+            "connectionType": "",
             "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
             "isExternal": false,
             "isDeprecated": false,
             "isDeleted": false,
             "isHidden": false,
+            "complete": true,
             "indexVersion": 1,
             "generationNum": 1,
             "created": 1760198400000,
@@ -45718,12 +46219,12 @@
         "properties": {
           "brand_color": {
             "type": "string",
-            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           },
           "apply_as_top_nav_color": {
             "type": "boolean",
-            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -49212,7 +49713,7 @@
         "type": "object",
         "properties": {
           "org_identifier": {
-            "description": "Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.",
+            "description": "Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.",
             "type": "string"
           }
         }
