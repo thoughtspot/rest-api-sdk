@@ -20977,7 +20977,8 @@
                           "validation_step": "HTTP_CONNECTION_CHECK",
                           "status": "SUCCESS",
                           "http_status": 200,
-                          "error_message": null
+                          "error_message": null,
+                          "aws_s3_info": null
                         }
                       ]
                     }
@@ -20996,7 +20997,8 @@
                           "validation_step": "HTTP_CONNECTION_CHECK",
                           "status": "SUCCESS",
                           "http_status": 200,
-                          "error_message": null
+                          "error_message": null,
+                          "aws_s3_info": null
                         },
                         {
                           "validation_step": "STORAGE_FILE_UPLOAD_CHECK",
@@ -21026,13 +21028,15 @@
                           "validation_step": "HTTP_CONNECTION_CHECK",
                           "status": "SUCCESS",
                           "http_status": 200,
-                          "error_message": null
+                          "error_message": null,
+                          "aws_s3_info": null
                         },
                         {
                           "validation_step": "STORAGE_FILE_UPLOAD_CHECK",
                           "status": "FAILED",
                           "http_status": null,
-                          "error_message": "Access denied. Ensure the IAM role has s3:PutObject permission on the target bucket."
+                          "error_message": "Access denied. Ensure the IAM role has s3:PutObject permission on the target bucket.",
+                          "aws_s3_info": null
                         }
                       ]
                     }
@@ -21051,13 +21055,15 @@
                           "validation_step": "HTTP_CONNECTION_CHECK",
                           "status": "SUCCESS",
                           "http_status": 200,
-                          "error_message": null
+                          "error_message": null,
+                          "aws_s3_info": null
                         },
                         {
                           "validation_step": "STORAGE_FILE_UPLOAD_CHECK",
                           "status": "SUCCESS",
                           "http_status": null,
                           "error_message": null,
+                          "aws_s3_info": null,
                           "gcp_gcs_info": {
                             "bucket_name": "my-webhook-files",
                             "file_name": "validation_dummy_20240821_153045.pdf",
