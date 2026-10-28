@@ -14,6 +14,16 @@ Add configuration to `api-playground-config.json`:
 }
 ```
 
+## Hiding "Set as NULL" on Request Fields
+
+APIMatic shows a "Set as NULL" control for every `nullable` field. To remove it from request parameters and bodies in the playground, set this in `api-playground-config.json`:
+```json
+{
+  "removeRequestNullable": true
+}
+```
+This changes only the playground's copy of the spec. Response schemas and the SDKs keep `nullable`.
+
 ## Local development
 Prepare the build folder
 
