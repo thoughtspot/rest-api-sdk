@@ -16,11 +16,11 @@ export * from '../models/AdvancedChartVisualizationFontRecord';
 export * from '../models/AgentConversation';
 export * from '../models/AgentConversationHistoryResponse';
 export * from '../models/AgentConversationList';
-export * from '../models/AgentConversationV2';
 export * from '../models/AgentEvent';
 export * from '../models/AgentEventContent';
 export * from '../models/AgentEventPart';
 export * from '../models/AgentInstructions';
+export * from '../models/AgentMessagesResponse';
 export * from '../models/AgentProgress';
 export * from '../models/AgentStreamDone';
 export * from '../models/AgentStreamError';
@@ -120,7 +120,6 @@ export * from '../models/ConversationShareStatusResponse';
 export * from '../models/ConvertWorksheetToModelRequest';
 export * from '../models/CopyObjectRequest';
 export * from '../models/CreateAgentConversationRequest';
-export * from '../models/CreateAgentConversationV2Request';
 export * from '../models/CreateAnalystRequest';
 export * from '../models/CreateCalendarRequest';
 export * from '../models/CreateCollectionRequest';
@@ -433,9 +432,9 @@ export * from '../models/SemanticIntegrationSearchResponse';
 export * from '../models/SemanticIntegrationSortOptions';
 export * from '../models/SemanticIntegrationTagReference';
 export * from '../models/SendAgentConversationMessageRequest';
+export * from '../models/SendAgentConversationMessageResponse';
+export * from '../models/SendAgentConversationMessageStreaming200Response';
 export * from '../models/SendAgentConversationMessageStreamingRequest';
-export * from '../models/SendAgentConversationMessageStreamingV2Request';
-export * from '../models/SendAgentConversationMessageV2Request';
 export * from '../models/SendAgentMessageRequest';
 export * from '../models/SendAgentMessageResponse';
 export * from '../models/SendAgentMessageStreamingRequest';
@@ -455,6 +454,7 @@ export * from '../models/SortOptions';
 export * from '../models/SortingOptions';
 export * from '../models/SqlQuery';
 export * from '../models/SqlQueryResponse';
+export * from '../models/StopConversationRequest';
 export * from '../models/StorageConfig';
 export * from '../models/StorageConfigInput';
 export * from '../models/StorageDestination';
@@ -623,11 +623,11 @@ import { AdvancedChartVisualizationFontRecord, AdvancedChartVisualizationFontRec
 import { AgentConversation } from '../models/AgentConversation';
 import { AgentConversationHistoryResponse } from '../models/AgentConversationHistoryResponse';
 import { AgentConversationList } from '../models/AgentConversationList';
-import { AgentConversationV2 } from '../models/AgentConversationV2';
 import { AgentEvent } from '../models/AgentEvent';
 import { AgentEventContent } from '../models/AgentEventContent';
 import { AgentEventPart } from '../models/AgentEventPart';
 import { AgentInstructions } from '../models/AgentInstructions';
+import { AgentMessagesResponse } from '../models/AgentMessagesResponse';
 import { AgentProgress } from '../models/AgentProgress';
 import { AgentStreamDone } from '../models/AgentStreamDone';
 import { AgentStreamError } from '../models/AgentStreamError';
@@ -726,8 +726,7 @@ import { ConversationSettingsInput } from '../models/ConversationSettingsInput';
 import { ConversationShareStatusResponse } from '../models/ConversationShareStatusResponse';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest  , CopyObjectRequestTypeEnum    } from '../models/CopyObjectRequest';
-import { CreateAgentConversationRequest } from '../models/CreateAgentConversationRequest';
-import { CreateAgentConversationV2Request, CreateAgentConversationV2RequestSourceEnum      } from '../models/CreateAgentConversationV2Request';
+import { CreateAgentConversationRequest    , CreateAgentConversationRequestSpotterExperienceVersionEnum   } from '../models/CreateAgentConversationRequest';
 import { CreateAnalystRequest } from '../models/CreateAnalystRequest';
 import { CreateCalendarRequest , CreateCalendarRequestCreationMethodEnum     , CreateCalendarRequestCalendarTypeEnum  , CreateCalendarRequestMonthOffsetEnum  , CreateCalendarRequestStartDayOfWeekEnum     } from '../models/CreateCalendarRequest';
 import { CreateCollectionRequest } from '../models/CreateCollectionRequest';
@@ -1039,10 +1038,10 @@ import { SemanticIntegrationResponse } from '../models/SemanticIntegrationRespon
 import { SemanticIntegrationSearchResponse     , SemanticIntegrationSearchResponseImportTypeEnum  , SemanticIntegrationSearchResponseTypeEnum          } from '../models/SemanticIntegrationSearchResponse';
 import { SemanticIntegrationSortOptions, SemanticIntegrationSortOptionsFieldNameEnum  , SemanticIntegrationSortOptionsOrderEnum   } from '../models/SemanticIntegrationSortOptions';
 import { SemanticIntegrationTagReference } from '../models/SemanticIntegrationTagReference';
-import { SendAgentConversationMessageRequest } from '../models/SendAgentConversationMessageRequest';
-import { SendAgentConversationMessageStreamingRequest } from '../models/SendAgentConversationMessageStreamingRequest';
-import { SendAgentConversationMessageStreamingV2Request } from '../models/SendAgentConversationMessageStreamingV2Request';
-import { SendAgentConversationMessageV2Request } from '../models/SendAgentConversationMessageV2Request';
+import { SendAgentConversationMessageRequest , SendAgentConversationMessageRequestSpotterExperienceVersionEnum   } from '../models/SendAgentConversationMessageRequest';
+import { SendAgentConversationMessageResponseClass } from '../models/SendAgentConversationMessageResponse';
+import { SendAgentConversationMessageStreaming200ResponseClass } from '../models/SendAgentConversationMessageStreaming200Response';
+import { SendAgentConversationMessageStreamingRequest , SendAgentConversationMessageStreamingRequestSpotterExperienceVersionEnum   } from '../models/SendAgentConversationMessageStreamingRequest';
 import { SendAgentMessageRequest } from '../models/SendAgentMessageRequest';
 import { SendAgentMessageResponse } from '../models/SendAgentMessageResponse';
 import { SendAgentMessageStreamingRequest } from '../models/SendAgentMessageStreamingRequest';
@@ -1062,6 +1061,7 @@ import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from 
 import { SortingOptions } from '../models/SortingOptions';
 import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse  , SqlQueryResponseMetadataTypeEnum    } from '../models/SqlQueryResponse';
+import { StopConversationRequest, StopConversationRequestSpotterExperienceVersionEnum   } from '../models/StopConversationRequest';
 import { StorageConfig } from '../models/StorageConfig';
 import { StorageConfigInput } from '../models/StorageConfigInput';
 import { StorageDestination, StorageDestinationStorageTypeEnum    } from '../models/StorageDestination';
@@ -1262,7 +1262,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ConversationPrincipalInfoTypeEnum",
     "ConversationPrincipalInfoPermissionEnum",
     "CopyObjectRequestTypeEnum",
-    "CreateAgentConversationV2RequestSourceEnum",
+    "CreateAgentConversationRequestSpotterExperienceVersionEnum",
     "CreateCalendarRequestCreationMethodEnum",
     "CreateCalendarRequestCalendarTypeEnum",
     "CreateCalendarRequestMonthOffsetEnum",
@@ -1448,6 +1448,8 @@ let enumsMap: Set<string> = new Set<string>([
     "SemanticIntegrationSearchResponseTypeEnum",
     "SemanticIntegrationSortOptionsFieldNameEnum",
     "SemanticIntegrationSortOptionsOrderEnum",
+    "SendAgentConversationMessageRequestSpotterExperienceVersionEnum",
+    "SendAgentConversationMessageStreamingRequestSpotterExperienceVersionEnum",
     "ShareMetadataRequestMetadataTypeEnum",
     "ShareMetadataTypeInputTypeEnum",
     "SharePermissionsInputShareModeEnum",
@@ -1459,6 +1461,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SortOptionsFieldNameEnum",
     "SortOptionsOrderEnum",
     "SqlQueryResponseMetadataTypeEnum",
+    "StopConversationRequestSpotterExperienceVersionEnum",
     "StorageDestinationStorageTypeEnum",
     "StorageDestinationInputStorageTypeEnum",
     "StyleFontAssignmentVisualizationAreasEnum",
@@ -1584,11 +1587,11 @@ let typeMap: {[index: string]: any} = {
     "AgentConversation": AgentConversation,
     "AgentConversationHistoryResponse": AgentConversationHistoryResponse,
     "AgentConversationList": AgentConversationList,
-    "AgentConversationV2": AgentConversationV2,
     "AgentEvent": AgentEvent,
     "AgentEventContent": AgentEventContent,
     "AgentEventPart": AgentEventPart,
     "AgentInstructions": AgentInstructions,
+    "AgentMessagesResponse": AgentMessagesResponse,
     "AgentProgress": AgentProgress,
     "AgentStreamDone": AgentStreamDone,
     "AgentStreamError": AgentStreamError,
@@ -1688,7 +1691,6 @@ let typeMap: {[index: string]: any} = {
     "ConvertWorksheetToModelRequest": ConvertWorksheetToModelRequest,
     "CopyObjectRequest": CopyObjectRequest,
     "CreateAgentConversationRequest": CreateAgentConversationRequest,
-    "CreateAgentConversationV2Request": CreateAgentConversationV2Request,
     "CreateAnalystRequest": CreateAnalystRequest,
     "CreateCalendarRequest": CreateCalendarRequest,
     "CreateCollectionRequest": CreateCollectionRequest,
@@ -2001,9 +2003,9 @@ let typeMap: {[index: string]: any} = {
     "SemanticIntegrationSortOptions": SemanticIntegrationSortOptions,
     "SemanticIntegrationTagReference": SemanticIntegrationTagReference,
     "SendAgentConversationMessageRequest": SendAgentConversationMessageRequest,
+    "SendAgentConversationMessageResponse": SendAgentConversationMessageResponseClass,
+    "SendAgentConversationMessageStreaming200Response": SendAgentConversationMessageStreaming200ResponseClass,
     "SendAgentConversationMessageStreamingRequest": SendAgentConversationMessageStreamingRequest,
-    "SendAgentConversationMessageStreamingV2Request": SendAgentConversationMessageStreamingV2Request,
-    "SendAgentConversationMessageV2Request": SendAgentConversationMessageV2Request,
     "SendAgentMessageRequest": SendAgentMessageRequest,
     "SendAgentMessageResponse": SendAgentMessageResponse,
     "SendAgentMessageStreamingRequest": SendAgentMessageStreamingRequest,
@@ -2023,6 +2025,7 @@ let typeMap: {[index: string]: any} = {
     "SortingOptions": SortingOptions,
     "SqlQuery": SqlQuery,
     "SqlQueryResponse": SqlQueryResponse,
+    "StopConversationRequest": StopConversationRequest,
     "StorageConfig": StorageConfig,
     "StorageConfigInput": StorageConfigInput,
     "StorageDestination": StorageDestination,

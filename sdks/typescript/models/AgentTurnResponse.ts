@@ -18,9 +18,9 @@ import { HttpFile } from '../http/http';
 */
 export class AgentTurnResponse {
     /**
-    * The conversation the turn belongs to.    Version: 26.12.0.cl or later 
+    * The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later 
     */
-    'conversation_identifier': string;
+    'conversation_identifier'?: string | null;
     /**
     * The frames of the turn, in the order Spotter produced them. The number of frames is not capped and the list is never truncated: a turn too large or too long to return whole fails with an HTTP error instead. For long turns, use the streaming endpoint.    Version: 26.12.0.cl or later 
     */

@@ -80,5 +80,23 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'AnalystIdentifier'
         }
+
+        /// <summary>
+        /// Test the property 'AdditionalInstructions'
+        /// </summary>
+        [Fact]
+        public void AdditionalInstructionsTest()
+        {
+            // TODO unit test for the property 'AdditionalInstructions'
+        }
+
+        /// <summary>
+        /// Test the property 'SpotterExperienceVersion'
+        /// </summary>
+        [Fact]
+        public void SpotterExperienceVersionTest()
+        {
+            // TODO unit test for the property 'SpotterExperienceVersion'
+        }
     }
 }

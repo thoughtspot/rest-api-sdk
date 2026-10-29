@@ -51,6 +51,63 @@ public class SendAgentConversationMessageRequest implements Serializable {
   @javax.annotation.Nonnull
   private List<String> messages;
 
+  /**
+   * Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Returns a list of   messages (&#x60;AgentMessagesResponse&#x60;). - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Returns the turn&#39;s   events (&#x60;AgentTurnResponse&#x60;) and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+   */
+  @JsonAdapter(SpotterExperienceVersionEnum.Adapter.class)
+  public enum SpotterExperienceVersionEnum {
+    V1("V1"),
+    
+    V2("V2");
+
+    private String value;
+
+    SpotterExperienceVersionEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static SpotterExperienceVersionEnum fromValue(String value) {
+      for (SpotterExperienceVersionEnum b : SpotterExperienceVersionEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<SpotterExperienceVersionEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SpotterExperienceVersionEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SpotterExperienceVersionEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return SpotterExperienceVersionEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      SpotterExperienceVersionEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_SPOTTER_EXPERIENCE_VERSION = "spotter_experience_version";
+  @SerializedName(SERIALIZED_NAME_SPOTTER_EXPERIENCE_VERSION)
+  @javax.annotation.Nullable
+  private SpotterExperienceVersionEnum spotterExperienceVersion = SpotterExperienceVersionEnum.V1;
+
   public SendAgentConversationMessageRequest() {
   }
 
@@ -78,6 +135,25 @@ public class SendAgentConversationMessageRequest implements Serializable {
 
   public void setMessages(@javax.annotation.Nonnull List<String> messages) {
     this.messages = messages;
+  }
+
+
+  public SendAgentConversationMessageRequest spotterExperienceVersion(@javax.annotation.Nullable SpotterExperienceVersionEnum spotterExperienceVersion) {
+    this.spotterExperienceVersion = spotterExperienceVersion;
+    return this;
+  }
+
+  /**
+   * Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Returns a list of   messages (&#x60;AgentMessagesResponse&#x60;). - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Returns the turn&#39;s   events (&#x60;AgentTurnResponse&#x60;) and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+   * @return spotterExperienceVersion
+   */
+  @javax.annotation.Nullable
+  public SpotterExperienceVersionEnum getSpotterExperienceVersion() {
+    return spotterExperienceVersion;
+  }
+
+  public void setSpotterExperienceVersion(@javax.annotation.Nullable SpotterExperienceVersionEnum spotterExperienceVersion) {
+    this.spotterExperienceVersion = spotterExperienceVersion;
   }
 
   /**
@@ -135,13 +211,14 @@ public class SendAgentConversationMessageRequest implements Serializable {
       return false;
     }
     SendAgentConversationMessageRequest sendAgentConversationMessageRequest = (SendAgentConversationMessageRequest) o;
-    return Objects.equals(this.messages, sendAgentConversationMessageRequest.messages)&&
+    return Objects.equals(this.messages, sendAgentConversationMessageRequest.messages) &&
+        Objects.equals(this.spotterExperienceVersion, sendAgentConversationMessageRequest.spotterExperienceVersion)&&
         Objects.equals(this.additionalProperties, sendAgentConversationMessageRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messages, additionalProperties);
+    return Objects.hash(messages, spotterExperienceVersion, additionalProperties);
   }
 
   @Override
@@ -149,6 +226,7 @@ public class SendAgentConversationMessageRequest implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class SendAgentConversationMessageRequest {\n");
     sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    spotterExperienceVersion: ").append(toIndentedString(spotterExperienceVersion)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -173,6 +251,7 @@ public class SendAgentConversationMessageRequest implements Serializable {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("messages");
+    openapiFields.add("spotter_experience_version");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -204,6 +283,13 @@ public class SendAgentConversationMessageRequest implements Serializable {
         throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
       } else if (!jsonObj.get("messages").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `messages` to be an array in the JSON string but got `%s`", jsonObj.get("messages").toString()));
+      }
+      if ((jsonObj.get("spotter_experience_version") != null && !jsonObj.get("spotter_experience_version").isJsonNull()) && !jsonObj.get("spotter_experience_version").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `spotter_experience_version` to be a primitive type in the JSON string but got `%s`", jsonObj.get("spotter_experience_version").toString()));
+      }
+      // validate the optional field `spotter_experience_version`
+      if (jsonObj.get("spotter_experience_version") != null && !jsonObj.get("spotter_experience_version").isJsonNull()) {
+        SpotterExperienceVersionEnum.validateJsonElement(jsonObj.get("spotter_experience_version"));
       }
   }
 

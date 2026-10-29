@@ -21,54 +21,146 @@ paths:
 
         Requires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.
 
+        #### Spotter version
+
+        `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:
+
+        - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.
+        - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.
+
+        The two versions differ in which creation settings they accept and in how validation errors are reported. See the sections below for each version's requests and responses.
+
+        **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.
+
+        **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.
+
         #### Usage guidelines
 
-        The conversation context is defined by exactly one of the following parameters:
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>
 
-        - `metadata_context`: defines the conversation context by data source. The context type can be one of:
-          - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
-          - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
-        - `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.
+        Conversations can carry `additional_instructions`, and of `conversation_settings` only `enable_save_chat` is used.
 
-        Passing both `analyst_identifier` and `metadata_context`, or neither, is rejected.
+        Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.
 
-        > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ "type": "data_source", "data_source_context": { "guid": "<worksheet-id>" } }`.
+        ##### Request
 
-        The `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:
-
-        - `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
-        - `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
-        - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl
-        - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history
-
-        If the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations. When the conversation is started from an analyst, the response additionally carries the analyst's `analyst_id`; it is `null` otherwise.
-
-        #### Example request
+        `POST /api/rest/2.0/ai/agent/conversation/create`
 
         ```json
         {
+          "spotter_experience_version": "V2",
+          "metadata_context": {
+            "type": "DATA_SOURCE",
+            "data_source_context": {
+              "data_source_identifiers": ["a1b2c3d4-e5f6-7890-abcd-ef1234567890"]
+            }
+          },
+          "additional_instructions": "Answer concisely and always report revenue in thousands.",
+          "conversation_settings": { "enable_save_chat": true }
+        }
+        ```
+
+        - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it here and on every later request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.
+        - The conversation context, defined by exactly one of:
+          - `metadata_context`: defines the conversation context by data source. The context type can be one of:
+            - `DATA_SOURCE`: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
+            - `AUTO_MODE`: automatically discovers and selects the most relevant datasets for the user's queries.
+          - `analyst_identifier`: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.
+
+          Passing both `analyst_identifier` and `metadata_context`, or neither, returns a `400`.
+        - `additional_instructions` *(optional, this version only)*: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. Not allowed with `analyst_identifier`, since the analyst brings its own instructions.
+        - `conversation_settings` *(optional)*: only `enable_save_chat` applies (default: `false`). When `true`, the conversation appears in `getConversationList` once it has messages. When `false`, it is kept out of the list but can still be continued and deleted by its identifier. The other settings are ignored.
+
+        ##### Response
+
+        ```json
+        {
+          "conversation_id": "8401773265129884672",
+          "conversation_identifier": "8401773265129884672",
+          "analyst_id": null
+        }
+        ```
+
+        - `conversation_identifier`: pass it to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages in this conversation, together with `spotter_experience_version` `V2`. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape.
+        - `conversation_id`: the same value, kept for backwards compatibility; use `conversation_identifier` for new integrations.
+        - `analyst_id`: the analyst's ID when the conversation is started from an analyst; `null` otherwise.
+
+        Validation failures return `400`. A data source or analyst that does not exist or that the caller cannot view is reported as a `400` that lists those identifiers.
+
+        </details>
+
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>
+
+        Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.
+
+        ##### Request
+
+        `POST /api/rest/2.0/ai/agent/conversation/create`
+
+        ```json
+        {
+          "spotter_experience_version": "V1",
           "metadata_context": {
             "type": "DATA_SOURCE",
             "data_source_context": {
               "data_source_identifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             }
           },
-          "conversation_settings": {}
+          "conversation_settings": { "enable_save_chat": true }
         }
         ```
+
+        - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.
+        - The conversation context, defined by exactly one of:
+          - `metadata_context`: defines the conversation context by data source. The context type can be one of:
+            - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.
+            - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.
+          - `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.
+
+          Passing both `analyst_identifier` and `metadata_context`, or neither, returns a `422`.
+        - `conversation_settings` *(optional)*: controls which Spotter capabilities are enabled for the conversation:
+          - `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl
+          - `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl
+          - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl
+          - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history
+        - `additional_instructions`: not available in this version; returns a `400`.
+
+        > **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ "type": "data_source", "data_source_context": { "guid": "<worksheet-id>" } }`.
+
+        ##### Response
+
+        ```json
+        {
+          "conversation_id": "wwHQ5j8O8dQC",
+          "conversation_identifier": "wwHQ5j8O8dQC",
+          "analyst_id": null
+        }
+        ```
+
+        - `conversation_identifier`: pass it to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages in this conversation. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape.
+        - `conversation_id`: the same value, kept for backwards compatibility; use `conversation_identifier` for new integrations.
+        - `analyst_id`: the analyst's ID when the conversation is started from an analyst; `null` otherwise.
+
+        Validation failures return `422`, and an `analyst_identifier` that does not exist in the caller's Org returns `404`.
+
+        </details>
 
         #### Error responses
 
         | Code | Description                                                                                                                             |
         | ---- | --------------------------------------------------------------------------------------------------------------------------------------- |
+        | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, `additional_instructions` is set on `V1` or with `analyst_identifier`, or, on `V2`, the request fails validation. |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |
         | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |
-        | 404  | Not found — no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |
-        | 422  | Unprocessable entity — the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |
+        | 404  | Not found — on `V1`, no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |
+        | 422  | Unprocessable entity — on `V1`, the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |
 
         > ###### Note:
         >
         > - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.
+        > - `spotter_experience_version`, `additional_instructions` and `V2` support are in Beta from 26.12.0.cl.
         > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
 
 
@@ -88,170 +180,43 @@ paths:
           content:
             application/json:
               examples:
-                example_1:
-                  summary: Create a conversation with a specific data source
+                v1_data_source:
+                  summary: "V1: create a conversation with a specific data source"
                   value:
                     conversation_id: wwHQ5j8O8dQC
                     conversation_identifier: wwHQ5j8O8dQC
-                example_2:
-                  summary: Create a conversation using auto mode where the agent automatically
-                    discovers and selects the most relevant datasets for the user's
-                    queries
+                v1_auto_mode:
+                  summary: "V1: create a conversation using auto mode where the agent\
+                    \ automatically discovers and selects the most relevant datasets\
+                    \ for the user's queries"
                   value:
                     conversation_id: aaHQ5j8O8dQC
                     conversation_identifier: aaHQ5j8O8dQC
-                example_3:
-                  summary: Create a conversation from a Spotter Analyst
+                v1_analyst:
+                  summary: "V1: create a conversation from a Spotter Analyst"
                   value:
                     conversation_id: bbHQ5j8O8dQC
                     conversation_identifier: bbHQ5j8O8dQC
                     analyst_id: 9f8e7d6c-5b4a-3210-fedc-ba9876543210
-              schema:
-                $ref: "#/components/schemas/AgentConversation"
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AgentConversation"
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-  /api/rest/2.0/ai/agent/v2/conversation/create:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Creates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.
-
-        Requires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.
-
-        #### Usage guidelines
-
-        A conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.
-
-        `source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.
-
-        - `source` (default: `DATA_SOURCE`): what the conversation is grounded in.
-          - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.
-          - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed.
-        - `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.
-        - `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `"Answer concisely and always report revenue in thousands."` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.
-        - `analyst_identifier`: the saved analyst to create the conversation from.
-
-        A parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.
-
-        Conversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.
-
-        #### Example requests
-
-        ```json
-        {
-          "source": "DATA_SOURCE",
-          "data_source_identifiers": ["a1b2c3d4-e5f6-7890-abcd-ef1234567890"],
-          "additional_instructions": "Answer concisely and always report revenue in thousands."
-        }
-        ```
-
-        ```json
-        {
-          "source": "ANALYST",
-          "analyst_identifier": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
-        }
-        ```
-
-        #### Example response
-
-        ```json
-        {
-          "conversation_identifier": "5612260428840173568"
-        }
-        ```
-
-        Treat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.
-
-        #### Error responses
-
-        | Code | Description                                                                                                                                                                                                                                                                                                                               |
-        | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-        | 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). |
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             |
-        | 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |
-
-        > ###### Note:
-        >
-        > - This endpoint is in Beta from 26.12.0.cl.
-        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-
-
-
-
-
-      operationId: createAgentConversationV2
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateAgentConversationV2Request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  summary: Conversation created
+                v2_data_sources:
+                  summary: "V2: conversation created, scoped to several data sources"
                   value:
-                    conversation_identifier: "5612260428840173568"
-                example_2:
-                  summary: "Conversation created, scoped to a single data source"
-                  value:
-                    conversation_identifier: "7258889042597511168"
-                example_3:
-                  summary: "Conversation created, scoped to several data sources"
-                  value:
+                    conversation_id: "8401773265129884672"
                     conversation_identifier: "8401773265129884672"
-                example_4:
-                  summary: Conversation created from an analyst
+                v2_analyst:
+                  summary: "V2: conversation created from a Spotter Analyst"
                   value:
+                    conversation_id: "6930417752281636864"
                     conversation_identifier: "6930417752281636864"
+                    analyst_id: 0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0
               schema:
-                $ref: "#/components/schemas/AgentConversationV2"
+                $ref: "#/components/schemas/AgentConversation"
           description: Common successful response
         "201":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AgentConversationV2"
+                $ref: "#/components/schemas/AgentConversation"
           description: Common error response
         "400":
           content:
@@ -522,26 +487,69 @@ paths:
         \ or later\n\n\nPermanently deletes an existing saved agent conversation and\
         \ all its associated messages. This operation is irreversible — deleted conversations\
         \ cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership\
-        \ of the conversation being deleted.\n\n#### Usage guidelines\n\nThe request\
-        \ must include:\n\n- `conversation_identifier` *(path parameter)*: the unique\
-        \ ID of the conversation to delete, as returned by `createAgentConversation`\
-        \ or `getConversationList`\n\nA successful request returns an empty `204 No\
-        \ Content` response. The deleted conversation no longer appears in `getConversationList`.\n\
-        \n#### Example request\n\n```bash\nDELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n\
+        \ of the conversation being deleted.\n\n#### Spotter version\n\n`spotter_experience_version`\
+        \ *(available from 26.12.0.cl)* is a query parameter that selects the version\
+        \ of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience,\
+        \ the same one behind the **Liveboard side panel (New)**. New Spotter capabilities\
+        \ ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience**\
+        \ to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default):\
+        \ the Spotter conversation API available before 26.12.0.cl. Used when the\
+        \ parameter is omitted. Use it explicitly only if your cluster must stay on\
+        \ the previous experience.\n\n**Keep the version consistent per conversation.**\
+        \ A conversation belongs to the version that created it. Pass the same value\
+        \ on every later request for that conversation, including when you continue\
+        \ it, stream a response, or retrieve its history. A request with a different\
+        \ value returns not found.\n\n**Default: `V1`.** A request that omits the\
+        \ parameter runs on `V1` on every cluster, including one whose **Spotter 3\
+        \ Liveboard experience** setting is **Liveboard side panel (New)**.\n\n####\
+        \ Usage guidelines\n\nThe request must include:\n\n- `spotter_experience_version`\
+        \ *(query parameter; required for `V2`)*: the version the conversation was\
+        \ created on. A request that omits it runs on `V1`, the default, so a `V2`\
+        \ conversation is found only when the parameter is passed. Available only\
+        \ when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard\
+        \ side panel (New)**; otherwise the request returns a `400`.\n- `conversation_identifier`\
+        \ *(path parameter)*: the unique ID of the conversation to delete, as returned\
+        \ by `createAgentConversation` or `getConversationList`\n\nA successful request\
+        \ returns an empty `204 No Content` response. The deleted conversation no\
+        \ longer appears in `getConversationList`.\n\n#### Example request\n\n```bash\n\
+        DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n\
         ```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
-        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
-        \ privilege or does not own the specified conversation. |\n| 404  | Not Found\
-        \ — no conversation exists with the given `conversation_identifier` for the\
-        \ authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and\
-        \ cannot be undone. Ensure the correct `conversation_identifier` is used before\
-        \ calling this endpoint.\n> - Only conversations created with `enable_save_chat:\
-        \ true` are persisted and can be deleted via this endpoint.\n> - Available\
-        \ from version 26.7.0.cl and later.\n> - This endpoint requires Spotter —\
-        \ please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\
-        \n\n\n\n"
+        | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's\
+        \ **Spotter 3 Liveboard experience** setting is not **Liveboard side panel\
+        \ (New)**. |\n| 401  | Unauthorized — authentication token is missing, expired,\
+        \ or invalid. |\n| 403  | Forbidden — the authenticated user does not have\
+        \ `CAN_USE_SPOTTER` privilege or does not own the specified conversation.\
+        \ |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier`\
+        \ for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent\
+        \ and cannot be undone. Ensure the correct `conversation_identifier` is used\
+        \ before calling this endpoint.\n> - On `V1`, only conversations created with\
+        \ `enable_save_chat: true` are persisted and can be deleted via this endpoint.\
+        \ On `V2`, any conversation can be deleted by its identifier, including one\
+        \ created without `enable_save_chat: true`.\n> - `spotter_experience_version`\
+        \ and `V2` support are in Beta from 26.12.0.cl.\n> - Available from version\
+        \ 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
       operationId: deleteConversation
       parameters:
+      - description: "Version of the Spotter experience the conversation runs on.\
+          \ A\nconversation stays on the version that created it, so pass the value\
+          \ used\nwhen it was created.\n- `V1` (default): the Spotter conversation\
+          \ API available before\n  26.12.0.cl. Used when the parameter is omitted.\n\
+          - `V2`: the new Spotter experience, the same one behind the Liveboard side\n\
+          \  panel (New); new Spotter capabilities ship here. Requires a cluster admin\n\
+          \  to set Spotter 3 Liveboard experience to Liveboard side panel (New);\n\
+          \  otherwise the request returns a 400. \n  Version: 26.12.0.cl or later\n"
+        explode: true
+        in: query
+        name: spotter_experience_version
+        required: false
+        schema:
+          default: V1
+          enum:
+          - V1
+          - V2
+          type: string
+        style: form
       - description: Unique identifier of the conversation to delete.
         explode: false
         in: path
@@ -1224,8 +1232,9 @@ paths:
         \ so clients can render the user message immediately.\n> - Do not assume every\
         \ `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation\
         \ can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n\
-        > - This endpoint requires Spotter — please contact ThoughtSpot Support to\
-        \ enable Spotter on your cluster.\n\n\n\n\n\n"
+        > - Supports `V1` conversations only. Conversations created with `spotter_experience_version:\
+        \ V2` are not found.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
       operationId: getConversation
       parameters:
       - description: Unique identifier of the conversation to load.
@@ -1400,19 +1409,41 @@ paths:
         \ true` are returned. \n  Version: 26.7.0.cl or later\n\n\nRetrieves a paginated\
         \ list of saved agent conversations for the currently authenticated user.\
         \ Only conversations that were created with `enable_save_chat: true` in `createAgentConversation`\
-        \ are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\
-        \nThe request supports the following optional query parameters:\n\n- `limit`:\
-        \ maximum number of conversations to return. Use this together with `offset`\
-        \ for pagination.\n- `offset`: number of conversations to skip before returning\
-        \ results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations\
-        \ with no messages are excluded from the results. Set to `false` to include\
-        \ empty conversations.\n\nIf the request is successful, the response includes\
-        \ a `conversations` array. Each entry contains:\n\n- `conversation_identifier`:\
-        \ the unique ID of the conversation, used as input to `sendAgentConversationMessage`,\
-        \ `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n\
-        - `conversation_title`: the display name of the conversation\n- `created_at`:\
-        \ ISO 8601 timestamp of when the conversation was created\n- `updated_at`:\
-        \ ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`:\
+        \ are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Spotter version\n\
+        \n`spotter_experience_version` *(available from 26.12.0.cl)* is a query parameter\
+        \ that selects the version of Spotter a conversation runs on:\n\n- `V2`: the\
+        \ new Spotter experience, the same one behind the **Liveboard side panel (New)**.\
+        \ New Spotter capabilities ship here. Requires a cluster admin to set **Spotter\
+        \ 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns\
+        \ a `400`.\n- `V1` (default): the Spotter conversation API available before\
+        \ 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if\
+        \ your cluster must stay on the previous experience.\n\nEach version lists\
+        \ only its own conversations.\n\n**Keep the version consistent per conversation.**\
+        \ A conversation belongs to the version that created it. Pass the same value\
+        \ on every later request for that conversation, including when you continue\
+        \ it, stream a response, or retrieve its history. A request with a different\
+        \ value returns not found.\n\n**Default: `V1`.** A request that omits the\
+        \ parameter runs on `V1` on every cluster, including one whose **Spotter 3\
+        \ Liveboard experience** setting is **Liveboard side panel (New)**.\n\n####\
+        \ Usage guidelines\n\nThe request includes:\n\n- `spotter_experience_version`\
+        \ *(query parameter; required for `V2`)*: the version whose conversations\
+        \ to list. A request that omits it lists `V1` conversations, the default,\
+        \ so pass `V2` to list conversations created on that version. Available only\
+        \ when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard\
+        \ side panel (New)**; otherwise the request returns a `400`.\n\nand supports\
+        \ the following optional query parameters:\n\n- `limit`: maximum number of\
+        \ conversations to return. Use this together with `offset` for pagination.\n\
+        - `offset`: number of conversations to skip before returning results. Defaults\
+        \ to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages\
+        \ are excluded from the results. Set to `false` to include empty conversations.\
+        \ Applies to `V1` only; `V2` always excludes conversations with no messages.\n\
+        \nIf the request is successful, the response includes a `conversations` array.\
+        \ Each entry contains:\n\n- `conversation_identifier`: the unique ID of the\
+        \ conversation, used as input to `sendAgentConversationMessage`, `updateConversation`,\
+        \ `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`:\
+        \ the display name of the conversation\n- `created_at`: ISO 8601 timestamp\
+        \ of when the conversation was created\n- `updated_at`: ISO 8601 timestamp\
+        \ of the most recent update to the conversation\n- `data_source_identifiers`:\
         \ list of unique IDs of the data sources associated with the conversation\n\
         - `data_source_names`: array of `{ id, name }` objects for the data sources\
         \ associated with the conversation\n- `is_pinned`: whether the current user\
@@ -1435,14 +1466,18 @@ paths:
         : [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\"\
         : \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\"\
         : false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.\
-        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
-        \ privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat:\
-        \ true` appear in this list. Conversations created with `enable_save_chat:\
-        \ false` (the default) are not persisted and cannot be retrieved.\n> - Available\
-        \ from version 26.7.0.cl and later.\n> - This endpoint requires Spotter —\
-        \ please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\
-        \n\n\n\n"
+        | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's\
+        \ **Spotter 3 Liveboard experience** setting is not **Liveboard side panel\
+        \ (New)**. |\n| 401  | Unauthorized — authentication token is missing, expired,\
+        \ or invalid. |\n| 403  | Forbidden — the authenticated user does not have\
+        \ `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations\
+        \ created with `enable_save_chat: true` appear in this list. On `V1`, conversations\
+        \ created with `enable_save_chat: false` (the default) are not persisted and\
+        \ cannot be retrieved. On `V2`, they are kept out of this list but can still\
+        \ be continued and deleted by their identifier.\n> - `spotter_experience_version`\
+        \ and `V2` support are in Beta from 26.12.0.cl.\n> - Available from version\
+        \ 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
       operationId: getConversationList
       parameters:
       - description: Maximum number of conversations to return. Used for pagination.
@@ -1475,6 +1510,25 @@ paths:
         schema:
           default: true
           type: boolean
+        style: form
+      - description: "Version of the Spotter experience whose conversations to list.\
+          \ Each version\nlists only the conversations created on it.\n- `V1` (default):\
+          \ the Spotter conversation API available before\n  26.12.0.cl. Used when\
+          \ the parameter is omitted.\n- `V2`: the new Spotter experience, the same\
+          \ one behind the Liveboard side\n  panel (New); new Spotter capabilities\
+          \ ship here. Requires a cluster admin\n  to set Spotter 3 Liveboard experience\
+          \ to Liveboard side panel (New);\n  otherwise the request returns a 400.\
+          \ \n  Version: 26.12.0.cl or later\n"
+        explode: true
+        in: query
+        name: spotter_experience_version
+        required: false
+        schema:
+          default: V1
+          enum:
+          - V1
+          - V2
+          type: string
         style: form
       responses:
         "200":
@@ -2791,33 +2845,132 @@ paths:
          Version: 26.5.0.cl or later
 
 
-        Sends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.
+        Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.
 
-        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.
+        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.
+
+        Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreaming` instead.
+
+        #### Spotter version
+
+        `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:
+
+        - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.
+        - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.
+
+        The two versions differ in the response shape: `AgentTurnResponse`, a list of events, on `V2`, and `AgentMessagesResponse`, a list of messages, on `V1`. See the sections below for each version's requests and responses.
+
+        The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the `SendAgentConversationMessageResponse` schema, which is one of `AgentMessagesResponse` or `AgentTurnResponse`.
+
+        **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.
+
+        **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.
 
         #### Usage guidelines
 
-        The request must include:
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>
 
-        - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking
-        - `messages`: an array of one or more text messages to send to the agent
+        The response collects every event of the turn into one `events` array, and a message can be sent without a conversation identifier to start a new conversation.
 
-        The API returns an array of response objects, each containing:
+        Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.
 
-        - `type`: the kind of response — `text`, `answer`, or `error`
-        - `message`: the main content of the response
-        - `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)
+        ##### Request
+
+        `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`, or `POST /api/rest/2.0/ai/agent/conversation/send` to start a new conversation
+
+        ```json
+        {
+          "spotter_experience_version": "V2",
+          "messages": ["Which region had the highest sales last quarter?"]
+        }
+        ```
+
+        - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.
+        - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the `x-conversation-identifier` response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier.
+        - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.
+
+        ##### Response
+
+        ```json
+        {
+          "conversation_identifier": "5612260428840173568",
+          "events": [
+            { "tool_call": { "id": "toolu_01AMjCrr", "name": "spotter_tools_fetch_and_visualize_data" } },
+            { "progress": { "code": "TML_GEN", "tool_call_id": "toolu_01AMjCrr" } },
+            { "tool_result": { "id": "toolu_01AMjCrr", "answer": { "session_id": "c5c25b33" } } },
+            {
+              "event": {
+                "content": { "role": "model", "parts": [{ "text": "Sales were highest in the West." }] }
+              }
+            },
+            { "done": { "conversation_identifier": "5612260428840173568" } }
+          ]
+        }
+        ```
+
+        This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.
+
+        `events` contains exactly what the streaming endpoint publishes on `V2`, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreaming` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.
+
+        To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.
+
+        A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint explains how the two differ.
+
+        </details>
+
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>
+
+        Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.
+
+        ##### Request
+
+        `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`
+
+        ```json
+        {
+          "spotter_experience_version": "V1",
+          "messages": ["Which region had the highest sales last quarter?"]
+        }
+        ```
+
+        - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.
+        - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`.
+        - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.
+
+        ##### Response
+
+        ```json
+        {
+          "messages": [
+            { "type": "text", "text": "Sales were highest in the West.", "metadata": {} }
+          ]
+        }
+        ```
+
+        The response contains a `messages` array, in order. Each message has:
+
+        - `type`: the kind of message — `text`, `answer`, `error`, and others
+        - `metadata`: additional information depending on the type (for example, answer metadata includes analytics and visualization details)
+        - the fields of that type: `text` for a `text` message, `title` and `session_id` for an `answer`, `code` and `message` for an `error`
+
+        </details>
 
         #### Error responses
 
         | Code | Description                                                                                                                      |
         |------|----------------------------------------------------------------------------------------------------------------------------------|
+        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
         | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
+        | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |
+        | 504  | Gateway timeout — on `V2`, the turn did not finish in the time allowed. Retry, or use `sendAgentConversationMessageStreaming` for questions that run long. |
 
         > ###### Note:
         >
         > - This endpoint is Generally Available from version 26.5.0.cl.
+        > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl.
         > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
         > - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.
 
@@ -2827,7 +2980,10 @@ paths:
 
       operationId: sendAgentConversationMessage
       parameters:
-      - description: Unique identifier for the conversation (used to track context)
+      - description: |-
+          Unique identifier of the conversation. Optional: on V2, omit
+          this path segment to start a new conversation; its identifier is returned
+          in the response and the `x-conversation-identifier` header.
         explode: false
         in: path
         name: conversation_identifier
@@ -2846,8 +3002,8 @@ paths:
           content:
             application/json:
               examples:
-                example_1:
-                  summary: Send a message to an existing agent conversation
+                v1_turn:
+                  summary: "V1: send a message to an existing agent conversation"
                   value:
                     messages:
                     - metadata: {}
@@ -2904,6 +3060,74 @@ paths:
 
                         The visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.
                       agent_context: ""
+                v2_turn:
+                  summary: "V2: a completed turn. `events` carries the same frames\
+                    \ the streaming endpoint publishes, in order."
+                  value:
+                    conversation_identifier: "5612260428840173568"
+                    events:
+                    - tool_call:
+                        id: toolu_01AMjCrr
+                        name: spotter_tools_fetch_and_visualize_data
+                        args:
+                          dataset_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                          english_query: total sales by region last quarter
+                    - progress:
+                        code: TML_GEN
+                        message: Translating the request with the Reasoning Engine
+                        tool_call_id: toolu_01AMjCrr
+                    - tool_result:
+                        id: toolu_01AMjCrr
+                        name: spotter_tools_fetch_and_visualize_data
+                        is_error: false
+                        text: |-
+                          **total sales by region last quarter**
+                          TML query: `[sales] [region] [date] = 'last quarter'`
+                        answer:
+                          title: total sales by region last quarter
+                          session_id: c5c25b33-74b8-4e83-b7f3-f7f384323903
+                          gen_no: 2
+                          worksheet_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                          sage_query: "[sales] [region] [date] = 'last quarter'"
+                          visualization:
+                            chart_type: ADVANCED_COLUMN
+                          table_data:
+                            total_rows: 5
+                    - event:
+                        id: c506785a-0493-4273-97c0-128ab2bdd7aa
+                        invocation_id: e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974
+                        partial: true
+                        content:
+                          role: model
+                          parts:
+                          - text: The user is asking for data
+                            thought: true
+                    - event:
+                        id: 10552f5a-c275-4e06-8af3-596676cbff71
+                        invocation_id: e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974
+                        partial: true
+                        content:
+                          role: model
+                          parts:
+                          - text: Total sales last quarter were highest in the West
+                              region.
+                    - done:
+                        conversation_identifier: "5612260428840173568"
+                v2_error_turn:
+                  summary: "V2: a turn that failed. The error frame carries display_message\
+                    \ and error_bucket; done still closes the turn."
+                  value:
+                    conversation_identifier: "5612260428840173568"
+                    events:
+                    - error:
+                        code: "409"
+                        message: "session busy: lease held by invocation 7f3a"
+                        source: transport
+                        display_message: Another request is still running in this
+                          conversation.
+                        error_bucket: RETRY
+                    - done:
+                        conversation_identifier: "5612260428840173568"
               schema: {}
           description: Common successful response
         "201":
@@ -2945,155 +3169,50 @@ paths:
          Version: 26.5.0.cl or later
 
 
-        Sends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
+        Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.
 
-        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.
+        Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.
 
-        #### Usage guidelines
+        #### Spotter version
 
-        The request must include:
+        `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:
 
-        - `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking
-        - `messages`: an array of one or more text messages to send to the agent
+        - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.
+        - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.
 
-        If the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{"type": "...", ...}]` — a JSON array of event objects. Event types include:
+        The two versions differ in the events the stream carries. See the sections below for each version's requests and responses.
 
-        - `ack`: confirms receipt of the request (`node_id`)
-        - `conv_title`: conversation title (`title`, `conv_id`)
-        - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)
-        - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)
-        - `text`: full text block with same structure as `text-chunk`
-        - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)
-        - `error`: if a failure occurs
+        **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.
 
-        #### Error responses
-
-        | Code | Description                                                                                                                      |
-        | ---- | -------------------------------------------------------------------------------------------------------------------------------- |
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
-
-        > ###### Note:
-        >
-        > - This endpoint is Generally Available from version 26.5.0.cl.
-        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-        > - The streaming protocol uses Server-Sent Events (SSE).
-        > - For the complete response in a single payload, use `sendAgentConversationMessage` instead.
-
-
-
-
-
-      operationId: sendAgentConversationMessageStreaming
-      parameters:
-      - description: Unique identifier for the conversation (used to track context)
-        explode: false
-        in: path
-        name: conversation_identifier
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SendAgentConversationMessageStreamingRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  summary: "SSE stream — each line is data: [{\"type\": \"...\", ...}].\
-                    \ Events arrive over time; this example shows a minimal sequence."
-                  value:
-                  - type: ack
-                    node_id: aGxzcFVrtom8
-                  - type: conv_title
-                    title: Sales 2025 vs 2024
-                    conv_id: -XIi04l5rrof
-                  - type: notification
-                    group_id: cDEsAQbSnd3J
-                    metadata:
-                      type: thinking
-                      tool_title: "Analyzing Sales Performance: 2025 vs 2024"
-                    code: TOOL_CALL_NOTIFICATION
-                  - id: mNAdvy-NK2l6
-                    type: text-chunk
-                    group_id: cDEsAQbSnd3J
-                    metadata:
-                      format: markdown
-                      type: thinking
-                    content: |2-
-
-
-                      I need to compare sales performance between 2025 and 2024.
-                  - id: hxWMDP-pgR3B
-                    type: answer
-                    group_id: m1MTvttEUa7o
-                    metadata:
-                      sage_query: "[sales] [date] = '2025' vs [date] = '2024'"
-                      session_id: 431adcf9-1328-4d8c-81a1-0faa7fa37ba6
-                      title: Compare sales for 2025 vs 2024
-                    title: Compare sales for 2025 vs 2024
-              schema:
-                $ref: "#/components/schemas/SendAgentMessageResponse"
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SendAgentMessageResponse"
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
-      x-streaming: true
-  /api/rest/2.0/ai/agent/v2/conversation/send/stream:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Sends a message to Spotter and streams the response back as Server-Sent Events.
-
-        Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.
+        **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.
 
         #### Usage guidelines
 
-        - `message` (required): the question to ask Spotter.
-        - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>
+
+        Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.
+
+        Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.
+
+        ##### Request
+
+        `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`, or `POST /api/rest/2.0/ai/agent/conversation/send/stream` to start a new conversation
+
+        ```json
+        {
+          "spotter_experience_version": "V2",
+          "messages": ["Which region had the highest sales last quarter?"]
+        }
+        ```
+
+        - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.
+        - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send/stream` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the `x-conversation-identifier` response header and in the final `done` event, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier.
+        - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.
 
         Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.
 
-        #### Response format
+        ##### Response
 
         Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:
 
@@ -3139,7 +3258,7 @@ paths:
         - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment.
         - `invocation_id` is stable for one turn; `id` identifies a single event.
 
-        #### Steps: tool_call, progress, tool_result
+        ###### Steps: tool_call, progress, tool_result
 
         When Spotter needs to do something — query a data source, run code — it reports the step as it happens.
 
@@ -3201,7 +3320,7 @@ paths:
 
         `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.
 
-        #### End of turn
+        ###### End of turn
 
         The stream ends with a terminal event:
 
@@ -3213,9 +3332,9 @@ paths:
 
         `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.
 
-        The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.
+        The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the conversation identifier.
 
-        #### Errors during a turn
+        ###### Errors during a turn
 
         If the turn fails after streaming has begun, an event carries an error instead of content:
 
@@ -3257,45 +3376,130 @@ paths:
 
         `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.
 
+        </details>
+
+        <details>
+        <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>
+
+        Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.
+
+        ##### Request
+
+        `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`
+
+        ```json
+        {
+          "spotter_experience_version": "V1",
+          "messages": ["Which region had the highest sales last quarter?"]
+        }
+        ```
+
+        - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.
+        - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`.
+        - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.
+
+        Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.
+
+        ##### Response
+
+        Each line has the form `data: [{"type": "...", ...}]` — a JSON array of event objects. Event types include:
+
+        - `ack`: confirms receipt of the request (`node_id`)
+        - `conv_title`: conversation title (`title`, `conv_id`)
+        - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)
+        - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)
+        - `text`: full text block with same structure as `text-chunk`
+        - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)
+        - `error`: if a failure occurs
+
+        </details>
+
         #### Error responses
 
         Errors detected before streaming begins are returned as a normal HTTP response.
 
-        | Code | Description                                                                                                        |
-        | ---- | ------------------------------------------------------------------------------------------------------------------ |
-        | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               |
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. |
-        | 404  | Not found — no conversation with the given identifier exists for this user.                                        |
+        | Code | Description                                                                                                                      |
+        | ---- | -------------------------------------------------------------------------------------------------------------------------------- |
+        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |
+        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
+        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
+        | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |
 
         > ###### Note:
         >
-        > - This endpoint is in Beta from 26.12.0.cl.
+        > - This endpoint is Generally Available from version 26.5.0.cl.
+        > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl.
         > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
         > - The streaming protocol uses Server-Sent Events (SSE).
+        > - For the complete response in a single payload, use `sendAgentConversationMessage` instead.
 
 
 
 
 
-      operationId: sendAgentConversationMessageStreamingV2
-      parameters: []
+      operationId: sendAgentConversationMessageStreaming
+      parameters:
+      - description: |-
+          Unique identifier of the conversation. Optional: on V2, omit
+          this path segment to start a new conversation; its identifier is returned
+          in the response and the `x-conversation-identifier` header.
+        explode: false
+        in: path
+        name: conversation_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SendAgentConversationMessageStreamingV2Request"
+              $ref: "#/components/schemas/SendAgentConversationMessageStreamingRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               examples:
-                example_1:
-                  summary: "SSE stream -- each event is a data: line carrying one\
-                    \ JSON object. Events arrive over time; this shows a step (tool_call,\
-                    \ progress, tool_result), the streamed answer text, and the terminal\
-                    \ done event."
+                v1_turn:
+                  summary: "V1: SSE stream — each line is data: [{\"type\": \"...\"\
+                    , ...}]. Events arrive over time; this example shows a minimal\
+                    \ sequence."
+                  value:
+                  - type: ack
+                    node_id: aGxzcFVrtom8
+                  - type: conv_title
+                    title: Sales 2025 vs 2024
+                    conv_id: -XIi04l5rrof
+                  - type: notification
+                    group_id: cDEsAQbSnd3J
+                    metadata:
+                      type: thinking
+                      tool_title: "Analyzing Sales Performance: 2025 vs 2024"
+                    code: TOOL_CALL_NOTIFICATION
+                  - id: mNAdvy-NK2l6
+                    type: text-chunk
+                    group_id: cDEsAQbSnd3J
+                    metadata:
+                      format: markdown
+                      type: thinking
+                    content: |2-
+
+
+                      I need to compare sales performance between 2025 and 2024.
+                  - id: hxWMDP-pgR3B
+                    type: answer
+                    group_id: m1MTvttEUa7o
+                    metadata:
+                      sage_query: "[sales] [date] = '2025' vs [date] = '2024'"
+                      session_id: 431adcf9-1328-4d8c-81a1-0faa7fa37ba6
+                      title: Compare sales for 2025 vs 2024
+                    title: Compare sales for 2025 vs 2024
+                v2_turn:
+                  summary: "V2: SSE stream -- each event is a data: line carrying\
+                    \ one JSON object. Events arrive over time; this shows a step\
+                    \ (tool_call, progress, tool_result), the streamed answer text,\
+                    \ and the terminal done event."
                   value:
                   - tool_call:
                       id: toolu_01AMjCrr
@@ -3359,9 +3563,10 @@ paths:
                             region.
                   - done:
                       conversation_identifier: "5612260428840173568"
-                example_2:
-                  summary: "A turn that fails after streaming has begun — render display_message,\
-                    \ branch on error_bucket. The stream still ends with done."
+                v2_error_turn:
+                  summary: "V2: a turn that fails after streaming has begun — render\
+                    \ display_message, branch on error_bucket. The stream still ends\
+                    \ with done."
                   value:
                   - error:
                       code: "409"
@@ -3372,13 +3577,12 @@ paths:
                   - done:
                       conversation_identifier: "5612260428840173568"
               schema:
-                $ref: "#/components/schemas/AgentStreamFrame"
+                $ref: "#/components/schemas/sendAgentConversationMessageStreaming_200_response"
           description: Common successful response
         "201":
           content:
             application/json:
-              schema:
-                $ref: "#/components/schemas/AgentStreamFrame"
+              schema: {}
           description: Common error response
         "400":
           content:
@@ -3407,187 +3611,7 @@ paths:
       tags:
       - AI
       - ThoughtSpotRest
-  /api/rest/2.0/ai/agent/v2/conversation/send:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Sends a message to Spotter and returns the complete response once the turn has finished.
-
-        Requires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.
-
-        Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.
-
-        #### Usage guidelines
-
-        - `message` (required): the question to ask Spotter.
-        - `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.
-
-        This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.
-
-        #### Response format
-
-        ```json
-        {
-          "conversation_identifier": "5612260428840173568",
-          "events": [
-            { "tool_call": { "id": "toolu_01AMjCrr", "name": "spotter_tools_fetch_and_visualize_data" } },
-            { "progress": { "code": "TML_GEN", "tool_call_id": "toolu_01AMjCrr" } },
-            { "tool_result": { "id": "toolu_01AMjCrr", "answer": { "session_id": "c5c25b33" } } },
-            {
-              "event": {
-                "content": { "role": "model", "parts": [{ "text": "Sales were highest in the West." }] }
-              }
-            },
-            { "done": { "conversation_identifier": "5612260428840173568" } }
-          ]
-        }
-        ```
-
-        `events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.
-
-        To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.
-
-        A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's "Errors during a turn" section explains how the two differ.
-
-        #### Error responses
-
-        | Code | Description                                                                                                                                                     |
-        | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-        | 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   |
-        | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            |
-        | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              |
-        | 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     |
-        | 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |
-
-        > ###### Note:
-        >
-        > - This endpoint is in Beta from 26.12.0.cl.
-        > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.
-
-
-
-
-
-      operationId: sendAgentConversationMessageV2
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SendAgentConversationMessageV2Request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  summary: "A completed turn. `events` carries the same frames the\
-                    \ streaming endpoint publishes, in order."
-                  value:
-                    conversation_identifier: "5612260428840173568"
-                    events:
-                    - tool_call:
-                        id: toolu_01AMjCrr
-                        name: spotter_tools_fetch_and_visualize_data
-                        args:
-                          dataset_id: cd252e5c-b552-49a8-821d-3eadaa049cca
-                          english_query: total sales by region last quarter
-                    - progress:
-                        code: TML_GEN
-                        message: Translating the request with the Reasoning Engine
-                        tool_call_id: toolu_01AMjCrr
-                    - tool_result:
-                        id: toolu_01AMjCrr
-                        name: spotter_tools_fetch_and_visualize_data
-                        is_error: false
-                        text: |-
-                          **total sales by region last quarter**
-                          TML query: `[sales] [region] [date] = 'last quarter'`
-                        answer:
-                          title: total sales by region last quarter
-                          session_id: c5c25b33-74b8-4e83-b7f3-f7f384323903
-                          gen_no: 2
-                          worksheet_id: cd252e5c-b552-49a8-821d-3eadaa049cca
-                          sage_query: "[sales] [region] [date] = 'last quarter'"
-                          visualization:
-                            chart_type: ADVANCED_COLUMN
-                          table_data:
-                            total_rows: 5
-                    - event:
-                        id: c506785a-0493-4273-97c0-128ab2bdd7aa
-                        invocation_id: e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974
-                        partial: true
-                        content:
-                          role: model
-                          parts:
-                          - text: The user is asking for data
-                            thought: true
-                    - event:
-                        id: 10552f5a-c275-4e06-8af3-596676cbff71
-                        invocation_id: e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974
-                        partial: true
-                        content:
-                          role: model
-                          parts:
-                          - text: Total sales last quarter were highest in the West
-                              region.
-                    - done:
-                        conversation_identifier: "5612260428840173568"
-                example_2:
-                  summary: A turn that failed. The error frame carries display_message
-                    and error_bucket; done still closes the turn.
-                  value:
-                    conversation_identifier: "5612260428840173568"
-                    events:
-                    - error:
-                        code: "409"
-                        message: "session busy: lease held by invocation 7f3a"
-                        source: transport
-                        display_message: Another request is still running in this
-                          conversation.
-                        error_bucket: RETRY
-                    - done:
-                        conversation_identifier: "5612260428840173568"
-              schema:
-                $ref: "#/components/schemas/AgentTurnResponse"
-          description: Common successful response
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AgentTurnResponse"
-          description: Common error response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Operation failed
-      tags:
-      - AI
-      - ThoughtSpotRest
+      x-streaming: true
   /api/rest/2.0/ai/agent/{conversation_identifier}/converse:
     post:
       deprecated: true
@@ -4307,14 +4331,33 @@ paths:
         \ to cancel a response that is actively being generated — for example, when\
         \ the user navigates away, reformulates their question, or no longer needs\
         \ the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to\
-        \ the specified conversation.\n\n#### Usage guidelines\n\nThe request must\
-        \ include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID\
-        \ of the conversation whose active response should be stopped, as returned\
-        \ by `createAgentConversation`\n\nA successful request returns an empty `204\
-        \ No Content` response. If there is no active response in progress at the\
-        \ time of the call, the request is still treated as successful.\n\nAfter stopping\
-        \ a response, the conversation session remains active. You can continue sending\
-        \ messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\
+        \ the specified conversation.\n\n#### Spotter version\n\n`spotter_experience_version`\
+        \ *(available from 26.12.0.cl)* selects the version of Spotter a conversation\
+        \ runs on:\n\n- `V2`: the new Spotter experience, the same one behind the\
+        \ **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires\
+        \ a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard\
+        \ side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter\
+        \ conversation API available before 26.12.0.cl. Used when the parameter is\
+        \ omitted. Use it explicitly only if your cluster must stay on the previous\
+        \ experience.\n\n**Keep the version consistent per conversation.** A conversation\
+        \ belongs to the version that created it. Pass the same value on every later\
+        \ request for that conversation, including when you continue it, stream a\
+        \ response, or retrieve its history. A request with a different value returns\
+        \ not found.\n\n**Default: `V1`.** A request that omits the parameter runs\
+        \ on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience**\
+        \ setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\n\
+        The request must include:\n\n- `spotter_experience_version` *(body parameter;\
+        \ required for `V2`)*: the version the conversation was created on. A request\
+        \ that omits it runs on `V1`, the default, so a `V2` conversation is found\
+        \ only when the parameter is passed. Available only when a cluster admin has\
+        \ set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**;\
+        \ otherwise the request returns a `400`.\n- `conversation_identifier` *(path\
+        \ parameter)*: the unique ID of the conversation whose active response should\
+        \ be stopped, as returned by `createAgentConversation`\n\nA successful request\
+        \ returns an empty `204 No Content` response. If there is no active response\
+        \ in progress at the time of the call, the request is still treated as successful.\n\
+        \nAfter stopping a response, the conversation session remains active. You\
+        \ can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\
         \n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n\
         ```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating\
         \ Spotter into a chat UI where users can cancel a long-running query. For\
@@ -4323,15 +4366,18 @@ paths:
         3. Your client calls `stopConversation` with the active `conversation_identifier`.\n\
         4. The stream is terminated and the user can ask a new question.\n\n#### Error\
         \ responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized\
-        \ — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden\
-        \ — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks\
-        \ access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling\
-        \ this endpoint when no response is in progress does not return an error.\n\
-        > - The conversation context is preserved after stopping — previous messages\
-        \ and answers remain accessible.\n> - Available from version 26.6.0.cl and\
-        \ later.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
-        \ Support to enable Spotter on your cluster.\n> - This feature is available\
-        \ only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n\n"
+        \ — authentication token is missing, expired, or invalid. |\n| 400  | Bad\
+        \ request — `spotter_experience_version` is `V2` and the cluster's **Spotter\
+        \ 3 Liveboard experience** setting is not **Liveboard side panel (New)**,\
+        \ or, on `V2`, no conversation with the given identifier exists for this user.\
+        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
+        \ privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n\
+        >\n> - Calling this endpoint when no response is in progress does not return\
+        \ an error.\n> - The conversation context is preserved after stopping — previous\
+        \ messages and answers remain accessible.\n> - Available from version 26.6.0.cl\
+        \ and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
+        \ Support to enable Spotter on your cluster.\n> - `spotter_experience_version`\
+        \ and `V2` support are in Beta from 26.12.0.cl.\n\n\n\n\n\n"
       operationId: stopConversation
       parameters:
       - description: Unique identifier of the conversation to stop.
@@ -4342,6 +4388,12 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopConversationRequest"
+        required: false
       responses:
         "204":
           description: Successfully stopped the in-progress agent conversation response
@@ -4517,9 +4569,10 @@ paths:
         \ Unsaved conversations are not persisted and do not have a retrievable identifier.\n\
         > - There is no limit on the number of conversations a user can pin.\n> -\
         \ Available from version 26.7.0.cl and later. The `is_pinned` attribute is\
-        \ available from version 26.10.0.cl and later.\n> - This endpoint requires\
-        \ Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
-        \n\n\n\n\n"
+        \ available from version 26.10.0.cl and later.\n> - Supports `V1` conversations\
+        \ only. Conversations created with `spotter_experience_version: V2` are not\
+        \ found.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
+        \ Support to enable Spotter on your cluster.\n\n\n\n\n\n"
       operationId: updateConversation
       parameters:
       - description: Unique identifier of the conversation to update.
@@ -35576,388 +35629,6 @@ components:
       - conversation_id
       - conversation_identifier
       type: object
-    AgentConversationV2:
-      description: A Spotter X conversation.
-      example:
-        conversation_identifier: conversation_identifier
-      properties:
-        conversation_identifier:
-          description: "Unique identifier of the conversation. Pass it to subsequent\
-            \ requests to\ncontinue the same conversation. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          type: string
-      required:
-      - conversation_identifier
-      type: object
-    AgentStreamFrame:
-      description: |-
-        One frame of an agent response. On the streaming endpoint each SSE `data:` line
-        is one frame, and a turn streams many over a single connection. Exactly one
-        field is set on any given frame: route on which one is present. New frame
-        types are added as new fields, so a frame where none of the fields you know is
-        set is a frame of a type you do not recognize: skip it.
-      example:
-        event:
-          id: id
-          invocation_id: invocation_id
-          partial: true
-          error_code: error_code
-          content:
-            role: role
-            parts:
-            - text: text
-              thought: true
-            - text: text
-              thought: true
-        tool_call:
-          id: id
-          name: name
-          args: ""
-        progress:
-          code: code
-          message: message
-          tool_call_id: tool_call_id
-        tool_result:
-          id: id
-          name: name
-          is_error: true
-          text: text
-          answer: ""
-        error:
-          code: code
-          message: message
-          source: source
-          display_message: display_message
-          error_bucket: error_bucket
-        done:
-          conversation_identifier: conversation_identifier
-      properties:
-        event:
-          $ref: "#/components/schemas/AgentEvent"
-        tool_call:
-          $ref: "#/components/schemas/AgentToolCall"
-        progress:
-          $ref: "#/components/schemas/AgentProgress"
-        tool_result:
-          $ref: "#/components/schemas/AgentToolResult"
-        error:
-          $ref: "#/components/schemas/AgentStreamError"
-        done:
-          $ref: "#/components/schemas/AgentStreamDone"
-      type: object
-    AgentEvent:
-      description: Text from Spotter — its reasoning or its answer.
-      example:
-        id: id
-        invocation_id: invocation_id
-        partial: true
-        error_code: error_code
-        content:
-          role: role
-          parts:
-          - text: text
-            thought: true
-          - text: text
-            thought: true
-      properties:
-        id:
-          description: "Identifies a single event. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        invocation_id:
-          description: "Stable for one turn; every event of the same turn shares it.\
-            \ \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        partial:
-          description: "`true` for an incremental chunk, `false` for a frame restating\
-            \ a completed\nsegment; absent on a complete event. Restated text is not\
-            \ republished, and\nframes arrive in order over a single response, so\
-            \ appending every part is\nsafe. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: boolean
-        error_code:
-          description: "Set when the turn failed while producing this event. \n  Version:\
-            \ 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        content:
-          $ref: "#/components/schemas/AgentEventContent"
-      required:
-      - content
-      type: object
-    AgentEventContent:
-      description: The content of one agent event.
-      example:
-        role: role
-        parts:
-        - text: text
-          thought: true
-        - text: text
-          thought: true
-      properties:
-        role:
-          description: "Always `model`: the events a caller sees are Spotter speaking.\
-            \ Mirrors the\nagent wire format, and is reserved for conversations with\
-            \ more than one\nspeaker. \n  Version: 26.12.0.cl or later\n"
-          type: string
-        parts:
-          description: "The text this event carries. Empty when `error_code` is set.\
-            \ \n  Version: 26.12.0.cl or later\n"
-          items:
-            $ref: "#/components/schemas/AgentEventPart"
-          type: array
-      required:
-      - parts
-      - role
-      type: object
-    AgentEventPart:
-      description: |-
-        One piece of text from Spotter, with a flag marking reasoning apart from the
-        answer itself.
-      example:
-        text: text
-        thought: true
-      properties:
-        text:
-          description: "The text to render. Text arrives incrementally, so concatenate\
-            \ parts in the\norder received. \n  Version: 26.12.0.cl or later\n"
-          type: string
-        thought:
-          description: "`true` when this text is Spotter's reasoning rather than its\
-            \ answer. Use it\nto render reasoning separately, or to hide it. Absent\
-            \ otherwise; treat\nabsence as `false`. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: boolean
-      required:
-      - text
-      type: object
-    AgentToolCall:
-      description: "A step Spotter started, such as querying a data source."
-      example:
-        id: id
-        name: name
-        args: ""
-      properties:
-        id:
-          description: "Correlates this call with its `progress` and `tool_result`\
-            \ frames. Absent\nwhen the backend did not assign one; a step's frames\
-            \ then arrive in order, so\nmatch them by position. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          nullable: true
-          type: string
-        name:
-          description: "Name of the step that ran. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        args:
-          description: "The arguments the step ran with, forwarded as the backend\
-            \ produced them. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-      type: object
-    AgentProgress:
-      description: "A stage of a step in flight, so you can show what Spotter is doing."
-      example:
-        code: code
-        message: message
-        tool_call_id: tool_call_id
-      properties:
-        code:
-          description: "Stage code. Treat an unfamiliar value as \"still working\"\
-            \ rather than an error. \n  Version: 26.12.0.cl or later\n"
-          type: string
-        message:
-          description: "Human-facing status text, when the backend supplies one. \n\
-            \  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        tool_call_id:
-          description: "The `tool_call` this stage belongs to. Absent when that call\
-            \ has no `id`. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-      required:
-      - code
-      type: object
-    AgentToolResult:
-      description: "What a step produced, including any answer."
-      example:
-        id: id
-        name: name
-        is_error: true
-        text: text
-        answer: ""
-      properties:
-        id:
-          description: "Correlates with the `tool_call` and `progress` frames of the\
-            \ same step.\nAbsent when that call has no `id`. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          nullable: true
-          type: string
-        name:
-          description: "The step that produced this result. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          nullable: true
-          type: string
-        is_error:
-          description: "`true` when the step failed. Spotter usually explains the\
-            \ failure in the text\nthat follows, so this is a signal to read rather\
-            \ than a reason to stop.\nAbsent when the step did not report an outcome;\
-            \ treat absence as `false`. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: boolean
-        text:
-          description: "The step's own human-readable summary. For a data query it\
-            \ includes a sample\nof the rows — read `answer.table_data.total_rows`\
-            \ for the true count. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        answer:
-          description: "The ThoughtSpot answer the step produced, forwarded as the\
-            \ backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link\
-            \ it. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-      type: object
-    AgentStreamError:
-      description: A failure that ended the turn.
-      example:
-        code: code
-        message: message
-        source: source
-        display_message: display_message
-        error_bucket: error_bucket
-      properties:
-        code:
-          description: "Machine-readable status, always a string. Quote it when reporting\
-            \ an issue. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        message:
-          description: "Diagnostic detail. Not written for end users — render `display_message`.\
-            \ \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        source:
-          description: "Which layer produced the failure. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          nullable: true
-          type: string
-        display_message:
-          description: "Text safe to show a user. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        error_bucket:
-          description: "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT`\
-            \ or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. \n  Version:\
-            \ 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-      type: object
-    AgentStreamDone:
-      description: End of turn. Always last.
-      example:
-        conversation_identifier: conversation_identifier
-      properties:
-        conversation_identifier:
-          description: "The conversation this turn belonged to, repeated so a client\
-            \ that cannot read\nresponse headers can still continue it. \n  Version:\
-            \ 26.12.0.cl or later\n"
-          type: string
-      required:
-      - conversation_identifier
-      type: object
-    AgentTurnResponse:
-      description: "A completed agent turn: every frame the streaming endpoint publishes,\
-        \ collected."
-      example:
-        conversation_identifier: conversation_identifier
-        events:
-        - event:
-            id: id
-            invocation_id: invocation_id
-            partial: true
-            error_code: error_code
-            content:
-              role: role
-              parts:
-              - text: text
-                thought: true
-              - text: text
-                thought: true
-          tool_call:
-            id: id
-            name: name
-            args: ""
-          progress:
-            code: code
-            message: message
-            tool_call_id: tool_call_id
-          tool_result:
-            id: id
-            name: name
-            is_error: true
-            text: text
-            answer: ""
-          error:
-            code: code
-            message: message
-            source: source
-            display_message: display_message
-            error_bucket: error_bucket
-          done:
-            conversation_identifier: conversation_identifier
-        - event:
-            id: id
-            invocation_id: invocation_id
-            partial: true
-            error_code: error_code
-            content:
-              role: role
-              parts:
-              - text: text
-                thought: true
-              - text: text
-                thought: true
-          tool_call:
-            id: id
-            name: name
-            args: ""
-          progress:
-            code: code
-            message: message
-            tool_call_id: tool_call_id
-          tool_result:
-            id: id
-            name: name
-            is_error: true
-            text: text
-            answer: ""
-          error:
-            code: code
-            message: message
-            source: source
-            display_message: display_message
-            error_bucket: error_bucket
-          done:
-            conversation_identifier: conversation_identifier
-      properties:
-        conversation_identifier:
-          description: "The conversation the turn belongs to. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          type: string
-        events:
-          description: "The frames of the turn, in the order Spotter produced them.\
-            \ The number of\nframes is not capped and the list is never truncated:\
-            \ a turn too large or too\nlong to return whole fails with an HTTP error\
-            \ instead. For long turns, use\nthe streaming endpoint. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          items:
-            $ref: "#/components/schemas/AgentStreamFrame"
-          type: array
-      required:
-      - conversation_identifier
-      - events
-      type: object
     SendAgentMessageResponse:
       example:
         success: true
@@ -38229,6 +37900,245 @@ components:
       - feature_id
       - feature_value
       type: object
+    AgentStreamFrame:
+      description: |-
+        One frame of an agent response. On the streaming endpoint each SSE `data:` line
+        is one frame, and a turn streams many over a single connection. Exactly one
+        field is set on any given frame: route on which one is present. New frame
+        types are added as new fields, so a frame where none of the fields you know is
+        set is a frame of a type you do not recognize: skip it.
+      properties:
+        event:
+          $ref: "#/components/schemas/AgentEvent"
+        tool_call:
+          $ref: "#/components/schemas/AgentToolCall"
+        progress:
+          $ref: "#/components/schemas/AgentProgress"
+        tool_result:
+          $ref: "#/components/schemas/AgentToolResult"
+        error:
+          $ref: "#/components/schemas/AgentStreamError"
+        done:
+          $ref: "#/components/schemas/AgentStreamDone"
+      type: object
+    AgentEvent:
+      description: Text from Spotter — its reasoning or its answer.
+      properties:
+        id:
+          description: "Identifies a single event. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        invocation_id:
+          description: "Stable for one turn; every event of the same turn shares it.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        partial:
+          description: "`true` for an incremental chunk, `false` for a frame restating\
+            \ a completed\nsegment; absent on a complete event. Restated text is not\
+            \ republished, and\nframes arrive in order over a single response, so\
+            \ appending every part is\nsafe. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+        error_code:
+          description: "Set when the turn failed while producing this event. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        content:
+          $ref: "#/components/schemas/AgentEventContent"
+      required:
+      - content
+      type: object
+    AgentEventContent:
+      description: The content of one agent event.
+      properties:
+        role:
+          description: "Always `model`: the events a caller sees are Spotter speaking.\
+            \ Mirrors the\nagent wire format, and is reserved for conversations with\
+            \ more than one\nspeaker. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        parts:
+          description: "The text this event carries. Empty when `error_code` is set.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          items:
+            $ref: "#/components/schemas/AgentEventPart"
+          type: array
+      required:
+      - parts
+      - role
+      type: object
+    AgentEventPart:
+      description: |-
+        One piece of text from Spotter, with a flag marking reasoning apart from the
+        answer itself.
+      properties:
+        text:
+          description: "The text to render. Text arrives incrementally, so concatenate\
+            \ parts in the\norder received. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        thought:
+          description: "`true` when this text is Spotter's reasoning rather than its\
+            \ answer. Use it\nto render reasoning separately, or to hide it. Absent\
+            \ otherwise; treat\nabsence as `false`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+      required:
+      - text
+      type: object
+    AgentToolCall:
+      description: "A step Spotter started, such as querying a data source."
+      properties:
+        id:
+          description: "Correlates this call with its `progress` and `tool_result`\
+            \ frames. Absent\nwhen the backend did not assign one; a step's frames\
+            \ then arrive in order, so\nmatch them by position. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        name:
+          description: "Name of the step that ran. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        args:
+          description: "The arguments the step ran with, forwarded as the backend\
+            \ produced them. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+      type: object
+    AgentProgress:
+      description: "A stage of a step in flight, so you can show what Spotter is doing."
+      properties:
+        code:
+          description: "Stage code. Treat an unfamiliar value as \"still working\"\
+            \ rather than an error. \n  Version: 26.12.0.cl or later\n"
+          type: string
+        message:
+          description: "Human-facing status text, when the backend supplies one. \n\
+            \  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        tool_call_id:
+          description: "The `tool_call` this stage belongs to. Absent when that call\
+            \ has no `id`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+      required:
+      - code
+      type: object
+    AgentToolResult:
+      description: "What a step produced, including any answer."
+      properties:
+        id:
+          description: "Correlates with the `tool_call` and `progress` frames of the\
+            \ same step.\nAbsent when that call has no `id`. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        name:
+          description: "The step that produced this result. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        is_error:
+          description: "`true` when the step failed. Spotter usually explains the\
+            \ failure in the text\nthat follows, so this is a signal to read rather\
+            \ than a reason to stop.\nAbsent when the step did not report an outcome;\
+            \ treat absence as `false`. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: boolean
+        text:
+          description: "The step's own human-readable summary. For a data query it\
+            \ includes a sample\nof the rows — read `answer.table_data.total_rows`\
+            \ for the true count. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        answer:
+          description: "The ThoughtSpot answer the step produced, forwarded as the\
+            \ backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link\
+            \ it. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+      type: object
+    AgentStreamError:
+      description: A failure that ended the turn.
+      properties:
+        code:
+          description: "Machine-readable status, always a string. Quote it when reporting\
+            \ an issue. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        message:
+          description: "Diagnostic detail. Not written for end users — render `display_message`.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        source:
+          description: "Which layer produced the failure. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        display_message:
+          description: "Text safe to show a user. \n  Version: 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+        error_bucket:
+          description: "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT`\
+            \ or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          nullable: true
+          type: string
+      type: object
+    AgentStreamDone:
+      description: End of turn. Always last.
+      properties:
+        conversation_identifier:
+          description: "The conversation this turn belonged to, repeated so a client\
+            \ that cannot read\nresponse headers can still continue it. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          type: string
+      required:
+      - conversation_identifier
+      type: object
+    AgentTurnResponse:
+      description: "A completed agent turn: every frame the streaming endpoint publishes,\
+        \ collected."
+      properties:
+        conversation_identifier:
+          description: "The conversation the turn belongs to. When the request named\
+            \ no\nconversation, this is the one it created. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          nullable: true
+          type: string
+        events:
+          description: "The frames of the turn, in the order Spotter produced them.\
+            \ The number of\nframes is not capped and the list is never truncated:\
+            \ a turn too large or too\nlong to return whole fails with an HTTP error\
+            \ instead. For long turns, use\nthe streaming endpoint. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          items:
+            $ref: "#/components/schemas/AgentStreamFrame"
+          type: array
+      required:
+      - events
+      type: object
+    AgentMessagesResponse:
+      description: A completed agent turn on V1.
+      properties:
+        messages:
+          description: "The agent's response messages, in order. Each has a `type`\
+            \ (`text`,\n`answer`, `error`, ...) and the fields of that type. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          items: {}
+          type: array
+      required:
+      - messages
+      type: object
+    SendAgentConversationMessageResponse:
+      description: |-
+        Shape of the JSON a non-streaming send returns: `AgentMessagesResponse` on
+        V1, `AgentTurnResponse` on V2.
+      oneOf:
+      - $ref: "#/components/schemas/AgentMessagesResponse"
+      - $ref: "#/components/schemas/AgentTurnResponse"
     Runtime_Filter:
       description: List of runtime parameters need to set during the session.
       properties:
@@ -38252,6 +38162,8 @@ components:
         metadata_context: ""
         conversation_settings: ""
         analyst_identifier: analyst_identifier
+        additional_instructions: additional_instructions
+        spotter_experience_version: V1
       properties:
         metadata_context:
           allOf:
@@ -38262,54 +38174,34 @@ components:
         conversation_settings:
           allOf:
           - $ref: "#/components/schemas/ConversationSettingsInput"
-          description: Conversation settings.
+          description: Conversation settings. Applies to V1 only.
         analyst_identifier:
           description: "Unique identifier of the Spotter Analyst to start the conversation\
             \ from.\nWhen provided, the conversation uses the analyst's configuration\
             \ (data\nsources, agent instructions, and connectors), and `metadata_context`\n\
             must be omitted. \n  Version: 26.10.0.cl or later\n"
           type: string
-      required:
-      - conversation_settings
-      type: object
-    CreateAgentConversationV2Request:
-      example:
-        source: DATA_SOURCE
-        data_source_identifiers:
-        - data_source_identifiers
-        - data_source_identifiers
-        additional_instructions: additional_instructions
-        analyst_identifier: analyst_identifier
-      properties:
-        source:
-          default: DATA_SOURCE
-          description: "What the conversation is grounded in. `DATA_SOURCE` scopes\
-            \ it to\n`data_source_identifiers`; `ANALYST` creates it from the saved\
-            \ analyst in\n`analyst_identifier`. \n  Version: 26.12.0.cl or later\n"
-          enum:
-          - DATA_SOURCE
-          - ANALYST
-          type: string
-        data_source_identifiers:
-          default: []
-          description: "Unique identifiers of the data sources to scope the conversation\
-            \ to. When\nempty, Spotter selects the most relevant data source for each\
-            \ question.\nOnly valid when `source` is `DATA_SOURCE`. \n  Version: 26.12.0.cl\
-            \ or later\n"
-          items:
-            type: string
-          type: array
         additional_instructions:
           description: "Guidance appended to the agent's instructions on every message\
-            \ in this\nconversation. Use it to set a persona, a preferred output format,\
-            \ or\ndomain rules. Cannot be changed after the conversation is created.\
-            \ Only\nvalid when `source` is `DATA_SOURCE`. \n  Version: 26.12.0.cl\
-            \ or later\n"
+            \ in this\nconversation, such as a persona, an output format or domain\
+            \ rules. Cannot\nbe changed after the conversation is created. V2 only,\
+            \ and not\nwith `analyst_identifier`. \n  Version: 26.12.0.cl or later\n"
           type: string
-        analyst_identifier:
-          description: "Unique identifier of the saved analyst to create the conversation\
-            \ from.\nRequired when `source` is `ANALYST`, and not allowed otherwise.\
-            \ \n  Version: 26.12.0.cl or later\n"
+        spotter_experience_version:
+          default: V1
+          description: "Version of the Spotter experience the conversation runs on.\
+            \ The\nconversation stays on this version, so pass the same value on every\
+            \ later\nrequest for it.\n- `V1` (default): the Spotter conversation API\
+            \ available before\n  26.12.0.cl. Used when the parameter is omitted.\
+            \ Uses\n  `conversation_settings`.\n- `V2`: the new Spotter experience,\
+            \ the same one behind the Liveboard side\n  panel (New); new Spotter capabilities\
+            \ ship here. Accepts\n  `additional_instructions`. Requires a cluster\
+            \ admin to set Spotter 3\n  Liveboard experience to Liveboard side panel\
+            \ (New); otherwise the\n  request returns a 400. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          enum:
+          - V1
+          - V2
           type: string
       type: object
     CreateAnalystRequest:
@@ -38621,12 +38513,30 @@ components:
         messages:
         - messages
         - messages
+        spotter_experience_version: V1
       properties:
         messages:
           description: messages to be sent to the agent
           items:
             type: string
           type: array
+        spotter_experience_version:
+          default: V1
+          description: "Version of the Spotter experience the conversation runs on.\
+            \ A\nconversation stays on the version that created it, so pass the value\
+            \ used\nwhen it was created.\n- `V1` (default): the Spotter conversation\
+            \ API available before\n  26.12.0.cl. Used when the parameter is omitted.\
+            \ Returns a list of\n  messages (`AgentMessagesResponse`).\n- `V2`: the\
+            \ new Spotter experience, the same one behind the Liveboard side\n  panel\
+            \ (New); new Spotter capabilities ship here. Returns the turn's\n  events\
+            \ (`AgentTurnResponse`) and can start a new conversation without\n  `conversation_identifier`.\
+            \ Requires a cluster admin to set Spotter 3\n  Liveboard experience to\
+            \ Liveboard side panel (New); otherwise the\n  request returns a 400.\
+            \ \n  Version: 26.12.0.cl or later\n"
+          enum:
+          - V1
+          - V2
+          type: string
       required:
       - messages
       type: object
@@ -38635,48 +38545,32 @@ components:
         messages:
         - messages
         - messages
+        spotter_experience_version: V1
       properties:
         messages:
           description: messages to be sent to the agent
           items:
             type: string
           type: array
+        spotter_experience_version:
+          default: V1
+          description: "Version of the Spotter experience the conversation runs on.\
+            \ A\nconversation stays on the version that created it, so pass the value\
+            \ used\nwhen it was created.\n- `V1` (default): the Spotter conversation\
+            \ API available before\n  26.12.0.cl. Used when the parameter is omitted.\
+            \ Streams message events.\n- `V2`: the new Spotter experience, the same\
+            \ one behind the Liveboard side\n  panel (New); new Spotter capabilities\
+            \ ship here. Streams\n  `AgentStreamFrame` events and can start a new\
+            \ conversation without\n  `conversation_identifier`. Requires a cluster\
+            \ admin to set Spotter 3\n  Liveboard experience to Liveboard side panel\
+            \ (New); otherwise the\n  request returns a 400. \n  Version: 26.12.0.cl\
+            \ or later\n"
+          enum:
+          - V1
+          - V2
+          type: string
       required:
       - messages
-      type: object
-    SendAgentConversationMessageStreamingV2Request:
-      example:
-        message: message
-        conversation_identifier: conversation_identifier
-      properties:
-        message:
-          description: "The message to send to Spotter. \n  Version: 26.12.0.cl or\
-            \ later\n"
-          type: string
-        conversation_identifier:
-          description: "Conversation to send the message in. When omitted, a new conversation\
-            \ is\ncreated and its identifier is returned in the\n`x-conversation-identifier`\
-            \ response header. \n  Version: 26.12.0.cl or later\n"
-          type: string
-      required:
-      - message
-      type: object
-    SendAgentConversationMessageV2Request:
-      example:
-        message: message
-        conversation_identifier: conversation_identifier
-      properties:
-        message:
-          description: "The message to send to Spotter. \n  Version: 26.12.0.cl or\
-            \ later\n"
-          type: string
-        conversation_identifier:
-          description: "Conversation to send the message in. When omitted, a new conversation\
-            \ is\ncreated and its identifier is returned in the\n`x-conversation-identifier`\
-            \ response header. \n  Version: 26.12.0.cl or later\n"
-          type: string
-      required:
-      - message
       type: object
     SendAgentMessageRequest:
       example:
@@ -38851,6 +38745,26 @@ components:
       required:
       - metadata_identifier
       - query
+      type: object
+    StopConversationRequest:
+      example:
+        spotter_experience_version: V1
+      properties:
+        spotter_experience_version:
+          default: V1
+          description: "Version of the Spotter experience the conversation runs on.\
+            \ A\nconversation stays on the version that created it, so pass the value\
+            \ used\nwhen it was created.\n- `V1` (default): the Spotter conversation\
+            \ API available before\n  26.12.0.cl. Used when the parameter is omitted.\n\
+            - `V2`: the new Spotter experience, the same one behind the Liveboard\
+            \ side\n  panel (New); new Spotter capabilities ship here. Requires a\
+            \ cluster admin\n  to set Spotter 3 Liveboard experience to Liveboard\
+            \ side panel (New);\n  otherwise the request returns a 400. \n  Version:\
+            \ 26.12.0.cl or later\n"
+          enum:
+          - V1
+          - V2
+          type: string
       type: object
     UpdateAnalystRequest:
       example:
@@ -47208,6 +47122,10 @@ components:
             type: string
           type: array
       type: object
+    sendAgentConversationMessageStreaming_200_response:
+      oneOf:
+      - $ref: "#/components/schemas/SendAgentMessageResponse"
+      - $ref: "#/components/schemas/AgentStreamFrame"
     dbtConnection_request:
       properties:
         connection_name:
@@ -47517,11 +47435,6 @@ x-roles:
   tags:
   - 26.2.0.cl
   description: Roles for version 26.2.0.cl
-- name: 26.12.0.cl
-  id: 26.12.0.cl
-  tags:
-  - 26.12.0.cl
-  description: Roles for version 26.12.0.cl
 - name: 26.10.0.cl
   id: 26.10.0.cl
   tags:
@@ -47672,4 +47585,9 @@ x-roles:
   tags:
   - 9.7.0.cl
   description: Roles for version 9.7.0.cl
+- name: 26.12.0.cl
+  id: 26.12.0.cl
+  tags:
+  - 26.12.0.cl
+  description: Roles for version 26.12.0.cl
 

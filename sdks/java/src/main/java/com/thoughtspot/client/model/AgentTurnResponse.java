@@ -49,7 +49,7 @@ public class AgentTurnResponse implements Serializable {
 
   public static final String SERIALIZED_NAME_CONVERSATION_IDENTIFIER = "conversation_identifier";
   @SerializedName(SERIALIZED_NAME_CONVERSATION_IDENTIFIER)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private String conversationIdentifier;
 
   public static final String SERIALIZED_NAME_EVENTS = "events";
@@ -60,21 +60,21 @@ public class AgentTurnResponse implements Serializable {
   public AgentTurnResponse() {
   }
 
-  public AgentTurnResponse conversationIdentifier(@javax.annotation.Nonnull String conversationIdentifier) {
+  public AgentTurnResponse conversationIdentifier(@javax.annotation.Nullable String conversationIdentifier) {
     this.conversationIdentifier = conversationIdentifier;
     return this;
   }
 
   /**
-   * The conversation the turn belongs to.    Version: 26.12.0.cl or later 
+   * The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later 
    * @return conversationIdentifier
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public String getConversationIdentifier() {
     return conversationIdentifier;
   }
 
-  public void setConversationIdentifier(@javax.annotation.Nonnull String conversationIdentifier) {
+  public void setConversationIdentifier(@javax.annotation.Nullable String conversationIdentifier) {
     this.conversationIdentifier = conversationIdentifier;
   }
 
@@ -204,7 +204,6 @@ public class AgentTurnResponse implements Serializable {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("conversation_identifier");
     openapiRequiredFields.add("events");
   }
 
@@ -228,7 +227,7 @@ public class AgentTurnResponse implements Serializable {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("conversation_identifier").isJsonPrimitive()) {
+      if ((jsonObj.get("conversation_identifier") != null && !jsonObj.get("conversation_identifier").isJsonNull()) && !jsonObj.get("conversation_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `conversation_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("conversation_identifier").toString()));
       }
       // ensure the json data is an array

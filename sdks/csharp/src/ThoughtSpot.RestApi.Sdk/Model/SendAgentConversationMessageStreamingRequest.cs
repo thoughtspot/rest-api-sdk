@@ -33,6 +33,33 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class SendAgentConversationMessageStreamingRequest : IValidatableObject
     {
         /// <summary>
+        /// Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   &#x60;AgentStreamFrame&#x60; events and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   &#x60;AgentStreamFrame&#x60; events and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SpotterExperienceVersionEnum
+        {
+            /// <summary>
+            /// Enum V1 for value: V1
+            /// </summary>
+            [EnumMember(Value = "V1")]
+            V1 = 1,
+
+            /// <summary>
+            /// Enum V2 for value: V2
+            /// </summary>
+            [EnumMember(Value = "V2")]
+            V2 = 2
+        }
+
+
+        /// <summary>
+        /// Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   &#x60;AgentStreamFrame&#x60; events and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   &#x60;AgentStreamFrame&#x60; events and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "spotter_experience_version", EmitDefaultValue = false)]
+        public SpotterExperienceVersionEnum? SpotterExperienceVersion { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="SendAgentConversationMessageStreamingRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -44,7 +71,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="SendAgentConversationMessageStreamingRequest" /> class.
         /// </summary>
         /// <param name="messages">messages to be sent to the agent (required).</param>
-        public SendAgentConversationMessageStreamingRequest(List<string> messages = default)
+        /// <param name="spotterExperienceVersion">Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   &#x60;AgentStreamFrame&#x60; events and can start a new conversation without   &#x60;conversation_identifier&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later  (default to SpotterExperienceVersionEnum.V1).</param>
+        public SendAgentConversationMessageStreamingRequest(List<string> messages = default, SpotterExperienceVersionEnum? spotterExperienceVersion = SpotterExperienceVersionEnum.V1)
         {
             // to ensure "messages" is required (not null)
             if (messages == null)
@@ -52,6 +80,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
                 throw new ArgumentNullException("messages is a required property for SendAgentConversationMessageStreamingRequest and cannot be null");
             }
             this.Messages = messages;
+            this.SpotterExperienceVersion = spotterExperienceVersion;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -77,6 +106,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class SendAgentConversationMessageStreamingRequest {\n");
             sb.Append("  Messages: ").Append(Messages).Append("\n");
+            sb.Append("  SpotterExperienceVersion: ").Append(SpotterExperienceVersion).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

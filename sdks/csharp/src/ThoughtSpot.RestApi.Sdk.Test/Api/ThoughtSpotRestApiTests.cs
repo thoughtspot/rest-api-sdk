@@ -192,18 +192,6 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test CreateAgentConversationV2
-        /// </summary>
-        [Fact]
-        public void CreateAgentConversationV2Test()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //CreateAgentConversationV2Request createAgentConversationV2Request = null;
-            //var response = instance.CreateAgentConversationV2(createAgentConversationV2Request);
-            //Assert.IsType<AgentConversationV2>(response);
-        }
-
-        /// <summary>
         /// Test CreateAnalyst
         /// </summary>
         [Fact]
@@ -630,7 +618,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.DeleteConversation(conversationIdentifier);
+            //string? spotterExperienceVersion = null;
+            //instance.DeleteConversation(conversationIdentifier, spotterExperienceVersion);
         }
 
         /// <summary>
@@ -1176,7 +1165,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //int? limit = null;
             //int? offset = null;
             //bool? skipEmpty = null;
-            //var response = instance.GetConversationList(limit, offset, skipEmpty);
+            //string? spotterExperienceVersion = null;
+            //var response = instance.GetConversationList(limit, offset, skipEmpty, spotterExperienceVersion);
             //Assert.IsType<AgentConversationHistoryResponse>(response);
         }
 
@@ -2006,31 +1996,7 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string conversationIdentifier = null;
             //SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest = null;
             //var response = instance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
-            //Assert.IsType<SendAgentMessageResponse>(response);
-        }
-
-        /// <summary>
-        /// Test SendAgentConversationMessageStreamingV2
-        /// </summary>
-        [Fact]
-        public void SendAgentConversationMessageStreamingV2Test()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //SendAgentConversationMessageStreamingV2Request sendAgentConversationMessageStreamingV2Request = null;
-            //var response = instance.SendAgentConversationMessageStreamingV2(sendAgentConversationMessageStreamingV2Request);
-            //Assert.IsType<AgentStreamFrame>(response);
-        }
-
-        /// <summary>
-        /// Test SendAgentConversationMessageV2
-        /// </summary>
-        [Fact]
-        public void SendAgentConversationMessageV2Test()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //SendAgentConversationMessageV2Request sendAgentConversationMessageV2Request = null;
-            //var response = instance.SendAgentConversationMessageV2(sendAgentConversationMessageV2Request);
-            //Assert.IsType<AgentTurnResponse>(response);
+            //Assert.IsType<SendAgentConversationMessageStreaming200Response>(response);
         }
 
         /// <summary>
@@ -2151,7 +2117,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.StopConversation(conversationIdentifier);
+            //StopConversationRequest? stopConversationRequest = null;
+            //instance.StopConversation(conversationIdentifier, stopConversationRequest);
         }
 
         /// <summary>

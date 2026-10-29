@@ -43,30 +43,25 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgentTurnResponse" /> class.
         /// </summary>
-        /// <param name="conversationIdentifier">The conversation the turn belongs to.    Version: 26.12.0.cl or later  (required).</param>
+        /// <param name="conversationIdentifier">The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later .</param>
         /// <param name="events">The frames of the turn, in the order Spotter produced them. The number of frames is not capped and the list is never truncated: a turn too large or too long to return whole fails with an HTTP error instead. For long turns, use the streaming endpoint.    Version: 26.12.0.cl or later  (required).</param>
         public AgentTurnResponse(string conversationIdentifier = default, List<AgentStreamFrame> events = default)
         {
-            // to ensure "conversationIdentifier" is required (not null)
-            if (conversationIdentifier == null)
-            {
-                throw new ArgumentNullException("conversationIdentifier is a required property for AgentTurnResponse and cannot be null");
-            }
-            this.ConversationIdentifier = conversationIdentifier;
             // to ensure "events" is required (not null)
             if (events == null)
             {
                 throw new ArgumentNullException("events is a required property for AgentTurnResponse and cannot be null");
             }
             this.Events = events;
+            this.ConversationIdentifier = conversationIdentifier;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// The conversation the turn belongs to.    Version: 26.12.0.cl or later 
+        /// The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later 
         /// </summary>
-        /// <value>The conversation the turn belongs to.    Version: 26.12.0.cl or later </value>
-        [DataMember(Name = "conversation_identifier", IsRequired = true, EmitDefaultValue = true)]
+        /// <value>The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "conversation_identifier", EmitDefaultValue = true)]
         public string ConversationIdentifier { get; set; }
 
         /// <summary>

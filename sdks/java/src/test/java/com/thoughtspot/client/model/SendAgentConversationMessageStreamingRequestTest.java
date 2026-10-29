@@ -38,4 +38,12 @@ public class SendAgentConversationMessageStreamingRequestTest {
         // TODO: test messages
     }
 
+    /**
+     * Test the property 'spotterExperienceVersion'
+     */
+    @Test
+    public void spotterExperienceVersionTest() {
+        // TODO: test spotterExperienceVersion
+    }
+
 }

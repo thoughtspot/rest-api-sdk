@@ -86,11 +86,11 @@ __all__ = [
     "AgentConversation",
     "AgentConversationHistoryResponse",
     "AgentConversationList",
-    "AgentConversationV2",
     "AgentEvent",
     "AgentEventContent",
     "AgentEventPart",
     "AgentInstructions",
+    "AgentMessagesResponse",
     "AgentProgress",
     "AgentStreamDone",
     "AgentStreamError",
@@ -190,7 +190,6 @@ __all__ = [
     "ConvertWorksheetToModelRequest",
     "CopyObjectRequest",
     "CreateAgentConversationRequest",
-    "CreateAgentConversationV2Request",
     "CreateAnalystRequest",
     "CreateCalendarRequest",
     "CreateCollectionRequest",
@@ -503,9 +502,9 @@ __all__ = [
     "SemanticIntegrationSortOptions",
     "SemanticIntegrationTagReference",
     "SendAgentConversationMessageRequest",
+    "SendAgentConversationMessageResponse",
+    "SendAgentConversationMessageStreaming200Response",
     "SendAgentConversationMessageStreamingRequest",
-    "SendAgentConversationMessageStreamingV2Request",
-    "SendAgentConversationMessageV2Request",
     "SendAgentMessageRequest",
     "SendAgentMessageResponse",
     "SendAgentMessageStreamingRequest",
@@ -525,6 +524,7 @@ __all__ = [
     "SortingOptions",
     "SqlQuery",
     "SqlQueryResponse",
+    "StopConversationRequest",
     "StorageConfig",
     "StorageConfigInput",
     "StorageDestination",
@@ -743,11 +743,11 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation as AgentConversation
     from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse as AgentConversationHistoryResponse
     from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList as AgentConversationList
-    from thoughtspot_rest_api_sdk.models.agent_conversation_v2 import AgentConversationV2 as AgentConversationV2
     from thoughtspot_rest_api_sdk.models.agent_event import AgentEvent as AgentEvent
     from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventContent as AgentEventContent
     from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart as AgentEventPart
     from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
+    from thoughtspot_rest_api_sdk.models.agent_messages_response import AgentMessagesResponse as AgentMessagesResponse
     from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress as AgentProgress
     from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone as AgentStreamDone
     from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError as AgentStreamError
@@ -847,7 +847,6 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
     from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
     from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
-    from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import CreateAgentConversationV2Request as CreateAgentConversationV2Request
     from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
     from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
     from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
@@ -1160,9 +1159,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.semantic_integration_sort_options import SemanticIntegrationSortOptions as SemanticIntegrationSortOptions
     from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference as SemanticIntegrationTagReference
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest as SendAgentConversationMessageRequest
+    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_response import SendAgentConversationMessageResponse as SendAgentConversationMessageResponse
+    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming200_response import SendAgentConversationMessageStreaming200Response as SendAgentConversationMessageStreaming200Response
     from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest as SendAgentConversationMessageStreamingRequest
-    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_v2_request import SendAgentConversationMessageStreamingV2Request as SendAgentConversationMessageStreamingV2Request
-    from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_v2_request import SendAgentConversationMessageV2Request as SendAgentConversationMessageV2Request
     from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest as SendAgentMessageRequest
     from thoughtspot_rest_api_sdk.models.send_agent_message_response import SendAgentMessageResponse as SendAgentMessageResponse
     from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import SendAgentMessageStreamingRequest as SendAgentMessageStreamingRequest
@@ -1182,6 +1181,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions as SortingOptions
     from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery as SqlQuery
     from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse as SqlQueryResponse
+    from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest as StopConversationRequest
     from thoughtspot_rest_api_sdk.models.storage_config import StorageConfig as StorageConfig
     from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput as StorageConfigInput
     from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination as StorageDestination
@@ -1406,11 +1406,11 @@ from thoughtspot_rest_api_sdk.models.advanced_chart_visualization_font_record im
 from thoughtspot_rest_api_sdk.models.agent_conversation import AgentConversation as AgentConversation
 from thoughtspot_rest_api_sdk.models.agent_conversation_history_response import AgentConversationHistoryResponse as AgentConversationHistoryResponse
 from thoughtspot_rest_api_sdk.models.agent_conversation_list import AgentConversationList as AgentConversationList
-from thoughtspot_rest_api_sdk.models.agent_conversation_v2 import AgentConversationV2 as AgentConversationV2
 from thoughtspot_rest_api_sdk.models.agent_event import AgentEvent as AgentEvent
 from thoughtspot_rest_api_sdk.models.agent_event_content import AgentEventContent as AgentEventContent
 from thoughtspot_rest_api_sdk.models.agent_event_part import AgentEventPart as AgentEventPart
 from thoughtspot_rest_api_sdk.models.agent_instructions import AgentInstructions as AgentInstructions
+from thoughtspot_rest_api_sdk.models.agent_messages_response import AgentMessagesResponse as AgentMessagesResponse
 from thoughtspot_rest_api_sdk.models.agent_progress import AgentProgress as AgentProgress
 from thoughtspot_rest_api_sdk.models.agent_stream_done import AgentStreamDone as AgentStreamDone
 from thoughtspot_rest_api_sdk.models.agent_stream_error import AgentStreamError as AgentStreamError
@@ -1510,7 +1510,6 @@ from thoughtspot_rest_api_sdk.models.conversation_share_status_response import C
 from thoughtspot_rest_api_sdk.models.convert_worksheet_to_model_request import ConvertWorksheetToModelRequest as ConvertWorksheetToModelRequest
 from thoughtspot_rest_api_sdk.models.copy_object_request import CopyObjectRequest as CopyObjectRequest
 from thoughtspot_rest_api_sdk.models.create_agent_conversation_request import CreateAgentConversationRequest as CreateAgentConversationRequest
-from thoughtspot_rest_api_sdk.models.create_agent_conversation_v2_request import CreateAgentConversationV2Request as CreateAgentConversationV2Request
 from thoughtspot_rest_api_sdk.models.create_analyst_request import CreateAnalystRequest as CreateAnalystRequest
 from thoughtspot_rest_api_sdk.models.create_calendar_request import CreateCalendarRequest as CreateCalendarRequest
 from thoughtspot_rest_api_sdk.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
@@ -1823,9 +1822,9 @@ from thoughtspot_rest_api_sdk.models.semantic_integration_search_response import
 from thoughtspot_rest_api_sdk.models.semantic_integration_sort_options import SemanticIntegrationSortOptions as SemanticIntegrationSortOptions
 from thoughtspot_rest_api_sdk.models.semantic_integration_tag_reference import SemanticIntegrationTagReference as SemanticIntegrationTagReference
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_request import SendAgentConversationMessageRequest as SendAgentConversationMessageRequest
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_response import SendAgentConversationMessageResponse as SendAgentConversationMessageResponse
+from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming200_response import SendAgentConversationMessageStreaming200Response as SendAgentConversationMessageStreaming200Response
 from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_request import SendAgentConversationMessageStreamingRequest as SendAgentConversationMessageStreamingRequest
-from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_streaming_v2_request import SendAgentConversationMessageStreamingV2Request as SendAgentConversationMessageStreamingV2Request
-from thoughtspot_rest_api_sdk.models.send_agent_conversation_message_v2_request import SendAgentConversationMessageV2Request as SendAgentConversationMessageV2Request
 from thoughtspot_rest_api_sdk.models.send_agent_message_request import SendAgentMessageRequest as SendAgentMessageRequest
 from thoughtspot_rest_api_sdk.models.send_agent_message_response import SendAgentMessageResponse as SendAgentMessageResponse
 from thoughtspot_rest_api_sdk.models.send_agent_message_streaming_request import SendAgentMessageStreamingRequest as SendAgentMessageStreamingRequest
@@ -1845,6 +1844,7 @@ from thoughtspot_rest_api_sdk.models.sort_options import SortOptions as SortOpti
 from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions as SortingOptions
 from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery as SqlQuery
 from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse as SqlQueryResponse
+from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest as StopConversationRequest
 from thoughtspot_rest_api_sdk.models.storage_config import StorageConfig as StorageConfig
 from thoughtspot_rest_api_sdk.models.storage_config_input import StorageConfigInput as StorageConfigInput
 from thoughtspot_rest_api_sdk.models.storage_destination import StorageDestination as StorageDestination

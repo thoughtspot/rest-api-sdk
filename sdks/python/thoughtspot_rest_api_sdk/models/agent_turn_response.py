@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.agent_stream_frame import AgentStreamFrame
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +26,7 @@ class AgentTurnResponse(BaseModel):
     """
     A completed agent turn: every frame the streaming endpoint publishes, collected.
     """ # noqa: E501
-    conversation_identifier: StrictStr = Field(description="The conversation the turn belongs to.    Version: 26.12.0.cl or later ")
+    conversation_identifier: Optional[StrictStr] = Field(default=None, description="The conversation the turn belongs to. When the request named no conversation, this is the one it created.    Version: 26.12.0.cl or later ")
     events: List[AgentStreamFrame] = Field(description="The frames of the turn, in the order Spotter produced them. The number of frames is not capped and the list is never truncated: a turn too large or too long to return whole fails with an HTTP error instead. For long turns, use the streaming endpoint.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["conversation_identifier", "events"]
@@ -83,6 +83,11 @@ class AgentTurnResponse(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if conversation_identifier (nullable) is None
+        # and model_fields_set contains the field
+        if self.conversation_identifier is None and "conversation_identifier" in self.model_fields_set:
+            _dict['conversation_identifier'] = None
 
         return _dict
 
