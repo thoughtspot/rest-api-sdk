@@ -48,6 +48,14 @@ public class FeatureGroupTest {
     }
 
     /**
+     * Test the property 'docsNewWindow'
+     */
+    @Test
+    public void docsNewWindowTest() {
+        // TODO: test docsNewWindow
+    }
+
+    /**
      * Test the property 'features'
      */
     @Test

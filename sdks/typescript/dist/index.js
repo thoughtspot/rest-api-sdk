@@ -7853,6 +7853,12 @@ _FeatureDetail.attributeTypeMap = [
     "baseName": "docs_url",
     "type": "string",
     "format": ""
+  },
+  {
+    "name": "docs_new_window",
+    "baseName": "docs_new_window",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var FeatureDetail = _FeatureDetail;
@@ -7878,6 +7884,12 @@ _FeatureGroup.attributeTypeMap = [
     "name": "docs_url",
     "baseName": "docs_url",
     "type": "string",
+    "format": ""
+  },
+  {
+    "name": "docs_new_window",
+    "baseName": "docs_new_window",
+    "type": "boolean",
     "format": ""
   },
   {

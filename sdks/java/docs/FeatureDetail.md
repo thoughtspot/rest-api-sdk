@@ -16,7 +16,8 @@ Detail for a single feature. Fields are populated according to the scope of the 
 |**elementType** | **String** | UI element type hint for the feature. Populated in the org-admin view. |  [optional] |
 |**elementConfig** | **Object** | UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field. |  [optional] |
 |**elementValue** | **String** | Current value of the feature for the requested Org. Populated in the org-admin view. |  [optional] |
-|**docsUrl** | **String** | Per-feature documentation URL, when available. |  [optional] |
+|**docsUrl** | **String** | Documentation URL of the feature itself, when it has one. Not inherited from its group. |  [optional] |
+|**docsNewWindow** | **Boolean** | &#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;. |  [optional] |
 
 
 ## Implemented Interfaces

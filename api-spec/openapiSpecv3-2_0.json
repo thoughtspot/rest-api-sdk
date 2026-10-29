@@ -33255,7 +33255,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Documentation URL for the feature group, when available.",
+            "description": "Documentation URL of the feature group itself, when it has one. Not\ninherited from, or by, the features in the group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the group's documentation link should open in a new browser tab,\nthe default, or `false` for the same tab. Omitted when there is no `docs_url`.",
             "nullable": true
           },
           "features": {
@@ -33318,7 +33323,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Per-feature documentation URL, when available.",
+            "description": "Documentation URL of the feature itself, when it has one. Not inherited from\nits group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the feature's documentation link should open in a new browser\ntab, the default, or `false` for the same tab. Omitted when there is no\n`docs_url`.",
             "nullable": true
           }
         },

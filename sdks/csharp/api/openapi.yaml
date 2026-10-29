@@ -31536,6 +31536,7 @@ components:
       example:
         feature_group: feature_group
         docs_url: docs_url
+        docs_new_window: true
         features:
         - feature_id: feature_id
           feature_name: feature_name
@@ -31550,6 +31551,7 @@ components:
           element_config: ""
           element_value: element_value
           docs_url: docs_url
+          docs_new_window: true
         - feature_id: feature_id
           feature_name: feature_name
           assigned_orgs:
@@ -31563,15 +31565,24 @@ components:
           element_config: ""
           element_value: element_value
           docs_url: docs_url
+          docs_new_window: true
       properties:
         feature_group:
           description: Display name of the feature group.
           nullable: true
           type: string
         docs_url:
-          description: "Documentation URL for the feature group, when available."
+          description: |-
+            Documentation URL of the feature group itself, when it has one. Not
+            inherited from, or by, the features in the group.
           nullable: true
           type: string
+        docs_new_window:
+          description: |-
+            `true` when the group's documentation link should open in a new browser tab,
+            the default, or `false` for the same tab. Omitted when there is no `docs_url`.
+          nullable: true
+          type: boolean
         features:
           description: |-
             Feature details within this group. Each entry contains the fields relevant to
@@ -31603,6 +31614,7 @@ components:
         element_config: ""
         element_value: element_value
         docs_url: docs_url
+        docs_new_window: true
       properties:
         feature_id:
           description: |-
@@ -31655,9 +31667,18 @@ components:
           nullable: true
           type: string
         docs_url:
-          description: "Per-feature documentation URL, when available."
+          description: |-
+            Documentation URL of the feature itself, when it has one. Not inherited from
+            its group.
           nullable: true
           type: string
+        docs_new_window:
+          description: |-
+            `true` when the feature's documentation link should open in a new browser
+            tab, the default, or `false` for the same tab. Omitted when there is no
+            `docs_url`.
+          nullable: true
+          type: boolean
       required:
       - feature_id
       type: object

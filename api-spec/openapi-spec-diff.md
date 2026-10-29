@@ -7,6 +7,11 @@
 -  added the optional property `last_active_time_in_millis` to the response with the `200` status
 
 
+### POST /api/rest/2.0/configurations/features/search
+-  added the optional property `items/docs_new_window` to the response with the `200` status
+-  added the optional property `items/features/items/docs_new_window` to the response with the `200` status
+
+
 ### POST /api/rest/2.0/localizations/manual-translation/export
 -  removed the non-success response with the status `404`
 

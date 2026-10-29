@@ -44,9 +44,10 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="FeatureGroup" /> class.
         /// </summary>
         /// <param name="varFeatureGroup">Display name of the feature group..</param>
-        /// <param name="docsUrl">Documentation URL for the feature group, when available..</param>
+        /// <param name="docsUrl">Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group..</param>
+        /// <param name="docsNewWindow">&#x60;true&#x60; when the group&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;..</param>
         /// <param name="features">Feature details within this group. Each entry contains the fields relevant to the requested scope; org-admin-only and cluster-admin-only fields are null in the other view. (required).</param>
-        public FeatureGroup(string varFeatureGroup = default, string docsUrl = default, List<FeatureDetail> features = default)
+        public FeatureGroup(string varFeatureGroup = default, string docsUrl = default, bool? docsNewWindow = default, List<FeatureDetail> features = default)
         {
             // to ensure "features" is required (not null)
             if (features == null)
@@ -56,6 +57,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.Features = features;
             this.VarFeatureGroup = varFeatureGroup;
             this.DocsUrl = docsUrl;
+            this.DocsNewWindow = docsNewWindow;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -67,11 +69,18 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string VarFeatureGroup { get; set; }
 
         /// <summary>
-        /// Documentation URL for the feature group, when available.
+        /// Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group.
         /// </summary>
-        /// <value>Documentation URL for the feature group, when available.</value>
+        /// <value>Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group.</value>
         [DataMember(Name = "docs_url", EmitDefaultValue = true)]
         public string DocsUrl { get; set; }
+
+        /// <summary>
+        /// &#x60;true&#x60; when the group&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.
+        /// </summary>
+        /// <value>&#x60;true&#x60; when the group&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.</value>
+        [DataMember(Name = "docs_new_window", EmitDefaultValue = true)]
+        public bool? DocsNewWindow { get; set; }
 
         /// <summary>
         /// Feature details within this group. Each entry contains the fields relevant to the requested scope; org-admin-only and cluster-admin-only fields are null in the other view.
@@ -96,6 +105,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("class FeatureGroup {\n");
             sb.Append("  VarFeatureGroup: ").Append(VarFeatureGroup).Append("\n");
             sb.Append("  DocsUrl: ").Append(DocsUrl).Append("\n");
+            sb.Append("  DocsNewWindow: ").Append(DocsNewWindow).Append("\n");
             sb.Append("  Features: ").Append(Features).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
