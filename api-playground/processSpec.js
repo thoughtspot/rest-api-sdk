@@ -126,6 +126,58 @@ function hideFieldsInOperation(spec, op, fields) {
   return hidden;
 }
 
+//Recursively removes `nullable` from a request schema and everything it references. Returns the count removed.
+function removeNullableInSchema(root, schemaNode, visited) {
+  if (!isObject(schemaNode) || visited.has(schemaNode)) return 0;
+  visited.add(schemaNode);
+
+  //`nullable` can sit next to a `$ref`, so remove it before following the reference.
+  let removed = 0;
+  if (schemaNode.nullable === true) {
+    delete schemaNode.nullable;
+    removed++;
+  }
+
+  if (schemaNode.$ref && typeof schemaNode.$ref === 'string') {
+    return removed + removeNullableInSchema(root, resolveRef(root, schemaNode.$ref), visited);
+  }
+
+  const children = [schemaNode.items];
+  for (const keyword of ['allOf', 'oneOf', 'anyOf']) {
+    if (Array.isArray(schemaNode[keyword])) children.push(...schemaNode[keyword]);
+  }
+  if (isObject(schemaNode.properties)) children.push(...Object.values(schemaNode.properties));
+
+  for (const child of children) {
+    removed += removeNullableInSchema(root, child, visited);
+  }
+  return removed;
+}
+
+//Removes `nullable` from request parameters and bodies so the playground does not show "Set as NULL" on inputs.
+//Response schemas are not changed. The SDKs are generated from the original spec and are not affected.
+function removeRequestNullable(spec) {
+  const visited = new Set();
+  let removed = 0;
+
+  for (const pathItem of Object.values(spec.paths)) {
+    for (const operation of Object.values(pathItem)) {
+      if (!isObject(operation)) continue;
+
+      for (const param of operation.parameters || []) {
+        removed += removeNullableInSchema(spec, param.schema, visited);
+      }
+
+      const content = (operation.requestBody && operation.requestBody.content) || {};
+      for (const media of Object.values(content)) {
+        removed += removeNullableInSchema(spec, media && media.schema, visited);
+      }
+    }
+  }
+
+  console.log(`Removed nullable from ${removed} request fields`);
+}
+
 async function processOpenApiSpec() {
   try {
     if (!fs.existsSync(CONFIG_PATH)) {
@@ -142,6 +194,11 @@ async function processOpenApiSpec() {
     if (config.hideApiFields && config.hideApiFields.length > 0) {
       console.log('\n=== Hiding API Fields in Spec ===');
       hideApiFields(spec, config);
+    }
+
+    if (config.removeRequestNullable) {
+      console.log('\n=== Removing nullable from Request Fields ===');
+      removeRequestNullable(spec);
     }
 
     let updatedSpecContent = JSON.stringify(spec, null, 2);
@@ -165,7 +222,8 @@ if (require.main === module) {
 
 module.exports = { 
   processOpenApiSpec, 
-  hideApiFields
+  hideApiFields,
+  removeRequestNullable
 };
 
 

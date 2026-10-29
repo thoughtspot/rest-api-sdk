@@ -4,5 +4,6 @@
         { "operationId": "getObjectAccessToken", "fields": ["user_parameters"] },
         { "operationId": "getCustomAccessToken", "fields": ["filter_rules"] },
         { "operationId": "updateWebhookConfiguration", "fields": ["reset_options"] }
-    ]
+    ],
+    "removeRequestNullable": true
 }
