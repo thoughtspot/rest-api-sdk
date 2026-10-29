@@ -4565,7 +4565,9 @@
                         ]
                       },
                       "extended_properties": {
-                        "displayNameLastUpdatedBy": "ADMIN"
+                        "displayNameLastUpdatedBy": "ADMIN",
+                        "companyName": "Example Corp",
+                        "activatedAtMs": 1699900000000
                       },
                       "email": "tsadmin@example.com"
                     }
@@ -6561,7 +6563,7 @@
                         "name": "Sales Analysts Warehouse",
                         "description": "Routes queries for sales analysts to a dedicated warehouse",
                         "configuration": {
-                          "accountName": "<account_name>",
+                          "password": "******",
                           "user": "<username>",
                           "role": "<role>",
                           "warehouse": "<warehouse>"
@@ -6659,6 +6661,7 @@
                       "name": "Sales Analysts Warehouse",
                       "description": "Routes queries for sales analysts to a dedicated warehouse",
                       "configuration": {
+                        "password": "******",
                         "user": "<username>",
                         "role": "<role>",
                         "warehouse": "<warehouse>"
@@ -6903,7 +6906,7 @@
                         "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                         "scheduled": false,
                         "connectionType": "",
-                        "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+                        "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                         "isExternal": false,
                         "isDeprecated": false,
                         "isDeleted": false,
@@ -6911,8 +6914,8 @@
                         "complete": true,
                         "indexVersion": 1,
                         "generationNum": 1,
-                        "created": 1760198400000,
-                        "modified": 1760198400000,
+                        "created": "2025-10-11T09:00:00.000-07:00",
+                        "modified": "2025-10-11T09:00:00.000-07:00",
                         "author": {
                           "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                           "name": "<username>"
@@ -7419,7 +7422,7 @@
                     "value": [
                       {
                         "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
-                        "obj_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+                        "obj_id": "Snowflake-Sales-5e6b4a3c",
                         "name": "Snowflake Sales",
                         "description": "Snowflake connection for the sales warehouse",
                         "data_warehouse_type": "SNOWFLAKE",
@@ -7482,7 +7485,7 @@
                           "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                           "scheduled": false,
                           "connectionType": "",
-                          "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+                          "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                           "isExternal": false,
                           "isDeprecated": false,
                           "isDeleted": false,
@@ -7490,8 +7493,8 @@
                           "complete": true,
                           "indexVersion": 2,
                           "generationNum": 2,
-                          "created": 1760198400000,
-                          "modified": 1760198460000,
+                          "created": "2025-10-11T09:00:00.000-07:00",
+                          "modified": "2025-10-11T09:01:00.000-07:00",
                           "author": {
                             "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                             "name": "<username>"
@@ -19102,7 +19105,7 @@
                         {
                           "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
                           "metadata_name": "Sales Model",
-                          "metadata_type": "LOGICAL_TABLE",
+                          "metadata_type": "WORKSHEET",
                           "principal_object_privilege_info": [
                             {
                               "principal_type": "USER_GROUP",
@@ -36981,7 +36984,7 @@
               "example": {
                 "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
                 "metadata_name": "Sales Model",
-                "metadata_type": "LOGICAL_TABLE",
+                "metadata_type": "WORKSHEET",
                 "principal_object_privilege_info": [
                   {
                     "principal_type": "USER_GROUP",
@@ -37017,7 +37020,7 @@
             {
               "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
               "metadata_name": "Sales Model",
-              "metadata_type": "LOGICAL_TABLE",
+              "metadata_type": "WORKSHEET",
               "principal_object_privilege_info": [
                 {
                   "principal_type": "USER_GROUP",
@@ -38205,10 +38208,10 @@
                 "type": "integer"
               },
               "created": {
-                "type": "integer"
+                "type": "string"
               },
               "modified": {
-                "type": "integer"
+                "type": "string"
               },
               "author": {
                 "type": "object",
@@ -38358,7 +38361,7 @@
               "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
               "scheduled": false,
               "connectionType": "",
-              "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+              "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
               "isExternal": false,
               "isDeprecated": false,
               "isDeleted": false,
@@ -38366,8 +38369,8 @@
               "complete": true,
               "indexVersion": 2,
               "generationNum": 2,
-              "created": 1760198400000,
-              "modified": 1760198460000,
+              "created": "2025-10-11T09:00:00.000-07:00",
+              "modified": "2025-10-11T09:01:00.000-07:00",
               "author": {
                 "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                 "name": "<username>"
@@ -38422,7 +38425,7 @@
         },
         "example": {
           "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
-          "obj_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+          "obj_id": "Snowflake-Sales-5e6b4a3c",
           "name": "Snowflake Sales",
           "description": "Snowflake connection for the sales warehouse",
           "data_warehouse_type": "SNOWFLAKE",
@@ -38485,7 +38488,7 @@
             "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
             "scheduled": false,
             "connectionType": "",
-            "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+            "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
             "isExternal": false,
             "isDeprecated": false,
             "isDeleted": false,
@@ -38493,8 +38496,8 @@
             "complete": true,
             "indexVersion": 2,
             "generationNum": 2,
-            "created": 1760198400000,
-            "modified": 1760198460000,
+            "created": "2025-10-11T09:00:00.000-07:00",
+            "modified": "2025-10-11T09:01:00.000-07:00",
             "author": {
               "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
               "name": "<username>"
@@ -41944,7 +41947,7 @@
             "type": "object",
             "nullable": true,
             "properties": {
-              "accountName": {
+              "password": {
                 "type": "string",
                 "description": "Returned when data_warehouse_type is SNOWFLAKE. These are all the types documented here."
               },
@@ -41963,7 +41966,7 @@
             },
             "additionalProperties": true,
             "example": {
-              "accountName": "<account_name>",
+              "password": "******",
               "user": "<username>",
               "role": "<role>",
               "warehouse": "<warehouse>"
@@ -42057,7 +42060,7 @@
           "name": "Sales Analysts Warehouse",
           "description": "Routes queries for sales analysts to a dedicated warehouse",
           "configuration": {
-            "accountName": "<account_name>",
+            "password": "******",
             "user": "<username>",
             "role": "<role>",
             "warehouse": "<warehouse>"
@@ -46720,10 +46723,10 @@
                 "type": "integer"
               },
               "created": {
-                "type": "integer"
+                "type": "string"
               },
               "modified": {
-                "type": "integer"
+                "type": "string"
               },
               "author": {
                 "type": "object",
@@ -46862,7 +46865,7 @@
               "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
               "scheduled": false,
               "connectionType": "",
-              "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+              "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
               "isExternal": false,
               "isDeprecated": false,
               "isDeleted": false,
@@ -46870,8 +46873,8 @@
               "complete": true,
               "indexVersion": 1,
               "generationNum": 1,
-              "created": 1760198400000,
-              "modified": 1760198400000,
+              "created": "2025-10-11T09:00:00.000-07:00",
+              "modified": "2025-10-11T09:00:00.000-07:00",
               "author": {
                 "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                 "name": "<username>"
@@ -46930,7 +46933,7 @@
             "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
             "scheduled": false,
             "connectionType": "",
-            "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+            "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
             "isExternal": false,
             "isDeprecated": false,
             "isDeleted": false,
@@ -46938,8 +46941,8 @@
             "complete": true,
             "indexVersion": 1,
             "generationNum": 1,
-            "created": 1760198400000,
-            "modified": 1760198400000,
+            "created": "2025-10-11T09:00:00.000-07:00",
+            "modified": "2025-10-11T09:00:00.000-07:00",
             "author": {
               "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
               "name": "<username>"
