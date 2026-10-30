@@ -38,7 +38,6 @@ public class ApiClientConfiguration {
     private final int readTimeoutMillis;
     private final int writeTimeoutMillis;
     private final Supplier<TokenResult> getToken;
-    private final boolean ignoreTokenCaching;
     private final long refreshBufferMs;
 
     /**
@@ -95,8 +94,8 @@ public class ApiClientConfiguration {
     }
 
     /**
-     * Constructor that initializes the configuration with all parameters, including token caching
-     * settings. When {@code getToken} is provided, the SDK automatically manages the token
+     * Constructor that initializes the configuration with all parameters, including token
+     * management. When {@code getToken} is provided, the SDK automatically manages the token
      * lifecycle: caching, proactive refresh before expiry, and 401 retry. When {@code getToken}
      * is null, the SDK uses the {@code bearerTokenSupplier} directly with no automatic refresh.
      *
@@ -119,11 +118,8 @@ public class ApiClientConfiguration {
      *     Integer#MAX_VALUE}.
      * @param getToken Supplier that returns a {@link TokenResult} containing the token and
      *     optional expiry. Called on first use and before expiry (if {@code expiresAt} is
-     *     provided). If null, token caching is disabled and {@code bearerTokenSupplier} is used
-     *     directly.
-     * @param ignoreTokenCaching Whether to ignore token caching. When true,
-     *     {@code getToken} is called on every request. When false (default), the SDK caches
-     *     the result and reuses it until near-expiry or 401.
+     *     provided). If a refresh before expiry fails, the cached token is used until it
+     *     expires. If null, {@code bearerTokenSupplier} is used directly.
      * @param refreshBufferMs Milliseconds before token expiry to trigger a proactive refresh.
      *     Only applies when {@code getToken} returns a {@link TokenResult} with
      *     {@code expiresAt}. Defaults to {@link TokenProvider#DEFAULT_REFRESH_BUFFER_MS} (30000).
@@ -142,7 +138,6 @@ public class ApiClientConfiguration {
             final int readTimeoutMillis,
             final int writeTimeoutMillis,
             final Supplier<TokenResult> getToken,
-            final boolean ignoreTokenCaching,
             final long refreshBufferMs) {
         this.basePath = normalizeBasePath(basePath);
         this.bearerTokenSupplier = bearerTokenSupplier;
@@ -166,7 +161,6 @@ public class ApiClientConfiguration {
         this.readTimeoutMillis = readTimeoutMillis;
         this.writeTimeoutMillis = writeTimeoutMillis;
         this.getToken = getToken;
-        this.ignoreTokenCaching = ignoreTokenCaching;
         this.refreshBufferMs = refreshBufferMs;
     }
 
@@ -219,7 +213,6 @@ public class ApiClientConfiguration {
         this.readTimeoutMillis = readTimeoutMillis;
         this.writeTimeoutMillis = writeTimeoutMillis;
         this.getToken = null;
-        this.ignoreTokenCaching = false;
         this.refreshBufferMs = TokenProvider.DEFAULT_REFRESH_BUFFER_MS;
     }
 
@@ -334,11 +327,6 @@ public class ApiClientConfiguration {
         return getToken;
     }
 
-    /** @return Whether token caching is ignored. Defaults to false. */
-    public boolean isIgnoreTokenCaching() {
-        return ignoreTokenCaching;
-    }
-
     /** @return Milliseconds before token expiry to trigger a proactive refresh. Defaults to 30000. */
     public long getRefreshBufferMs() {
         return refreshBufferMs;
@@ -390,7 +378,6 @@ public class ApiClientConfiguration {
         private int readTimeoutMillis;
         private int writeTimeoutMillis;
         private Supplier<TokenResult> getToken;
-        private boolean ignoreTokenCaching;
         private long refreshBufferMs;
 
         /**
@@ -411,7 +398,6 @@ public class ApiClientConfiguration {
             this.readTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
             this.writeTimeoutMillis = DEFAULT_READ_WRITE_TIMEOUT_MILLIS;
             this.getToken = null;
-            this.ignoreTokenCaching = false;
             this.refreshBufferMs = TokenProvider.DEFAULT_REFRESH_BUFFER_MS;
         }
 
@@ -434,7 +420,6 @@ public class ApiClientConfiguration {
             this.readTimeoutMillis = config.getReadTimeoutMillis();
             this.writeTimeoutMillis = config.getWriteTimeoutMillis();
             this.getToken = config.getGetToken();
-            this.ignoreTokenCaching = config.isIgnoreTokenCaching();
             this.refreshBufferMs = config.getRefreshBufferMs();
         }
 
@@ -618,7 +603,9 @@ public class ApiClientConfiguration {
 
         /**
          * Sets the token supplier function. The SDK caches the result and calls it again before
-         * expiry (if {@code expiresAt} is provided in the {@link TokenResult}) or on 401.
+         * expiry (if {@code expiresAt} is provided in the {@link TokenResult}) or on 401. If the
+         * call before expiry fails, the SDK keeps using the cached token until it expires, then
+         * throws.
          *
          * <p>The supplier can return:
          * <ul>
@@ -632,19 +619,6 @@ public class ApiClientConfiguration {
          */
         public Builder getToken(Supplier<TokenResult> getToken) {
             this.getToken = getToken;
-            return this;
-        }
-
-        /**
-         * Sets whether to ignore token caching. When false (default), the SDK caches the token
-         * and reuses it until near-expiry or 401. When true, {@code getToken} is called on every
-         * request.
-         *
-         * @param ignoreTokenCaching true to ignore caching, false to enable caching (default).
-         * @return The builder instance.
-         */
-        public Builder ignoreTokenCaching(boolean ignoreTokenCaching) {
-            this.ignoreTokenCaching = ignoreTokenCaching;
             return this;
         }
 
@@ -680,7 +654,6 @@ public class ApiClientConfiguration {
                     readTimeoutMillis,
                     writeTimeoutMillis,
                     getToken,
-                    ignoreTokenCaching,
                     refreshBufferMs
             );
         }

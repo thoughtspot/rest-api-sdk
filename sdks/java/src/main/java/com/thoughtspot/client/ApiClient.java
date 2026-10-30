@@ -173,8 +173,7 @@ public class ApiClient {
             if (apiClientConfiguration.getGetToken() != null) {
                 tokenProvider = new TokenProvider(
                         apiClientConfiguration.getGetToken(),
-                        apiClientConfiguration.getRefreshBufferMs(),
-                        !apiClientConfiguration.isIgnoreTokenCaching());
+                        apiClientConfiguration.getRefreshBufferMs());
                 tokenRefreshInterceptor = new TokenRefreshInterceptor(tokenProvider);
                 builder.addInterceptor(tokenRefreshInterceptor);
             }

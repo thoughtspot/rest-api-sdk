@@ -5,6 +5,7 @@
 package com.thoughtspot.client;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -21,7 +22,8 @@ import java.util.logging.Logger;
  *   <li>Cache the token per client instance.
  *   <li>Reuse the cached token without validation.
  *   <li>If {@code expiresAt} is present, call {@code getToken} when fewer than {@code
- *       refreshBufferMs} milliseconds remain.
+ *       refreshBufferMs} milliseconds remain. If that call fails, keep using the cached token
+ *       while it has not expired; once it has, surface the failure.
  *   <li>On 401, clear the cache, call {@code getToken} once, and retry the request once.
  *   <li>Deduplicate concurrent {@code getToken} calls into a single in-flight call.
  * </ol>
@@ -35,7 +37,6 @@ class TokenProvider {
 
     private final Supplier<TokenResult> getToken;
     private final long refreshBufferMs;
-    private final boolean cachingEnabled;
 
     private final AtomicReference<TokenResult> cached = new AtomicReference<>();
     private final AtomicReference<CompletableFuture<TokenResult>> inflight = new AtomicReference<>();
@@ -43,37 +44,46 @@ class TokenProvider {
     /**
      * @param getToken supplier that fetches a new token (provided by the customer)
      * @param refreshBufferMs milliseconds before expiry to trigger proactive refresh
-     * @param cachingEnabled whether to cache the token between requests
      */
-    TokenProvider(Supplier<TokenResult> getToken, long refreshBufferMs, boolean cachingEnabled) {
+    TokenProvider(Supplier<TokenResult> getToken, long refreshBufferMs) {
         this.getToken = getToken;
         this.refreshBufferMs = refreshBufferMs;
-        this.cachingEnabled = cachingEnabled;
     }
 
     /**
      * Get the current valid token. Returns the cached token if it's still valid, otherwise fetches a
-     * new one.
+     * new one. If the refresh inside the buffer window fails, falls back to the cached token as long
+     * as it has not expired yet.
      *
      * @return the bearer token string
+     * @throws RuntimeException if no token could be fetched and there is no unexpired cached token
      */
     String token() {
-        if (!cachingEnabled) {
-            return fetchNew("caching_disabled").getToken();
+        TokenResult current = cached.get();
+        if (current == null) {
+            return requestNew("cold").getToken();
+        }
+        if (!current.hasExpiry()) {
+            return current.getToken();
         }
 
-        TokenResult current = cached.get();
-        if (current != null) {
-            long buffer = current.getTokenBufferMs() != null
-                    ? current.getTokenBufferMs()
-                    : refreshBufferMs;
-            if (!current.hasExpiry() || current.getExpiresAt() - System.currentTimeMillis() > buffer) {
+        long buffer = current.getTokenBufferMs() != null
+                ? current.getTokenBufferMs()
+                : refreshBufferMs;
+        if (current.getExpiresAt() - System.currentTimeMillis() > buffer) {
+            return current.getToken();
+        }
+
+        try {
+            return requestNew("expiry").getToken();
+        } catch (RuntimeException e) {
+            if (current.getExpiresAt() > System.currentTimeMillis()) {
+                logger.log(Level.WARNING,
+                        "Token refresh before expiry failed, using cached token until it expires", e);
                 return current.getToken();
             }
-            return requestNew("expiry").getToken();
+            throw new RuntimeException("Token refresh failed and the cached token has expired", e);
         }
-
-        return requestNew("cold").getToken();
     }
 
     /**
@@ -120,7 +130,16 @@ class TokenProvider {
         } else {
             CompletableFuture<TokenResult> existing = inflight.get();
             if (existing != null) {
-                return existing.join();
+                try {
+                    return existing.join();
+                } catch (CompletionException e) {
+                    // Rethrow the leader's original failure so waiters see the same exception
+                    // the leader did, not a CompletionException wrapping it.
+                    Throwable cause = e.getCause();
+                    if (cause instanceof RuntimeException) throw (RuntimeException) cause;
+                    if (cause instanceof Error) throw (Error) cause;
+                    throw e;
+                }
             }
             TokenResult fresh = cached.get();
             if (fresh != null) return fresh;
@@ -134,9 +153,7 @@ class TokenProvider {
         if (result == null) {
             throw new RuntimeException("getToken returned null");
         }
-        if (cachingEnabled) {
-            cached.set(result);
-        }
+        cached.set(result);
         return result;
     }
 }

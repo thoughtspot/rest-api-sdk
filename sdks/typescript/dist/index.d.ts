@@ -10761,7 +10761,7 @@ declare class DeleteMetadataRequest {
     */
     'delete_mode'?: DeleteMetadataRequestDeleteModeEnum;
     /**
-    * Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin.    Version: 27.1.0.cl or later
+    * Reason for the delete, recorded with the Recycle Bin entry. Optional, and recommended when you move objects you do not own to the Recycle Bin. At most 32 characters. If omitted, a default reason saying that the object was deleted through the API is recorded.    Version: 27.1.0.cl or later
     */
     'delete_reason'?: string;
     static readonly discriminator: string | undefined;

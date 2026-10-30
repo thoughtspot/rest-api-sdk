@@ -44124,9 +44124,10 @@ components:
           type: string
         delete_reason:
           description: "Reason for the delete, recorded with the Recycle Bin entry.\
-            \ At most 32 characters. Required, with at least 5 characters, to move\
-            \ objects you do not own to the Recycle Bin. \n  Version: 27.1.0.cl or\
-            \ later\n"
+            \ Optional, and recommended when you move objects you do not own to the\
+            \ Recycle Bin. At most 32 characters. If omitted, a default reason saying\
+            \ that the object was deleted through the API is recorded. \n  Version:\
+            \ 27.1.0.cl or later\n"
           type: string
       required:
       - metadata
