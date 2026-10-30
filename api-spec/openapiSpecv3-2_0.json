@@ -14,14 +14,6 @@
       "description": "Roles for version 26.2.0.cl"
     },
     {
-      "name": "26.12.0.cl",
-      "id": "26.12.0.cl",
-      "tags": [
-        "26.12.0.cl"
-      ],
-      "description": "Roles for version 26.12.0.cl"
-    },
-    {
       "name": "26.10.0.cl",
       "id": "26.10.0.cl",
       "tags": [
@@ -260,6 +252,14 @@
         "9.7.0.cl"
       ],
       "description": "Roles for version 9.7.0.cl"
+    },
+    {
+      "name": "26.12.0.cl",
+      "id": "26.12.0.cl",
+      "tags": [
+        "26.12.0.cl"
+      ],
+      "description": "Roles for version 26.12.0.cl"
     }
   ],
   "tags": [],
@@ -267,7 +267,7 @@
     "/api/rest/2.0/ai/agent/conversation/create": {
       "post": {
         "operationId": "createAgentConversation",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Usage guidelines\n\nThe conversation context is defined by exactly one of the following parameters:\n\n- `metadata_context`: defines the conversation context by data source. The context type can be one of:\n  - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n  - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n- `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.\n\nPassing both `analyst_identifier` and `metadata_context`, or neither, is rejected.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\nThe `conversation_settings` parameter controls which Spotter capabilities are enabled for the conversation:\n\n- `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled in Spotter 3; setting this to `false` has no effect on versions >= 26.2.0.cl\n- `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n\nIf the request is successful, the response includes a unique `conversation_identifier` that must be passed to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages within this conversation. The response also includes `conversation_id` with the same value for backwards compatibility; use `conversation_identifier` for new integrations. When the conversation is started from an analyst, the response additionally carries the analyst's `analyst_id`; it is `null` otherwise.\n\n#### Example request\n\n```json\n{\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": {}\n}\n```\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |\n| 404  | Not found — no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |\n| 422  | Unprocessable entity — the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nCreates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.\n\nRequires `CAN_USE_SPOTTER` privilege and at least view access to the metadata object specified in the request.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\nThe two versions differ in which creation settings they accept and in how validation errors are reported. See the sections below for each version's requests and responses.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>\n\nConversations can carry `additional_instructions`, and of `conversation_settings` only `enable_save_chat` is used.\n\nBefore you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/create`\n\n```json\n{\n  \"spotter_experience_version\": \"V2\",\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"]\n    }\n  },\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\",\n  \"conversation_settings\": { \"enable_save_chat\": true }\n}\n```\n\n- `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it here and on every later request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n- The conversation context, defined by exactly one of:\n  - `metadata_context`: defines the conversation context by data source. The context type can be one of:\n    - `DATA_SOURCE`: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n    - `AUTO_MODE`: automatically discovers and selects the most relevant datasets for the user's queries.\n  - `analyst_identifier`: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.\n\n  Passing both `analyst_identifier` and `metadata_context`, or neither, returns a `400`.\n- `additional_instructions` *(optional, this version only)*: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. Not allowed with `analyst_identifier`, since the analyst brings its own instructions.\n- `conversation_settings` *(optional)*: only `enable_save_chat` applies (default: `false`). When `true`, the conversation appears in `getConversationList` once it has messages. When `false`, it is kept out of the list but can still be continued and deleted by its identifier. The other settings are ignored.\n\n##### Response\n\n```json\n{\n  \"conversation_id\": \"8401773265129884672\",\n  \"conversation_identifier\": \"8401773265129884672\",\n  \"analyst_id\": null\n}\n```\n\n- `conversation_identifier`: pass it to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages in this conversation, together with `spotter_experience_version` `V2`. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape.\n- `conversation_id`: the same value, kept for backwards compatibility; use `conversation_identifier` for new integrations.\n- `analyst_id`: the analyst's ID when the conversation is started from an analyst; `null` otherwise.\n\nValidation failures return `400`. A data source or analyst that does not exist or that the caller cannot view is reported as a `400` that lists those identifiers.\n\n</details>\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>\n\nUse this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/create`\n\n```json\n{\n  \"spotter_experience_version\": \"V1\",\n  \"metadata_context\": {\n    \"type\": \"DATA_SOURCE\",\n    \"data_source_context\": {\n      \"data_source_identifier\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  },\n  \"conversation_settings\": { \"enable_save_chat\": true }\n}\n```\n\n- `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.\n- The conversation context, defined by exactly one of:\n  - `metadata_context`: defines the conversation context by data source. The context type can be one of:\n    - `DATA_SOURCE` *(available from 26.5.0.cl)*: targets a specific data source. Provide `data_source_identifier` in `data_source_context` for a single data source, or `data_source_identifiers` for multi-data-source context. The deprecated `guid` field is accepted for backwards compatibility.\n    - `AUTO_MODE` *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user's queries.\n  - `analyst_identifier` *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst's configuration — its data sources, agent instructions, and connectors — so `metadata_context` must be omitted. The caller must be the analyst's author, have the analyst shared with them, or hold admin / Spotter-management privileges.\n\n  Passing both `analyst_identifier` and `metadata_context`, or neither, returns a `422`.\n- `conversation_settings` *(optional)*: controls which Spotter capabilities are enabled for the conversation:\n  - `enable_contextual_change_analysis` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl\n  - `enable_natural_language_answer_generation` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl\n  - `enable_reasoning` (default: `true`, **deprecated from 26.2.0.cl**) — always enabled; setting this to `false` has no effect on versions >= 26.2.0.cl\n  - `enable_save_chat` (default: `false`, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history\n- `additional_instructions`: not available in this version; returns a `400`.\n\n> **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase `data_source` enum value with the `guid` field instead of the above. Example: `{ \"type\": \"data_source\", \"data_source_context\": { \"guid\": \"<worksheet-id>\" } }`.\n\n##### Response\n\n```json\n{\n  \"conversation_id\": \"wwHQ5j8O8dQC\",\n  \"conversation_identifier\": \"wwHQ5j8O8dQC\",\n  \"analyst_id\": null\n}\n```\n\n- `conversation_identifier`: pass it to `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming` to send messages in this conversation. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape.\n- `conversation_id`: the same value, kept for backwards compatibility; use `conversation_identifier` for new integrations.\n- `analyst_id`: the analyst's ID when the conversation is started from an analyst; `null` otherwise.\n\nValidation failures return `422`, and an `analyst_identifier` that does not exist in the caller's Org returns `404`.\n\n</details>\n\n#### Error responses\n\n| Code | Description                                                                                                                             |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, `additional_instructions` is set on `V1` or with `analyst_identifier`, or, on `V2`, the request fails validation. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in `analyst_identifier`. |\n| 404  | Not found — on `V1`, no analyst with the given `analyst_identifier` exists in the caller's Org.                                                          |\n| 422  | Unprocessable entity — on `V1`, the request fails validation: both `analyst_identifier` and `metadata_context` were provided, neither was provided, or `metadata_context` is malformed (for example, `DATA_SOURCE` context without a data source identifier). |\n\n> ###### Note:\n>\n> - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl.\n> - `spotter_experience_version`, `additional_instructions` and `V2` support are in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.2.0.cl"
@@ -292,26 +292,41 @@
                   "$ref": "#/components/schemas/AgentConversation"
                 },
                 "examples": {
-                  "example_1": {
-                    "summary": "Create a conversation with a specific data source",
+                  "v1_data_source": {
+                    "summary": "V1: create a conversation with a specific data source",
                     "value": {
                       "conversation_id": "wwHQ5j8O8dQC",
                       "conversation_identifier": "wwHQ5j8O8dQC"
                     }
                   },
-                  "example_2": {
-                    "summary": "Create a conversation using auto mode where the agent automatically discovers and selects the most relevant datasets for the user's queries",
+                  "v1_auto_mode": {
+                    "summary": "V1: create a conversation using auto mode where the agent automatically discovers and selects the most relevant datasets for the user's queries",
                     "value": {
                       "conversation_id": "aaHQ5j8O8dQC",
                       "conversation_identifier": "aaHQ5j8O8dQC"
                     }
                   },
-                  "example_3": {
-                    "summary": "Create a conversation from a Spotter Analyst",
+                  "v1_analyst": {
+                    "summary": "V1: create a conversation from a Spotter Analyst",
                     "value": {
                       "conversation_id": "bbHQ5j8O8dQC",
                       "conversation_identifier": "bbHQ5j8O8dQC",
                       "analyst_id": "9f8e7d6c-5b4a-3210-fedc-ba9876543210"
+                    }
+                  },
+                  "v2_data_sources": {
+                    "summary": "V2: conversation created, scoped to several data sources",
+                    "value": {
+                      "conversation_id": "8401773265129884672",
+                      "conversation_identifier": "8401773265129884672"
+                    }
+                  },
+                  "v2_analyst": {
+                    "summary": "V2: conversation created from a Spotter Analyst",
+                    "value": {
+                      "conversation_id": "6930417752281636864",
+                      "conversation_identifier": "6930417752281636864",
+                      "analyst_id": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
                     }
                   }
                 }
@@ -324,115 +339,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AgentConversation"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/create": {
-      "post": {
-        "operationId": "createAgentConversationV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nCreates a new Spotter conversation, grounded in data sources or in a saved analyst, and returns its identifier.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to any data source or analyst specified in the request.\n\n#### Usage guidelines\n\nA conversation holds the message history and context for an exchange with Spotter. Create one, then pass the returned `conversation_identifier` to `sendAgentConversationMessageV2` or `sendAgentConversationMessageStreamingV2` to send messages within it.\n\n`source` decides which other parameters apply. Every parameter is optional; send an empty body to create a conversation with no customization.\n\n- `source` (default: `DATA_SOURCE`): what the conversation is grounded in.\n  - `DATA_SOURCE`: data sources, set with `data_source_identifiers` and optionally `additional_instructions`. `analyst_identifier` is not allowed.\n  - `ANALYST`: a saved analyst, set with `analyst_identifier`, which is then required. The analyst brings its own instructions, data sources and connectors, so `data_source_identifiers` and `additional_instructions` are not allowed.\n- `data_source_identifiers` (default: `[]`): scopes the conversation to one or more data sources. When empty or omitted, Spotter automatically discovers and selects the most relevant data source for each question. Empty or blank identifiers are ignored.\n- `additional_instructions`: guidance appended to the agent's instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules — for example, `\"Answer concisely and always report revenue in thousands.\"` It cannot be changed after the conversation is created, and it is sent with every message, so keep it short.\n- `analyst_identifier`: the saved analyst to create the conversation from.\n\nA parameter that does not apply to the `source` fails the request with a 400 rather than being ignored.\n\nConversations are private to the user who created them. A conversation created by one user cannot be read, continued, or deleted by another.\n\n#### Example requests\n\n```json\n{\n  \"source\": \"DATA_SOURCE\",\n  \"data_source_identifiers\": [\"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"],\n  \"additional_instructions\": \"Answer concisely and always report revenue in thousands.\"\n}\n```\n\n```json\n{\n  \"source\": \"ANALYST\",\n  \"analyst_identifier\": \"0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0\"\n}\n```\n\n#### Example response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\"\n}\n```\n\nTreat `conversation_identifier` as an opaque string. Its format is not part of the contract and may change; store and return it as received rather than parsing or validating its shape.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                                                                                                                                                                                               |\n| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — the request fails validation; `analyst_identifier` is missing when `source` is `ANALYST`; a parameter that does not apply to the `source` is set; or the analyst in `analyst_identifier`, or a data source in `data_source_identifiers`, does not exist or the caller cannot view it (the message lists those identifiers). |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                                                                                                                                                                                                      |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the analyst.                                                                                                                                                                                                                             |\n| 500  | Internal server error — an unexpected failure while creating the conversation.                                                                                                                                                                                                                                                            |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAgentConversationV2Request"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "Conversation created",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568"
-                    }
-                  },
-                  "example_2": {
-                    "summary": "Conversation created, scoped to a single data source",
-                    "value": {
-                      "conversation_identifier": "7258889042597511168"
-                    }
-                  },
-                  "example_3": {
-                    "summary": "Conversation created, scoped to several data sources",
-                    "value": {
-                      "conversation_identifier": "8401773265129884672"
-                    }
-                  },
-                  "example_4": {
-                    "summary": "Conversation created from an analyst",
-                    "value": {
-                      "conversation_identifier": "6930417752281636864"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentConversationV2"
                 }
               }
             }
@@ -732,12 +638,26 @@
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete": {
       "delete": {
         "operationId": "deleteConversation",
-        "description": "\nDeletes an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nPermanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`\n\nA successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.\n\n#### Example request\n\n```bash\nDELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint.\n> - Only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nDeletes an existing agent conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nPermanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* is a query parameter that selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `spotter_experience_version` *(query parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`\n\nA successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.\n\n#### Example request\n\n```bash\nDELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint.\n> - On `V1`, only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint. On `V2`, any conversation can be deleted by its identifier, including one created without `enable_save_chat: true`.\n> - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
         ],
         "parameters": [
+          {
+            "in": "query",
+            "name": "spotter_experience_version",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "V1",
+                "V2"
+              ],
+              "default": "V1"
+            },
+            "description": "Version of the Spotter experience the conversation runs on. A\nconversation stays on the version that created it, so pass the value used\nwhen it was created.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted.\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Requires a cluster admin\n  to set Spotter 3 Liveboard experience to Liveboard side panel (New);\n  otherwise the request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
           {
             "in": "path",
             "name": "conversation_identifier",
@@ -1051,7 +971,7 @@
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages": {
       "get": {
         "operationId": "getConversation",
-        "description": "\nRetrieves the full public-safe content of a saved agent conversation: ordered\nturns (user messages and agent response items) and sanitized code-execution\nfile metadata. Internal graph or branch state, Azure file identifiers, and\nmessages with a `SYSTEM` source are omitted. The full answer payload is not\nembedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n`answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the full public-safe content of a saved agent conversation. Returns ordered conversation messages — each carrying an optional user prompt (the user's message and any attachments) and the agent response items produced for that turn — plus sanitized metadata for any files generated by the code-execution tool. \n\nUse this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\nIf the request is successful, the response contains two top-level fields:\n\n| Field                  | Type                                        | Description                                                                                                                                          |\n| ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `messages`             | `ConversationMessage[]`                     | Ordered oldest to newest. Empty array when the conversation has no messages.                                                                         |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |\n\nNo other top-level fields are returned.\n\n#### ConversationMessage fields\n\n| Field                 | Type                         | Description                                                                                                    |\n| --------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |\n| `message_id`          | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. |\n| `timestamp_in_millis` | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    |\n| `user_prompt`         | `UserPrompt`                 | User-authored prompt that started the turn (message and attachments). `null` for liveboard-started synthetic first turns. |\n| `response_items`      | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |\n\n#### UserPrompt fields\n\n| Field         | Type                   | Description                                                                                          |\n| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------- |\n| `message`     | `UserMessage`          | User query that started the turn. `null` for liveboard-started synthetic first turns.                |\n| `attachments` | `UserAttachmentItem[]` | Files or connector resources attached to the user message. Empty array when there are no attachments. |\n\n#### UserMessage fields\n\n| Field        | Type     | Description                                   |\n| ------------ | -------- | --------------------------------------------- |\n| `message_id` | `String` | Unique identifier of the user-source message. |\n| `content`    | `String` | Text body of the user query.                  |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item carries a `type` discriminator and these shared fields:\n\n| Field                 | Type      | Description                                                                                                                    |\n| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| `type`                | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       |\n| `timestamp_in_millis` | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     |\n| `is_thinking`         | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. |\n| `step_title`          | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\nVariant-specific fields:\n\n- **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n- **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object).\n- **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference to a saved answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n- **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n- **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\n#### content_type values\n\n`content_type` is the `ContentMimeType` enum. The following values are defined:\n\n| Value                       | Wire MIME                   | Meaning                                              |\n| --------------------------- | --------------------------- | ---------------------------------------------------- |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               |\n| `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |\n\n#### transport_type values\n\n`transport_type` is the `TransportType` enum used on the `resource` variant.\n\n| Value              | Meaning                                       |\n| ------------------ | --------------------------------------------- |\n| `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  |\n| `SSE`              | Server-sent events transport.                 |\n\n#### FileReference fields\n\n| Field                    | Type     | Description                                                  |\n| ------------------------ | -------- | ------------------------------------------------------------ |\n| `file_id`                | `String` | Unique identifier of the code-execution-generated file.      |\n| `display_name`           | `String` | Human-readable file name.                                    |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created.     |\n\nCross-reference `file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.\n\n#### PublicFileInfo fields\n\n| Field                    | Type     | Description                                              |\n| ------------------------ | -------- | -------------------------------------------------------- |\n| `file_id`                | `String` | Unique identifier of the file.                           |\n| `display_name`           | `String` | Human-readable file name.                                |\n| `file_type`              | `String` | File type such as `csv`, `pdf`, or `png`.                |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created. |\n| `size_bytes`             | `Int`    | File size in bytes.                                      |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field                    | Type      | Description                                                                                                                     |\n| ------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| `file_id`                | `String`  | Unique identifier of the file.                                                                                                  |\n| `display_name`           | `String`  | Human-readable file name.                                                                                                       |\n| `file_type`              | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       |\n| `created_time_in_millis` | `Long`    | Milliseconds since Unix epoch when the file was created.                                                                        |\n| `expired`                | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML tokens, visualization metadata) for that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages\n```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"node_u_01\",\n      \"timestamp_in_millis\": 1744000000000,\n      \"user_prompt\": {\n        \"message\": {\n          \"message_id\": \"msg_u_01\",\n          \"content\": \"Show me revenue by region as a chart.\"\n        },\n        \"attachments\": []\n      },\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue\" },\n          \"timestamp_in_millis\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\": \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualising\",\n          \"timestamp_in_millis\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp_in_millis\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": {\n            \"file_id\": \"revenue_by_region.csv\",\n            \"display_name\": \"revenue_by_region.csv\",\n            \"created_time_in_millis\": 1744027200000\n          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_time_in_millis\": 1744027200000,\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example: liveboard-started conversation\n\nWhen a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_prompt` is `null`, and `response_items` contains a single `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp_in_millis\": 1743999000000,\n      \"user_prompt\": null,\n      \"response_items\": [\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\": null,\n          \"step_title\": null,\n          \"timestamp_in_millis\": 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description                                                                                                                 |\n| ---- | --------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |\n\n> ###### Note:\n>\n> - Messages with an internal `SYSTEM` source are always dropped from the response.\n> - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately.\n> - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRetrieves the full public-safe content of a saved agent conversation: ordered\nturns (user messages and agent response items) and sanitized code-execution\nfile metadata. Internal graph or branch state, Azure file identifiers, and\nmessages with a `SYSTEM` source are omitted. The full answer payload is not\nembedded; fetch it separately via `loadAnswer` using the `answer_id` on each\n`answer` response item.\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves the full public-safe content of a saved agent conversation. Returns ordered conversation messages — each carrying an optional user prompt (the user's message and any attachments) and the agent response items produced for that turn — plus sanitized metadata for any files generated by the code-execution tool. \n\nUse this endpoint to render a persisted conversation in a UI, build an audit trail, or post-process a completed conversation. The full answer payload is not embedded — fetch it separately via `loadAnswer` using the `answer_id` on each `answer` response item.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` _(path parameter)_: the unique ID of the conversation, as returned by `createAgentConversation` or `getConversationList`.\n\nIf the request is successful, the response contains two top-level fields:\n\n| Field                  | Type                                        | Description                                                                                                                                          |\n| ---------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `messages`             | `ConversationMessage[]`                     | Ordered oldest to newest. Empty array when the conversation has no messages.                                                                         |\n| `code_execution_files` | `CodeExecutionFileMetadata[]`               | List of sanitized file metadata entries (one per `file_id`). Covers all code-execution-generated files referenced anywhere in the conversation. Empty array when there are none. |\n\nNo other top-level fields are returned.\n\n#### ConversationMessage fields\n\n| Field                 | Type                         | Description                                                                                                    |\n| --------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------- |\n| `message_id`          | `String`                     | Stable identifier for the turn. For liveboard-started synthetic first turns, this is the root node identifier. |\n| `timestamp_in_millis` | `Long`                       | Milliseconds since Unix epoch for the turn.                                                                    |\n| `user_prompt`         | `UserPrompt`                 | User-authored prompt that started the turn (message and attachments). `null` for liveboard-started synthetic first turns. |\n| `response_items`      | `ConversationResponseItem[]` | Agent-side output produced in response to this turn. Empty array for in-progress turns.                        |\n\n#### UserPrompt fields\n\n| Field         | Type                   | Description                                                                                          |\n| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------- |\n| `message`     | `UserMessage`          | User query that started the turn. `null` for liveboard-started synthetic first turns.                |\n| `attachments` | `UserAttachmentItem[]` | Files or connector resources attached to the user message. Empty array when there are no attachments. |\n\n#### UserMessage fields\n\n| Field        | Type     | Description                                   |\n| ------------ | -------- | --------------------------------------------- |\n| `message_id` | `String` | Unique identifier of the user-source message. |\n| `content`    | `String` | Text body of the user query.                  |\n\n#### UserAttachmentItem fields\n\nDiscriminated by `type`. Only `\"file\"` or `\"resource\"` are valid values. Only the fields for the indicated variant are populated. See `ConversationResponseItem` below for the field definitions of the `file` and `resource` variants — `UserAttachmentItem` uses the same fields.\n\n#### ConversationResponseItem fields\n\nEvery item carries a `type` discriminator and these shared fields:\n\n| Field                 | Type      | Description                                                                                                                    |\n| --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| `type`                | `String`  | Discriminator. One of `\"text\"`, `\"tool_call\"`, `\"tool_result\"`, `\"answer\"`, `\"file\"`, `\"resource\"`, `\"search_datasets\"`.       |\n| `timestamp_in_millis` | `Long`    | Milliseconds since Unix epoch when this item was produced.                                                                     |\n| `is_thinking`         | `Boolean` | `true` when the item represents internal agent reasoning rather than user-facing output. Consumers may hide or collapse these. |\n| `step_title`          | `String`  | Human-readable label for the agent step producing this item (e.g. `\"Searching\"`, `\"Visualising\"`).                             |\n\nVariant-specific fields:\n\n- **`text`** — agent text output: `content` (String), `content_type` (`ContentMimeType` enum), `file_reference` (FileReference).\n- **`tool_call`** — agent invoked a tool: `tool_call_id` (String), `tool_name` (String), `arguments` (JSON object).\n- **`tool_result`** — result returned from a tool invocation: `tool_call_id`, `tool_name`, `content`, `content_type` (`ContentMimeType` enum), `success` (Boolean).\n- **`answer`** — slim reference to a saved answer: `answer_id` (String), `tool_call_id`, `tool_name`.\n- **`file`** — uploaded or generated files: `files` (`PublicFileInfo[]`).\n- **`resource`** — MCP connector resource: `title`, `uri`, `name`, `mime_type`, `description`, `size` (Int), `connector_id`, `connector_name`, `connector_slug`, `transport_type` (`TransportType` enum).\n- **`search_datasets`** — dataset discovery result: `text` (String), `data_sources` (`DataSourceInfo[]`).\n\nClients should switch on `type` and ignore unknown variants for forward-compatibility.\n\n#### content_type values\n\n`content_type` is the `ContentMimeType` enum. The following values are defined:\n\n| Value                       | Wire MIME                   | Meaning                                              |\n| --------------------------- | --------------------------- | ---------------------------------------------------- |\n| `TEXT_PLAIN`                | `text/plain`                | Plain text. Default for `tool_result`.               |\n| `TEXT_MARKDOWN`             | `text/markdown`             | Markdown. Default for `text`.                        |\n| `TEXT_X_MARKDOWN_WITH_CODE` | `text/x-markdown-with-code` | Markdown whose body starts with a fenced code block. |\n| `TEXT_HTML`                 | `text/html`                 | Raw HTML.                                            |\n\n#### transport_type values\n\n`transport_type` is the `TransportType` enum used on the `resource` variant.\n\n| Value              | Meaning                                       |\n| ------------------ | --------------------------------------------- |\n| `STREAMABLE_HTTP`  | Streamable HTTP transport (default for MCP).  |\n| `SSE`              | Server-sent events transport.                 |\n\n#### FileReference fields\n\n| Field                    | Type     | Description                                                  |\n| ------------------------ | -------- | ------------------------------------------------------------ |\n| `file_id`                | `String` | Unique identifier of the code-execution-generated file.      |\n| `display_name`           | `String` | Human-readable file name.                                    |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created.     |\n\nCross-reference `file_id` against `code_execution_files` to retrieve full metadata including the `expired` flag before attempting a download.\n\n#### PublicFileInfo fields\n\n| Field                    | Type     | Description                                              |\n| ------------------------ | -------- | -------------------------------------------------------- |\n| `file_id`                | `String` | Unique identifier of the file.                           |\n| `display_name`           | `String` | Human-readable file name.                                |\n| `file_type`              | `String` | File type such as `csv`, `pdf`, or `png`.                |\n| `created_time_in_millis` | `Long`   | Milliseconds since Unix epoch when the file was created. |\n| `size_bytes`             | `Int`    | File size in bytes.                                      |\n\n#### CodeExecutionFileMetadata fields\n\nEach entry in the `code_execution_files` array contains:\n\n| Field                    | Type      | Description                                                                                                                     |\n| ------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| `file_id`                | `String`  | Unique identifier of the file.                                                                                                  |\n| `display_name`           | `String`  | Human-readable file name.                                                                                                       |\n| `file_type`              | `String`  | File type such as `csv`, `pdf`, or `png`.                                                                                       |\n| `created_time_in_millis` | `Long`    | Milliseconds since Unix epoch when the file was created.                                                                        |\n| `expired`                | `Boolean` | When `true`, the underlying file is no longer retrievable from code-execution storage; UIs should disable download and preview. |\n\n#### Loading answer payloads\n\nEach `AnswerResponseItem` in the response contains an `answer_id` field. Pass this value as the `answer_identifier` parameter to `loadAnswer` to retrieve the full answer payload (TML tokens, visualization metadata) for that item.\n\n#### Example request\n\n```bash\nGET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages\n```\n\n#### Example response\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"node_u_01\",\n      \"timestamp_in_millis\": 1744000000000,\n      \"user_prompt\": {\n        \"message\": {\n          \"message_id\": \"msg_u_01\",\n          \"content\": \"Show me revenue by region as a chart.\"\n        },\n        \"attachments\": []\n      },\n      \"response_items\": [\n        {\n          \"type\": \"tool_call\",\n          \"tool_call_id\": \"toolu_01ABC\",\n          \"tool_name\": \"search_datasets\",\n          \"step_title\": \"Searching datasets\",\n          \"arguments\": { \"query\": \"revenue\" },\n          \"timestamp_in_millis\": 1744000001000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"ans_01XYZ\",\n          \"tool_call_id\": \"toolu_02DEF\",\n          \"tool_name\": \"fetch_and_visualize\",\n          \"step_title\": \"Visualising\",\n          \"timestamp_in_millis\": 1744000004000,\n          \"is_thinking\": false\n        },\n        {\n          \"type\": \"text\",\n          \"content\": \"Revenue is highest in APAC.\",\n          \"content_type\": \"TEXT_MARKDOWN\",\n          \"timestamp_in_millis\": 1744000005000,\n          \"is_thinking\": false,\n          \"step_title\": null,\n          \"file_reference\": {\n            \"file_id\": \"revenue_by_region.csv\",\n            \"display_name\": \"revenue_by_region.csv\",\n            \"created_time_in_millis\": 1744027200000\n          }\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": [\n    {\n      \"file_id\": \"revenue_by_region.csv\",\n      \"display_name\": \"revenue_by_region.csv\",\n      \"file_type\": \"csv\",\n      \"created_time_in_millis\": 1744027200000,\n      \"expired\": false\n    }\n  ]\n}\n```\n\n#### Example: liveboard-started conversation\n\nWhen a conversation is initiated from a saved liveboard visualization rather than a user query, the first turn is synthetic. `user_prompt` is `null`, and `response_items` contains a single `answer` item referencing the seed visualization.\n\n```json\n{\n  \"messages\": [\n    {\n      \"message_id\": \"ROOT_NODE\",\n      \"timestamp_in_millis\": 1743999000000,\n      \"user_prompt\": null,\n      \"response_items\": [\n        {\n          \"type\": \"answer\",\n          \"answer_id\": \"lb_seed_01\",\n          \"tool_call_id\": null,\n          \"tool_name\": null,\n          \"step_title\": null,\n          \"timestamp_in_millis\": 1743999000000,\n          \"is_thinking\": false\n        }\n      ]\n    }\n  ],\n  \"code_execution_files\": []\n}\n```\n\nSubsequent turns follow the normal user-to-agent pattern.\n\n#### Error responses\n\n| Code | Description                                                                                                                 |\n| ---- | --------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                        |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n| 404  | Not Found — no conversation exists with the given identifier for the authenticated user.                                    |\n\n> ###### Note:\n>\n> - Messages with an internal `SYSTEM` source are always dropped from the response.\n> - In-progress turns are still returned with an empty `response_items` array so clients can render the user message immediately.\n> - Do not assume every `tool_call` has a paired `tool_result` or `answer` — an interrupted conversation can leave a dangling call.\n> - Available from version 26.7.0.cl and later.\n> - Supports `V1` conversations only. Conversations created with `spotter_experience_version: V2` are not found.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -1304,7 +1224,7 @@
     "/api/rest/2.0/ai/agent/conversations": {
       "get": {
         "operationId": "getConversationList",
-        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Usage guidelines\n\nThe request supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n- `is_pinned`: whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list. Available from version 26.10.0.cl.\n- `analyst_id`: unique identifier of the Spotter Analyst the conversation is associated with, or `null` when the conversation is not associated with an analyst. Available from version 26.10.0.cl.\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. Conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nRetrieves the list of saved agent conversations for the currently authenticated user.\nOnly conversations created with `enable_save_chat: true` are returned. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves a paginated list of saved agent conversations for the currently authenticated user. Only conversations that were created with `enable_save_chat: true` in `createAgentConversation` are returned.\n\nRequires `CAN_USE_SPOTTER` privilege.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* is a query parameter that selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\nEach version lists only its own conversations.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\nThe request includes:\n\n- `spotter_experience_version` *(query parameter; required for `V2`)*: the version whose conversations to list. A request that omits it lists `V1` conversations, the default, so pass `V2` to list conversations created on that version. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n\nand supports the following optional query parameters:\n\n- `limit`: maximum number of conversations to return. Use this together with `offset` for pagination.\n- `offset`: number of conversations to skip before returning results. Defaults to `0`.\n- `skip_empty`: when `true` (default), conversations with no messages are excluded from the results. Set to `false` to include empty conversations. Applies to `V1` only; `V2` always excludes conversations with no messages.\n\nIf the request is successful, the response includes a `conversations` array. Each entry contains:\n\n- `conversation_identifier`: the unique ID of the conversation, used as input to `sendAgentConversationMessage`, `updateConversation`, `deleteConversation`, `stopConversation`, and `loadAnswer`\n- `conversation_title`: the display name of the conversation\n- `created_at`: ISO 8601 timestamp of when the conversation was created\n- `updated_at`: ISO 8601 timestamp of the most recent update to the conversation\n- `data_source_identifiers`: list of unique IDs of the data sources associated with the conversation\n- `data_source_names`: array of `{ id, name }` objects for the data sources associated with the conversation\n- `is_pinned`: whether the current user has pinned this conversation. Pinned conversations are surfaced first in the list. Available from version 26.10.0.cl.\n- `analyst_id`: unique identifier of the Spotter Analyst the conversation is associated with, or `null` when the conversation is not associated with an analyst. Available from version 26.10.0.cl.\n\n#### Pagination\n\nUse `limit` and `offset` to page through large result sets:\n\n```\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=0   → first page\nGET /api/rest/2.0/ai/agent/conversations?limit=20&offset=20  → second page\n```\n\n#### Pagination and `has_more`\n\nThe response includes a `has_more: Boolean` field. When `true`, there are additional conversations beyond the current page — increment `offset` by `limit` to fetch the next page. When `has_more` is `false`, the current page is the last. Note that `total_count` is not returned; use `has_more` to drive paging controls.\n\n#### Example response\n\n```json\n{\n  \"conversations\": [\n    {\n      \"conversation_identifier\": \"abc123\",\n      \"conversation_title\": \"Sales by Region Q1\",\n      \"created_at\": \"2026-03-01T10:00:00Z\",\n      \"updated_at\": \"2026-03-05T14:23:00Z\",\n      \"data_source_identifiers\": [\"ds-001\"],\n      \"data_source_names\": [{ \"id\": \"ds-001\", \"name\": \"Retail Sales\" }],\n      \"is_pinned\": true\n    }\n  ],\n  \"has_more\": false\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` appear in this list. On `V1`, conversations created with `enable_save_chat: false` (the default) are not persisted and cannot be retrieved. On `V2`, they are kept out of this list but can still be continued and deleted by their identifier.\n> - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.\n> - Available from version 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -1341,6 +1261,20 @@
               "default": true
             },
             "description": "When true, excludes conversations with no messages. Defaults to true."
+          },
+          {
+            "in": "query",
+            "name": "spotter_experience_version",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "V1",
+                "V2"
+              ],
+              "default": "V1"
+            },
+            "description": "Version of the Spotter experience whose conversations to list. Each version\nlists only the conversations created on it.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted.\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Requires a cluster admin\n  to set Spotter 3 Liveboard experience to Liveboard side panel (New);\n  otherwise the request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         ],
         "responses": {
@@ -2575,7 +2509,7 @@
     "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send": {
       "post": {
         "operationId": "sendAgentConversationMessage",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends natural language messages to an existing Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nThe API returns an array of response objects, each containing:\n\n- `type`: the kind of response — `text`, `answer`, or `error`\n- `message`: the main content of the response\n- `metadata`: additional information depending on the message type (e.g., answer metadata includes analytics and visualization details)\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends natural language messages to a Spotter agent conversation and returns the complete response synchronously.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.\n\nUse this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreaming` instead.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\nThe two versions differ in the response shape: `AgentTurnResponse`, a list of events, on `V2`, and `AgentMessagesResponse`, a list of messages, on `V1`. See the sections below for each version's requests and responses.\n\nThe response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the `SendAgentConversationMessageResponse` schema, which is one of `AgentMessagesResponse` or `AgentTurnResponse`.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>\n\nThe response collects every event of the turn into one `events` array, and a message can be sent without a conversation identifier to start a new conversation.\n\nBefore you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`, or `POST /api/rest/2.0/ai/agent/conversation/send` to start a new conversation\n\n```json\n{\n  \"spotter_experience_version\": \"V2\",\n  \"messages\": [\"Which region had the highest sales last quarter?\"]\n}\n```\n\n- `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n- `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the `x-conversation-identifier` response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier.\n- `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.\n\n##### Response\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\",\n  \"events\": [\n    { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },\n    { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },\n    { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },\n    {\n      \"event\": {\n        \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }\n      }\n    },\n    { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n  ]\n}\n```\n\nThis endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.\n\n`events` contains exactly what the streaming endpoint publishes on `V2`, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreaming` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.\n\nTo render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.\n\nA turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint explains how the two differ.\n\n</details>\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>\n\nUse this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`\n\n```json\n{\n  \"spotter_experience_version\": \"V1\",\n  \"messages\": [\"Which region had the highest sales last quarter?\"]\n}\n```\n\n- `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.\n- `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`.\n- `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.\n\n##### Response\n\n```json\n{\n  \"messages\": [\n    { \"type\": \"text\", \"text\": \"Sales were highest in the West.\", \"metadata\": {} }\n  ]\n}\n```\n\nThe response contains a `messages` array, in order. Each message has:\n\n- `type`: the kind of message — `text`, `answer`, `error`, and others\n- `metadata`: additional information depending on the type (for example, answer metadata includes analytics and visualization details)\n- the fields of that type: `text` for a `text` message, `title` and `session_id` for an `answer`, `code` and `message` for an `error`\n\n</details>\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n|------|----------------------------------------------------------------------------------------------------------------------------------|\n| 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n| 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |\n| 504  | Gateway timeout — on `V2`, the turn did not finish in the time allowed. Retry, or use `sendAgentConversationMessageStreaming` for questions that run long. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.5.0.cl"
@@ -2598,7 +2532,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier for the conversation (used to track context)"
+            "description": "Unique identifier of the conversation. Optional: on V2, omit\nthis path segment to start a new conversation; its identifier is returned\nin the response and the `x-conversation-identifier` header."
           }
         ],
         "responses": {
@@ -2610,8 +2544,8 @@
                   "type": "object"
                 },
                 "examples": {
-                  "example_1": {
-                    "summary": "Send a message to an existing agent conversation",
+                  "v1_turn": {
+                    "summary": "V1: send a message to an existing agent conversation",
                     "value": {
                       "messages": [
                         {
@@ -2667,6 +2601,110 @@
                           "type": "text",
                           "text": "\n\nThe visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.",
                           "agent_context": ""
+                        }
+                      ]
+                    }
+                  },
+                  "v2_turn": {
+                    "summary": "V2: a completed turn. `events` carries the same frames the streaming endpoint publishes, in order.",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568",
+                      "events": [
+                        {
+                          "tool_call": {
+                            "id": "toolu_01AMjCrr",
+                            "name": "spotter_tools_fetch_and_visualize_data",
+                            "args": {
+                              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                              "english_query": "total sales by region last quarter"
+                            }
+                          }
+                        },
+                        {
+                          "progress": {
+                            "code": "TML_GEN",
+                            "message": "Translating the request with the Reasoning Engine",
+                            "tool_call_id": "toolu_01AMjCrr"
+                          }
+                        },
+                        {
+                          "tool_result": {
+                            "id": "toolu_01AMjCrr",
+                            "name": "spotter_tools_fetch_and_visualize_data",
+                            "is_error": false,
+                            "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+                            "answer": {
+                              "title": "total sales by region last quarter",
+                              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+                              "gen_no": 2,
+                              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                              "sage_query": "[sales] [region] [date] = 'last quarter'",
+                              "visualization": {
+                                "chart_type": "ADVANCED_COLUMN"
+                              },
+                              "table_data": {
+                                "total_rows": 5
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "event": {
+                            "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                            "partial": true,
+                            "content": {
+                              "role": "model",
+                              "parts": [
+                                {
+                                  "text": "The user is asking for data",
+                                  "thought": true
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "event": {
+                            "id": "10552f5a-c275-4e06-8af3-596676cbff71",
+                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                            "partial": true,
+                            "content": {
+                              "role": "model",
+                              "parts": [
+                                {
+                                  "text": "Total sales last quarter were highest in the West region."
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "done": {
+                            "conversation_identifier": "5612260428840173568"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "v2_error_turn": {
+                    "summary": "V2: a turn that failed. The error frame carries display_message and error_bucket; done still closes the turn.",
+                    "value": {
+                      "conversation_identifier": "5612260428840173568",
+                      "events": [
+                        {
+                          "error": {
+                            "code": "409",
+                            "message": "session busy: lease held by invocation 7f3a",
+                            "source": "transport",
+                            "display_message": "Another request is still running in this conversation.",
+                            "error_bucket": "RETRY"
+                          }
+                        },
+                        {
+                          "done": {
+                            "conversation_identifier": "5612260428840173568"
+                          }
                         }
                       ]
                     }
@@ -2731,7 +2769,7 @@
     "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream": {
       "post": {
         "operationId": "sendAgentConversationMessageStreaming",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends one or more natural language messages to an existing Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`. A conversation must first be created using the `createAgentConversation` API.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier`: the unique session ID returned by `createAgentConversation`, used for context continuity and message tracking\n- `messages`: an array of one or more text messages to send to the agent\n\nIf the request is valid, the API returns a Server-Sent Events (SSE) stream. Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n#### Error responses\n\n| Code | Description                                                                                                                      |\n| ---- | -------------------------------------------------------------------------------------------------------------------------------- |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n> - For the complete response in a single payload, use `sendAgentConversationMessage` instead.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.5.0.cl or later</span>\n\nSends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\nThe two versions differ in the events the stream carries. See the sections below for each version's requests and responses.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>\n\nEach event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.\n\nBefore you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`, or `POST /api/rest/2.0/ai/agent/conversation/send/stream` to start a new conversation\n\n```json\n{\n  \"spotter_experience_version\": \"V2\",\n  \"messages\": [\"Which region had the highest sales last quarter?\"]\n}\n```\n\n- `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n- `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send/stream` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the `x-conversation-identifier` response header and in the final `done` event, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier.\n- `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.\n\nSend `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.\n\n##### Response\n\nEach event is a `data:` line carrying a single JSON object, with exactly one top-level key:\n\n| Key           | Meaning                                                             |\n| ------------- | ------------------------------------------------------------------- |\n| `event`       | Text from Spotter — its reasoning or its answer.                    |\n| `tool_call`   | Spotter started a step, such as querying a data source.             |\n| `progress`    | A stage of a step in flight, so you can show what Spotter is doing. |\n| `tool_result` | A step finished; carries its result, including any answer produced. |\n| `error`       | The turn failed.                                                    |\n| `done`        | End of turn. Always last.                                           |\n\nA turn that queries data runs them in this order:\n\n```\ntool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done\n```\n\n`tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.\n\nIgnore any key you don't recognise — new event types may be added.\n\nLines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.\n\nAn event with content has the shape:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"partial\": true,\n    \"content\": {\n      \"role\": \"model\",\n      \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]\n    }\n  }\n}\n```\n\n- `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received.\n- `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it.\n- `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment.\n- `invocation_id` is stable for one turn; `id` identifies a single event.\n\n###### Steps: tool_call, progress, tool_result\n\nWhen Spotter needs to do something — query a data source, run code — it reports the step as it happens.\n\n**`tool_call`** announces the step and the arguments it ran with:\n\n```json\n{\n  \"tool_call\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"args\": {\n      \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"english_query\": \"total sales by region last quarter\"\n    }\n  }\n}\n```\n\n**`progress`** reports each stage while the step runs:\n\n```json\n{\n  \"progress\": {\n    \"code\": \"ANSWER_GEN\",\n    \"message\": \"Verifying results with the Trust Layer\",\n    \"tool_call_id\": \"toolu_01AMjCrr\"\n  }\n}\n```\n\n`message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.\n\n**`tool_result`** carries what the step produced:\n\n```json\n{\n  \"tool_result\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"is_error\": false,\n    \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",\n    \"answer\": {\n      \"title\": \"total sales by region last quarter\",\n      \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",\n      \"gen_no\": 2,\n      \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",\n      \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",\n      \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },\n      \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }\n    }\n  }\n}\n```\n\n- `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count.\n- `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted.\n- `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.\n\n`args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.\n\n###### End of turn\n\nThe stream ends with a terminal event:\n\n```json\n{ \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n```\n\nNothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.\n\n`done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.\n\nThe `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the conversation identifier.\n\n###### Errors during a turn\n\nIf the turn fails after streaming has begun, an event carries an error instead of content:\n\n```json\n{\n  \"error\": {\n    \"code\": \"409\",\n    \"message\": \"session busy: lease held by invocation 7f3a\",\n    \"source\": \"transport\",\n    \"display_message\": \"Another request is still running in this conversation.\",\n    \"error_bucket\": \"RETRY\"\n  }\n}\n```\n\nRender `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.\n\nA failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.\n\nA failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"error_code\": \"MALFORMED_FUNCTION_CALL\",\n    \"content\": { \"role\": \"model\", \"parts\": [] }\n  }\n}\n```\n\nThe two report different things:\n\n| Where                     | What failed                                                                   | What to do                                                                   |\n| ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |\n| `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            |\n| `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |\n\n`error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.\n\n</details>\n\n<details>\n<summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>\n\nUse this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.\n\n##### Request\n\n`POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`\n\n```json\n{\n  \"spotter_experience_version\": \"V1\",\n  \"messages\": [\"Which region had the highest sales last quarter?\"]\n}\n```\n\n- `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version.\n- `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`.\n- `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.\n\nSend `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.\n\n##### Response\n\nEach line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:\n\n- `ack`: confirms receipt of the request (`node_id`)\n- `conv_title`: conversation title (`title`, `conv_id`)\n- `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`)\n- `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`)\n- `text`: full text block with same structure as `text-chunk`\n- `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`)\n- `error`: if a failure occurs\n\n</details>\n\n#### Error responses\n\nErrors detected before streaming begins are returned as a normal HTTP response.\n\n| Code | Description                                                                                                                      |\n| ---- | -------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |\n| 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |\n\n> ###### Note:\n>\n> - This endpoint is Generally Available from version 26.5.0.cl.\n> - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n> - For the complete response in a single payload, use `sendAgentConversationMessage` instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.5.0.cl"
@@ -2754,7 +2792,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Unique identifier for the conversation (used to track context)"
+            "description": "Unique identifier of the conversation. Optional: on V2, omit\nthis path segment to start a new conversation; its identifier is returned\nin the response and the `x-conversation-identifier` header."
           }
         ],
         "responses": {
@@ -2763,11 +2801,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SendAgentMessageResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AgentStreamFrame"
+                    }
+                  ]
                 },
                 "examples": {
-                  "example_1": {
-                    "summary": "SSE stream — each line is data: [{\"type\": \"...\", ...}]. Events arrive over time; this example shows a minimal sequence.",
+                  "v1_turn": {
+                    "summary": "V1: SSE stream — each line is data: [{\"type\": \"...\", ...}]. Events arrive over time; this example shows a minimal sequence.",
                     "value": [
                       {
                         "type": "ack",
@@ -2809,95 +2854,9 @@
                         "title": "Compare sales for 2025 vs 2024"
                       }
                     ]
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendAgentMessageResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "x-streaming": true
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/send/stream": {
-      "post": {
-        "operationId": "sendAgentConversationMessageStreamingV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and streams the response back as Server-Sent Events.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned in the `x-conversation-identifier` response header, so a follow-up question can continue the same exchange.\n\nSend `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.\n\n#### Response format\n\nEach event is a `data:` line carrying a single JSON object, with exactly one top-level key:\n\n| Key           | Meaning                                                             |\n| ------------- | ------------------------------------------------------------------- |\n| `event`       | Text from Spotter — its reasoning or its answer.                    |\n| `tool_call`   | Spotter started a step, such as querying a data source.             |\n| `progress`    | A stage of a step in flight, so you can show what Spotter is doing. |\n| `tool_result` | A step finished; carries its result, including any answer produced. |\n| `error`       | The turn failed.                                                    |\n| `done`        | End of turn. Always last.                                           |\n\nA turn that queries data runs them in this order:\n\n```\ntool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done\n```\n\n`tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.\n\nIgnore any key you don't recognise — new event types may be added.\n\nLines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.\n\nAn event with content has the shape:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"partial\": true,\n    \"content\": {\n      \"role\": \"model\",\n      \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]\n    }\n  }\n}\n```\n\n- `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received.\n- `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it.\n- `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment.\n- `invocation_id` is stable for one turn; `id` identifies a single event.\n\n#### Steps: tool_call, progress, tool_result\n\nWhen Spotter needs to do something — query a data source, run code — it reports the step as it happens.\n\n**`tool_call`** announces the step and the arguments it ran with:\n\n```json\n{\n  \"tool_call\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"args\": {\n      \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"english_query\": \"total sales by region last quarter\"\n    }\n  }\n}\n```\n\n**`progress`** reports each stage while the step runs:\n\n```json\n{\n  \"progress\": {\n    \"code\": \"ANSWER_GEN\",\n    \"message\": \"Verifying results with the Trust Layer\",\n    \"tool_call_id\": \"toolu_01AMjCrr\"\n  }\n}\n```\n\n`message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.\n\n**`tool_result`** carries what the step produced:\n\n```json\n{\n  \"tool_result\": {\n    \"id\": \"toolu_01AMjCrr\",\n    \"name\": \"spotter_tools_fetch_and_visualize_data\",\n    \"is_error\": false,\n    \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",\n    \"answer\": {\n      \"title\": \"total sales by region last quarter\",\n      \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",\n      \"gen_no\": 2,\n      \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",\n      \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n      \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",\n      \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },\n      \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }\n    }\n  }\n}\n```\n\n- `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count.\n- `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted.\n- `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.\n\n`args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.\n\n#### End of turn\n\nThe stream ends with a terminal event:\n\n```json\n{ \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n```\n\nNothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.\n\n`done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.\n\nThe `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the parameter.\n\n#### Errors during a turn\n\nIf the turn fails after streaming has begun, an event carries an error instead of content:\n\n```json\n{\n  \"error\": {\n    \"code\": \"409\",\n    \"message\": \"session busy: lease held by invocation 7f3a\",\n    \"source\": \"transport\",\n    \"display_message\": \"Another request is still running in this conversation.\",\n    \"error_bucket\": \"RETRY\"\n  }\n}\n```\n\nRender `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.\n\nA failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.\n\nA failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:\n\n```json\n{\n  \"event\": {\n    \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",\n    \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",\n    \"error_code\": \"MALFORMED_FUNCTION_CALL\",\n    \"content\": { \"role\": \"model\", \"parts\": [] }\n  }\n}\n```\n\nThe two report different things:\n\n| Where                     | What failed                                                                   | What to do                                                                   |\n| ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |\n| `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            |\n| `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |\n\n`error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.\n\n#### Error responses\n\nErrors detected before streaming begins are returned as a normal HTTP response.\n\n| Code | Description                                                                                                        |\n| ---- | ------------------------------------------------------------------------------------------------------------------ |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is not a string.               |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                               |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation. |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                        |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n> - The streaming protocol uses Server-Sent Events (SSE).\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendAgentConversationMessageStreamingV2Request"
-              }
-            }
-          },
-          "required": true
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentStreamFrame"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "SSE stream -- each event is a data: line carrying one JSON object. Events arrive over time; this shows a step (tool_call, progress, tool_result), the streamed answer text, and the terminal done event.",
+                  },
+                  "v2_turn": {
+                    "summary": "V2: SSE stream -- each event is a data: line carrying one JSON object. Events arrive over time; this shows a step (tool_call, progress, tool_result), the streamed answer text, and the terminal done event.",
                     "value": [
                       {
                         "tool_call": {
@@ -3001,8 +2960,8 @@
                       }
                     ]
                   },
-                  "example_2": {
-                    "summary": "A turn that fails after streaming has begun — render display_message, branch on error_bucket. The stream still ends with done.",
+                  "v2_error_turn": {
+                    "summary": "V2: a turn that fails after streaming has begun — render display_message, branch on error_bucket. The stream still ends with done.",
                     "value": [
                       {
                         "error": {
@@ -3029,7 +2988,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentStreamFrame"
+                  "type": "object"
                 }
               }
             }
@@ -3074,196 +3033,8 @@
               }
             }
           }
-        }
-      }
-    },
-    "/api/rest/2.0/ai/agent/v2/conversation/send": {
-      "post": {
-        "operationId": "sendAgentConversationMessageV2",
-        "description": "\n<span class=\"since-beta-tag\">Beta</span> <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nSends a message to Spotter and returns the complete response once the turn has finished.\n\nRequires `CAN_USE_SPOTTER` privilege, and at least view access to the data sources the conversation is scoped to.\n\nUse this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreamingV2` instead.\n\n#### Usage guidelines\n\n- `message` (required): the question to ask Spotter.\n- `conversation_identifier` (optional): the conversation to ask in, as returned by `createAgentConversationV2`. Omit it to ask a one-off question — a conversation is created automatically and its identifier is returned both in the response body and in the `x-conversation-identifier` response header.\n\nThis endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.\n\n#### Response format\n\n```json\n{\n  \"conversation_identifier\": \"5612260428840173568\",\n  \"events\": [\n    { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },\n    { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },\n    { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },\n    {\n      \"event\": {\n        \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }\n      }\n    },\n    { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }\n  ]\n}\n```\n\n`events` contains exactly what the streaming endpoint publishes, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreamingV2` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.\n\nTo render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.\n\nA turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint's \"Errors during a turn\" section explains how the two differ.\n\n#### Error responses\n\n| Code | Description                                                                                                                                                     |\n| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| 400  | Bad request — `message` is missing or is not a string, or `conversation_identifier` is empty or not a string.                                                   |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                                            |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege, or lacks access to the conversation.                                              |\n| 404  | Not found — no conversation with the given identifier exists for this user.                                                                                     |\n| 504  | Gateway timeout — the turn did not finish in the time allowed. Retry the request, or use `sendAgentConversationMessageStreamingV2` for questions that run long. |\n\n> ###### Note:\n>\n> - This endpoint is in Beta from 26.12.0.cl.\n> - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
-        "tags": [
-          "AI",
-          "26.12.0.cl"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendAgentConversationMessageV2Request"
-              }
-            }
-          },
-          "required": true
         },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Common successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentTurnResponse"
-                },
-                "examples": {
-                  "example_1": {
-                    "summary": "A completed turn. `events` carries the same frames the streaming endpoint publishes, in order.",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568",
-                      "events": [
-                        {
-                          "tool_call": {
-                            "id": "toolu_01AMjCrr",
-                            "name": "spotter_tools_fetch_and_visualize_data",
-                            "args": {
-                              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                              "english_query": "total sales by region last quarter"
-                            }
-                          }
-                        },
-                        {
-                          "progress": {
-                            "code": "TML_GEN",
-                            "message": "Translating the request with the Reasoning Engine",
-                            "tool_call_id": "toolu_01AMjCrr"
-                          }
-                        },
-                        {
-                          "tool_result": {
-                            "id": "toolu_01AMjCrr",
-                            "name": "spotter_tools_fetch_and_visualize_data",
-                            "is_error": false,
-                            "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
-                            "answer": {
-                              "title": "total sales by region last quarter",
-                              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
-                              "gen_no": 2,
-                              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
-                              "sage_query": "[sales] [region] [date] = 'last quarter'",
-                              "visualization": {
-                                "chart_type": "ADVANCED_COLUMN"
-                              },
-                              "table_data": {
-                                "total_rows": 5
-                              }
-                            }
-                          }
-                        },
-                        {
-                          "event": {
-                            "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
-                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                            "partial": true,
-                            "content": {
-                              "role": "model",
-                              "parts": [
-                                {
-                                  "text": "The user is asking for data",
-                                  "thought": true
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "event": {
-                            "id": "10552f5a-c275-4e06-8af3-596676cbff71",
-                            "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
-                            "partial": true,
-                            "content": {
-                              "role": "model",
-                              "parts": [
-                                {
-                                  "text": "Total sales last quarter were highest in the West region."
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "done": {
-                            "conversation_identifier": "5612260428840173568"
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  "example_2": {
-                    "summary": "A turn that failed. The error frame carries display_message and error_bucket; done still closes the turn.",
-                    "value": {
-                      "conversation_identifier": "5612260428840173568",
-                      "events": [
-                        {
-                          "error": {
-                            "code": "409",
-                            "message": "session busy: lease held by invocation 7f3a",
-                            "source": "transport",
-                            "display_message": "Another request is still running in this conversation.",
-                            "error_bucket": "RETRY"
-                          }
-                        },
-                        {
-                          "done": {
-                            "conversation_identifier": "5612260428840173568"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Common error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentTurnResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden access.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Operation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
+        "x-streaming": true
       }
     },
     "/api/rest/2.0/ai/agent/{conversation_identifier}/converse": {
@@ -3965,11 +3736,21 @@
     "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response": {
       "post": {
         "operationId": "stopConversation",
-        "description": "\nStops an in-progress agent conversation response. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span>Version: 26.6.0.cl or later</span>\n\nStops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`\n\nA successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.\n\nAfter stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n2. User clicks a \"Stop generating\" button while the response is streaming.\n3. Your client calls `stopConversation` with the active `conversation_identifier`.\n4. The stream is terminated and the user can ask a new question.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling this endpoint when no response is in progress does not return an error.\n> - The conversation context is preserved after stopping — previous messages and answers remain accessible.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - This feature is available only for **Spotter 3** (`SPOTTER3`) version.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nStops an in-progress agent conversation response. <br/>  <span class=\"since-beta-tag\">Version: 26.6.0.cl or later</span>\n\n<span>Version: 26.6.0.cl or later</span>\n\nStops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.\n\nRequires `CAN_USE_SPOTTER` privilege and access to the specified conversation.\n\n#### Spotter version\n\n`spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:\n\n- `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`.\n- `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.\n\n**Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.\n\n**Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `spotter_experience_version` *(body parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`.\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`\n\nA successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.\n\nAfter stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.\n\n#### Example request\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response\n```\n\n#### Typical usage scenario\n\nThis endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:\n\n1. User sends a message via `sendAgentConversationMessageStreaming`.\n2. User clicks a \"Stop generating\" button while the response is streaming.\n3. Your client calls `stopConversation` with the active `conversation_identifier`.\n4. The stream is terminated and the user can ask a new question.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or, on `V2`, no conversation with the given identifier exists for this user. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n>\n> - Calling this endpoint when no response is in progress does not return an error.\n> - The conversation context is preserved after stopping — previous messages and answers remain accessible.\n> - Available from version 26.6.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n> - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.6.0.cl"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StopConversationRequest"
+              }
+            }
+          },
+          "required": false
+        },
         "parameters": [
           {
             "in": "path",
@@ -4124,7 +3905,7 @@
     "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update": {
       "post": {
         "operationId": "updateConversation",
-        "description": "\nUpdates attributes of an existing agent conversation. Supports updating the\ndisplay title and the pinned state; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. Each attribute is applied independently, so\nomitted attributes are left unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nUse this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.\n    - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\nRename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - There is no limit on the number of conversations a user can pin.\n> - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\nUpdates attributes of an existing agent conversation. Supports updating the\ndisplay title and the pinned state; additional conversation attributes may be\nsupported in future versions. At least one updatable attribute must be\nprovided in the request body. Each attribute is applied independently, so\nomitted attributes are left unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates attributes of an existing saved agent conversation. Supports updating the conversation's display `title` and its `is_pinned` state; additional updatable attributes may be supported in future versions. At least one updatable attribute must be supplied in the request body.\n\nUse this endpoint to rename a conversation, or to pin a conversation so that it is surfaced first in the conversation list for quick access.\n\nRequires `CAN_USE_SPOTTER` privilege and ownership of the conversation being updated.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `conversation_identifier` *(path parameter)*: the unique ID of the conversation to update, as returned by `createAgentConversation` or `getConversationList`\n- At least one updatable attribute in the request body:\n    - `title` *(optional)*: the new display name for the conversation. An empty or whitespace-only value is replaced with a default title rather than rejected.\n    - `is_pinned` *(optional)*: `true` to pin the conversation, `false` to unpin it. Available from version 26.10.0.cl.\n\nEach attribute is applied independently: omitted attributes are left unchanged, so you can update the title and the pinned state in a single request or in separate requests. Updating `is_pinned` is idempotent — pinning an already-pinned conversation, or unpinning an already-unpinned one, succeeds with no side effects.\n\nA successful request returns an empty `204 No Content` response. Updated attributes are reflected immediately in subsequent calls to `getConversationList`.\n\n#### Example request\n\nRename a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\"\n}\n```\n\nPin a conversation:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"is_pinned\": true\n}\n```\n\nUpdate both attributes in a single request:\n\n```bash\nPOST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update\nContent-Type: application/json\n\n{\n  \"title\": \"Revenue Breakdown by Product Line\",\n  \"is_pinned\": true\n}\n```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad Request — the request body supplies neither `title` nor `is_pinned`, or `is_pinned` is not a boolean. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |\n| 422  | Unprocessable Entity — the request body is malformed or contains an invalid field value. |\n\n> ###### Note:\n>\n> - Only conversations created with `enable_save_chat: true` can be updated. Unsaved conversations are not persisted and do not have a retrievable identifier.\n> - There is no limit on the number of conversations a user can pin.\n> - Available from version 26.7.0.cl and later. The `is_pinned` attribute is available from version 26.10.0.cl and later.\n> - Supports `V1` conversations only. Conversations created with `spotter_experience_version: V2` are not found.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "AI",
           "26.7.0.cl"
@@ -33255,7 +33036,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Documentation URL for the feature group, when available.",
+            "description": "Documentation URL of the feature group itself, when it has one. Not\ninherited from, or by, the features in the group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the group's documentation link should open in a new browser tab,\nthe default, or `false` for the same tab. Omitted when there is no `docs_url`.",
             "nullable": true
           },
           "features": {
@@ -33318,7 +33104,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Per-feature documentation URL, when available.",
+            "description": "Documentation URL of the feature itself, when it has one. Not inherited from\nits group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the feature's documentation link should open in a new browser\ntab, the default, or `false` for the same tab. Omitted when there is no\n`docs_url`.",
             "nullable": true
           }
         },
@@ -37277,267 +37068,6 @@
           }
         }
       },
-      "AgentConversationV2": {
-        "type": "object",
-        "required": [
-          "conversation_identifier"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "Unique identifier of the conversation. Pass it to subsequent requests to\ncontinue the same conversation. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "A Spotter X conversation."
-      },
-      "AgentStreamFrame": {
-        "type": "object",
-        "properties": {
-          "event": {
-            "$ref": "#/components/schemas/AgentEvent",
-            "description": "Text from Spotter — its reasoning or its answer. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_call": {
-            "$ref": "#/components/schemas/AgentToolCall",
-            "description": "Spotter started a step, such as querying a data source. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "progress": {
-            "$ref": "#/components/schemas/AgentProgress",
-            "description": "A stage of a step in flight. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_result": {
-            "$ref": "#/components/schemas/AgentToolResult",
-            "description": "A step finished; carries its result, including any answer produced. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error": {
-            "$ref": "#/components/schemas/AgentStreamError",
-            "description": "The turn failed. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "done": {
-            "$ref": "#/components/schemas/AgentStreamDone",
-            "description": "End of turn. Always last. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
-      },
-      "AgentEvent": {
-        "type": "object",
-        "required": [
-          "content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifies a single event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "invocation_id": {
-            "type": "string",
-            "description": "Stable for one turn; every event of the same turn shares it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "partial": {
-            "type": "boolean",
-            "description": "`true` for an incremental chunk, `false` for a frame restating a completed\nsegment; absent on a complete event. Restated text is not republished, and\nframes arrive in order over a single response, so appending every part is\nsafe. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error_code": {
-            "type": "string",
-            "description": "Set when the turn failed while producing this event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "content": {
-            "$ref": "#/components/schemas/AgentEventContent",
-            "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "Text from Spotter — its reasoning or its answer."
-      },
-      "AgentEventContent": {
-        "type": "object",
-        "required": [
-          "role",
-          "parts"
-        ],
-        "properties": {
-          "role": {
-            "type": "string",
-            "description": "Always `model`: the events a caller sees are Spotter speaking. Mirrors the\nagent wire format, and is reserved for conversations with more than one\nspeaker. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "parts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEventPart"
-            },
-            "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "The content of one agent event."
-      },
-      "AgentEventPart": {
-        "type": "object",
-        "required": [
-          "text"
-        ],
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "The text to render. Text arrives incrementally, so concatenate parts in the\norder received. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "thought": {
-            "type": "boolean",
-            "description": "`true` when this text is Spotter's reasoning rather than its answer. Use it\nto render reasoning separately, or to hide it. Absent otherwise; treat\nabsence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
-      },
-      "AgentToolCall": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Correlates this call with its `progress` and `tool_result` frames. Absent\nwhen the backend did not assign one; a step's frames then arrive in order, so\nmatch them by position. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the step that ran. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "args": {
-            "type": "object",
-            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A step Spotter started, such as querying a data source."
-      },
-      "AgentProgress": {
-        "type": "object",
-        "required": [
-          "code"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Stage code. Treat an unfamiliar value as \"still working\" rather than an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "message": {
-            "type": "string",
-            "description": "Human-facing status text, when the backend supplies one. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "tool_call_id": {
-            "type": "string",
-            "description": "The `tool_call` this stage belongs to. Absent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A stage of a step in flight, so you can show what Spotter is doing."
-      },
-      "AgentToolResult": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Correlates with the `tool_call` and `progress` frames of the same step.\nAbsent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The step that produced this result. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "is_error": {
-            "type": "boolean",
-            "description": "`true` when the step failed. Spotter usually explains the failure in the text\nthat follows, so this is a signal to read rather than a reason to stop.\nAbsent when the step did not report an outcome; treat absence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "text": {
-            "type": "string",
-            "description": "The step's own human-readable summary. For a data query it includes a sample\nof the rows — read `answer.table_data.total_rows` for the true count. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "answer": {
-            "type": "object",
-            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "What a step produced, including any answer."
-      },
-      "AgentStreamError": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Machine-readable status, always a string. Quote it when reporting an issue. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Diagnostic detail. Not written for end users — render `display_message`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "description": "Which layer produced the failure. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "display_message": {
-            "type": "string",
-            "description": "Text safe to show a user. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          },
-          "error_bucket": {
-            "type": "string",
-            "description": "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT` or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
-          }
-        },
-        "description": "A failure that ended the turn."
-      },
-      "AgentStreamDone": {
-        "type": "object",
-        "required": [
-          "conversation_identifier"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "End of turn. Always last."
-      },
-      "AgentTurnResponse": {
-        "type": "object",
-        "required": [
-          "conversation_identifier",
-          "events"
-        ],
-        "properties": {
-          "conversation_identifier": {
-            "type": "string",
-            "description": "The conversation the turn belongs to. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          },
-          "events": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentStreamFrame"
-            },
-            "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
-          }
-        },
-        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
-      },
       "SendAgentMessageResponse": {
         "type": "object",
         "required": [
@@ -39565,6 +39095,281 @@
         },
         "description": "Response returned when a feature's value is set."
       },
+      "AgentStreamFrame": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/AgentEvent",
+            "description": "Text from Spotter — its reasoning or its answer. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_call": {
+            "$ref": "#/components/schemas/AgentToolCall",
+            "description": "Spotter started a step, such as querying a data source. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "progress": {
+            "$ref": "#/components/schemas/AgentProgress",
+            "description": "A stage of a step in flight. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_result": {
+            "$ref": "#/components/schemas/AgentToolResult",
+            "description": "A step finished; carries its result, including any answer produced. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/AgentStreamError",
+            "description": "The turn failed. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "done": {
+            "$ref": "#/components/schemas/AgentStreamDone",
+            "description": "End of turn. Always last. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
+      },
+      "AgentEvent": {
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifies a single event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "invocation_id": {
+            "type": "string",
+            "description": "Stable for one turn; every event of the same turn shares it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "partial": {
+            "type": "boolean",
+            "description": "`true` for an incremental chunk, `false` for a frame restating a completed\nsegment; absent on a complete event. Restated text is not republished, and\nframes arrive in order over a single response, so appending every part is\nsafe. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "string",
+            "description": "Set when the turn failed while producing this event. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "content": {
+            "$ref": "#/components/schemas/AgentEventContent",
+            "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "Text from Spotter — its reasoning or its answer."
+      },
+      "AgentEventContent": {
+        "type": "object",
+        "required": [
+          "role",
+          "parts"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "Always `model`: the events a caller sees are Spotter speaking. Mirrors the\nagent wire format, and is reserved for conversations with more than one\nspeaker. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEventPart"
+            },
+            "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "The content of one agent event."
+      },
+      "AgentEventPart": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to render. Text arrives incrementally, so concatenate parts in the\norder received. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "thought": {
+            "type": "boolean",
+            "description": "`true` when this text is Spotter's reasoning rather than its answer. Use it\nto render reasoning separately, or to hide it. Absent otherwise; treat\nabsence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
+      },
+      "AgentToolCall": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Correlates this call with its `progress` and `tool_result` frames. Absent\nwhen the backend did not assign one; a step's frames then arrive in order, so\nmatch them by position. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the step that ran. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "args": {
+            "type": "object",
+            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A step Spotter started, such as querying a data source."
+      },
+      "AgentProgress": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Stage code. Treat an unfamiliar value as \"still working\" rather than an error. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-facing status text, when the backend supplies one. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The `tool_call` this stage belongs to. Absent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A stage of a step in flight, so you can show what Spotter is doing."
+      },
+      "AgentToolResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Correlates with the `tool_call` and `progress` frames of the same step.\nAbsent when that call has no `id`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The step that produced this result. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "is_error": {
+            "type": "boolean",
+            "description": "`true` when the step failed. Spotter usually explains the failure in the text\nthat follows, so this is a signal to read rather than a reason to stop.\nAbsent when the step did not report an outcome; treat absence as `false`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "description": "The step's own human-readable summary. For a data query it includes a sample\nof the rows — read `answer.table_data.total_rows` for the true count. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "answer": {
+            "type": "object",
+            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "What a step produced, including any answer."
+      },
+      "AgentStreamError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable status, always a string. Quote it when reporting an issue. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Diagnostic detail. Not written for end users — render `display_message`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "description": "Which layer produced the failure. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "display_message": {
+            "type": "string",
+            "description": "Text safe to show a user. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "error_bucket": {
+            "type": "string",
+            "description": "What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT` or `SUPPORT`. Treat\nan unrecognized value as `SUPPORT`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          }
+        },
+        "description": "A failure that ended the turn."
+      },
+      "AgentStreamDone": {
+        "type": "object",
+        "required": [
+          "conversation_identifier"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "End of turn. Always last."
+      },
+      "AgentTurnResponse": {
+        "type": "object",
+        "required": [
+          "events"
+        ],
+        "properties": {
+          "conversation_identifier": {
+            "type": "string",
+            "description": "The conversation the turn belongs to. When the request named no\nconversation, this is the one it created. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "nullable": true
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentStreamFrame"
+            },
+            "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
+      },
+      "AgentMessagesResponse": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The agent's response messages, in order. Each has a `type` (`text`,\n`answer`, `error`, ...) and the fields of that type. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+          }
+        },
+        "description": "A completed agent turn on V1."
+      },
+      "SendAgentConversationMessageResponse": {
+        "description": "Shape of the JSON a non-streaming send returns: `AgentMessagesResponse` on\nV1, `AgentTurnResponse` on V2.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AgentMessagesResponse"
+          },
+          {
+            "$ref": "#/components/schemas/AgentTurnResponse"
+          }
+        ]
+      },
       "Runtime_Filter": {
         "type": "object",
         "properties": {
@@ -39607,7 +39412,7 @@
             ]
           },
           "conversation_settings": {
-            "description": "Conversation settings.",
+            "description": "Conversation settings. Applies to V1 only.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConversationSettingsInput"
@@ -39617,39 +39422,19 @@
           "analyst_identifier": {
             "description": "Unique identifier of the Spotter Analyst to start the conversation from.\nWhen provided, the conversation uses the analyst's configuration (data\nsources, agent instructions, and connectors), and `metadata_context`\nmust be omitted. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
             "type": "string"
-          }
-        },
-        "required": [
-          "conversation_settings"
-        ]
-      },
-      "CreateAgentConversationV2Request": {
-        "type": "object",
-        "properties": {
-          "source": {
-            "description": "What the conversation is grounded in. `DATA_SOURCE` scopes it to\n`data_source_identifiers`; `ANALYST` creates it from the saved analyst in\n`analyst_identifier`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "default": "DATA_SOURCE",
-            "type": "string",
-            "enum": [
-              "DATA_SOURCE",
-              "ANALYST"
-            ]
-          },
-          "data_source_identifiers": {
-            "description": "Unique identifiers of the data sources to scope the conversation to. When\nempty, Spotter selects the most relevant data source for each question.\nOnly valid when `source` is `DATA_SOURCE`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "default": [],
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "additional_instructions": {
-            "description": "Guidance appended to the agent's instructions on every message in this\nconversation. Use it to set a persona, a preferred output format, or\ndomain rules. Cannot be changed after the conversation is created. Only\nvalid when `source` is `DATA_SOURCE`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "description": "Guidance appended to the agent's instructions on every message in this\nconversation, such as a persona, an output format or domain rules. Cannot\nbe changed after the conversation is created. V2 only, and not\nwith `analyst_identifier`. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "type": "string"
           },
-          "analyst_identifier": {
-            "description": "Unique identifier of the saved analyst to create the conversation from.\nRequired when `source` is `ANALYST`, and not allowed otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
+          "spotter_experience_version": {
+            "description": "Version of the Spotter experience the conversation runs on. The\nconversation stays on this version, so pass the same value on every later\nrequest for it.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted. Uses\n  `conversation_settings`.\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Accepts\n  `additional_instructions`. Requires a cluster admin to set Spotter 3\n  Liveboard experience to Liveboard side panel (New); otherwise the\n  request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": "V1",
+            "type": "string",
+            "enum": [
+              "V1",
+              "V2"
+            ]
           }
         }
       },
@@ -39930,6 +39715,15 @@
             "items": {
               "type": "string"
             }
+          },
+          "spotter_experience_version": {
+            "description": "Version of the Spotter experience the conversation runs on. A\nconversation stays on the version that created it, so pass the value used\nwhen it was created.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted. Returns a list of\n  messages (`AgentMessagesResponse`).\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Returns the turn's\n  events (`AgentTurnResponse`) and can start a new conversation without\n  `conversation_identifier`. Requires a cluster admin to set Spotter 3\n  Liveboard experience to Liveboard side panel (New); otherwise the\n  request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": "V1",
+            "type": "string",
+            "enum": [
+              "V1",
+              "V2"
+            ]
           }
         },
         "required": [
@@ -39945,42 +39739,19 @@
             "items": {
               "type": "string"
             }
+          },
+          "spotter_experience_version": {
+            "description": "Version of the Spotter experience the conversation runs on. A\nconversation stays on the version that created it, so pass the value used\nwhen it was created.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted. Streams message events.\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Streams\n  `AgentStreamFrame` events and can start a new conversation without\n  `conversation_identifier`. Requires a cluster admin to set Spotter 3\n  Liveboard experience to Liveboard side panel (New); otherwise the\n  request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": "V1",
+            "type": "string",
+            "enum": [
+              "V1",
+              "V2"
+            ]
           }
         },
         "required": [
           "messages"
-        ]
-      },
-      "SendAgentConversationMessageStreamingV2Request": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          },
-          "conversation_identifier": {
-            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
-        ]
-      },
-      "SendAgentConversationMessageV2Request": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "The message to send to Spotter. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          },
-          "conversation_identifier": {
-            "description": "Conversation to send the message in. When omitted, a new conversation is\ncreated and its identifier is returned in the\n`x-conversation-identifier` response header. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "type": "string"
-          }
-        },
-        "required": [
-          "message"
         ]
       },
       "SendAgentMessageRequest": {
@@ -40135,6 +39906,20 @@
           "query",
           "metadata_identifier"
         ]
+      },
+      "StopConversationRequest": {
+        "type": "object",
+        "properties": {
+          "spotter_experience_version": {
+            "description": "Version of the Spotter experience the conversation runs on. A\nconversation stays on the version that created it, so pass the value used\nwhen it was created.\n- `V1` (default): the Spotter conversation API available before\n  26.12.0.cl. Used when the parameter is omitted.\n- `V2`: the new Spotter experience, the same one behind the Liveboard side\n  panel (New); new Spotter capabilities ship here. Requires a cluster admin\n  to set Spotter 3 Liveboard experience to Liveboard side panel (New);\n  otherwise the request returns a 400. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
+            "default": "V1",
+            "type": "string",
+            "enum": [
+              "V1",
+              "V2"
+            ]
+          }
+        }
       },
       "UpdateAnalystRequest": {
         "type": "object",
