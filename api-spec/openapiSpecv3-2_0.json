@@ -4282,6 +4282,7 @@
                       "hidden": false,
                       "modification_time_in_millis": 1699900060000,
                       "first_login_time_in_millis": 1699900100000,
+                      "last_active_time_in_millis": 1699900200000,
                       "expiration_time_in_millis": 1731522000000,
                       "extended_preferences": {
                         "<preference_key>": "<preference_value>"
@@ -4345,7 +4346,9 @@
                         ]
                       },
                       "extended_properties": {
-                        "displayNameLastUpdatedBy": "ADMIN"
+                        "displayNameLastUpdatedBy": "ADMIN",
+                        "companyName": "Example Corp",
+                        "activatedAtMs": 1699900000000
                       },
                       "email": "tsadmin@example.com"
                     }
@@ -4395,6 +4398,7 @@
                       "external": false,
                       "favorite_metadata": [],
                       "first_login_time_in_millis": 1699900005000,
+                      "last_active_time_in_millis": 1699900105000,
                       "hidden": false,
                       "home_liveboard": {
                         "id": "c8e4d2a1-6b3f-4e7a-9d5c-2f1a8b7e6d4c",
@@ -6340,7 +6344,7 @@
                         "name": "Sales Analysts Warehouse",
                         "description": "Routes queries for sales analysts to a dedicated warehouse",
                         "configuration": {
-                          "accountName": "<account_name>",
+                          "password": "******",
                           "user": "<username>",
                           "role": "<role>",
                           "warehouse": "<warehouse>"
@@ -6438,6 +6442,7 @@
                       "name": "Sales Analysts Warehouse",
                       "description": "Routes queries for sales analysts to a dedicated warehouse",
                       "configuration": {
+                        "password": "******",
                         "user": "<username>",
                         "role": "<role>",
                         "warehouse": "<warehouse>"
@@ -6681,15 +6686,17 @@
                         "type": "RDBMS_SNOWFLAKE",
                         "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                         "scheduled": false,
-                        "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+                        "connectionType": "",
+                        "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                         "isExternal": false,
                         "isDeprecated": false,
                         "isDeleted": false,
                         "isHidden": false,
+                        "complete": true,
                         "indexVersion": 1,
                         "generationNum": 1,
-                        "created": 1760198400000,
-                        "modified": 1760198400000,
+                        "created": "2025-10-11T09:00:00.000-07:00",
+                        "modified": "2025-10-11T09:00:00.000-07:00",
                         "author": {
                           "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                           "name": "<username>"
@@ -7196,7 +7203,7 @@
                     "value": [
                       {
                         "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
-                        "obj_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+                        "obj_id": "Snowflake-Sales-5e6b4a3c",
                         "name": "Snowflake Sales",
                         "description": "Snowflake connection for the sales warehouse",
                         "data_warehouse_type": "SNOWFLAKE",
@@ -7258,15 +7265,17 @@
                           "type": "RDBMS_SNOWFLAKE",
                           "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
                           "scheduled": false,
-                          "configuration": "{\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
+                          "connectionType": "",
+                          "configuration": "{\"password\":\"******\",\"accountName\":\"<account_name>\",\"user\":\"<username>\",\"role\":\"<role>\",\"warehouse\":\"<warehouse>\"}",
                           "isExternal": false,
                           "isDeprecated": false,
                           "isDeleted": false,
                           "isHidden": false,
+                          "complete": true,
                           "indexVersion": 2,
                           "generationNum": 2,
-                          "created": 1760198400000,
-                          "modified": 1760198460000,
+                          "created": "2025-10-11T09:00:00.000-07:00",
+                          "modified": "2025-10-11T09:01:00.000-07:00",
                           "author": {
                             "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                             "name": "<username>"
@@ -13500,7 +13509,12 @@
                                     "status_code": "OK"
                                   },
                                   "header": {
+                                    "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                                     "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                                    "is_versioning_enabled": false,
+                                    "metadata_type": "LOGICAL_TABLE",
+                                    "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                                    "description": "",
                                     "name": "Sales Table"
                                   }
                                 }
@@ -13717,7 +13731,12 @@
                             "status_code": "OK"
                           },
                           "header": {
+                            "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                             "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                            "is_versioning_enabled": false,
+                            "metadata_type": "LOGICAL_TABLE",
+                            "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                            "description": "",
                             "name": "Sales Table"
                           }
                         }
@@ -14042,11 +14061,11 @@
                         "metadata_id": "00000001-0000-4000-8000-000000000001",
                         "metadata_name": "Parameters Liveboard",
                         "metadata_type": "LIVEBOARD",
-                        "metadata_obj_id": null,
+                        "metadata_obj_id": "parameters-liveboard-4e5f6a7b",
                         "dependent_objects": {
                           "00000001-0000-4000-8000-000000000001": {}
                         },
-                        "dependent_objects_is_last_batch": null,
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
                         "metadata_detail": {
                           "reportContent": {
@@ -14080,15 +14099,23 @@
                                       "vizContent": {
                                         "refAnswerSheetIndex": 0,
                                         "refVizId": "00000002-0000-4000-8000-000000000002",
+                                        "effectiveQuestion": {
+                                          "sageContextProto": "<base64 encoded sage context>",
+                                          "sageContextIndex": 0,
+                                          "text": "holiday ytd partial revenue",
+                                          "isChasmTrapQuery": false
+                                        },
                                         "locked": false,
                                         "dataOnDemand": false,
                                         "refAnswerBook": {
                                           "id": "00000003-0000-4000-8000-000000000003",
                                           "name": "Total Partial Revenue",
+                                          "description": "",
                                           "sheets": [
                                             {
                                               "id": "00000004-0000-4000-8000-000000000004",
                                               "name": "Total Partial Revenue",
+                                              "description": "",
                                               "owner": "00000003-0000-4000-8000-000000000003"
                                             }
                                           ]
@@ -14101,6 +14128,7 @@
                                         "indexVersion": 27,
                                         "generationNum": 28,
                                         "name": "Answer: Total Partial Revenue Viz: Chart Viz holiday ytd",
+                                        "description": "",
                                         "author": "00000006-0000-4000-8000-000000000006",
                                         "authorName": "<username>",
                                         "hasLenientDiscoverability": false,
@@ -14111,6 +14139,9 @@
                                         "owner": "00000001-0000-4000-8000-000000000001",
                                         "isDeleted": false,
                                         "isHidden": false,
+                                        "orgIds": [
+                                          0
+                                        ],
                                         "tags": [],
                                         "configs": [],
                                         "isConnectionConfigurationDisabled": false,
@@ -14165,6 +14196,9 @@
                                   "owner": "00000001-0000-4000-8000-000000000001",
                                   "isDeleted": false,
                                   "isHidden": false,
+                                  "orgIds": [
+                                    0
+                                  ],
                                   "tags": [],
                                   "configs": [],
                                   "isConnectionConfigurationDisabled": false,
@@ -14347,6 +14381,9 @@
                                               "chartType": "KPI",
                                               "axisConfigs": [
                                                 {
+                                                  "x": [
+                                                    "00000026-0000-4000-8000-000000000026"
+                                                  ],
                                                   "y": [
                                                     "00000008-0000-4000-8000-000000000008"
                                                   ]
@@ -14355,8 +14392,48 @@
                                               "bestAxisConfigs": {
                                                 "KPI": [
                                                   {
+                                                    "x": [
+                                                      "00000026-0000-4000-8000-000000000026"
+                                                    ],
                                                     "y": [
                                                       "00000008-0000-4000-8000-000000000008"
+                                                    ]
+                                                  }
+                                                ],
+                                                "COLUMN": [
+                                                  {
+                                                    "x": [
+                                                      "00000026-0000-4000-8000-000000000026"
+                                                    ],
+                                                    "y": [
+                                                      "00000008-0000-4000-8000-000000000008"
+                                                    ]
+                                                  }
+                                                ],
+                                                "SCATTER": [
+                                                  {
+                                                    "x": [
+                                                      "00000008-0000-4000-8000-000000000008"
+                                                    ],
+                                                    "y": [
+                                                      "00000008-0000-4000-8000-000000000008"
+                                                    ],
+                                                    "color": [
+                                                      "00000026-0000-4000-8000-000000000026"
+                                                    ]
+                                                  }
+                                                ],
+                                                "BUBBLE": [
+                                                  {
+                                                    "x": [
+                                                      "00000026-0000-4000-8000-000000000026"
+                                                    ],
+                                                    "y": [
+                                                      "00000008-0000-4000-8000-000000000008"
+                                                    ],
+                                                    "size": "00000008-0000-4000-8000-000000000008",
+                                                    "category": [
+                                                      "00000009-0000-4000-8000-000000000009"
                                                     ]
                                                   }
                                                 ]
@@ -14381,6 +14458,18 @@
                                                   "sageOutputColumnId": "00000008-0000-4000-8000-000000000008",
                                                   "outputIdsWithMatchingLogicalKey": [],
                                                   "aggrApplied": true,
+                                                  "metricDefinition": {
+                                                    "row": [
+                                                      {
+                                                        "range": {
+                                                          "max": 500
+                                                        },
+                                                        "color": "#0500ff",
+                                                        "action": "NONE"
+                                                      }
+                                                    ],
+                                                    "name": ""
+                                                  },
                                                   "isVisible": true,
                                                   "columnToFormatPatternType": {},
                                                   "effectiveAggrType": "SUM",
@@ -14396,6 +14485,10 @@
                                                   "baseType": "MEASURE",
                                                   "isBaseColumnFormulaColumn": true,
                                                   "isBaseColumnAdditive": true,
+                                                  "baseCurrencyTypeInfo": {
+                                                    "setting": "FROM_ISO_CODE",
+                                                    "isoCode": "USD"
+                                                  },
                                                   "referencedTableHeaders": [
                                                     {
                                                       "id": "0000000d-0000-4000-8000-00000000000d",
@@ -14419,7 +14512,8 @@
                                                       "id": "00000013-0000-4000-8000-000000000013",
                                                       "name": "Revenue"
                                                     }
-                                                  ]
+                                                  ],
+                                                  "customOrder": []
                                                 }
                                               ],
                                               "vizType": "CHART"
@@ -14440,6 +14534,35 @@
                                               "owner": "00000004-0000-4000-8000-000000000004",
                                               "isDeleted": false,
                                               "isHidden": false,
+                                              "clientState": {
+                                                "multiColorSeriesColors": {},
+                                                "seriesColors": {
+                                                  "00000008-0000-4000-8000-000000000008": "#a174c1"
+                                                },
+                                                "chartProperties": {
+                                                  "visibleSeriesNames": [
+                                                    "00000008-0000-4000-8000-000000000008"
+                                                  ],
+                                                  "gridLines": {},
+                                                  "showRoundedNumbers": true,
+                                                  "chartSpecific": {}
+                                                },
+                                                "axisProperties": {
+                                                  "00000026-0000-4000-8000-000000000026": {
+                                                    "linkedColumns": [],
+                                                    "axisType": "X"
+                                                  }
+                                                },
+                                                "yAxisShared": false,
+                                                "visibleSeriesNames": [
+                                                  "00000008-0000-4000-8000-000000000008"
+                                                ],
+                                                "version": "V2.1",
+                                                "columnProperties": {
+                                                  "00000008-0000-4000-8000-000000000008": {},
+                                                  "00000026-0000-4000-8000-000000000026": {}
+                                                }
+                                              },
                                               "tags": [],
                                               "configs": [],
                                               "isConnectionConfigurationDisabled": false,
@@ -14514,7 +14637,62 @@
                                                       "id": "00000013-0000-4000-8000-000000000013",
                                                       "name": "Revenue"
                                                     }
-                                                  ]
+                                                  ],
+                                                  "customOrder": []
+                                                },
+                                                {
+                                                  "sortAscending": true,
+                                                  "sortIndex": 0,
+                                                  "isUserSorted": false,
+                                                  "aggrTypeOverride": "NONE",
+                                                  "typeOverride": "ATTRIBUTE",
+                                                  "dataTypeOverride": "UNKNOWN",
+                                                  "formatTypeOverride": "NONE",
+                                                  "groupBy": true,
+                                                  "uniqueValues": -1,
+                                                  "sageOutputColumnId": "00000026-0000-4000-8000-000000000026",
+                                                  "outputIdsWithMatchingLogicalKey": [],
+                                                  "aggrApplied": false,
+                                                  "isVisible": true,
+                                                  "columnToFormatPatternType": {},
+                                                  "bucketization": "ABS_HOUR_AS_EPOCH",
+                                                  "effectiveAggrType": "NONE",
+                                                  "effectiveDataType": "DATE_TIME",
+                                                  "effectiveType": "ATTRIBUTE",
+                                                  "formatPattern": "dd/MM/yyyy hh a",
+                                                  "id": "00000026-0000-4000-8000-000000000026",
+                                                  "effectiveColumnGuid": "00000027-0000-4000-8000-000000000027",
+                                                  "effectiveColumnIdString": "00000028-0000-4000-8000-000000000028#NONE#ATTRIBUTE#null",
+                                                  "baseColumnName": "Hour(Date)",
+                                                  "baseAggrType": "NONE",
+                                                  "baseDataType": "DATE_TIME",
+                                                  "baseType": "ATTRIBUTE",
+                                                  "isBaseColumnAdditive": false,
+                                                  "referencedTableHeaders": [
+                                                    {
+                                                      "id": "0000000d-0000-4000-8000-00000000000d",
+                                                      "name": "Parameters WS"
+                                                    }
+                                                  ],
+                                                  "referencedColumnHeaders": [
+                                                    {
+                                                      "id": "00000029-0000-4000-8000-000000000029",
+                                                      "name": "Date"
+                                                    }
+                                                  ],
+                                                  "allLevelReferencedTableHeaders": [
+                                                    {
+                                                      "id": "0000000d-0000-4000-8000-00000000000d",
+                                                      "name": "Parameters WS"
+                                                    }
+                                                  ],
+                                                  "allLevelReferencedColumnHeaders": [
+                                                    {
+                                                      "id": "00000029-0000-4000-8000-000000000029",
+                                                      "name": "Date"
+                                                    }
+                                                  ],
+                                                  "customOrder": []
                                                 }
                                               ],
                                               "title": {
@@ -14541,6 +14719,11 @@
                                               "owner": "00000004-0000-4000-8000-000000000004",
                                               "isDeleted": false,
                                               "isHidden": false,
+                                              "clientState": {
+                                                "dataOffset": 0,
+                                                "widthState": {},
+                                                "wrapTableHeader": true
+                                              },
                                               "tags": [],
                                               "configs": [],
                                               "isConnectionConfigurationDisabled": false,
@@ -14606,6 +14789,121 @@
                                             },
                                             "complete": true,
                                             "incompleteDetail": []
+                                          },
+                                          {
+                                            "vizContent": {
+                                              "vizType": "HEADLINE",
+                                              "template": "ATTRIBUTE",
+                                              "columns": [
+                                                {
+                                                  "column": {
+                                                    "sortAscending": true,
+                                                    "sortIndex": 0,
+                                                    "isUserSorted": false,
+                                                    "aggrTypeOverride": "NONE",
+                                                    "typeOverride": "ATTRIBUTE",
+                                                    "dataTypeOverride": "UNKNOWN",
+                                                    "formatTypeOverride": "NONE",
+                                                    "groupBy": true,
+                                                    "uniqueValues": -1,
+                                                    "sageOutputColumnId": "00000026-0000-4000-8000-000000000026",
+                                                    "outputIdsWithMatchingLogicalKey": [],
+                                                    "aggrApplied": false,
+                                                    "isVisible": true,
+                                                    "columnToFormatPatternType": {},
+                                                    "bucketization": "ABS_HOUR_AS_EPOCH",
+                                                    "effectiveAggrType": "NONE",
+                                                    "effectiveDataType": "DATE_TIME",
+                                                    "effectiveType": "ATTRIBUTE",
+                                                    "formatPattern": "dd/MM/yyyy hh a",
+                                                    "id": "00000026-0000-4000-8000-000000000026",
+                                                    "effectiveColumnGuid": "00000027-0000-4000-8000-000000000027",
+                                                    "effectiveColumnIdString": "00000028-0000-4000-8000-000000000028#NONE#ATTRIBUTE#null",
+                                                    "baseColumnName": "Hour(Date)",
+                                                    "baseAggrType": "NONE",
+                                                    "baseDataType": "DATE_TIME",
+                                                    "baseType": "ATTRIBUTE",
+                                                    "isBaseColumnAdditive": false,
+                                                    "referencedTableHeaders": [
+                                                      {
+                                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                                        "name": "Parameters WS"
+                                                      }
+                                                    ],
+                                                    "referencedColumnHeaders": [
+                                                      {
+                                                        "id": "00000029-0000-4000-8000-000000000029",
+                                                        "name": "Date"
+                                                      }
+                                                    ],
+                                                    "allLevelReferencedTableHeaders": [
+                                                      {
+                                                        "id": "0000000d-0000-4000-8000-00000000000d",
+                                                        "name": "Parameters WS"
+                                                      }
+                                                    ],
+                                                    "allLevelReferencedColumnHeaders": [
+                                                      {
+                                                        "id": "00000029-0000-4000-8000-000000000029",
+                                                        "name": "Date"
+                                                      }
+                                                    ],
+                                                    "customOrder": []
+                                                  },
+                                                  "possibleAggrs": [
+                                                    "COUNT",
+                                                    "COUNT_DISTINCT"
+                                                  ],
+                                                  "aggrs": [
+                                                    "COUNT_DISTINCT"
+                                                  ],
+                                                  "tableSummary": true
+                                                }
+                                              ],
+                                              "showSummaryAggrs": true,
+                                              "title": {
+                                                "value": {
+                                                  "text": "Headline 0"
+                                                }
+                                              },
+                                              "locked": true
+                                            },
+                                            "relatedLinks": [],
+                                            "header": {
+                                              "id": "00000025-0000-4000-8000-000000000025",
+                                              "indexVersion": 27,
+                                              "generationNum": 28,
+                                              "name": "Headline Viz holiday ytd = true partial revenue",
+                                              "author": "00000006-0000-4000-8000-000000000006",
+                                              "authorName": "<username>",
+                                              "hasLenientDiscoverability": false,
+                                              "authorDisplayName": "<user_display_name>",
+                                              "created": 1760198400000,
+                                              "modified": 1760198460000,
+                                              "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                              "owner": "00000004-0000-4000-8000-000000000004",
+                                              "isDeleted": false,
+                                              "isHidden": false,
+                                              "tags": [],
+                                              "configs": [],
+                                              "isConnectionConfigurationDisabled": false,
+                                              "type": "QUESTION",
+                                              "aiAnswerGenerationDisabled": false,
+                                              "isExternal": false,
+                                              "isDeprecated": false,
+                                              "isSharedViaConnection": false,
+                                              "syncWithSource": false,
+                                              "isParameterized": false,
+                                              "cachedDataAsOf": 0,
+                                              "isVerified": false,
+                                              "isVersioningEnabled": false,
+                                              "contentUpgradeId": "<upgrade id>",
+                                              "headerUpgradeId": "<upgrade id>",
+                                              "isPublished": false,
+                                              "csrProtected": false
+                                            },
+                                            "complete": true,
+                                            "incompleteDetail": []
                                           }
                                         ]
                                       },
@@ -14614,6 +14912,7 @@
                                         "indexVersion": 27,
                                         "generationNum": 28,
                                         "name": "Total Partial Revenue",
+                                        "description": "",
                                         "author": "00000006-0000-4000-8000-000000000006",
                                         "authorName": "<username>",
                                         "hasLenientDiscoverability": false,
@@ -14624,6 +14923,9 @@
                                         "owner": "00000003-0000-4000-8000-000000000003",
                                         "isDeleted": false,
                                         "isHidden": true,
+                                        "clientState": {
+                                          "queryState": "FALCON"
+                                        },
                                         "tags": [],
                                         "configs": [],
                                         "isConnectionConfigurationDisabled": false,
@@ -14656,6 +14958,7 @@
                                   "indexVersion": 27,
                                   "generationNum": 28,
                                   "name": "Total Partial Revenue",
+                                  "description": "",
                                   "author": "00000006-0000-4000-8000-000000000006",
                                   "authorName": "<username>",
                                   "hasLenientDiscoverability": false,
@@ -14669,6 +14972,9 @@
                                   "isHidden": true,
                                   "isAutoCreated": false,
                                   "isAutoDelete": false,
+                                  "clientState": {
+                                    "queryState": "FALCON"
+                                  },
                                   "ownerOrgId": 0,
                                   "resolvedObjects": {},
                                   "tags": [],
@@ -14790,6 +15096,9 @@
                           "isHidden": false,
                           "isAutoCreated": false,
                           "isAutoDelete": false,
+                          "orgIds": [
+                            0
+                          ],
                           "ownerOrgId": 0,
                           "resolvedObjects": {},
                           "tags": [
@@ -14844,6 +15153,7 @@
                           "subType": "",
                           "reportId": "",
                           "viewId": "",
+                          "objId": "parameters-liveboard-4e5f6a7b",
                           "contentUpgradeId": "<upgrade id>",
                           "headerUpgradeId": "<upgrade id>",
                           "isPublished": false,
@@ -15050,7 +15360,377 @@
                         "metadata_type": "ANSWER",
                         "dependent_objects": null,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "reportContent": {
+                            "sheets": [
+                              {
+                                "sheetType": "QUESTION",
+                                "sheetContent": {
+                                  "sheetContentType": "QUESTION",
+                                  "headlineVisibilityMap": {
+                                    "0000001e-0000-4000-8000-00000000001e": true
+                                  },
+                                  "defaultQueryableSource": "FALCON",
+                                  "querableSources": [
+                                    "FALCON"
+                                  ],
+                                  "externalQueryableDataSource": "DEFAULT",
+                                  "displayMode": "CHART_MODE",
+                                  "bestDisplayMode": "CHART_MODE",
+                                  "canGenerateLeafData": true,
+                                  "question": {
+                                    "sageContextIndex": -1,
+                                    "text": "revenue by region",
+                                    "isChasmTrapQuery": false,
+                                    "sageContextProto": "<base64_encoded_sage_context>"
+                                  },
+                                  "filter": {
+                                    "filterContent": {
+                                      "rows": []
+                                    }
+                                  },
+                                  "visualizations": [
+                                    {
+                                      "vizContent": {
+                                        "chartType": "COLUMN",
+                                        "vizType": "CHART",
+                                        "locked": false
+                                      },
+                                      "relatedLinks": [],
+                                      "header": {
+                                        "id": "0000001e-0000-4000-8000-00000000001e",
+                                        "indexVersion": 36,
+                                        "generationNum": 36,
+                                        "name": "<name>",
+                                        "author": "00000006-0000-4000-8000-000000000006",
+                                        "authorName": "<authorName>",
+                                        "hasLenientDiscoverability": false,
+                                        "authorDisplayName": "<authorDisplayName>",
+                                        "created": 1519761648892,
+                                        "modified": 1583190990050,
+                                        "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                        "owner": "0000001c-0000-4000-8000-00000000001c",
+                                        "isDeleted": false,
+                                        "isHidden": false,
+                                        "clientState": {
+                                          "version": "V4DOT2",
+                                          "chartProperties": {
+                                            "responsiveLayoutPreference": "AUTO_ON",
+                                            "chartSpecific": {}
+                                          },
+                                          "axisProperties": [
+                                            {
+                                              "id": "0000002a-0000-4000-8000-00000000002a",
+                                              "properties": {
+                                                "axisType": "Y",
+                                                "linkedColumns": [
+                                                  "00000008-0000-4000-8000-000000000008"
+                                                ],
+                                                "isOpposite": false
+                                              }
+                                            },
+                                            {
+                                              "id": "0000002b-0000-4000-8000-00000000002b",
+                                              "properties": {
+                                                "axisType": "X",
+                                                "linkedColumns": [
+                                                  "00000026-0000-4000-8000-000000000026"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "systemSeriesColors": [
+                                            {
+                                              "serieName": "00000008-0000-4000-8000-000000000008",
+                                              "color": "#48D1E0"
+                                            }
+                                          ]
+                                        },
+                                        "tags": [],
+                                        "configs": [],
+                                        "isConnectionConfigurationDisabled": false,
+                                        "type": "QUESTION_ANSWER_BOOK",
+                                        "aiAnswerGenerationDisabled": false,
+                                        "isExternal": false,
+                                        "isDeprecated": false,
+                                        "isSharedViaConnection": false,
+                                        "syncWithSource": false,
+                                        "isParameterized": false,
+                                        "cachedDataAsOf": 0,
+                                        "isVerified": false,
+                                        "isVersioningEnabled": false,
+                                        "isPublished": false,
+                                        "csrProtected": false,
+                                        "contentUpgradeId": "<upgrade id>",
+                                        "headerUpgradeId": "<upgrade id>",
+                                        "orgIds": [
+                                          0
+                                        ]
+                                      },
+                                      "complete": true,
+                                      "incompleteDetail": []
+                                    },
+                                    {
+                                      "vizContent": {
+                                        "vizType": "HEADLINE",
+                                        "template": "MEASURE",
+                                        "columns": [
+                                          {
+                                            "column": {
+                                              "isUserSorted": false,
+                                              "aggrTypeOverride": "SUM",
+                                              "typeOverride": "MEASURE",
+                                              "dataTypeOverride": "UNKNOWN",
+                                              "formatTypeOverride": "NONE",
+                                              "groupBy": false,
+                                              "uniqueValues": -1,
+                                              "sageOutputColumnId": "00000008-0000-4000-8000-000000000008",
+                                              "outputIdsWithMatchingLogicalKey": [],
+                                              "aggrApplied": true,
+                                              "isVisible": true,
+                                              "columnToFormatPatternType": {},
+                                              "effectiveAggrType": "SUM",
+                                              "effectiveDataType": "DOUBLE",
+                                              "effectiveType": "MEASURE",
+                                              "id": "00000008-0000-4000-8000-000000000008",
+                                              "effectiveColumnGuid": "00000010-0000-4000-8000-000000000010",
+                                              "effectiveColumnIdString": "00000011-0000-4000-8000-000000000011#SUM#MEASURE#null",
+                                              "baseColumnName": "Partial Revenue",
+                                              "baseAggrType": "SUM",
+                                              "baseDataType": "DOUBLE",
+                                              "baseType": "MEASURE",
+                                              "isBaseColumnAdditive": true,
+                                              "baseCurrencyTypeInfo": {
+                                                "setting": "FROM_ISO_CODE",
+                                                "isoCode": "USD"
+                                              },
+                                              "referencedTableHeaders": [
+                                                {
+                                                  "id": "0000000d-0000-4000-8000-00000000000d",
+                                                  "name": "Parameters WS"
+                                                }
+                                              ],
+                                              "referencedColumnHeaders": [
+                                                {
+                                                  "id": "00000013-0000-4000-8000-000000000013",
+                                                  "name": "Revenue"
+                                                }
+                                              ],
+                                              "allLevelReferencedTableHeaders": [
+                                                {
+                                                  "id": "0000000d-0000-4000-8000-00000000000d",
+                                                  "name": "Parameters WS"
+                                                }
+                                              ],
+                                              "allLevelReferencedColumnHeaders": [
+                                                {
+                                                  "id": "00000013-0000-4000-8000-000000000013",
+                                                  "name": "Revenue"
+                                                }
+                                              ],
+                                              "customOrder": []
+                                            },
+                                            "possibleAggrs": [
+                                              "SUM",
+                                              "AVERAGE",
+                                              "MIN",
+                                              "MAX"
+                                            ],
+                                            "aggrs": [
+                                              "SUM"
+                                            ],
+                                            "tableSummary": true
+                                          }
+                                        ],
+                                        "showSummaryAggrs": true,
+                                        "customTitle": false,
+                                        "locked": false
+                                      },
+                                      "relatedLinks": [],
+                                      "header": {
+                                        "id": "0000002c-0000-4000-8000-00000000002c",
+                                        "indexVersion": 36,
+                                        "generationNum": 36,
+                                        "name": "<name>",
+                                        "author": "00000006-0000-4000-8000-000000000006",
+                                        "authorName": "<authorName>",
+                                        "hasLenientDiscoverability": false,
+                                        "authorDisplayName": "<authorDisplayName>",
+                                        "created": 1519761648892,
+                                        "modified": 1583190990050,
+                                        "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                        "owner": "0000001c-0000-4000-8000-00000000001c",
+                                        "isDeleted": false,
+                                        "isHidden": false,
+                                        "clientState": {
+                                          "headlineVizPropVersion": "V1"
+                                        },
+                                        "tags": [],
+                                        "configs": [],
+                                        "isConnectionConfigurationDisabled": false,
+                                        "type": "QUESTION_ANSWER_BOOK",
+                                        "aiAnswerGenerationDisabled": false,
+                                        "isExternal": false,
+                                        "isDeprecated": false,
+                                        "isSharedViaConnection": false,
+                                        "syncWithSource": false,
+                                        "isParameterized": false,
+                                        "cachedDataAsOf": 0,
+                                        "isVerified": false,
+                                        "isVersioningEnabled": false,
+                                        "isPublished": false,
+                                        "csrProtected": false,
+                                        "contentUpgradeId": "<upgrade id>",
+                                        "headerUpgradeId": "<upgrade id>",
+                                        "orgIds": [
+                                          0
+                                        ]
+                                      },
+                                      "complete": true,
+                                      "incompleteDetail": []
+                                    },
+                                    {
+                                      "vizContent": {
+                                        "vizType": "TABLE",
+                                        "customTitle": false,
+                                        "locked": false
+                                      },
+                                      "relatedLinks": [],
+                                      "header": {
+                                        "id": "0000002d-0000-4000-8000-00000000002d",
+                                        "indexVersion": 36,
+                                        "generationNum": 36,
+                                        "name": "<name>",
+                                        "author": "00000006-0000-4000-8000-000000000006",
+                                        "authorName": "<authorName>",
+                                        "hasLenientDiscoverability": false,
+                                        "authorDisplayName": "<authorDisplayName>",
+                                        "created": 1519761648892,
+                                        "modified": 1583190990050,
+                                        "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                        "owner": "0000001c-0000-4000-8000-00000000001c",
+                                        "isDeleted": false,
+                                        "isHidden": false,
+                                        "clientState": {
+                                          "tableVizPropVersion": "V1"
+                                        },
+                                        "tags": [],
+                                        "configs": [],
+                                        "isConnectionConfigurationDisabled": false,
+                                        "type": "QUESTION_ANSWER_BOOK",
+                                        "aiAnswerGenerationDisabled": false,
+                                        "isExternal": false,
+                                        "isDeprecated": false,
+                                        "isSharedViaConnection": false,
+                                        "syncWithSource": false,
+                                        "isParameterized": false,
+                                        "cachedDataAsOf": 0,
+                                        "isVerified": false,
+                                        "isVersioningEnabled": false,
+                                        "isPublished": false,
+                                        "csrProtected": false,
+                                        "contentUpgradeId": "<upgrade id>",
+                                        "headerUpgradeId": "<upgrade id>",
+                                        "orgIds": [
+                                          0
+                                        ]
+                                      },
+                                      "complete": true,
+                                      "incompleteDetail": []
+                                    }
+                                  ]
+                                },
+                                "header": {
+                                  "id": "0000001d-0000-4000-8000-00000000001d",
+                                  "indexVersion": 36,
+                                  "generationNum": 36,
+                                  "name": "<name>",
+                                  "description": "",
+                                  "author": "00000006-0000-4000-8000-000000000006",
+                                  "authorName": "<authorName>",
+                                  "hasLenientDiscoverability": false,
+                                  "authorDisplayName": "<authorDisplayName>",
+                                  "created": 1519761648892,
+                                  "modified": 1583190990050,
+                                  "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                  "owner": "0000001c-0000-4000-8000-00000000001c",
+                                  "isDeleted": false,
+                                  "isHidden": false,
+                                  "tags": [],
+                                  "configs": [],
+                                  "isConnectionConfigurationDisabled": false,
+                                  "type": "QUESTION_ANSWER_BOOK",
+                                  "aiAnswerGenerationDisabled": false,
+                                  "isExternal": false,
+                                  "isDeprecated": false,
+                                  "isSharedViaConnection": false,
+                                  "syncWithSource": false,
+                                  "isParameterized": false,
+                                  "cachedDataAsOf": 0,
+                                  "isVerified": false,
+                                  "isVersioningEnabled": false,
+                                  "isPublished": false,
+                                  "csrProtected": false,
+                                  "contentUpgradeId": "<upgrade id>",
+                                  "headerUpgradeId": "<upgrade id>",
+                                  "orgIds": [
+                                    0
+                                  ]
+                                },
+                                "complete": true,
+                                "incompleteDetail": []
+                              }
+                            ]
+                          },
+                          "type": "QUESTION",
+                          "header": {
+                            "isTimeSeriesKPI": false,
+                            "referencedVizType": "CHART",
+                            "chartType": "COLUMN",
+                            "id": "0000001c-0000-4000-8000-00000000001c",
+                            "indexVersion": 36,
+                            "generationNum": 36,
+                            "name": "<name>",
+                            "description": "",
+                            "author": "00000006-0000-4000-8000-000000000006",
+                            "authorName": "<authorName>",
+                            "hasLenientDiscoverability": false,
+                            "descriptionAutoGenerated": false,
+                            "authorDisplayName": "<authorDisplayName>",
+                            "created": 1519761648892,
+                            "modified": 1583190990050,
+                            "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                            "owner": "0000001c-0000-4000-8000-00000000001c",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "isAutoCreated": false,
+                            "isAutoDelete": false,
+                            "ownerOrgId": 0,
+                            "resolvedObjects": {},
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "datasetId": "",
+                            "subType": "",
+                            "reportId": "",
+                            "viewId": "",
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": []
+                        },
                         "metadata_header": {
                           "id": "0000001c-0000-4000-8000-00000000001c",
                           "indexVersion": 36,
@@ -15079,99 +15759,945 @@
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "isTimeSeriesKPI": false,
+                          "referencedVizType": "CHART",
+                          "chartType": "COLUMN",
+                          "ownerOrgId": 0,
+                          "resolvedObjects": {},
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "descriptionAutoGenerated": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "objId": "answer-1c2d3e4f",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
-                        "stats": null
+                        "stats": {
+                          "views": 18,
+                          "favorites": 2
+                        },
+                        "metadata_obj_id": "answer-1c2d3e4f",
+                        "dependent_objects_is_last_batch": true
                       },
                       {
-                        "metadata_id": "0000001d-0000-4000-8000-00000000001d",
+                        "metadata_id": "0000002e-0000-4000-8000-00000000002e",
                         "metadata_name": "<metadata_name>",
                         "metadata_type": "LOGICAL_TABLE",
-                        "dependent_objects": null,
-                        "incomplete_objects": null,
-                        "metadata_detail": null,
-                        "metadata_header": {
-                          "id": "0000001d-0000-4000-8000-00000000001d",
-                          "indexVersion": 34,
-                          "generationNum": 34,
-                          "name": "<name>",
-                          "author": "00000006-0000-4000-8000-000000000006",
-                          "authorName": "<authorName>",
-                          "authorDisplayName": "<authorDisplayName>",
-                          "created": 1455598151033,
-                          "modified": 1455598151033,
-                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                          "owner": "0000001d-0000-4000-8000-00000000001d",
-                          "isDeleted": false,
-                          "isHidden": false,
-                          "orgIds": [
-                            0
-                          ],
-                          "tags": [],
-                          "type": "WORKSHEET",
-                          "aiAnswerGenerationDisabled": false,
-                          "isExternal": false,
-                          "isDeprecated": false,
-                          "isSharedViaConnection": false
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "0000003d-0000-4000-8000-00000000003d": {
+                            "LOGICAL_TABLE": [
+                              {
+                                "id": "0000002f-0000-4000-8000-00000000002f",
+                                "indexVersion": 24,
+                                "generationNum": 24,
+                                "name": "<name>",
+                                "author": "00000030-0000-4000-8000-000000000030",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1459286147194,
+                                "modified": 1561503204697,
+                                "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                                "owner": "0000002f-0000-4000-8000-00000000002f",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "schemaStripe": "falcon_default_schema",
+                                "databaseStripe": "<database>",
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "ONE_TO_ONE_LOGICAL",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "datasetId": "",
+                                "subType": "",
+                                "reportId": "",
+                                "viewId": "",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              }
+                            ],
+                            "TABLE_FILTER": [
+                              {
+                                "id": "00000031-0000-4000-8000-000000000031",
+                                "indexVersion": 24,
+                                "generationNum": 24,
+                                "name": "<name>",
+                                "author": "00000032-0000-4000-8000-000000000032",
+                                "created": 1459392718571,
+                                "modified": 1505867592245,
+                                "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                                "owner": "0000002f-0000-4000-8000-00000000002f",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              }
+                            ]
+                          }
                         },
-                        "visualization_headers": null,
-                        "stats": null
-                      },
-                      {
-                        "metadata_id": "0000001e-0000-4000-8000-00000000001e",
-                        "metadata_name": "<metadata_name>",
-                        "metadata_type": "LOGICAL_COLUMN",
-                        "dependent_objects": null,
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
-                        "metadata_header": {
-                          "id": "0000001e-0000-4000-8000-00000000001e",
-                          "indexVersion": 34,
-                          "generationNum": 34,
-                          "name": "<name>",
-                          "author": "00000006-0000-4000-8000-000000000006",
-                          "created": 1455598151033,
-                          "modified": 1455598151033,
-                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                          "owner": "0000001d-0000-4000-8000-00000000001d",
-                          "isDeleted": false,
-                          "isHidden": false,
-                          "orgIds": [
-                            0
+                        "metadata_detail": {
+                          "columns": [
+                            {
+                              "physicalColumnGUID": "00000033-0000-4000-8000-000000000033",
+                              "position": 0,
+                              "complete": true,
+                              "incompleteDetail": [],
+                              "header": {
+                                "id": "00000034-0000-4000-8000-000000000034",
+                                "indexVersion": 24,
+                                "generationNum": 24,
+                                "name": "ID",
+                                "author": "00000030-0000-4000-8000-000000000030",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1459286147196,
+                                "modified": 1505944146732,
+                                "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                                "owner": "0000002e-0000-4000-8000-00000000002e",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "schemaStripe": "falcon_default_schema",
+                                "databaseStripe": "<database>",
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "isDerived": false,
+                              "dataType": "INT32",
+                              "dataPanelColumnGroups": {},
+                              "type": "ATTRIBUTE",
+                              "defaultAggrType": "NONE",
+                              "physicalColumnName": "ID",
+                              "ownerName": "<metadata_name>",
+                              "ownerType": "ONE_TO_ONE_LOGICAL",
+                              "entityCategory": "DEFAULT",
+                              "spotiqPreference": "DEFAULT",
+                              "isAdditive": false,
+                              "indexType": "DONT_INDEX",
+                              "valueCasing": "DEFAULT",
+                              "indexPriority": 1,
+                              "sources": [],
+                              "synonyms": [],
+                              "synonymType": "UNKNOWN",
+                              "customActionTags": [],
+                              "injectedInlineValues": [],
+                              "precision": 26,
+                              "scale": 0,
+                              "isPrimaryKey": true,
+                              "isAttributionDimension": true,
+                              "isStrictDateColumn": false,
+                              "defaultDateBucket": "AUTO",
+                              "isTimeBucketRestricted": false,
+                              "customOrder": [],
+                              "dataRecency": 1793129715
+                            },
+                            {
+                              "physicalColumnGUID": "00000035-0000-4000-8000-000000000035",
+                              "position": 1,
+                              "complete": true,
+                              "incompleteDetail": [],
+                              "header": {
+                                "id": "00000036-0000-4000-8000-000000000036",
+                                "indexVersion": 24,
+                                "generationNum": 24,
+                                "name": "NAME",
+                                "author": "00000030-0000-4000-8000-000000000030",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1459286147196,
+                                "modified": 1505944146731,
+                                "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                                "owner": "0000002e-0000-4000-8000-00000000002e",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "schemaStripe": "falcon_default_schema",
+                                "databaseStripe": "<database>",
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "isDerived": false,
+                              "dataType": "VARCHAR",
+                              "dataPanelColumnGroups": {},
+                              "type": "ATTRIBUTE",
+                              "defaultAggrType": "NONE",
+                              "physicalColumnName": "NAME",
+                              "ownerName": "<metadata_name>",
+                              "ownerType": "ONE_TO_ONE_LOGICAL",
+                              "entityCategory": "DEFAULT",
+                              "spotiqPreference": "DEFAULT",
+                              "isAdditive": false,
+                              "indexType": "DEFAULT",
+                              "valueCasing": "DEFAULT",
+                              "indexPriority": 1,
+                              "sources": [],
+                              "synonyms": [],
+                              "synonymType": "UNKNOWN",
+                              "customActionTags": [],
+                              "injectedInlineValues": [],
+                              "precision": 255,
+                              "scale": 255,
+                              "isPrimaryKey": false,
+                              "isAttributionDimension": true,
+                              "isStrictDateColumn": false,
+                              "defaultDateBucket": "AUTO",
+                              "isTimeBucketRestricted": false,
+                              "customOrder": [],
+                              "dataRecency": 1793129715
+                            }
                           ],
-                          "tags": [],
-                          "aiAnswerGenerationDisabled": false,
-                          "isExternal": false,
-                          "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "tableFilters": [],
+                          "parameters": {},
+                          "physicalTableVersion": 1,
+                          "worksheetLevelJoins": {},
+                          "logicalTableContent": {
+                            "rowUsageCount": 0,
+                            "rowUsageCountLastLoadTime": 0,
+                            "joinType": "INNER",
+                            "joinOverrides": {},
+                            "physicalTableName": "<metadata_name>",
+                            "worksheetType": "VIEW",
+                            "isAggregatedWorksheet": false,
+                            "bypassRLS": false,
+                            "ignoreAllSecureSuggestionWarnings": false,
+                            "isMultiTenantCustomCalendarConfigured": false,
+                            "isOptimized": false,
+                            "useCases": {},
+                            "useCaseNameToGuid": {},
+                            "inputTableGuids": []
+                          },
+                          "type": "ONE_TO_ONE_LOGICAL",
+                          "generationType": "DEFAULT",
+                          "physicalTableGUID": "00000037-0000-4000-8000-000000000037",
+                          "relationships": [],
+                          "dataSourceId": "00000038-0000-4000-8000-000000000038",
+                          "dataSourceTypeEnum": "DEFAULT",
+                          "header": {
+                            "id": "0000002e-0000-4000-8000-00000000002e",
+                            "indexVersion": 24,
+                            "generationNum": 24,
+                            "name": "<metadata_name>",
+                            "author": "00000030-0000-4000-8000-000000000030",
+                            "authorName": "<authorName>",
+                            "authorDisplayName": "<authorDisplayName>",
+                            "created": 1459286147196,
+                            "modified": 1624977104528,
+                            "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                            "owner": "0000002e-0000-4000-8000-00000000002e",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "schemaStripe": "falcon_default_schema",
+                            "databaseStripe": "<database>",
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "type": "ONE_TO_ONE_LOGICAL",
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "datasetId": "",
+                            "subType": "",
+                            "reportId": "",
+                            "viewId": "",
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": [],
+                          "destinationRelationships": [
+                            {
+                              "sourceTable": "00000039-0000-4000-8000-000000000039",
+                              "destinationTable": "0000002e-0000-4000-8000-00000000002e",
+                              "physicalRelationshipGUID": "0000003a-0000-4000-8000-00000000003a",
+                              "content": {
+                                "relationships": [
+                                  {
+                                    "sourceColumn": "0000003b-0000-4000-8000-00000000003b",
+                                    "destinationColumn": "00000034-0000-4000-8000-000000000034"
+                                  }
+                                ],
+                                "weight": 1
+                              },
+                              "joinType": "INNER",
+                              "type": "PK_FK",
+                              "isOneToOneJoin": false,
+                              "isCyclic": false,
+                              "indicateOneToManyOnUI": false,
+                              "header": {
+                                "id": "0000003c-0000-4000-8000-00000000003c",
+                                "indexVersion": 25,
+                                "generationNum": 25,
+                                "name": "ID - ID",
+                                "author": "00000030-0000-4000-8000-000000000030",
+                                "created": 1459286147578,
+                                "modified": 1505944146734,
+                                "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                                "owner": "00000039-0000-4000-8000-000000000039",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "databaseStripe": "<database>",
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "PK_FK",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "complete": true,
+                              "incompleteDetail": [],
+                              "sourceColumns": [
+                                "0000003b-0000-4000-8000-00000000003b"
+                              ],
+                              "targetColumns": [
+                                "00000034-0000-4000-8000-000000000034"
+                              ]
+                            }
+                          ],
+                          "relationshipsWithin": "",
+                          "isCached": true,
+                          "isParameterized": false
                         },
-                        "visualization_headers": null,
-                        "stats": null
-                      },
-                      {
-                        "metadata_id": "0000001f-0000-4000-8000-00000000001f",
-                        "metadata_name": "<metadata_name>",
-                        "metadata_type": "CONNECTION",
-                        "dependent_objects": null,
-                        "incomplete_objects": null,
-                        "metadata_detail": null,
                         "metadata_header": {
-                          "dataUploadEnabled": false,
-                          "id": "0000001f-0000-4000-8000-00000000001f",
-                          "indexVersion": 29,
-                          "generationNum": 29,
-                          "name": "<name>",
-                          "description": "",
-                          "author": "00000006-0000-4000-8000-000000000006",
+                          "isMaterialized": false,
+                          "rowCount": 0,
+                          "dataSourceType": "DEFAULT",
+                          "id": "0000002e-0000-4000-8000-00000000002e",
+                          "indexVersion": 24,
+                          "generationNum": 24,
+                          "name": "<metadata_name>",
+                          "author": "00000030-0000-4000-8000-000000000030",
                           "authorName": "<authorName>",
                           "hasLenientDiscoverability": false,
+                          "descriptionAutoGenerated": false,
+                          "authorDisplayName": "<authorDisplayName>",
+                          "created": 1459286147196,
+                          "modified": 1624977104528,
+                          "modifiedBy": "00000030-0000-4000-8000-000000000030",
+                          "owner": "0000002e-0000-4000-8000-00000000002e",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "isAutoCreated": false,
+                          "isAutoDelete": false,
+                          "ownerOrgId": 0,
+                          "resolvedObjects": {},
+                          "schemaStripe": "falcon_default_schema",
+                          "databaseStripe": "<database>",
+                          "dataSourceName": "Default",
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "ONE_TO_ONE_LOGICAL",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      },
+                      {
+                        "metadata_id": "0000003e-0000-4000-8000-00000000003e",
+                        "metadata_name": "<metadata_name>",
+                        "metadata_type": "LOGICAL_COLUMN",
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "0000003e-0000-4000-8000-00000000003e": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
+                        "incomplete_objects": null,
+                        "metadata_detail": {
+                          "position": 2,
+                          "complete": true,
+                          "incompleteDetail": [],
+                          "header": {
+                            "id": "0000003e-0000-4000-8000-00000000003e",
+                            "indexVersion": 9,
+                            "generationNum": 9,
+                            "name": "<metadata_name>",
+                            "author": "0000003f-0000-4000-8000-00000000003f",
+                            "authorName": "<authorName>",
+                            "authorDisplayName": "<authorDisplayName>",
+                            "created": 1396595872590,
+                            "modified": 1399434202249,
+                            "modifiedBy": "0000003f-0000-4000-8000-00000000003f",
+                            "owner": "00000040-0000-4000-8000-000000000040",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "isDerived": true,
+                          "dataType": "INT64",
+                          "dataPanelColumnGroups": {},
+                          "type": "ATTRIBUTE",
+                          "defaultAggrType": "SUM",
+                          "ownerName": "<table_name>",
+                          "ownerType": "WORKSHEET",
+                          "entityCategory": "DEFAULT",
+                          "spotiqPreference": "DEFAULT",
+                          "isAdditive": false,
+                          "indexType": "DONT_INDEX",
+                          "valueCasing": "UNKNOWN",
+                          "indexPriority": 1,
+                          "sources": [
+                            {
+                              "tableId": "00000041-0000-4000-8000-000000000041",
+                              "tableName": "<table_name>",
+                              "columnId": "00000042-0000-4000-8000-000000000042",
+                              "columnName": "<column_name>"
+                            }
+                          ],
+                          "synonyms": [],
+                          "synonymType": "UNKNOWN",
+                          "customActionTags": [],
+                          "injectedInlineValues": [],
+                          "precision": -1,
+                          "scale": 0,
+                          "isPrimaryKey": false,
+                          "isAttributionDimension": true,
+                          "isStrictDateColumn": false,
+                          "defaultDateBucket": "AUTO",
+                          "isTimeBucketRestricted": false,
+                          "derivationExpr": {
+                            "exprType": "LOGICAL_COLUMN_REFERENCE",
+                            "logicalColumn": {
+                              "header": {
+                                "id": "00000042-0000-4000-8000-000000000042",
+                                "indexVersion": 9,
+                                "generationNum": 9,
+                                "name": "<column_name>",
+                                "author": "0000003f-0000-4000-8000-00000000003f",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1396592259618,
+                                "modified": 1469643438553,
+                                "modifiedBy": "00000043-0000-4000-8000-000000000043",
+                                "owner": "00000041-0000-4000-8000-000000000041",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "databaseStripe": "<database>",
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              }
+                            },
+                            "joinPaths": [
+                              {
+                                "joins": []
+                              }
+                            ]
+                          },
+                          "customOrder": [],
+                          "dataRecency": 1793129148
+                        },
+                        "metadata_header": {
+                          "id": "0000003e-0000-4000-8000-00000000003e",
+                          "indexVersion": 9,
+                          "generationNum": 9,
+                          "name": "<metadata_name>",
+                          "author": "0000003f-0000-4000-8000-00000000003f",
+                          "authorName": "<authorName>",
+                          "authorDisplayName": "<authorDisplayName>",
+                          "created": 1396595872590,
+                          "modified": 1399434202249,
+                          "modifiedBy": "0000003f-0000-4000-8000-00000000003f",
+                          "owner": "00000040-0000-4000-8000-000000000040",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "ownerOrgId": 0,
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      },
+                      {
+                        "metadata_id": "00000044-0000-4000-8000-000000000044",
+                        "metadata_name": "<metadata_name>",
+                        "metadata_type": "CONNECTION",
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "00000044-0000-4000-8000-000000000044": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
+                        "incomplete_objects": null,
+                        "metadata_detail": {
+                          "header": {
+                            "id": "00000044-0000-4000-8000-000000000044",
+                            "indexVersion": 19,
+                            "generationNum": 19,
+                            "name": "<metadata_name>",
+                            "description": "",
+                            "author": "00000045-0000-4000-8000-000000000045",
+                            "authorName": "<authorName>",
+                            "authorDisplayName": "<authorDisplayName>",
+                            "created": 1565611520983,
+                            "modified": 1565611520983,
+                            "modifiedBy": "00000046-0000-4000-8000-000000000046",
+                            "owner": "00000044-0000-4000-8000-000000000044",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "isAutoCreated": false,
+                            "statistics": {
+                              "dataLoadStatistics": {
+                                "scheduled": false,
+                                "connectionType": "",
+                                "connectionDisplayName": "",
+                                "dataLoadStatusList": [],
+                                "header": {
+                                  "id": "00000047-0000-4000-8000-000000000047",
+                                  "indexVersion": 19,
+                                  "generationNum": 19,
+                                  "author": "00000045-0000-4000-8000-000000000045",
+                                  "owner": "00000044-0000-4000-8000-000000000044",
+                                  "isDeleted": false,
+                                  "isHidden": false,
+                                  "ownerOrgId": 0,
+                                  "tags": [],
+                                  "configs": [],
+                                  "isConnectionConfigurationDisabled": false,
+                                  "aiAnswerGenerationDisabled": false,
+                                  "isExternal": false,
+                                  "isDeprecated": false,
+                                  "isSharedViaConnection": false,
+                                  "syncWithSource": false,
+                                  "isParameterized": false,
+                                  "cachedDataAsOf": 0,
+                                  "isVerified": false,
+                                  "isVersioningEnabled": false,
+                                  "contentUpgradeId": "<upgrade id>",
+                                  "headerUpgradeId": "<upgrade id>",
+                                  "isPublished": false,
+                                  "csrProtected": false
+                                },
+                                "complete": true,
+                                "incompleteDetail": []
+                              }
+                            },
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "type": "RDBMS_SNOWFLAKE",
+                          "authenticationType": "SERVICE_ACCOUNT",
+                          "logicalTableList": [
+                            {
+                              "columns": [
+                                {
+                                  "position": 0,
+                                  "complete": true,
+                                  "incompleteDetail": [],
+                                  "header": {
+                                    "id": "00000048-0000-4000-8000-000000000048",
+                                    "indexVersion": 24,
+                                    "generationNum": 24,
+                                    "name": "ID",
+                                    "author": "00000045-0000-4000-8000-000000000045",
+                                    "authorName": "<authorName>",
+                                    "authorDisplayName": "<authorDisplayName>",
+                                    "created": 1565611525489,
+                                    "modified": 1565611527677,
+                                    "modifiedBy": "00000045-0000-4000-8000-000000000045",
+                                    "owner": "00000049-0000-4000-8000-000000000049",
+                                    "isDeleted": false,
+                                    "isHidden": false,
+                                    "ownerOrgId": 0,
+                                    "tags": [],
+                                    "configs": [],
+                                    "isConnectionConfigurationDisabled": false,
+                                    "aiAnswerGenerationDisabled": false,
+                                    "isExternal": false,
+                                    "isDeprecated": false,
+                                    "isSharedViaConnection": false,
+                                    "syncWithSource": false,
+                                    "isParameterized": false,
+                                    "cachedDataAsOf": 0,
+                                    "isVerified": false,
+                                    "isVersioningEnabled": false,
+                                    "contentUpgradeId": "<upgrade id>",
+                                    "headerUpgradeId": "<upgrade id>",
+                                    "isPublished": false,
+                                    "csrProtected": false
+                                  },
+                                  "isDerived": false,
+                                  "dataType": "INT64",
+                                  "dataPanelColumnGroups": {},
+                                  "type": "MEASURE",
+                                  "defaultAggrType": "SUM",
+                                  "physicalColumnName": "ID",
+                                  "ownerName": "<table_name>",
+                                  "ownerType": "ONE_TO_ONE_LOGICAL",
+                                  "entityCategory": "DEFAULT",
+                                  "columnMappingInfo": {
+                                    "columnName": "ID"
+                                  },
+                                  "spotiqPreference": "DEFAULT",
+                                  "isAdditive": true,
+                                  "indexType": "DONT_INDEX",
+                                  "valueCasing": "DEFAULT",
+                                  "indexPriority": 1,
+                                  "sources": [],
+                                  "synonyms": [],
+                                  "synonymType": "UNKNOWN",
+                                  "customActionTags": [],
+                                  "injectedInlineValues": [],
+                                  "precision": -1,
+                                  "scale": 0,
+                                  "isPrimaryKey": false,
+                                  "isAttributionDimension": true,
+                                  "isStrictDateColumn": false,
+                                  "defaultDateBucket": "AUTO",
+                                  "isTimeBucketRestricted": false,
+                                  "customOrder": []
+                                },
+                                {
+                                  "position": 1,
+                                  "complete": true,
+                                  "incompleteDetail": [],
+                                  "header": {
+                                    "id": "0000004a-0000-4000-8000-00000000004a",
+                                    "indexVersion": 24,
+                                    "generationNum": 24,
+                                    "name": "AMOUNT",
+                                    "author": "00000045-0000-4000-8000-000000000045",
+                                    "authorName": "<authorName>",
+                                    "authorDisplayName": "<authorDisplayName>",
+                                    "created": 1565611525489,
+                                    "modified": 1565611527677,
+                                    "modifiedBy": "00000045-0000-4000-8000-000000000045",
+                                    "owner": "00000049-0000-4000-8000-000000000049",
+                                    "isDeleted": false,
+                                    "isHidden": false,
+                                    "ownerOrgId": 0,
+                                    "tags": [],
+                                    "configs": [],
+                                    "isConnectionConfigurationDisabled": false,
+                                    "aiAnswerGenerationDisabled": false,
+                                    "isExternal": false,
+                                    "isDeprecated": false,
+                                    "isSharedViaConnection": false,
+                                    "syncWithSource": false,
+                                    "isParameterized": false,
+                                    "cachedDataAsOf": 0,
+                                    "isVerified": false,
+                                    "isVersioningEnabled": false,
+                                    "contentUpgradeId": "<upgrade id>",
+                                    "headerUpgradeId": "<upgrade id>",
+                                    "isPublished": false,
+                                    "csrProtected": false
+                                  },
+                                  "isDerived": false,
+                                  "dataType": "DOUBLE",
+                                  "dataPanelColumnGroups": {},
+                                  "type": "MEASURE",
+                                  "defaultAggrType": "SUM",
+                                  "physicalColumnName": "AMOUNT",
+                                  "ownerName": "<table_name>",
+                                  "ownerType": "ONE_TO_ONE_LOGICAL",
+                                  "entityCategory": "DEFAULT",
+                                  "columnMappingInfo": {
+                                    "columnName": "AMOUNT"
+                                  },
+                                  "spotiqPreference": "DEFAULT",
+                                  "isAdditive": true,
+                                  "indexType": "DONT_INDEX",
+                                  "valueCasing": "DEFAULT",
+                                  "indexPriority": 1,
+                                  "sources": [],
+                                  "synonyms": [],
+                                  "synonymType": "UNKNOWN",
+                                  "customActionTags": [],
+                                  "injectedInlineValues": [],
+                                  "precision": -1,
+                                  "scale": 0,
+                                  "isPrimaryKey": false,
+                                  "isAttributionDimension": true,
+                                  "isStrictDateColumn": false,
+                                  "defaultDateBucket": "AUTO",
+                                  "isTimeBucketRestricted": false,
+                                  "customOrder": []
+                                }
+                              ],
+                              "tableFilters": [],
+                              "parameters": {},
+                              "physicalTableVersion": 0,
+                              "worksheetLevelJoins": {},
+                              "logicalTableContent": {
+                                "rowUsageCount": 0,
+                                "rowUsageCountLastLoadTime": 0,
+                                "joinType": "INNER",
+                                "joinOverrides": {},
+                                "worksheetType": "VIEW",
+                                "isAggregatedWorksheet": false,
+                                "bypassRLS": false,
+                                "ignoreAllSecureSuggestionWarnings": false,
+                                "tableMappingInfo": {
+                                  "databaseName": "<database>",
+                                  "schemaName": "PUBLIC",
+                                  "tableName": "<table_name>",
+                                  "tableType": "TABLE",
+                                  "cachingInfo": {
+                                    "isCached": false,
+                                    "lastLoadTime": 0,
+                                    "type": "UNKNOWN"
+                                  }
+                                },
+                                "isMultiTenantCustomCalendarConfigured": false,
+                                "isOptimized": false,
+                                "useCases": {},
+                                "useCaseNameToGuid": {},
+                                "inputTableGuids": []
+                              },
+                              "type": "ONE_TO_ONE_LOGICAL",
+                              "generationType": "DEFAULT",
+                              "relationships": [],
+                              "dataSourceId": "00000044-0000-4000-8000-000000000044",
+                              "dataSourceTypeEnum": "RDBMS_SNOWFLAKE",
+                              "header": {
+                                "id": "00000049-0000-4000-8000-000000000049",
+                                "indexVersion": 24,
+                                "generationNum": 24,
+                                "name": "<table_name>",
+                                "author": "00000045-0000-4000-8000-000000000045",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1565611525489,
+                                "modified": 1565611527677,
+                                "modifiedBy": "00000045-0000-4000-8000-000000000045",
+                                "owner": "00000049-0000-4000-8000-000000000049",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "ONE_TO_ONE_LOGICAL",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": true,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "datasetId": "",
+                                "subType": "",
+                                "reportId": "",
+                                "viewId": "",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "complete": true,
+                              "incompleteDetail": [],
+                              "destinationRelationships": [],
+                              "relationshipsWithin": "",
+                              "isParameterized": false
+                            }
+                          ],
+                          "dataSourceContent": {
+                            "templatedProperties": [],
+                            "databases": [],
+                            "statistics": {},
+                            "dataLoadInfo": {
+                              "tableToTaskIdMap": {}
+                            },
+                            "dataUploadConfiguration": {
+                              "isDefaultDataSource": false
+                            },
+                            "configuration": {
+                              "database": "<database>",
+                              "role": "<role>",
+                              "accountName": "<account>",
+                              "warehouse": "<warehouse>",
+                              "user": "<user>"
+                            }
+                          },
+                          "disabled": false
+                        },
+                        "metadata_header": {
+                          "dataUploadEnabled": false,
+                          "parameterizedConnection": false,
+                          "connectionDisabled": false,
+                          "id": "00000044-0000-4000-8000-000000000044",
+                          "indexVersion": 19,
+                          "generationNum": 19,
+                          "name": "<metadata_name>",
+                          "description": "",
+                          "author": "00000045-0000-4000-8000-000000000045",
+                          "authorName": "<authorName>",
+                          "hasLenientDiscoverability": false,
+                          "descriptionAutoGenerated": false,
                           "authorDisplayName": "<authorDisplayName>",
                           "created": 1565611520983,
                           "modified": 1565611520983,
                           "relationWithUser": "ADMINISTRATOR",
-                          "modifiedBy": "00000020-0000-4000-8000-000000000020",
-                          "owner": "0000001f-0000-4000-8000-00000000001f",
+                          "modifiedBy": "00000046-0000-4000-8000-000000000046",
+                          "owner": "00000044-0000-4000-8000-000000000044",
                           "isDeleted": false,
                           "isHidden": false,
                           "isAutoCreated": false,
@@ -15183,176 +16709,707 @@
                               "connectionDisplayName": "",
                               "dataLoadStatusList": [],
                               "header": {
-                                "id": "00000021-0000-4000-8000-000000000021",
-                                "indexVersion": 29,
-                                "generationNum": 29,
-                                "author": "00000006-0000-4000-8000-000000000006",
-                                "owner": "0000001f-0000-4000-8000-00000000001f",
+                                "id": "00000047-0000-4000-8000-000000000047",
+                                "indexVersion": 19,
+                                "generationNum": 19,
+                                "author": "00000045-0000-4000-8000-000000000045",
+                                "owner": "00000044-0000-4000-8000-000000000044",
                                 "isDeleted": false,
                                 "isHidden": false,
-                                "orgIds": [
-                                  0
-                                ],
+                                "ownerOrgId": 0,
                                 "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
                                 "aiAnswerGenerationDisabled": false,
                                 "isExternal": false,
                                 "isDeprecated": false,
-                                "isSharedViaConnection": false
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
                               },
                               "complete": true,
                               "incompleteDetail": []
                             }
                           },
-                          "orgIds": [
-                            0
-                          ],
+                          "ownerOrgId": 0,
                           "resolvedObjects": {},
                           "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
                           "type": "RDBMS_SNOWFLAKE",
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
                       },
                       {
-                        "metadata_id": "00000016-0000-4000-8000-000000000016",
+                        "metadata_id": "0000004b-0000-4000-8000-00000000004b",
                         "metadata_name": "<metadata_name>",
                         "metadata_type": "TAG",
-                        "dependent_objects": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "0000004b-0000-4000-8000-00000000004b": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "content": {
+                            "taggedCount": 0
+                          },
+                          "header": {
+                            "id": "0000004b-0000-4000-8000-00000000004b",
+                            "indexVersion": 0,
+                            "generationNum": 28,
+                            "name": "<metadata_name>",
+                            "author": "0000004c-0000-4000-8000-00000000004c",
+                            "created": 1412881252884,
+                            "modified": 1412881301302,
+                            "modifiedBy": "0000004c-0000-4000-8000-00000000004c",
+                            "owner": "0000004b-0000-4000-8000-00000000004b",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "clientState": {
+                              "color": "#fbc17c"
+                            },
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": []
+                        },
                         "metadata_header": {
-                          "id": "00000016-0000-4000-8000-000000000016",
+                          "id": "0000004b-0000-4000-8000-00000000004b",
                           "indexVersion": 0,
-                          "generationNum": 38,
-                          "name": "<name>",
-                          "author": "00000006-0000-4000-8000-000000000006",
+                          "generationNum": 28,
+                          "name": "<metadata_name>",
+                          "author": "0000004c-0000-4000-8000-00000000004c",
                           "created": 1412881252884,
                           "modified": 1412881301302,
-                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                          "owner": "00000016-0000-4000-8000-000000000016",
+                          "modifiedBy": "0000004c-0000-4000-8000-00000000004c",
+                          "owner": "0000004b-0000-4000-8000-00000000004b",
                           "isDeleted": false,
                           "isHidden": false,
                           "clientState": {
-                            "color": "<color>"
+                            "color": "#fbc17c"
                           },
-                          "orgIds": [
-                            0
-                          ],
+                          "ownerOrgId": 0,
                           "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
                       },
                       {
-                        "metadata_id": "00000020-0000-4000-8000-000000000020",
-                        "metadata_name": "<metadata_name>",
+                        "metadata_id": "0000004d-0000-4000-8000-00000000004d",
+                        "metadata_name": "<username>",
                         "metadata_type": "USER",
-                        "dependent_objects": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "0000004d-0000-4000-8000-00000000004d": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "userContent": {
+                            "userPreferences": {
+                              "notifyOnShare": true,
+                              "showWalkMe": true,
+                              "analystOnboardingComplete": false,
+                              "useBrowserLanguage": true
+                            },
+                            "userProperties": {},
+                            "userParameters": {}
+                          },
+                          "state": "ACTIVE",
+                          "assignedGroups": [
+                            "0000004e-0000-4000-8000-00000000004e",
+                            "0000004f-0000-4000-8000-00000000004f",
+                            "00000050-0000-4000-8000-000000000050"
+                          ],
+                          "inheritedGroups": [
+                            "0000004e-0000-4000-8000-00000000004e",
+                            "0000004f-0000-4000-8000-00000000004f",
+                            "00000050-0000-4000-8000-000000000050"
+                          ],
+                          "privileges": [],
+                          "type": "LOCAL_USER",
+                          "parenttype": "USER",
+                          "visibility": "DEFAULT",
+                          "tenantId": "00000051-0000-4000-8000-000000000051",
+                          "displayName": "<user_display_name>",
+                          "header": {
+                            "id": "0000004d-0000-4000-8000-00000000004d",
+                            "indexVersion": 0,
+                            "generationNum": 16,
+                            "name": "<username>",
+                            "displayName": "<user_display_name>",
+                            "author": "0000004d-0000-4000-8000-00000000004d",
+                            "created": 1354006445722,
+                            "modified": 1354006445987,
+                            "modifiedBy": "0000004d-0000-4000-8000-00000000004d",
+                            "owner": "0000004d-0000-4000-8000-00000000004d",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "belongToAllOrgs": true,
+                            "ownerOrgId": -1,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "type": "LOCAL_USER",
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": [],
+                          "isSuperUser": true,
+                          "isSystemPrincipal": true
+                        },
                         "metadata_header": {
-                          "id": "00000020-0000-4000-8000-000000000020",
-                          "indexVersion": 169,
-                          "generationNum": 169,
-                          "name": "<name>",
-                          "displayName": "<displayName>",
-                          "author": "00000020-0000-4000-8000-000000000020",
+                          "id": "0000004d-0000-4000-8000-00000000004d",
+                          "indexVersion": 0,
+                          "generationNum": 16,
+                          "name": "<username>",
+                          "displayName": "<user_display_name>",
+                          "author": "0000004d-0000-4000-8000-00000000004d",
                           "created": 1354006445722,
                           "modified": 1354006445987,
-                          "modifiedBy": "00000020-0000-4000-8000-000000000020",
-                          "owner": "00000020-0000-4000-8000-000000000020",
+                          "modifiedBy": "0000004d-0000-4000-8000-00000000004d",
+                          "owner": "0000004d-0000-4000-8000-00000000004d",
                           "isDeleted": false,
                           "isHidden": false,
-                          "orgIds": [
-                            0
-                          ],
                           "belongToAllOrgs": true,
+                          "ownerOrgId": -1,
                           "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
                           "type": "LOCAL_USER",
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
                       },
                       {
-                        "metadata_id": "00000022-0000-4000-8000-000000000022",
+                        "metadata_id": "00000052-0000-4000-8000-000000000052",
                         "metadata_name": "<metadata_name>",
                         "metadata_type": "USER_GROUP",
-                        "dependent_objects": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "00000052-0000-4000-8000-000000000052": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "userGroupContent": {},
+                          "groupIdx": 2,
+                          "publishAcrossOrgs": false,
+                          "metadataVersion": 0,
+                          "assignedPinboards": [],
+                          "assignedRoles": [],
+                          "granularPrivileges": [],
+                          "assignedGroups": [],
+                          "inheritedGroups": [],
+                          "privileges": [],
+                          "type": "LOCAL_GROUP",
+                          "parenttype": "GROUP",
+                          "visibility": "DEFAULT",
+                          "tenantId": "00000053-0000-4000-8000-000000000053",
+                          "displayName": "<group_display_name>",
+                          "header": {
+                            "id": "00000052-0000-4000-8000-000000000052",
+                            "indexVersion": 15,
+                            "generationNum": 17,
+                            "name": "<metadata_name>",
+                            "displayName": "<group_display_name>",
+                            "author": "00000054-0000-4000-8000-000000000054",
+                            "created": 1354006445722,
+                            "modified": 1354006445987,
+                            "modifiedBy": "00000055-0000-4000-8000-000000000055",
+                            "owner": "00000052-0000-4000-8000-000000000052",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "type": "LOCAL_GROUP",
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": [],
+                          "isSystemPrincipal": false
+                        },
                         "metadata_header": {
                           "numDefaultPinboards": 0,
                           "numMemberUsers": 3,
-                          "id": "00000022-0000-4000-8000-000000000022",
-                          "indexVersion": 25,
-                          "generationNum": 27,
-                          "name": "<name>",
-                          "displayName": "<displayName>",
-                          "author": "00000006-0000-4000-8000-000000000006",
+                          "numInheritedAssignedRoles": 0,
+                          "id": "00000052-0000-4000-8000-000000000052",
+                          "indexVersion": 15,
+                          "generationNum": 17,
+                          "name": "<metadata_name>",
+                          "displayName": "<group_display_name>",
+                          "author": "00000054-0000-4000-8000-000000000054",
                           "hasLenientDiscoverability": false,
+                          "descriptionAutoGenerated": false,
                           "created": 1354006445722,
                           "modified": 1354006445987,
-                          "modifiedBy": "00000020-0000-4000-8000-000000000020",
-                          "owner": "00000022-0000-4000-8000-000000000022",
+                          "modifiedBy": "00000055-0000-4000-8000-000000000055",
+                          "owner": "00000052-0000-4000-8000-000000000052",
                           "isDeleted": false,
                           "isHidden": false,
                           "isAutoCreated": false,
                           "isAutoDelete": false,
-                          "orgIds": [
-                            0
-                          ],
+                          "ownerOrgId": 0,
                           "resolvedObjects": {},
                           "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
                           "type": "LOCAL_GROUP",
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
                       },
                       {
-                        "metadata_id": "00000023-0000-4000-8000-000000000023",
+                        "metadata_id": "00000056-0000-4000-8000-000000000056",
                         "metadata_name": "<metadata_name>",
                         "metadata_type": "LOGICAL_RELATIONSHIP",
-                        "dependent_objects": null,
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "00000056-0000-4000-8000-000000000056": {
+                            "LOGICAL_TABLE": [
+                              {
+                                "id": "00000057-0000-4000-8000-000000000057",
+                                "indexVersion": 9,
+                                "generationNum": 9,
+                                "name": "<name>",
+                                "author": "00000058-0000-4000-8000-000000000058",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1476395034184,
+                                "modified": 1476395034184,
+                                "modifiedBy": "00000058-0000-4000-8000-000000000058",
+                                "owner": "00000057-0000-4000-8000-000000000057",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "AGGR_WORKSHEET",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "datasetId": "",
+                                "subType": "",
+                                "reportId": "",
+                                "viewId": "",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              {
+                                "id": "00000059-0000-4000-8000-000000000059",
+                                "indexVersion": 9,
+                                "generationNum": 9,
+                                "name": "<destination_table_name>",
+                                "description": "",
+                                "author": "00000058-0000-4000-8000-000000000058",
+                                "authorName": "<authorName>",
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1476155314817,
+                                "modified": 1476156550243,
+                                "modifiedBy": "00000058-0000-4000-8000-000000000058",
+                                "owner": "00000059-0000-4000-8000-000000000059",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "type": "AGGR_WORKSHEET",
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "datasetId": "",
+                                "subType": "",
+                                "reportId": "",
+                                "viewId": "",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              }
+                            ],
+                            "PINBOARD_ANSWER_BOOK": [
+                              {
+                                "id": "0000005a-0000-4000-8000-00000000005a",
+                                "indexVersion": 9,
+                                "generationNum": 9,
+                                "name": "<source_table_name>",
+                                "author": "00000058-0000-4000-8000-000000000058",
+                                "authorName": "<authorName>",
+                                "hasLenientDiscoverability": false,
+                                "descriptionAutoGenerated": false,
+                                "authorDisplayName": "<authorDisplayName>",
+                                "created": 1451925519184,
+                                "modified": 1599793728336,
+                                "modifiedBy": "00000058-0000-4000-8000-000000000058",
+                                "owner": "0000005a-0000-4000-8000-00000000005a",
+                                "isDeleted": false,
+                                "isHidden": true,
+                                "isAutoCreated": false,
+                                "isAutoDelete": false,
+                                "ownerOrgId": 0,
+                                "resolvedObjects": {},
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "datasetId": "",
+                                "subType": "",
+                                "reportId": "",
+                                "viewId": "",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              }
+                            ]
+                          }
+                        },
+                        "dependent_objects_is_last_batch": true,
                         "incomplete_objects": null,
-                        "metadata_detail": null,
+                        "metadata_detail": {
+                          "sourceTable": "0000005b-0000-4000-8000-00000000005b",
+                          "destinationTable": "0000005c-0000-4000-8000-00000000005c",
+                          "content": {
+                            "relationships": [
+                              {
+                                "sourceColumn": "0000005d-0000-4000-8000-00000000005d",
+                                "destinationColumn": "0000005e-0000-4000-8000-00000000005e"
+                              },
+                              {
+                                "sourceColumn": "0000005f-0000-4000-8000-00000000005f",
+                                "destinationColumn": "00000060-0000-4000-8000-000000000060"
+                              }
+                            ],
+                            "weight": 1
+                          },
+                          "joinType": "INNER",
+                          "type": "USER_DEFINED",
+                          "isOneToOneJoin": false,
+                          "isCyclic": false,
+                          "indicateOneToManyOnUI": false,
+                          "header": {
+                            "id": "00000056-0000-4000-8000-000000000056",
+                            "indexVersion": 9,
+                            "generationNum": 9,
+                            "name": "<metadata_name>",
+                            "description": "",
+                            "author": "00000058-0000-4000-8000-000000000058",
+                            "created": 1476155258711,
+                            "modified": 1476155258711,
+                            "modifiedBy": "00000058-0000-4000-8000-000000000058",
+                            "owner": "0000005b-0000-4000-8000-00000000005b",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "type": "USER_DEFINED",
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": true,
+                          "incompleteDetail": [],
+                          "sourceColumns": [
+                            "0000005d-0000-4000-8000-00000000005d",
+                            "0000005f-0000-4000-8000-00000000005f"
+                          ],
+                          "targetColumns": [
+                            "0000005e-0000-4000-8000-00000000005e",
+                            "00000060-0000-4000-8000-000000000060"
+                          ]
+                        },
                         "metadata_header": {
-                          "id": "00000023-0000-4000-8000-000000000023",
-                          "indexVersion": 35,
-                          "generationNum": 35,
-                          "name": "<name>",
+                          "id": "00000056-0000-4000-8000-000000000056",
+                          "indexVersion": 9,
+                          "generationNum": 9,
+                          "name": "<metadata_name>",
                           "description": "",
-                          "author": "00000006-0000-4000-8000-000000000006",
-                          "created": 1460535074875,
-                          "modified": 1504281966956,
-                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                          "owner": "00000024-0000-4000-8000-000000000024",
+                          "author": "00000058-0000-4000-8000-000000000058",
+                          "created": 1476155258711,
+                          "modified": 1476155258711,
+                          "modifiedBy": "00000058-0000-4000-8000-000000000058",
+                          "owner": "0000005b-0000-4000-8000-00000000005b",
                           "isDeleted": false,
                           "isHidden": false,
-                          "orgIds": [
-                            0
-                          ],
+                          "ownerOrgId": 0,
                           "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
                           "type": "USER_DEFINED",
                           "aiAnswerGenerationDisabled": false,
                           "isExternal": false,
                           "isDeprecated": false,
-                          "isSharedViaConnection": false
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      },
+                      {
+                        "metadata_id": "00000061-0000-4000-8000-000000000061",
+                        "metadata_name": "<metadata_name>",
+                        "metadata_type": "INSIGHT_SPEC",
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "00000061-0000-4000-8000-000000000061": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": {
+                          "hasTabs": false,
+                          "modelVersion": "V1",
+                          "hasMandatoryFilter": false,
+                          "isMandatoryFilterValueSelected": true,
+                          "totalContainerCount": 26,
+                          "id": "00000061-0000-4000-8000-000000000061",
+                          "indexVersion": 27,
+                          "generationNum": 27,
+                          "name": "<metadata_name>",
+                          "description": "<description>",
+                          "author": "00000062-0000-4000-8000-000000000062",
+                          "authorName": "<authorName>",
+                          "hasLenientDiscoverability": false,
+                          "descriptionAutoGenerated": false,
+                          "authorDisplayName": "<authorDisplayName>",
+                          "created": 1556025007407,
+                          "modified": 1556025174551,
+                          "modifiedBy": "00000062-0000-4000-8000-000000000062",
+                          "owner": "00000061-0000-4000-8000-000000000061",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "isAutoCreated": true,
+                          "isAutoDelete": false,
+                          "ownerOrgId": 0,
+                          "resolvedObjects": {},
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "datasetId": "",
+                          "subType": "",
+                          "reportId": "",
+                          "viewId": "",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      },
+                      {
+                        "metadata_id": "00000063-0000-4000-8000-000000000063",
+                        "metadata_name": "<metadata_name>",
+                        "metadata_type": "TEMPLATE_VARIABLE",
+                        "metadata_obj_id": null,
+                        "dependent_objects": {
+                          "00000063-0000-4000-8000-000000000063": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
+                        "incomplete_objects": null,
+                        "metadata_detail": null,
+                        "metadata_header": {
+                          "id": "00000063-0000-4000-8000-000000000063",
+                          "indexVersion": 1,
+                          "generationNum": 1,
+                          "name": "<metadata_name>",
+                          "author": "00000064-0000-4000-8000-000000000064",
+                          "created": 1760198400000,
+                          "modified": 1760198460000,
+                          "modifiedBy": "00000064-0000-4000-8000-000000000064",
+                          "owner": "00000063-0000-4000-8000-000000000063",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "ownerOrgId": 0,
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "subType": "",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
@@ -16829,7 +18886,7 @@
                         {
                           "metadata_id": "6a7b8c9d-0e1f-4a2b-8c3d-4e5f6a7b8c9d",
                           "metadata_name": "Sales Model",
-                          "metadata_type": "LOGICAL_TABLE",
+                          "metadata_type": "WORKSHEET",
                           "principal_object_privilege_info": [
                             {
                               "principal_type": "USER_GROUP",
@@ -21573,6 +23630,7 @@
                       "creation_time_in_millis": 1760198400000,
                       "modification_time_in_millis": 1760198460000,
                       "first_login_time_in_millis": 0,
+                      "last_active_time_in_millis": 0,
                       "expiration_time_in_millis": 1791734400000,
                       "incomplete_details": [],
                       "org_privileges": {
@@ -21582,10 +23640,12 @@
                         ]
                       },
                       "extended_properties": {
-                        "displayNameLastUpdatedBy": "ADMIN"
+                        "displayNameLastUpdatedBy": "ADMIN",
+                        "department": "finance"
                       },
                       "extended_preferences": {
-                        "notificationChannel": "EMAIL"
+                        "notificationChannel": "EMAIL",
+                        "theme": "dark"
                       },
                       "user_parameters": {
                         "0": {
@@ -22158,6 +24218,7 @@
                         "creation_time_in_millis": 1760198400000,
                         "modification_time_in_millis": 1760198460000,
                         "first_login_time_in_millis": 1760198500000,
+                        "last_active_time_in_millis": 1760198600000,
                         "expiration_time_in_millis": 1791734400000,
                         "incomplete_details": [
                           "<incomplete_detail_message>"
@@ -24828,6 +26889,26 @@
                           "id": "b9e3d8f2-4c7a-4e1b-8d3c-5f9a2b7e4c6d",
                           "name": "Old Webhook 1",
                           "description": "First webhook to be deleted",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
                           "org": {
                             "id": "0",
                             "name": "Primary"
@@ -24850,6 +26931,26 @@
                           "id": "e7c4a1f8-2b5d-4a9e-7c3f-8b1e5d4a7c9b",
                           "name": "Old Webhook 2",
                           "description": "Second webhook to be deleted",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
                           "org": {
                             "id": "0",
                             "name": "Primary"
@@ -24885,6 +26986,26 @@
                           "id": "c8f2a5e9-3d6b-4f1e-a8c2-7e4b1d9f5a3c",
                           "name": "Successfully Deleted Webhook",
                           "description": "This webhook was deleted successfully",
+                          "last_modified_by": {
+                            "id": "2c9a7e4f-6b3d-4a8e-9f1c-5e7a3b9c2d6f",
+                            "name": "alex_kim"
+                          },
+                          "signature_verification": {
+                            "type": "HMAC_SHA256",
+                            "header": "X-Webhook-Signature",
+                            "algorithm": "SHA256",
+                            "secret": "***"
+                          },
+                          "additional_headers": [
+                            {
+                              "key": "Custom-Header",
+                              "value": "value1"
+                            }
+                          ],
+                          "url_params": {
+                            "source": "thoughtspot",
+                            "tenant_id": "12345"
+                          },
                           "org": {
                             "id": "0",
                             "name": "Primary"
