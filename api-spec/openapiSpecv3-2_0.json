@@ -9113,7 +9113,7 @@
     "/api/rest/2.0/searchdata": {
       "post": {
         "operationId": "searchData",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\nTo get the SQL query generated for the search along with the data, set `include_sql` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows. Sessions with view-only access cannot use `include_sql`. To get the SQL without running the query, use the [fetchAnswerSqlQuery](#/http/api-endpoints/metadata/fetch-answer-sql-query) API.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an Answer from a given data source.\n\nRequires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.\n\n#### Usage guidelines\n\nTo search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.\n\nPass search tokens in the `query_string` attribute in the API request as shown in the following example:\n\n```\n{\n  \"query_string\": \"[sales] by [store]\",\n  \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n}\n```\n\nFor more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).  \n\nThe `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).  \n\nTo get the SQL query generated for the search along with the data, set `include_sql` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows. Sessions with view-only access cannot use `include_sql`. To get the SQL without running the query, use the [fetchSqlQueryFromModel](#/http/api-endpoints/metadata/fetch-sql-query-from-model) API.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Data",
           "9.0.0.cl"
@@ -11890,7 +11890,7 @@
     "/api/rest/2.0/input-tables/{input_table_identifier}/update": {
       "post": {
         "operationId": "updateInputTable",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, or a value is not compatible with its column's data type (including a date value in neither accepted form for its column).\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.11.0.cl or later</span>\n\nWrites rows into an existing input table. Each call performs a keyed upsert (MERGE): rows are matched against the input table's existing rows on its key columns — the columns mapped to the linked model (its join-key columns). A matched row is updated in place; a row whose key is not found is inserted.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your ThoughtSpot instance, the `CAN_MANAGE_INPUT_TABLES` (**Can manage input tables**) privilege is required. The caller must also have `MODIFY` permission on the input table object.\n\n#### Usage guidelines\n\nSpecify the input table GUID as the `input_table_identifier` path parameter and provide the row data in the request body:\n\n* **`columns`** — Ordered list of column names to write. Column names must exactly match the names defined when the input table was created. The payload **must include every key column** (the columns mapped from the linked model), because rows are matched on those columns, and **must also name at least one non-key column** — the key columns identify a row but are never assigned to, so a payload of key columns alone has nothing to write and is rejected. Beyond that you may include any subset of the non-key columns.\n* **`rows`** — List of rows to write. Each row is an array of string values in the same order as `columns`, and must contain exactly one value per column. All cell values are passed as strings regardless of the column's underlying data type. An empty value writes `NULL` into that cell.\n\n#### Date values\n\nPass a `DATE` cell as an **ISO calendar date** — `yyyy-MM-dd`, for example `2025-01-01`. The value is stored exactly as written, with no time-zone conversion.\n\nAn epoch number (seconds or milliseconds) is also accepted, but it is resolved in the cluster's local time zone, so a UTC-midnight epoch can land on the previous day on a cluster west of UTC. Use the ISO form.\n\nThe date format is declared once per column, so every row must use the same form for a given column: a `DATE` column carrying an ISO date in one row and an epoch number in another is rejected.\n\nThe ISO form applies to `DATE` columns only. `DATE_TIME` and `TIME` columns accept an epoch number only, and an ISO value in one of them is rejected.\n\nA date value in neither accepted form for its column — including a calendar-invalid ISO date such as `2026-02-30` — is rejected with a validation error.\n\n#### Write semantics\n\n* **Matched rows** (the key already exists): only the non-key columns present in `columns` are overwritten. Columns you do not include keep their existing values — this is how you update a subset of columns without disturbing the rest. At least one non-key column must be present for there to be anything to overwrite.\n* **New rows** (the key does not exist): a new row is inserted. Any non-key column you did not include is set to `NULL`.\n* This is **not** a full-table replace. Rows already in the table whose keys are not present in the payload are left untouched.\n* The `rows` array must contain at least one row; an empty `rows` array is rejected.\n\nThe request is rejected with a validation error when a column name does not match the table schema, a row's value count does not match the number of `columns`, a required key column is omitted, no non-key column is named, a value is not compatible with its column's data type (including a date value in neither accepted form for its column), or two rows carry the same key. Keys are compared exactly as sent, so `999` and `0999` are different keys; the same key text may appear only once per payload.\n\n#### Response\n\nThe response returns `rows_loaded` — the number of rows actually written, the\nsum of rows updated (matched) and rows inserted (new).\n\n`rows_loaded` is the count the warehouse itself reports, so it reflects what\nwas written rather than what was submitted. If the warehouse completes the load\nbut reports no count, the call fails with `500` rather than returning a count it\ncannot stand behind. The write is a MERGE keyed on the input table's key\ncolumns, so it is idempotent — retrying the same payload is safe.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Input Tables",
           "26.11.0.cl"
@@ -12985,7 +12985,7 @@
     "/api/rest/2.0/metadata/{logical_table_identifier}/build-index": {
       "post": {
         "operationId": "buildMetadataIndex",
-        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires tenant administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table. A table that is not yet loaded into the search index is picked up on the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.\n\nNote: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "27.1.0.cl"
@@ -13602,7 +13602,7 @@
     "/api/rest/2.0/metadata/answer/sql": {
       "post": {
         "operationId": "fetchAnswerSqlQuery",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches the underlying SQL query data for an Answer object, a search query, or an unsaved Answer. Nothing is saved or executed.\n\nRequires at least view access to the Answer object. For a search query or an unsaved Answer, the user needs access to the data source and, if [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege. Sessions with view-only access are not allowed to call this API.\n\n#### Usage guidelines\n\nSpecify one of the following inputs:\n\n- `metadata_identifier`: GUID or name of a saved Answer.\n- `answer_tml`: TML of an unsaved Answer, in YAML or JSON format.\n- `query_string` and `logical_table_identifier`: a search query and the GUID or name of the data source to run it against.\n\nIf more than one input is given, only the first in the order above is used and the others are ignored. For a search query or an unsaved Answer, `metadata_id` in the response is generated for the request and is not the ID of a saved object.\n\nUpon successful execution, the API returns the SQL queries for the specified object as shown in this example:\n```\n{\n   \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n   \"metadata_name\":\"Total sales\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n         \"metadata_name\":\"Total sales -test\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  \\\"ta_2\\\".\\\"PRODUCTNAME\\\" \\\"ca_2\\\", \\n  \\\"ta_1\\\".\\\"STORENAME\\\" \\\"ca_3\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_4\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\")\\n    ELSE 0\\n  END \\\"ca_5\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_3\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_3\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_PRODUCTS\\\" \\\"ta_2\\\"\\n    ON \\\"ta_3\\\".\\\"PRODUCTID\\\" = \\\"ta_2\\\".\\\"PRODUCTID\\\"\\nGROUP BY \\n  \\\"ca_1\\\", \\n  \\\"ca_2\\\", \\n  \\\"ca_3\\\"\\n\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nFetches the underlying SQL query data for an Answer object.\n\nRequires at least view access to the Answer object.\n\nUpon successful execution, the API returns the SQL queries for the specified object as shown in this example:\n```\n{\n   \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n   \"metadata_name\":\"Total sales\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n         \"metadata_name\":\"Total sales -test\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  \\\"ta_2\\\".\\\"PRODUCTNAME\\\" \\\"ca_2\\\", \\n  \\\"ta_1\\\".\\\"STORENAME\\\" \\\"ca_3\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_4\\\", \\n  CASE\\n    WHEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\") IS NOT NULL THEN sum(\\\"ta_3\\\".\\\"QUANTITYPURCHASED\\\")\\n    ELSE 0\\n  END \\\"ca_5\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_3\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_3\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_PRODUCTS\\\" \\\"ta_2\\\"\\n    ON \\\"ta_3\\\".\\\"PRODUCTID\\\" = \\\"ta_2\\\".\\\"PRODUCTID\\\"\\nGROUP BY \\n  \\\"ca_1\\\", \\n  \\\"ca_2\\\", \\n  \\\"ca_3\\\"\\n\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "9.0.0.cl"
@@ -13842,6 +13842,225 @@
         "responses": {
           "200": {
             "description": "Fetching SQL query of specified metadata object is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/sql/answer": {
+      "post": {
+        "operationId": "fetchSqlQueryFromAnswer",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nFetches the underlying SQL query data for a saved Answer object. The query is not executed.\n\nRequires at least view access to the Answer object.\n\nUpon successful execution, the API returns the SQL queries for the specified object as shown in this example:\n```\n{\n   \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n   \"metadata_name\":\"Total sales\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"8fbe44a8-46ad-4b16-8d39-184b2fada490\",\n         \"metadata_name\":\"Total sales\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nGROUP BY \\\"ca_1\\\"\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FetchSqlQueryFromAnswerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Fetching SQL query of specified metadata object is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/sql/model": {
+      "post": {
+        "operationId": "fetchSqlQueryFromModel",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nFetches the SQL query for a search query on a data source, such as a Model, View, or Table. The query is not executed.\n\nRequires access to the data source. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required. Sessions with view-only access cannot call this API.\n\n#### Usage guidelines\n\n- Pass search tokens in the `query_string` attribute, and the GUID or name of the data source in `logical_table_identifier`. For more information about the `query_string` format, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).\n- To change the generated SQL, add `runtime_filter`, `runtime_sort`, or `runtime_param_override`. They use the same format as in the [searchData](#/http/api-endpoints/data/search-data) API.\n- The SQL is generated for the table visualization of the search. It has no `LIMIT` or `OFFSET` clause.\n- `metadata_id` in the response is the GUID of the data source, and `metadata_name` is the query string.\n- To get the data and the SQL in one call, use the [searchData](#/http/api-endpoints/data/search-data) API with `include_sql` set to `true`.\n\nUpon successful execution, the API returns the SQL query as shown in this example:\n```\n{\n   \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n   \"metadata_name\":\"[sales] [region]\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",\n         \"metadata_name\":\"[sales] [region]\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nGROUP BY \\\"ca_1\\\"\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FetchSqlQueryFromModelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Fetching SQL query is successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/sql/tml": {
+      "post": {
+        "operationId": "fetchSqlQueryFromTML",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nFetches the SQL query for the TML of an unsaved Answer. The Answer is not saved and the query is not executed.\n\nRequires access to every data source that the Answer uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required. Sessions with view-only access cannot call this API.\n\n#### Usage guidelines\n\n- Send the Answer TML in the `answer_tml` attribute, in YAML or JSON format. Only Answer TML is supported.\n- TML support must be enabled on the cluster. If it is disabled, the API returns a 403 error.\n- The SQL is generated for the visualization that the TML specifies in `display_mode`.\n- The `metadata_id` in the response is generated for each request. It is not the ID of a saved object, so do not use it to look up or correlate results.\n- `metadata_name` is the Answer name from the TML.\n\nUpon successful execution, the API returns the SQL query as shown in this example:\n```\n{\n   \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n   \"metadata_name\":\"Sales by region\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n         \"metadata_name\":\"Sales by region\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nGROUP BY \\\"ca_1\\\"\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FetchSqlQueryFromTMLRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Fetching SQL query is successful.",
             "content": {
               "application/json": {
                 "schema": {
@@ -18297,7 +18516,7 @@
     "/api/rest/2.0/customization/styles/search": {
       "post": {
         "operationId": "searchStyleCustomizations",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.10.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nRetrieves style preferences at cluster level or for the authenticated user's org. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\n- Set `scope` to `CLUSTER` to retrieve cluster-level style defaults.\n- Set `scope` to `ORG` (default) to retrieve preferences for the authenticated user's org.\n- Each field in the response includes an `is_overridden` flag indicating whether the value was explicitly set at the requested scope or inherited from a parent scope (cluster or system default).\n- `app_color_theme` (_available from 26.12.0.cl_) describes the same underlying color as `navigation_panel`, in a different form: `navigation_panel` uses the `DARK`/`TWO_TONE`/`CUSTOM` theme modes, while `app_color_theme` gives the brand color and how it is applied (`brand_color`, `apply_as_top_nav_color`). They never disagree, so use whichever your integration already reads. `app_color_theme` is returned only when the app color theme is enabled on the cluster; `navigation_panel` is always returned.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -18881,7 +19100,7 @@
     "/api/rest/2.0/customization/styles/update": {
       "post": {
         "operationId": "updateStyleCustomization",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.10.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.7.0.cl or later</span>\n\nUpdates style preferences at cluster level or for the authenticated user's org, including navigation panel color, chart color palette, embedded footer text, logo, and font assignments per visualization area. Cluster-level preferences serve as defaults for all orgs. Org-level preferences override cluster defaults. Resetting an Org-level preference falls back to Cluster-level preference, which on reset falls back to system defaults.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege.\n\n#### Usage guidelines\n\nTwo operations are supported via the `operation` field:\n\n- **REPLACE** (default): Applies the fields provided in the request. Omitted fields remain unchanged.\n- **RESET**: Reverts specific fields to defaults. Specify which fields to reset using `reset_options.style` (for style fields) and `reset_options.visualization_areas` (for font assignments). Fields not listed in `reset_options` are not affected.\n\n#### Logo upload\n\nLogo files are uploaded as binary fields using `multipart/form-data`:\n\n- `default_logo`: Square app icon and favicon. Recommended size: 140×140 px. Accepted formats: PNG, JPG.\n- `wide_logo`: Horizontal top nav bar logo. Recommended size: 230×45 px. Accepted formats: PNG, JPG.\n\nTo reset a logo to the default, use `operation: RESET` with `reset_options.style` set to `DEFAULT_LOGO` or `WIDE_LOGO`.\n\n#### Navigation panel color\n\nSet `navigation_panel.theme` to one of:\n\n- `DARK`: Default dark theme.\n- `TWO_TONE`: Dual-tone panel style.\n- `CUSTOM`: User-defined color. Provide `navigation_panel.base_color` as a 6-digit hex string (e.g. `#2359B6`).\n\n#### App color theme\n\n`app_color_theme` (_available from 26.12.0.cl_) sets the same underlying color as `navigation_panel`, expressed as a brand color plus how it is applied. Provide exactly one of `navigation_panel` or `app_color_theme` per request; providing both returns an error. `app_color_theme` is supported only when the app color theme is enabled on the cluster; using it otherwise returns an error.\n\n- `brand_color`: Brand color as a 6-digit hex string (e.g. `#2359B6`). Omit to leave the stored color unchanged. To clear it, use `operation: RESET` with `reset_options.style` set to `APP_COLOR_THEME`.\n- `apply_as_top_nav_color`: Whether the brand color is painted on the top navigation bar literally, instead of the surface shade generated from it. Omit to leave the stored choice unchanged.\n\n`brand_color` and `apply_as_top_nav_color` may be set independently in the same request.\n\n#### Chart color palette\n\nProvide exactly 8 color entries in `chart_color_palette.colors`. Each entry requires a `primary` hex color. If `secondary` shades are omitted, the server auto-generates 4 shades from the primary color.\n\n#### Font assignments\n\nSpecify `visualization_fonts.chart_visualization_fonts`, `visualization_fonts.table_visualization_fonts`, and `visualization_fonts.advanced_chart_visualization_fonts` to assign custom fonts to specific visualization areas. Only provide the areas you want to update; omitted areas remain unchanged.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Style Customization",
           "26.7.0.cl"
@@ -18927,7 +19146,7 @@
                     ]
                   },
                   "app_color_theme": {
-                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+                    "description": "App color theme -- the same underlying color navigation_panel sets,\nexpressed as a brand color plus how it is applied. brand_color and\napply_as_top_nav_color may be set independently; each is left unchanged\nif omitted. To clear the brand color, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. Supported only when the app\ncolor theme is enabled on the cluster. Must not be provided together\nwith navigation_panel. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/AppColorThemeInput"
@@ -32641,7 +32860,7 @@
           },
           "app_color_theme": {
             "$ref": "#/components/schemas/StyleAppColorTheme",
-            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "App color theme configuration -- the same stored color navigation_panel\nexpresses, as a brand color plus how it is applied. Returned alongside\nnavigation_panel when the app color theme is enabled on the cluster;\nomitted otherwise. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           },
           "chart_color_palette": {
@@ -33260,7 +33479,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Documentation URL for the feature group, when available.",
+            "description": "Documentation URL of the feature group itself, when it has one. Not\ninherited from, or by, the features in the group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the group's documentation link should open in a new browser tab,\nthe default, or `false` for the same tab. Omitted when there is no `docs_url`.",
             "nullable": true
           },
           "features": {
@@ -33323,7 +33547,12 @@
           },
           "docs_url": {
             "type": "string",
-            "description": "Per-feature documentation URL, when available.",
+            "description": "Documentation URL of the feature itself, when it has one. Not inherited from\nits group.",
+            "nullable": true
+          },
+          "docs_new_window": {
+            "type": "boolean",
+            "description": "`true` when the feature's documentation link should open in a new browser\ntab, the default, or `false` for the same tab. Omitted when there is no\n`docs_url`.",
             "nullable": true
           }
         },
@@ -39143,12 +39372,12 @@
         "properties": {
           "brand_color": {
             "type": "string",
-            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "Brand color as a 6-digit hex string (e.g. \"#2359B6\"). Omit to leave the\nstored color unchanged. To clear it, use operation RESET with\nreset_options.style: [\"APP_COLOR_THEME\"]. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           },
           "apply_as_top_nav_color": {
             "type": "boolean",
-            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.10.0.cl or later</span>",
+            "description": "Whether the brand color is painted on the top navigation bar literally,\ninstead of the surface shade derived from it. Omit to leave the stored\nchoice unchanged. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -42643,7 +42872,7 @@
         "type": "object",
         "properties": {
           "org_identifier": {
-            "description": "Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session. Reindexing a table in another Org requires tenant administrator privileges.",
+            "description": "Unique ID or name of the Org that contains the logical table. Defaults to the Org of the current session.",
             "type": "string"
           }
         }
@@ -42866,22 +43095,13 @@
         "type": "object",
         "properties": {
           "metadata_identifier": {
-            "description": "ID or name of a saved Answer. Required unless <code>query_string</code> and <code>logical_table_identifier</code> are given.",
-            "type": "string"
-          },
-          "query_string": {
-            "description": "Search query string to compile into SQL without executing it. For example, <code>[Sales][Region]</code>. Requires <code>logical_table_identifier</code>. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
-            "type": "string"
-          },
-          "logical_table_identifier": {
-            "description": "GUID or name of the data source, such as a Model, View, or Table, to run <code>query_string</code> against. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
-            "type": "string"
-          },
-          "answer_tml": {
-            "description": "TML of an unsaved Answer to compile into SQL without saving or executing it. Takes precedence over <code>query_string</code>, but <code>metadata_identifier</code> takes precedence over both.\n\n**Note: Passing TML in YAML format directly from the Playground currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)** <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "ID or name of an Answer.",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "metadata_identifier"
+        ]
       },
       "FetchAsyncImportTaskStatusRequest": {
         "type": "object",
@@ -42947,6 +43167,59 @@
         },
         "required": [
           "metadata_identifier"
+        ]
+      },
+      "FetchSqlQueryFromAnswerRequest": {
+        "type": "object",
+        "properties": {
+          "metadata_identifier": {
+            "description": "ID or name of a saved Answer.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "metadata_identifier"
+        ]
+      },
+      "FetchSqlQueryFromModelRequest": {
+        "type": "object",
+        "properties": {
+          "query_string": {
+            "description": "Query string with search tokens. For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api)",
+            "type": "string"
+          },
+          "logical_table_identifier": {
+            "description": "GUID or name of the data source object, such as a Model, View, or Table, to run <code>query_string</code> against.",
+            "type": "string"
+          },
+          "runtime_filter": {
+            "description": "JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).",
+            "type": "object"
+          },
+          "runtime_sort": {
+            "description": "JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).",
+            "type": "object"
+          },
+          "runtime_param_override": {
+            "description": "JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).",
+            "type": "object"
+          }
+        },
+        "required": [
+          "query_string",
+          "logical_table_identifier"
+        ]
+      },
+      "FetchSqlQueryFromTMLRequest": {
+        "type": "object",
+        "properties": {
+          "answer_tml": {
+            "description": "TML of an unsaved Answer, in YAML or JSON format. The Answer is not saved and the query is not executed.\n\n**Note: Passing TML in YAML format directly from the Playground currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+            "type": "string"
+          }
+        },
+        "required": [
+          "answer_tml"
         ]
       },
       "ImportMetadataTMLRequest": {
