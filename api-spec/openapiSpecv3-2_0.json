@@ -3057,7 +3057,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SendAgentMessageResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AgentStreamFrame"
+                    }
+                  ]
                 }
               }
             }
@@ -50605,6 +50612,9 @@
               "gen_no": {
                 "type": "integer"
               },
+              "transaction_id": {
+                "type": "string"
+              },
               "worksheet_id": {
                 "type": "string"
               },
@@ -50625,6 +50635,21 @@
                 "properties": {
                   "total_rows": {
                     "type": "integer"
+                  },
+                  "columns": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      },
+                      "title": "Table Data Columns"
+                    }
                   }
                 },
                 "title": "Answer Table Data"
@@ -50635,13 +50660,24 @@
               "title": "total sales by region last quarter",
               "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
               "gen_no": 2,
+              "transaction_id": "6fafbc09-1b08-4c49-a017-fa331612a76f",
               "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
               "sage_query": "[sales] [region] [date] = 'last quarter'",
               "visualization": {
                 "chart_type": "ADVANCED_COLUMN"
               },
               "table_data": {
-                "total_rows": 5
+                "total_rows": 5,
+                "columns": [
+                  {
+                    "name": "region",
+                    "type": "ATTRIBUTE"
+                  },
+                  {
+                    "name": "Total sales",
+                    "type": "MEASURE"
+                  }
+                ]
               }
             },
             "title": "Agent Tool Result Answer"
@@ -50652,18 +50688,29 @@
           "id": "toolu_01AMjCrr",
           "name": "spotter_tools_fetch_and_visualize_data",
           "is_error": false,
-          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`\nChart type: ADVANCED_COLUMN",
           "answer": {
             "title": "total sales by region last quarter",
             "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
             "gen_no": 2,
+            "transaction_id": "6fafbc09-1b08-4c49-a017-fa331612a76f",
             "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
             "sage_query": "[sales] [region] [date] = 'last quarter'",
             "visualization": {
               "chart_type": "ADVANCED_COLUMN"
             },
             "table_data": {
-              "total_rows": 5
+              "total_rows": 5,
+              "columns": [
+                {
+                  "name": "region",
+                  "type": "ATTRIBUTE"
+                },
+                {
+                  "name": "Total sales",
+                  "type": "MEASURE"
+                }
+              ]
             }
           }
         }
