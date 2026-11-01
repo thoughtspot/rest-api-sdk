@@ -1619,7 +1619,7 @@
                 },
                 "examples": {
                   "example_1": {
-                    "summary": "Shared conversation with one message and an answer",
+                    "summary": "Shared conversation with one message, the agent's tool steps, and an answer",
                     "value": {
                       "conversation_id": "conv-abc-123",
                       "shared_conversation_id": "snap-xyz-456",
@@ -1646,6 +1646,75 @@
                             "attachments": []
                           },
                           "response_items": [
+                            {
+                              "type": "search_datasets",
+                              "timestamp_in_millis": 1744000001000,
+                              "is_thinking": true,
+                              "step_title": "Finding data sources",
+                              "text": "Found 1 data source that matches the question.",
+                              "data_sources": [
+                                {
+                                  "data_source_identifier": "ds-001",
+                                  "data_source_name": "Retail Sales",
+                                  "description": "Retail sales transactions by region",
+                                  "confidence": 0.94,
+                                  "reasoning": "The model contains revenue amounts and a region column.",
+                                  "header": {
+                                    "display_name": "Retail Sales",
+                                    "guid": "ds-001",
+                                    "description": "Retail sales transactions by region"
+                                  },
+                                  "related_liveboard_visualizations": [
+                                    {
+                                      "answer": {
+                                        "header": {
+                                          "id": "4c5d6e7f-8a9b-4c0d-9e1f-2a3b4c5d6e7f",
+                                          "title": "Revenue by region"
+                                        }
+                                      },
+                                      "pinboard_header": {
+                                        "id": "5d6e7f8a-9b0c-4d1e-8f2a-3b4c5d6e7f8a",
+                                        "title": "Regional Performance"
+                                      }
+                                    }
+                                  ],
+                                  "related_answers": [
+                                    {
+                                      "header": {
+                                        "id": "6e7f8a9b-0c1d-4e2f-9a3b-4c5d6e7f8a9b",
+                                        "title": "Quarterly revenue by region"
+                                      }
+                                    }
+                                  ],
+                                  "related_spotter_queries": [
+                                    "revenue by region last quarter"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "tool_call",
+                              "timestamp_in_millis": 1744000002000,
+                              "is_thinking": true,
+                              "step_title": "Querying data",
+                              "tool_call_id": "toolu-01",
+                              "tool_name": "fetch_and_visualize",
+                              "arguments": {
+                                "query": "revenue by region",
+                                "data_source_identifier": "ds-001"
+                              }
+                            },
+                            {
+                              "type": "tool_result",
+                              "timestamp_in_millis": 1744000003000,
+                              "is_thinking": true,
+                              "step_title": "Querying data",
+                              "tool_call_id": "toolu-01",
+                              "tool_name": "fetch_and_visualize",
+                              "content": "Returned 5 rows.",
+                              "content_type": "TEXT_PLAIN",
+                              "success": true
+                            },
                             {
                               "type": "answer",
                               "answer_id": "ans-01",
@@ -13828,7 +13897,8 @@
                   "$ref": "#/components/schemas/ImportEPackAsyncTaskStatus"
                 },
                 "examples": {
-                  "example": {
+                  "example_1": {
+                    "summary": "Import task accepted and queued",
                     "value": {
                       "tenant_id": "<tenant_id>",
                       "org_id": 0,
@@ -13838,6 +13908,30 @@
                       "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
                       "import_policy": "PARTIAL_OBJECT",
                       "created_at": 1760198400000,
+                      "total_object_count": 2,
+                      "object_processed_count": 0,
+                      "modified_at": 1760198400000,
+                      "author_display_name": "<user_display_name>"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Import task rejected because the task executor is at capacity",
+                    "value": {
+                      "tenant_id": "<tenant_id>",
+                      "org_id": 0,
+                      "task_id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "task_name": "Import sales objects",
+                      "import_response": {
+                        "status": {
+                          "status_code": "ERROR",
+                          "error_message": "Task Executor capacity reached. Cannot accept more tasks. Please try after sometime."
+                        }
+                      },
+                      "task_status": "FAILED",
+                      "author_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                      "import_policy": "PARTIAL_OBJECT",
+                      "created_at": 1760198400000,
+                      "completed_at": 1760198400000,
                       "total_object_count": 2,
                       "object_processed_count": 0,
                       "modified_at": 1760198400000,
