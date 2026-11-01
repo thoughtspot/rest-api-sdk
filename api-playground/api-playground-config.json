@@ -3,7 +3,6 @@
     "hideApiFields": [
         { "operationId": "getFullAccessToken", "fields": ["user_parameters"] },
         { "operationId": "getObjectAccessToken", "fields": ["user_parameters"] },
-        { "operationId": "getCustomAccessToken", "fields": ["filter_rules"] },
-        { "operationId": "updateWebhookConfiguration", "fields": ["reset_options"] }
+        { "operationId": "getCustomAccessToken", "fields": ["filter_rules"] }
     ]
 }
