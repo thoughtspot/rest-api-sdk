@@ -50386,7 +50386,17 @@
             "nullable": true
           }
         },
-        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it."
+        "description": "One frame of an agent response. On the streaming endpoint each SSE `data:` line\nis one frame, and a turn streams many over a single connection. Exactly one\nfield is set on any given frame: route on which one is present. New frame\ntypes are added as new fields, so a frame where none of the fields you know is\nset is a frame of a type you do not recognize: skip it.",
+        "example": {
+          "tool_call": {
+            "id": "toolu_01AMjCrr",
+            "name": "spotter_tools_fetch_and_visualize_data",
+            "args": {
+              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "english_query": "total sales by region last quarter"
+            }
+          }
+        }
       },
       "AgentEvent": {
         "type": "object",
@@ -50419,7 +50429,21 @@
             "description": "The text this event carries. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "Text from Spotter — its reasoning or its answer."
+        "description": "Text from Spotter — its reasoning or its answer.",
+        "example": {
+          "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+          "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+          "partial": true,
+          "content": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "The user is asking for data",
+                "thought": true
+              }
+            ]
+          }
+        }
       },
       "AgentEventContent": {
         "type": "object",
@@ -50440,7 +50464,16 @@
             "description": "The text this event carries. Empty when `error_code` is set. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "The content of one agent event."
+        "description": "The content of one agent event.",
+        "example": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The user is asking for data",
+              "thought": true
+            }
+          ]
+        }
       },
       "AgentEventPart": {
         "type": "object",
@@ -50458,7 +50491,11 @@
             "nullable": true
           }
         },
-        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself."
+        "description": "One piece of text from Spotter, with a flag marking reasoning apart from the\nanswer itself.",
+        "example": {
+          "text": "The user is asking for data",
+          "thought": true
+        }
       },
       "AgentToolCall": {
         "type": "object",
@@ -50475,11 +50512,33 @@
           },
           "args": {
             "type": "object",
-            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
+            "description": "The arguments the step ran with, forwarded as the backend produced them. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "dataset_id": {
+                "type": "string"
+              },
+              "english_query": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "english_query": "total sales by region last quarter"
+            },
+            "title": "Agent Tool Call Args"
           }
         },
-        "description": "A step Spotter started, such as querying a data source."
+        "description": "A step Spotter started, such as querying a data source.",
+        "example": {
+          "id": "toolu_01AMjCrr",
+          "name": "spotter_tools_fetch_and_visualize_data",
+          "args": {
+            "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+            "english_query": "total sales by region last quarter"
+          }
+        }
       },
       "AgentProgress": {
         "type": "object",
@@ -50502,7 +50561,12 @@
             "nullable": true
           }
         },
-        "description": "A stage of a step in flight, so you can show what Spotter is doing."
+        "description": "A stage of a step in flight, so you can show what Spotter is doing.",
+        "example": {
+          "code": "TML_GEN",
+          "message": "Translating the request with the Reasoning Engine",
+          "tool_call_id": "toolu_01AMjCrr"
+        }
       },
       "AgentToolResult": {
         "type": "object",
@@ -50529,11 +50593,80 @@
           },
           "answer": {
             "type": "object",
-            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>",
-            "nullable": true
+            "description": "The ThoughtSpot answer the step produced, forwarded as the backend produced\nit. Use `session_id` with `gen_no` to fetch or deep-link it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nKeys are documented from a sample; other keys may be returned.",
+            "nullable": true,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "session_id": {
+                "type": "string"
+              },
+              "gen_no": {
+                "type": "integer"
+              },
+              "worksheet_id": {
+                "type": "string"
+              },
+              "sage_query": {
+                "type": "string"
+              },
+              "visualization": {
+                "type": "object",
+                "properties": {
+                  "chart_type": {
+                    "type": "string"
+                  }
+                },
+                "title": "Answer Visualization"
+              },
+              "table_data": {
+                "type": "object",
+                "properties": {
+                  "total_rows": {
+                    "type": "integer"
+                  }
+                },
+                "title": "Answer Table Data"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "title": "total sales by region last quarter",
+              "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+              "gen_no": 2,
+              "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+              "sage_query": "[sales] [region] [date] = 'last quarter'",
+              "visualization": {
+                "chart_type": "ADVANCED_COLUMN"
+              },
+              "table_data": {
+                "total_rows": 5
+              }
+            },
+            "title": "Agent Tool Result Answer"
           }
         },
-        "description": "What a step produced, including any answer."
+        "description": "What a step produced, including any answer.",
+        "example": {
+          "id": "toolu_01AMjCrr",
+          "name": "spotter_tools_fetch_and_visualize_data",
+          "is_error": false,
+          "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+          "answer": {
+            "title": "total sales by region last quarter",
+            "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+            "gen_no": 2,
+            "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+            "sage_query": "[sales] [region] [date] = 'last quarter'",
+            "visualization": {
+              "chart_type": "ADVANCED_COLUMN"
+            },
+            "table_data": {
+              "total_rows": 5
+            }
+          }
+        }
       },
       "AgentStreamError": {
         "type": "object",
@@ -50564,7 +50697,14 @@
             "nullable": true
           }
         },
-        "description": "A failure that ended the turn."
+        "description": "A failure that ended the turn.",
+        "example": {
+          "code": "409",
+          "message": "session busy: lease held by invocation 7f3a",
+          "source": "transport",
+          "display_message": "Another request is still running in this conversation.",
+          "error_bucket": "RETRY"
+        }
       },
       "AgentStreamDone": {
         "type": "object",
@@ -50577,7 +50717,10 @@
             "description": "The conversation this turn belonged to, repeated so a client that cannot read\nresponse headers can still continue it. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "End of turn. Always last."
+        "description": "End of turn. Always last.",
+        "example": {
+          "conversation_identifier": "5612260428840173568"
+        }
       },
       "AgentTurnResponse": {
         "type": "object",
@@ -50598,7 +50741,86 @@
             "description": "The frames of the turn, in the order Spotter produced them. The number of\nframes is not capped and the list is never truncated: a turn too large or too\nlong to return whole fails with an HTTP error instead. For long turns, use\nthe streaming endpoint. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
           }
         },
-        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected."
+        "description": "A completed agent turn: every frame the streaming endpoint publishes, collected.",
+        "example": {
+          "conversation_identifier": "5612260428840173568",
+          "events": [
+            {
+              "tool_call": {
+                "id": "toolu_01AMjCrr",
+                "name": "spotter_tools_fetch_and_visualize_data",
+                "args": {
+                  "dataset_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                  "english_query": "total sales by region last quarter"
+                }
+              }
+            },
+            {
+              "progress": {
+                "code": "TML_GEN",
+                "message": "Translating the request with the Reasoning Engine",
+                "tool_call_id": "toolu_01AMjCrr"
+              }
+            },
+            {
+              "tool_result": {
+                "id": "toolu_01AMjCrr",
+                "name": "spotter_tools_fetch_and_visualize_data",
+                "is_error": false,
+                "text": "**total sales by region last quarter**\nTML query: `[sales] [region] [date] = 'last quarter'`",
+                "answer": {
+                  "title": "total sales by region last quarter",
+                  "session_id": "c5c25b33-74b8-4e83-b7f3-f7f384323903",
+                  "gen_no": 2,
+                  "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                  "sage_query": "[sales] [region] [date] = 'last quarter'",
+                  "visualization": {
+                    "chart_type": "ADVANCED_COLUMN"
+                  },
+                  "table_data": {
+                    "total_rows": 5
+                  }
+                }
+              }
+            },
+            {
+              "event": {
+                "id": "c506785a-0493-4273-97c0-128ab2bdd7aa",
+                "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                "partial": true,
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "The user is asking for data",
+                      "thought": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "event": {
+                "id": "10552f5a-c275-4e06-8af3-596676cbff71",
+                "invocation_id": "e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974",
+                "partial": true,
+                "content": {
+                  "role": "model",
+                  "parts": [
+                    {
+                      "text": "Total sales last quarter were highest in the West region."
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "done": {
+                "conversation_identifier": "5612260428840173568"
+              }
+            }
+          ]
+        }
       },
       "AgentMessagesResponse": {
         "type": "object",
@@ -50609,12 +50831,156 @@
           "messages": {
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "output": {
+                      "type": "string"
+                    },
+                    "worksheet_id": {
+                      "type": "string"
+                    },
+                    "assumptions": {
+                      "type": "string"
+                    },
+                    "chart_type": {
+                      "type": "string"
+                    },
+                    "interrupted": {
+                      "type": "boolean"
+                    },
+                    "data_awareness_enabled": {
+                      "type": "boolean"
+                    }
+                  },
+                  "title": "Messages Metadata"
+                },
+                "internal": {
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "agent_context": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "session_id": {
+                  "type": "string"
+                },
+                "gen_no": {
+                  "type": "integer"
+                },
+                "sage_query": {
+                  "type": "string"
+                },
+                "tml_tokens": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "formulas": {
+                  "type": "array",
+                  "items": {}
+                },
+                "parameters": {
+                  "type": "array",
+                  "items": {}
+                },
+                "subqueries": {
+                  "type": "array",
+                  "items": {}
+                },
+                "viz_suggestion": {
+                  "type": "string"
+                },
+                "ac_state": {
+                  "nullable": true
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "metadata": {},
+                "internal": {},
+                "type": "text",
+                "text": "\n\nI'll compare sales between 2025 and 2024. First, let me get the dataset context to identify the relevant sales and date columns.",
+                "agent_context": ""
+              },
+              "title": "Agent Messages Response Messages"
             },
-            "description": "The agent's response messages, in order. Each has a `type` (`text`,\n`answer`, `error`, ...) and the fields of that type. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>"
+            "description": "The agent's response messages, in order. Each has a `type` (`text`,\n`answer`, `error`, ...) and the fields of that type. <br/>  <span class=\"since-beta-tag\">Version: 26.12.0.cl or later</span>\n\nKeys are documented from a sample; other keys may be returned."
           }
         },
-        "description": "A completed agent turn on V1."
+        "description": "A completed agent turn on V1.",
+        "example": {
+          "messages": [
+            {
+              "metadata": {},
+              "internal": {},
+              "type": "text",
+              "text": "\n\nI'll compare sales between 2025 and 2024. First, let me get the dataset context to identify the relevant sales and date columns.",
+              "agent_context": ""
+            },
+            {
+              "metadata": {},
+              "internal": {},
+              "type": "text",
+              "text": "```json\n{\"search_mode\": \"semantic\", \"dataset_name\": \"(Sample) Retail - Apparel\", \"columns\": [{\"name\": \"sales\", \"type\": \"MEASURE\", \"data_type\": \"double\"}, {\"name\": \"date\", \"type\": \"ATTRIBUTE\", \"data_type\": \"date\", \"sample_values\": [\"2025\", \"2024\"]}]}\n```",
+              "agent_context": ""
+            },
+            {
+              "metadata": {},
+              "internal": {},
+              "type": "text",
+              "text": "\n\nPerfect! I found the sales and date columns. I can see the dataset contains sales data for both 2025 and 2024. Now I'll create a comparison query to show sales for 2025 versus 2024.",
+              "agent_context": ""
+            },
+            {
+              "metadata": {
+                "output": "<base64-encoded-protobuf-output>",
+                "worksheet_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                "assumptions": "",
+                "chart_type": "KPI",
+                "interrupted": false,
+                "data_awareness_enabled": true
+              },
+              "internal": {},
+              "type": "answer",
+              "title": "Compare total sales for 2025 vs 2024",
+              "description": "",
+              "session_id": "842bb67a-e08e-4861-97e8-8db9538db51d",
+              "gen_no": 2,
+              "sage_query": "[sales] [date] = '2025' vs [date] = '2024'",
+              "tml_tokens": [
+                "[sales]",
+                "[date] = '2025' vs [date] = '2024'"
+              ],
+              "formulas": [],
+              "parameters": [],
+              "subqueries": [],
+              "viz_suggestion": "CAEQIBomEiQ2NjE5NzI0Yy1kMjVlLTU4MDItOWNjOC1jNDA3MWY3OWY5MzAoATIA",
+              "ac_state": null
+            },
+            {
+              "metadata": {},
+              "internal": {},
+              "type": "text",
+              "text": "\n\nThe visualization shows the side-by-side comparison of total sales (in USD) between the two years, allowing you to see the year-over-year performance. You can see the sales figures for both 2024 and 2025, making it easy to identify growth or decline trends in your retail apparel business.",
+              "agent_context": ""
+            }
+          ]
+        }
       },
       "SendAgentConversationMessageResponse": {
         "description": "Shape of the JSON a non-streaming send returns: `AgentMessagesResponse` on\nV1, `AgentTurnResponse` on V2.",
