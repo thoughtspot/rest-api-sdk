@@ -7254,11 +7254,11 @@ paths:
         \ metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can\
         \ manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac)\
         \ is enabled on your instance, the following Data control privileges may be\
-        \ required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n\
-        - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES`\
-        \ (**Can manage data models**)\n\nTo download the connection metadata difference\
-        \ between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier`\
-        \ in the API request.\n\n\n\n\n\n"
+        \ required:  \n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n\
+        - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download\
+        \ the connection metadata difference between ThoughtSpot and CDW, pass the\
+        \ connection GUID as `connection_identifier` in the API request.\n\n\n\n\n\
+        \n"
       operationId: downloadConnectionMetadataChanges
       parameters:
       - description: GUID of the connection
@@ -7316,7 +7316,6 @@ paths:
         Requires `DATAMANAGEMENT` (**Can manage data**) privilege.
         If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:
 
-        - `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)
         - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)
         - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)
 
