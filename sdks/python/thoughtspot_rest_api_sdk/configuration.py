@@ -18,6 +18,11 @@ from typing import Any, Awaitable, Callable, ClassVar, Dict, List, Literal, Opti
 from typing_extensions import NotRequired, Self
 
 
+from thoughtspot_rest_api_sdk.token_provider import (
+    DEFAULT_GET_TOKEN_TIMEOUT,
+    DEFAULT_TOKEN_REFRESH_BUFFER_MS,
+    GetToken,
+)
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'multipleOf', 'maximum', 'exclusiveMaximum',
@@ -142,7 +147,18 @@ class Configuration:
       The dict value is an API key prefix when generating the auth data.
     :param username: Username for HTTP basic authentication.
     :param password: Password for HTTP basic authentication.
-    :param access_token: Access token.
+    :param access_token: Access token: a static str (never refreshed), or a
+      callable invoked on every request.
+    :param get_token: Zero-argument sync or async callable that mints a bearer
+      token, returning a str, a TokenResult, or an /auth/token/* response.
+      Called on first use, cached per ApiClient, called again within
+      token_refresh_buffer_ms of a known expiry, and once more after a 401
+      before the request is retried once. Mutually exclusive with access_token.
+    :param token_refresh_buffer_ms: How long before a known expiry get_token
+      is called again, in milliseconds (default 30000).
+    :param get_token_timeout: Longest a get_token call may take, in seconds
+      (default 300). Requests waiting on it then fail with TimeoutError, and
+      the next request calls get_token again.
     :param server_index: Index to servers configuration.
     :param server_variables: Mapping with string values to replace variables in
       templated server configuration. The validation of enums is performed for
@@ -219,9 +235,33 @@ class Configuration:
         retry_max_backoff: float = 30.0,
         retry_statuses: Optional[Any] = None,
         retry_methods: Optional[Any] = None,
+        get_token: Optional[GetToken] = None,
+        token_refresh_buffer_ms: Optional[float] = None,
+        get_token_timeout: Optional[float] = None,
     ) -> None:
         """Constructor
         """
+        # CUSTOM (ThoughtSpot): validate the token source up front so a
+        # misconfiguration fails at construction, not on the first request.
+        if get_token is not None:
+            if not callable(get_token):
+                raise TypeError(
+                    "get_token must be a callable; pass a static token as access_token instead."
+                )
+            if access_token is not None:
+                raise ValueError("Pass either access_token or get_token, not both.")
+        if token_refresh_buffer_ms is not None and (
+            isinstance(token_refresh_buffer_ms, bool)
+            or not isinstance(token_refresh_buffer_ms, (int, float))
+            or not 0 <= token_refresh_buffer_ms < float("inf")
+        ):
+            raise ValueError("token_refresh_buffer_ms must be a finite number >= 0.")
+        if get_token_timeout is not None and (
+            isinstance(get_token_timeout, bool)
+            or not isinstance(get_token_timeout, (int, float))
+            or not 0 < get_token_timeout < float("inf")
+        ):
+            raise ValueError("get_token_timeout must be a finite number of seconds > 0.")
         self._base_path = "https://localhost:443" if host is None else host
         """Default Base url
         """
@@ -378,12 +418,29 @@ class Configuration:
         self.retry_methods = retry_methods
         """HTTP methods eligible for retry; None = all methods"""
 
+        # CUSTOM (ThoughtSpot): customer-supplied token function. rest.py gives
+        # each ApiClient its own _TokenCache around it (see token_provider.py).
+        self.get_token = get_token
+        """Callable minting a bearer token (str / TokenResult / token response)"""
+        self.token_refresh_buffer_ms = (
+            DEFAULT_TOKEN_REFRESH_BUFFER_MS if token_refresh_buffer_ms is None else token_refresh_buffer_ms
+        )
+        """Call get_token again when fewer than this many ms of validity remain"""
+        self.get_token_timeout = (
+            DEFAULT_GET_TOKEN_TIMEOUT if get_token_timeout is None else get_token_timeout
+        )
+        """Longest a get_token call may take, in seconds"""
+
     def __deepcopy__(self, memo:  Dict[int, Any]) -> Self:
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
         for k, v in self.__dict__.items():
-            if k not in ('logger', 'logger_file_handler'):
+            # CUSTOM: get_token is shared, not copied — deep-copying a bound
+            # method would clone (or fail on) the customer's backend object.
+            if k == 'get_token':
+                setattr(result, k, v)
+            elif k not in ('logger', 'logger_file_handler'):
                 setattr(result, k, copy.deepcopy(v, memo))
         # shallow copy of loggers
         result.logger = copy.copy(self.logger)

@@ -26,6 +26,7 @@ __version__ = "2.32.0"
 # Define package exports
 __all__ = [
     "ThoughtSpotTokenProvider",
+    "TokenResult",
     "AIApi",
     "AuthenticationApi",
     "CollectionsApi",
@@ -679,6 +680,7 @@ __all__ = [
 if __import__("typing").TYPE_CHECKING:
     # import apis into sdk package
     from thoughtspot_rest_api_sdk.token_provider import ThoughtSpotTokenProvider as ThoughtSpotTokenProvider
+    from thoughtspot_rest_api_sdk.token_provider import TokenResult as TokenResult
     from thoughtspot_rest_api_sdk.api.ai_api import AIApi as AIApi
     from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi as AuthenticationApi
     from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi as CollectionsApi
@@ -1342,6 +1344,7 @@ else:
             ("__all__", __all__),
             """# import apis into sdk package
 from thoughtspot_rest_api_sdk.token_provider import ThoughtSpotTokenProvider as ThoughtSpotTokenProvider
+from thoughtspot_rest_api_sdk.token_provider import TokenResult as TokenResult
 from thoughtspot_rest_api_sdk.api.ai_api import AIApi as AIApi
 from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi as AuthenticationApi
 from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi as CollectionsApi
