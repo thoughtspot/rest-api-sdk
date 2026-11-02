@@ -28,9 +28,9 @@ class PngOptionsInput(BaseModel):
     include_cover_page: Optional[StrictBool] = Field(default=False, description="Indicates whether to include the cover page with the Liveboard title.")
     include_filter_page: Optional[StrictBool] = Field(default=False, description="Indicates whether to include a page with all applied filters.")
     personalised_view_id: Optional[StrictStr] = Field(default=None, description="Indicates personalised view of the Liveboard in case of png")
-    image_resolution: Optional[StrictInt] = Field(default=None, description="Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image   Version: 10.9.0.cl or later ")
-    image_scale: Optional[StrictInt] = Field(default=None, description="The scale of the image in percentage. Ex. 100 for 100% scale.   Version: 10.9.0.cl or later ")
-    include_header: Optional[StrictBool] = Field(default=False, description="Indicates whether to include the header of the liveboard.   Version: 10.9.0.cl or later ")
+    image_resolution: Optional[StrictInt] = Field(default=None, description="Desired width of the Liveboard image in pixels. Ex. 1920 for Full HD image    Version: 10.9.0.cl or later ")
+    image_scale: Optional[StrictInt] = Field(default=None, description="The scale of the image in percentage. Ex. 100 for 100% scale.    Version: 10.9.0.cl or later ")
+    include_header: Optional[StrictBool] = Field(default=False, description="Indicates whether to include the header of the liveboard.    Version: 10.9.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["include_cover_page", "include_filter_page", "personalised_view_id", "image_resolution", "image_scale", "include_header"]
 

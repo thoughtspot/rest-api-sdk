@@ -300,6 +300,31 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateInputTable
+        /// </summary>
+        [Fact]
+        public void CreateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateInputTableRequest createInputTableRequest = null;
+            //var response = instance.CreateInputTable(createInputTableRequest);
+            //Assert.IsType<InputTableResponse>(response);
+        }
+
+        /// <summary>
+        /// Test CreateInputTableColumn
+        /// </summary>
+        [Fact]
+        public void CreateInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //CreateInputTableColumnRequest createInputTableColumnRequest = null;
+            //var response = instance.CreateInputTableColumn(inputTableIdentifier, createInputTableColumnRequest);
+            //Assert.IsType<InputColumnResponse>(response);
+        }
+
+        /// <summary>
         /// Test CreateOrg
         /// </summary>
         [Fact]
@@ -606,6 +631,29 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteInputTable
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //instance.DeleteInputTable(inputTableIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteInputTableColumn
+        /// </summary>
+        [Fact]
+        public void DeleteInputTableColumnTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //string columnIdentifier = null;
+            //instance.DeleteInputTableColumn(inputTableIdentifier, columnIdentifier);
+        }
+
+        /// <summary>
         /// Test DeleteManualTranslations
         /// </summary>
         [Fact]
@@ -703,6 +751,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string tagIdentifier = null;
             //instance.DeleteTag(tagIdentifier);
+        }
+
+        /// <summary>
+        /// Test DeleteUsageData
+        /// </summary>
+        [Fact]
+        public void DeleteUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeleteUsageDataRequest deleteUsageDataRequest = null;
+            //var response = instance.DeleteUsageData(deleteUsageDataRequest);
+            //Assert.IsType<DeleteUsageDataResponse>(response);
         }
 
         /// <summary>
@@ -1226,6 +1286,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test GetUsageDataForUser
+        /// </summary>
+        [Fact]
+        public void GetUsageDataForUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string? userIdentifier = null;
+            //var response = instance.GetUsageDataForUser(userIdentifier);
+            //Assert.IsType<UsageDataForUserResponse>(response);
+        }
+
+        /// <summary>
         /// Test GetWebhookStorageConfig
         /// </summary>
         [Fact]
@@ -1627,6 +1699,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchLinkCustomizations
+        /// </summary>
+        [Fact]
+        public void SearchLinkCustomizationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchLinkCustomizationsRequest searchLinkCustomizationsRequest = null;
+            //var response = instance.SearchLinkCustomizations(searchLinkCustomizationsRequest);
+            //Assert.IsType<List<LinkPreference>>(response);
+        }
+
+        /// <summary>
         /// Test SearchMetadata
         /// </summary>
         [Fact]
@@ -1732,6 +1816,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //SearchTagsRequest searchTagsRequest = null;
             //var response = instance.SearchTags(searchTagsRequest);
             //Assert.IsType<List<Tag>>(response);
+        }
+
+        /// <summary>
+        /// Test SearchUsageData
+        /// </summary>
+        [Fact]
+        public void SearchUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchUsageDataRequest searchUsageDataRequest = null;
+            //var response = instance.SearchUsageData(searchUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
         }
 
         /// <summary>
@@ -2164,6 +2260,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test UpdateInputTable
+        /// </summary>
+        [Fact]
+        public void UpdateInputTableTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string inputTableIdentifier = null;
+            //UpdateInputTableRequest updateInputTableRequest = null;
+            //var response = instance.UpdateInputTable(inputTableIdentifier, updateInputTableRequest);
+            //Assert.IsType<InputTableUpdateResponse>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateLinkCustomizations
+        /// </summary>
+        [Fact]
+        public void UpdateLinkCustomizationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateLinkCustomizationsRequest updateLinkCustomizationsRequest = null;
+            //instance.UpdateLinkCustomizations(updateLinkCustomizationsRequest);
+        }
+
+        /// <summary>
         /// Test UpdateMetadataHeader
         /// </summary>
         [Fact]
@@ -2274,6 +2394,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string tagIdentifier = null;
             //UpdateTagRequest updateTagRequest = null;
             //instance.UpdateTag(tagIdentifier, updateTagRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateUsageData
+        /// </summary>
+        [Fact]
+        public void UpdateUsageDataTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateUsageDataRequest updateUsageDataRequest = null;
+            //var response = instance.UpdateUsageData(updateUsageDataRequest);
+            //Assert.IsType<UsageDataResponse>(response);
         }
 
         /// <summary>

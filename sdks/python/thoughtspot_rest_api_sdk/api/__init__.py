@@ -14,7 +14,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
     from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
+    from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
+    from thoughtspot_rest_api_sdk.api.link_customization_api import LinkCustomizationApi
     from thoughtspot_rest_api_sdk.api.log_api import LogApi
     from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi
     from thoughtspot_rest_api_sdk.api.metadata_api import MetadataApi
@@ -52,7 +54,9 @@ from thoughtspot_rest_api_sdk.api.data_api import DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
 from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
+from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
+from thoughtspot_rest_api_sdk.api.link_customization_api import LinkCustomizationApi
 from thoughtspot_rest_api_sdk.api.log_api import LogApi
 from thoughtspot_rest_api_sdk.api.manual_translation_api import ManualTranslationApi
 from thoughtspot_rest_api_sdk.api.metadata_api import MetadataApi

@@ -13,7 +13,9 @@ apis/DataApi.ts
 apis/EmailCustomizationApi.ts
 apis/FeatureManagementApi.ts
 apis/GroupsApi.ts
+apis/InputTablesApi.ts
 apis/JobsApi.ts
+apis/LinkCustomizationApi.ts
 apis/LogApi.ts
 apis/ManualTranslationApi.ts
 apis/MetadataApi.ts
@@ -47,7 +49,9 @@ docs/DataApi.md
 docs/EmailCustomizationApi.md
 docs/FeatureManagementApi.md
 docs/GroupsApi.md
+docs/InputTablesApi.md
 docs/JobsApi.md
+docs/LinkCustomizationApi.md
 docs/LogApi.md
 docs/ManualTranslationApi.md
 docs/MetadataApi.md
@@ -190,6 +194,8 @@ models/CreateConversationRequest.ts
 models/CreateCustomActionRequest.ts
 models/CreateEmailCustomizationRequest.ts
 models/CreateEmailCustomizationResponse.ts
+models/CreateInputTableColumnRequest.ts
+models/CreateInputTableRequest.ts
 models/CreateOrgRequest.ts
 models/CreateRoleRequest.ts
 models/CreateScheduleRequest.ts
@@ -229,6 +235,8 @@ models/DeleteMetadataRequest.ts
 models/DeleteMetadataTypeInput.ts
 models/DeleteOrgEmailCustomizationRequest.ts
 models/DeleteStyleFontsRequest.ts
+models/DeleteUsageDataRequest.ts
+models/DeleteUsageDataResponse.ts
 models/DeleteVariablesRequest.ts
 models/DeleteWebhookConfigurationsRequest.ts
 models/DeployCommitRequest.ts
@@ -314,6 +322,9 @@ models/ImportUserGroupsResponse.ts
 models/ImportUserType.ts
 models/ImportUsersRequest.ts
 models/ImportUsersResponse.ts
+models/InputColumnDefinitionInput.ts
+models/InputColumnInfo.ts
+models/InputColumnResponse.ts
 models/InputColumnSchemaInput.ts
 models/InputEurekaNLSRequest.ts
 models/InputTableDefinitionInput.ts
@@ -324,6 +335,9 @@ models/JWTParameter.ts
 models/JWTUserOptions.ts
 models/JWTUserOptionsFull.ts
 models/JobRecipient.ts
+models/LinkPreference.ts
+models/LinkTemplate.ts
+models/LinkTemplateInput.ts
 models/LiveboardContent.ts
 models/LiveboardDataResponse.ts
 models/LiveboardDetailsInput.ts
@@ -332,6 +346,7 @@ models/LiveboardOptionsInput.ts
 models/LoadAnswerResponse.ts
 models/LogResponse.ts
 models/LoginRequest.ts
+models/MaintenanceScheduleInfo.ts
 models/ManageObjectPrivilegeRequest.ts
 models/MemorySources.ts
 models/MetadataAssociationItem.ts
@@ -385,6 +400,7 @@ models/PutVariableValuesRequest.ts
 models/QueryGetDecomposedQueryRequest.ts
 models/RecipientDetails.ts
 models/RecipientDetailsInput.ts
+models/ReferencedColumnTimeDimension.ts
 models/RegionalSettingsInput.ts
 models/RepoConfigObject.ts
 models/ResetUserPasswordRequest.ts
@@ -444,6 +460,7 @@ models/SearchDataResponse.ts
 models/SearchDatasetsResponseItem.ts
 models/SearchEmailCustomizationRequest.ts
 models/SearchFeaturesRequest.ts
+models/SearchLinkCustomizationsRequest.ts
 models/SearchMetadataRequest.ts
 models/SearchOrgsRequest.ts
 models/SearchRoleResponse.ts
@@ -454,6 +471,7 @@ models/SearchSemanticIntegrationsRequest.ts
 models/SearchStyleCustomizationsRequest.ts
 models/SearchStyleFontsRequest.ts
 models/SearchTagsRequest.ts
+models/SearchUsageDataRequest.ts
 models/SearchUserGroupsRequest.ts
 models/SearchUsersRequest.ts
 models/SearchVariablesRequest.ts
@@ -551,6 +569,8 @@ models/UpdateCustomActionRequest.ts
 models/UpdateEmailCustomizationRequest.ts
 models/UpdateFeatureAssignmentsRequest.ts
 models/UpdateFeatureValueRequest.ts
+models/UpdateInputTableRequest.ts
+models/UpdateLinkCustomizationsRequest.ts
 models/UpdateMetadataHeaderRequest.ts
 models/UpdateMetadataObjIdRequest.ts
 models/UpdateObjIdInput.ts
@@ -560,11 +580,19 @@ models/UpdateScheduleRequest.ts
 models/UpdateStyleFontRequest.ts
 models/UpdateSystemConfigRequest.ts
 models/UpdateTagRequest.ts
+models/UpdateUsageDataRequest.ts
 models/UpdateUserGroupRequest.ts
 models/UpdateUserRequest.ts
 models/UpdateVariableRequest.ts
 models/UpdateVariableValuesRequest.ts
 models/UpdateWebhookConfigurationRequest.ts
+models/UsageData.ts
+models/UsageDataForUserResponse.ts
+models/UsageDataResponse.ts
+models/UsageDataUpdateInput.ts
+models/UsagePoolKey.ts
+models/UsagePoolKeyInput.ts
+models/UsageSummary.ts
 models/User.ts
 models/UserGroup.ts
 models/UserGroupResponse.ts
@@ -625,7 +653,9 @@ tests/DataApiTest.ts
 tests/EmailCustomizationApiTest.ts
 tests/FeatureManagementApiTest.ts
 tests/GroupsApiTest.ts
+tests/InputTablesApiTest.ts
 tests/JobsApiTest.ts
+tests/LinkCustomizationApiTest.ts
 tests/LogApiTest.ts
 tests/ManualTranslationApiTest.ts
 tests/MetadataApiTest.ts

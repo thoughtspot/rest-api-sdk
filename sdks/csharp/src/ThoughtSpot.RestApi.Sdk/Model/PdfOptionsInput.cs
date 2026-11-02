@@ -33,9 +33,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class PdfOptionsInput : IValidatableObject
     {
         /// <summary>
-        /// Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.   Version: 26.5.0.cl or later 
+        /// Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.    Version: 26.5.0.cl or later 
         /// </summary>
-        /// <value>Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.   Version: 26.5.0.cl or later </value>
+        /// <value>Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.    Version: 26.5.0.cl or later </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PageSizeEnum
         {
@@ -54,9 +54,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
 
 
         /// <summary>
-        /// Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.   Version: 26.5.0.cl or later 
+        /// Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.    Version: 26.5.0.cl or later 
         /// </summary>
-        /// <value>Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.   Version: 26.5.0.cl or later </value>
+        /// <value>Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.    Version: 26.5.0.cl or later </value>
         [DataMember(Name = "page_size", EmitDefaultValue = true)]
         public PageSizeEnum? PageSize { get; set; }
         /// <summary>
@@ -89,8 +89,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PdfOptionsInput" /> class.
         /// </summary>
-        /// <param name="pageSize">Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.   Version: 26.5.0.cl or later .</param>
-        /// <param name="zoomLevel">Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later .</param>
+        /// <param name="pageSize">Size of PDF page. &#x60;A4&#x60; generates a paginated A4 PDF. &#x60;CONTINUOUS&#x60; generates a continuous PDF that matches the Liveboard layout. Each Liveboard tab has its own page of variable length. Defaults to &#x60;A4&#x60; if not specified.    Version: 26.5.0.cl or later .</param>
+        /// <param name="zoomLevel">Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.    Version: 26.5.0.cl or later .</param>
         /// <param name="includeCoverPage">Indicates whether to include the cover page with the Liveboard title. (default to true).</param>
         /// <param name="includeCustomLogo">Indicates whether to include customized wide logo in the footer if available. (default to true).</param>
         /// <param name="includeFilterPage">Indicates whether to include a page with all applied filters. For &#x60;CONTINUOUS&#x60; page_size, this parameter indicates whether to include the filter header. (default to true).</param>
@@ -118,9 +118,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later 
+        /// Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.    Version: 26.5.0.cl or later 
         /// </summary>
-        /// <value>Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.   Version: 26.5.0.cl or later </value>
+        /// <value>Zoom level percentage for the PDF. Only applicable when &#x60;page_size&#x60; is &#x60;CONTINUOUS&#x60;. Acceptable values are integers in the range [45, 175]. Defaults to 100 if not specified.    Version: 26.5.0.cl or later </value>
         [DataMember(Name = "zoom_level", EmitDefaultValue = true)]
         public int? ZoomLevel { get; set; }
 

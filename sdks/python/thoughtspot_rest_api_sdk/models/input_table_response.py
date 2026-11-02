@@ -17,6 +17,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from thoughtspot_rest_api_sdk.models.input_column_info import InputColumnInfo
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -25,9 +26,11 @@ class InputTableResponse(BaseModel):
     """
     InputTableResponse
     """ # noqa: E501
-    input_table_identifier: Optional[StrictStr] = Field(default=None, description="Unique ID of the newly created input table.")
+    input_table_id: Optional[StrictStr] = Field(default=None, description="Unique ID of the newly created input table. Pass it as the input_table_identifier path parameter of the other input-table operations.")
+    input_columns: Optional[List[InputColumnInfo]] = Field(default=None, description="Columns of the newly created input table, each with its name and unique ID. Use these IDs to reference specific columns in follow-up calls (for example, the column identifiers written by updateInputTable). Returned so callers do not need a separate lookup to resolve a column name to its ID.")
+    message_info: Optional[StrictStr] = Field(default=None, description="Note set when a referenced column had to be renamed to keep the input table's column names unique — a model column name that occurs in more than one base table is prefixed with its base table name. Absent when no column was renamed. Read it to learn the final name of a renamed column, or read the name off input_columns.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["input_table_identifier"]
+    __properties: ClassVar[List[str]] = ["input_table_id", "input_columns", "message_info"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,15 +73,32 @@ class InputTableResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in input_columns (list)
+        _items = []
+        if self.input_columns:
+            for _item_input_columns in self.input_columns:
+                if _item_input_columns:
+                    _items.append(_item_input_columns.to_dict())
+            _dict['input_columns'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if input_table_identifier (nullable) is None
+        # set to None if input_table_id (nullable) is None
         # and model_fields_set contains the field
-        if self.input_table_identifier is None and "input_table_identifier" in self.model_fields_set:
-            _dict['input_table_identifier'] = None
+        if self.input_table_id is None and "input_table_id" in self.model_fields_set:
+            _dict['input_table_id'] = None
+
+        # set to None if input_columns (nullable) is None
+        # and model_fields_set contains the field
+        if self.input_columns is None and "input_columns" in self.model_fields_set:
+            _dict['input_columns'] = None
+
+        # set to None if message_info (nullable) is None
+        # and model_fields_set contains the field
+        if self.message_info is None and "message_info" in self.model_fields_set:
+            _dict['message_info'] = None
 
         return _dict
 
@@ -92,7 +112,9 @@ class InputTableResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "input_table_identifier": obj.get("input_table_identifier")
+            "input_table_id": obj.get("input_table_id"),
+            "input_columns": [InputColumnInfo.from_dict(_item) for _item in obj["input_columns"]] if obj.get("input_columns") is not None else None,
+            "message_info": obj.get("message_info")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
