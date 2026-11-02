@@ -100,6 +100,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DependentObjectsIsLastBatch'
+        /// </summary>
+        [Fact]
+        public void DependentObjectsIsLastBatchTest()
+        {
+            // TODO unit test for the property 'DependentObjectsIsLastBatch'
+        }
+
+        /// <summary>
         /// Test the property 'IncompleteObjects'
         /// </summary>
         [Fact]

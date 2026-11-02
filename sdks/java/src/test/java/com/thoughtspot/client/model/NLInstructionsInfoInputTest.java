@@ -4,27 +4,46 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for NLInstructionsInfoInput */
+/**
+ * Model tests for NLInstructionsInfoInput
+ */
 public class NLInstructionsInfoInputTest {
     private final NLInstructionsInfoInput model = new NLInstructionsInfoInput();
 
-    /** Model tests for NLInstructionsInfoInput */
+    /**
+     * Model tests for NLInstructionsInfoInput
+     */
     @Test
     public void testNLInstructionsInfoInput() {
         // TODO: test NLInstructionsInfoInput
     }
 
-    /** Test the property 'instructions' */
+    /**
+     * Test the property 'instructions'
+     */
     @Test
     public void instructionsTest() {
         // TODO: test instructions
     }
 
-    /** Test the property 'scope' */
+    /**
+     * Test the property 'scope'
+     */
     @Test
     public void scopeTest() {
         // TODO: test scope
     }
+
 }

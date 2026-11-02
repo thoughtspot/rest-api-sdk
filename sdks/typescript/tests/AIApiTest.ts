@@ -182,6 +182,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('deleteUsageData', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "deleteUsageData"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.deleteUsageData(
+                    // deleteUsageDataRequest DeleteUsageDataRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.deleteUsageData(
+                    // deleteUsageDataRequest DeleteUsageDataRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('exportMemory', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -474,6 +506,38 @@ describe('AIApi', function() {
         });     
       });
 
+      describe('getUsageDataForUser', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "getUsageDataForUser"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.getUsageDataForUser(
+                    // userIdentifier user_identifier
+                       
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.getUsageDataForUser(
+                    // userIdentifier user_identifier
+                       
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
       describe('importMemory', function() {
 
         const testReqBodies = requestBodies.filter(
@@ -597,6 +661,38 @@ describe('AIApi', function() {
                 await expect(
                   instance.searchAnalysts(
                     // searchAnalystsRequest SearchAnalystsRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('searchUsageData', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "searchUsageData"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.searchUsageData(
+                    // searchUsageDataRequest SearchUsageDataRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.searchUsageData(
+                    // searchUsageDataRequest SearchUsageDataRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);
@@ -1045,6 +1141,38 @@ describe('AIApi', function() {
                     // conversationIdentifier conversation_identifier
                     test.Path_Variables.conversation_identifier     , 
                     // updateConversationRequest UpdateConversationRequest
+                     test.Body   
+                  )
+                ).to.be.rejectedWith(Error);
+            }
+
+          });
+        });     
+      });
+
+      describe('updateUsageData', function() {
+
+        const testReqBodies = requestBodies.filter(
+          (body: any) => body.Metadata.operationId === "updateUsageData"
+        );
+        testReqBodies.forEach(async (test: any) => {
+          it(`${test.Metadata.operationId} - ${test.Metadata.scenario} : Testid - ${test.Metadata.testId}`, async function () {
+            
+            if (test.Metadata.scenario === "positive") {         
+              var data;
+              try {
+                data = await instance.updateUsageData(
+                    // updateUsageDataRequest UpdateUsageDataRequest
+                     test.Body   
+                )
+              } catch (er) {
+                console.error(er, "Response", data)
+                expect(er).to.be.undefined
+              }
+            } else {
+                await expect(
+                  instance.updateUsageData(
+                    // updateUsageDataRequest UpdateUsageDataRequest
                      test.Body   
                   )
                 ).to.be.rejectedWith(Error);

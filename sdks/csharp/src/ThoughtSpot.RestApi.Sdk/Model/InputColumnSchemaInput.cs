@@ -73,7 +73,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="name">Name of the column. (required).</param>
         /// <param name="dataType">Physical data type of the column as recognized by the connected warehouse (for example, VARCHAR, INT64, DOUBLE, BOOL, DATE). The accepted values depend on the underlying Cloud Data Warehouse. (required).</param>
         /// <param name="type">Semantic role of the column in ThoughtSpot. Use ATTRIBUTE for dimensional data such as text, dates, and identifiers, and MEASURE for numeric or aggregatable values. (required).</param>
-        /// <param name="allowedValues">Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later .</param>
+        /// <param name="allowedValues">Optional list of permitted values for the column, at most 500, which makes it a fixed-choice column. Every non-empty value written into the column by updateInputTable must then be an exact member of the list, and the API rejects a write that is not. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s data_type — a number for the numeric types, true or false for BOOL, and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave empty to allow any value supported by the data type..</param>
         public InputColumnSchemaInput(string name = default, string dataType = default, TypeEnum type = default, List<string> allowedValues = default)
         {
             // to ensure "name" is required (not null)
@@ -108,9 +108,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string DataType { get; set; }
 
         /// <summary>
-        /// Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later 
+        /// Optional list of permitted values for the column, at most 500, which makes it a fixed-choice column. Every non-empty value written into the column by updateInputTable must then be an exact member of the list, and the API rejects a write that is not. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s data_type — a number for the numeric types, true or false for BOOL, and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave empty to allow any value supported by the data type.
         /// </summary>
-        /// <value>Optional list of permitted values for the column. When provided, data written to this column is restricted to these values. Omit or leave empty to allow any value supported by the data type.    Version: 26.9.0.cl or later </value>
+        /// <value>Optional list of permitted values for the column, at most 500, which makes it a fixed-choice column. Every non-empty value written into the column by updateInputTable must then be an exact member of the list, and the API rejects a write that is not. Each value must be non-empty, at most 8192 characters, and representable as the column&#39;s data_type — a number for the numeric types, true or false for BOOL, and an epoch integer for DATE, DATE_TIME, and TIME. Omit or leave empty to allow any value supported by the data type.</value>
         [DataMember(Name = "allowed_values", EmitDefaultValue = true)]
         public List<string> AllowedValues { get; set; }
 

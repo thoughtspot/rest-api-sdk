@@ -118,6 +118,8 @@ export * from '../models/CreateConversationRequest';
 export * from '../models/CreateCustomActionRequest';
 export * from '../models/CreateEmailCustomizationRequest';
 export * from '../models/CreateEmailCustomizationResponse';
+export * from '../models/CreateInputTableColumnRequest';
+export * from '../models/CreateInputTableRequest';
 export * from '../models/CreateOrgRequest';
 export * from '../models/CreateRoleRequest';
 export * from '../models/CreateScheduleRequest';
@@ -157,6 +159,8 @@ export * from '../models/DeleteMetadataRequest';
 export * from '../models/DeleteMetadataTypeInput';
 export * from '../models/DeleteOrgEmailCustomizationRequest';
 export * from '../models/DeleteStyleFontsRequest';
+export * from '../models/DeleteUsageDataRequest';
+export * from '../models/DeleteUsageDataResponse';
 export * from '../models/DeleteVariablesRequest';
 export * from '../models/DeleteWebhookConfigurationsRequest';
 export * from '../models/DeployCommitRequest';
@@ -242,6 +246,9 @@ export * from '../models/ImportUserGroupsResponse';
 export * from '../models/ImportUserType';
 export * from '../models/ImportUsersRequest';
 export * from '../models/ImportUsersResponse';
+export * from '../models/InputColumnDefinitionInput';
+export * from '../models/InputColumnInfo';
+export * from '../models/InputColumnResponse';
 export * from '../models/InputColumnSchemaInput';
 export * from '../models/InputEurekaNLSRequest';
 export * from '../models/InputTableDefinitionInput';
@@ -252,6 +259,9 @@ export * from '../models/JWTParameter';
 export * from '../models/JWTUserOptions';
 export * from '../models/JWTUserOptionsFull';
 export * from '../models/JobRecipient';
+export * from '../models/LinkPreference';
+export * from '../models/LinkTemplate';
+export * from '../models/LinkTemplateInput';
 export * from '../models/LiveboardContent';
 export * from '../models/LiveboardDataResponse';
 export * from '../models/LiveboardDetailsInput';
@@ -260,6 +270,7 @@ export * from '../models/LiveboardOptionsInput';
 export * from '../models/LoadAnswerResponse';
 export * from '../models/LogResponse';
 export * from '../models/LoginRequest';
+export * from '../models/MaintenanceScheduleInfo';
 export * from '../models/ManageObjectPrivilegeRequest';
 export * from '../models/MemorySources';
 export * from '../models/MetadataAssociationItem';
@@ -312,6 +323,7 @@ export * from '../models/PutVariableValuesRequest';
 export * from '../models/QueryGetDecomposedQueryRequest';
 export * from '../models/RecipientDetails';
 export * from '../models/RecipientDetailsInput';
+export * from '../models/ReferencedColumnTimeDimension';
 export * from '../models/RegionalSettingsInput';
 export * from '../models/RepoConfigObject';
 export * from '../models/ResetUserPasswordRequest';
@@ -371,6 +383,7 @@ export * from '../models/SearchDataResponse';
 export * from '../models/SearchDatasetsResponseItem';
 export * from '../models/SearchEmailCustomizationRequest';
 export * from '../models/SearchFeaturesRequest';
+export * from '../models/SearchLinkCustomizationsRequest';
 export * from '../models/SearchMetadataRequest';
 export * from '../models/SearchOrgsRequest';
 export * from '../models/SearchRoleResponse';
@@ -381,6 +394,7 @@ export * from '../models/SearchSemanticIntegrationsRequest';
 export * from '../models/SearchStyleCustomizationsRequest';
 export * from '../models/SearchStyleFontsRequest';
 export * from '../models/SearchTagsRequest';
+export * from '../models/SearchUsageDataRequest';
 export * from '../models/SearchUserGroupsRequest';
 export * from '../models/SearchUsersRequest';
 export * from '../models/SearchVariablesRequest';
@@ -478,6 +492,8 @@ export * from '../models/UpdateCustomActionRequest';
 export * from '../models/UpdateEmailCustomizationRequest';
 export * from '../models/UpdateFeatureAssignmentsRequest';
 export * from '../models/UpdateFeatureValueRequest';
+export * from '../models/UpdateInputTableRequest';
+export * from '../models/UpdateLinkCustomizationsRequest';
 export * from '../models/UpdateMetadataHeaderRequest';
 export * from '../models/UpdateMetadataObjIdRequest';
 export * from '../models/UpdateObjIdInput';
@@ -487,11 +503,19 @@ export * from '../models/UpdateScheduleRequest';
 export * from '../models/UpdateStyleFontRequest';
 export * from '../models/UpdateSystemConfigRequest';
 export * from '../models/UpdateTagRequest';
+export * from '../models/UpdateUsageDataRequest';
 export * from '../models/UpdateUserGroupRequest';
 export * from '../models/UpdateUserRequest';
 export * from '../models/UpdateVariableRequest';
 export * from '../models/UpdateVariableValuesRequest';
 export * from '../models/UpdateWebhookConfigurationRequest';
+export * from '../models/UsageData';
+export * from '../models/UsageDataForUserResponse';
+export * from '../models/UsageDataResponse';
+export * from '../models/UsageDataUpdateInput';
+export * from '../models/UsagePoolKey';
+export * from '../models/UsagePoolKeyInput';
+export * from '../models/UsageSummary';
 export * from '../models/User';
 export * from '../models/UserGroup';
 export * from '../models/UserGroupResponse';
@@ -657,6 +681,8 @@ import { CreateConversationRequest } from '../models/CreateConversationRequest';
 import { CreateCustomActionRequest } from '../models/CreateCustomActionRequest';
 import { CreateEmailCustomizationRequest } from '../models/CreateEmailCustomizationRequest';
 import { CreateEmailCustomizationResponse } from '../models/CreateEmailCustomizationResponse';
+import { CreateInputTableColumnRequest } from '../models/CreateInputTableColumnRequest';
+import { CreateInputTableRequest } from '../models/CreateInputTableRequest';
 import { CreateOrgRequest } from '../models/CreateOrgRequest';
 import { CreateRoleRequest  , CreateRoleRequestPrivilegesEnum    } from '../models/CreateRoleRequest';
 import { CreateScheduleRequest  , CreateScheduleRequestMetadataTypeEnum   , CreateScheduleRequestFileFormatEnum    , CreateScheduleRequestTimeZoneEnum      } from '../models/CreateScheduleRequest';
@@ -696,6 +722,8 @@ import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { DeleteMetadataTypeInput, DeleteMetadataTypeInputTypeEnum    } from '../models/DeleteMetadataTypeInput';
 import { DeleteOrgEmailCustomizationRequest } from '../models/DeleteOrgEmailCustomizationRequest';
 import { DeleteStyleFontsRequest, DeleteStyleFontsRequestScopeEnum     } from '../models/DeleteStyleFontsRequest';
+import { DeleteUsageDataRequest } from '../models/DeleteUsageDataRequest';
+import { DeleteUsageDataResponse } from '../models/DeleteUsageDataResponse';
 import { DeleteVariablesRequest } from '../models/DeleteVariablesRequest';
 import { DeleteWebhookConfigurationsRequest } from '../models/DeleteWebhookConfigurationsRequest';
 import { DeployCommitRequest  , DeployCommitRequestDeployTypeEnum  , DeployCommitRequestDeployPolicyEnum   } from '../models/DeployCommitRequest';
@@ -763,7 +791,7 @@ import { GetRelevantQuestionsRequest } from '../models/GetRelevantQuestionsReque
 import { GetTokenResponse } from '../models/GetTokenResponse';
 import { GroupInfo } from '../models/GroupInfo';
 import { GroupObject } from '../models/GroupObject';
-import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum   , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
+import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum    , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
 import { ImportDiagnostic, ImportDiagnosticSubStatusEnum    } from '../models/ImportDiagnostic';
@@ -781,6 +809,9 @@ import { ImportUserGroupsResponse } from '../models/ImportUserGroupsResponse';
 import { ImportUserType } from '../models/ImportUserType';
 import { ImportUsersRequest } from '../models/ImportUsersRequest';
 import { ImportUsersResponse } from '../models/ImportUsersResponse';
+import { InputColumnDefinitionInput } from '../models/InputColumnDefinitionInput';
+import { InputColumnInfo } from '../models/InputColumnInfo';
+import { InputColumnResponse } from '../models/InputColumnResponse';
 import { InputColumnSchemaInput  , InputColumnSchemaInputTypeEnum    } from '../models/InputColumnSchemaInput';
 import { InputEurekaNLSRequest } from '../models/InputEurekaNLSRequest';
 import { InputTableDefinitionInput } from '../models/InputTableDefinitionInput';
@@ -791,6 +822,9 @@ import { JWTParameter } from '../models/JWTParameter';
 import { JWTUserOptions } from '../models/JWTUserOptions';
 import { JWTUserOptionsFull } from '../models/JWTUserOptionsFull';
 import { JobRecipient, JobRecipientTypeEnum      } from '../models/JobRecipient';
+import { LinkPreference, LinkPreferenceScopeEnum     } from '../models/LinkPreference';
+import { LinkTemplate, LinkTemplateTypeEnum     } from '../models/LinkTemplate';
+import { LinkTemplateInput, LinkTemplateInputTypeEnum    } from '../models/LinkTemplateInput';
 import { LiveboardContent } from '../models/LiveboardContent';
 import { LiveboardDataResponse } from '../models/LiveboardDataResponse';
 import { LiveboardDetailsInput } from '../models/LiveboardDetailsInput';
@@ -799,6 +833,7 @@ import { LiveboardOptionsInput } from '../models/LiveboardOptionsInput';
 import { LoadAnswerResponse } from '../models/LoadAnswerResponse';
 import { LogResponse } from '../models/LogResponse';
 import { LoginRequest } from '../models/LoginRequest';
+import { MaintenanceScheduleInfo  , MaintenanceScheduleInfoStatusEnum  , MaintenanceScheduleInfoTypeEnum    } from '../models/MaintenanceScheduleInfo';
 import { ManageObjectPrivilegeRequest, ManageObjectPrivilegeRequestOperationEnum  , ManageObjectPrivilegeRequestMetadataTypeEnum  , ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum     } from '../models/ManageObjectPrivilegeRequest';
 import { MemorySources, MemorySourcesTypeEnum    } from '../models/MemorySources';
 import { MetadataAssociationItem } from '../models/MetadataAssociationItem';
@@ -807,7 +842,7 @@ import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput
 import { MetadataListItemInput   , MetadataListItemInputTypeEnum  , MetadataListItemInputSubtypesEnum   } from '../models/MetadataListItemInput';
 import { MetadataObject , MetadataObjectTypeEnum   } from '../models/MetadataObject';
 import { MetadataResponse  , MetadataResponseTypeEnum   } from '../models/MetadataResponse';
-import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum          } from '../models/MetadataSearchResponse';
+import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum           } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum  , MetadataSearchSortOptionsOrderEnum   } from '../models/MetadataSearchSortOptions';
 import { ModelTableList } from '../models/ModelTableList';
 import { NLInstructionsInfo , NLInstructionsInfoScopeEnum   } from '../models/NLInstructionsInfo';
@@ -851,6 +886,7 @@ import { PutVariableValuesRequest, PutVariableValuesRequestOperationEnum    } fr
 import { QueryGetDecomposedQueryRequest } from '../models/QueryGetDecomposedQueryRequest';
 import { RecipientDetails } from '../models/RecipientDetails';
 import { RecipientDetailsInput } from '../models/RecipientDetailsInput';
+import { ReferencedColumnTimeDimension , ReferencedColumnTimeDimensionTimeDimensionEnum   } from '../models/ReferencedColumnTimeDimension';
 import { RegionalSettingsInput, RegionalSettingsInputCurrencyFormatEnum  , RegionalSettingsInputUserLocaleEnum  , RegionalSettingsInputNumberFormatLocaleEnum  , RegionalSettingsInputDateFormatLocaleEnum   } from '../models/RegionalSettingsInput';
 import { RepoConfigObject } from '../models/RepoConfigObject';
 import { ResetUserPasswordRequest } from '../models/ResetUserPasswordRequest';
@@ -910,7 +946,8 @@ import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
 import { SearchFeaturesRequest, SearchFeaturesRequestScopeEnum   , SearchFeaturesRequestCategoryEnum   } from '../models/SearchFeaturesRequest';
-import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                       , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
+import { SearchLinkCustomizationsRequest, SearchLinkCustomizationsRequestScopeEnum   } from '../models/SearchLinkCustomizationsRequest';
+import { SearchMetadataRequest   , SearchMetadataRequestDependentObjectVersionEnum                        , SearchMetadataRequestLiveboardResponseVersionEnum    } from '../models/SearchMetadataRequest';
 import { SearchOrgsRequest  , SearchOrgsRequestVisibilityEnum  , SearchOrgsRequestStatusEnum    } from '../models/SearchOrgsRequest';
 import { SearchRoleResponse       , SearchRoleResponsePrivilegesEnum  , SearchRoleResponsePermissionEnum            } from '../models/SearchRoleResponse';
 import { SearchRolesRequest   , SearchRolesRequestPrivilegesEnum     , SearchRolesRequestPermissionsEnum   } from '../models/SearchRolesRequest';
@@ -920,6 +957,7 @@ import { SearchSemanticIntegrationsRequest } from '../models/SearchSemanticInteg
 import { SearchStyleCustomizationsRequest, SearchStyleCustomizationsRequestScopeEnum   } from '../models/SearchStyleCustomizationsRequest';
 import { SearchStyleFontsRequest, SearchStyleFontsRequestScopeEnum      } from '../models/SearchStyleFontsRequest';
 import { SearchTagsRequest } from '../models/SearchTagsRequest';
+import { SearchUsageDataRequest } from '../models/SearchUsageDataRequest';
 import { SearchUserGroupsRequest      , SearchUserGroupsRequestPrivilegesEnum   , SearchUserGroupsRequestTypeEnum   , SearchUserGroupsRequestVisibilityEnum         } from '../models/SearchUserGroupsRequest';
 import { SearchUsersRequest   , SearchUsersRequestVisibilityEnum    , SearchUsersRequestPrivilegesEnum  , SearchUsersRequestAccountTypeEnum  , SearchUsersRequestAccountStatusEnum               } from '../models/SearchUsersRequest';
 import { SearchVariablesRequest    , SearchVariablesRequestResponseContentEnum   } from '../models/SearchVariablesRequest';
@@ -1017,6 +1055,8 @@ import { UpdateCustomActionRequest     , UpdateCustomActionRequestOperationEnum 
 import { UpdateEmailCustomizationRequest } from '../models/UpdateEmailCustomizationRequest';
 import { UpdateFeatureAssignmentsRequest  , UpdateFeatureAssignmentsRequestOperationEnum   } from '../models/UpdateFeatureAssignmentsRequest';
 import { UpdateFeatureValueRequest, UpdateFeatureValueRequestScopeEnum       } from '../models/UpdateFeatureValueRequest';
+import { UpdateInputTableRequest } from '../models/UpdateInputTableRequest';
+import { UpdateLinkCustomizationsRequest, UpdateLinkCustomizationsRequestScopeEnum  , UpdateLinkCustomizationsRequestOperationEnum    } from '../models/UpdateLinkCustomizationsRequest';
 import { UpdateMetadataHeaderRequest } from '../models/UpdateMetadataHeaderRequest';
 import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest';
 import { UpdateObjIdInput , UpdateObjIdInputTypeEnum     } from '../models/UpdateObjIdInput';
@@ -1026,11 +1066,19 @@ import { UpdateScheduleRequest  , UpdateScheduleRequestMetadataTypeEnum   , Upda
 import { UpdateStyleFontRequest, UpdateStyleFontRequestScopeEnum   , UpdateStyleFontRequestWeightEnum  , UpdateStyleFontRequestStyleEnum    } from '../models/UpdateStyleFontRequest';
 import { UpdateSystemConfigRequest } from '../models/UpdateSystemConfigRequest';
 import { UpdateTagRequest } from '../models/UpdateTagRequest';
+import { UpdateUsageDataRequest } from '../models/UpdateUsageDataRequest';
 import { UpdateUserGroupRequest    , UpdateUserGroupRequestPrivilegesEnum   , UpdateUserGroupRequestTypeEnum   , UpdateUserGroupRequestVisibilityEnum   , UpdateUserGroupRequestOperationEnum   } from '../models/UpdateUserGroupRequest';
 import { UpdateUserRequest  , UpdateUserRequestVisibilityEnum   , UpdateUserRequestAccountStatusEnum     , UpdateUserRequestAccountTypeEnum      , UpdateUserRequestOperationEnum  , UpdateUserRequestPreferredLocaleEnum      } from '../models/UpdateUserRequest';
 import { UpdateVariableRequest } from '../models/UpdateVariableRequest';
 import { UpdateVariableValuesRequest } from '../models/UpdateVariableValuesRequest';
-import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      , UpdateWebhookConfigurationRequestStatusEnum  , UpdateWebhookConfigurationRequestResetOptionsEnum   } from '../models/UpdateWebhookConfigurationRequest';
+import { UpdateWebhookConfigurationRequest    , UpdateWebhookConfigurationRequestEventsEnum      , UpdateWebhookConfigurationRequestStatusEnum  , UpdateWebhookConfigurationRequestOperationEnum  , UpdateWebhookConfigurationRequestResetOptionsEnum   } from '../models/UpdateWebhookConfigurationRequest';
+import { UsageData } from '../models/UsageData';
+import { UsageDataForUserResponse } from '../models/UsageDataForUserResponse';
+import { UsageDataResponse } from '../models/UsageDataResponse';
+import { UsageDataUpdateInput } from '../models/UsageDataUpdateInput';
+import { UsagePoolKey, UsagePoolKeyEntityTypeEnum    } from '../models/UsagePoolKey';
+import { UsagePoolKeyInput, UsagePoolKeyInputEntityTypeEnum    } from '../models/UsagePoolKeyInput';
+import { UsageSummary } from '../models/UsageSummary';
 import { User   , UserVisibilityEnum         , UserAccountTypeEnum  , UserAccountStatusEnum                  , UserParentTypeEnum                    } from '../models/User';
 import { UserGroup } from '../models/UserGroup';
 import { UserGroupResponse                      , UserGroupResponseParentTypeEnum      , UserGroupResponseTypeEnum   , UserGroupResponseVisibilityEnum    } from '../models/UserGroupResponse';
@@ -1204,6 +1252,11 @@ let enumsMap: Set<string> = new Set<string>([
     "InputColumnSchemaInputTypeEnum",
     "JWTMetadataObjectTypeEnum",
     "JobRecipientTypeEnum",
+    "LinkPreferenceScopeEnum",
+    "LinkTemplateTypeEnum",
+    "LinkTemplateInputTypeEnum",
+    "MaintenanceScheduleInfoStatusEnum",
+    "MaintenanceScheduleInfoTypeEnum",
     "ManageObjectPrivilegeRequestOperationEnum",
     "ManageObjectPrivilegeRequestMetadataTypeEnum",
     "ManageObjectPrivilegeRequestObjectPrivilegeTypesEnum",
@@ -1238,6 +1291,7 @@ let enumsMap: Set<string> = new Set<string>([
     "PrincipalsInputTypeEnum",
     "PublishMetadataListItemTypeEnum",
     "PutVariableValuesRequestOperationEnum",
+    "ReferencedColumnTimeDimensionTimeDimensionEnum",
     "RegionalSettingsInputCurrencyFormatEnum",
     "RegionalSettingsInputUserLocaleEnum",
     "RegionalSettingsInputNumberFormatLocaleEnum",
@@ -1268,6 +1322,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SearchDataRequestDataFormatEnum",
     "SearchFeaturesRequestScopeEnum",
     "SearchFeaturesRequestCategoryEnum",
+    "SearchLinkCustomizationsRequestScopeEnum",
     "SearchMetadataRequestDependentObjectVersionEnum",
     "SearchMetadataRequestLiveboardResponseVersionEnum",
     "SearchOrgsRequestVisibilityEnum",
@@ -1342,6 +1397,8 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateCustomActionRequestOperationEnum",
     "UpdateFeatureAssignmentsRequestOperationEnum",
     "UpdateFeatureValueRequestScopeEnum",
+    "UpdateLinkCustomizationsRequestScopeEnum",
+    "UpdateLinkCustomizationsRequestOperationEnum",
     "UpdateObjIdInputTypeEnum",
     "UpdateOrgRequestOperationEnum",
     "UpdateRoleRequestPrivilegesEnum",
@@ -1363,7 +1420,10 @@ let enumsMap: Set<string> = new Set<string>([
     "UpdateUserRequestPreferredLocaleEnum",
     "UpdateWebhookConfigurationRequestEventsEnum",
     "UpdateWebhookConfigurationRequestStatusEnum",
+    "UpdateWebhookConfigurationRequestOperationEnum",
     "UpdateWebhookConfigurationRequestResetOptionsEnum",
+    "UsagePoolKeyEntityTypeEnum",
+    "UsagePoolKeyInputEntityTypeEnum",
     "UserVisibilityEnum",
     "UserAccountTypeEnum",
     "UserAccountStatusEnum",
@@ -1515,6 +1575,8 @@ let typeMap: {[index: string]: any} = {
     "CreateCustomActionRequest": CreateCustomActionRequest,
     "CreateEmailCustomizationRequest": CreateEmailCustomizationRequest,
     "CreateEmailCustomizationResponse": CreateEmailCustomizationResponse,
+    "CreateInputTableColumnRequest": CreateInputTableColumnRequest,
+    "CreateInputTableRequest": CreateInputTableRequest,
     "CreateOrgRequest": CreateOrgRequest,
     "CreateRoleRequest": CreateRoleRequest,
     "CreateScheduleRequest": CreateScheduleRequest,
@@ -1554,6 +1616,8 @@ let typeMap: {[index: string]: any} = {
     "DeleteMetadataTypeInput": DeleteMetadataTypeInput,
     "DeleteOrgEmailCustomizationRequest": DeleteOrgEmailCustomizationRequest,
     "DeleteStyleFontsRequest": DeleteStyleFontsRequest,
+    "DeleteUsageDataRequest": DeleteUsageDataRequest,
+    "DeleteUsageDataResponse": DeleteUsageDataResponse,
     "DeleteVariablesRequest": DeleteVariablesRequest,
     "DeleteWebhookConfigurationsRequest": DeleteWebhookConfigurationsRequest,
     "DeployCommitRequest": DeployCommitRequest,
@@ -1639,6 +1703,9 @@ let typeMap: {[index: string]: any} = {
     "ImportUserType": ImportUserType,
     "ImportUsersRequest": ImportUsersRequest,
     "ImportUsersResponse": ImportUsersResponse,
+    "InputColumnDefinitionInput": InputColumnDefinitionInput,
+    "InputColumnInfo": InputColumnInfo,
+    "InputColumnResponse": InputColumnResponse,
     "InputColumnSchemaInput": InputColumnSchemaInput,
     "InputEurekaNLSRequest": InputEurekaNLSRequest,
     "InputTableDefinitionInput": InputTableDefinitionInput,
@@ -1649,6 +1716,9 @@ let typeMap: {[index: string]: any} = {
     "JWTUserOptions": JWTUserOptions,
     "JWTUserOptionsFull": JWTUserOptionsFull,
     "JobRecipient": JobRecipient,
+    "LinkPreference": LinkPreference,
+    "LinkTemplate": LinkTemplate,
+    "LinkTemplateInput": LinkTemplateInput,
     "LiveboardContent": LiveboardContent,
     "LiveboardDataResponse": LiveboardDataResponse,
     "LiveboardDetailsInput": LiveboardDetailsInput,
@@ -1657,6 +1727,7 @@ let typeMap: {[index: string]: any} = {
     "LoadAnswerResponse": LoadAnswerResponse,
     "LogResponse": LogResponse,
     "LoginRequest": LoginRequest,
+    "MaintenanceScheduleInfo": MaintenanceScheduleInfo,
     "ManageObjectPrivilegeRequest": ManageObjectPrivilegeRequest,
     "MemorySources": MemorySources,
     "MetadataAssociationItem": MetadataAssociationItem,
@@ -1709,6 +1780,7 @@ let typeMap: {[index: string]: any} = {
     "QueryGetDecomposedQueryRequest": QueryGetDecomposedQueryRequest,
     "RecipientDetails": RecipientDetails,
     "RecipientDetailsInput": RecipientDetailsInput,
+    "ReferencedColumnTimeDimension": ReferencedColumnTimeDimension,
     "RegionalSettingsInput": RegionalSettingsInput,
     "RepoConfigObject": RepoConfigObject,
     "ResetUserPasswordRequest": ResetUserPasswordRequest,
@@ -1768,6 +1840,7 @@ let typeMap: {[index: string]: any} = {
     "SearchDatasetsResponseItem": SearchDatasetsResponseItem,
     "SearchEmailCustomizationRequest": SearchEmailCustomizationRequest,
     "SearchFeaturesRequest": SearchFeaturesRequest,
+    "SearchLinkCustomizationsRequest": SearchLinkCustomizationsRequest,
     "SearchMetadataRequest": SearchMetadataRequest,
     "SearchOrgsRequest": SearchOrgsRequest,
     "SearchRoleResponse": SearchRoleResponse,
@@ -1778,6 +1851,7 @@ let typeMap: {[index: string]: any} = {
     "SearchStyleCustomizationsRequest": SearchStyleCustomizationsRequest,
     "SearchStyleFontsRequest": SearchStyleFontsRequest,
     "SearchTagsRequest": SearchTagsRequest,
+    "SearchUsageDataRequest": SearchUsageDataRequest,
     "SearchUserGroupsRequest": SearchUserGroupsRequest,
     "SearchUsersRequest": SearchUsersRequest,
     "SearchVariablesRequest": SearchVariablesRequest,
@@ -1875,6 +1949,8 @@ let typeMap: {[index: string]: any} = {
     "UpdateEmailCustomizationRequest": UpdateEmailCustomizationRequest,
     "UpdateFeatureAssignmentsRequest": UpdateFeatureAssignmentsRequest,
     "UpdateFeatureValueRequest": UpdateFeatureValueRequest,
+    "UpdateInputTableRequest": UpdateInputTableRequest,
+    "UpdateLinkCustomizationsRequest": UpdateLinkCustomizationsRequest,
     "UpdateMetadataHeaderRequest": UpdateMetadataHeaderRequest,
     "UpdateMetadataObjIdRequest": UpdateMetadataObjIdRequest,
     "UpdateObjIdInput": UpdateObjIdInput,
@@ -1884,11 +1960,19 @@ let typeMap: {[index: string]: any} = {
     "UpdateStyleFontRequest": UpdateStyleFontRequest,
     "UpdateSystemConfigRequest": UpdateSystemConfigRequest,
     "UpdateTagRequest": UpdateTagRequest,
+    "UpdateUsageDataRequest": UpdateUsageDataRequest,
     "UpdateUserGroupRequest": UpdateUserGroupRequest,
     "UpdateUserRequest": UpdateUserRequest,
     "UpdateVariableRequest": UpdateVariableRequest,
     "UpdateVariableValuesRequest": UpdateVariableValuesRequest,
     "UpdateWebhookConfigurationRequest": UpdateWebhookConfigurationRequest,
+    "UsageData": UsageData,
+    "UsageDataForUserResponse": UsageDataForUserResponse,
+    "UsageDataResponse": UsageDataResponse,
+    "UsageDataUpdateInput": UsageDataUpdateInput,
+    "UsagePoolKey": UsagePoolKey,
+    "UsagePoolKeyInput": UsagePoolKeyInput,
+    "UsageSummary": UsageSummary,
     "User": User,
     "UserGroup": UserGroup,
     "UserGroupResponse": UserGroupResponse,

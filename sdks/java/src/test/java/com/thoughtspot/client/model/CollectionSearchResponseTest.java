@@ -4,45 +4,71 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.Collection;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for CollectionSearchResponse */
+/**
+ * Model tests for CollectionSearchResponse
+ */
 public class CollectionSearchResponseTest {
     private final CollectionSearchResponse model = new CollectionSearchResponse();
 
-    /** Model tests for CollectionSearchResponse */
+    /**
+     * Model tests for CollectionSearchResponse
+     */
     @Test
     public void testCollectionSearchResponse() {
         // TODO: test CollectionSearchResponse
     }
 
-    /** Test the property 'collections' */
+    /**
+     * Test the property 'collections'
+     */
     @Test
     public void collectionsTest() {
         // TODO: test collections
     }
 
-    /** Test the property 'recordOffset' */
+    /**
+     * Test the property 'recordOffset'
+     */
     @Test
     public void recordOffsetTest() {
         // TODO: test recordOffset
     }
 
-    /** Test the property 'recordSize' */
+    /**
+     * Test the property 'recordSize'
+     */
     @Test
     public void recordSizeTest() {
         // TODO: test recordSize
     }
 
-    /** Test the property 'isLastBatch' */
+    /**
+     * Test the property 'isLastBatch'
+     */
     @Test
     public void isLastBatchTest() {
         // TODO: test isLastBatch
     }
 
-    /** Test the property 'count' */
+    /**
+     * Test the property 'count'
+     */
     @Test
     public void countTest() {
         // TODO: test count
     }
+
 }

@@ -55,12 +55,30 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'InputTableIdentifier'
+        /// Test the property 'InputTableId'
         /// </summary>
         [Fact]
-        public void InputTableIdentifierTest()
+        public void InputTableIdTest()
         {
-            // TODO unit test for the property 'InputTableIdentifier'
+            // TODO unit test for the property 'InputTableId'
+        }
+
+        /// <summary>
+        /// Test the property 'InputColumns'
+        /// </summary>
+        [Fact]
+        public void InputColumnsTest()
+        {
+            // TODO unit test for the property 'InputColumns'
+        }
+
+        /// <summary>
+        /// Test the property 'MessageInfo'
+        /// </summary>
+        [Fact]
+        public void MessageInfoTest()
+        {
+            // TODO unit test for the property 'MessageInfo'
         }
     }
 }

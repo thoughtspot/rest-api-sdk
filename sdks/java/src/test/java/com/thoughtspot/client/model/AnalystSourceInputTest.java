@@ -4,33 +4,52 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for AnalystSourceInput */
+/**
+ * Model tests for AnalystSourceInput
+ */
 public class AnalystSourceInputTest {
     private final AnalystSourceInput model = new AnalystSourceInput();
 
-    /** Model tests for AnalystSourceInput */
+    /**
+     * Model tests for AnalystSourceInput
+     */
     @Test
     public void testAnalystSourceInput() {
         // TODO: test AnalystSourceInput
     }
 
-    /** Test the property 'identifier' */
+    /**
+     * Test the property 'identifier'
+     */
     @Test
     public void identifierTest() {
         // TODO: test identifier
     }
 
-    /** Test the property 'name' */
+    /**
+     * Test the property 'name'
+     */
     @Test
     public void nameTest() {
         // TODO: test name
     }
 
-    /** Test the property 'type' */
+    /**
+     * Test the property 'type'
+     */
     @Test
     public void typeTest() {
         // TODO: test type
     }
+
 }

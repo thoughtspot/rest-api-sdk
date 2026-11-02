@@ -4,33 +4,52 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for SearchFeaturesRequest */
+/**
+ * Model tests for SearchFeaturesRequest
+ */
 public class SearchFeaturesRequestTest {
     private final SearchFeaturesRequest model = new SearchFeaturesRequest();
 
-    /** Model tests for SearchFeaturesRequest */
+    /**
+     * Model tests for SearchFeaturesRequest
+     */
     @Test
     public void testSearchFeaturesRequest() {
         // TODO: test SearchFeaturesRequest
     }
 
-    /** Test the property 'scope' */
+    /**
+     * Test the property 'scope'
+     */
     @Test
     public void scopeTest() {
         // TODO: test scope
     }
 
-    /** Test the property 'orgIdentifier' */
+    /**
+     * Test the property 'orgIdentifier'
+     */
     @Test
     public void orgIdentifierTest() {
         // TODO: test orgIdentifier
     }
 
-    /** Test the property 'category' */
+    /**
+     * Test the property 'category'
+     */
     @Test
     public void categoryTest() {
         // TODO: test category
     }
+
 }

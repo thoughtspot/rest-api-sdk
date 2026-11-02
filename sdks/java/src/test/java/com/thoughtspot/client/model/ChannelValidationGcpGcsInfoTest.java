@@ -4,33 +4,52 @@
 
 package com.thoughtspot.client.model;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/** Model tests for ChannelValidationGcpGcsInfo */
+/**
+ * Model tests for ChannelValidationGcpGcsInfo
+ */
 public class ChannelValidationGcpGcsInfoTest {
     private final ChannelValidationGcpGcsInfo model = new ChannelValidationGcpGcsInfo();
 
-    /** Model tests for ChannelValidationGcpGcsInfo */
+    /**
+     * Model tests for ChannelValidationGcpGcsInfo
+     */
     @Test
     public void testChannelValidationGcpGcsInfo() {
         // TODO: test ChannelValidationGcpGcsInfo
     }
 
-    /** Test the property 'bucketName' */
+    /**
+     * Test the property 'bucketName'
+     */
     @Test
     public void bucketNameTest() {
         // TODO: test bucketName
     }
 
-    /** Test the property 'fileName' */
+    /**
+     * Test the property 'fileName'
+     */
     @Test
     public void fileNameTest() {
         // TODO: test fileName
     }
 
-    /** Test the property 'objectKey' */
+    /**
+     * Test the property 'objectKey'
+     */
     @Test
     public void objectKeyTest() {
         // TODO: test objectKey
     }
+
 }

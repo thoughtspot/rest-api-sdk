@@ -7,14 +7,16 @@ package com.thoughtspot.client;
 import java.util.List;
 import java.util.Map;
 
-/** API response returned by API call. */
+/**
+ * API response returned by API call.
+ */
 public class ApiResponse<T> {
-    private final int statusCode;
-    private final Map<String, List<String>> headers;
-    private final T data;
+    final private int statusCode;
+    final private Map<String, List<String>> headers;
+    final private T data;
 
     /**
-     * Constructor for ApiResponse.
+     * <p>Constructor for ApiResponse.</p>
      *
      * @param statusCode The status code of HTTP response
      * @param headers The headers of HTTP response
@@ -24,7 +26,7 @@ public class ApiResponse<T> {
     }
 
     /**
-     * Constructor for ApiResponse.
+     * <p>Constructor for ApiResponse.</p>
      *
      * @param statusCode The status code of HTTP response
      * @param headers The headers of HTTP response
@@ -37,7 +39,7 @@ public class ApiResponse<T> {
     }
 
     /**
-     * Get the <code>status code</code>.
+     * <p>Get the <code>status code</code>.</p>
      *
      * @return the status code
      */
@@ -46,16 +48,16 @@ public class ApiResponse<T> {
     }
 
     /**
-     * Get the <code>headers</code>.
+     * <p>Get the <code>headers</code>.</p>
      *
-     * @return a {@link java.util.Map} of headers
+     * @return a {@link java.util.Map} of headers 
      */
     public Map<String, List<String>> getHeaders() {
         return headers;
     }
 
     /**
-     * Get the <code>data</code>.
+     * <p>Get the <code>data</code>.</p>
      *
      * @return the data
      */
