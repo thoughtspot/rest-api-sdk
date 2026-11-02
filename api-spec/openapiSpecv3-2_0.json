@@ -13919,6 +13919,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "metadata_id": "8fbe44a8-46ad-4b16-8d39-184b2fada490",
+                      "metadata_name": "Sales by region",
+                      "metadata_type": "ANSWER",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "8fbe44a8-46ad-4b16-8d39-184b2fada490",
+                          "metadata_name": "Sales by region",
+                          "sql_query": "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -13992,6 +14008,38 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                },
+                "examples": {
+                  "example": {
+                    "summary": "Search query",
+                    "value": {
+                      "metadata_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                      "metadata_name": "[sales] [region]",
+                      "metadata_type": "ANSWER",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                          "metadata_name": "[sales] [region]",
+                          "sql_query": "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                        }
+                      ]
+                    }
+                  },
+                  "example_with_runtime_overrides": {
+                    "summary": "With runtime_filter {\"col1\": \"region\", \"op1\": \"EQ\", \"val1\": \"West\"} and runtime_sort {\"sortCol1\": \"sales\", \"asc1\": false}",
+                    "value": {
+                      "metadata_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                      "metadata_name": "[sales] [region]",
+                      "metadata_type": "ANSWER",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "cd252e5c-b552-49a8-821d-3eadaa049cca",
+                          "metadata_name": "[sales] [region]",
+                          "sql_query": "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nWHERE \"ta_1\".\"REGION\" = 'West'\nGROUP BY \"ca_1\"\nORDER BY \"ca_2\" DESC"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -14042,7 +14090,7 @@
     "/api/rest/2.0/metadata/sql/tml": {
       "post": {
         "operationId": "fetchSqlQueryFromTML",
-        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nFetches the SQL query for the TML of an unsaved Answer. The Answer is not saved and the query is not executed.\n\nRequires access to every data source that the Answer uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required. Sessions with view-only access cannot call this API.\n\n#### Usage guidelines\n\n- Send the Answer TML in the `answer_tml` attribute, in YAML or JSON format. Only Answer TML is supported.\n- TML support must be enabled on the cluster. If it is disabled, the API returns a 403 error.\n- The SQL is generated for the visualization that the TML specifies in `display_mode`.\n- The `metadata_id` in the response is generated for each request. It is not the ID of a saved object, so do not use it to look up or correlate results.\n- `metadata_name` is the Answer name from the TML.\n\nUpon successful execution, the API returns the SQL query as shown in this example:\n```\n{\n   \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n   \"metadata_name\":\"Sales by region\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n         \"metadata_name\":\"Sales by region\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nGROUP BY \\\"ca_1\\\"\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nFetches the SQL query of an unsaved Answer. An unsaved Answer is an Answer that does not exist in ThoughtSpot as a saved object, so it has no GUID. You describe it in the request as Answer TML. The API does not save the Answer and does not run the query.\n\nTo get the SQL query of a saved Answer, use the [fetchSqlQueryFromAnswer](#/http/api-endpoints/metadata/fetch-sql-query-from-answer) API instead.\n\nRequires access to every data source that the Answer uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required. Sessions with view-only access cannot call this API.\n\n#### Usage guidelines\n\n- Send the unsaved Answer in the `answer_tml` attribute, as Answer TML in YAML or JSON format. The TML of other object types, such as a Liveboard or a Model, is not supported.\n- TML support must be enabled on the cluster. If it is disabled, the API returns a 403 error.\n- The SQL is generated for the visualization that the TML specifies in `display_mode`.\n- The `metadata_id` in the response is generated for each request. It is not the ID of a saved object, so do not use it to look up or correlate results.\n- `metadata_name` is the Answer name from the TML.\n\nUpon successful execution, the API returns the SQL query as shown in this example:\n```\n{\n   \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n   \"metadata_name\":\"Sales by region\",\n   \"metadata_type\":\"ANSWER\",\n   \"sql_queries\":[\n      {\n         \"metadata_id\":\"3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b\",\n         \"metadata_name\":\"Sales by region\",\n         \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nGROUP BY \\\"ca_1\\\"\"\n      }\n   ]\n}\n```\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "27.1.0.cl"
@@ -14065,6 +14113,22 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "metadata_id": "3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b",
+                      "metadata_name": "Sales by region",
+                      "metadata_type": "ANSWER",
+                      "sql_queries": [
+                        {
+                          "metadata_id": "3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b",
+                          "metadata_name": "Sales by region",
+                          "sql_query": "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -43214,7 +43278,7 @@
         "type": "object",
         "properties": {
           "answer_tml": {
-            "description": "TML of an unsaved Answer, in YAML or JSON format. The Answer is not saved and the query is not executed.\n\n**Note: Passing TML in YAML format directly from the Playground currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
+            "description": "The unsaved Answer, as Answer TML in YAML or JSON format. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The API does not save the Answer and does not run the query.\n\n**Note: Passing TML in YAML format directly from the Playground currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**",
             "type": "string"
           }
         },
