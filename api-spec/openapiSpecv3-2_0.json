@@ -2610,7 +2610,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/SendAgentConversationMessageResponse"
                 },
                 "examples": {
                   "v1_turn": {
@@ -3057,14 +3057,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/SendAgentMessageResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/AgentStreamFrame"
-                    }
-                  ]
+                  "type": "object"
                 }
               }
             }
@@ -7002,7 +6995,7 @@
     "/api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier}": {
       "post": {
         "operationId": "downloadConnectionMetadataChanges",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nExports the difference in connection metadata between CDW and ThoughtSpot\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:  \n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nTo download the connection metadata difference between ThoughtSpot and CDW, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "9.9.0.cl"
@@ -7071,7 +7064,7 @@
     "/api/rest/2.0/connections/fetch-connection-diff-status/{connection_identifier}": {
       "post": {
         "operationId": "fetchConnectionDiffStatus",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_MANAGE_CUSTOM_CALENDAR`(**Can manage custom calendars**)\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.9.0.cl or later</span>\n\nValidates the difference in connection metadata between CDW and ThoughtSpot.\n\nRequires `DATAMANAGEMENT` (**Can manage data**) privilege.\nIf [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required:\n\n- `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**)\n- `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)\n\nReturns a boolean indicating whether there is any difference between the connection metadata at ThoughtSpot and CDW.\n\nTo get the connection metadata difference status, pass the connection GUID as `connection_identifier` in the API request.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Connections",
           "9.9.0.cl"
@@ -9184,7 +9177,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/DbtConnectionResponse"
                 },
                 "examples": {
                   "example": {
@@ -9285,7 +9278,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/DbtGenerateSyncTmlResponse"
                 },
                 "examples": {
                   "example": {
@@ -9448,7 +9441,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/DbtGenerateTmlResponse"
                 },
                 "examples": {
                   "example": {
@@ -12694,7 +12687,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/GetManualTranslationBundleResponse"
                 },
                 "examples": {
                   "example": {
@@ -13173,7 +13166,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object"
+                    "$ref": "#/components/schemas/ExportMetadataTMLResponse"
                   }
                 },
                 "examples": {
@@ -13336,7 +13329,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/ExportMetadataTMLBatchedResponse"
                 },
                 "examples": {
                   "example_1": {
@@ -13791,7 +13784,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object"
+                    "$ref": "#/components/schemas/ImportMetadataTMLResponse"
                   }
                 },
                 "examples": {
@@ -30469,7 +30462,8 @@
                         "type": "integer"
                       },
                       "resolvedObjects": {
-                        "type": "object"
+                        "type": "object",
+                        "additionalProperties": true
                       },
                       "tags": {
                         "type": "array",
@@ -30896,7 +30890,8 @@
                                                   "type": "boolean"
                                                 },
                                                 "columnToFormatPatternType": {
-                                                  "type": "object"
+                                                  "type": "object",
+                                                  "additionalProperties": true
                                                 },
                                                 "effectiveAggrType": {
                                                   "type": "string"
@@ -30932,30 +30927,75 @@
                                                   "type": "boolean"
                                                 },
                                                 "baseCurrencyTypeInfo": {
-                                                  "type": "object"
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "setting": {
+                                                      "type": "string"
+                                                    },
+                                                    "isoCode": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "title": "Column Base Currency Type Info"
                                                 },
                                                 "referencedTableHeaders": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "name": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "title": "Columns Column Referenced Table Headers"
                                                   }
                                                 },
                                                 "referencedColumnHeaders": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "name": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "title": "Columns Column Referenced Column Headers"
                                                   }
                                                 },
                                                 "allLevelReferencedTableHeaders": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "name": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "title": "Columns Column All Level Referenced Table Headers"
                                                   }
                                                 },
                                                 "allLevelReferencedColumnHeaders": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "name": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "title": "Columns Column All Level Referenced Column Headers"
                                                   }
                                                 },
                                                 "customOrder": {
@@ -30963,7 +31003,7 @@
                                                   "items": {}
                                                 }
                                               },
-                                              "title": "Columns Column"
+                                              "title": "Visualizations Viz Content Columns Column"
                                             },
                                             "possibleAggrs": {
                                               "type": "array",
@@ -30981,7 +31021,7 @@
                                               "type": "boolean"
                                             }
                                           },
-                                          "title": "Viz Content Columns"
+                                          "title": "Sheet Content Visualizations Viz Content Columns"
                                         }
                                       },
                                       "showSummaryAggrs": {
@@ -30991,7 +31031,7 @@
                                         "type": "boolean"
                                       }
                                     },
-                                    "title": "Visualizations Viz Content"
+                                    "title": "Sheets Sheet Content Visualizations Viz Content"
                                   },
                                   "relatedLinks": {
                                     "type": "array",
@@ -31114,10 +31154,11 @@
                                                 "type": "string"
                                               },
                                               "chartSpecific": {
-                                                "type": "object"
+                                                "type": "object",
+                                                "additionalProperties": true
                                               }
                                             },
-                                            "title": "Client State Chart Properties"
+                                            "title": "Header Client State Chart Properties"
                                           },
                                           "axisProperties": {
                                             "type": "array",
@@ -31128,7 +31169,22 @@
                                                   "type": "string"
                                                 },
                                                 "properties": {
-                                                  "type": "object"
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "axisType": {
+                                                      "type": "string"
+                                                    },
+                                                    "linkedColumns": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "isOpposite": {
+                                                      "type": "boolean"
+                                                    }
+                                                  },
+                                                  "title": "Axis Properties Properties"
                                                 }
                                               },
                                               "title": "Client State Axis Properties"
@@ -31162,7 +31218,7 @@
                                         "type": "string"
                                       }
                                     },
-                                    "title": "Visualizations Header"
+                                    "title": "Sheets Sheet Content Visualizations Header"
                                   },
                                   "complete": {
                                     "type": "boolean"
@@ -31273,7 +31329,7 @@
                                       "items": {}
                                     }
                                   },
-                                  "title": "Filter Filter Content"
+                                  "title": "Sheets Sheet Content Filter Filter Content"
                                 }
                               },
                               "title": "Report Content Sheets Sheet Content Filter"
@@ -31538,10 +31594,288 @@
                                         "type": "object",
                                         "properties": {
                                           "filterContent": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                              "rows": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "column": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "isUserSorted": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "aggrTypeOverride": {
+                                                          "type": "string"
+                                                        },
+                                                        "typeOverride": {
+                                                          "type": "string"
+                                                        },
+                                                        "dataTypeOverride": {
+                                                          "type": "string"
+                                                        },
+                                                        "formatTypeOverride": {
+                                                          "type": "string"
+                                                        },
+                                                        "uniqueValues": {
+                                                          "type": "integer"
+                                                        },
+                                                        "sageOutputColumnId": {
+                                                          "type": "string"
+                                                        },
+                                                        "outputIdsWithMatchingLogicalKey": {
+                                                          "type": "array",
+                                                          "items": {}
+                                                        },
+                                                        "aggrApplied": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "isVisible": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "columnToFormatPatternType": {
+                                                          "type": "object",
+                                                          "additionalProperties": true
+                                                        },
+                                                        "effectiveAggrType": {
+                                                          "type": "string"
+                                                        },
+                                                        "effectiveDataType": {
+                                                          "type": "string"
+                                                        },
+                                                        "effectiveType": {
+                                                          "type": "string"
+                                                        },
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "effectiveColumnGuid": {
+                                                          "type": "string"
+                                                        },
+                                                        "effectiveColumnIdString": {
+                                                          "type": "string"
+                                                        },
+                                                        "baseColumnName": {
+                                                          "type": "string"
+                                                        },
+                                                        "baseColumnFormulaId": {
+                                                          "type": "string"
+                                                        },
+                                                        "baseAggrType": {
+                                                          "type": "string"
+                                                        },
+                                                        "baseDataType": {
+                                                          "type": "string"
+                                                        },
+                                                        "baseType": {
+                                                          "type": "string"
+                                                        },
+                                                        "isBaseColumnFormulaColumn": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "isBaseColumnAdditive": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "referencedTableHeaders": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "name": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "title": "Rows Column Referenced Table Headers"
+                                                          }
+                                                        },
+                                                        "referencedColumnHeaders": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "name": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "title": "Rows Column Referenced Column Headers"
+                                                          }
+                                                        },
+                                                        "allLevelReferencedTableHeaders": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "name": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "title": "Rows Column All Level Referenced Table Headers"
+                                                          }
+                                                        },
+                                                        "allLevelReferencedColumnHeaders": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "name": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "title": "Rows Column All Level Referenced Column Headers"
+                                                          }
+                                                        }
+                                                      },
+                                                      "title": "Rows Column"
+                                                    },
+                                                    "oper": {
+                                                      "type": "string"
+                                                    },
+                                                    "values": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "key": {
+                                                            "type": "string"
+                                                          },
+                                                          "selected": {
+                                                            "type": "boolean"
+                                                          }
+                                                        },
+                                                        "title": "Rows Values"
+                                                      }
+                                                    },
+                                                    "negation": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "applyOnTablesGuids": {
+                                                      "type": "array",
+                                                      "items": {}
+                                                    },
+                                                    "type": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "title": "Filter Content Rows"
+                                                }
+                                              }
+                                            },
+                                            "title": "Sheets Sheet Content Filter Filter Content 2"
                                           },
                                           "header": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "indexVersion": {
+                                                "type": "integer"
+                                              },
+                                              "generationNum": {
+                                                "type": "integer"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              },
+                                              "author": {
+                                                "type": "string"
+                                              },
+                                              "authorName": {
+                                                "type": "string"
+                                              },
+                                              "hasLenientDiscoverability": {
+                                                "type": "boolean"
+                                              },
+                                              "authorDisplayName": {
+                                                "type": "string"
+                                              },
+                                              "created": {
+                                                "type": "integer"
+                                              },
+                                              "modified": {
+                                                "type": "integer"
+                                              },
+                                              "modifiedBy": {
+                                                "type": "string"
+                                              },
+                                              "owner": {
+                                                "type": "string"
+                                              },
+                                              "isDeleted": {
+                                                "type": "boolean"
+                                              },
+                                              "isHidden": {
+                                                "type": "boolean"
+                                              },
+                                              "tags": {
+                                                "type": "array",
+                                                "items": {}
+                                              },
+                                              "configs": {
+                                                "type": "array",
+                                                "items": {}
+                                              },
+                                              "isConnectionConfigurationDisabled": {
+                                                "type": "boolean"
+                                              },
+                                              "type": {
+                                                "type": "string"
+                                              },
+                                              "aiAnswerGenerationDisabled": {
+                                                "type": "boolean"
+                                              },
+                                              "isExternal": {
+                                                "type": "boolean"
+                                              },
+                                              "isDeprecated": {
+                                                "type": "boolean"
+                                              },
+                                              "isSharedViaConnection": {
+                                                "type": "boolean"
+                                              },
+                                              "syncWithSource": {
+                                                "type": "boolean"
+                                              },
+                                              "isParameterized": {
+                                                "type": "boolean"
+                                              },
+                                              "cachedDataAsOf": {
+                                                "type": "integer"
+                                              },
+                                              "isVerified": {
+                                                "type": "boolean"
+                                              },
+                                              "isVersioningEnabled": {
+                                                "type": "boolean"
+                                              },
+                                              "contentUpgradeId": {
+                                                "type": "string"
+                                              },
+                                              "headerUpgradeId": {
+                                                "type": "string"
+                                              },
+                                              "isPublished": {
+                                                "type": "boolean"
+                                              },
+                                              "csrProtected": {
+                                                "type": "boolean"
+                                              }
+                                            },
+                                            "title": "Filter Header"
                                           },
                                           "complete": {
                                             "type": "boolean"
@@ -31577,14 +31911,742 @@
                                           "type": "object",
                                           "properties": {
                                             "vizContent": {
-                                              "type": "object"
+                                              "type": "object",
+                                              "properties": {
+                                                "chartType": {
+                                                  "type": "string"
+                                                },
+                                                "axisConfigs": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "x": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "y": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    },
+                                                    "title": "Viz Content Axis Configs"
+                                                  }
+                                                },
+                                                "bestAxisConfigs": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "KPI": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "x": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "y": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "title": "Best Axis Configs KPI"
+                                                      }
+                                                    },
+                                                    "COLUMN": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "x": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "y": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "title": "Best Axis Configs COLUMN"
+                                                      }
+                                                    },
+                                                    "SCATTER": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "x": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "y": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "color": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "title": "Best Axis Configs SCATTER"
+                                                      }
+                                                    },
+                                                    "BUBBLE": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "x": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "y": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "size": {
+                                                            "type": "string"
+                                                          },
+                                                          "category": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "title": "Best Axis Configs BUBBLE"
+                                                      }
+                                                    }
+                                                  },
+                                                  "title": "Viz Content Best Axis Configs"
+                                                },
+                                                "title": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "text": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "title": "Visualizations Viz Content Title Value"
+                                                    }
+                                                  },
+                                                  "title": "Viz Content Title"
+                                                },
+                                                "customTitle": {
+                                                  "type": "boolean"
+                                                },
+                                                "locked": {
+                                                  "type": "boolean"
+                                                },
+                                                "dataOnDemand": {
+                                                  "type": "boolean"
+                                                },
+                                                "columns": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "isUserSorted": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "aggrTypeOverride": {
+                                                        "type": "string"
+                                                      },
+                                                      "typeOverride": {
+                                                        "type": "string"
+                                                      },
+                                                      "dataTypeOverride": {
+                                                        "type": "string"
+                                                      },
+                                                      "formatTypeOverride": {
+                                                        "type": "string"
+                                                      },
+                                                      "groupBy": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "uniqueValues": {
+                                                        "type": "integer"
+                                                      },
+                                                      "sageOutputColumnId": {
+                                                        "type": "string"
+                                                      },
+                                                      "outputIdsWithMatchingLogicalKey": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                      },
+                                                      "aggrApplied": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "metricDefinition": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "row": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "range": {
+                                                                  "type": "object",
+                                                                  "properties": {
+                                                                    "max": {
+                                                                      "type": "integer"
+                                                                    }
+                                                                  },
+                                                                  "title": "Row Range"
+                                                                },
+                                                                "color": {
+                                                                  "type": "string"
+                                                                },
+                                                                "action": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "title": "Metric Definition Row"
+                                                            }
+                                                          },
+                                                          "name": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "title": "Columns Metric Definition"
+                                                      },
+                                                      "isVisible": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "columnToFormatPatternType": {
+                                                        "type": "object",
+                                                        "additionalProperties": true
+                                                      },
+                                                      "effectiveAggrType": {
+                                                        "type": "string"
+                                                      },
+                                                      "effectiveDataType": {
+                                                        "type": "string"
+                                                      },
+                                                      "effectiveType": {
+                                                        "type": "string"
+                                                      },
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "effectiveColumnGuid": {
+                                                        "type": "string"
+                                                      },
+                                                      "effectiveColumnIdString": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseColumnName": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseColumnFormulaId": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseAggrType": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseDataType": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseType": {
+                                                        "type": "string"
+                                                      },
+                                                      "isBaseColumnFormulaColumn": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "isBaseColumnAdditive": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "baseCurrencyTypeInfo": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "setting": {
+                                                            "type": "string"
+                                                          },
+                                                          "isoCode": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "title": "Columns Base Currency Type Info"
+                                                      },
+                                                      "referencedTableHeaders": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "name": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "title": "Columns Referenced Table Headers"
+                                                        }
+                                                      },
+                                                      "referencedColumnHeaders": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "name": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "title": "Columns Referenced Column Headers"
+                                                        }
+                                                      },
+                                                      "allLevelReferencedTableHeaders": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "name": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "title": "Columns All Level Referenced Table Headers"
+                                                        }
+                                                      },
+                                                      "allLevelReferencedColumnHeaders": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "name": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "title": "Columns All Level Referenced Column Headers"
+                                                        }
+                                                      },
+                                                      "customOrder": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                      },
+                                                      "sortAscending": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "sortIndex": {
+                                                        "type": "integer"
+                                                      },
+                                                      "bucketization": {
+                                                        "type": "string"
+                                                      },
+                                                      "formatPattern": {
+                                                        "type": "string"
+                                                      },
+                                                      "column": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "sortAscending": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "sortIndex": {
+                                                            "type": "integer"
+                                                          },
+                                                          "isUserSorted": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "aggrTypeOverride": {
+                                                            "type": "string"
+                                                          },
+                                                          "typeOverride": {
+                                                            "type": "string"
+                                                          },
+                                                          "dataTypeOverride": {
+                                                            "type": "string"
+                                                          },
+                                                          "formatTypeOverride": {
+                                                            "type": "string"
+                                                          },
+                                                          "groupBy": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "uniqueValues": {
+                                                            "type": "integer"
+                                                          },
+                                                          "sageOutputColumnId": {
+                                                            "type": "string"
+                                                          },
+                                                          "outputIdsWithMatchingLogicalKey": {
+                                                            "type": "array",
+                                                            "items": {}
+                                                          },
+                                                          "aggrApplied": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "isVisible": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "columnToFormatPatternType": {
+                                                            "type": "object",
+                                                            "additionalProperties": true
+                                                          },
+                                                          "bucketization": {
+                                                            "type": "string"
+                                                          },
+                                                          "effectiveAggrType": {
+                                                            "type": "string"
+                                                          },
+                                                          "effectiveDataType": {
+                                                            "type": "string"
+                                                          },
+                                                          "effectiveType": {
+                                                            "type": "string"
+                                                          },
+                                                          "formatPattern": {
+                                                            "type": "string"
+                                                          },
+                                                          "id": {
+                                                            "type": "string"
+                                                          },
+                                                          "effectiveColumnGuid": {
+                                                            "type": "string"
+                                                          },
+                                                          "effectiveColumnIdString": {
+                                                            "type": "string"
+                                                          },
+                                                          "baseColumnName": {
+                                                            "type": "string"
+                                                          },
+                                                          "baseAggrType": {
+                                                            "type": "string"
+                                                          },
+                                                          "baseDataType": {
+                                                            "type": "string"
+                                                          },
+                                                          "baseType": {
+                                                            "type": "string"
+                                                          },
+                                                          "isBaseColumnAdditive": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "referencedTableHeaders": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                },
+                                                                "name": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "title": "Columns Column Referenced Table Headers 2"
+                                                            }
+                                                          },
+                                                          "referencedColumnHeaders": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                },
+                                                                "name": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "title": "Columns Column Referenced Column Headers 2"
+                                                            }
+                                                          },
+                                                          "allLevelReferencedTableHeaders": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                },
+                                                                "name": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "title": "Columns Column All Level Referenced Table 2"
+                                                            }
+                                                          },
+                                                          "allLevelReferencedColumnHeaders": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                },
+                                                                "name": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "title": "Columns Column All Level Referenced Column 2"
+                                                            }
+                                                          },
+                                                          "customOrder": {
+                                                            "type": "array",
+                                                            "items": {}
+                                                          }
+                                                        },
+                                                        "title": "Visualizations Viz Content Columns Column 2"
+                                                      },
+                                                      "possibleAggrs": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "aggrs": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "tableSummary": {
+                                                        "type": "boolean"
+                                                      }
+                                                    },
+                                                    "title": "Sheet Content Visualizations Viz Content Columns 2"
+                                                  }
+                                                },
+                                                "vizType": {
+                                                  "type": "string"
+                                                },
+                                                "compoundRowIndices": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "integer"
+                                                  }
+                                                },
+                                                "template": {
+                                                  "type": "string"
+                                                },
+                                                "showSummaryAggrs": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "title": "Sheets Sheet Content Visualizations Viz Content 2"
                                             },
                                             "relatedLinks": {
                                               "type": "array",
                                               "items": {}
                                             },
                                             "header": {
-                                              "type": "object"
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "indexVersion": {
+                                                  "type": "integer"
+                                                },
+                                                "generationNum": {
+                                                  "type": "integer"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                },
+                                                "author": {
+                                                  "type": "string"
+                                                },
+                                                "authorName": {
+                                                  "type": "string"
+                                                },
+                                                "hasLenientDiscoverability": {
+                                                  "type": "boolean"
+                                                },
+                                                "authorDisplayName": {
+                                                  "type": "string"
+                                                },
+                                                "created": {
+                                                  "type": "integer"
+                                                },
+                                                "modified": {
+                                                  "type": "integer"
+                                                },
+                                                "modifiedBy": {
+                                                  "type": "string"
+                                                },
+                                                "owner": {
+                                                  "type": "string"
+                                                },
+                                                "isDeleted": {
+                                                  "type": "boolean"
+                                                },
+                                                "isHidden": {
+                                                  "type": "boolean"
+                                                },
+                                                "clientState": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "multiColorSeriesColors": {
+                                                      "type": "object",
+                                                      "additionalProperties": true
+                                                    },
+                                                    "seriesColors": {
+                                                      "type": "object",
+                                                      "additionalProperties": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "chartProperties": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "visibleSeriesNames": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "gridLines": {
+                                                          "type": "object",
+                                                          "additionalProperties": true
+                                                        },
+                                                        "showRoundedNumbers": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "chartSpecific": {
+                                                          "type": "object",
+                                                          "additionalProperties": true
+                                                        }
+                                                      },
+                                                      "title": "Header Client State Chart Properties 2"
+                                                    },
+                                                    "axisProperties": {
+                                                      "type": "object",
+                                                      "additionalProperties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "linkedColumns": {
+                                                            "type": "array",
+                                                            "items": {}
+                                                          },
+                                                          "axisType": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "title": "Axis Properties Value"
+                                                      }
+                                                    },
+                                                    "yAxisShared": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "visibleSeriesNames": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "version": {
+                                                      "type": "string"
+                                                    },
+                                                    "columnProperties": {
+                                                      "type": "object",
+                                                      "additionalProperties": {
+                                                        "type": "object",
+                                                        "additionalProperties": true
+                                                      }
+                                                    },
+                                                    "dataOffset": {
+                                                      "type": "integer"
+                                                    },
+                                                    "widthState": {
+                                                      "type": "object",
+                                                      "additionalProperties": true
+                                                    },
+                                                    "wrapTableHeader": {
+                                                      "type": "boolean"
+                                                    }
+                                                  },
+                                                  "title": "Sheet Content Visualizations Header Client State 2"
+                                                },
+                                                "tags": {
+                                                  "type": "array",
+                                                  "items": {}
+                                                },
+                                                "configs": {
+                                                  "type": "array",
+                                                  "items": {}
+                                                },
+                                                "isConnectionConfigurationDisabled": {
+                                                  "type": "boolean"
+                                                },
+                                                "type": {
+                                                  "type": "string"
+                                                },
+                                                "aiAnswerGenerationDisabled": {
+                                                  "type": "boolean"
+                                                },
+                                                "isExternal": {
+                                                  "type": "boolean"
+                                                },
+                                                "isDeprecated": {
+                                                  "type": "boolean"
+                                                },
+                                                "isSharedViaConnection": {
+                                                  "type": "boolean"
+                                                },
+                                                "syncWithSource": {
+                                                  "type": "boolean"
+                                                },
+                                                "isParameterized": {
+                                                  "type": "boolean"
+                                                },
+                                                "cachedDataAsOf": {
+                                                  "type": "integer"
+                                                },
+                                                "isVerified": {
+                                                  "type": "boolean"
+                                                },
+                                                "isVersioningEnabled": {
+                                                  "type": "boolean"
+                                                },
+                                                "contentUpgradeId": {
+                                                  "type": "string"
+                                                },
+                                                "headerUpgradeId": {
+                                                  "type": "string"
+                                                },
+                                                "isPublished": {
+                                                  "type": "boolean"
+                                                },
+                                                "csrProtected": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "title": "Sheets Sheet Content Visualizations Header 2"
                                             },
                                             "complete": {
                                               "type": "boolean"
@@ -31809,7 +32871,8 @@
                               "type": "integer"
                             },
                             "resolvedObjects": {
-                              "type": "object"
+                              "type": "object",
+                              "additionalProperties": true
                             },
                             "tags": {
                               "type": "array",
@@ -32509,7 +33572,8 @@
                       "type": "string"
                     },
                     "dataPanelColumnGroups": {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     "type": {
                       "type": "string"
@@ -32603,6 +33667,7 @@
               },
               "parameters": {
                 "type": "object",
+                "additionalProperties": true,
                 "description": "Returned when metadata_type is LOGICAL_TABLE."
               },
               "physicalTableVersion": {
@@ -32611,6 +33676,7 @@
               },
               "worksheetLevelJoins": {
                 "type": "object",
+                "additionalProperties": true,
                 "description": "Returned when metadata_type is LOGICAL_TABLE."
               },
               "logicalTableContent": {
@@ -32626,7 +33692,8 @@
                     "type": "string"
                   },
                   "joinOverrides": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   },
                   "physicalTableName": {
                     "type": "string"
@@ -32650,10 +33717,12 @@
                     "type": "boolean"
                   },
                   "useCases": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   },
                   "useCaseNameToGuid": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   },
                   "inputTableGuids": {
                     "type": "array",
@@ -32885,6 +33954,7 @@
               },
               "dataPanelColumnGroups": {
                 "type": "object",
+                "additionalProperties": true,
                 "description": "Returned when metadata_type is LOGICAL_COLUMN."
               },
               "defaultAggrType": {
@@ -33260,7 +34330,8 @@
                             "type": "string"
                           },
                           "dataPanelColumnGroups": {
-                            "type": "object"
+                            "type": "object",
+                            "additionalProperties": true
                           },
                           "type": {
                             "type": "string"
@@ -33357,13 +34428,15 @@
                       "items": {}
                     },
                     "parameters": {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     "physicalTableVersion": {
                       "type": "integer"
                     },
                     "worksheetLevelJoins": {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     "logicalTableContent": {
                       "type": "object",
@@ -33378,7 +34451,8 @@
                           "type": "string"
                         },
                         "joinOverrides": {
-                          "type": "object"
+                          "type": "object",
+                          "additionalProperties": true
                         },
                         "worksheetType": {
                           "type": "string"
@@ -33432,10 +34506,12 @@
                           "type": "boolean"
                         },
                         "useCases": {
-                          "type": "object"
+                          "type": "object",
+                          "additionalProperties": true
                         },
                         "useCaseNameToGuid": {
-                          "type": "object"
+                          "type": "object",
+                          "additionalProperties": true
                         },
                         "inputTableGuids": {
                           "type": "array",
@@ -33607,13 +34683,15 @@
                     "items": {}
                   },
                   "statistics": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   },
                   "dataLoadInfo": {
                     "type": "object",
                     "properties": {
                       "tableToTaskIdMap": {
-                        "type": "object"
+                        "type": "object",
+                        "additionalProperties": true
                       }
                     },
                     "title": "Data Source Content Data Load Info"
@@ -33706,10 +34784,12 @@
                     "title": "User Content User Preferences"
                   },
                   "userProperties": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   },
                   "userParameters": {
-                    "type": "object"
+                    "type": "object",
+                    "additionalProperties": true
                   }
                 },
                 "description": "Returned when metadata_type is USER.",
@@ -33756,6 +34836,7 @@
               },
               "userGroupContent": {
                 "type": "object",
+                "additionalProperties": true,
                 "description": "Returned when metadata_type is USER_GROUP."
               },
               "groupIdx": {
@@ -33937,6 +35018,7 @@
               },
               "resolvedObjects": {
                 "type": "object",
+                "additionalProperties": true,
                 "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, CONNECTION, USER_GROUP, or INSIGHT_SPEC."
               },
               "tags": {
@@ -34349,7 +35431,7 @@
                           "type": "string"
                         }
                       },
-                      "title": "Title Value"
+                      "title": "Visualization Headers Title Value"
                     }
                   },
                   "description": "Returned when metadata_type is LIVEBOARD.",
@@ -35706,7 +36788,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Response Status"
+                          "title": "Import Response Object Response Status"
                         },
                         "header": {
                           "type": "object",
@@ -35733,7 +36815,7 @@
                               "type": "string"
                             }
                           },
-                          "title": "Response Header"
+                          "title": "Import Response Object Response Header"
                         }
                       },
                       "title": "Object Response"
@@ -50905,7 +51987,8 @@
                   "title": "Messages Metadata"
                 },
                 "internal": {
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": true
                 },
                 "type": {
                   "type": "string"
@@ -54176,7 +55259,7 @@
             ]
           },
           "delete_reason": {
-            "description": "Reason for the delete, recorded with the Recycle Bin entry. At most 32 characters. Required, with at least 5 characters, to move objects you do not own to the Recycle Bin. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
+            "description": "Reason for the delete, recorded with the Recycle Bin entry. Optional, and recommended when you move objects you do not own to the Recycle Bin. At most 32 characters. If omitted, a default reason saying that the object was deleted through the API is recorded. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "type": "string"
           }
         },
@@ -59150,6 +60233,716 @@
                 "SIGNATURE_VERIFICATION",
                 "STORAGE_DESTINATION"
               ]
+            }
+          }
+        }
+      },
+      "DbtConnectionResponse": {
+        "type": "object",
+        "properties": {
+          "dbt_connection_identifier": {
+            "type": "string"
+          },
+          "connection_id": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "dbt_connection_identifier": "d3e4f5a6-0003-4b7c-8d9e-0f1a2b3c4d5e",
+          "connection_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c"
+        }
+      },
+      "DbtGenerateTmlResponse": {
+        "type": "object",
+        "properties": {
+          "worksheet_tmls": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "Sales Model": "guid: e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f\nworksheet:\n  name: Sales Model\n"
+            },
+            "description": "Keyed by name; every value has the shape described here."
+          },
+          "table_tmls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "guid": "f5a6b7c8-0005-4d9e-8f0a-2b3c4d5e6f7a",
+                "name": "ORDERS"
+              },
+              "title": "Dbt Generate Tml Response Table Tmls"
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
+          },
+          "failed_table_tmls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "semantic_report": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "model_name": {
+                  "type": "string"
+                },
+                "model_id": {
+                  "type": "string"
+                },
+                "semantic_components": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "semantic_type": {
+                        "type": "string"
+                      },
+                      "import_status": {
+                        "type": "string"
+                      },
+                      "sql_expression": {
+                        "type": "string"
+                      },
+                      "translated_formula": {
+                        "type": "string"
+                      }
+                    },
+                    "title": "Semantic Report Semantic Components"
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "model_name": "Sales Model",
+                "model_id": "e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f",
+                "semantic_components": [
+                  {
+                    "name": "Total Sales",
+                    "semantic_type": "MEASURE",
+                    "import_status": "IMPORTED",
+                    "sql_expression": "sum(orders.sales)",
+                    "translated_formula": "sum ( [sales] )"
+                  },
+                  {
+                    "name": "Region",
+                    "semantic_type": "DIMENSION",
+                    "import_status": "SKIPPED",
+                    "sql_expression": "customers.region",
+                    "translated_formula": ""
+                  }
+                ]
+              },
+              "title": "Dbt Generate Tml Response Semantic Report"
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
+          }
+        },
+        "example": {
+          "worksheet_tmls": {
+            "Sales Model": "guid: e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f\nworksheet:\n  name: Sales Model\n"
+          },
+          "table_tmls": [
+            {
+              "guid": "f5a6b7c8-0005-4d9e-8f0a-2b3c4d5e6f7a",
+              "name": "ORDERS"
+            },
+            {
+              "guid": "a6b7c8d9-0006-4e0f-9a1b-3c4d5e6f7a8b",
+              "name": "CUSTOMERS"
+            }
+          ],
+          "failed_table_tmls": [
+            "RETURNS"
+          ],
+          "semantic_report": [
+            {
+              "model_name": "Sales Model",
+              "model_id": "e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f",
+              "semantic_components": [
+                {
+                  "name": "Total Sales",
+                  "semantic_type": "MEASURE",
+                  "import_status": "IMPORTED",
+                  "sql_expression": "sum(orders.sales)",
+                  "translated_formula": "sum ( [sales] )"
+                },
+                {
+                  "name": "Region",
+                  "semantic_type": "DIMENSION",
+                  "import_status": "SKIPPED",
+                  "sql_expression": "customers.region",
+                  "translated_formula": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "DbtGenerateSyncTmlResponse": {
+        "type": "object",
+        "properties": {
+          "worksheet_tmls": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "Marketing Model": "guid: b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c\nworksheet:\n  name: Marketing Model\n"
+            },
+            "description": "Keyed by name; every value has the shape described here."
+          },
+          "table_tmls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "guid": "c8d9e0f1-0008-4a2b-9c3d-5e6f7a8b9c0d",
+                "name": "CAMPAIGNS"
+              },
+              "title": "Dbt Generate Sync Tml Response Table Tmls"
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
+          },
+          "failed_table_tmls": {
+            "type": "array",
+            "items": {}
+          },
+          "semantic_report": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "model_name": {
+                  "type": "string"
+                },
+                "model_id": {
+                  "type": "string"
+                },
+                "semantic_components": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "semantic_type": {
+                        "type": "string"
+                      },
+                      "import_status": {
+                        "type": "string"
+                      },
+                      "sql_expression": {
+                        "type": "string"
+                      },
+                      "translated_formula": {
+                        "type": "string"
+                      }
+                    },
+                    "title": "Semantic Report Semantic Components 2"
+                  }
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "model_name": "Marketing Model",
+                "model_id": "b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c",
+                "semantic_components": [
+                  {
+                    "name": "Campaign Spend",
+                    "semantic_type": "MEASURE",
+                    "import_status": "IMPORTED",
+                    "sql_expression": "sum(campaigns.spend)",
+                    "translated_formula": "sum ( [spend] )"
+                  },
+                  {
+                    "name": "Cost Per Lead",
+                    "semantic_type": "METRIC",
+                    "import_status": "IMPORTED",
+                    "sql_expression": "sum(campaigns.spend) / nullif(count(leads.lead_id), 0)",
+                    "translated_formula": "sum ( [spend] ) / safe_divide ( count ( [lead_id] ) )"
+                  },
+                  {
+                    "name": "Channel",
+                    "semantic_type": "DIMENSION",
+                    "import_status": "SKIPPED",
+                    "sql_expression": "campaigns.channel_group",
+                    "translated_formula": ""
+                  }
+                ]
+              },
+              "title": "Dbt Generate Sync Tml Response Semantic Report"
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
+          }
+        },
+        "example": {
+          "worksheet_tmls": {
+            "Marketing Model": "guid: b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c\nworksheet:\n  name: Marketing Model\n"
+          },
+          "table_tmls": [
+            {
+              "guid": "c8d9e0f1-0008-4a2b-9c3d-5e6f7a8b9c0d",
+              "name": "CAMPAIGNS"
+            },
+            {
+              "guid": "d9e0f1a2-0009-4b3c-8d4e-6f7a8b9c0d1e",
+              "name": "LEADS"
+            }
+          ],
+          "failed_table_tmls": [],
+          "semantic_report": [
+            {
+              "model_name": "Marketing Model",
+              "model_id": "b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c",
+              "semantic_components": [
+                {
+                  "name": "Campaign Spend",
+                  "semantic_type": "MEASURE",
+                  "import_status": "IMPORTED",
+                  "sql_expression": "sum(campaigns.spend)",
+                  "translated_formula": "sum ( [spend] )"
+                },
+                {
+                  "name": "Cost Per Lead",
+                  "semantic_type": "METRIC",
+                  "import_status": "IMPORTED",
+                  "sql_expression": "sum(campaigns.spend) / nullif(count(leads.lead_id), 0)",
+                  "translated_formula": "sum ( [spend] ) / safe_divide ( count ( [lead_id] ) )"
+                },
+                {
+                  "name": "Channel",
+                  "semantic_type": "DIMENSION",
+                  "import_status": "SKIPPED",
+                  "sql_expression": "campaigns.channel_group",
+                  "translated_formula": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "GetManualTranslationBundleResponse": {
+        "type": "object",
+        "properties": {
+          "translations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "liveboard.title.sales_overview": "Resumen de ventas",
+              "column.label.total_sales": "Ventas totales"
+            },
+            "description": "Keyed by name; every value has the shape described here."
+          }
+        },
+        "example": {
+          "translations": {
+            "liveboard.title.sales_overview": "Resumen de ventas",
+            "column.label.total_sales": "Ventas totales"
+          }
+        }
+      },
+      "ExportMetadataTMLResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "filename": {
+                "type": "string"
+              },
+              "status": {
+                "type": "object",
+                "properties": {
+                  "status_code": {
+                    "type": "string"
+                  },
+                  "error_code": {
+                    "type": "integer"
+                  },
+                  "error_message": {
+                    "type": "string"
+                  }
+                },
+                "title": "Export Metadata TML Response Info Status"
+              },
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "dependency": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "filename": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "status_code": {
+                          "type": "string"
+                        },
+                        "error_message": {
+                          "type": "string"
+                        }
+                      },
+                      "title": "Info Dependency Status"
+                    }
+                  },
+                  "title": "Export Metadata TML Response Info Dependency"
+                }
+              },
+              "tables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "filename": {
+                      "type": "string"
+                    }
+                  },
+                  "title": "Export Metadata TML Response Info Tables"
+                }
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "name": "Total sales by region",
+              "filename": "Total sales by region.answer.tml",
+              "status": {
+                "status_code": "OK"
+              },
+              "type": "ANSWER",
+              "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+              "dependency": [
+                {
+                  "name": "Sales Model",
+                  "filename": "Sales Model.worksheet.tml"
+                }
+              ]
+            },
+            "description": "Keys are documented from a sample; other keys may be returned.",
+            "title": "Export Metadata TML Response Info"
+          },
+          "edoc": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "info": {
+            "name": "Total sales by region",
+            "filename": "Total sales by region.answer.tml",
+            "status": {
+              "status_code": "OK"
+            },
+            "type": "ANSWER",
+            "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+            "dependency": [
+              {
+                "name": "Sales Model",
+                "filename": "Sales Model.worksheet.tml"
+              }
+            ]
+          },
+          "edoc": "guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b\nanswer:\n  name: Total sales by region\n  description: Total sales for each region\n  tables:\n  - id: Sales Model\n  search_query: \"[sales] [region]\"\n  answer_columns:\n  - name: region\n  - name: Total sales\n  display_mode: CHART_MODE\n"
+        }
+      },
+      "ExportMetadataTMLBatchedResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "filename": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "status_code": {
+                          "type": "string"
+                        },
+                        "error_code": {
+                          "type": "integer"
+                        },
+                        "error_message": {
+                          "type": "string"
+                        }
+                      },
+                      "title": "Result Info Status"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "dependency": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "filename": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "object",
+                            "properties": {
+                              "status_code": {
+                                "type": "string"
+                              },
+                              "error_message": {
+                                "type": "string"
+                              }
+                            },
+                            "title": "Result Info Dependency Status"
+                          }
+                        },
+                        "title": "Result Info Dependency"
+                      }
+                    },
+                    "tables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "filename": {
+                            "type": "string"
+                          }
+                        },
+                        "title": "Result Info Tables"
+                      }
+                    }
+                  },
+                  "title": "Result Info"
+                },
+                "edoc": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true,
+              "example": {
+                "info": {
+                  "name": "Total sales by region",
+                  "filename": "Total sales by region.answer.tml",
+                  "status": {
+                    "status_code": "OK"
+                  },
+                  "type": "ANSWER",
+                  "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                  "dependency": [
+                    {
+                      "name": "Sales Model",
+                      "filename": "Sales Model.worksheet.tml"
+                    }
+                  ]
+                },
+                "edoc": "guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b\nanswer:\n  name: Total sales by region\n  description: Total sales for each region\n  tables:\n  - id: Sales Model\n  search_query: \"[sales] [region]\"\n  answer_columns:\n  - name: region\n  - name: Total sales\n  display_mode: CHART_MODE\n"
+              },
+              "title": "Export Metadata TML Batched Response Result"
+            },
+            "description": "Keys are documented from a sample; other keys may be returned."
+          },
+          "isLastBatch": {
+            "type": "boolean"
+          },
+          "batch_offset": {
+            "type": "integer"
+          },
+          "batch_size": {
+            "type": "integer"
+          }
+        },
+        "example": {
+          "result": [
+            {
+              "info": {
+                "name": "Total sales by region",
+                "filename": "Total sales by region.answer.tml",
+                "status": {
+                  "status_code": "OK"
+                },
+                "type": "ANSWER",
+                "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                "dependency": [
+                  {
+                    "name": "Sales Model",
+                    "filename": "Sales Model.worksheet.tml"
+                  }
+                ]
+              },
+              "edoc": "guid: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b\nanswer:\n  name: Total sales by region\n  description: Total sales for each region\n  tables:\n  - id: Sales Model\n  search_query: \"[sales] [region]\"\n  answer_columns:\n  - name: region\n  - name: Total sales\n  display_mode: CHART_MODE\n"
+            },
+            {
+              "info": {
+                "name": "Snowflake Sales",
+                "filename": "Snowflake Sales.connection.tml",
+                "status": {
+                  "status_code": "OK"
+                },
+                "type": "CONNECTION",
+                "id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c",
+                "dependency": [],
+                "tables": [
+                  {
+                    "name": "ORDERS",
+                    "filename": "ORDERS.table.tml"
+                  }
+                ]
+              },
+              "edoc": "guid: 5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c\nconnection:\n  name: Snowflake Sales\n  type: RDBMS_SNOWFLAKE\n  authentication_type: SERVICE_ACCOUNT\n  properties:\n  - key: accountName\n    value: \"<account_name>\"\n  - key: role\n    value: \"<role>\"\n"
+            }
+          ],
+          "isLastBatch": false,
+          "batch_offset": 0,
+          "batch_size": 2
+        }
+      },
+      "ImportMetadataTMLResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "guid": {
+            "type": "string"
+          },
+          "request_index": {
+            "type": "integer"
+          },
+          "response": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "object",
+                "properties": {
+                  "status_code": {
+                    "type": "string"
+                  },
+                  "error_message": {
+                    "type": "string"
+                  }
+                },
+                "title": "Import Metadata TML Response Response Status"
+              },
+              "header": {
+                "type": "object",
+                "properties": {
+                  "author_guid": {
+                    "type": "string"
+                  },
+                  "id_guid": {
+                    "type": "string"
+                  },
+                  "is_versioning_enabled": {
+                    "type": "boolean"
+                  },
+                  "metadata_type": {
+                    "type": "string"
+                  },
+                  "owner_guid": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "title": "Import Metadata TML Response Response Header"
+              }
+            },
+            "additionalProperties": true,
+            "example": {
+              "status": {
+                "status_code": "OK"
+              },
+              "header": {
+                "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+                "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                "is_versioning_enabled": false,
+                "metadata_type": "LOGICAL_TABLE",
+                "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                "description": "",
+                "name": "Sales Table"
+              }
+            },
+            "description": "Keys are documented from a sample; other keys may be returned.",
+            "title": "Import Metadata TML Response Response"
+          }
+        },
+        "example": {
+          "name": "Sales Table",
+          "guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+          "request_index": 0,
+          "response": {
+            "status": {
+              "status_code": "OK"
+            },
+            "header": {
+              "author_guid": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+              "id_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+              "is_versioning_enabled": false,
+              "metadata_type": "LOGICAL_TABLE",
+              "owner_guid": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+              "description": "",
+              "name": "Sales Table"
             }
           }
         }
