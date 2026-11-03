@@ -44026,6 +44026,18 @@ components:
           - CLUSTER
           type: string
       type: object
+    ExportManualTranslationTemplateRequest:
+      properties:
+        liveboard_identifiers:
+          description: |-
+            GUIDs or names of the Liveboards whose translatable strings go into the
+            template. Names are resolved in the current Org. Specify 1 to 50 Liveboards.
+          items:
+            type: string
+          type: array
+      required:
+      - liveboard_identifiers
+      type: object
     BuildMetadataIndexRequest:
       properties:
         org_identifier:

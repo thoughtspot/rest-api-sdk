@@ -196,6 +196,7 @@ export * from '../models/EventChannelConfigInput';
 export * from '../models/ExcludeMetadataListItemInput';
 export * from '../models/ExportAnswerReportRequest';
 export * from '../models/ExportLiveboardReportRequest';
+export * from '../models/ExportManualTranslationTemplateRequest';
 export * from '../models/ExportManualTranslationsRequest';
 export * from '../models/ExportMemoryRequest';
 export * from '../models/ExportMemoryResponse';
@@ -803,6 +804,7 @@ import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventC
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum        , ExportAnswerReportRequestTypeEnum   } from '../models/ExportAnswerReportRequest';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
+import { ExportManualTranslationTemplateRequest } from '../models/ExportManualTranslationTemplateRequest';
 import { ExportManualTranslationsRequest, ExportManualTranslationsRequestScopeEnum   } from '../models/ExportManualTranslationsRequest';
 import { ExportMemoryRequest } from '../models/ExportMemoryRequest';
 import { ExportMemoryResponse } from '../models/ExportMemoryResponse';
@@ -1767,6 +1769,7 @@ let typeMap: {[index: string]: any} = {
     "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
     "ExportAnswerReportRequest": ExportAnswerReportRequest,
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
+    "ExportManualTranslationTemplateRequest": ExportManualTranslationTemplateRequest,
     "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
     "ExportMemoryRequest": ExportMemoryRequest,
     "ExportMemoryResponse": ExportMemoryResponse,

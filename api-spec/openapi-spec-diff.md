@@ -57,6 +57,10 @@
 -  removed the non-success response with the status `404`
 
 
+### POST /api/rest/2.0/localizations/manual-translation/template/export
+-  endpoint added
+
+
 ### POST /api/rest/2.0/metadata/delete
 -  added the new optional request property `delete_mode`
 -  added the new optional request property `delete_reason`

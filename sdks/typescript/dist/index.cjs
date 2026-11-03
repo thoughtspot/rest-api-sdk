@@ -230,6 +230,7 @@ __export(typescript_exports, {
   ExcludeMetadataListItemInput: () => ExcludeMetadataListItemInput,
   ExportAnswerReportRequest: () => ExportAnswerReportRequest,
   ExportLiveboardReportRequest: () => ExportLiveboardReportRequest,
+  ExportManualTranslationTemplateRequest: () => ExportManualTranslationTemplateRequest,
   ExportManualTranslationsRequest: () => ExportManualTranslationsRequest,
   ExportMemoryRequest: () => ExportMemoryRequest,
   ExportMemoryResponse: () => ExportMemoryResponse,
@@ -8004,6 +8005,26 @@ _ExportLiveboardReportRequest.attributeTypeMap = [
   }
 ];
 var ExportLiveboardReportRequest = _ExportLiveboardReportRequest;
+
+// models/ExportManualTranslationTemplateRequest.ts
+var _ExportManualTranslationTemplateRequest = class _ExportManualTranslationTemplateRequest {
+  static getAttributeTypeMap() {
+    return _ExportManualTranslationTemplateRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportManualTranslationTemplateRequest.discriminator = void 0;
+_ExportManualTranslationTemplateRequest.mapping = void 0;
+_ExportManualTranslationTemplateRequest.attributeTypeMap = [
+  {
+    "name": "liveboard_identifiers",
+    "baseName": "liveboard_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var ExportManualTranslationTemplateRequest = _ExportManualTranslationTemplateRequest;
 
 // models/ExportManualTranslationsRequest.ts
 var _ExportManualTranslationsRequest = class _ExportManualTranslationsRequest {
@@ -24800,6 +24821,7 @@ var typeMap = {
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
+  "ExportManualTranslationTemplateRequest": ExportManualTranslationTemplateRequest,
   "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
   "ExportMemoryRequest": ExportMemoryRequest,
   "ExportMemoryResponse": ExportMemoryResponse,
@@ -86186,6 +86208,7 @@ var createBasicConfig = (thoughtSpotHost, options) => {
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
   ExportLiveboardReportRequest,
+  ExportManualTranslationTemplateRequest,
   ExportManualTranslationsRequest,
   ExportMemoryRequest,
   ExportMemoryResponse,

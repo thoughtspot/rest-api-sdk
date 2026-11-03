@@ -200,6 +200,7 @@ import { EventChannelConfigInput } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest } from '../models/ExportAnswerReportRequest';
 import { ExportLiveboardReportRequest } from '../models/ExportLiveboardReportRequest';
+import { ExportManualTranslationTemplateRequest } from '../models/ExportManualTranslationTemplateRequest';
 import { ExportManualTranslationsRequest } from '../models/ExportManualTranslationsRequest';
 import { ExportMemoryRequest } from '../models/ExportMemoryRequest';
 import { ExportMemoryResponse } from '../models/ExportMemoryResponse';

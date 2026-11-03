@@ -267,6 +267,7 @@ __all__ = [
     "ExcludeMetadataListItemInput",
     "ExportAnswerReportRequest",
     "ExportLiveboardReportRequest",
+    "ExportManualTranslationTemplateRequest",
     "ExportManualTranslationsRequest",
     "ExportMemoryRequest",
     "ExportMemoryResponse",
@@ -925,6 +926,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
     from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest
+    from thoughtspot_rest_api_sdk.models.export_manual_translation_template_request import ExportManualTranslationTemplateRequest as ExportManualTranslationTemplateRequest
     from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest as ExportManualTranslationsRequest
     from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest as ExportMemoryRequest
     from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse as ExportMemoryResponse
@@ -1589,6 +1591,7 @@ from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChan
 from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest
+from thoughtspot_rest_api_sdk.models.export_manual_translation_template_request import ExportManualTranslationTemplateRequest as ExportManualTranslationTemplateRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest as ExportManualTranslationsRequest
 from thoughtspot_rest_api_sdk.models.export_memory_request import ExportMemoryRequest as ExportMemoryRequest
 from thoughtspot_rest_api_sdk.models.export_memory_response import ExportMemoryResponse as ExportMemoryResponse
