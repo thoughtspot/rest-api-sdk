@@ -101,6 +101,10 @@ strong {
     display: none !important;
 }
 
+.nullable-checkbox {
+    display: none !important;
+}
+
 body {
     opacity: 0;
     transition: opacity 0.1s linear;
