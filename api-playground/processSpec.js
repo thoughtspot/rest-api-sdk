@@ -126,6 +126,19 @@ function hideFieldsInOperation(spec, op, fields) {
   return hidden;
 }
 
+//Removes operations marked deprecated, and paths left with no operations.
+function hideDeprecatedOperations(spec) {
+  for (const [pathKey, pathItem] of Object.entries(spec.paths)) {
+    for (const [method, op] of Object.entries(pathItem)) {
+      if (op.deprecated === true) {
+        console.log(`Hiding deprecated operation: ${op.operationId} (${method.toUpperCase()} ${pathKey})`);
+        delete pathItem[method];
+      }
+    }
+    if (Object.keys(pathItem).length === 0) delete spec.paths[pathKey];
+  }
+}
+
 async function processOpenApiSpec() {
   try {
     if (!fs.existsSync(CONFIG_PATH)) {
@@ -138,6 +151,10 @@ async function processOpenApiSpec() {
 
     const configContent = fs.readFileSync(CONFIG_PATH, 'utf8');
     const config = JSON.parse(configContent);
+
+    if (config.hideDeprecatedOperations) {
+      hideDeprecatedOperations(spec);
+    }
 
     if (config.hideApiFields && config.hideApiFields.length > 0) {
       console.log('\n=== Hiding API Fields in Spec ===');
