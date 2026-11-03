@@ -15978,7 +15978,8 @@
                         "visualization_headers": null,
                         "stats": {
                           "views": 18,
-                          "favorites": 2
+                          "favorites": 2,
+                          "last_accessed": 1760198460000
                         },
                         "metadata_obj_id": "answer-1c2d3e4f",
                         "dependent_objects_is_last_batch": true

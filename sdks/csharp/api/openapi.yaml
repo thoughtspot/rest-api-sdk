@@ -14870,6 +14870,7 @@ paths:
                     stats:
                       views: 18
                       favorites: 2
+                      last_accessed: 1760198460000
                     metadata_obj_id: answer-1c2d3e4f
                     dependent_objects_is_last_batch: true
                   - metadata_id: 0000002e-0000-4000-8000-00000000002e
