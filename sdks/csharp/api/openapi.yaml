@@ -516,16 +516,17 @@ paths:
         ```\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n\
         | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's\
         \ **Spotter 3 Liveboard experience** setting is not **Liveboard side panel\
-        \ (New)**. |\n| 401  | Unauthorized — authentication token is missing, expired,\
-        \ or invalid. |\n| 403  | Forbidden — the authenticated user does not have\
-        \ `CAN_USE_SPOTTER` privilege or does not own the specified conversation.\
-        \ |\n| 404  | Not Found — no conversation exists with the given `conversation_identifier`\
-        \ for the authenticated user. |\n\n> ###### Note:\n>\n> - Deletion is permanent\
-        \ and cannot be undone. Ensure the correct `conversation_identifier` is used\
-        \ before calling this endpoint.\n> - On `V1`, only conversations created with\
-        \ `enable_save_chat: true` are persisted and can be deleted via this endpoint.\
-        \ On `V2`, any conversation can be deleted by its identifier, including one\
-        \ created without `enable_save_chat: true`.\n> - `spotter_experience_version`\
+        \ (New)**, or the conversation identifier is malformed on `V2` (it must be\
+        \ letters, digits, `-` and `_`). |\n| 401  | Unauthorized — authentication\
+        \ token is missing, expired, or invalid. |\n| 403  | Forbidden — the authenticated\
+        \ user does not have `CAN_USE_SPOTTER` privilege or does not own the specified\
+        \ conversation. |\n| 404  | Not Found — no conversation exists with the given\
+        \ `conversation_identifier` for the authenticated user. |\n\n> ###### Note:\n\
+        >\n> - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier`\
+        \ is used before calling this endpoint.\n> - On `V1`, only conversations created\
+        \ with `enable_save_chat: true` are persisted and can be deleted via this\
+        \ endpoint. On `V2`, any conversation can be deleted by its identifier, including\
+        \ one created without `enable_save_chat: true`.\n> - `spotter_experience_version`\
         \ and `V2` support are in Beta from 26.12.0.cl.\n> - Available from version\
         \ 26.7.0.cl and later.\n> - This endpoint requires Spotter — please contact\
         \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
@@ -3010,10 +3011,10 @@ paths:
 
         | Code | Description                                                                                                                      |
         |------|----------------------------------------------------------------------------------------------------------------------------------|
-        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |
+        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`), or the conversation identifier is omitted on `V1`. |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
         | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
-        | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |
+        | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user, or it belongs to another user. |
         | 504  | Gateway timeout — on `V2`, the turn did not finish in the time allowed. Retry, or use `sendAgentConversationMessageStreaming` for questions that run long. |
 
         > ###### Note:
@@ -3170,7 +3171,6 @@ paths:
                     events:
                     - error:
                         code: "409"
-                        message: "session busy: lease held by invocation 7f3a"
                         source: transport
                         display_message: Another request is still running in this
                           conversation.
@@ -3391,7 +3391,6 @@ paths:
         {
           "error": {
             "code": "409",
-            "message": "session busy: lease held by invocation 7f3a",
             "source": "transport",
             "display_message": "Another request is still running in this conversation.",
             "error_bucket": "RETRY"
@@ -3399,7 +3398,9 @@ paths:
         }
         ```
 
-        Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.
+        Render `display_message`. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.
+
+        A conversation that does not exist, or that belongs to another user, is reported the same way: an `error` event with `code` `"404"` and `error_bucket` `NEW_CHAT`, after a `200` response has started. The two cases cannot be told apart.
 
         A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.
 
@@ -3469,10 +3470,9 @@ paths:
 
         | Code | Description                                                                                                                      |
         | ---- | -------------------------------------------------------------------------------------------------------------------------------- |
-        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. |
+        | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`), or the conversation identifier is omitted on `V1`. |
         | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             |
         | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |
-        | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |
 
         > ###### Note:
         >
@@ -3619,7 +3619,6 @@ paths:
                   value:
                   - error:
                       code: "409"
-                      message: "session busy: lease held by invocation 7f3a"
                       source: transport
                       display_message: Another request is still running in this conversation.
                       error_bucket: RETRY
@@ -4418,15 +4417,17 @@ paths:
         \ — authentication token is missing, expired, or invalid. |\n| 400  | Bad\
         \ request — `spotter_experience_version` is `V2` and the cluster's **Spotter\
         \ 3 Liveboard experience** setting is not **Liveboard side panel (New)**,\
-        \ or, on `V2`, no conversation with the given identifier exists for this user.\
-        \ |\n| 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER`\
-        \ privilege or lacks access to the specified conversation. |\n\n> ###### Note:\n\
-        >\n> - Calling this endpoint when no response is in progress does not return\
-        \ an error.\n> - The conversation context is preserved after stopping — previous\
-        \ messages and answers remain accessible.\n> - Available from version 26.6.0.cl\
-        \ and later.\n> - This endpoint requires Spotter — please contact ThoughtSpot\
-        \ Support to enable Spotter on your cluster.\n> - `spotter_experience_version`\
-        \ and `V2` support are in Beta from 26.12.0.cl.\n\n\n\n\n\n"
+        \ the conversation identifier is malformed on `V2` (it must be letters, digits,\
+        \ `-` and `_`), or, on `V2`, no conversation with the given identifier exists\
+        \ for this user. |\n| 403  | Forbidden — the authenticated user does not have\
+        \ `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation.\
+        \ |\n\n> ###### Note:\n>\n> - Calling this endpoint when no response is in\
+        \ progress does not return an error.\n> - The conversation context is preserved\
+        \ after stopping — previous messages and answers remain accessible.\n> - Available\
+        \ from version 26.6.0.cl and later.\n> - This endpoint requires Spotter —\
+        \ please contact ThoughtSpot Support to enable Spotter on your cluster.\n\
+        > - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.\n\
+        \n\n\n\n\n"
       operationId: stopConversation
       parameters:
       - description: Unique identifier of the conversation to stop.
@@ -40007,11 +40008,6 @@ components:
         code:
           description: "Machine-readable status, always a string. Quote it when reporting\
             \ an issue. \n  Version: 26.12.0.cl or later\n"
-          nullable: true
-          type: string
-        message:
-          description: "Diagnostic detail. Not written for end users — render `display_message`.\
-            \ \n  Version: 26.12.0.cl or later\n"
           nullable: true
           type: string
         source:

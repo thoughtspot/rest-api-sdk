@@ -21,10 +21,6 @@ export class AgentStreamError {
     */
     'code'?: string | null;
     /**
-    * Diagnostic detail. Not written for end users — render `display_message`.    Version: 26.12.0.cl or later 
-    */
-    'message'?: string | null;
-    /**
     * Which layer produced the failure.    Version: 26.12.0.cl or later 
     */
     'source'?: string | null;
@@ -45,12 +41,6 @@ export class AgentStreamError {
         {
             "name": "code",
             "baseName": "code",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "message",
-            "baseName": "message",
             "type": "string",
             "format": ""
         },

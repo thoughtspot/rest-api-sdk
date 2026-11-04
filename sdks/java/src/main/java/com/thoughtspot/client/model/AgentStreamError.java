@@ -49,11 +49,6 @@ public class AgentStreamError implements Serializable {
   @javax.annotation.Nullable
   private String code;
 
-  public static final String SERIALIZED_NAME_MESSAGE = "message";
-  @SerializedName(SERIALIZED_NAME_MESSAGE)
-  @javax.annotation.Nullable
-  private String message;
-
   public static final String SERIALIZED_NAME_SOURCE = "source";
   @SerializedName(SERIALIZED_NAME_SOURCE)
   @javax.annotation.Nullable
@@ -88,25 +83,6 @@ public class AgentStreamError implements Serializable {
 
   public void setCode(@javax.annotation.Nullable String code) {
     this.code = code;
-  }
-
-
-  public AgentStreamError message(@javax.annotation.Nullable String message) {
-    this.message = message;
-    return this;
-  }
-
-  /**
-   * Diagnostic detail. Not written for end users — render &#x60;display_message&#x60;.    Version: 26.12.0.cl or later 
-   * @return message
-   */
-  @javax.annotation.Nullable
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(@javax.annotation.Nullable String message) {
-    this.message = message;
   }
 
 
@@ -222,7 +198,6 @@ public class AgentStreamError implements Serializable {
     }
     AgentStreamError agentStreamError = (AgentStreamError) o;
     return Objects.equals(this.code, agentStreamError.code) &&
-        Objects.equals(this.message, agentStreamError.message) &&
         Objects.equals(this.source, agentStreamError.source) &&
         Objects.equals(this.displayMessage, agentStreamError.displayMessage) &&
         Objects.equals(this.errorBucket, agentStreamError.errorBucket)&&
@@ -231,7 +206,7 @@ public class AgentStreamError implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, message, source, displayMessage, errorBucket, additionalProperties);
+    return Objects.hash(code, source, displayMessage, errorBucket, additionalProperties);
   }
 
   @Override
@@ -239,7 +214,6 @@ public class AgentStreamError implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgentStreamError {\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    displayMessage: ").append(toIndentedString(displayMessage)).append("\n");
     sb.append("    errorBucket: ").append(toIndentedString(errorBucket)).append("\n");
@@ -267,7 +241,6 @@ public class AgentStreamError implements Serializable {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("code");
-    openapiFields.add("message");
     openapiFields.add("source");
     openapiFields.add("display_message");
     openapiFields.add("error_bucket");
@@ -291,9 +264,6 @@ public class AgentStreamError implements Serializable {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("code") != null && !jsonObj.get("code").isJsonNull()) && !jsonObj.get("code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
-      }
-      if ((jsonObj.get("message") != null && !jsonObj.get("message").isJsonNull()) && !jsonObj.get("message").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `message` to be a primitive type in the JSON string but got `%s`", jsonObj.get("message").toString()));
       }
       if ((jsonObj.get("source") != null && !jsonObj.get("source").isJsonNull()) && !jsonObj.get("source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source").toString()));

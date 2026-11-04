@@ -36,14 +36,12 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="AgentStreamError" /> class.
         /// </summary>
         /// <param name="code">Machine-readable status, always a string. Quote it when reporting an issue.    Version: 26.12.0.cl or later .</param>
-        /// <param name="message">Diagnostic detail. Not written for end users — render &#x60;display_message&#x60;.    Version: 26.12.0.cl or later .</param>
         /// <param name="source">Which layer produced the failure.    Version: 26.12.0.cl or later .</param>
         /// <param name="displayMessage">Text safe to show a user.    Version: 26.12.0.cl or later .</param>
         /// <param name="errorBucket">What the caller should do: &#x60;RETRY&#x60;, &#x60;REFRESH&#x60;, &#x60;NEW_CHAT&#x60; or &#x60;SUPPORT&#x60;. Treat an unrecognized value as &#x60;SUPPORT&#x60;.    Version: 26.12.0.cl or later .</param>
-        public AgentStreamError(string code = default, string message = default, string source = default, string displayMessage = default, string errorBucket = default)
+        public AgentStreamError(string code = default, string source = default, string displayMessage = default, string errorBucket = default)
         {
             this.Code = code;
-            this.Message = message;
             this.Source = source;
             this.DisplayMessage = displayMessage;
             this.ErrorBucket = errorBucket;
@@ -56,13 +54,6 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Machine-readable status, always a string. Quote it when reporting an issue.    Version: 26.12.0.cl or later </value>
         [DataMember(Name = "code", EmitDefaultValue = true)]
         public string Code { get; set; }
-
-        /// <summary>
-        /// Diagnostic detail. Not written for end users — render &#x60;display_message&#x60;.    Version: 26.12.0.cl or later 
-        /// </summary>
-        /// <value>Diagnostic detail. Not written for end users — render &#x60;display_message&#x60;.    Version: 26.12.0.cl or later </value>
-        [DataMember(Name = "message", EmitDefaultValue = true)]
-        public string Message { get; set; }
 
         /// <summary>
         /// Which layer produced the failure.    Version: 26.12.0.cl or later 
@@ -100,7 +91,6 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AgentStreamError {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  DisplayMessage: ").Append(DisplayMessage).Append("\n");
             sb.Append("  ErrorBucket: ").Append(ErrorBucket).Append("\n");

@@ -64,15 +64,6 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Message'
-        /// </summary>
-        [Fact]
-        public void MessageTest()
-        {
-            // TODO unit test for the property 'Message'
-        }
-
-        /// <summary>
         /// Test the property 'Source'
         /// </summary>
         [Fact]

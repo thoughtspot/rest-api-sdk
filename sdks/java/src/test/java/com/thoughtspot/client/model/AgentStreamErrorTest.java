@@ -37,14 +37,6 @@ public class AgentStreamErrorTest {
     }
 
     /**
-     * Test the property 'message'
-     */
-    @Test
-    public void messageTest() {
-        // TODO: test message
-    }
-
-    /**
      * Test the property 'source'
      */
     @Test

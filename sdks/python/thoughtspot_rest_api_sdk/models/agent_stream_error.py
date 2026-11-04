@@ -26,12 +26,11 @@ class AgentStreamError(BaseModel):
     A failure that ended the turn.
     """ # noqa: E501
     code: Optional[StrictStr] = Field(default=None, description="Machine-readable status, always a string. Quote it when reporting an issue.    Version: 26.12.0.cl or later ")
-    message: Optional[StrictStr] = Field(default=None, description="Diagnostic detail. Not written for end users — render `display_message`.    Version: 26.12.0.cl or later ")
     source: Optional[StrictStr] = Field(default=None, description="Which layer produced the failure.    Version: 26.12.0.cl or later ")
     display_message: Optional[StrictStr] = Field(default=None, description="Text safe to show a user.    Version: 26.12.0.cl or later ")
     error_bucket: Optional[StrictStr] = Field(default=None, description="What the caller should do: `RETRY`, `REFRESH`, `NEW_CHAT` or `SUPPORT`. Treat an unrecognized value as `SUPPORT`.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["code", "message", "source", "display_message", "error_bucket"]
+    __properties: ClassVar[List[str]] = ["code", "source", "display_message", "error_bucket"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,11 +83,6 @@ class AgentStreamError(BaseModel):
         if self.code is None and "code" in self.model_fields_set:
             _dict['code'] = None
 
-        # set to None if message (nullable) is None
-        # and model_fields_set contains the field
-        if self.message is None and "message" in self.model_fields_set:
-            _dict['message'] = None
-
         # set to None if source (nullable) is None
         # and model_fields_set contains the field
         if self.source is None and "source" in self.model_fields_set:
@@ -117,7 +111,6 @@ class AgentStreamError(BaseModel):
 
         _obj = cls.model_validate({
             "code": obj.get("code"),
-            "message": obj.get("message"),
             "source": obj.get("source"),
             "display_message": obj.get("display_message"),
             "error_bucket": obj.get("error_bucket")
