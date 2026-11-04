@@ -31493,7 +31493,7 @@
           "dependent_objects": {
             "description": "Details of dependent objects of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys.",
             "nullable": true,
-            "oneOf": [
+            "anyOf": [
               {
                 "type": "object",
                 "properties": {
