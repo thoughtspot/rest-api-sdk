@@ -31514,7 +31514,7 @@
                     "description": "Returned when metadata_type is LIVEBOARD or ANSWER."
                   }
                 },
-                "title": "Dependent Objects Variant 1"
+                "title": "Metadata Search Response Dependent Objects"
               },
               {
                 "type": "object",
@@ -31883,7 +31883,7 @@
                       }
                     }
                   },
-                  "title": "Variant 2 Value"
+                  "title": "Dependent Objects Value"
                 }
               }
             ]
