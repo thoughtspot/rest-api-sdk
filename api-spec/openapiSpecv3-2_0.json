@@ -29737,7 +29737,8 @@
                 "AUTHORING",
                 "DATADOWNLOADING"
               ]
-            }
+            },
+            "title": "User Org Privileges"
           },
           "preferred_locale": {
             "type": "string",
@@ -29773,7 +29774,8 @@
             },
             "example": {
               "<preference_key>": "<preference_value>"
-            }
+            },
+            "title": "User Extended Preferences"
           },
           "user_parameters": {
             "type": "object",
@@ -29844,7 +29846,8 @@
                   }
                 ]
               }
-            }
+            },
+            "title": "User User Parameters"
           },
           "access_control_properties": {
             "type": "object",
@@ -29896,7 +29899,8 @@
                   }
                 },
                 "title": "User Access Control Properties Value Value"
-              }
+              },
+              "title": "Access Control Properties Value"
             },
             "example": {
               "0": {
@@ -29932,7 +29936,8 @@
                   ]
                 }
               }
-            }
+            },
+            "title": "User Access Control Properties"
           },
           "variable_values": {
             "type": "object",
@@ -29963,7 +29968,8 @@
                   }
                 },
                 "title": "User Variable Values Value Value"
-              }
+              },
+              "title": "Variable Values Value"
             },
             "example": {
               "0": {
@@ -29978,7 +29984,8 @@
                   ]
                 }
               }
-            }
+            },
+            "title": "User Variable Values"
           }
         },
         "example": {
@@ -30516,7 +30523,8 @@
               "allowMultipleOrgs": true,
               "sessionTimeout": 3600
             },
-            "description": "Keyed by name; every value has the shape described here."
+            "description": "Keyed by name; every value has the shape described here.",
+            "title": "System Override Info Config Override Info"
           }
         },
         "example": {
@@ -31509,7 +31517,8 @@
                   "type": "object",
                   "additionalProperties": true
                 },
-                "description": "Returned when metadata_type is LIVEBOARD or ANSWER."
+                "description": "Returned when metadata_type is LIVEBOARD or ANSWER.",
+                "title": "Dependent Objects Dependents"
               }
             },
             "additionalProperties": {
@@ -32087,7 +32096,8 @@
                                     "items": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "title": "Logical Table Id To Pinboard Filter Viz Ids"
                                 },
                                 "filterIdToLinkedFilterIds": {
                                   "type": "object",
@@ -32096,7 +32106,8 @@
                                     "items": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "title": "Filter Id To Linked Filter Ids"
                                 },
                                 "filterIdToExcludedVizs": {
                                   "type": "object",
@@ -32105,7 +32116,8 @@
                                     "items": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "title": "Pinboard Filter Details Filter Id To Excluded Vizs"
                                 }
                               },
                               "title": "Sheet Content Pinboard Filter Details"
@@ -33253,7 +33265,8 @@
                               "type": "object",
                               "additionalProperties": {
                                 "type": "boolean"
-                              }
+                              },
+                              "title": "Sheets Sheet Content Headline Visibility Map"
                             },
                             "defaultQueryableSource": {
                               "type": "string"
@@ -33818,7 +33831,8 @@
                                         "type": "object",
                                         "additionalProperties": {
                                           "type": "boolean"
-                                        }
+                                        },
+                                        "title": "Sheets Sheet Content Headline Visibility Map 2"
                                       },
                                       "defaultQueryableSource": {
                                         "type": "string"
@@ -34813,7 +34827,8 @@
                                                         "type": "object",
                                                         "additionalProperties": {
                                                           "type": "string"
-                                                        }
+                                                        },
+                                                        "title": "Columns Column To Format Pattern Type"
                                                       },
                                                       "effectiveAggrType": {
                                                         "type": "string"
@@ -34995,7 +35010,8 @@
                                                             "type": "object",
                                                             "additionalProperties": {
                                                               "type": "string"
-                                                            }
+                                                            },
+                                                            "title": "Column Column To Format Pattern Type"
                                                           },
                                                           "effectiveAggrType": {
                                                             "type": "string"
@@ -35226,7 +35242,8 @@
                                                           "type": "object",
                                                           "additionalProperties": {
                                                             "type": "string"
-                                                          }
+                                                          },
+                                                          "title": "Series Colors Variant 1"
                                                         },
                                                         {
                                                           "type": "array",
@@ -35292,7 +35309,8 @@
                                                               }
                                                             },
                                                             "title": "Variant 1 Value"
-                                                          }
+                                                          },
+                                                          "title": "Axis Properties Variant 1"
                                                         },
                                                         {
                                                           "type": "array",
@@ -35336,7 +35354,8 @@
                                                           "additionalProperties": {
                                                             "type": "object",
                                                             "additionalProperties": true
-                                                          }
+                                                          },
+                                                          "title": "Column Properties Variant 1"
                                                         },
                                                         {
                                                           "type": "array",
@@ -35784,7 +35803,8 @@
                         }
                       },
                       "title": "Resolved Objects Value"
-                    }
+                    },
+                    "title": "Header Resolved Objects"
                   },
                   "tags": {
                     "type": "array",
@@ -42646,7 +42666,8 @@
                         "type": "integer"
                       }
                     ]
-                  }
+                  },
+                  "title": "Answer Content Data Rows Variant 2"
                 }
               ]
             },
@@ -42801,7 +42822,8 @@
                         "type": "integer"
                       }
                     ]
-                  }
+                  },
+                  "title": "Liveboard Content Data Rows Variant 2"
                 }
               ]
             },
@@ -47834,7 +47856,8 @@
             },
             "example": {
               "api_key": "abc123"
-            }
+            },
+            "title": "Webhook Response Url Params"
           },
           "events": {
             "type": "array",
@@ -64676,7 +64699,8 @@
             "example": {
               "Sales Model": "guid: e4f5a6b7-0004-4c8d-9e0f-1a2b3c4d5e6f\nworksheet:\n  name: Sales Model\n"
             },
-            "description": "Keyed by name; every value has the shape described here."
+            "description": "Keyed by name; every value has the shape described here.",
+            "title": "Dbt Generate Tml Response Worksheet Tmls"
           },
           "table_tmls": {
             "type": "array",
@@ -64819,7 +64843,8 @@
             "example": {
               "Marketing Model": "guid: b7c8d9e0-0007-4f1a-8b2c-4d5e6f7a8b9c\nworksheet:\n  name: Marketing Model\n"
             },
-            "description": "Keyed by name; every value has the shape described here."
+            "description": "Keyed by name; every value has the shape described here.",
+            "title": "Dbt Generate Sync Tml Response Worksheet Tmls"
           },
           "table_tmls": {
             "type": "array",
@@ -64973,7 +64998,8 @@
               "liveboard.title.sales_overview": "Resumen de ventas",
               "column.label.total_sales": "Ventas totales"
             },
-            "description": "Keyed by name; every value has the shape described here."
+            "description": "Keyed by name; every value has the shape described here.",
+            "title": "Translations"
           }
         },
         "example": {
