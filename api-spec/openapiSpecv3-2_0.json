@@ -26577,7 +26577,7 @@
                           "id": "7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07",
                           "type": "COMMIT",
                           "state": "PARTIAL_SUCCESS",
-                          "message": "1 of 2 objects committed",
+                          "message": "1 of 2 requested objects committed",
                           "accepted_time_in_millis": 1783500062000,
                           "end_time_in_millis": 1783500064500,
                           "author": {
@@ -26590,7 +26590,7 @@
                             {
                               "obj_id": "Revenue-Dashboard-d7f3a1c8",
                               "type": "LIVEBOARD",
-                              "file_name": "liveboards/revenue_dashboard_q3.liveboard.tml",
+                              "file_name": "liveboard/Revenue-Dashboard-d7f3a1c8.liveboard.tml",
                               "action": "UPDATE",
                               "status": "SUCCESS",
                               "is_dependency": false
@@ -26598,10 +26598,17 @@
                             {
                               "obj_id": "Q3-Pipeline-b2c4d6a8",
                               "type": "ANSWER",
-                              "action": "CREATE",
-                              "status": "SKIPPED",
-                              "message": "Object does not have versioning enabled",
+                              "status": "FAILED",
+                              "message": "Cannot download TML due to lack of access to objects.",
                               "is_dependency": false
+                            },
+                            {
+                              "obj_id": "Sales-Model-a4e6c8d0",
+                              "type": "LOGICAL_TABLE",
+                              "file_name": "model/Sales-Model-a4e6c8d0.model.tml",
+                              "action": "UPDATE",
+                              "status": "SUCCESS",
+                              "is_dependency": true
                             }
                           ]
                         }
@@ -26614,7 +26621,7 @@
             }
           },
           "400": {
-            "description": "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range.",
+            "description": "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN or TEMPLATE_VARIABLE, an unknown run_type, and a record_offset or record_size out of range.",
             "content": {
               "application/json": {
                 "schema": {
@@ -31128,9 +31135,11 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "TEMPLATE_VARIABLE"
             ],
-            "description": "Type of the metadata object. LOGICAL_TABLE matches runs that exported a\nlogical table as a dependency.",
+            "description": "Type of the metadata object. Runs are matched by object ID alone.",
             "nullable": true
           }
         },
@@ -31226,7 +31235,7 @@
             "items": {
               "$ref": "#/components/schemas/VersionControlObjectResult"
             },
-            "description": "Per-object outcomes known so far. This grows while state is RUNNING, and is\ncomplete once the run is terminal."
+            "description": "Per-object outcomes. While state is RUNNING, an object the run has not reached\nyet is PENDING, and the list can still grow as a COMMIT run exports\ndependencies; once the run is terminal, it is complete and no object is\nPENDING."
           }
         },
         "description": "Current outcome of one run."
@@ -31247,7 +31256,9 @@
             "enum": [
               "LIVEBOARD",
               "ANSWER",
-              "LOGICAL_TABLE"
+              "LOGICAL_TABLE",
+              "LOGICAL_COLUMN",
+              "TEMPLATE_VARIABLE"
             ],
             "description": "Type of the object.",
             "nullable": true
@@ -31271,6 +31282,7 @@
           "status": {
             "type": "string",
             "enum": [
+              "PENDING",
               "SUCCESS",
               "VALIDATED",
               "FAILED",
@@ -49559,7 +49571,7 @@
             "type": "string"
           },
           "root_dir": {
-            "description": "Repository-relative directory that every write must resolve under. Omit\nthis to leave the stored directory unchanged.",
+            "description": "Repository-relative directory that every write must resolve under. Send an\nempty string to use the repository root. Omit this to leave the stored\ndirectory unchanged.",
             "type": "string"
           },
           "credential": {
