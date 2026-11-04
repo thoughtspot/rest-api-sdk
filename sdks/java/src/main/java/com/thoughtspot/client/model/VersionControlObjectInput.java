@@ -50,7 +50,7 @@ public class VersionControlObjectInput implements Serializable {
   private String identifier;
 
   /**
-   * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+   * Type of the metadata object. Runs are matched by object ID alone.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -58,7 +58,11 @@ public class VersionControlObjectInput implements Serializable {
     
     ANSWER("ANSWER"),
     
-    LOGICAL_TABLE("LOGICAL_TABLE");
+    LOGICAL_TABLE("LOGICAL_TABLE"),
+    
+    LOGICAL_COLUMN("LOGICAL_COLUMN"),
+    
+    TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
 
     private String value;
 
@@ -136,7 +140,7 @@ public class VersionControlObjectInput implements Serializable {
   }
 
   /**
-   * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+   * Type of the metadata object. Runs are matched by object ID alone.
    * @return type
    */
   @javax.annotation.Nullable

@@ -33,9 +33,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class VersionControlObjectInput : IValidatableObject
     {
         /// <summary>
-        /// Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+        /// Type of the metadata object. Runs are matched by object ID alone.
         /// </summary>
-        /// <value>Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.</value>
+        /// <value>Type of the metadata object. Runs are matched by object ID alone.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -55,14 +55,26 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum LOGICALTABLE for value: LOGICAL_TABLE
             /// </summary>
             [EnumMember(Value = "LOGICAL_TABLE")]
-            LOGICALTABLE = 3
+            LOGICALTABLE = 3,
+
+            /// <summary>
+            /// Enum LOGICALCOLUMN for value: LOGICAL_COLUMN
+            /// </summary>
+            [EnumMember(Value = "LOGICAL_COLUMN")]
+            LOGICALCOLUMN = 4,
+
+            /// <summary>
+            /// Enum TEMPLATEVARIABLE for value: TEMPLATE_VARIABLE
+            /// </summary>
+            [EnumMember(Value = "TEMPLATE_VARIABLE")]
+            TEMPLATEVARIABLE = 5
         }
 
 
         /// <summary>
-        /// Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+        /// Type of the metadata object. Runs are matched by object ID alone.
         /// </summary>
-        /// <value>Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.</value>
+        /// <value>Type of the metadata object. Runs are matched by object ID alone.</value>
         [DataMember(Name = "type", EmitDefaultValue = true)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -77,7 +89,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="VersionControlObjectInput" /> class.
         /// </summary>
         /// <param name="identifier">Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name. (required).</param>
-        /// <param name="type">Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency..</param>
+        /// <param name="type">Type of the metadata object. Runs are matched by object ID alone..</param>
         public VersionControlObjectInput(string identifier = default, TypeEnum? type = default)
         {
             // to ensure "identifier" is required (not null)

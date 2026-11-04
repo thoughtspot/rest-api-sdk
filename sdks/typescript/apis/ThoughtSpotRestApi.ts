@@ -20304,7 +20304,7 @@ export class ThoughtSpotRestApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ErrorResponse", ""
             ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range.", body, response.headers);
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN or TEMPLATE_VARIABLE, an unknown run_type, and a record_offset or record_size out of range.", body, response.headers);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(

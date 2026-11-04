@@ -23802,7 +23802,7 @@ paths:
                     - id: 7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07
                       type: COMMIT
                       state: PARTIAL_SUCCESS
-                      message: 1 of 2 objects committed
+                      message: 1 of 2 requested objects committed
                       accepted_time_in_millis: 1783500062000
                       end_time_in_millis: 1783500064500
                       author:
@@ -23813,16 +23813,21 @@ paths:
                       objects:
                       - obj_id: Revenue-Dashboard-d7f3a1c8
                         type: LIVEBOARD
-                        file_name: liveboards/revenue_dashboard_q3.liveboard.tml
+                        file_name: liveboard/Revenue-Dashboard-d7f3a1c8.liveboard.tml
                         action: UPDATE
                         status: SUCCESS
                         is_dependency: false
                       - obj_id: Q3-Pipeline-b2c4d6a8
                         type: ANSWER
-                        action: CREATE
-                        status: SKIPPED
-                        message: Object does not have versioning enabled
+                        status: FAILED
+                        message: Cannot download TML due to lack of access to objects.
                         is_dependency: false
+                      - obj_id: Sales-Model-a4e6c8d0
+                        type: LOGICAL_TABLE
+                        file_name: model/Sales-Model-a4e6c8d0.model.tml
+                        action: UPDATE
+                        status: SUCCESS
+                        is_dependency: true
                     last_batch: true
               schema:
                 $ref: "#/components/schemas/VersionControlRunList"
@@ -23836,8 +23841,9 @@ paths:
           description: "Invalid request. Covers a malformed body, a run identifier\
             \ that is not a UUID, more than 100 run_identifiers, more than 50 objects,\
             \ an object identifier that is not a well-formed object id, an object\
-            \ type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type,\
-            \ and a record_offset or record_size out of range."
+            \ type other than LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN or\
+            \ TEMPLATE_VARIABLE, an unknown run_type, and a record_offset or record_size\
+            \ out of range."
         "401":
           content:
             application/json:
@@ -28241,13 +28247,14 @@ components:
             name.
           type: string
         type:
-          description: |-
-            Type of the metadata object. LOGICAL_TABLE matches runs that exported a
-            logical table as a dependency.
+          description: Type of the metadata object. Runs are matched by object ID
+            alone.
           enum:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          - LOGICAL_COLUMN
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
       required:
@@ -28273,14 +28280,14 @@ components:
             type: LIVEBOARD
             file_name: file_name
             action: CREATE
-            status: SUCCESS
+            status: PENDING
             message: message
             is_dependency: true
           - obj_id: obj_id
             type: LIVEBOARD
             file_name: file_name
             action: CREATE
-            status: SUCCESS
+            status: PENDING
             message: message
             is_dependency: true
         - id: id
@@ -28299,14 +28306,14 @@ components:
             type: LIVEBOARD
             file_name: file_name
             action: CREATE
-            status: SUCCESS
+            status: PENDING
             message: message
             is_dependency: true
           - obj_id: obj_id
             type: LIVEBOARD
             file_name: file_name
             action: CREATE
-            status: SUCCESS
+            status: PENDING
             message: message
             is_dependency: true
         last_batch: true
@@ -28344,14 +28351,14 @@ components:
           type: LIVEBOARD
           file_name: file_name
           action: CREATE
-          status: SUCCESS
+          status: PENDING
           message: message
           is_dependency: true
         - obj_id: obj_id
           type: LIVEBOARD
           file_name: file_name
           action: CREATE
-          status: SUCCESS
+          status: PENDING
           message: message
           is_dependency: true
       properties:
@@ -28404,8 +28411,10 @@ components:
           type: string
         objects:
           description: |-
-            Per-object outcomes known so far. This grows while state is RUNNING, and is
-            complete once the run is terminal.
+            Per-object outcomes. While state is RUNNING, an object the run has not reached
+            yet is PENDING, and the list can still grow as a COMMIT run exports
+            dependencies; once the run is terminal, it is complete and no object is
+            PENDING.
           items:
             $ref: "#/components/schemas/VersionControlObjectResult"
           type: array
@@ -28425,7 +28434,7 @@ components:
         type: LIVEBOARD
         file_name: file_name
         action: CREATE
-        status: SUCCESS
+        status: PENDING
         message: message
         is_dependency: true
       properties:
@@ -28441,6 +28450,8 @@ components:
           - LIVEBOARD
           - ANSWER
           - LOGICAL_TABLE
+          - LOGICAL_COLUMN
+          - TEMPLATE_VARIABLE
           nullable: true
           type: string
         file_name:
@@ -28459,6 +28470,7 @@ components:
         status:
           description: Outcome for the object.
           enum:
+          - PENDING
           - SUCCESS
           - VALIDATED
           - FAILED
@@ -48813,8 +48825,9 @@ components:
           type: string
         root_dir:
           description: |-
-            Repository-relative directory that every write must resolve under. Omit
-            this to leave the stored directory unchanged.
+            Repository-relative directory that every write must resolve under. Send an
+            empty string to use the repository root. Omit this to leave the stored
+            directory unchanged.
           type: string
         credential:
           allOf:

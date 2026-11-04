@@ -36,7 +36,7 @@ class VersionControlRunStatus(BaseModel):
     author: VersionControlPrincipal
     branch: StrictStr = Field(description="Branch the run used, which is the Org's configured branch at admission. A later edit to the Org's configuration does not change it.")
     revision: Optional[StrictStr] = Field(default=None, description="On a commit, the commit this run produced. On a deploy, the revision being deployed. On a restore, the restore commit. Absent until the commit is pushed, and on a run that failed before pushing.")
-    objects: List[VersionControlObjectResult] = Field(description="Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal.")
+    objects: List[VersionControlObjectResult] = Field(description="Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "type", "state", "message", "accepted_time_in_millis", "end_time_in_millis", "author", "branch", "revision", "objects"]
 

@@ -22075,7 +22075,7 @@ declare class VersionControlObjectInput {
     */
     'identifier': string;
     /**
-    * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+    * Type of the metadata object. Runs are matched by object ID alone.
     */
     'type'?: VersionControlObjectInputTypeEnum | null;
     static readonly discriminator: string | undefined;
@@ -22096,7 +22096,7 @@ declare class VersionControlObjectInput {
     }[];
     constructor();
 }
-type VersionControlObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type VersionControlObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "TEMPLATE_VARIABLE";
 
 /**
  * ThoughtSpot Public REST API
@@ -27091,7 +27091,7 @@ declare class UpdateVersionControlConfigRequest {
     */
     'commit_branch'?: string;
     /**
-    * Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged.
+    * Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged.
     */
     'root_dir'?: string;
     /**
@@ -28506,9 +28506,9 @@ declare class VersionControlObjectResult {
     }[];
     constructor();
 }
-type VersionControlObjectResultTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE";
+type VersionControlObjectResultTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "TEMPLATE_VARIABLE";
 type VersionControlObjectResultActionEnum = "CREATE" | "UPDATE" | "UPSERT" | "DELETE";
-type VersionControlObjectResultStatusEnum = "SUCCESS" | "VALIDATED" | "FAILED" | "SKIPPED";
+type VersionControlObjectResultStatusEnum = "PENDING" | "SUCCESS" | "VALIDATED" | "FAILED" | "SKIPPED";
 
 /**
  * ThoughtSpot Public REST API
@@ -28734,7 +28734,7 @@ declare class VersionControlRunStatus {
     */
     'revision'?: string | null;
     /**
-    * Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal.
+    * Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING.
     */
     'objects': Array<VersionControlObjectResult>;
     static readonly discriminator: string | undefined;

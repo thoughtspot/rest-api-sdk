@@ -100,6 +100,14 @@
 -  added the optional property `items/last_active_time_in_millis` to the response with the `200` status
 
 
+### POST /api/rest/2.0/version-control/runs/search
+- :warning: added the new `LOGICAL_COLUMN` enum value to the `runs/items/objects/items/type` response property for the response status `200`
+- :warning: added the new `PENDING` enum value to the `runs/items/objects/items/status` response property for the response status `200`
+- :warning: added the new `TEMPLATE_VARIABLE` enum value to the `runs/items/objects/items/type` response property for the response status `200`
+-  added the new `LOGICAL_COLUMN` enum value to the request property `objects/items/type`
+-  added the new `TEMPLATE_VARIABLE` enum value to the request property `objects/items/type`
+
+
 
 
 ## Components

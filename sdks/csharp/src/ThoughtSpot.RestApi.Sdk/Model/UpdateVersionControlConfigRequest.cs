@@ -96,7 +96,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="provider">Version control provider hosting the repository. Omit this to leave the stored provider unchanged..</param>
         /// <param name="repositoryUrl">HTTPS URL of the repository your Org versions to. Omit this to leave the stored repository unchanged..</param>
         /// <param name="commitBranch">Branch that versioning runs commit to. Omit this to leave the stored branch unchanged..</param>
-        /// <param name="rootDir">Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged..</param>
+        /// <param name="rootDir">Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged..</param>
         /// <param name="credential">Credential ThoughtSpot uses to reach the repository. Omit this to keep the stored credential, unless the provider, host or repository owner changed, in which case a new credential is required..</param>
         /// <param name="disabledOperations">Operations to turn off for this Org, replacing whatever is stored. Send an empty array to disable nothing. Omit this to leave the stored set unchanged..</param>
         public UpdateVersionControlConfigRequest(ProviderEnum? provider = default, string repositoryUrl = default, string commitBranch = default, string rootDir = default, VersionControlCredentialInput credential = default, List<DisabledOperationsEnum> disabledOperations = default)
@@ -125,9 +125,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string CommitBranch { get; set; }
 
         /// <summary>
-        /// Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged.
+        /// Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged.
         /// </summary>
-        /// <value>Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged.</value>
+        /// <value>Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged.</value>
         [DataMember(Name = "root_dir", EmitDefaultValue = false)]
         public string RootDir { get; set; }
 
