@@ -31933,6 +31933,11 @@
                 },
                 "additionalProperties": true,
                 "description": "Returned when metadata_type is LIVEBOARD or ANSWER.",
+                "required": [
+                  "areInaccessibleDependentsReturned",
+                  "hasInaccessibleDependents",
+                  "dependents"
+                ],
                 "title": "Dependent Objects Variant 1"
               },
               {
