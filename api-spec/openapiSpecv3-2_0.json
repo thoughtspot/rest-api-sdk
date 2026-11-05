@@ -15736,182 +15736,6 @@
                       }
                     ]
                   },
-                  "example_collection": {
-                    "description": "Collection (Liveboard folder) search result (metadata_type: COLLECTION)",
-                    "value": [
-                      {
-                        "metadata_id": "00000019-0000-4000-8000-000000000019",
-                        "metadata_name": "Sales collection",
-                        "metadata_type": "COLLECTION",
-                        "metadata_obj_id": "sales-collection-4d4a779a",
-                        "dependent_objects": {
-                          "00000019-0000-4000-8000-000000000019": {}
-                        },
-                        "dependent_objects_is_last_batch": true,
-                        "incomplete_objects": [
-                          {
-                            "code": "BASE_OBJECT_MISSING",
-                            "codeNumber": 10005,
-                            "message": "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
-                            "header": {
-                              "id": "00000019-0000-4000-8000-000000000019",
-                              "indexVersion": 156,
-                              "generationNum": 156,
-                              "name": "Sales collection",
-                              "description": "",
-                              "author": "00000006-0000-4000-8000-000000000006",
-                              "created": 1791476207822,
-                              "modified": 1791476219803,
-                              "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                              "isDeleted": false,
-                              "isHidden": false,
-                              "ownerOrgId": 0,
-                              "tags": [],
-                              "configs": [],
-                              "isConnectionConfigurationDisabled": false,
-                              "aiAnswerGenerationDisabled": false,
-                              "isExternal": false,
-                              "isDeprecated": false,
-                              "isSharedViaConnection": false,
-                              "syncWithSource": false,
-                              "isParameterized": false,
-                              "cachedDataAsOf": 0,
-                              "isVerified": false,
-                              "isVersioningEnabled": false,
-                              "objId": "sales-collection-4d4a779a",
-                              "contentUpgradeId": "<upgrade id>",
-                              "headerUpgradeId": "<upgrade id>",
-                              "isPublished": false,
-                              "csrProtected": false
-                            },
-                            "type": "FOLDER"
-                          }
-                        ],
-                        "metadata_detail": {
-                          "folderContent": {
-                            "schemaVersion": "3.1.0"
-                          },
-                          "assignedEntities": [
-                            "0000001a-0000-4000-8000-00000000001a",
-                            "00000001-0000-4000-8000-000000000001"
-                          ],
-                          "inheritedFolders": [
-                            "0000001b-0000-4000-8000-00000000001b"
-                          ],
-                          "state": "ACTIVE",
-                          "visibility": "SHARABLE",
-                          "header": {
-                            "id": "00000019-0000-4000-8000-000000000019",
-                            "indexVersion": 156,
-                            "generationNum": 156,
-                            "name": "Sales collection",
-                            "description": "",
-                            "author": "00000006-0000-4000-8000-000000000006",
-                            "created": 1791476207822,
-                            "modified": 1791476219803,
-                            "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                            "isDeleted": false,
-                            "isHidden": false,
-                            "ownerOrgId": 0,
-                            "tags": [],
-                            "configs": [],
-                            "isConnectionConfigurationDisabled": false,
-                            "aiAnswerGenerationDisabled": false,
-                            "isExternal": false,
-                            "isDeprecated": false,
-                            "isSharedViaConnection": false,
-                            "syncWithSource": false,
-                            "isParameterized": false,
-                            "cachedDataAsOf": 0,
-                            "isVerified": false,
-                            "isVersioningEnabled": false,
-                            "objId": "sales-collection-4d4a779a",
-                            "contentUpgradeId": "<upgrade id>",
-                            "headerUpgradeId": "<upgrade id>",
-                            "isPublished": false,
-                            "csrProtected": false
-                          },
-                          "complete": false,
-                          "incompleteDetail": [
-                            {
-                              "code": "BASE_OBJECT_MISSING",
-                              "codeNumber": 10005,
-                              "message": "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
-                              "header": {
-                                "id": "00000019-0000-4000-8000-000000000019",
-                                "indexVersion": 156,
-                                "generationNum": 156,
-                                "name": "Sales collection",
-                                "description": "",
-                                "author": "00000006-0000-4000-8000-000000000006",
-                                "created": 1791476207822,
-                                "modified": 1791476219803,
-                                "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                                "isDeleted": false,
-                                "isHidden": false,
-                                "ownerOrgId": 0,
-                                "tags": [],
-                                "configs": [],
-                                "isConnectionConfigurationDisabled": false,
-                                "aiAnswerGenerationDisabled": false,
-                                "isExternal": false,
-                                "isDeprecated": false,
-                                "isSharedViaConnection": false,
-                                "syncWithSource": false,
-                                "isParameterized": false,
-                                "cachedDataAsOf": 0,
-                                "isVerified": false,
-                                "isVersioningEnabled": false,
-                                "objId": "sales-collection-4d4a779a",
-                                "contentUpgradeId": "<upgrade id>",
-                                "headerUpgradeId": "<upgrade id>",
-                                "isPublished": false,
-                                "csrProtected": false
-                              },
-                              "type": "FOLDER"
-                            }
-                          ]
-                        },
-                        "metadata_header": {
-                          "id": "00000019-0000-4000-8000-000000000019",
-                          "indexVersion": 156,
-                          "generationNum": 156,
-                          "name": "Sales collection",
-                          "description": "",
-                          "author": "00000006-0000-4000-8000-000000000006",
-                          "authorName": "<username>",
-                          "authorDisplayName": "<user_display_name>",
-                          "created": 1791476207822,
-                          "modified": 1791476219803,
-                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
-                          "isDeleted": false,
-                          "isHidden": false,
-                          "ownerOrgId": 0,
-                          "tags": [],
-                          "configs": [],
-                          "isConnectionConfigurationDisabled": false,
-                          "type": "",
-                          "aiAnswerGenerationDisabled": false,
-                          "isExternal": false,
-                          "isDeprecated": false,
-                          "isSharedViaConnection": false,
-                          "syncWithSource": false,
-                          "isParameterized": false,
-                          "cachedDataAsOf": 0,
-                          "isVerified": false,
-                          "isVersioningEnabled": false,
-                          "subType": "",
-                          "objId": "sales-collection-4d4a779a",
-                          "contentUpgradeId": "<upgrade id>",
-                          "headerUpgradeId": "<upgrade id>",
-                          "isPublished": false,
-                          "csrProtected": false
-                        },
-                        "visualization_headers": null,
-                        "stats": null
-                      }
-                    ]
-                  },
                   "example_answer": {
                     "description": "Answer search result (metadata_type: ANSWER)",
                     "value": [
@@ -18812,6 +18636,182 @@
                           "orgIds": [
                             0
                           ]
+                        },
+                        "visualization_headers": null,
+                        "stats": null
+                      }
+                    ]
+                  },
+                  "example_collection": {
+                    "description": "Collection (Liveboard folder) search result (metadata_type: COLLECTION)",
+                    "value": [
+                      {
+                        "metadata_id": "00000019-0000-4000-8000-000000000019",
+                        "metadata_name": "Sales collection",
+                        "metadata_type": "COLLECTION",
+                        "metadata_obj_id": "sales-collection-4d4a779a",
+                        "dependent_objects": {
+                          "00000019-0000-4000-8000-000000000019": {}
+                        },
+                        "dependent_objects_is_last_batch": true,
+                        "incomplete_objects": [
+                          {
+                            "code": "BASE_OBJECT_MISSING",
+                            "codeNumber": 10005,
+                            "message": "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
+                            "header": {
+                              "id": "00000019-0000-4000-8000-000000000019",
+                              "indexVersion": 156,
+                              "generationNum": 156,
+                              "name": "Sales collection",
+                              "description": "",
+                              "author": "00000006-0000-4000-8000-000000000006",
+                              "created": 1791476207822,
+                              "modified": 1791476219803,
+                              "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                              "isDeleted": false,
+                              "isHidden": false,
+                              "ownerOrgId": 0,
+                              "tags": [],
+                              "configs": [],
+                              "isConnectionConfigurationDisabled": false,
+                              "aiAnswerGenerationDisabled": false,
+                              "isExternal": false,
+                              "isDeprecated": false,
+                              "isSharedViaConnection": false,
+                              "syncWithSource": false,
+                              "isParameterized": false,
+                              "cachedDataAsOf": 0,
+                              "isVerified": false,
+                              "isVersioningEnabled": false,
+                              "objId": "sales-collection-4d4a779a",
+                              "contentUpgradeId": "<upgrade id>",
+                              "headerUpgradeId": "<upgrade id>",
+                              "isPublished": false,
+                              "csrProtected": false
+                            },
+                            "type": "FOLDER"
+                          }
+                        ],
+                        "metadata_detail": {
+                          "folderContent": {
+                            "schemaVersion": "3.1.0"
+                          },
+                          "assignedEntities": [
+                            "0000001a-0000-4000-8000-00000000001a",
+                            "00000001-0000-4000-8000-000000000001"
+                          ],
+                          "inheritedFolders": [
+                            "0000001b-0000-4000-8000-00000000001b"
+                          ],
+                          "state": "ACTIVE",
+                          "visibility": "SHARABLE",
+                          "header": {
+                            "id": "00000019-0000-4000-8000-000000000019",
+                            "indexVersion": 156,
+                            "generationNum": 156,
+                            "name": "Sales collection",
+                            "description": "",
+                            "author": "00000006-0000-4000-8000-000000000006",
+                            "created": 1791476207822,
+                            "modified": 1791476219803,
+                            "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                            "isDeleted": false,
+                            "isHidden": false,
+                            "ownerOrgId": 0,
+                            "tags": [],
+                            "configs": [],
+                            "isConnectionConfigurationDisabled": false,
+                            "aiAnswerGenerationDisabled": false,
+                            "isExternal": false,
+                            "isDeprecated": false,
+                            "isSharedViaConnection": false,
+                            "syncWithSource": false,
+                            "isParameterized": false,
+                            "cachedDataAsOf": 0,
+                            "isVerified": false,
+                            "isVersioningEnabled": false,
+                            "objId": "sales-collection-4d4a779a",
+                            "contentUpgradeId": "<upgrade id>",
+                            "headerUpgradeId": "<upgrade id>",
+                            "isPublished": false,
+                            "csrProtected": false
+                          },
+                          "complete": false,
+                          "incompleteDetail": [
+                            {
+                              "code": "BASE_OBJECT_MISSING",
+                              "codeNumber": 10005,
+                              "message": "Missing owner GUID for storable: {\"id\":\"00000019-0000-4000-8000-000000000019\",\"name\":\"Sales collection\",\"type\":\"Folder\"}",
+                              "header": {
+                                "id": "00000019-0000-4000-8000-000000000019",
+                                "indexVersion": 156,
+                                "generationNum": 156,
+                                "name": "Sales collection",
+                                "description": "",
+                                "author": "00000006-0000-4000-8000-000000000006",
+                                "created": 1791476207822,
+                                "modified": 1791476219803,
+                                "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                                "isDeleted": false,
+                                "isHidden": false,
+                                "ownerOrgId": 0,
+                                "tags": [],
+                                "configs": [],
+                                "isConnectionConfigurationDisabled": false,
+                                "aiAnswerGenerationDisabled": false,
+                                "isExternal": false,
+                                "isDeprecated": false,
+                                "isSharedViaConnection": false,
+                                "syncWithSource": false,
+                                "isParameterized": false,
+                                "cachedDataAsOf": 0,
+                                "isVerified": false,
+                                "isVersioningEnabled": false,
+                                "objId": "sales-collection-4d4a779a",
+                                "contentUpgradeId": "<upgrade id>",
+                                "headerUpgradeId": "<upgrade id>",
+                                "isPublished": false,
+                                "csrProtected": false
+                              },
+                              "type": "FOLDER"
+                            }
+                          ]
+                        },
+                        "metadata_header": {
+                          "id": "00000019-0000-4000-8000-000000000019",
+                          "indexVersion": 156,
+                          "generationNum": 156,
+                          "name": "Sales collection",
+                          "description": "",
+                          "author": "00000006-0000-4000-8000-000000000006",
+                          "authorName": "<username>",
+                          "authorDisplayName": "<user_display_name>",
+                          "created": 1791476207822,
+                          "modified": 1791476219803,
+                          "modifiedBy": "00000006-0000-4000-8000-000000000006",
+                          "isDeleted": false,
+                          "isHidden": false,
+                          "ownerOrgId": 0,
+                          "tags": [],
+                          "configs": [],
+                          "isConnectionConfigurationDisabled": false,
+                          "type": "",
+                          "aiAnswerGenerationDisabled": false,
+                          "isExternal": false,
+                          "isDeprecated": false,
+                          "isSharedViaConnection": false,
+                          "syncWithSource": false,
+                          "isParameterized": false,
+                          "cachedDataAsOf": 0,
+                          "isVerified": false,
+                          "isVersioningEnabled": false,
+                          "subType": "",
+                          "objId": "sales-collection-4d4a779a",
+                          "contentUpgradeId": "<upgrade id>",
+                          "headerUpgradeId": "<upgrade id>",
+                          "isPublished": false,
+                          "csrProtected": false
                         },
                         "visualization_headers": null,
                         "stats": null
@@ -32112,7 +32112,7 @@
           },
           "metadata_detail": {
             "type": "object",
-            "description": "Complete details of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP.",
+            "description": "Complete details of the metadata objects.\n\nKeys are the union of what each metadata_type returns; each key says which metadata_type values return it. Types not listed may return other keys. Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, or COLLECTION.",
             "nullable": true,
             "properties": {
               "reportContent": {
@@ -36167,12 +36167,12 @@
                     "type": "boolean"
                   }
                 },
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP.",
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, or COLLECTION.",
                 "title": "Metadata Detail Header"
               },
               "complete": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, or COLLECTION."
               },
               "incompleteDetail": {
                 "type": "array",
@@ -36203,10 +36203,13 @@
                         "name": {
                           "type": "string"
                         },
-                        "description": {
+                        "author": {
                           "type": "string"
                         },
-                        "author": {
+                        "authorName": {
+                          "type": "string"
+                        },
+                        "authorDisplayName": {
                           "type": "string"
                         },
                         "created": {
@@ -36218,14 +36221,29 @@
                         "modifiedBy": {
                           "type": "string"
                         },
+                        "owner": {
+                          "type": "string"
+                        },
                         "isDeleted": {
                           "type": "boolean"
                         },
                         "isHidden": {
                           "type": "boolean"
                         },
+                        "orgIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
                         "ownerOrgId": {
                           "type": "integer"
+                        },
+                        "schemaStripe": {
+                          "type": "string"
+                        },
+                        "databaseStripe": {
+                          "type": "string"
                         },
                         "tags": {
                           "type": "array",
@@ -36265,9 +36283,6 @@
                         "isVersioningEnabled": {
                           "type": "boolean"
                         },
-                        "objId": {
-                          "type": "string"
-                        },
                         "contentUpgradeId": {
                           "type": "string"
                         },
@@ -36280,28 +36295,13 @@
                         "csrProtected": {
                           "type": "boolean"
                         },
-                        "authorName": {
-                          "type": "string"
-                        },
-                        "authorDisplayName": {
-                          "type": "string"
-                        },
-                        "owner": {
-                          "type": "string"
-                        },
-                        "orgIds": {
-                          "type": "array",
-                          "items": {
-                            "type": "integer"
-                          }
-                        },
-                        "schemaStripe": {
-                          "type": "string"
-                        },
-                        "databaseStripe": {
-                          "type": "string"
-                        },
                         "type": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "objId": {
                           "type": "string"
                         }
                       },
@@ -36313,7 +36313,7 @@
                   },
                   "title": "Metadata Detail Incomplete Detail"
                 },
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, TAG, USER, USER_GROUP, or LOGICAL_RELATIONSHIP."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, or COLLECTION."
               },
               "personalised_views": {
                 "type": "array",
@@ -36345,38 +36345,6 @@
                   "title": "Metadata Detail Personalised Views"
                 },
                 "description": "Returned when metadata_type is LIVEBOARD."
-              },
-              "folderContent": {
-                "type": "object",
-                "properties": {
-                  "schemaVersion": {
-                    "type": "string"
-                  }
-                },
-                "description": "Returned when metadata_type is COLLECTION.",
-                "title": "Metadata Detail Folder Content"
-              },
-              "assignedEntities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Returned when metadata_type is COLLECTION."
-              },
-              "inheritedFolders": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Returned when metadata_type is COLLECTION."
-              },
-              "state": {
-                "type": "string",
-                "description": "Returned when metadata_type is COLLECTION or USER."
-              },
-              "visibility": {
-                "type": "string",
-                "description": "Returned when metadata_type is COLLECTION, USER, or USER_GROUP."
               },
               "columns": {
                 "type": "array",
@@ -38868,6 +38836,10 @@
                 "description": "Returned when metadata_type is USER.",
                 "title": "Metadata Detail User Content"
               },
+              "state": {
+                "type": "string",
+                "description": "Returned when metadata_type is USER or COLLECTION."
+              },
               "assignedGroups": {
                 "type": "array",
                 "items": {
@@ -38890,6 +38862,10 @@
               "parenttype": {
                 "type": "string",
                 "description": "Returned when metadata_type is USER or USER_GROUP."
+              },
+              "visibility": {
+                "type": "string",
+                "description": "Returned when metadata_type is USER, USER_GROUP, or COLLECTION."
               },
               "tenantId": {
                 "type": "string",
@@ -38980,6 +38956,30 @@
                   "type": "string"
                 },
                 "description": "Returned when metadata_type is LOGICAL_RELATIONSHIP."
+              },
+              "folderContent": {
+                "type": "object",
+                "properties": {
+                  "schemaVersion": {
+                    "type": "string"
+                  }
+                },
+                "description": "Returned when metadata_type is COLLECTION.",
+                "title": "Metadata Detail Folder Content"
+              },
+              "assignedEntities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Returned when metadata_type is COLLECTION."
+              },
+              "inheritedFolders": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Returned when metadata_type is COLLECTION."
               }
             },
             "additionalProperties": true,
@@ -39012,31 +39012,31 @@
               },
               "id": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "indexVersion": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "generationNum": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "name": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "description": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, CONNECTION, LOGICAL_RELATIONSHIP, or INSIGHT_SPEC."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, CONNECTION, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or COLLECTION."
               },
               "author": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "authorName": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, or INSIGHT_SPEC."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, INSIGHT_SPEC, or COLLECTION."
               },
               "hasLenientDiscoverability": {
                 "type": "boolean",
@@ -39048,19 +39048,19 @@
               },
               "authorDisplayName": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, or INSIGHT_SPEC."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, INSIGHT_SPEC, or COLLECTION."
               },
               "created": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "modified": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "modifiedBy": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "owner": {
                 "type": "string",
@@ -39068,11 +39068,11 @@
               },
               "isDeleted": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isHidden": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isAutoCreated": {
                 "type": "boolean",
@@ -39091,7 +39091,7 @@
               },
               "ownerOrgId": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "resolvedObjects": {
                 "type": "object",
@@ -39170,7 +39170,7 @@
                   },
                   "title": "Metadata Header Tags"
                 },
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "configs": {
                 "type": "array",
@@ -39201,51 +39201,51 @@
                   },
                   "title": "Metadata Header Configs"
                 },
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isConnectionConfigurationDisabled": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "type": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "aiAnswerGenerationDisabled": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isExternal": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isDeprecated": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isSharedViaConnection": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "syncWithSource": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isParameterized": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "cachedDataAsOf": {
                 "type": "integer",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isVerified": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isVersioningEnabled": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "datasetId": {
                 "type": "string",
@@ -39253,7 +39253,7 @@
               },
               "subType": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "reportId": {
                 "type": "string",
@@ -39265,23 +39265,23 @@
               },
               "objId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, or TEMPLATE_VARIABLE."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, COLLECTION, or TEMPLATE_VARIABLE."
               },
               "contentUpgradeId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "headerUpgradeId": {
                 "type": "string",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "isPublished": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "csrProtected": {
                 "type": "boolean",
-                "description": "Returned when metadata_type is LIVEBOARD, COLLECTION, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, or TEMPLATE_VARIABLE. These are all the types documented here."
+                "description": "Returned when metadata_type is LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN, CONNECTION, TAG, USER, USER_GROUP, LOGICAL_RELATIONSHIP, INSIGHT_SPEC, COLLECTION, or TEMPLATE_VARIABLE. These are all the types documented here."
               },
               "clientState": {
                 "type": "object",
