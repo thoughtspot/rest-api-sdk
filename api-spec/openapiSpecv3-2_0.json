@@ -14246,7 +14246,8 @@
                   }
                 },
                 "examples": {
-                  "example": {
+                  "example_1": {
+                    "description": "Liveboard search result (metadata_type: LIVEBOARD)",
                     "value": [
                       {
                         "metadata_id": "00000001-0000-4000-8000-000000000001",
@@ -15732,7 +15733,12 @@
                           "favorites": 3,
                           "last_accessed": 1760198460000
                         }
-                      },
+                      }
+                    ]
+                  },
+                  "example_2": {
+                    "description": "Collection (Liveboard folder) search result (metadata_type: COLLECTION)",
+                    "value": [
                       {
                         "metadata_id": "00000019-0000-4000-8000-000000000019",
                         "metadata_name": "Sales collection",
@@ -15903,7 +15909,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_3": {
+                    "description": "Answer search result (metadata_type: ANSWER)",
+                    "value": [
                       {
                         "metadata_id": "0000001c-0000-4000-8000-00000000001c",
                         "metadata_name": "<metadata_name>",
@@ -16808,7 +16819,12 @@
                         },
                         "metadata_obj_id": "answer-1c2d3e4f",
                         "dependent_objects_is_last_batch": true
-                      },
+                      }
+                    ]
+                  },
+                  "example_4": {
+                    "description": "Model, Table, View or SQL View search result (metadata_type: LOGICAL_TABLE)",
+                    "value": [
                       {
                         "metadata_id": "0000002e-0000-4000-8000-00000000002e",
                         "metadata_name": "<metadata_name>",
@@ -17512,7 +17528,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_5": {
+                    "description": "Column search result (metadata_type: LOGICAL_COLUMN)",
+                    "value": [
                       {
                         "metadata_id": "0000003e-0000-4000-8000-00000000003e",
                         "metadata_name": "<metadata_name>",
@@ -17682,7 +17703,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_6": {
+                    "description": "Connection search result (metadata_type: CONNECTION)",
+                    "value": [
                       {
                         "metadata_id": "00000044-0000-4000-8000-000000000044",
                         "metadata_name": "<metadata_name>",
@@ -18165,7 +18191,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_7": {
+                    "description": "Tag search result (metadata_type: TAG)",
+                    "value": [
                       {
                         "metadata_id": "0000004b-0000-4000-8000-00000000004b",
                         "metadata_name": "<metadata_name>",
@@ -18259,7 +18290,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_8": {
+                    "description": "User search result (metadata_type: USER)",
+                    "value": [
                       {
                         "metadata_id": "0000004d-0000-4000-8000-00000000004d",
                         "metadata_name": "<username>",
@@ -18378,7 +18414,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_9": {
+                    "description": "Group search result (metadata_type: USER_GROUP)",
+                    "value": [
                       {
                         "metadata_id": "00000052-0000-4000-8000-000000000052",
                         "metadata_name": "<metadata_name>",
@@ -18497,7 +18538,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_10": {
+                    "description": "Relationship search result (metadata_type: LOGICAL_RELATIONSHIP)",
+                    "value": [
                       {
                         "metadata_id": "00000056-0000-4000-8000-000000000056",
                         "metadata_name": "<metadata_name>",
@@ -18699,7 +18745,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_11": {
+                    "description": "SpotIQ insight specification search result (metadata_type: INSIGHT_SPEC)",
+                    "value": [
                       {
                         "metadata_id": "00000061-0000-4000-8000-000000000061",
                         "metadata_name": "<metadata_name>",
@@ -18764,7 +18815,12 @@
                         },
                         "visualization_headers": null,
                         "stats": null
-                      },
+                      }
+                    ]
+                  },
+                  "example_12": {
+                    "description": "Template variable search result (metadata_type: TEMPLATE_VARIABLE)",
+                    "value": [
                       {
                         "metadata_id": "00000063-0000-4000-8000-000000000063",
                         "metadata_name": "<metadata_name>",
