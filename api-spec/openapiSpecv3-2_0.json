@@ -13873,7 +13873,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Fetching SQL query is successful.",
+            "description": "Fetching SQL query of specified metadata object is successful.",
             "content": {
               "application/json": {
                 "schema": {
