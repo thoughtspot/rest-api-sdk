@@ -1,78 +1,96 @@
-# API Changelog - 26.11.0.cl vs. 26.10.0.cl
+# API Changelog - 26.12.0.cl vs. 26.11.0.cl
 
 
 ## API Changes
 
-### POST /api/rest/2.0/ai/usage-data/delete
+### POST /api/rest/2.0/ai/agent/v2/conversation/create
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/usage-data/search
+### POST /api/rest/2.0/ai/agent/v2/conversation/send
 -  endpoint added
 
 
-### POST /api/rest/2.0/ai/usage-data/update
+### POST /api/rest/2.0/ai/agent/v2/conversation/send/stream
 -  endpoint added
 
 
-### GET /api/rest/2.0/ai/usage-data/user
+### POST /api/rest/2.0/auth/session/login
+-  added the new optional request property `no_url_redirection`
+-  added the new optional request property `redirect_url`
+-  the response header `location` was added for the status `204`
+-  added the non-success response with the status `302`
+
+
+### POST /api/rest/2.0/auth/token/full
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
+### POST /api/rest/2.0/auth/token/object
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/search
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/styles/search
+-  added the optional property `items/app_color_theme` to the response with the `200` status
+
+
+### POST /api/rest/2.0/customization/styles/update
+-  added the new optional request property `app_color_theme`
+-  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
+
+
+### POST /api/rest/2.0/version-control/branch/promote
 -  endpoint added
 
 
-### POST /api/rest/2.0/customization/links/search
+### POST /api/rest/2.0/version-control/commit
 -  endpoint added
 
 
-### POST /api/rest/2.0/customization/links/update
+### POST /api/rest/2.0/version-control/commit/restore
 -  endpoint added
 
 
-### POST /api/rest/2.0/groups/import
--  added the new optional request property `groups/items/role_identifiers`
-
-
-### POST /api/rest/2.0/input-tables/create
+### POST /api/rest/2.0/version-control/config/create
 -  endpoint added
 
 
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/columns/create
+### POST /api/rest/2.0/version-control/config/delete
 -  endpoint added
 
 
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/columns/{column_identifier}/delete
+### POST /api/rest/2.0/version-control/config/search
 -  endpoint added
 
 
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/delete
+### POST /api/rest/2.0/version-control/config/update
 -  endpoint added
 
 
-### POST /api/rest/2.0/input-tables/{input_table_identifier}/update
+### POST /api/rest/2.0/version-control/deploy
 -  endpoint added
 
 
-### POST /api/rest/2.0/metadata/headers/update
--  added the new `PERSONALISED_VIEW` enum value to the request property `headers_update/items/type`
-
-
-### POST /api/rest/2.0/metadata/search
-- :warning: added the new `TEMPLATE_VARIABLE` enum value to the `items/metadata_type` response property for the response status `200`
--  added the new optional request property `dependent_objects_record_offset`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `exclude_objects/items/type`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `metadata/items/type`
--  added the optional property `items/dependent_objects_is_last_batch` to the response with the `200` status
-
-
-### POST /api/rest/2.0/metadata/update-obj-id
--  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
-
-
-### GET /api/rest/2.0/system
--  added the optional property `maintenance_schedule` to the response with the `200` status
-
-
-### POST /api/rest/2.0/webhooks/{webhook_identifier}/update
--  added the new optional request property `operation`
+### POST /api/rest/2.0/version-control/runs/search
+-  endpoint added
 
 
 
