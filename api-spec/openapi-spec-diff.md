@@ -32,25 +32,55 @@
 -  added the new optional `query` request parameter `spotter_experience_version`
 
 
-### POST /api/rest/2.0/ai/agent/v2/conversation/create
-- :warning: api path removed without deprecation
-
-
-### POST /api/rest/2.0/ai/agent/v2/conversation/send
-- :warning: api path removed without deprecation
-
-
-### POST /api/rest/2.0/ai/agent/v2/conversation/send/stream
-- :warning: api path removed without deprecation
+### POST /api/rest/2.0/auth/session/login
+-  added the new optional request property `no_url_redirection`
+-  added the new optional request property `redirect_url`
+-  the response header `location` was added for the status `204`
+-  added the non-success response with the status `302`
 
 
 ### GET /api/rest/2.0/auth/session/user
 -  added the optional property `last_active_time_in_millis` to the response with the `200` status
 
 
+### POST /api/rest/2.0/auth/token/full
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
+### POST /api/rest/2.0/auth/token/object
+-  added the new optional request property `org_identifier`
+-  request property `org_id` deprecated
+
+
 ### POST /api/rest/2.0/configurations/features/search
 -  added the optional property `items/docs_new_window` to the response with the `200` status
 -  added the optional property `items/features/items/docs_new_window` to the response with the `200` status
+
+
+### POST /api/rest/2.0/customization/custom-actions
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/search
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/delete
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/custom-actions/{custom_action_identifier}/update
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/customization/styles/search
+-  added the optional property `items/app_color_theme` to the response with the `200` status
+
+
+### POST /api/rest/2.0/customization/styles/update
+-  added the new optional request property `app_color_theme`
+-  added the new `APP_COLOR_THEME` enum value to the request property `reset_options/allOf[#/components/schemas/StyleResetOptionsInput]/style/items/`
 
 
 ### POST /api/rest/2.0/localizations/manual-translation/export
@@ -100,21 +130,42 @@
 -  added the optional property `items/last_active_time_in_millis` to the response with the `200` status
 
 
+### POST /api/rest/2.0/version-control/branch/promote
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/commit
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/commit/restore
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/create
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/delete
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/search
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/config/update
+-  endpoint added
+
+
+### POST /api/rest/2.0/version-control/deploy
+-  endpoint added
+
+
 ### POST /api/rest/2.0/version-control/runs/search
-- :warning: added the new `LOGICAL_COLUMN` enum value to the `runs/items/objects/items/type` response property for the response status `200`
-- :warning: added the new `PENDING` enum value to the `runs/items/objects/items/status` response property for the response status `200`
-- :warning: added the new `TEMPLATE_VARIABLE` enum value to the `runs/items/objects/items/type` response property for the response status `200`
--  added the new `LOGICAL_COLUMN` enum value to the request property `objects/items/type`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `objects/items/type`
+-  endpoint added
 
 
-
-
-## Components
--  removed the schema `AgentConversationV2`
--  removed the schema `CreateAgentConversationV2Request`
--  removed the schema `SendAgentConversationMessageStreamingV2Request`
--  removed the schema `SendAgentConversationMessageV2Request`
 
 
 
