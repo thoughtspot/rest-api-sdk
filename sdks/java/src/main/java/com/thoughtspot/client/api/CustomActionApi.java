@@ -105,7 +105,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call createCustomActionCall(CreateCustomActionRequest createCustomActionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -151,6 +153,7 @@ public class CustomActionApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createCustomActionValidateBeforeCall(CreateCustomActionRequest createCustomActionRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'createCustomActionRequest' is set
@@ -178,7 +181,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ResponseCustomAction createCustomAction(CreateCustomActionRequest createCustomActionRequest) throws ApiException {
         ApiResponse<ResponseCustomAction> localVarResp = createCustomActionWithHttpInfo(createCustomActionRequest);
         return localVarResp.getData();
@@ -200,7 +205,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<ResponseCustomAction> createCustomActionWithHttpInfo(CreateCustomActionRequest createCustomActionRequest) throws ApiException {
         okhttp3.Call localVarCall = createCustomActionValidateBeforeCall(createCustomActionRequest, null);
         Type localVarReturnType = new TypeToken<ResponseCustomAction>(){}.getType();
@@ -224,7 +231,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call createCustomActionAsync(CreateCustomActionRequest createCustomActionRequest, final ApiCallback<ResponseCustomAction> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = createCustomActionValidateBeforeCall(createCustomActionRequest, _callback);
@@ -248,7 +257,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteCustomActionCall(String customActionIdentifier, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -294,6 +305,7 @@ public class CustomActionApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteCustomActionValidateBeforeCall(String customActionIdentifier, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'customActionIdentifier' is set
@@ -320,7 +332,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public void deleteCustomAction(String customActionIdentifier) throws ApiException {
         deleteCustomActionWithHttpInfo(customActionIdentifier);
     }
@@ -341,7 +355,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> deleteCustomActionWithHttpInfo(String customActionIdentifier) throws ApiException {
         okhttp3.Call localVarCall = deleteCustomActionValidateBeforeCall(customActionIdentifier, null);
         return localVarApiClient.execute(localVarCall);
@@ -364,7 +380,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call deleteCustomActionAsync(String customActionIdentifier, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteCustomActionValidateBeforeCall(customActionIdentifier, _callback);
@@ -387,7 +405,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call searchCustomActionsCall(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -433,6 +453,7 @@ public class CustomActionApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call searchCustomActionsValidateBeforeCall(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'searchCustomActionsRequest' is set
@@ -460,7 +481,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public List<ResponseCustomAction> searchCustomActions(SearchCustomActionsRequest searchCustomActionsRequest) throws ApiException {
         ApiResponse<List<ResponseCustomAction>> localVarResp = searchCustomActionsWithHttpInfo(searchCustomActionsRequest);
         return localVarResp.getData();
@@ -482,7 +505,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<List<ResponseCustomAction>> searchCustomActionsWithHttpInfo(SearchCustomActionsRequest searchCustomActionsRequest) throws ApiException {
         okhttp3.Call localVarCall = searchCustomActionsValidateBeforeCall(searchCustomActionsRequest, null);
         Type localVarReturnType = new TypeToken<List<ResponseCustomAction>>(){}.getType();
@@ -506,7 +531,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call searchCustomActionsAsync(SearchCustomActionsRequest searchCustomActionsRequest, final ApiCallback<List<ResponseCustomAction>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = searchCustomActionsValidateBeforeCall(searchCustomActionsRequest, _callback);
@@ -531,7 +558,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateCustomActionCall(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -578,6 +607,7 @@ public class CustomActionApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateCustomActionValidateBeforeCall(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'customActionIdentifier' is set
@@ -610,7 +640,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public void updateCustomAction(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest) throws ApiException {
         updateCustomActionWithHttpInfo(customActionIdentifier, updateCustomActionRequest);
     }
@@ -632,7 +664,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Void> updateCustomActionWithHttpInfo(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest) throws ApiException {
         okhttp3.Call localVarCall = updateCustomActionValidateBeforeCall(customActionIdentifier, updateCustomActionRequest, null);
         return localVarApiClient.execute(localVarCall);
@@ -656,7 +690,9 @@ public class CustomActionApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call updateCustomActionAsync(String customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = updateCustomActionValidateBeforeCall(customActionIdentifier, updateCustomActionRequest, _callback);

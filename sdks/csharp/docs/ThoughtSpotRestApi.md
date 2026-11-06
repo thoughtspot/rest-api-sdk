@@ -19,6 +19,7 @@ All URIs are relative to *https://localhost:443*
 | [**CreateAnalyst**](ThoughtSpotRestApi.md#createanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/create |  |
 | [**CreateCalendar**](ThoughtSpotRestApi.md#createcalendar) | **POST** /api/rest/2.0/calendars/create |  |
 | [**CreateCollection**](ThoughtSpotRestApi.md#createcollection) | **POST** /api/rest/2.0/collections/create |  |
+| [**CreateCommit**](ThoughtSpotRestApi.md#createcommit) | **POST** /api/rest/2.0/version-control/commit |  |
 | [**CreateConfig**](ThoughtSpotRestApi.md#createconfig) | **POST** /api/rest/2.0/vcs/git/config/create |  |
 | [**CreateConnection**](ThoughtSpotRestApi.md#createconnection) | **POST** /api/rest/2.0/connection/create |  |
 | [**CreateConnectionConfiguration**](ThoughtSpotRestApi.md#createconnectionconfiguration) | **POST** /api/rest/2.0/connection-configurations/create |  |
@@ -35,6 +36,7 @@ All URIs are relative to *https://localhost:443*
 | [**CreateUser**](ThoughtSpotRestApi.md#createuser) | **POST** /api/rest/2.0/users/create |  |
 | [**CreateUserGroup**](ThoughtSpotRestApi.md#createusergroup) | **POST** /api/rest/2.0/groups/create |  |
 | [**CreateVariable**](ThoughtSpotRestApi.md#createvariable) | **POST** /api/rest/2.0/template/variables/create |  |
+| [**CreateVersionControlConfig**](ThoughtSpotRestApi.md#createversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/create |  |
 | [**CreateWebhookConfiguration**](ThoughtSpotRestApi.md#createwebhookconfiguration) | **POST** /api/rest/2.0/webhooks/create |  |
 | [**DbtConnection**](ThoughtSpotRestApi.md#dbtconnection) | **POST** /api/rest/2.0/dbt/dbt-connection |  |
 | [**DbtGenerateSyncTml**](ThoughtSpotRestApi.md#dbtgeneratesynctml) | **POST** /api/rest/2.0/dbt/generate-sync-tml |  |
@@ -68,8 +70,10 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteUserGroup**](ThoughtSpotRestApi.md#deleteusergroup) | **POST** /api/rest/2.0/groups/{group_identifier}/delete |  |
 | [**DeleteVariable**](ThoughtSpotRestApi.md#deletevariable) | **POST** /api/rest/2.0/template/variables/{identifier}/delete |  |
 | [**DeleteVariables**](ThoughtSpotRestApi.md#deletevariables) | **POST** /api/rest/2.0/template/variables/delete |  |
+| [**DeleteVersionControlConfig**](ThoughtSpotRestApi.md#deleteversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/delete |  |
 | [**DeleteWebhookConfigurations**](ThoughtSpotRestApi.md#deletewebhookconfigurations) | **POST** /api/rest/2.0/webhooks/delete |  |
 | [**DeployCommit**](ThoughtSpotRestApi.md#deploycommit) | **POST** /api/rest/2.0/vcs/git/commits/deploy |  |
+| [**DeployRevision**](ThoughtSpotRestApi.md#deployrevision) | **POST** /api/rest/2.0/version-control/deploy |  |
 | [**DownloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadconnectionmetadatachanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |  |
 | [**ExportAnswerReport**](ThoughtSpotRestApi.md#exportanswerreport) | **POST** /api/rest/2.0/report/answer |  |
 | [**ExportLiveboardReport**](ThoughtSpotRestApi.md#exportliveboardreport) | **POST** /api/rest/2.0/report/liveboard |  |
@@ -123,10 +127,12 @@ All URIs are relative to *https://localhost:443*
 | [**ManageObjectPrivilege**](ThoughtSpotRestApi.md#manageobjectprivilege) | **POST** /api/rest/2.0/security/metadata/manage-object-privilege |  |
 | [**ParameterizeMetadata**](ThoughtSpotRestApi.md#parameterizemetadata) | **POST** /api/rest/2.0/metadata/parameterize |  |
 | [**ParameterizeMetadataFields**](ThoughtSpotRestApi.md#parameterizemetadatafields) | **POST** /api/rest/2.0/metadata/parameterize-fields |  |
+| [**PromoteBranch**](ThoughtSpotRestApi.md#promotebranch) | **POST** /api/rest/2.0/version-control/branch/promote |  |
 | [**PublishMetadata**](ThoughtSpotRestApi.md#publishmetadata) | **POST** /api/rest/2.0/security/metadata/publish |  |
 | [**PutVariableValues**](ThoughtSpotRestApi.md#putvariablevalues) | **POST** /api/rest/2.0/template/variables/{identifier}/update-values |  |
 | [**QueryGetDecomposedQuery**](ThoughtSpotRestApi.md#querygetdecomposedquery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
 | [**ResetUserPassword**](ThoughtSpotRestApi.md#resetuserpassword) | **POST** /api/rest/2.0/users/reset-password |  |
+| [**RestoreRevision**](ThoughtSpotRestApi.md#restorerevision) | **POST** /api/rest/2.0/version-control/commit/restore |  |
 | [**RevertCommit**](ThoughtSpotRestApi.md#revertcommit) | **POST** /api/rest/2.0/vcs/git/commits/{commit_id}/revert |  |
 | [**RevokeRefreshTokens**](ThoughtSpotRestApi.md#revokerefreshtokens) | **POST** /api/rest/2.0/connections/{connection_identifier}/revoke-refresh-tokens |  |
 | [**RevokeToken**](ThoughtSpotRestApi.md#revoketoken) | **POST** /api/rest/2.0/auth/token/revoke |  |
@@ -157,6 +163,8 @@ All URIs are relative to *https://localhost:443*
 | [**SearchUserGroups**](ThoughtSpotRestApi.md#searchusergroups) | **POST** /api/rest/2.0/groups/search |  |
 | [**SearchUsers**](ThoughtSpotRestApi.md#searchusers) | **POST** /api/rest/2.0/users/search |  |
 | [**SearchVariables**](ThoughtSpotRestApi.md#searchvariables) | **POST** /api/rest/2.0/template/variables/search |  |
+| [**SearchVersionControlConfigs**](ThoughtSpotRestApi.md#searchversioncontrolconfigs) | **POST** /api/rest/2.0/version-control/config/search |  |
+| [**SearchVersionControlRuns**](ThoughtSpotRestApi.md#searchversioncontrolruns) | **POST** /api/rest/2.0/version-control/runs/search |  |
 | [**SearchWebhookConfigurations**](ThoughtSpotRestApi.md#searchwebhookconfigurations) | **POST** /api/rest/2.0/webhooks/search |  |
 | [**SendAgentConversationMessage**](ThoughtSpotRestApi.md#sendagentconversationmessage) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send |  |
 | [**SendAgentConversationMessageStreaming**](ThoughtSpotRestApi.md#sendagentconversationmessagestreaming) | **POST** /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream |  |
@@ -205,6 +213,7 @@ All URIs are relative to *https://localhost:443*
 | [**UpdateUserGroup**](ThoughtSpotRestApi.md#updateusergroup) | **POST** /api/rest/2.0/groups/{group_identifier}/update |  |
 | [**UpdateVariable**](ThoughtSpotRestApi.md#updatevariable) | **POST** /api/rest/2.0/template/variables/{identifier}/update |  |
 | [**UpdateVariableValues**](ThoughtSpotRestApi.md#updatevariablevalues) | **POST** /api/rest/2.0/template/variables/update-values |  |
+| [**UpdateVersionControlConfig**](ThoughtSpotRestApi.md#updateversioncontrolconfig) | **POST** /api/rest/2.0/version-control/config/update |  |
 | [**UpdateWebhookConfiguration**](ThoughtSpotRestApi.md#updatewebhookconfiguration) | **POST** /api/rest/2.0/webhooks/{webhook_identifier}/update |  |
 | [**UploadStyleFont**](ThoughtSpotRestApi.md#uploadstylefont) | **POST** /api/rest/2.0/customization/styles/fonts/upload |  |
 | [**ValidateCommunicationChannel**](ThoughtSpotRestApi.md#validatecommunicationchannel) | **POST** /api/rest/2.0/system/communication-channels/validate |  |
@@ -898,7 +907,7 @@ void (empty response body)
 
 
 
-  Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.     
+  Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.      
 
 ### Example
 ```csharp
@@ -1687,6 +1696,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createcommit"></a>
+# **CreateCommit**
+> VersionControlCommitResponse CreateCommit (CreateCommitRequest createCommitRequest)
+
+
+
+ Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateCommitExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createCommitRequest = new CreateCommitRequest(); // CreateCommitRequest | 
+
+            try
+            {
+                VersionControlCommitResponse result = apiInstance.CreateCommit(createCommitRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateCommit: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateCommitWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlCommitResponse> response = apiInstance.CreateCommitWithHttpInfo(createCommitRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateCommitWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createCommitRequest** | [**CreateCommitRequest**](CreateCommitRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlCommitResponse**](VersionControlCommitResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. A name matches more than one object of the given type; name the object by GUID or object id instead. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -3297,6 +3408,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="createversioncontrolconfig"></a>
+# **CreateVersionControlConfig**
+> VersionControlConfig CreateVersionControlConfig (CreateVersionControlConfigRequest createVersionControlConfigRequest)
+
+
+
+ Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class CreateVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var createVersionControlConfigRequest = new CreateVersionControlConfigRequest(); // CreateVersionControlConfigRequest | 
+
+            try
+            {
+                VersionControlConfig result = apiInstance.CreateVersionControlConfig(createVersionControlConfigRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.CreateVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreateVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlConfig> response = apiInstance.CreateVersionControlConfigWithHttpInfo(createVersionControlConfigRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.CreateVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **createVersionControlConfigRequest** | [**CreateVersionControlConfigRequest**](CreateVersionControlConfigRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlConfig**](VersionControlConfig.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The stored configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **409** | Conflict. The org is already configured, another org already commits to this repository and branch, or the org is still served by the legacy Callosum VCS surface. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="createwebhookconfiguration"></a>
 # **CreateWebhookConfiguration**
 > WebhookResponse CreateWebhookConfiguration (CreateWebhookConfigurationRequest createWebhookConfigurationRequest)
@@ -4608,11 +4820,11 @@ void (empty response body)
 
 <a id="deleteconversation"></a>
 # **DeleteConversation**
-> void DeleteConversation (string conversationIdentifier)
+> void DeleteConversation (string conversationIdentifier, string? spotterExperienceVersion = null)
 
 
 
- Deletes an existing agent conversation.    Version: 26.7.0.cl or later   Permanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* is a query parameter that selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - `spotter_experience_version` *(query parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`  A successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.  #### Example request  ```bash DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete ```  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |  > ###### Note: > > - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint. > - On `V1`, only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint. On `V2`, any conversation can be deleted by its identifier, including one created without `enable_save_chat: true`. > - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+ Deletes an existing agent conversation.    Version: 26.7.0.cl or later   Permanently deletes an existing saved agent conversation and all its associated messages. This operation is irreversible — deleted conversations cannot be recovered.  Requires `CAN_USE_SPOTTER` privilege and ownership of the conversation being deleted.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* is a query parameter that selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - `spotter_experience_version` *(query parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter)*: the unique ID of the conversation to delete, as returned by `createAgentConversation` or `getConversationList`  A successful request returns an empty `204 No Content` response. The deleted conversation no longer appears in `getConversationList`.  #### Example request  ```bash DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete ```  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`). | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or does not own the specified conversation. | | 404  | Not Found — no conversation exists with the given `conversation_identifier` for the authenticated user. |  > ###### Note: > > - Deletion is permanent and cannot be undone. Ensure the correct `conversation_identifier` is used before calling this endpoint. > - On `V1`, only conversations created with `enable_save_chat: true` are persisted and can be deleted via this endpoint. On `V2`, any conversation can be deleted by its identifier, including one created without `enable_save_chat: true`. > - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl. > - Available from version 26.7.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
 
 ### Example
 ```csharp
@@ -4639,10 +4851,11 @@ namespace Example
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
             var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation to delete.
+            var spotterExperienceVersion = "V1";  // string? | Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Requires a cluster admin   to set Spotter 3 Liveboard experience to Liveboard side panel (New);   otherwise the request returns a 400.    Version: 26.12.0.cl or later  (optional)  (default to V1)
 
             try
             {
-                apiInstance.DeleteConversation(conversationIdentifier);
+                apiInstance.DeleteConversation(conversationIdentifier, spotterExperienceVersion);
             }
             catch (ApiException  e)
             {
@@ -4661,7 +4874,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    apiInstance.DeleteConversationWithHttpInfo(conversationIdentifier);
+    apiInstance.DeleteConversationWithHttpInfo(conversationIdentifier, spotterExperienceVersion);
 }
 catch (ApiException e)
 {
@@ -4676,6 +4889,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **conversationIdentifier** | **string** | Unique identifier of the conversation to delete. |  |
+| **spotterExperienceVersion** | **string?** | Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Requires a cluster admin   to set Spotter 3 Liveboard experience to Liveboard side panel (New);   otherwise the request returns a 400.    Version: 26.12.0.cl or later  | [optional] [default to V1] |
 
 ### Return type
 
@@ -6536,6 +6750,97 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="deleteversioncontrolconfig"></a>
+# **DeleteVersionControlConfig**
+> void DeleteVersionControlConfig ()
+
+
+
+ Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeleteVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+
+            try
+            {
+                apiInstance.DeleteVersionControlConfig();
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.DeleteVersionControlConfigWithHttpInfo();
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeleteVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully revoked version control for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="deletewebhookconfigurations"></a>
 # **DeleteWebhookConfigurations**
 > WebhookDeleteResponse DeleteWebhookConfigurations (DeleteWebhookConfigurationsRequest deleteWebhookConfigurationsRequest)
@@ -6732,6 +7037,108 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="deployrevision"></a>
+# **DeployRevision**
+> VersionControlDeployResponse DeployRevision (DeployRevisionRequest deployRevisionRequest)
+
+
+
+ Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class DeployRevisionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var deployRevisionRequest = new DeployRevisionRequest(); // DeployRevisionRequest | 
+
+            try
+            {
+                VersionControlDeployResponse result = apiInstance.DeployRevision(deployRevisionRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.DeployRevision: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeployRevisionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlDeployResponse> response = apiInstance.DeployRevisionWithHttpInfo(deployRevisionRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.DeployRevisionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **deployRevisionRequest** | [**DeployRevisionRequest**](DeployRevisionRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlDeployResponse**](VersionControlDeployResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the deploy run has started. The body is a receipt, not a result: nothing is imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, an unknown, ambiguous or unreachable target_revision, a paused repository, and an org whose disabled_operations holds DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another deploy, restore or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -9035,7 +9442,7 @@ catch (ApiException e)
 
 <a id="getconversationlist"></a>
 # **GetConversationList**
-> AgentConversationHistoryResponse GetConversationList (int? limit = null, int? offset = null, bool? skipEmpty = null)
+> AgentConversationHistoryResponse GetConversationList (int? limit = null, int? offset = null, bool? skipEmpty = null, string? spotterExperienceVersion = null)
 
 
 
@@ -9068,10 +9475,11 @@ namespace Example
             var limit = 30;  // int? | Maximum number of conversations to return. Used for pagination. (optional)  (default to 30)
             var offset = 0;  // int? | Number of conversations to skip before returning results. Used for pagination. (optional)  (default to 0)
             var skipEmpty = true;  // bool? | When true, excludes conversations with no messages. Defaults to true. (optional)  (default to true)
+            var spotterExperienceVersion = "V1";  // string? | Version of the Spotter experience whose conversations to list. Each version lists only the conversations created on it. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Requires a cluster admin   to set Spotter 3 Liveboard experience to Liveboard side panel (New);   otherwise the request returns a 400.    Version: 26.12.0.cl or later  (optional)  (default to V1)
 
             try
             {
-                AgentConversationHistoryResponse result = apiInstance.GetConversationList(limit, offset, skipEmpty);
+                AgentConversationHistoryResponse result = apiInstance.GetConversationList(limit, offset, skipEmpty, spotterExperienceVersion);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -9091,7 +9499,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    ApiResponse<AgentConversationHistoryResponse> response = apiInstance.GetConversationListWithHttpInfo(limit, offset, skipEmpty);
+    ApiResponse<AgentConversationHistoryResponse> response = apiInstance.GetConversationListWithHttpInfo(limit, offset, skipEmpty, spotterExperienceVersion);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -9111,6 +9519,7 @@ catch (ApiException e)
 | **limit** | **int?** | Maximum number of conversations to return. Used for pagination. | [optional] [default to 30] |
 | **offset** | **int?** | Number of conversations to skip before returning results. Used for pagination. | [optional] [default to 0] |
 | **skipEmpty** | **bool?** | When true, excludes conversations with no messages. Defaults to true. | [optional] [default to true] |
+| **spotterExperienceVersion** | **string?** | Version of the Spotter experience whose conversations to list. Each version lists only the conversations created on it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Requires a cluster admin   to set Spotter 3 Liveboard experience to Liveboard side panel (New);   otherwise the request returns a 400.    Version: 26.12.0.cl or later  | [optional] [default to V1] |
 
 ### Return type
 
@@ -11598,7 +12007,8 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | User login successful. |  -  |
+| **204** | User login successful. Carries the location header when redirect_url was supplied with no_url_redirection |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
+| **302** | Redirect to the specified redirect_url |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -11981,6 +12391,107 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="promotebranch"></a>
+# **PromoteBranch**
+> VersionControlPromotionResponse PromoteBranch (PromoteBranchRequest promoteBranchRequest)
+
+
+
+ Version: 26.12.0.cl or later   Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class PromoteBranchExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var promoteBranchRequest = new PromoteBranchRequest(); // PromoteBranchRequest | 
+
+            try
+            {
+                VersionControlPromotionResponse result = apiInstance.PromoteBranch(promoteBranchRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.PromoteBranch: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the PromoteBranchWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlPromotionResponse> response = apiInstance.PromoteBranchWithHttpInfo(promoteBranchRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.PromoteBranchWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **promoteBranchRequest** | [**PromoteBranchRequest**](PromoteBranchRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlPromotionResponse**](VersionControlPromotionResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The promotion was carried out, or with dry_run true would have been. Conflicting content appears here only when conflict_policy resolved it. |  -  |
+| **400** | The promotion could not be carried out, and nothing was written. Covers a source that names both or neither of an org and a branch, a cherry-pick with no source_revision, a source org that versions to a different repository, a source_branch that no org in the caller&#39;s repository versions to, an unknown branch or commit, content that conflicts while conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run because the real promotion could not have completed either, branches with unrelated histories, and a target branch the provider protects. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. Also returned when the caller is neither a tenant administrator nor an administrator of the source org. |  -  |
+| **404** | An org involved has no version control configuration: the caller&#39;s org, which then has no branch to promote into, or the org named by source.org_identifier, which then has none to promote from. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -12372,6 +12883,108 @@ void (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="restorerevision"></a>
+# **RestoreRevision**
+> VersionControlRestoreResponse RestoreRevision (RestoreRevisionRequest restoreRevisionRequest)
+
+
+
+ Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class RestoreRevisionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var restoreRevisionRequest = new RestoreRevisionRequest(); // RestoreRevisionRequest | 
+
+            try
+            {
+                VersionControlRestoreResponse result = apiInstance.RestoreRevision(restoreRevisionRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.RestoreRevision: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the RestoreRevisionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlRestoreResponse> response = apiInstance.RestoreRevisionWithHttpInfo(restoreRevisionRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.RestoreRevisionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **restoreRevisionRequest** | [**RestoreRevisionRequest**](RestoreRevisionRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlRestoreResponse**](VersionControlRestoreResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The request was admitted and the restore run has started. The body is a receipt, not a result: nothing is committed or imported yet. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, a target_revision that is unknown, ambiguous, unreachable from the branch or is its head, a paused repository, and an org whose disabled_operations holds COMMIT or DEPLOY. error.message names the reason. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **404** | The caller&#39;s org has no version control configuration. |  -  |
+| **409** | Conflict. Another restore, deploy or versioning run is already in flight for the caller&#39;s org. Nothing was started; retry once it finishes. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -13974,7 +14587,7 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature management not enabled. |  -  |
+| **404** | Feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -15380,6 +15993,201 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="searchversioncontrolconfigs"></a>
+# **SearchVersionControlConfigs**
+> VersionControlConfigList SearchVersionControlConfigs ()
+
+
+
+ Version: 26.12.0.cl or later   Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchVersionControlConfigsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+
+            try
+            {
+                VersionControlConfigList result = apiInstance.SearchVersionControlConfigs();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlConfigs: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchVersionControlConfigsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlConfigList> response = apiInstance.SearchVersionControlConfigsWithHttpInfo();
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlConfigsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**VersionControlConfigList**](VersionControlConfigList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Zero or one configuration. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="searchversioncontrolruns"></a>
+# **SearchVersionControlRuns**
+> VersionControlRunList SearchVersionControlRuns (SearchVersionControlRunsRequest searchVersionControlRunsRequest)
+
+
+
+ Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class SearchVersionControlRunsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var searchVersionControlRunsRequest = new SearchVersionControlRunsRequest(); // SearchVersionControlRunsRequest | 
+
+            try
+            {
+                VersionControlRunList result = apiInstance.SearchVersionControlRuns(searchVersionControlRunsRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlRuns: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchVersionControlRunsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<VersionControlRunList> response = apiInstance.SearchVersionControlRunsWithHttpInfo(searchVersionControlRunsRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.SearchVersionControlRunsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **searchVersionControlRunsRequest** | [**SearchVersionControlRunsRequest**](SearchVersionControlRunsRequest.md) |  |  |
+
+### Return type
+
+[**VersionControlRunList**](VersionControlRunList.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The runs&#39; current outcomes. A run identifier that does not exist in the caller&#39;s org is left out, not reported as an error. |  -  |
+| **400** | Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="searchwebhookconfigurations"></a>
 # **SearchWebhookConfigurations**
 > WebhookSearchResponse SearchWebhookConfigurations (SearchWebhookConfigurationsRequest searchWebhookConfigurationsRequest)
@@ -15486,7 +16294,7 @@ catch (ApiException e)
 
 
 
-  Version: 26.5.0.cl or later   Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreaming` instead.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the response shape: `AgentTurnResponse`, a list of events, on `V2`, and `AgentMessagesResponse`, a list of messages, on `V1`. See the sections below for each version's requests and responses.  The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the `SendAgentConversationMessageResponse` schema, which is one of `AgentMessagesResponse` or `AgentTurnResponse`.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  <details> <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>  The response collects every event of the turn into one `events` array, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`, or `POST /api/rest/2.0/ai/agent/conversation/send` to start a new conversation  ```json {   \"spotter_experience_version\": \"V2\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the `x-conversation-identifier` response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  `events` contains exactly what the streaming endpoint publishes on `V2`, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreaming` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint explains how the two differ.  </details>  <details> <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`  ```json {   \"spotter_experience_version\": \"V1\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version. - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  ```json {   \"messages\": [     { \"type\": \"text\", \"text\": \"Sales were highest in the West.\", \"metadata\": {} }   ] } ```  The response contains a `messages` array, in order. Each message has:  - `type`: the kind of message — `text`, `answer`, `error`, and others - `metadata`: additional information depending on the type (for example, answer metadata includes analytics and visualization details) - the fields of that type: `text` for a `text` message, `title` and `session_id` for an `answer`, `code` and `message` for an `error`  </details>  #### Error responses  | Code | Description                                                                                                                      | |- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. | | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  | | 504  | Gateway timeout — on `V2`, the turn did not finish in the time allowed. Retry, or use `sendAgentConversationMessageStreaming` for questions that run long. |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.      
+  Version: 26.5.0.cl or later   Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use `sendAgentConversationMessageStreaming` instead.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the response shape: `AgentTurnResponse`, a list of events, on `V2`, and `AgentMessagesResponse`, a list of messages, on `V1`. See the sections below for each version's requests and responses.  The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the `SendAgentConversationMessageResponse` schema, which is one of `AgentMessagesResponse` or `AgentTurnResponse`.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  <details> <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>  The response collects every event of the turn into one `events` array, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`, or `POST /api/rest/2.0/ai/agent/conversation/send` to start a new conversation  ```json {   \"spotter_experience_version\": \"V2\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the `x-conversation-identifier` response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  ```json {   \"conversation_identifier\": \"5612260428840173568\",   \"events\": [     { \"tool_call\": { \"id\": \"toolu_01AMjCrr\", \"name\": \"spotter_tools_fetch_and_visualize_data\" } },     { \"progress\": { \"code\": \"TML_GEN\", \"tool_call_id\": \"toolu_01AMjCrr\" } },     { \"tool_result\": { \"id\": \"toolu_01AMjCrr\", \"answer\": { \"session_id\": \"c5c25b33\" } } },     {       \"event\": {         \"content\": { \"role\": \"model\", \"parts\": [{ \"text\": \"Sales were highest in the West.\" }] }       }     },     { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } }   ] } ```  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client's read timeout to several minutes; a turn that runs too long is ended with a `504`.  `events` contains exactly what the streaming endpoint publishes on `V2`, in the same order, collected into an array. Every key and its meaning is documented under `sendAgentConversationMessageStreaming` — `event`, `tool_call`, `progress`, `tool_result`, `error` and `done`.  To render the answer, concatenate `parts[].text` from each `event` frame in order, skipping parts marked `thought: true` if you do not want to show Spotter's reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an `error` frame; `done` reports that the turn ended, not that it succeeded. An `event` can also carry an `error_code` when Spotter failed while producing that event; the streaming endpoint explains how the two differ.  </details>  <details> <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send`  ```json {   \"spotter_experience_version\": \"V1\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version. - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  ```json {   \"messages\": [     { \"type\": \"text\", \"text\": \"Sales were highest in the West.\", \"metadata\": {} }   ] } ```  The response contains a `messages` array, in order. Each message has:  - `type`: the kind of message — `text`, `answer`, `error`, and others - `metadata`: additional information depending on the type (for example, answer metadata includes analytics and visualization details) - the fields of that type: `text` for a `text` message, `title` and `session_id` for an `answer`, `code` and `message` for an `error`  </details>  #### Error responses  | Code | Description                                                                                                                      | |- -- -- -|- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -| | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`), or the conversation identifier is omitted on `V1`. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. | | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user, or it belongs to another user. | | 504  | Gateway timeout — on `V2`, the turn did not finish in the time allowed. Retry, or use `sendAgentConversationMessageStreaming` for questions that run long. |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - For real-time streamed responses, use `sendAgentConversationMessageStreaming` instead.      
 
 ### Example
 ```csharp
@@ -15512,7 +16320,7 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier for the conversation (used to track context)
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the `x-conversation-identifier` header.
             var sendAgentConversationMessageRequest = new SendAgentConversationMessageRequest(); // SendAgentConversationMessageRequest | 
 
             try
@@ -15554,7 +16362,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **conversationIdentifier** | **string** | Unique identifier for the conversation (used to track context) |  |
+| **conversationIdentifier** | **string** | Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. |  |
 | **sendAgentConversationMessageRequest** | [**SendAgentConversationMessageRequest**](SendAgentConversationMessageRequest.md) |  |  |
 
 ### Return type
@@ -15585,11 +16393,11 @@ catch (ApiException e)
 
 <a id="sendagentconversationmessagestreaming"></a>
 # **SendAgentConversationMessageStreaming**
-> SendAgentMessageResponse SendAgentConversationMessageStreaming (string conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest)
+> SendAgentConversationMessageStreaming200Response SendAgentConversationMessageStreaming (string conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest)
 
 
 
-  Version: 26.5.0.cl or later   Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the events the stream carries. See the sections below for each version's requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  <details> <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>  Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`, or `POST /api/rest/2.0/ai/agent/conversation/send/stream` to start a new conversation  ```json {   \"spotter_experience_version\": \"V2\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send/stream` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the `x-conversation-identifier` response header and in the final `done` event, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  ##### Response  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  ###### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  ###### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the conversation identifier.  ###### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"message\": \"session busy: lease held by invocation 7f3a\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`, not `message` — the latter is diagnostic and not written for end users. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | - -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  </details>  <details> <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`  ```json {   \"spotter_experience_version\": \"V1\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version. - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  ##### Response  Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:  - `ack`: confirms receipt of the request (`node_id`) - `conv_title`: conversation title (`title`, `conv_id`) - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`) - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`) - `text`: full text block with same structure as `text-chunk` - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`) - `error`: if a failure occurs  </details>  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                                      | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or the conversation identifier is omitted on `V1`. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. | | 404  | Not found — on `V2`, no conversation with the given identifier exists for this user.                                  |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE). > - For the complete response in a single payload, use `sendAgentConversationMessage` instead.      
+  Version: 26.5.0.cl or later   Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires `CAN_USE_SPOTTER` privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by `conversation_identifier`.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the events the stream carries. See the sections below for each version's requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  <details> <summary>When <code>spotter_experience_version</code> is <code>V2</code></summary>  Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster's **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn't, requests return a `400`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`, or `POST /api/rest/2.0/ai/agent/conversation/send/stream` to start a new conversation  ```json {   \"spotter_experience_version\": \"V2\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(required for this version)*: `V2`. A request that omits it runs on `V1`, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter, optional)*: the conversation to send the messages in, as returned by `createAgentConversation`. Omit the segment — `POST /api/rest/2.0/ai/agent/conversation/send/stream` — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the `x-conversation-identifier` response header and in the final `done` event, so a follow-up can continue it. The new conversation is not saved: it does not appear in `getConversationList`, but it can be continued by its identifier. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  ##### Response  Each event is a `data:` line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | `event`       | Text from Spotter — its reasoning or its answer.                    | | `tool_call`   | Spotter started a step, such as querying a data source.             | | `progress`    | A stage of a step in flight, so you can show what Spotter is doing. | | `tool_result` | A step finished; carries its result, including any answer produced. | | `error`       | The turn failed.                                                    | | `done`        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  ``` tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done ```  `tool_call`, `progress` and `tool_result` for one step share a `tool_call_id`, so you can group them. A turn may run several steps, or none.  Ignore any key you don't recognise — new event types may be added.  Lines beginning with `:` are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with `:`.  An event with content has the shape:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"partial\": true,     \"content\": {       \"role\": \"model\",       \"parts\": [{ \"text\": \" asking for data\", \"thought\": true }]     }   } } ```  - `parts[].text` carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - `parts[].thought` is `true` when the text is Spotter's reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - `partial` is `true` for an incremental chunk and `false` for a frame that restates the accumulated text of a completed segment. - `invocation_id` is stable for one turn; `id` identifies a single event.  ###### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **`tool_call`** announces the step and the arguments it ran with:  ```json {   \"tool_call\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"args\": {       \"dataset_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"english_query\": \"total sales by region last quarter\"     }   } } ```  **`progress`** reports each stage while the step runs:  ```json {   \"progress\": {     \"code\": \"ANSWER_GEN\",     \"message\": \"Verifying results with the Trust Layer\",     \"tool_call_id\": \"toolu_01AMjCrr\"   } } ```  `message` is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar `code` as \"still working\" rather than an error.  **`tool_result`** carries what the step produced:  ```json {   \"tool_result\": {     \"id\": \"toolu_01AMjCrr\",     \"name\": \"spotter_tools_fetch_and_visualize_data\",     \"is_error\": false,     \"text\": \"**total sales by region last quarter**\\nTML query: `[sales] [region] [date] = 'last quarter'`\\n...\",     \"answer\": {       \"title\": \"total sales by region last quarter\",       \"session_id\": \"c5c25b33-74b8-4e83-b7f3-f7f384323903\",       \"gen_no\": 2,       \"transaction_id\": \"6fafbc09-1b08-4c49-a017-fa331612a76f\",       \"worksheet_id\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\",       \"sage_query\": \"[sales] [region] [date] = 'last quarter'\",       \"visualization\": { \"chart_type\": \"ADVANCED_COLUMN\" },       \"table_data\": { \"total_rows\": 5, \"columns\": [{ \"name\": \"region\", \"type\": \"ATTRIBUTE\" }] }     }   } } ```  - `text` is the step's own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read `answer.table_data.total_rows` for the true count. - `answer` is present when the step produced a ThoughtSpot answer. Use `session_id` with `gen_no` to fetch or deep-link it, and `sage_query` to show how the question was interpreted. - `is_error` is `true` when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  `args` and `answer` are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  ###### End of turn  The stream ends with a terminal event:  ```json { \"done\": { \"conversation_identifier\": \"5612260428840173568\" } } ```  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a `done` event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  `done` reports that the stream completed, not that the turn succeeded; a turn that emitted an `error` event still ends with `done`. Check for an `error` event to determine the outcome.  The `conversation_identifier` is repeated here so a client that cannot read response headers — a browser `EventSource`, for example — can still continue a conversation it created by omitting the conversation identifier.  ###### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  ```json {   \"error\": {     \"code\": \"409\",     \"source\": \"transport\",     \"display_message\": \"Another request is still running in this conversation.\",     \"error_bucket\": \"RETRY\"   } } ```  Render `display_message`. `code` is always a string; quote it when reporting an issue. Branch on `error_bucket`: `RETRY` (retry the request), `REFRESH` (reload and retry), `NEW_CHAT` (start a new conversation), `SUPPORT` (contact support). Treat any unrecognized value as `SUPPORT`.  A conversation that does not exist, or that belongs to another user, is reported the same way: an `error` event with `code` `\"404\"` and `error_bucket` `NEW_CHAT`, after a `200` response has started. The two cases cannot be told apart.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a `done` event and no `error` event.  A failure can also be reported on an `event` itself, when Spotter fails while producing that event. Its `error_code` is set and its `parts` are empty:  ```json {   \"event\": {     \"id\": \"c506785a-0493-4273-97c0-128ab2bdd7aa\",     \"invocation_id\": \"e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\",     \"error_code\": \"MALFORMED_FUNCTION_CALL\",     \"content\": { \"role\": \"model\", \"parts\": [] }   } } ```  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | - -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | `error` frame             | The turn as a whole. Carries `display_message` and `error_bucket`.            | Show `display_message` and act on `error_bucket`.                            | | `event` with `error_code` | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an `error` frame follows, act on that. |  `error_code` is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  </details>  <details> <summary>When <code>spotter_experience_version</code> is <code>V1</code></summary>  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in `V2`.  ##### Request  `POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream`  ```json {   \"spotter_experience_version\": \"V1\",   \"messages\": [\"Which region had the highest sales last quarter?\"] } ```  - `spotter_experience_version` *(optional)*: `V1`, the default. A request that omits it runs on this version. - `conversation_identifier` *(path parameter, required)*: the conversation to send the messages in, as returned by `createAgentConversation`. - `messages`: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send `Accept: text/event-stream` and read the response incrementally. With `curl`, use `-N` to disable buffering.  ##### Response  Each line has the form `data: [{\"type\": \"...\", ...}]` — a JSON array of event objects. Event types include:  - `ack`: confirms receipt of the request (`node_id`) - `conv_title`: conversation title (`title`, `conv_id`) - `notification`: status updates on operations (`group_id`, `metadata`, `code` — e.g. `TOOL_CALL_NOTIFICATION`, `nls_start`, `FINAL_RESPONSE_NOTIFICATION`) - `text-chunk`: incremental content chunks (`id`, `group_id`, `metadata` with `format` and `type` such as `thinking` or `text`, `content`) - `text`: full text block with same structure as `text-chunk` - `answer`: structured answer with metadata (`id`, `group_id`, `metadata` with `sage_query`, `session_id`, `title`, etc., `title`) - `error`: if a failure occurs  </details>  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                                      | | - -- - | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | 400  | Bad request — `messages` is missing or invalid, `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`), or the conversation identifier is omitted on `V1`. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks permission on the referenced conversation. |  > ###### Note: > > - This endpoint is Generally Available from version 26.5.0.cl. > - `spotter_experience_version`, the optional conversation identifier and `V2` support are in Beta from 26.12.0.cl. > - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. > - The streaming protocol uses Server-Sent Events (SSE). > - For the complete response in a single payload, use `sendAgentConversationMessage` instead.      
 
 ### Example
 ```csharp
@@ -15615,12 +16423,12 @@ namespace Example
             HttpClient httpClient = new HttpClient();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
-            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier for the conversation (used to track context)
+            var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the `x-conversation-identifier` header.
             var sendAgentConversationMessageStreamingRequest = new SendAgentConversationMessageStreamingRequest(); // SendAgentConversationMessageStreamingRequest | 
 
             try
             {
-                SendAgentMessageResponse result = apiInstance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+                SendAgentConversationMessageStreaming200Response result = apiInstance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -15640,7 +16448,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    ApiResponse<SendAgentMessageResponse> response = apiInstance.SendAgentConversationMessageStreamingWithHttpInfo(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+    ApiResponse<SendAgentConversationMessageStreaming200Response> response = apiInstance.SendAgentConversationMessageStreamingWithHttpInfo(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -15657,12 +16465,12 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **conversationIdentifier** | **string** | Unique identifier for the conversation (used to track context) |  |
+| **conversationIdentifier** | **string** | Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. |  |
 | **sendAgentConversationMessageStreamingRequest** | [**SendAgentConversationMessageStreamingRequest**](SendAgentConversationMessageStreamingRequest.md) |  |  |
 
 ### Return type
 
-[**SendAgentMessageResponse**](SendAgentMessageResponse.md)
+[**SendAgentConversationMessageStreaming200Response**](SendAgentConversationMessageStreaming200Response.md)
 
 ### Authorization
 
@@ -16595,11 +17403,11 @@ catch (ApiException e)
 
 <a id="stopconversation"></a>
 # **StopConversation**
-> void StopConversation (string conversationIdentifier)
+> void StopConversation (string conversationIdentifier, StopConversationRequest? stopConversationRequest = null)
 
 
 
- Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   <span>Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - `spotter_experience_version` *(body parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`  A successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response ```  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via `sendAgentConversationMessageStreaming`. 2. User clicks a \"Stop generating\" button while the response is streaming. 3. Your client calls `stopConversation` with the active `conversation_identifier`. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, or, on `V2`, no conversation with the given identifier exists for this user. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |  > ###### Note: > > - Calling this endpoint when no response is in progress does not return an error. > - The conversation context is preserved after stopping — previous messages and answers remain accessible. > - Available from version 26.6.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.      
+ Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   <span>Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires `CAN_USE_SPOTTER` privilege and access to the specified conversation.  #### Spotter version  `spotter_experience_version` *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - `V2`: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a `400`. - `V1` (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: `V1`.** A request that omits the parameter runs on `V1` on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - `spotter_experience_version` *(body parameter; required for `V2`)*: the version the conversation was created on. A request that omits it runs on `V1`, the default, so a `V2` conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a `400`. - `conversation_identifier` *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by `createAgentConversation`  A successful request returns an empty `204 No Content` response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using `sendAgentConversationMessage` or `sendAgentConversationMessageStreaming`.  #### Example request  ```bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response ```  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via `sendAgentConversationMessageStreaming`. 2. User clicks a \"Stop generating\" button while the response is streaming. 3. Your client calls `stopConversation` with the active `conversation_identifier`. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 400  | Bad request — `spotter_experience_version` is `V2` and the cluster's **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on `V2` (it must be letters, digits, `-` and `_`), or, on `V2`, no conversation with the given identifier exists for this user. | | 403  | Forbidden — the authenticated user does not have `CAN_USE_SPOTTER` privilege or lacks access to the specified conversation. |  > ###### Note: > > - Calling this endpoint when no response is in progress does not return an error. > - The conversation context is preserved after stopping — previous messages and answers remain accessible. > - Available from version 26.6.0.cl and later. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. > - `spotter_experience_version` and `V2` support are in Beta from 26.12.0.cl.      
 
 ### Example
 ```csharp
@@ -16626,10 +17434,11 @@ namespace Example
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
             var conversationIdentifier = "conversationIdentifier_example";  // string | Unique identifier of the conversation to stop.
+            var stopConversationRequest = new StopConversationRequest?(); // StopConversationRequest? |  (optional) 
 
             try
             {
-                apiInstance.StopConversation(conversationIdentifier);
+                apiInstance.StopConversation(conversationIdentifier, stopConversationRequest);
             }
             catch (ApiException  e)
             {
@@ -16648,7 +17457,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    apiInstance.StopConversationWithHttpInfo(conversationIdentifier);
+    apiInstance.StopConversationWithHttpInfo(conversationIdentifier, stopConversationRequest);
 }
 catch (ApiException e)
 {
@@ -16663,6 +17472,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **conversationIdentifier** | **string** | Unique identifier of the conversation to stop. |  |
+| **stopConversationRequest** | [**StopConversationRequest?**](StopConversationRequest?.md) |  | [optional]  |
 
 ### Return type
 
@@ -16674,7 +17484,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 
@@ -18475,7 +19285,7 @@ catch (ApiException e)
 | **400** | Invalid request parameters. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -18576,7 +19386,7 @@ catch (ApiException e)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Insufficient privileges or org not assigned to feature. |  -  |
-| **404** | Feature not found or feature management not enabled. |  -  |
+| **404** | Feature not found or feature delegation not enabled. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -19272,7 +20082,7 @@ void (empty response body)
 
 <a id="updatestylecustomization"></a>
 # **UpdateStyleCustomization**
-> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
+> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, AppColorThemeInput? appColorTheme = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
 
 
 
@@ -19305,7 +20115,8 @@ namespace Example
             var scope = "CLUSTER";  // string | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (default to ORG)
             var operation = "REPLACE";  // string? | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional)  (default to REPLACE)
             var resetOptions = new StyleResetOptionsInput?(); // StyleResetOptionsInput? | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional) 
-            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional) 
+            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional) 
+            var appColorTheme = new AppColorThemeInput?(); // AppColorThemeInput? | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional) 
             var chartColorPalette = new StyleColorPaletteInput?(); // StyleColorPaletteInput? | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional) 
             var embeddedFooterText = "embeddedFooterText_example";  // string? | Custom footer text for the embedded application. An empty string clears the footer. (optional) 
             var visualizationFonts = new VisualizationFontsInput?(); // VisualizationFontsInput? | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional) 
@@ -19314,7 +20125,7 @@ namespace Example
 
             try
             {
-                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
             }
             catch (ApiException  e)
             {
@@ -19333,7 +20144,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
 }
 catch (ApiException e)
 {
@@ -19350,7 +20161,8 @@ catch (ApiException e)
 | **scope** | **string** | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. | [default to ORG] |
 | **operation** | **string?** | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. | [optional] [default to REPLACE] |
 | **resetOptions** | [**StyleResetOptionsInput?**](StyleResetOptionsInput?.md) | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. | [optional]  |
-| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. | [optional]  |
+| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. | [optional]  |
+| **appColorTheme** | [**AppColorThemeInput?**](AppColorThemeInput?.md) | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  | [optional]  |
 | **chartColorPalette** | [**StyleColorPaletteInput?**](StyleColorPaletteInput?.md) | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. | [optional]  |
 | **embeddedFooterText** | **string?** | Custom footer text for the embedded application. An empty string clears the footer. | [optional]  |
 | **visualizationFonts** | [**VisualizationFontsInput?**](VisualizationFontsInput?.md) | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. | [optional]  |
@@ -20162,6 +20974,102 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateversioncontrolconfig"></a>
+# **UpdateVersionControlConfig**
+> void UpdateVersionControlConfig (UpdateVersionControlConfigRequest updateVersionControlConfigRequest)
+
+
+
+ Version: 26.12.0.cl or later   Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class UpdateVersionControlConfigExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var updateVersionControlConfigRequest = new UpdateVersionControlConfigRequest(); // UpdateVersionControlConfigRequest | 
+
+            try
+            {
+                apiInstance.UpdateVersionControlConfig(updateVersionControlConfigRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateVersionControlConfig: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateVersionControlConfigWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.UpdateVersionControlConfigWithHttpInfo(updateVersionControlConfigRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.UpdateVersionControlConfigWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **updateVersionControlConfigRequest** | [**UpdateVersionControlConfigRequest**](UpdateVersionControlConfigRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully updated the version control configuration for the Org. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

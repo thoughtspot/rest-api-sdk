@@ -3,16 +3,33 @@
 
 ## API Changes
 
-### POST /api/rest/2.0/ai/agent/v2/conversation/create
--  endpoint added
+### POST /api/rest/2.0/ai/agent/conversation/create
+-  added the new optional request property `additional_instructions`
+-  added the new optional request property `spotter_experience_version`
+-  the request property `conversation_settings` became optional
 
 
-### POST /api/rest/2.0/ai/agent/v2/conversation/send
--  endpoint added
+### POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send
+-  added the new optional request property `spotter_experience_version`
 
 
-### POST /api/rest/2.0/ai/agent/v2/conversation/send/stream
--  endpoint added
+### POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream
+- :warning: the response body was restructured into a oneOf, so a field that was previously guaranteed may no longer be present
+- :warning: removed the required property `success` from the response with the `201` status
+- :warning: removed the optional property `message` from the response with the `201` status
+-  added the new optional request property `spotter_experience_version`
+
+
+### POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response
+-  added optional request body
+
+
+### GET /api/rest/2.0/ai/agent/conversations
+-  added the new optional `query` request parameter `spotter_experience_version`
+
+
+### DELETE /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete
+-  added the new optional `query` request parameter `spotter_experience_version`
 
 
 ### POST /api/rest/2.0/auth/session/login

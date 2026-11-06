@@ -258,7 +258,8 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | User login successful. |  -  |
+| **204** | User login successful. Carries the location header when redirect_url was supplied with no_url_redirection |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
+| **302** | Redirect to the specified redirect_url |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

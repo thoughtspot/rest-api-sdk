@@ -327,6 +327,7 @@ apiInstance.getFullAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    org_identifier: "org_identifier_example",
     scope: null,
     email: "email_example",
     display_name: "display_name_example",
@@ -402,6 +403,7 @@ apiInstance.getObjectAccessToken(
     secret_key: "",
     validity_time_in_sec: 300,
     org_id: 1,
+    org_identifier: "org_identifier_example",
     scope: null,
     email: "email_example",
     display_name: "display_name_example",
@@ -475,6 +477,8 @@ apiInstance.login(
     password: "password_example",
     org_identifier: "org_identifier_example",
     remember_me: false,
+    redirect_url: "redirect_url_example",
+    no_url_redirection: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -508,7 +512,8 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | User login successful. |  -  |
+**204** | User login successful. Carries the location header when redirect_url was supplied with no_url_redirection |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
+**302** | Redirect to the specified redirect_url |  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  |
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |

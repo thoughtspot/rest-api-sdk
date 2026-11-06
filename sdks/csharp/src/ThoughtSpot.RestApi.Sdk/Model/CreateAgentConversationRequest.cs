@@ -33,29 +33,47 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class CreateAgentConversationRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateAgentConversationRequest" /> class.
+        /// Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
         /// </summary>
-        [JsonConstructorAttribute]
-        protected CreateAgentConversationRequest()
+        /// <value>Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SpotterExperienceVersionEnum
         {
-            this.AdditionalProperties = new Dictionary<string, object>();
+            /// <summary>
+            /// Enum V1 for value: V1
+            /// </summary>
+            [EnumMember(Value = "V1")]
+            V1 = 1,
+
+            /// <summary>
+            /// Enum V2 for value: V2
+            /// </summary>
+            [EnumMember(Value = "V2")]
+            V2 = 2
         }
+
+
+        /// <summary>
+        /// Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "spotter_experience_version", EmitDefaultValue = false)]
+        public SpotterExperienceVersionEnum? SpotterExperienceVersion { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAgentConversationRequest" /> class.
         /// </summary>
         /// <param name="metadataContext">Context for the conversation. Required unless &#x60;analyst_identifier&#x60; is provided; do not pass both..</param>
-        /// <param name="conversationSettings">Conversation settings. (required).</param>
+        /// <param name="conversationSettings">Conversation settings. Applies to V1 only..</param>
         /// <param name="analystIdentifier">Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst&#39;s configuration (data sources, agent instructions, and connectors), and &#x60;metadata_context&#x60; must be omitted.    Version: 26.10.0.cl or later .</param>
-        public CreateAgentConversationRequest(ContextPayloadV2Input metadataContext = default, ConversationSettingsInput conversationSettings = default, string analystIdentifier = default)
+        /// <param name="additionalInstructions">Guidance appended to the agent&#39;s instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later .</param>
+        /// <param name="spotterExperienceVersion">Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later  (default to SpotterExperienceVersionEnum.V1).</param>
+        public CreateAgentConversationRequest(ContextPayloadV2Input metadataContext = default, ConversationSettingsInput conversationSettings = default, string analystIdentifier = default, string additionalInstructions = default, SpotterExperienceVersionEnum? spotterExperienceVersion = SpotterExperienceVersionEnum.V1)
         {
-            // to ensure "conversationSettings" is required (not null)
-            if (conversationSettings == null)
-            {
-                throw new ArgumentNullException("conversationSettings is a required property for CreateAgentConversationRequest and cannot be null");
-            }
-            this.ConversationSettings = conversationSettings;
             this.MetadataContext = metadataContext;
+            this.ConversationSettings = conversationSettings;
             this.AnalystIdentifier = analystIdentifier;
+            this.AdditionalInstructions = additionalInstructions;
+            this.SpotterExperienceVersion = spotterExperienceVersion;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -67,10 +85,10 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public ContextPayloadV2Input MetadataContext { get; set; }
 
         /// <summary>
-        /// Conversation settings.
+        /// Conversation settings. Applies to V1 only.
         /// </summary>
-        /// <value>Conversation settings.</value>
-        [DataMember(Name = "conversation_settings", IsRequired = true, EmitDefaultValue = true)]
+        /// <value>Conversation settings. Applies to V1 only.</value>
+        [DataMember(Name = "conversation_settings", EmitDefaultValue = false)]
         public ConversationSettingsInput ConversationSettings { get; set; }
 
         /// <summary>
@@ -79,6 +97,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst&#39;s configuration (data sources, agent instructions, and connectors), and &#x60;metadata_context&#x60; must be omitted.    Version: 26.10.0.cl or later </value>
         [DataMember(Name = "analyst_identifier", EmitDefaultValue = false)]
         public string AnalystIdentifier { get; set; }
+
+        /// <summary>
+        /// Guidance appended to the agent&#39;s instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+        /// </summary>
+        /// <value>Guidance appended to the agent&#39;s instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later </value>
+        [DataMember(Name = "additional_instructions", EmitDefaultValue = false)]
+        public string AdditionalInstructions { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -97,6 +122,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  MetadataContext: ").Append(MetadataContext).Append("\n");
             sb.Append("  ConversationSettings: ").Append(ConversationSettings).Append("\n");
             sb.Append("  AnalystIdentifier: ").Append(AnalystIdentifier).Append("\n");
+            sb.Append("  AdditionalInstructions: ").Append(AdditionalInstructions).Append("\n");
+            sb.Append("  SpotterExperienceVersion: ").Append(SpotterExperienceVersion).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

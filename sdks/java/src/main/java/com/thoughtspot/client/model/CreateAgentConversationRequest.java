@@ -53,13 +53,75 @@ public class CreateAgentConversationRequest implements Serializable {
 
   public static final String SERIALIZED_NAME_CONVERSATION_SETTINGS = "conversation_settings";
   @SerializedName(SERIALIZED_NAME_CONVERSATION_SETTINGS)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private ConversationSettingsInput conversationSettings;
 
   public static final String SERIALIZED_NAME_ANALYST_IDENTIFIER = "analyst_identifier";
   @SerializedName(SERIALIZED_NAME_ANALYST_IDENTIFIER)
   @javax.annotation.Nullable
   private String analystIdentifier;
+
+  public static final String SERIALIZED_NAME_ADDITIONAL_INSTRUCTIONS = "additional_instructions";
+  @SerializedName(SERIALIZED_NAME_ADDITIONAL_INSTRUCTIONS)
+  @javax.annotation.Nullable
+  private String additionalInstructions;
+
+  /**
+   * Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+   */
+  @JsonAdapter(SpotterExperienceVersionEnum.Adapter.class)
+  public enum SpotterExperienceVersionEnum {
+    V1("V1"),
+    
+    V2("V2");
+
+    private String value;
+
+    SpotterExperienceVersionEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static SpotterExperienceVersionEnum fromValue(String value) {
+      for (SpotterExperienceVersionEnum b : SpotterExperienceVersionEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<SpotterExperienceVersionEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SpotterExperienceVersionEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SpotterExperienceVersionEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return SpotterExperienceVersionEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      SpotterExperienceVersionEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_SPOTTER_EXPERIENCE_VERSION = "spotter_experience_version";
+  @SerializedName(SERIALIZED_NAME_SPOTTER_EXPERIENCE_VERSION)
+  @javax.annotation.Nullable
+  private SpotterExperienceVersionEnum spotterExperienceVersion = SpotterExperienceVersionEnum.V1;
 
   public CreateAgentConversationRequest() {
   }
@@ -83,21 +145,21 @@ public class CreateAgentConversationRequest implements Serializable {
   }
 
 
-  public CreateAgentConversationRequest conversationSettings(@javax.annotation.Nonnull ConversationSettingsInput conversationSettings) {
+  public CreateAgentConversationRequest conversationSettings(@javax.annotation.Nullable ConversationSettingsInput conversationSettings) {
     this.conversationSettings = conversationSettings;
     return this;
   }
 
   /**
-   * Conversation settings.
+   * Conversation settings. Applies to V1 only.
    * @return conversationSettings
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public ConversationSettingsInput getConversationSettings() {
     return conversationSettings;
   }
 
-  public void setConversationSettings(@javax.annotation.Nonnull ConversationSettingsInput conversationSettings) {
+  public void setConversationSettings(@javax.annotation.Nullable ConversationSettingsInput conversationSettings) {
     this.conversationSettings = conversationSettings;
   }
 
@@ -118,6 +180,44 @@ public class CreateAgentConversationRequest implements Serializable {
 
   public void setAnalystIdentifier(@javax.annotation.Nullable String analystIdentifier) {
     this.analystIdentifier = analystIdentifier;
+  }
+
+
+  public CreateAgentConversationRequest additionalInstructions(@javax.annotation.Nullable String additionalInstructions) {
+    this.additionalInstructions = additionalInstructions;
+    return this;
+  }
+
+  /**
+   * Guidance appended to the agent&#39;s instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with &#x60;analyst_identifier&#x60;.    Version: 26.12.0.cl or later 
+   * @return additionalInstructions
+   */
+  @javax.annotation.Nullable
+  public String getAdditionalInstructions() {
+    return additionalInstructions;
+  }
+
+  public void setAdditionalInstructions(@javax.annotation.Nullable String additionalInstructions) {
+    this.additionalInstructions = additionalInstructions;
+  }
+
+
+  public CreateAgentConversationRequest spotterExperienceVersion(@javax.annotation.Nullable SpotterExperienceVersionEnum spotterExperienceVersion) {
+    this.spotterExperienceVersion = spotterExperienceVersion;
+    return this;
+  }
+
+  /**
+   * Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - &#x60;V1&#x60; (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   &#x60;conversation_settings&#x60;. - &#x60;V2&#x60;: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   &#x60;additional_instructions&#x60;. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+   * @return spotterExperienceVersion
+   */
+  @javax.annotation.Nullable
+  public SpotterExperienceVersionEnum getSpotterExperienceVersion() {
+    return spotterExperienceVersion;
+  }
+
+  public void setSpotterExperienceVersion(@javax.annotation.Nullable SpotterExperienceVersionEnum spotterExperienceVersion) {
+    this.spotterExperienceVersion = spotterExperienceVersion;
   }
 
   /**
@@ -177,13 +277,15 @@ public class CreateAgentConversationRequest implements Serializable {
     CreateAgentConversationRequest createAgentConversationRequest = (CreateAgentConversationRequest) o;
     return Objects.equals(this.metadataContext, createAgentConversationRequest.metadataContext) &&
         Objects.equals(this.conversationSettings, createAgentConversationRequest.conversationSettings) &&
-        Objects.equals(this.analystIdentifier, createAgentConversationRequest.analystIdentifier)&&
+        Objects.equals(this.analystIdentifier, createAgentConversationRequest.analystIdentifier) &&
+        Objects.equals(this.additionalInstructions, createAgentConversationRequest.additionalInstructions) &&
+        Objects.equals(this.spotterExperienceVersion, createAgentConversationRequest.spotterExperienceVersion)&&
         Objects.equals(this.additionalProperties, createAgentConversationRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(metadataContext, conversationSettings, analystIdentifier, additionalProperties);
+    return Objects.hash(metadataContext, conversationSettings, analystIdentifier, additionalInstructions, spotterExperienceVersion, additionalProperties);
   }
 
   @Override
@@ -193,6 +295,8 @@ public class CreateAgentConversationRequest implements Serializable {
     sb.append("    metadataContext: ").append(toIndentedString(metadataContext)).append("\n");
     sb.append("    conversationSettings: ").append(toIndentedString(conversationSettings)).append("\n");
     sb.append("    analystIdentifier: ").append(toIndentedString(analystIdentifier)).append("\n");
+    sb.append("    additionalInstructions: ").append(toIndentedString(additionalInstructions)).append("\n");
+    sb.append("    spotterExperienceVersion: ").append(toIndentedString(spotterExperienceVersion)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -219,10 +323,11 @@ public class CreateAgentConversationRequest implements Serializable {
     openapiFields.add("metadata_context");
     openapiFields.add("conversation_settings");
     openapiFields.add("analyst_identifier");
+    openapiFields.add("additional_instructions");
+    openapiFields.add("spotter_experience_version");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("conversation_settings");
   }
 
   /**
@@ -237,22 +342,27 @@ public class CreateAgentConversationRequest implements Serializable {
           throw new IllegalArgumentException(String.format("The required field(s) %s in CreateAgentConversationRequest is not found in the empty JSON string", CreateAgentConversationRequest.openapiRequiredFields.toString()));
         }
       }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CreateAgentConversationRequest.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the optional field `metadata_context`
       if (jsonObj.get("metadata_context") != null && !jsonObj.get("metadata_context").isJsonNull()) {
         ContextPayloadV2Input.validateJsonElement(jsonObj.get("metadata_context"));
       }
-      // validate the required field `conversation_settings`
-      ConversationSettingsInput.validateJsonElement(jsonObj.get("conversation_settings"));
+      // validate the optional field `conversation_settings`
+      if (jsonObj.get("conversation_settings") != null && !jsonObj.get("conversation_settings").isJsonNull()) {
+        ConversationSettingsInput.validateJsonElement(jsonObj.get("conversation_settings"));
+      }
       if ((jsonObj.get("analyst_identifier") != null && !jsonObj.get("analyst_identifier").isJsonNull()) && !jsonObj.get("analyst_identifier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `analyst_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("analyst_identifier").toString()));
+      }
+      if ((jsonObj.get("additional_instructions") != null && !jsonObj.get("additional_instructions").isJsonNull()) && !jsonObj.get("additional_instructions").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `additional_instructions` to be a primitive type in the JSON string but got `%s`", jsonObj.get("additional_instructions").toString()));
+      }
+      if ((jsonObj.get("spotter_experience_version") != null && !jsonObj.get("spotter_experience_version").isJsonNull()) && !jsonObj.get("spotter_experience_version").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `spotter_experience_version` to be a primitive type in the JSON string but got `%s`", jsonObj.get("spotter_experience_version").toString()));
+      }
+      // validate the optional field `spotter_experience_version`
+      if (jsonObj.get("spotter_experience_version") != null && !jsonObj.get("spotter_experience_version").isJsonNull()) {
+        SpotterExperienceVersionEnum.validateJsonElement(jsonObj.get("spotter_experience_version"));
       }
   }
 

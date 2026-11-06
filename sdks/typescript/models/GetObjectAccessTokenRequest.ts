@@ -37,8 +37,13 @@ export class GetObjectAccessTokenRequest {
     'validity_time_in_sec'?: number;
     /**
     * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
+    * @deprecated
     */
     'org_id'?: number;
+    /**
+    * ID or name of the Org context to log in to. Takes precedence over org_id when both are provided. If neither is specified and a secret key is provided, the user will be logged into the org corresponding to the secret key; otherwise, the user will be logged in to the Org context of their previous login session.    Version: 26.12.0.cl or later 
+    */
+    'org_identifier'?: string;
     /**
     * The set of Orgs this token is authorized to operate in, recorded at issuance. Only applicable to a Tenant Administrator. Each subsequent request selects one Org from this set using the `X-Org-Selector` header.   Version: 26.10.0.cl or later 
     */
@@ -104,6 +109,12 @@ export class GetObjectAccessTokenRequest {
             "baseName": "org_id",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "org_identifier",
+            "baseName": "org_identifier",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "scope",

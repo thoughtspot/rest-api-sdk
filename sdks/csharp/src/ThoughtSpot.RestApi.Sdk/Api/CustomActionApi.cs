@@ -36,6 +36,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCustomActionRequest"></param>
         /// <returns>ResponseCustomAction</returns>
+        [Obsolete]
         ResponseCustomAction CreateCustomAction(CreateCustomActionRequest createCustomActionRequest);
 
         /// <summary>
@@ -47,6 +48,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCustomActionRequest"></param>
         /// <returns>ApiResponse of ResponseCustomAction</returns>
+        [Obsolete]
         ApiResponse<ResponseCustomAction> CreateCustomActionWithHttpInfo(CreateCustomActionRequest createCustomActionRequest);
         /// <summary>
         /// 
@@ -57,6 +59,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <returns></returns>
+        [Obsolete]
         void DeleteCustomAction(string customActionIdentifier);
 
         /// <summary>
@@ -68,6 +71,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <returns>ApiResponse of Object(void)</returns>
+        [Obsolete]
         ApiResponse<Object> DeleteCustomActionWithHttpInfo(string customActionIdentifier);
         /// <summary>
         /// 
@@ -78,6 +82,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="searchCustomActionsRequest"></param>
         /// <returns>List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         List<ResponseCustomAction> SearchCustomActions(SearchCustomActionsRequest searchCustomActionsRequest);
 
         /// <summary>
@@ -89,6 +94,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="searchCustomActionsRequest"></param>
         /// <returns>ApiResponse of List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         ApiResponse<List<ResponseCustomAction>> SearchCustomActionsWithHttpInfo(SearchCustomActionsRequest searchCustomActionsRequest);
         /// <summary>
         /// 
@@ -100,6 +106,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="updateCustomActionRequest"></param>
         /// <returns></returns>
+        [Obsolete]
         void UpdateCustomAction(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest);
 
         /// <summary>
@@ -112,6 +119,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="updateCustomActionRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
+        [Obsolete]
         ApiResponse<Object> UpdateCustomActionWithHttpInfo(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest);
         #endregion Synchronous Operations
     }
@@ -132,6 +140,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="createCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ResponseCustomAction</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ResponseCustomAction> CreateCustomActionAsync(CreateCustomActionRequest createCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
@@ -144,6 +153,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="createCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ResponseCustomAction)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<ResponseCustomAction>> CreateCustomActionWithHttpInfoAsync(CreateCustomActionRequest createCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
@@ -155,6 +165,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
+        [Obsolete]
         System.Threading.Tasks.Task DeleteCustomActionAsync(string customActionIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
@@ -167,6 +178,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomActionWithHttpInfoAsync(string customActionIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
@@ -178,6 +190,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="searchCustomActionsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<List<ResponseCustomAction>> SearchCustomActionsAsync(SearchCustomActionsRequest searchCustomActionsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
@@ -190,6 +203,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="searchCustomActionsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ResponseCustomAction&gt;)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<List<ResponseCustomAction>>> SearchCustomActionsWithHttpInfoAsync(SearchCustomActionsRequest searchCustomActionsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
@@ -202,6 +216,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="updateCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
+        [Obsolete]
         System.Threading.Tasks.Task UpdateCustomActionAsync(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
@@ -215,6 +230,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="updateCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<Object>> UpdateCustomActionWithHttpInfoAsync(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
@@ -772,6 +788,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCustomActionRequest"></param>
         /// <returns>ResponseCustomAction</returns>
+        [Obsolete]
         public ResponseCustomAction CreateCustomAction(CreateCustomActionRequest createCustomActionRequest)
         {
             ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ResponseCustomAction> localVarResponse = CreateCustomActionWithHttpInfo(createCustomActionRequest);
@@ -784,6 +801,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCustomActionRequest"></param>
         /// <returns>ApiResponse of ResponseCustomAction</returns>
+        [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ResponseCustomAction> CreateCustomActionWithHttpInfo(CreateCustomActionRequest createCustomActionRequest)
         {
             // verify the required parameter 'createCustomActionRequest' is set
@@ -835,6 +853,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="createCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ResponseCustomAction</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<ResponseCustomAction> CreateCustomActionAsync(CreateCustomActionRequest createCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ResponseCustomAction> localVarResponse = await CreateCustomActionWithHttpInfoAsync(createCustomActionRequest, cancellationToken).ConfigureAwait(false);
@@ -848,6 +867,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="createCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ResponseCustomAction)</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<ResponseCustomAction>> CreateCustomActionWithHttpInfoAsync(CreateCustomActionRequest createCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'createCustomActionRequest' is set
@@ -902,6 +922,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <returns></returns>
+        [Obsolete]
         public void DeleteCustomAction(string customActionIdentifier)
         {
             DeleteCustomActionWithHttpInfo(customActionIdentifier);
@@ -913,6 +934,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <returns>ApiResponse of Object(void)</returns>
+        [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteCustomActionWithHttpInfo(string customActionIdentifier)
         {
             // verify the required parameter 'customActionIdentifier' is set
@@ -963,6 +985,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task DeleteCustomActionAsync(string customActionIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await DeleteCustomActionWithHttpInfoAsync(customActionIdentifier, cancellationToken).ConfigureAwait(false);
@@ -975,6 +998,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> DeleteCustomActionWithHttpInfoAsync(string customActionIdentifier, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'customActionIdentifier' is set
@@ -1028,6 +1052,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="searchCustomActionsRequest"></param>
         /// <returns>List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         public List<ResponseCustomAction> SearchCustomActions(SearchCustomActionsRequest searchCustomActionsRequest)
         {
             ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<ResponseCustomAction>> localVarResponse = SearchCustomActionsWithHttpInfo(searchCustomActionsRequest);
@@ -1040,6 +1065,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="searchCustomActionsRequest"></param>
         /// <returns>ApiResponse of List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<ResponseCustomAction>> SearchCustomActionsWithHttpInfo(SearchCustomActionsRequest searchCustomActionsRequest)
         {
             // verify the required parameter 'searchCustomActionsRequest' is set
@@ -1091,6 +1117,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="searchCustomActionsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ResponseCustomAction&gt;</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<List<ResponseCustomAction>> SearchCustomActionsAsync(SearchCustomActionsRequest searchCustomActionsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<ResponseCustomAction>> localVarResponse = await SearchCustomActionsWithHttpInfoAsync(searchCustomActionsRequest, cancellationToken).ConfigureAwait(false);
@@ -1104,6 +1131,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="searchCustomActionsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ResponseCustomAction&gt;)</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<List<ResponseCustomAction>>> SearchCustomActionsWithHttpInfoAsync(SearchCustomActionsRequest searchCustomActionsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'searchCustomActionsRequest' is set
@@ -1159,6 +1187,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="updateCustomActionRequest"></param>
         /// <returns></returns>
+        [Obsolete]
         public void UpdateCustomAction(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest)
         {
             UpdateCustomActionWithHttpInfo(customActionIdentifier, updateCustomActionRequest);
@@ -1171,6 +1200,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="customActionIdentifier">Unique ID or name of the custom action.</param>
         /// <param name="updateCustomActionRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
+        [Obsolete]
         public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> UpdateCustomActionWithHttpInfo(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest)
         {
             // verify the required parameter 'customActionIdentifier' is set
@@ -1228,6 +1258,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="updateCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task UpdateCustomActionAsync(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await UpdateCustomActionWithHttpInfoAsync(customActionIdentifier, updateCustomActionRequest, cancellationToken).ConfigureAwait(false);
@@ -1241,6 +1272,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="updateCustomActionRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> UpdateCustomActionWithHttpInfoAsync(string customActionIdentifier, UpdateCustomActionRequest updateCustomActionRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'customActionIdentifier' is set

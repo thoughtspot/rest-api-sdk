@@ -88,17 +88,130 @@ print(response.data)
 
 ## Authentication
 
-Set `access_token` on the `Configuration`. It accepts a **static token string**,
-the **built-in token provider**, or **your own callable** — three options for the
-three common cases.
+Pick one of these:
 
-**1. Static token** — when you already hold a bearer token:
+| You have | Use |
+|---|---|
+| Your own way to mint tokens (any `/auth/token/*` endpoint, your backend) | `get_token=` **(recommended)** |
+| A bearer token you already hold | `access_token="..."` |
+| A username plus password or secret key, and want the SDK to mint | `ThoughtSpotTokenProvider` (no 401 recovery; see below) |
+
+### `get_token` (recommended)
+
+Pass a zero-argument function that returns a token. Your secret key never goes
+to the SDK. Load it from an environment variable or a secret manager, and run
+`get_token` server-side only. Don't send full-access tokens to browsers. The
+function can be sync or async, and can return:
+
+- a token `str`;
+- a `TokenResult(token, expires_at_ms=...)`, where `expires_at_ms` is epoch
+  milliseconds;
+- the response of any `/auth/token/*` call, used as-is (its
+  `expiration_time_in_millis` gives the expiry);
+- a dict with a `token` key and, optionally, `expires_at_ms`,
+  `expiration_time_in_millis` or `expiresAt`. The raw `/auth/token/*` JSON works.
+
+```python
+import os
+
+from thoughtspot_rest_api_sdk import (
+    ApiClient, AuthenticationApi, Configuration, GetFullAccessTokenRequest,
+    ThoughtSpotRestApi, TokenResult,
+)
+
+# A separate client with no token mints the tokens.
+auth_api = AuthenticationApi(ApiClient(Configuration(host=BASE_URL)))
+
+async def get_token() -> TokenResult:
+    resp = await auth_api.get_full_access_token(
+        GetFullAccessTokenRequest(
+            username="USERNAME", secret_key=os.environ["THOUGHTSPOT_SECRET_KEY"]
+        )
+    )
+    return TokenResult(resp.token, expires_at_ms=resp.expiration_time_in_millis)
+    # Equivalent: `return resp`
+
+client = ThoughtSpotRestApi(ApiClient(Configuration(host=BASE_URL, get_token=get_token)))
+```
+
+You can also call your own backend:
+
+```python
+def get_token() -> TokenResult:
+    data = requests.post(MY_BACKEND_URL, timeout=10).json()
+    return TokenResult(data["token"], expires_at_ms=data["expiration_time_in_millis"])
+
+config = Configuration(host=BASE_URL, get_token=get_token)
+```
+
+What the SDK does with it:
+
+- **First use, not construction.** `get_token` is first called on the first
+  request. Creating the `Configuration` or client does not call it.
+- **Cached per client.** Each `ApiClient` keeps its own token, even when
+  clients share a `Configuration`. The cached token is reused without
+  validation calls.
+- **Refresh before expiry.** When the expiry is known, `get_token` is called
+  again once fewer than `token_refresh_buffer_ms` (default `30000`) remain. Set
+  it on the `Configuration`, or per token with
+  `TokenResult(..., refresh_buffer_ms=...)`. When `get_token` returns a plain
+  `str`, the expiry is unknown. The token is then kept until the server rejects
+  it, which costs one 401 round trip at each expiry. If an early refresh fails
+  while the cached token is still valid, the cached token is used and a warning
+  is logged. Once the token has expired, the `get_token` error is raised. A
+  token that is already inside the buffer when minted logs a one-time warning:
+  check that `expires_at_ms` is in milliseconds, not seconds.
+- **One retry on 401.** On a 401 the SDK drops the cached token, calls
+  `get_token` once, and resends the request once. If that also returns 401,
+  `UnauthorizedException` is raised. This retry is separate from the
+  `retries` budget, and a 401 in `retry_statuses` is ignored while `get_token`
+  is set. The resend assumes the server rejects an unauthenticated request
+  before processing it, which is how ThoughtSpot's authentication works.
+- **Single-flight.** Concurrent requests that all need a token share one
+  `get_token` call. A burst of 401s for the same token also triggers only one
+  call.
+- **Bounded wait.** A `get_token` call may take up to `get_token_timeout`
+  seconds (default `300`). After that, every request waiting on it fails with
+  `TimeoutError`, and the next request calls `get_token` again. A sync
+  `get_token` thread can't be stopped; its late result is discarded. A
+  timeout during an early refresh is handled like any failed refresh.
+- **Retry safety.** Multipart bodies are rewound before the retry. For SSE
+  `*_stream` endpoints, the token is fetched before the stream opens, and a 401
+  on open is retried once. A persistent 401 is raised to the caller as
+  `UnauthorizedException`.
+- **No tokens in logs.** The SDK logs each `get_token` call and its reason
+  (`cold`, `expiry`, `401`) at DEBUG level on the `thoughtspot_rest_api_sdk.token`
+  logger, never the token. `TokenResult` hides the token in its `repr()`.
+
+Usage notes:
+
+- A sync `get_token` runs in a worker thread, so it may block on I/O or call the
+  SDK's `*_sync` methods. An async `get_token` runs on the event loop, so it
+  must `await` the async methods and never call `*_sync` ones.
+- `get_token` may mint through the same client you pass it to. Requests made
+  from inside `get_token` are sent without the managed token and are not
+  retried on 401, so they don't wait on the `get_token` call they belong to.
+- Share one `ApiClient`, and so one cache, across your API objects, and use it
+  from one event loop.
+- `get_token` is read when the `ApiClient` is created.
+- With `get_token`, the SDK sets the `Authorization` header on every request,
+  overriding any value passed through `_headers` or `_request_auth`.
+- `get_token` and `access_token` cannot be used together.
+- Tokens must be visible ASCII with no whitespace. Strip any trailing newline
+  from a token read from a file.
+
+### Static token
+
+Use this when you already hold a bearer token. It is sent as-is and never
+refreshed or retried.
 
 ```python
 config = Configuration(host=BASE_URL, access_token="YOUR_BEARER_TOKEN")
 ```
 
-**2. Built-in provider** — `ThoughtSpotTokenProvider` mints a token from
+### Built-in provider
+
+`ThoughtSpotTokenProvider` mints a token from
 `/auth/token/full` and refreshes it transparently. Supply exactly one of
 `password` (basic auth) or `secret_key` (trusted authentication). It caches the
 token and only re-mints when the cached one is near expiry, and collapses
@@ -111,8 +224,18 @@ provider = ThoughtSpotTokenProvider(BASE_URL, "USERNAME", password="PASSWORD")
 config = Configuration(host=BASE_URL, access_token=provider)
 ```
 
-**3. Your own callable** — for any other identity source. It is invoked on every
-request (so it doubles as the refresh hook) and may be sync or async:
+> **No 401 recovery.** The provider re-mints only near expiry. If the server
+> rejects its token earlier (revoked, rotated, clock skew), requests fail with
+> `UnauthorizedException` until the cached token expires. For 401 recovery,
+> mint with `get_token` instead (example above). Don't pass the provider
+> itself as `get_token`: after a 401 it returns the same cached token, so the
+> retry fails too.
+
+### Per-request callable
+
+`access_token` also accepts a callable, invoked on **every** request with no
+caching and no 401 retry. It is kept for backward compatibility; prefer
+`get_token`.
 
 ```python
 async def token_supplier() -> str:
@@ -218,7 +341,9 @@ config.retry_methods = {"GET", "PUT", "DELETE"}
 | Option | Default | Description |
 |---|---|---|
 | `host` | — | Cluster URL, e.g. `https://your-cluster.thoughtspot.cloud` |
-| `access_token` | `None` | Bearer token string, or a callable returning a token |
+| `get_token` | `None` | Callable that mints a token: cached per client, refreshed before expiry, retried once on 401 (see *Authentication*) |
+| `token_refresh_buffer_ms` | `30000` | Call `get_token` again when fewer than this many milliseconds of validity remain |
+| `access_token` | `None` | Bearer token string, or a callable invoked on every request |
 | `verify_ssl` | `True` | Set `False` for clusters with self-signed certificates |
 | `ssl_ca_cert` / `ca_cert_data` | `None` | Custom CA bundle (file path / PEM string) |
 | `cert_file` / `key_file` | `None` | Client certificate and key for mutual TLS |
@@ -265,9 +390,9 @@ credentials or changing timeouts — call `apply_configuration`:
 client.apply_configuration(Configuration(host=BASE_URL, access_token=NEW_TOKEN))
 ```
 
-This rebuilds the underlying API client. For continuous token refresh you do not
-need this — set `access_token` to a callable (see *Authentication*); it is invoked
-on every request.
+This rebuilds the underlying API client, which also drops any token cached from
+`get_token`. You don't need it for token refresh: `get_token` handles that (see
+*Authentication*).
 
 ## Live Playground
 

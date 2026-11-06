@@ -947,7 +947,8 @@ public class AuthenticationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -1019,7 +1020,8 @@ public class AuthenticationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -1040,7 +1042,8 @@ public class AuthenticationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
@@ -1063,7 +1066,8 @@ public class AuthenticationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> User login successful. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> User login successful. Carries the location header when redirect_url was supplied with no_url_redirection </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
+        <tr><td> 302 </td><td> Redirect to the specified redirect_url </td><td>  * Location - Resolved redirect URL. Present only when redirect_url was supplied with no_url_redirection <br>  </td></tr>
         <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
