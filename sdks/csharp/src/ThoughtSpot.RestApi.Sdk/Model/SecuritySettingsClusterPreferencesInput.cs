@@ -36,9 +36,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="SecuritySettingsClusterPreferencesInput" /> class.
         /// </summary>
         /// <param name="enablePartitionedCookies">Support embedded access when third-party cookies are blocked..</param>
-        /// <param name="corsWhitelistedUrls">Allowed origins for CORS..</param>
+        /// <param name="corsWhitelistedUrls">Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed..</param>
         /// <param name="cspSettings">cspSettings.</param>
-        /// <param name="samlRedirectUrls">Allowed redirect hosts for SAML login..</param>
+        /// <param name="samlRedirectUrls">Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed..</param>
         /// <param name="nonEmbedAccess">nonEmbedAccess.</param>
         public SecuritySettingsClusterPreferencesInput(bool? enablePartitionedCookies = default, List<string> corsWhitelistedUrls = default, CspSettingsInput cspSettings = default, List<string> samlRedirectUrls = default, ClusterNonEmbedAccessInput nonEmbedAccess = default)
         {
@@ -58,9 +58,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? EnablePartitionedCookies { get; set; }
 
         /// <summary>
-        /// Allowed origins for CORS.
+        /// Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed origins for CORS.</value>
+        /// <value>Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "cors_whitelisted_urls", EmitDefaultValue = true)]
         public List<string> CorsWhitelistedUrls { get; set; }
 
@@ -71,9 +71,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public CspSettingsInput CspSettings { get; set; }
 
         /// <summary>
-        /// Allowed redirect hosts for SAML login.
+        /// Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed redirect hosts for SAML login.</value>
+        /// <value>Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "saml_redirect_urls", EmitDefaultValue = true)]
         public List<string> SamlRedirectUrls { get; set; }
 

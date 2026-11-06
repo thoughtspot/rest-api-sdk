@@ -109,7 +109,7 @@ public class SecuritySettingsClusterPreferencesInput implements Serializable {
   }
 
   /**
-   * Allowed origins for CORS.
+   * Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.
    * @return corsWhitelistedUrls
    */
   @javax.annotation.Nullable
@@ -155,7 +155,7 @@ public class SecuritySettingsClusterPreferencesInput implements Serializable {
   }
 
   /**
-   * Allowed redirect hosts for SAML login.
+   * Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.
    * @return samlRedirectUrls
    */
   @javax.annotation.Nullable

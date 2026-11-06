@@ -36,7 +36,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="OrgNonEmbedAccessInput" /> class.
         /// </summary>
         /// <param name="blockFullAppAccess">Block full application access for non-embedded usage..</param>
-        /// <param name="groupsIdentifiersWithAccess">Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true..</param>
+        /// <param name="groupsIdentifiersWithAccess">Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access..</param>
         public OrgNonEmbedAccessInput(bool? blockFullAppAccess = default, List<string> groupsIdentifiersWithAccess = default)
         {
             this.BlockFullAppAccess = blockFullAppAccess;
@@ -52,9 +52,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? BlockFullAppAccess { get; set; }
 
         /// <summary>
-        /// Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.
+        /// Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.
         /// </summary>
-        /// <value>Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.</value>
+        /// <value>Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.</value>
         [DataMember(Name = "groups_identifiers_with_access", EmitDefaultValue = true)]
         public List<string> GroupsIdentifiersWithAccess { get; set; }
 

@@ -21,7 +21,7 @@ export class ScriptSrcUrlsInput {
     */
     'enabled'?: boolean | null;
     /**
-    * Allowed URLs for script-src directive. Can only be set if enabled is true.
+    * Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed.
     */
     'urls'?: Array<string> | null;
 

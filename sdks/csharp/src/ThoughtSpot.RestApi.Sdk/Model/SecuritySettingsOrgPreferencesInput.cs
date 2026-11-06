@@ -44,7 +44,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="SecuritySettingsOrgPreferencesInput" /> class.
         /// </summary>
         /// <param name="orgIdentifier">Unique identifier or name of the org (required).</param>
-        /// <param name="corsWhitelistedUrls">Allowed origins for CORS for this org..</param>
+        /// <param name="corsWhitelistedUrls">Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed..</param>
         /// <param name="nonEmbedAccess">nonEmbedAccess.</param>
         public SecuritySettingsOrgPreferencesInput(string orgIdentifier = default, List<string> corsWhitelistedUrls = default, OrgNonEmbedAccessInput nonEmbedAccess = default)
         {
@@ -67,9 +67,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string OrgIdentifier { get; set; }
 
         /// <summary>
-        /// Allowed origins for CORS for this org.
+        /// Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed origins for CORS for this org.</value>
+        /// <value>Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "cors_whitelisted_urls", EmitDefaultValue = true)]
         public List<string> CorsWhitelistedUrls { get; set; }
 

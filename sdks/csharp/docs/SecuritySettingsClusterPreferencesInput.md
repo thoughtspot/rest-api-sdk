@@ -6,9 +6,9 @@ Input for cluster-level security preferences configuration.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnablePartitionedCookies** | **bool?** | Support embedded access when third-party cookies are blocked. | [optional] 
-**CorsWhitelistedUrls** | **List&lt;string&gt;** | Allowed origins for CORS. | [optional] 
+**CorsWhitelistedUrls** | **List&lt;string&gt;** | Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed. | [optional] 
 **CspSettings** | [**CspSettingsInput**](CspSettingsInput.md) |  | [optional] 
-**SamlRedirectUrls** | **List&lt;string&gt;** | Allowed redirect hosts for SAML login. | [optional] 
+**SamlRedirectUrls** | **List&lt;string&gt;** | Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed. | [optional] 
 **NonEmbedAccess** | [**ClusterNonEmbedAccessInput**](ClusterNonEmbedAccessInput.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

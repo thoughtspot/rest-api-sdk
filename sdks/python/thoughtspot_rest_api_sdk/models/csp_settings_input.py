@@ -26,13 +26,13 @@ class CspSettingsInput(BaseModel):
     """
     Input for CSP (Content Security Policy) settings.
     """ # noqa: E501
-    connect_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for connect-src directive.")
-    font_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for font-src directive.")
-    visual_embed_hosts: Optional[List[StrictStr]] = Field(default=None, description="Allowed hosts for visual embed (frame-ancestors directive).")
-    iframe_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for frame-src directive.")
-    img_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for img-src directive.")
+    connect_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.")
+    font_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.")
+    visual_embed_hosts: Optional[List[StrictStr]] = Field(default=None, description="Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.")
+    iframe_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.")
+    img_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.")
     script_src_urls: Optional[ScriptSrcUrlsInput] = None
-    style_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for style-src directive.")
+    style_src_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["connect_src_urls", "font_src_urls", "visual_embed_hosts", "iframe_src_urls", "img_src_urls", "script_src_urls", "style_src_urls"]
 

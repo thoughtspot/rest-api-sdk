@@ -4415,7 +4415,7 @@ declare class ClusterNonEmbedAccessInput {
     */
     'block_full_app_access'?: boolean | null;
     /**
-    * Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true.
+    * Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.
     */
     'groups_identifiers_with_access'?: Array<string> | null;
     static readonly discriminator: string | undefined;
@@ -5935,7 +5935,7 @@ declare class ScriptSrcUrlsInput {
     */
     'enabled'?: boolean | null;
     /**
-    * Allowed URLs for script-src directive. Can only be set if enabled is true.
+    * Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed.
     */
     'urls'?: Array<string> | null;
     static readonly discriminator: string | undefined;
@@ -5974,28 +5974,28 @@ declare class ScriptSrcUrlsInput {
 */
 declare class CspSettingsInput {
     /**
-    * Allowed URLs for connect-src directive.
+    * Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'connect_src_urls'?: Array<string> | null;
     /**
-    * Allowed URLs for font-src directive.
+    * Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'font_src_urls'?: Array<string> | null;
     /**
-    * Allowed hosts for visual embed (frame-ancestors directive).
+    * Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.
     */
     'visual_embed_hosts'?: Array<string> | null;
     /**
-    * Allowed URLs for frame-src directive.
+    * Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'iframe_src_urls'?: Array<string> | null;
     /**
-    * Allowed URLs for img-src directive.
+    * Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'img_src_urls'?: Array<string> | null;
     'script_src_urls'?: ScriptSrcUrlsInput;
     /**
-    * Allowed URLs for style-src directive.
+    * Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'style_src_urls'?: Array<string> | null;
     static readonly discriminator: string | undefined;
@@ -6038,12 +6038,12 @@ declare class SecuritySettingsClusterPreferencesInput {
     */
     'enable_partitioned_cookies'?: boolean | null;
     /**
-    * Allowed origins for CORS.
+    * Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.
     */
     'cors_whitelisted_urls'?: Array<string> | null;
     'csp_settings'?: CspSettingsInput;
     /**
-    * Allowed redirect hosts for SAML login.
+    * Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.
     */
     'saml_redirect_urls'?: Array<string> | null;
     'non_embed_access'?: ClusterNonEmbedAccessInput;
@@ -6086,7 +6086,7 @@ declare class OrgNonEmbedAccessInput {
     */
     'block_full_app_access'?: boolean | null;
     /**
-    * Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.
+    * Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.
     */
     'groups_identifiers_with_access'?: Array<string> | null;
     static readonly discriminator: string | undefined;
@@ -6129,7 +6129,7 @@ declare class SecuritySettingsOrgPreferencesInput {
     */
     'org_identifier': string;
     /**
-    * Allowed origins for CORS for this org.
+    * Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.
     */
     'cors_whitelisted_urls'?: Array<string> | null;
     'non_embed_access'?: OrgNonEmbedAccessInput;
@@ -32129,7 +32129,7 @@ declare class SystemApiRequestFactory extends BaseAPIRequestFactory {
      */
     configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettings(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -32368,7 +32368,7 @@ declare class ThoughtSpotRestApiRequestFactory extends BaseAPIRequestFactory {
      */
     configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest, _options?: Configuration): Promise<RequestContext>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettings(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: Configuration): Promise<RequestContext>;
@@ -37683,12 +37683,12 @@ declare class PromiseSystemApi {
      */
     configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettingsWithHttpInfo(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettings(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: PromiseConfigurationOptions): Promise<void>;
@@ -37899,12 +37899,12 @@ declare class PromiseThoughtSpotRestApi {
      */
     configureCommunicationChannelPreferences(configureCommunicationChannelPreferencesRequest: ConfigureCommunicationChannelPreferencesRequest, _options?: PromiseConfigurationOptions): Promise<void>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettingsWithHttpInfo(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>>;
     /**
-     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
+     *   Version: 26.2.0.cl or later   Configure security settings for your ThoughtSpot application instance. - Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration. - Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege. See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.  #### Usage guidelines  - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed. - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are. - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged. - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value. - To remove a value, send the current list without that value. - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.  #### Example request  To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:  ```json {   \"cluster_preferences\": {     \"cors_whitelisted_urls\": [       \"https://app1.example.com\",       \"https://app2.example.com\",       \"https://app3.example.com\"     ]   } } ```  If you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
      * @param configureSecuritySettingsRequest
      */
     configureSecuritySettings(configureSecuritySettingsRequest: ConfigureSecuritySettingsRequest, _options?: PromiseConfigurationOptions): Promise<void>;

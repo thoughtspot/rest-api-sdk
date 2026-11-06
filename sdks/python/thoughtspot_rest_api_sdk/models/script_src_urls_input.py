@@ -26,7 +26,7 @@ class ScriptSrcUrlsInput(BaseModel):
     Input for script-src CSP settings.
     """ # noqa: E501
     enabled: Optional[StrictBool] = Field(default=None, description="Whether script-src customization is enabled.")
-    urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for script-src directive. Can only be set if enabled is true.")
+    urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["enabled", "urls"]
 

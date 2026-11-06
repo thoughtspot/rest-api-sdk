@@ -21,7 +21,7 @@ export class OrgNonEmbedAccessInput {
     */
     'block_full_app_access'?: boolean | null;
     /**
-    * Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.
+    * Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.
     */
     'groups_identifiers_with_access'?: Array<string> | null;
 

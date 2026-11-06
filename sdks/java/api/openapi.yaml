@@ -20336,6 +20336,34 @@ paths:
         Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege.
         See [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.
 
+        #### Usage guidelines
+
+        - **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed.
+        - Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are.
+        - In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged.
+        - To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value.
+        - To remove a value, send the current list without that value.
+        - For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.
+
+        #### Example request
+
+        To add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:
+
+        ```json
+        {
+          "cluster_preferences": {
+            "cors_whitelisted_urls": [
+              "https://app1.example.com",
+              "https://app2.example.com",
+              "https://app3.example.com"
+            ]
+          }
+        }
+        ```
+
+        If you send only `["https://app3.example.com"]`, the allowlist is overwritten and contains only `https://app3.example.com`.
+
+
 
 
 
@@ -35255,7 +35283,9 @@ components:
           nullable: true
           type: boolean
         cors_whitelisted_urls:
-          description: Allowed origins for CORS.
+          description: |-
+            Allowed origins for CORS.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35263,7 +35293,9 @@ components:
         csp_settings:
           $ref: '#/components/schemas/CspSettingsInput'
         saml_redirect_urls:
-          description: Allowed redirect hosts for SAML login.
+          description: |-
+            Allowed redirect hosts for SAML login.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35275,31 +35307,41 @@ components:
       description: Input for CSP (Content Security Policy) settings.
       properties:
         connect_src_urls:
-          description: Allowed URLs for connect-src directive.
+          description: |-
+            Allowed URLs for connect-src directive.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
           type: array
         font_src_urls:
-          description: Allowed URLs for font-src directive.
+          description: |-
+            Allowed URLs for font-src directive.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
           type: array
         visual_embed_hosts:
-          description: Allowed hosts for visual embed (frame-ancestors directive).
+          description: |-
+            Allowed hosts for visual embed (frame-ancestors directive).
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
           type: array
         iframe_src_urls:
-          description: Allowed URLs for frame-src directive.
+          description: |-
+            Allowed URLs for frame-src directive.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
           type: array
         img_src_urls:
-          description: Allowed URLs for img-src directive.
+          description: |-
+            Allowed URLs for img-src directive.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35307,7 +35349,9 @@ components:
         script_src_urls:
           $ref: '#/components/schemas/ScriptSrcUrlsInput'
         style_src_urls:
-          description: Allowed URLs for style-src directive.
+          description: |-
+            Allowed URLs for style-src directive.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35321,8 +35365,9 @@ components:
           nullable: true
           type: boolean
         urls:
-          description: Allowed URLs for script-src directive. Can only be set if enabled
-            is true.
+          description: |-
+            Allowed URLs for script-src directive. Can only be set if enabled is true.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35339,6 +35384,7 @@ components:
           description: |-
             Group identifiers that are allowed non-embed full app access.
             Can only be set when orgs feature is disabled and block_full_app_access is true.
+            Replaces the existing list. Groups not included in the request lose access.
           items:
             type: string
           nullable: true
@@ -35363,7 +35409,9 @@ components:
           description: Unique identifier or name of the org
           type: string
         cors_whitelisted_urls:
-          description: Allowed origins for CORS for this org.
+          description: |-
+            Allowed origins for CORS for this org.
+            Replaces the existing list. Values not included in the request are removed.
           items:
             type: string
           nullable: true
@@ -35386,8 +35434,9 @@ components:
           nullable: true
           type: boolean
         groups_identifiers_with_access:
-          description: Group identifiers that are allowed non-embed full app access.
-            Can only be set if block_full_app_access is true.
+          description: |-
+            Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.
+            Replaces the existing list. Groups not included in the request lose access.
           items:
             type: string
           nullable: true

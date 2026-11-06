@@ -21580,7 +21580,7 @@
     "/api/rest/2.0/system/security-settings/configure": {
       "post": {
         "operationId": "configureSecuritySettings",
-        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nConfigure security settings for your ThoughtSpot application instance.\n- Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration.\n- Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege.\nSee [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 26.2.0.cl or later</span>\n\nConfigure security settings for your ThoughtSpot application instance.\n- Use `cluster_preferences` to update cluster-level security settings including CORS whitelisted URLs, CSP settings, SAML redirect URLs, partitioned cookies, and non-embed access configuration.\n- Use `org_preferences` to configure Org-specific security settings. If your instance has [Orgs](https://docs.thoughtspot.com/cloud/latest/orgs-overview), this allows configuring CORS and non-embed access settings specific to the Org.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. Cluster-level SAML and script-src settings require `ADMINISTRATION` privilege.\nSee [Security Settings](https://developers.thoughtspot.com/docs/security-settings) for more details.\n\n#### Usage guidelines\n\n- **Values you send replace the existing values. They are not appended.** For each list field in the request, such as `cors_whitelisted_urls`, `saml_redirect_urls`, a CSP directive in `csp_settings` (including `csp_settings.script_src_urls.urls`), or `groups_identifiers_with_access`, the list you send becomes the complete new list. Any existing value that is not in the request is removed.\n- Fields that you omit are left unchanged. For example, sending only `csp_settings.img_src_urls` updates the `img-src` allowlist and leaves CORS, SAML, and the other CSP directives as they are.\n- In `org_preferences`, only the Orgs you include are updated. Orgs that you omit from the array are left unchanged.\n- To add a value, first call `POST /api/rest/2.0/system/security-settings/search` to get the current values, then send the current list together with the new value.\n- To remove a value, send the current list without that value.\n- For `groups_identifiers_with_access`, groups not included in the request lose non-embed full application access.\n\n#### Example request\n\nTo add `https://app3.example.com` to a CORS allowlist that already contains `https://app1.example.com` and `https://app2.example.com`, send all three URLs:\n\n```json\n{\n  \"cluster_preferences\": {\n    \"cors_whitelisted_urls\": [\n      \"https://app1.example.com\",\n      \"https://app2.example.com\",\n      \"https://app3.example.com\"\n    ]\n  }\n}\n```\n\nIf you send only `[\"https://app3.example.com\"]`, the allowlist is overwritten and contains only `https://app3.example.com`.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "System",
           "26.2.0.cl"
@@ -46108,7 +46108,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed origins for CORS.",
+            "description": "Allowed origins for CORS.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "csp_settings": {
@@ -46121,7 +46121,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed redirect hosts for SAML login.",
+            "description": "Allowed redirect hosts for SAML login.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "non_embed_access": {
@@ -46140,7 +46140,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for connect-src directive.",
+            "description": "Allowed URLs for connect-src directive.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "font_src_urls": {
@@ -46148,7 +46148,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for font-src directive.",
+            "description": "Allowed URLs for font-src directive.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "visual_embed_hosts": {
@@ -46156,7 +46156,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed hosts for visual embed (frame-ancestors directive).",
+            "description": "Allowed hosts for visual embed (frame-ancestors directive).\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "iframe_src_urls": {
@@ -46164,7 +46164,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for frame-src directive.",
+            "description": "Allowed URLs for frame-src directive.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "img_src_urls": {
@@ -46172,7 +46172,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for img-src directive.",
+            "description": "Allowed URLs for img-src directive.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "script_src_urls": {
@@ -46185,7 +46185,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for style-src directive.",
+            "description": "Allowed URLs for style-src directive.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           }
         },
@@ -46204,7 +46204,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed URLs for script-src directive. Can only be set if enabled is true.",
+            "description": "Allowed URLs for script-src directive. Can only be set if enabled is true.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           }
         },
@@ -46223,7 +46223,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Group identifiers that are allowed non-embed full app access.\nCan only be set when orgs feature is disabled and block_full_app_access is true.",
+            "description": "Group identifiers that are allowed non-embed full app access.\nCan only be set when orgs feature is disabled and block_full_app_access is true.\nReplaces the existing list. Groups not included in the request lose access.",
             "nullable": true
           }
         },
@@ -46244,7 +46244,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Allowed origins for CORS for this org.",
+            "description": "Allowed origins for CORS for this org.\nReplaces the existing list. Values not included in the request are removed.",
             "nullable": true
           },
           "non_embed_access": {
@@ -46268,7 +46268,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.",
+            "description": "Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.\nReplaces the existing list. Groups not included in the request lose access.",
             "nullable": true
           }
         },

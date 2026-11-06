@@ -28,9 +28,9 @@ class SecuritySettingsClusterPreferencesInput(BaseModel):
     Input for cluster-level security preferences configuration.
     """ # noqa: E501
     enable_partitioned_cookies: Optional[StrictBool] = Field(default=None, description="Support embedded access when third-party cookies are blocked.")
-    cors_whitelisted_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed origins for CORS.")
+    cors_whitelisted_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.")
     csp_settings: Optional[CspSettingsInput] = None
-    saml_redirect_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed redirect hosts for SAML login.")
+    saml_redirect_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.")
     non_embed_access: Optional[ClusterNonEmbedAccessInput] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["enable_partitioned_cookies", "cors_whitelisted_urls", "csp_settings", "saml_redirect_urls", "non_embed_access"]

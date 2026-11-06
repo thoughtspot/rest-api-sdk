@@ -99,7 +99,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed URLs for connect-src directive.
+   * Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.
    * @return connectSrcUrls
    */
   @javax.annotation.Nullable
@@ -126,7 +126,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed URLs for font-src directive.
+   * Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.
    * @return fontSrcUrls
    */
   @javax.annotation.Nullable
@@ -153,7 +153,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed hosts for visual embed (frame-ancestors directive).
+   * Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.
    * @return visualEmbedHosts
    */
   @javax.annotation.Nullable
@@ -180,7 +180,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed URLs for frame-src directive.
+   * Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.
    * @return iframeSrcUrls
    */
   @javax.annotation.Nullable
@@ -207,7 +207,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed URLs for img-src directive.
+   * Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.
    * @return imgSrcUrls
    */
   @javax.annotation.Nullable
@@ -253,7 +253,7 @@ public class CspSettingsInput implements Serializable {
   }
 
   /**
-   * Allowed URLs for style-src directive.
+   * Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.
    * @return styleSrcUrls
    */
   @javax.annotation.Nullable

@@ -18,28 +18,28 @@ import { HttpFile } from '../http/http';
 */
 export class CspSettingsInput {
     /**
-    * Allowed URLs for connect-src directive.
+    * Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'connect_src_urls'?: Array<string> | null;
     /**
-    * Allowed URLs for font-src directive.
+    * Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'font_src_urls'?: Array<string> | null;
     /**
-    * Allowed hosts for visual embed (frame-ancestors directive).
+    * Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.
     */
     'visual_embed_hosts'?: Array<string> | null;
     /**
-    * Allowed URLs for frame-src directive.
+    * Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'iframe_src_urls'?: Array<string> | null;
     /**
-    * Allowed URLs for img-src directive.
+    * Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'img_src_urls'?: Array<string> | null;
     'script_src_urls'?: ScriptSrcUrlsInput;
     /**
-    * Allowed URLs for style-src directive.
+    * Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.
     */
     'style_src_urls'?: Array<string> | null;
 

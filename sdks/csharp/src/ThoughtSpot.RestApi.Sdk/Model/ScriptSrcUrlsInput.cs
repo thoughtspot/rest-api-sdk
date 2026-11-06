@@ -36,7 +36,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// Initializes a new instance of the <see cref="ScriptSrcUrlsInput" /> class.
         /// </summary>
         /// <param name="enabled">Whether script-src customization is enabled..</param>
-        /// <param name="urls">Allowed URLs for script-src directive. Can only be set if enabled is true..</param>
+        /// <param name="urls">Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed..</param>
         public ScriptSrcUrlsInput(bool? enabled = default, List<string> urls = default)
         {
             this.Enabled = enabled;
@@ -52,9 +52,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public bool? Enabled { get; set; }
 
         /// <summary>
-        /// Allowed URLs for script-src directive. Can only be set if enabled is true.
+        /// Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for script-src directive. Can only be set if enabled is true.</value>
+        /// <value>Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "urls", EmitDefaultValue = true)]
         public List<string> Urls { get; set; }
 
