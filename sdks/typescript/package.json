@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --dts",
     "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000",
+    "test:token-caching": "ts-mocha ./tests/tokenCaching/tokenManagerTest.ts --timeout 30000",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

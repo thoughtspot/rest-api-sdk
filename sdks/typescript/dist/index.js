@@ -85278,6 +85278,130 @@ var PromiseWebhooksApi = class {
   }
 };
 
+// auth/tokenManager.ts
+var DEFAULT_REFRESH_BUFFER_MS = 3e4;
+var normalize = (result) => {
+  const cached = typeof result === "string" ? { token: result } : result;
+  if (!cached || typeof cached.token !== "string" || cached.token === "") {
+    throw new Error("getToken must return a non-empty token string or { token, expiresAt }");
+  }
+  return cached;
+};
+var errorName = (e) => e instanceof Error ? e.name : typeof e;
+var TokenManager = class {
+  constructor(fetchToken, options = {}) {
+    this.fetchToken = fetchToken;
+    this.cached = null;
+    this.inflight = null;
+    this.warnedShortLived = false;
+    this.refreshBufferMs = options.refreshBufferMs ?? DEFAULT_REFRESH_BUFFER_MS;
+    this.logger = options.logger ?? (() => {
+    });
+    this.now = options.now ?? Date.now;
+  }
+  async getToken() {
+    const current = this.cached;
+    if (current) {
+      if (!this.isExpiring(current)) {
+        return current.token;
+      }
+      try {
+        return (await this.requestNew("expiry")).token;
+      } catch (e) {
+        if ((current.expiresAt ?? 0) <= this.now()) {
+          throw e;
+        }
+        this.logger(
+          `warning: getToken failed while refreshing a still-valid token (${errorName(e)}); using the cached token`
+        );
+        return current.token;
+      }
+    }
+    return (await this.requestNew("cold")).token;
+  }
+  /**
+   * Called when `failedToken` was rejected with a 401. Returns a replacement token,
+   * or null when getToken itself fails so the caller can surface the original 401.
+   */
+  async refreshAfterUnauthorized(failedToken) {
+    const current = this.cached;
+    if (current && current.token !== failedToken) {
+      return current.token;
+    }
+    this.cached = null;
+    try {
+      return (await this.requestNew("401")).token;
+    } catch (e) {
+      this.logger(`getToken failed after 401: ${e?.message ?? e}`);
+      return null;
+    }
+  }
+  isExpiring(current) {
+    if (current.expiresAt === void 0) {
+      return false;
+    }
+    const buffer = current.tokenBufferMs ?? this.refreshBufferMs;
+    return current.expiresAt - this.now() <= buffer;
+  }
+  requestNew(reason) {
+    if (!this.inflight) {
+      this.inflight = this.fetchNew(reason).finally(() => {
+        this.inflight = null;
+      });
+    }
+    return this.inflight;
+  }
+  async fetchNew(reason) {
+    this.logger(`calling getToken (reason: ${reason})`);
+    const fresh = normalize(await this.fetchToken());
+    this.cached = fresh;
+    this.warnIfShortLived(fresh);
+    return fresh;
+  }
+  warnIfShortLived(fresh) {
+    if (this.warnedShortLived || !this.isExpiring(fresh)) {
+      return;
+    }
+    this.warnedShortLived = true;
+    this.logger(
+      "warning: getToken returned a token that expires within the refresh buffer, so getToken will be called on every request. Check that expiresAt is epoch milliseconds and that the token lifetime exceeds refreshBufferMs."
+    );
+  }
+};
+
+// http/tokenRefreshHttpLibrary.ts
+var BEARER_PREFIX = "Bearer ";
+var findAuthorization = (request) => {
+  const headers = request.getHeaders();
+  const key = Object.keys(headers).find((k) => k.toLowerCase() === "authorization");
+  return key ? headers[key] : void 0;
+};
+var TokenRefreshHttpLibrary = class {
+  constructor(inner, tokenManager) {
+    this.inner = inner;
+    this.tokenManager = tokenManager;
+  }
+  send(request) {
+    return from(this.sendWithRetry(request));
+  }
+  async sendWithRetry(request) {
+    const response = await this.inner.send(request).toPromise();
+    if (response.httpStatusCode !== 401) {
+      return response;
+    }
+    const sent = findAuthorization(request);
+    if (!sent?.startsWith(BEARER_PREFIX)) {
+      return response;
+    }
+    const newToken = await this.tokenManager.refreshAfterUnauthorized(sent.slice(BEARER_PREFIX.length));
+    if (newToken === null) {
+      return response;
+    }
+    request.setHeaderParam("Authorization", BEARER_PREFIX + newToken);
+    return this.inner.send(request).toPromise();
+  }
+};
+
 // utils/config.ts
 var createAdditionalHeadersMiddleware = (additionalHeaders) => {
   return {
@@ -85313,30 +85437,37 @@ var createBearerAuthenticationConfig = (thoughtSpotHost, paramOrTokenProvider, o
     promiseMiddleware: middleware
   });
   const authApiClient = new PromiseAuthenticationApi(config);
-  let configTokenProvider;
-  if (paramOrTokenProvider.hasOwnProperty("username")) {
-    configTokenProvider = {
-      getToken: async () => {
-        const token = (await authApiClient.getFullAccessToken(paramOrTokenProvider)).token;
-        return token;
-      }
-    };
+  let tokenProvider;
+  let tokenManager;
+  const managerOptions = {
+    refreshBufferMs: options?.refreshBufferMs,
+    logger: options?.tokenLogger
+  };
+  if (typeof paramOrTokenProvider === "string") {
+    tokenProvider = { getToken: () => paramOrTokenProvider };
   } else if (typeof paramOrTokenProvider === "function") {
-    configTokenProvider = {
-      getToken: paramOrTokenProvider
-    };
+    tokenProvider = { getToken: paramOrTokenProvider };
+  } else if (paramOrTokenProvider && "getToken" in paramOrTokenProvider) {
+    const source = paramOrTokenProvider;
+    tokenProvider = tokenManager = new TokenManager(() => source.getToken(), managerOptions);
+  } else if (paramOrTokenProvider?.hasOwnProperty("username")) {
+    tokenProvider = tokenManager = new TokenManager(async () => {
+      const resp = await authApiClient.getFullAccessToken(paramOrTokenProvider);
+      return { token: resp.token, expiresAt: resp.expiration_time_in_millis };
+    }, managerOptions);
   } else {
-    throw new Error("Pass a proper GetFullAccessTokenRequest or a function which returns a token");
+    throw new Error("Pass a proper GetFullAccessTokenRequest, { getToken }, a token string or a function which returns a token");
   }
   const authConfig = {
     bearerAuth: {
-      tokenProvider: configTokenProvider
+      tokenProvider
     }
   };
   const globalConfig = createConfiguration({
     authMethods: authConfig,
     baseServer: serverConfig,
-    promiseMiddleware: middleware
+    promiseMiddleware: middleware,
+    httpApi: tokenManager ? new TokenRefreshHttpLibrary(new IsomorphicFetchHttpLibrary(), tokenManager) : void 0
   });
   return globalConfig;
 };
