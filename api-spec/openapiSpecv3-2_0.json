@@ -6,6 +6,14 @@
   },
   "x-roles": [
     {
+      "name": "27.1.0.cl",
+      "id": "27.1.0.cl",
+      "tags": [
+        "27.1.0.cl"
+      ],
+      "description": "Roles for version 27.1.0.cl"
+    },
+    {
       "name": "26.10.0.cl",
       "id": "26.10.0.cl",
       "tags": [
@@ -174,14 +182,6 @@
       "description": "Roles for version 10.10.0.cl"
     },
     {
-      "name": "27.1.0.cl",
-      "id": "27.1.0.cl",
-      "tags": [
-        "27.1.0.cl"
-      ],
-      "description": "Roles for version 27.1.0.cl"
-    },
-    {
       "name": "10.6.0.cl",
       "id": "10.6.0.cl",
       "tags": [
@@ -264,6 +264,392 @@
   ],
   "tags": [],
   "paths": {
+    "/api/rest/2.0/ai/context/export": {
+      "post": {
+        "operationId": "exportContext",
+        "description": "\nExports the context that a selection of models, Spotter analysts and\norg-level context covers, as a YAML file to edit and import into another\nenvironment with importContext.\nRequires Spotter access and the right to write each selected scope: on each\nmodel, edit access, or view access together with the `CAN_MANAGE_SPOTTER`\nprivilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each\nSpotter analyst, having created it, having it shared with you in `MODIFY`\nmode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege\ntogether with view access to it; and the `ADMINISTRATION` privilege for\norg-level and all-org context. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nExports Spotter's context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.\n\nUse it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the `importContext` API in the target.\n\nRequires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write each selected scope:\n\n- Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model.\n- Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it.\n- Org-level context or the whole Org: the `ADMINISTRATION` privilege.\n\nUse a bearer token for the Org whose context you are exporting.\n\n#### Usage guidelines\n\nSelect what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.\n\n- `model_identifiers`: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected.\n- `analyst_identifiers`: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models.\n- `include_analyst_models`: when `true`, also selects every model the selected analysts use.\n- `include_org_level_context`: when `true`, also selects the org-level context, which names no model and no analyst and applies to every question in the Org.\n- `export_all_org_context`: when `true`, selects everything in the Org. Use it on its own, without the other fields.\n\nEvery kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.\n\nThe response contains:\n\n- `content`: the YAML file. Pass it to `importContext` as is or after editing.\n- `summary`: what the file holds per owner, each entry with its `scope` and `exported_count`. The `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With `export_all_org_context`, only the owners that have context have an entry.\n- `additional_model_identifiers` and `additional_analyst_identifiers`: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn't replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:\n  - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in `additional_model_identifiers`.\n  - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in `additional_analyst_identifiers`.\n  - With `include_analyst_models`, analyst A's models are selected. A metric scoped to A's model M1 and to model M3, which A doesn't use, is left out, and M3 is listed.\n\n#### What an import of this file replaces\n\nThe file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:\n\n- With `include_analyst_models`, the file lists the models the analysts use in the source, and the import replaces those models' context even if the analysts use other models in the target.\n- With `export_all_org_context`, the import replaces all of the target Org's context, including context on models and analysts that exist only in the target.\n\nContext of other analysts on a selected model is kept. A model's own context also applies inside every analyst that uses it, so replacing it changes those analysts' answers too; the import's dry run lists them.\n\n#### Limits\n\nAn export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.\n\n#### Error responses\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — nothing is selected, `export_all_org_context` is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn't use the context layer, or the selection is over the export limits. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the user doesn't have Spotter access, or doesn't have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. |\n| 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |\n\n> ###### Note:\n> - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportContextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportContextResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "The exported YAML file and what it holds per owner",
+                    "value": {
+                      "content": "selection: { models: [gtm] }\nmodels:\n  gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }\nentities:\n- id: ctx_2a7c11\n  type: BUSINESS_DEFINITION\n  title: Region\n  scope: { models: [gtm] }\n  definition: Region means sales territory, not billing country.\n- id: ctx_8f2a61\n  type: METRIC\n  title: ARR\n  scope: { models: [gtm] }\n  expression:\n    formula: sum ( [Contract Value] ) where [Recurring] = 'true'\n    columns: { gtm: [Contract Value, Recurring] }\n",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "exported_count": 2
+                        }
+                      ],
+                      "additional_model_identifiers": [],
+                      "additional_analyst_identifiers": []
+                    }
+                  },
+                  "example_2": {
+                    "summary": "An analyst with its model and the org-level context: the Org has an entry with no identifiers, here with no org-level context to export",
+                    "value": {
+                      "content": "selection: { models: [gtm], analysts: [sales], org_level_context: true }\nmodels:\n  gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }\nanalysts:\n  sales: { id: 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b, name: Sales analyst }\nentities:\n- id: ctx_2a7c11\n  type: BUSINESS_DEFINITION\n  title: Region\n  scope: { models: [gtm] }\n  definition: Region means sales territory, not billing country.\n- id: ctx_51c3d0\n  type: NON_SEMANTIC_INSTRUCTION\n  title: Answer format\n  scope: { analysts: [sales] }\n  instruction: Lead with a short table, then one sentence.\n",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "exported_count": 1
+                        },
+                        {
+                          "scope": {
+                            "type": "ANALYST",
+                            "identifiers": [
+                              "9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b"
+                            ]
+                          },
+                          "exported_count": 1
+                        },
+                        {
+                          "scope": {
+                            "type": "ORG",
+                            "identifiers": []
+                          },
+                          "exported_count": 0
+                        }
+                      ],
+                      "additional_model_identifiers": [],
+                      "additional_analyst_identifiers": []
+                    }
+                  },
+                  "example_3": {
+                    "summary": "A model and an analyst, with context left out because a selected model shares it with an unselected one",
+                    "value": {
+                      "content": "selection: { models: [gtm], analysts: [sales] }\nmodels:\n  gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }\nanalysts:\n  sales: { id: 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b, name: Sales analyst }\nentities:\n- id: ctx_2a7c11\n  type: BUSINESS_DEFINITION\n  title: Region\n  scope: { models: [gtm] }\n  definition: Region means sales territory, not billing country.\n- id: ctx_51c3d0\n  type: NON_SEMANTIC_INSTRUCTION\n  title: Answer format\n  scope: { analysts: [sales] }\n  instruction: Lead with a short table, then one sentence.\n",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "exported_count": 1
+                        },
+                        {
+                          "scope": {
+                            "type": "ANALYST",
+                            "identifiers": [
+                              "9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b"
+                            ]
+                          },
+                          "exported_count": 1
+                        }
+                      ],
+                      "additional_model_identifiers": [
+                        "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d"
+                      ],
+                      "additional_analyst_identifiers": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportContextResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "no_rights_on_model": {
+                    "summary": "No right to write a selected model",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 2104,
+                            "incident_id_guid": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                            "trace_id_guid": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                            "debug": "[\"no edit rights on data model 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "no_rights_on_model": {
+                    "summary": "No right to write a selected model",
+                    "value": {
+                      "error": {
+                        "message": {
+                          "debug": {
+                            "code": 2104,
+                            "incident_id_guid": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                            "trace_id_guid": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                            "debug": "[\"no edit rights on data model 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c\"]"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/ai/context/import": {
+      "post": {
+        "operationId": "importContext",
+        "description": "\nImports a YAML file of context, usually from exportContext, and replaces\nthe context its selection covers in this environment: it inserts the file's\nentities with new IDs, then deletes the rest of that context. Run with\n`dry_run` set to `true` first to validate the file and preview the changes.\nRequires Spotter access and the right to write every scope in the file: on\neach model, edit access, or view access together with the\n`CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that\nmodel; on each Spotter analyst, having created it, having it shared with\nyou in `MODIFY` mode, the `ADMINISTRATION` privilege, or the\n`CAN_MANAGE_SPOTTER` privilege together with view access to it; and the\n`ADMINISTRATION` privilege for org-level and all-org context. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nImports a YAML file of Spotter context, usually one produced by the `exportContext` API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.\n\nUse it to move context between environments, for example from development to production. Always run it with `dry_run` set to `true` first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.\n\nRequires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write every scope in the file:\n\n- Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model.\n- Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it.\n- Org-level context or the whole Org: the `ADMINISTRATION` privilege.\n\nA scope you can't write is reported as an `ACCESS_DENIED` validation failure. Use a bearer token for the Org you are importing into.\n\n#### Usage guidelines\n\nThe request must include:\n\n- `content`: the YAML file, typically the `content` returned by `exportContext`, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB.\n- `dry_run`: required, with no default. `true` validates the file and previews the changes; `false` applies them.\n\nAn import is a full replace. The file's entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.\n\nThe response contains:\n\n- `status`: `SUCCESS` (in a dry run, the preview is complete), `VALIDATION_FAILED` (the file has problems, listed in `validation_failures`; nothing was written) or `FAILED` (a valid file hit a server error; see `diagnostics`).\n- `summary`: per owner, the entities before the import (`existing_record_count`), deleted and inserted. Previews in a dry run. Each entry's `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry.\n- `validation_failures`: every problem in the file, each with its `line_number`, `entity_key`, `field_name`, `reason` and `message`, so you can fix the file in one pass.\n- `diagnostics`: warnings and failure causes, grouped by `sub_status` (`WARNING`, `FAILURE` or `ROLLED_BACK`). Warnings include a selected model or analyst left with no context, an analyst's context deleted on a model the file doesn't name, analysts outside the selection whose answers change through a replaced model's context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs.\n- `operation_id`: include it when contacting support.\n\n#### What is replaced\n\nOnly the file's selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:\n\n- An entity that names analysts belongs to those analysts.\n- Otherwise, an entity that names models belongs to those models.\n- Otherwise, it is org-level context.\n\nAn entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1's own context and all of A's context, including A's context on models the file never names. It keeps analyst B's context on M1, and entities that also name an unselected model or analyst.\n\n#### File format\n\nThe file is YAML with the file's `selection`, the `models` and `analysts` it refers to by alias, and its `entities`:\n\n```yaml\nselection: { models: [gtm], analysts: [sales] }\nmodels:\n  gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored\nanalysts:\n  sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored\nentities:\n- id: ctx_2a7c11                                 # a key within this file; not stored\n  type: BUSINESS_DEFINITION\n  title: Region\n  scope: { models: [gtm] }\n  definition: Region means sales territory, not billing country.\n- id: ctx_51c3d0\n  type: NON_SEMANTIC_INSTRUCTION\n  title: Answer format\n  scope: { analysts: [sales] }\n  instruction: Lead with a short table, then one sentence.\n```\n\nThe identifiers in the file are for reference only and aren't stored as written:\n\n- Entity `id`s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID.\n- The aliases (`gtm`, `sales`) only link the entities' scopes to the `models` and `analysts` entries.\n- The `guid`, `obj_id`, `id` and `name` values under `models` and `analysts` are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target's own objects.\n\n#### Validations\n\nThe whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.\n\nEach failure has one of these reasons:\n\n| Reason | Meaning |\n|--------|---------|\n| `SCHEMA` | The YAML is invalid, or has an unknown field or a bad value. |\n| `VALIDATION` | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. |\n| `CHAR_LIMIT` | A field is longer than its limit. |\n| `CHAR_BUDGET` | A scope's non-semantic instructions or guardrails together exceed their character budget. |\n| `SCOPE` | An entity is outside the file's selection, is personal context, or names a model that isn't one of its analyst's models. |\n| `UNRESOLVED_SOURCE` | A model or analyst isn't found in this environment. |\n| `UNRESOLVED_COLUMN` | A column isn't found by name in its model. |\n| `UNRESOLVED_REFERENCE` | A reference or relationship names an entity key that isn't in the file. |\n| `INVALID_RELATIONSHIP` | A relationship isn't allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. |\n| `ACCESS_DENIED` | You can't write a scope the file involves. |\n\n#### Limits\n\nThe current limits, and what a file over each one fails with:\n\n| Limit | Value | Fails with |\n|-------|-------|------------|\n| File size | 10 MiB | A `400` error, before the file is validated |\n| Entities per file | 10,000 | `VALIDATION` |\n| Title of an entity | 120 characters | `CHAR_LIMIT` |\n| Any other text field of an entity | 4,000 characters | `CHAR_LIMIT` |\n| `NON_SEMANTIC_INSTRUCTION` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` |\n| `GUARDRAIL` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` |\n| Depth of a chain of relationships | 10 | `INVALID_RELATIONSHIP` |\n\nA `DATA_GUIDE` entity must also name at least one model and no analyst; otherwise it fails with `SCOPE`.\n\n#### Error responses\n\nProblems in the file are not errors: the call returns `200` with `VALIDATION_FAILED`, and the details are in `validation_failures`.\n\n| Code | Description |\n|------|-------------|\n| 400  | Bad request — `dry_run` is missing, the file is over 10 MiB, or the Org doesn't use the context layer. |\n| 401  | Unauthorized — authentication token is missing, expired, or invalid. |\n| 403  | Forbidden — the user doesn't have Spotter access. |\n| 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |\n\n> ###### Important:\n> Never run with `dry_run` set to `false` without first checking a dry run. A real import deletes and replaces the context the file's selection covers.\n\n> ###### Note:\n> - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs.\n> - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "AI",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportContextRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Common successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportContextResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "summary": "Dry run preview",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "existing_record_count": 4,
+                          "deleted_record_count": 4,
+                          "inserted_record_count": 2
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "66666666-6666-6666-6666-666666666666"
+                    }
+                  },
+                  "example_2": {
+                    "summary": "Import applied after checking the dry run",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "existing_record_count": 4,
+                          "deleted_record_count": 4,
+                          "inserted_record_count": 2
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [],
+                      "operation_id": "66666666-6666-6666-6666-666666666668"
+                    }
+                  },
+                  "example_3": {
+                    "summary": "Dry run with a warning: an analyst outside the selection is affected",
+                    "value": {
+                      "status": "SUCCESS",
+                      "summary": [
+                        {
+                          "scope": {
+                            "type": "DATA_MODEL",
+                            "identifiers": [
+                              "3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c"
+                            ]
+                          },
+                          "existing_record_count": 4,
+                          "deleted_record_count": 4,
+                          "inserted_record_count": 2
+                        }
+                      ],
+                      "validation_failures": [],
+                      "diagnostics": [
+                        {
+                          "sub_status": "WARNING",
+                          "messages": [
+                            "Analyst Pricing uses model gtm_model, whose context is replaced; its answers on gtm_model change"
+                          ]
+                        }
+                      ],
+                      "operation_id": "66666666-6666-6666-6666-666666666669"
+                    }
+                  },
+                  "example_4": {
+                    "summary": "Validation failures: nothing was written",
+                    "value": {
+                      "status": "VALIDATION_FAILED",
+                      "summary": [],
+                      "validation_failures": [
+                        {
+                          "entity_key": "ctx_8f2a61",
+                          "line_number": 16,
+                          "field_name": "expression.columns",
+                          "reason": "UNRESOLVED_COLUMN",
+                          "message": "Column 'Recurring' isn't in model gtm_model"
+                        }
+                      ],
+                      "diagnostics": [
+                        {
+                          "sub_status": "FAILURE",
+                          "messages": [
+                            "1 validation failure; nothing was written"
+                          ]
+                        }
+                      ],
+                      "operation_id": "66666666-6666-6666-6666-666666666667"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Common error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportContextResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rest/2.0/ai/agent/analysts/create": {
       "post": {
         "operationId": "createAnalyst",
@@ -47601,6 +47987,82 @@
         },
         "description": "Response from exportMemory. Contains the serialized payload\nready for local editing and re-submission to importMemory."
       },
+      "ExportContextResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The exported context as a YAML file. Pass it to importContext in the target\nenvironment, as is or after editing.",
+            "nullable": true
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContextExportSummary"
+            },
+            "description": "What the file holds, one entry per owner. Every selected model and analyst\nhas an entry, even with a count of 0, and so does the Org when org-level\ncontext is selected. With `export_all_org_context`, only the owners that\nhave context have an entry.",
+            "nullable": true
+          },
+          "additional_model_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Context that a selected model shares with models outside the selection is\nleft out of the file, because importing this selection wouldn't replace it.\nThese are the GUIDs of those other models: add them to `model_identifiers`\nand export again to include that context. For example, a metric scoped to\nmodels M1 and M2 is left out when only M1 is selected, and M2 is listed\nhere. Empty when nothing was left out.",
+            "nullable": true
+          },
+          "additional_analyst_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Context that a selected Spotter analyst shares with analysts outside the\nselection is left out of the file, because importing this selection\nwouldn't replace it. These are the IDs of those other analysts: add them to\n`analyst_identifiers` and export again to include that context. For\nexample, an instruction scoped to analysts A and B is left out when only A\nis selected, and B is listed here. Empty when nothing was left out.",
+            "nullable": true
+          }
+        },
+        "description": "Response from exportContext: the exported file, and what it holds per owner."
+      },
+      "ContextExportSummary": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/ContextScope",
+            "description": "The owner these counts are for.",
+            "nullable": true
+          },
+          "exported_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entities with this owner written to the file.",
+            "nullable": true
+          }
+        },
+        "description": "What an export wrote to the file for one owner."
+      },
+      "ContextScope": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DATA_MODEL",
+              "ANALYST",
+              "ORG"
+            ],
+            "description": "What owns the entities: models, Spotter analysts or the Org.",
+            "nullable": true
+          },
+          "identifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "GUIDs of the models for `DATA_MODEL`, IDs of the analysts for `ANALYST`,\nand empty for `ORG`. More than one when the entities are owned jointly.",
+            "nullable": true
+          }
+        },
+        "description": "The owner of a group of context entities: a kind of owner and its\nidentifiers."
+      },
       "VariableDetailInput": {
         "type": "object",
         "properties": {
@@ -54823,7 +55285,12 @@
               "UNRESOLVED_SOURCE",
               "ACCESS_DENIED",
               "CHAR_LIMIT",
-              "SCHEMA"
+              "SCHEMA",
+              "SCOPE",
+              "UNRESOLVED_REFERENCE",
+              "INVALID_RELATIONSHIP",
+              "UNRESOLVED_COLUMN",
+              "CHAR_BUDGET"
             ],
             "description": "Machine-readable category for the failure (e.g. `VALIDATION`,\n`ACCESS_DENIED`, `CHAR_LIMIT`).",
             "nullable": true
@@ -54836,6 +55303,11 @@
           "message": {
             "type": "string",
             "description": "Human-readable description of the failure.",
+            "nullable": true
+          },
+          "entity_key": {
+            "type": "string",
+            "description": "Key of the entity in the imported file that failed, as written in its `id`\nfield. Set by importContext only; empty when the failure concerns the file\nas a whole. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>",
             "nullable": true
           }
         },
@@ -54865,6 +55337,82 @@
           }
         },
         "description": "A group of importMemory diagnostic messages that share a severity /\ndisposition. This is the single, uniform channel for fatal errors,\nrollbacks, and non-fatal observations."
+      },
+      "ImportContextResponse": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "VALIDATION_FAILED",
+              "FAILED"
+            ],
+            "description": "Terminal status of the import. `SUCCESS` means it completed, or in a dry\nrun that the preview is complete. `VALIDATION_FAILED` means the file has\nproblems, all listed in `validation_failures`, and nothing was written.\n`FAILED` means a valid file hit a server error; see `diagnostics`."
+          },
+          "summary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContextImportSummary"
+            },
+            "description": "What the import changes, one entry per owner: entities before the import,\ndeleted and inserted. Previews in a dry run. Every selected model and\nanalyst has an entry, and so does the Org when the file selects org-level\ncontext. When the file selects the whole Org, only the owners with context\nin this environment or in the file have an entry.",
+            "nullable": true
+          },
+          "validation_failures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportFailure"
+            },
+            "description": "Every problem found in the file, each with its line, entity key, field,\nreason and message. Nothing is written when any are present.",
+            "nullable": true
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportDiagnostic"
+            },
+            "description": "Warnings and failure causes, grouped by `sub_status`. Warnings include a\nselected model or analyst left with no context, an analyst's context\ndeleted on a model the file doesn't name, analysts outside the selection\nwhose answers change through a replaced model's context, and references\ninto the replaced context that break because their targets get new IDs.",
+            "nullable": true
+          },
+          "operation_id": {
+            "type": "string",
+            "description": "Server-generated identifier for this import. Include it when contacting\nsupport to help correlate server-side logs.",
+            "nullable": true
+          }
+        },
+        "description": "Response from importContext. `status` says how the import ended; the other\nfields say what it changed, or would change in a dry run, and why it failed."
+      },
+      "ContextImportSummary": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "$ref": "#/components/schemas/ContextScope",
+            "description": "The owner these counts are for.",
+            "nullable": true
+          },
+          "existing_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entities with this owner in this environment before the import.",
+            "nullable": true
+          },
+          "deleted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entities deleted, or to be deleted in a dry run.",
+            "nullable": true
+          },
+          "inserted_record_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of entities inserted from the file, or to be inserted in a dry run.",
+            "nullable": true
+          }
+        },
+        "description": "What an import changes for one owner, or would change in a dry run."
       },
       "VariableUpdateAssignmentInput": {
         "type": "object",
@@ -57104,6 +57652,62 @@
           }
         },
         "description": "List of runtime parameters need to set during the session."
+      },
+      "ExportContextRequest": {
+        "type": "object",
+        "properties": {
+          "model_identifiers": {
+            "description": "GUIDs or obj_ids of the models whose context to export. Exports the\ncontext each model owns: entities scoped to that model, or to several\nmodels that are all selected.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "analyst_identifiers": {
+            "description": "IDs of the Spotter analysts whose context to export. Exports every entity\nthat names only selected analysts, whichever models it also names.",
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "include_analyst_models": {
+            "description": "When `true`, also selects every model the selected analysts use. The file\nlists those models, so importing it replaces exactly them.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "include_org_level_context": {
+            "description": "When `true`, also selects the org-level context: entities that name no\nmodel and no analyst and apply to every question in the Org. Requires the\n`ADMINISTRATION` privilege.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "export_all_org_context": {
+            "description": "When `true`, selects everything in the Org: every model, every analyst\nand the org-level context. Must be used on its own. Importing the\nresulting file replaces all of the target Org's context. Requires the\n`ADMINISTRATION` privilege.",
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "ImportContextRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "The YAML file to import, usually the `content` returned by exportContext,\nedited or as is. The file's own selection decides what is replaced, so no\nother identifiers are needed. Up to 10 MiB.",
+            "type": "string"
+          },
+          "dry_run": {
+            "description": "Required. When `true`, validates the file and returns what the import\nwould change, without writing anything. When `false`, applies the import.\nThere is no default, so a real import is never triggered by omission.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "content",
+          "dry_run"
+        ]
       },
       "CreateAnalystRequest": {
         "type": "object",
