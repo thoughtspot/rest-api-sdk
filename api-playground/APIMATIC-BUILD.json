@@ -96,7 +96,19 @@
       },
       "enableExport": false,
       "enableConsoleCalls": true,
-      "useLegacyApiPlayground": true
+      "useLegacyApiPlayground": true,
+      "aiAssistMenu": {
+        "enable": true,
+        "tools": {
+          "chatgpt": true,
+          "claude": true,
+          "perplexity": false,
+          "grok": false,
+          "googleAiStudio": false
+        },
+        "showCopyPage": true,
+        "showViewAsMarkdown": true
+      }
     }
   }
 }
