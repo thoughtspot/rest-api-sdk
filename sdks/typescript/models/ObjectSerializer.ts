@@ -110,7 +110,10 @@ export * from '../models/ConfigureSecuritySettingsRequest';
 export * from '../models/ConnectionConfigurationResponse';
 export * from '../models/ConnectionConfigurationSearchRequest';
 export * from '../models/ConnectionInput';
+export * from '../models/ContextExportSummary';
+export * from '../models/ContextImportSummary';
 export * from '../models/ContextPayloadV2Input';
+export * from '../models/ContextScope';
 export * from '../models/Conversation';
 export * from '../models/ConversationMessage';
 export * from '../models/ConversationMessageResponse';
@@ -195,6 +198,8 @@ export * from '../models/EventChannelConfig';
 export * from '../models/EventChannelConfigInput';
 export * from '../models/ExcludeMetadataListItemInput';
 export * from '../models/ExportAnswerReportRequest';
+export * from '../models/ExportContextRequest';
+export * from '../models/ExportContextResponse';
 export * from '../models/ExportLiveboardReportRequest';
 export * from '../models/ExportManualTranslationTemplateRequest';
 export * from '../models/ExportManualTranslationsRequest';
@@ -248,6 +253,8 @@ export * from '../models/GroupObject';
 export * from '../models/GroupsImportListInput';
 export * from '../models/HeaderAttributeInput';
 export * from '../models/HeaderUpdateInput';
+export * from '../models/ImportContextRequest';
+export * from '../models/ImportContextResponse';
 export * from '../models/ImportDiagnostic';
 export * from '../models/ImportEPackAsyncTaskStatus';
 export * from '../models/ImportFailure';
@@ -719,7 +726,10 @@ import { ConfigureSecuritySettingsRequest } from '../models/ConfigureSecuritySet
 import { ConnectionConfigurationResponse     , ConnectionConfigurationResponsePolicyProcessesEnum   , ConnectionConfigurationResponseDataWarehouseTypeEnum  , ConnectionConfigurationResponsePolicyTypeEnum     } from '../models/ConnectionConfigurationResponse';
 import { ConnectionConfigurationSearchRequest  , ConnectionConfigurationSearchRequestPolicyTypeEnum   } from '../models/ConnectionConfigurationSearchRequest';
 import { ConnectionInput } from '../models/ConnectionInput';
+import { ContextExportSummary } from '../models/ContextExportSummary';
+import { ContextImportSummary } from '../models/ContextImportSummary';
 import { ContextPayloadV2Input, ContextPayloadV2InputTypeEnum    } from '../models/ContextPayloadV2Input';
+import { ContextScope, ContextScopeTypeEnum    } from '../models/ContextScope';
 import { Conversation } from '../models/Conversation';
 import { ConversationMessage } from '../models/ConversationMessage';
 import { ConversationMessageResponse } from '../models/ConversationMessageResponse';
@@ -804,6 +814,8 @@ import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConf
 import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventChannelConfigInputChannelsEnum   } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum        , ExportAnswerReportRequestTypeEnum   } from '../models/ExportAnswerReportRequest';
+import { ExportContextRequest } from '../models/ExportContextRequest';
+import { ExportContextResponse } from '../models/ExportContextResponse';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
 import { ExportManualTranslationTemplateRequest } from '../models/ExportManualTranslationTemplateRequest';
 import { ExportManualTranslationsRequest, ExportManualTranslationsRequestScopeEnum   } from '../models/ExportManualTranslationsRequest';
@@ -857,9 +869,11 @@ import { GroupObject } from '../models/GroupObject';
 import { GroupsImportListInput    , GroupsImportListInputPrivilegesEnum    , GroupsImportListInputTypeEnum   , GroupsImportListInputVisibilityEnum   } from '../models/GroupsImportListInput';
 import { HeaderAttributeInput } from '../models/HeaderAttributeInput';
 import { HeaderUpdateInput  , HeaderUpdateInputTypeEnum    } from '../models/HeaderUpdateInput';
+import { ImportContextRequest } from '../models/ImportContextRequest';
+import { ImportContextResponse, ImportContextResponseStatusEnum       } from '../models/ImportContextResponse';
 import { ImportDiagnostic, ImportDiagnosticSubStatusEnum    } from '../models/ImportDiagnostic';
 import { ImportEPackAsyncTaskStatus     , ImportEPackAsyncTaskStatusTaskStatusEnum   , ImportEPackAsyncTaskStatusImportPolicyEnum          } from '../models/ImportEPackAsyncTaskStatus';
-import { ImportFailure , ImportFailureReasonEnum     } from '../models/ImportFailure';
+import { ImportFailure , ImportFailureReasonEnum      } from '../models/ImportFailure';
 import { ImportMemoryRequest } from '../models/ImportMemoryRequest';
 import { ImportMemoryResponse, ImportMemoryResponseStatusEnum       } from '../models/ImportMemoryResponse';
 import { ImportMetadataTMLAsyncRequest   , ImportMetadataTMLAsyncRequestImportPolicyEnum      } from '../models/ImportMetadataTMLAsyncRequest';
@@ -1263,6 +1277,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ConnectionConfigurationResponsePolicyTypeEnum",
     "ConnectionConfigurationSearchRequestPolicyTypeEnum",
     "ContextPayloadV2InputTypeEnum",
+    "ContextScopeTypeEnum",
     "ConversationPrincipalInfoTypeEnum",
     "ConversationPrincipalInfoPermissionEnum",
     "CopyObjectRequestTypeEnum",
@@ -1334,6 +1349,7 @@ let enumsMap: Set<string> = new Set<string>([
     "GroupsImportListInputTypeEnum",
     "GroupsImportListInputVisibilityEnum",
     "HeaderUpdateInputTypeEnum",
+    "ImportContextResponseStatusEnum",
     "ImportDiagnosticSubStatusEnum",
     "ImportEPackAsyncTaskStatusTaskStatusEnum",
     "ImportEPackAsyncTaskStatusImportPolicyEnum",
@@ -1686,7 +1702,10 @@ let typeMap: {[index: string]: any} = {
     "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
     "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
     "ConnectionInput": ConnectionInput,
+    "ContextExportSummary": ContextExportSummary,
+    "ContextImportSummary": ContextImportSummary,
     "ContextPayloadV2Input": ContextPayloadV2Input,
+    "ContextScope": ContextScope,
     "Conversation": Conversation,
     "ConversationMessage": ConversationMessage,
     "ConversationMessageResponse": ConversationMessageResponse,
@@ -1771,6 +1790,8 @@ let typeMap: {[index: string]: any} = {
     "EventChannelConfigInput": EventChannelConfigInput,
     "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
     "ExportAnswerReportRequest": ExportAnswerReportRequest,
+    "ExportContextRequest": ExportContextRequest,
+    "ExportContextResponse": ExportContextResponse,
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
     "ExportManualTranslationTemplateRequest": ExportManualTranslationTemplateRequest,
     "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
@@ -1824,6 +1845,8 @@ let typeMap: {[index: string]: any} = {
     "GroupsImportListInput": GroupsImportListInput,
     "HeaderAttributeInput": HeaderAttributeInput,
     "HeaderUpdateInput": HeaderUpdateInput,
+    "ImportContextRequest": ImportContextRequest,
+    "ImportContextResponse": ImportContextResponse,
     "ImportDiagnostic": ImportDiagnostic,
     "ImportEPackAsyncTaskStatus": ImportEPackAsyncTaskStatus,
     "ImportFailure": ImportFailure,

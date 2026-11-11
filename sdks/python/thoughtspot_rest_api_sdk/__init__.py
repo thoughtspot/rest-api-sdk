@@ -184,7 +184,10 @@ __all__ = [
     "ConnectionConfigurationResponse",
     "ConnectionConfigurationSearchRequest",
     "ConnectionInput",
+    "ContextExportSummary",
+    "ContextImportSummary",
     "ContextPayloadV2Input",
+    "ContextScope",
     "Conversation",
     "ConversationMessage",
     "ConversationMessageResponse",
@@ -269,6 +272,8 @@ __all__ = [
     "EventChannelConfigInput",
     "ExcludeMetadataListItemInput",
     "ExportAnswerReportRequest",
+    "ExportContextRequest",
+    "ExportContextResponse",
     "ExportLiveboardReportRequest",
     "ExportManualTranslationTemplateRequest",
     "ExportManualTranslationsRequest",
@@ -322,6 +327,8 @@ __all__ = [
     "GroupsImportListInput",
     "HeaderAttributeInput",
     "HeaderUpdateInput",
+    "ImportContextRequest",
+    "ImportContextResponse",
     "ImportDiagnostic",
     "ImportEPackAsyncTaskStatus",
     "ImportFailure",
@@ -847,7 +854,10 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.connection_configuration_response import ConnectionConfigurationResponse as ConnectionConfigurationResponse
     from thoughtspot_rest_api_sdk.models.connection_configuration_search_request import ConnectionConfigurationSearchRequest as ConnectionConfigurationSearchRequest
     from thoughtspot_rest_api_sdk.models.connection_input import ConnectionInput as ConnectionInput
+    from thoughtspot_rest_api_sdk.models.context_export_summary import ContextExportSummary as ContextExportSummary
+    from thoughtspot_rest_api_sdk.models.context_import_summary import ContextImportSummary as ContextImportSummary
     from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayloadV2Input as ContextPayloadV2Input
+    from thoughtspot_rest_api_sdk.models.context_scope import ContextScope as ContextScope
     from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
     from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
     from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
@@ -932,6 +942,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput as EventChannelConfigInput
     from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
     from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
+    from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest as ExportContextRequest
+    from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse as ExportContextResponse
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest
     from thoughtspot_rest_api_sdk.models.export_manual_translation_template_request import ExportManualTranslationTemplateRequest as ExportManualTranslationTemplateRequest
     from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest as ExportManualTranslationsRequest
@@ -985,6 +997,8 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput as GroupsImportListInput
     from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput as HeaderAttributeInput
     from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput as HeaderUpdateInput
+    from thoughtspot_rest_api_sdk.models.import_context_request import ImportContextRequest as ImportContextRequest
+    from thoughtspot_rest_api_sdk.models.import_context_response import ImportContextResponse as ImportContextResponse
     from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic as ImportDiagnostic
     from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus as ImportEPackAsyncTaskStatus
     from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure as ImportFailure
@@ -1516,7 +1530,10 @@ from thoughtspot_rest_api_sdk.models.configure_security_settings_request import 
 from thoughtspot_rest_api_sdk.models.connection_configuration_response import ConnectionConfigurationResponse as ConnectionConfigurationResponse
 from thoughtspot_rest_api_sdk.models.connection_configuration_search_request import ConnectionConfigurationSearchRequest as ConnectionConfigurationSearchRequest
 from thoughtspot_rest_api_sdk.models.connection_input import ConnectionInput as ConnectionInput
+from thoughtspot_rest_api_sdk.models.context_export_summary import ContextExportSummary as ContextExportSummary
+from thoughtspot_rest_api_sdk.models.context_import_summary import ContextImportSummary as ContextImportSummary
 from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayloadV2Input as ContextPayloadV2Input
+from thoughtspot_rest_api_sdk.models.context_scope import ContextScope as ContextScope
 from thoughtspot_rest_api_sdk.models.conversation import Conversation as Conversation
 from thoughtspot_rest_api_sdk.models.conversation_message import ConversationMessage as ConversationMessage
 from thoughtspot_rest_api_sdk.models.conversation_message_response import ConversationMessageResponse as ConversationMessageResponse
@@ -1601,6 +1618,8 @@ from thoughtspot_rest_api_sdk.models.event_channel_config import EventChannelCon
 from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput as EventChannelConfigInput
 from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
+from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest as ExportContextRequest
+from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse as ExportContextResponse
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translation_template_request import ExportManualTranslationTemplateRequest as ExportManualTranslationTemplateRequest
 from thoughtspot_rest_api_sdk.models.export_manual_translations_request import ExportManualTranslationsRequest as ExportManualTranslationsRequest
@@ -1654,6 +1673,8 @@ from thoughtspot_rest_api_sdk.models.group_object import GroupObject as GroupObj
 from thoughtspot_rest_api_sdk.models.groups_import_list_input import GroupsImportListInput as GroupsImportListInput
 from thoughtspot_rest_api_sdk.models.header_attribute_input import HeaderAttributeInput as HeaderAttributeInput
 from thoughtspot_rest_api_sdk.models.header_update_input import HeaderUpdateInput as HeaderUpdateInput
+from thoughtspot_rest_api_sdk.models.import_context_request import ImportContextRequest as ImportContextRequest
+from thoughtspot_rest_api_sdk.models.import_context_response import ImportContextResponse as ImportContextResponse
 from thoughtspot_rest_api_sdk.models.import_diagnostic import ImportDiagnostic as ImportDiagnostic
 from thoughtspot_rest_api_sdk.models.import_e_pack_async_task_status import ImportEPackAsyncTaskStatus as ImportEPackAsyncTaskStatus
 from thoughtspot_rest_api_sdk.models.import_failure import ImportFailure as ImportFailure

@@ -32,6 +32,10 @@ export class ImportFailure {
     * Human-readable description of the failure.
     */
     'message'?: string | null;
+    /**
+    * Key of the entity in the imported file that failed, as written in its `id` field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later 
+    */
+    'entity_key'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -61,6 +65,12 @@ export class ImportFailure {
             "baseName": "message",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "entity_key",
+            "baseName": "entity_key",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -71,5 +81,5 @@ export class ImportFailure {
     }
 }
 
-    export type ImportFailureReasonEnum = "UNKNOWN_FAILURE_REASON" | "VALIDATION" | "UNRESOLVED_SOURCE" | "ACCESS_DENIED" | "CHAR_LIMIT" | "SCHEMA" ;
+    export type ImportFailureReasonEnum = "UNKNOWN_FAILURE_REASON" | "VALIDATION" | "UNRESOLVED_SOURCE" | "ACCESS_DENIED" | "CHAR_LIMIT" | "SCHEMA" | "SCOPE" | "UNRESOLVED_REFERENCE" | "INVALID_RELATIONSHIP" | "UNRESOLVED_COLUMN" | "CHAR_BUDGET" ;
 

@@ -32277,6 +32277,84 @@ components:
           nullable: true
           type: string
       type: object
+    ExportContextResponse:
+      description: "Response from exportContext: the exported file, and what it holds\
+        \ per owner."
+      properties:
+        content:
+          description: |-
+            The exported context as a YAML file. Pass it to importContext in the target
+            environment, as is or after editing.
+          nullable: true
+          type: string
+        summary:
+          description: |-
+            What the file holds, one entry per owner. Every selected model and analyst
+            has an entry, even with a count of 0, and so does the Org when org-level
+            context is selected. With `export_all_org_context`, only the owners that
+            have context have an entry.
+          items:
+            $ref: "#/components/schemas/ContextExportSummary"
+          nullable: true
+          type: array
+        additional_model_identifiers:
+          description: |-
+            Context that a selected model shares with models outside the selection is
+            left out of the file, because importing this selection wouldn't replace it.
+            These are the GUIDs of those other models: add them to `model_identifiers`
+            and export again to include that context. For example, a metric scoped to
+            models M1 and M2 is left out when only M1 is selected, and M2 is listed
+            here. Empty when nothing was left out.
+          items:
+            type: string
+          nullable: true
+          type: array
+        additional_analyst_identifiers:
+          description: |-
+            Context that a selected Spotter analyst shares with analysts outside the
+            selection is left out of the file, because importing this selection
+            wouldn't replace it. These are the IDs of those other analysts: add them to
+            `analyst_identifiers` and export again to include that context. For
+            example, an instruction scoped to analysts A and B is left out when only A
+            is selected, and B is listed here. Empty when nothing was left out.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    ContextExportSummary:
+      description: What an export wrote to the file for one owner.
+      properties:
+        scope:
+          $ref: "#/components/schemas/ContextScope"
+        exported_count:
+          description: Number of entities with this owner written to the file.
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ContextScope:
+      description: |-
+        The owner of a group of context entities: a kind of owner and its
+        identifiers.
+      properties:
+        type:
+          description: "What owns the entities: models, Spotter analysts or the Org."
+          enum:
+          - DATA_MODEL
+          - ANALYST
+          - ORG
+          nullable: true
+          type: string
+        identifiers:
+          description: |-
+            GUIDs of the models for `DATA_MODEL`, IDs of the analysts for `ANALYST`,
+            and empty for `ORG`. More than one when the entities are owned jointly.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     VariableDetailInput:
       description: Input for variable details in search
       example:
@@ -39078,10 +39156,12 @@ components:
           reason: UNKNOWN_FAILURE_REASON
           field_name: field_name
           message: message
+          entity_key: entity_key
         - line_number: 5
           reason: UNKNOWN_FAILURE_REASON
           field_name: field_name
           message: message
+          entity_key: entity_key
         diagnostics:
         - sub_status: UNKNOWN
           messages:
@@ -39219,6 +39299,7 @@ components:
         reason: UNKNOWN_FAILURE_REASON
         field_name: field_name
         message: message
+        entity_key: entity_key
       properties:
         line_number:
           description: |-
@@ -39238,6 +39319,11 @@ components:
           - ACCESS_DENIED
           - CHAR_LIMIT
           - SCHEMA
+          - SCOPE
+          - UNRESOLVED_REFERENCE
+          - INVALID_RELATIONSHIP
+          - UNRESOLVED_COLUMN
+          - CHAR_BUDGET
           nullable: true
           type: string
         field_name:
@@ -39249,6 +39335,12 @@ components:
           type: string
         message:
           description: Human-readable description of the failure.
+          nullable: true
+          type: string
+        entity_key:
+          description: "Key of the entity in the imported file that failed, as written\
+            \ in its `id`\nfield. Set by importContext only; empty when the failure\
+            \ concerns the file\nas a whole. \n  Version: 27.1.0.cl or later\n"
           nullable: true
           type: string
       type: object
@@ -39282,6 +39374,85 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    ImportContextResponse:
+      description: |-
+        Response from importContext. `status` says how the import ended; the other
+        fields say what it changed, or would change in a dry run, and why it failed.
+      properties:
+        status:
+          description: |-
+            Terminal status of the import. `SUCCESS` means it completed, or in a dry
+            run that the preview is complete. `VALIDATION_FAILED` means the file has
+            problems, all listed in `validation_failures`, and nothing was written.
+            `FAILED` means a valid file hit a server error; see `diagnostics`.
+          enum:
+          - SUCCESS
+          - VALIDATION_FAILED
+          - FAILED
+          type: string
+        summary:
+          description: |-
+            What the import changes, one entry per owner: entities before the import,
+            deleted and inserted. Previews in a dry run. Every selected model and
+            analyst has an entry, and so does the Org when the file selects org-level
+            context. When the file selects the whole Org, only the owners with context
+            in this environment or in the file have an entry.
+          items:
+            $ref: "#/components/schemas/ContextImportSummary"
+          nullable: true
+          type: array
+        validation_failures:
+          description: |-
+            Every problem found in the file, each with its line, entity key, field,
+            reason and message. Nothing is written when any are present.
+          items:
+            $ref: "#/components/schemas/ImportFailure"
+          nullable: true
+          type: array
+        diagnostics:
+          description: |-
+            Warnings and failure causes, grouped by `sub_status`. Warnings include a
+            selected model or analyst left with no context, an analyst's context
+            deleted on a model the file doesn't name, analysts outside the selection
+            whose answers change through a replaced model's context, and references
+            into the replaced context that break because their targets get new IDs.
+          items:
+            $ref: "#/components/schemas/ImportDiagnostic"
+          nullable: true
+          type: array
+        operation_id:
+          description: |-
+            Server-generated identifier for this import. Include it when contacting
+            support to help correlate server-side logs.
+          nullable: true
+          type: string
+      required:
+      - status
+      type: object
+    ContextImportSummary:
+      description: "What an import changes for one owner, or would change in a dry\
+        \ run."
+      properties:
+        scope:
+          $ref: "#/components/schemas/ContextScope"
+        existing_record_count:
+          description: Number of entities with this owner in this environment before
+            the import.
+          format: int32
+          nullable: true
+          type: integer
+        deleted_record_count:
+          description: "Number of entities deleted, or to be deleted in a dry run."
+          format: int32
+          nullable: true
+          type: integer
+        inserted_record_count:
+          description: "Number of entities inserted from the file, or to be inserted\
+            \ in a dry run."
+          format: int32
+          nullable: true
+          type: integer
       type: object
     VariableUpdateAssignmentInput:
       description: Input for variable value update in batch operations
@@ -41002,6 +41173,68 @@ components:
       properties:
         runtime_param_override:
           description: Runtime param override type in JWT.
+      type: object
+    ExportContextRequest:
+      properties:
+        model_identifiers:
+          default: []
+          description: |-
+            GUIDs or obj_ids of the models whose context to export. Exports the
+            context each model owns: entities scoped to that model, or to several
+            models that are all selected.
+          items:
+            type: string
+          type: array
+        analyst_identifiers:
+          default: []
+          description: |-
+            IDs of the Spotter analysts whose context to export. Exports every entity
+            that names only selected analysts, whichever models it also names.
+          items:
+            type: string
+          type: array
+        include_analyst_models:
+          default: false
+          description: |-
+            When `true`, also selects every model the selected analysts use. The file
+            lists those models, so importing it replaces exactly them.
+          nullable: true
+          type: boolean
+        include_org_level_context:
+          default: false
+          description: |-
+            When `true`, also selects the org-level context: entities that name no
+            model and no analyst and apply to every question in the Org. Requires the
+            `ADMINISTRATION` privilege.
+          nullable: true
+          type: boolean
+        export_all_org_context:
+          default: false
+          description: |-
+            When `true`, selects everything in the Org: every model, every analyst
+            and the org-level context. Must be used on its own. Importing the
+            resulting file replaces all of the target Org's context. Requires the
+            `ADMINISTRATION` privilege.
+          nullable: true
+          type: boolean
+      type: object
+    ImportContextRequest:
+      properties:
+        content:
+          description: |-
+            The YAML file to import, usually the `content` returned by exportContext,
+            edited or as is. The file's own selection decides what is replaced, so no
+            other identifiers are needed. Up to 10 MiB.
+          type: string
+        dry_run:
+          description: |-
+            Required. When `true`, validates the file and returns what the import
+            would change, without writing anything. When `false`, applies the import.
+            There is no default, so a real import is never triggered by omission.
+          type: boolean
+      required:
+      - content
+      - dry_run
       type: object
     CreateAnalystRequest:
       example:
@@ -50290,6 +50523,11 @@ components:
       scheme: bearer
       type: http
 x-roles:
+- name: 27.1.0.cl
+  id: 27.1.0.cl
+  tags:
+  - 27.1.0.cl
+  description: Roles for version 27.1.0.cl
 - name: 26.10.0.cl
   id: 26.10.0.cl
   tags:
@@ -50395,11 +50633,6 @@ x-roles:
   tags:
   - 10.10.0.cl
   description: Roles for version 10.10.0.cl
-- name: 27.1.0.cl
-  id: 27.1.0.cl
-  tags:
-  - 27.1.0.cl
-  description: Roles for version 27.1.0.cl
 - name: 10.6.0.cl
   id: 10.6.0.cl
   tags:

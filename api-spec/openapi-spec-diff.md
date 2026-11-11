@@ -103,6 +103,14 @@
 -  endpoint deprecated
 
 
+### POST /api/rest/2.0/ai/context/export
+-  endpoint added
+
+
+### POST /api/rest/2.0/ai/context/import
+-  endpoint added
+
+
 ### POST /api/rest/2.0/ai/conversation/create
 -  endpoint deprecated
 
@@ -113,6 +121,21 @@
 
 ### POST /api/rest/2.0/ai/data-source-suggestions
 -  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/memory/import
+- :warning: added the new `CHAR_BUDGET` enum value to the `validation_failures/items/reason` response property for the response status `200`
+- :warning: added the new `CHAR_BUDGET` enum value to the `validation_failures/items/reason` response property for the response status `201`
+- :warning: added the new `INVALID_RELATIONSHIP` enum value to the `validation_failures/items/reason` response property for the response status `200`
+- :warning: added the new `INVALID_RELATIONSHIP` enum value to the `validation_failures/items/reason` response property for the response status `201`
+- :warning: added the new `SCOPE` enum value to the `validation_failures/items/reason` response property for the response status `200`
+- :warning: added the new `SCOPE` enum value to the `validation_failures/items/reason` response property for the response status `201`
+- :warning: added the new `UNRESOLVED_COLUMN` enum value to the `validation_failures/items/reason` response property for the response status `200`
+- :warning: added the new `UNRESOLVED_COLUMN` enum value to the `validation_failures/items/reason` response property for the response status `201`
+- :warning: added the new `UNRESOLVED_REFERENCE` enum value to the `validation_failures/items/reason` response property for the response status `200`
+- :warning: added the new `UNRESOLVED_REFERENCE` enum value to the `validation_failures/items/reason` response property for the response status `201`
+-  added the optional property `validation_failures/items/entity_key` to the response with the `200` status
+-  added the optional property `validation_failures/items/entity_key` to the response with the `201` status
 
 
 ### POST /api/rest/2.0/ai/relevant-questions/

@@ -4127,6 +4127,70 @@ _ConnectionInput.attributeTypeMap = [
 ];
 var ConnectionInput = _ConnectionInput;
 
+// models/ContextExportSummary.ts
+var _ContextExportSummary = class _ContextExportSummary {
+  static getAttributeTypeMap() {
+    return _ContextExportSummary.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ContextExportSummary.discriminator = void 0;
+_ContextExportSummary.mapping = void 0;
+_ContextExportSummary.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "ContextScope",
+    "format": ""
+  },
+  {
+    "name": "exported_count",
+    "baseName": "exported_count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ContextExportSummary = _ContextExportSummary;
+
+// models/ContextImportSummary.ts
+var _ContextImportSummary = class _ContextImportSummary {
+  static getAttributeTypeMap() {
+    return _ContextImportSummary.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ContextImportSummary.discriminator = void 0;
+_ContextImportSummary.mapping = void 0;
+_ContextImportSummary.attributeTypeMap = [
+  {
+    "name": "scope",
+    "baseName": "scope",
+    "type": "ContextScope",
+    "format": ""
+  },
+  {
+    "name": "existing_record_count",
+    "baseName": "existing_record_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "deleted_record_count",
+    "baseName": "deleted_record_count",
+    "type": "number",
+    "format": "int32"
+  },
+  {
+    "name": "inserted_record_count",
+    "baseName": "inserted_record_count",
+    "type": "number",
+    "format": "int32"
+  }
+];
+var ContextImportSummary = _ContextImportSummary;
+
 // models/ContextPayloadV2Input.ts
 var _ContextPayloadV2Input = class _ContextPayloadV2Input {
   static getAttributeTypeMap() {
@@ -4152,6 +4216,32 @@ _ContextPayloadV2Input.attributeTypeMap = [
   }
 ];
 var ContextPayloadV2Input = _ContextPayloadV2Input;
+
+// models/ContextScope.ts
+var _ContextScope = class _ContextScope {
+  static getAttributeTypeMap() {
+    return _ContextScope.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ContextScope.discriminator = void 0;
+_ContextScope.mapping = void 0;
+_ContextScope.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "ContextScopeTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifiers",
+    "baseName": "identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var ContextScope = _ContextScope;
 
 // models/Conversation.ts
 var _Conversation = class _Conversation {
@@ -7225,6 +7315,88 @@ _ExportAnswerReportRequest.attributeTypeMap = [
 ];
 var ExportAnswerReportRequest = _ExportAnswerReportRequest;
 
+// models/ExportContextRequest.ts
+var _ExportContextRequest = class _ExportContextRequest {
+  static getAttributeTypeMap() {
+    return _ExportContextRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportContextRequest.discriminator = void 0;
+_ExportContextRequest.mapping = void 0;
+_ExportContextRequest.attributeTypeMap = [
+  {
+    "name": "model_identifiers",
+    "baseName": "model_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "analyst_identifiers",
+    "baseName": "analyst_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "include_analyst_models",
+    "baseName": "include_analyst_models",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "include_org_level_context",
+    "baseName": "include_org_level_context",
+    "type": "boolean",
+    "format": ""
+  },
+  {
+    "name": "export_all_org_context",
+    "baseName": "export_all_org_context",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ExportContextRequest = _ExportContextRequest;
+
+// models/ExportContextResponse.ts
+var _ExportContextResponse = class _ExportContextResponse {
+  static getAttributeTypeMap() {
+    return _ExportContextResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportContextResponse.discriminator = void 0;
+_ExportContextResponse.mapping = void 0;
+_ExportContextResponse.attributeTypeMap = [
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "summary",
+    "baseName": "summary",
+    "type": "Array<ContextExportSummary>",
+    "format": ""
+  },
+  {
+    "name": "additional_model_identifiers",
+    "baseName": "additional_model_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "additional_analyst_identifiers",
+    "baseName": "additional_analyst_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var ExportContextResponse = _ExportContextResponse;
+
 // models/ExportLiveboardReportRequest.ts
 var _ExportLiveboardReportRequest = class _ExportLiveboardReportRequest {
   static getAttributeTypeMap() {
@@ -9311,6 +9483,76 @@ _HeaderUpdateInput.attributeTypeMap = [
 ];
 var HeaderUpdateInput = _HeaderUpdateInput;
 
+// models/ImportContextRequest.ts
+var _ImportContextRequest = class _ImportContextRequest {
+  static getAttributeTypeMap() {
+    return _ImportContextRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ImportContextRequest.discriminator = void 0;
+_ImportContextRequest.mapping = void 0;
+_ImportContextRequest.attributeTypeMap = [
+  {
+    "name": "content",
+    "baseName": "content",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "dry_run",
+    "baseName": "dry_run",
+    "type": "boolean",
+    "format": ""
+  }
+];
+var ImportContextRequest = _ImportContextRequest;
+
+// models/ImportContextResponse.ts
+var _ImportContextResponse = class _ImportContextResponse {
+  static getAttributeTypeMap() {
+    return _ImportContextResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ImportContextResponse.discriminator = void 0;
+_ImportContextResponse.mapping = void 0;
+_ImportContextResponse.attributeTypeMap = [
+  {
+    "name": "status",
+    "baseName": "status",
+    "type": "ImportContextResponseStatusEnum",
+    "format": ""
+  },
+  {
+    "name": "summary",
+    "baseName": "summary",
+    "type": "Array<ContextImportSummary>",
+    "format": ""
+  },
+  {
+    "name": "validation_failures",
+    "baseName": "validation_failures",
+    "type": "Array<ImportFailure>",
+    "format": ""
+  },
+  {
+    "name": "diagnostics",
+    "baseName": "diagnostics",
+    "type": "Array<ImportDiagnostic>",
+    "format": ""
+  },
+  {
+    "name": "operation_id",
+    "baseName": "operation_id",
+    "type": "string",
+    "format": ""
+  }
+];
+var ImportContextResponse = _ImportContextResponse;
+
 // models/ImportDiagnostic.ts
 var _ImportDiagnostic = class _ImportDiagnostic {
   static getAttributeTypeMap() {
@@ -9473,6 +9715,12 @@ _ImportFailure.attributeTypeMap = [
   {
     "name": "message",
     "baseName": "message",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "entity_key",
+    "baseName": "entity_key",
     "type": "string",
     "format": ""
   }
@@ -23669,6 +23917,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "ConnectionConfigurationResponsePolicyTypeEnum",
   "ConnectionConfigurationSearchRequestPolicyTypeEnum",
   "ContextPayloadV2InputTypeEnum",
+  "ContextScopeTypeEnum",
   "ConversationPrincipalInfoTypeEnum",
   "ConversationPrincipalInfoPermissionEnum",
   "CopyObjectRequestTypeEnum",
@@ -23740,6 +23989,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "GroupsImportListInputTypeEnum",
   "GroupsImportListInputVisibilityEnum",
   "HeaderUpdateInputTypeEnum",
+  "ImportContextResponseStatusEnum",
   "ImportDiagnosticSubStatusEnum",
   "ImportEPackAsyncTaskStatusTaskStatusEnum",
   "ImportEPackAsyncTaskStatusImportPolicyEnum",
@@ -24091,7 +24341,10 @@ var typeMap = {
   "ConnectionConfigurationResponse": ConnectionConfigurationResponse,
   "ConnectionConfigurationSearchRequest": ConnectionConfigurationSearchRequest,
   "ConnectionInput": ConnectionInput,
+  "ContextExportSummary": ContextExportSummary,
+  "ContextImportSummary": ContextImportSummary,
   "ContextPayloadV2Input": ContextPayloadV2Input,
+  "ContextScope": ContextScope,
   "Conversation": Conversation,
   "ConversationMessage": ConversationMessage,
   "ConversationMessageResponse": ConversationMessageResponse,
@@ -24176,6 +24429,8 @@ var typeMap = {
   "EventChannelConfigInput": EventChannelConfigInput,
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
+  "ExportContextRequest": ExportContextRequest,
+  "ExportContextResponse": ExportContextResponse,
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
   "ExportManualTranslationTemplateRequest": ExportManualTranslationTemplateRequest,
   "ExportManualTranslationsRequest": ExportManualTranslationsRequest,
@@ -24229,6 +24484,8 @@ var typeMap = {
   "GroupsImportListInput": GroupsImportListInput,
   "HeaderAttributeInput": HeaderAttributeInput,
   "HeaderUpdateInput": HeaderUpdateInput,
+  "ImportContextRequest": ImportContextRequest,
+  "ImportContextResponse": ImportContextResponse,
   "ImportDiagnostic": ImportDiagnostic,
   "ImportEPackAsyncTaskStatus": ImportEPackAsyncTaskStatus,
   "ImportFailure": ImportFailure,
@@ -90722,7 +90979,10 @@ export {
   PromiseConnectionConfigurationsApi as ConnectionConfigurationsApi,
   ConnectionInput,
   PromiseConnectionsApi as ConnectionsApi,
+  ContextExportSummary,
+  ContextImportSummary,
   ContextPayloadV2Input,
+  ContextScope,
   Conversation,
   ConversationMessage,
   ConversationMessageResponse,
@@ -90812,6 +91072,8 @@ export {
   EventChannelConfigInput,
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
+  ExportContextRequest,
+  ExportContextResponse,
   ExportLiveboardReportRequest,
   ExportManualTranslationTemplateRequest,
   ExportManualTranslationsRequest,
@@ -90870,6 +91132,8 @@ export {
   HttpException,
   HttpInfo,
   HttpMethod,
+  ImportContextRequest,
+  ImportContextResponse,
   ImportDiagnostic,
   ImportEPackAsyncTaskStatus,
   ImportFailure,

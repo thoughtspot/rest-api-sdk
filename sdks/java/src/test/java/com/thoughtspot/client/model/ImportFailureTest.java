@@ -60,4 +60,12 @@ public class ImportFailureTest {
         // TODO: test message
     }
 
+    /**
+     * Test the property 'entityKey'
+     */
+    @Test
+    public void entityKeyTest() {
+        // TODO: test entityKey
+    }
+
 }

@@ -64,7 +64,17 @@ public class ImportFailure implements Serializable {
     
     CHAR_LIMIT("CHAR_LIMIT"),
     
-    SCHEMA("SCHEMA");
+    SCHEMA("SCHEMA"),
+    
+    SCOPE("SCOPE"),
+    
+    UNRESOLVED_REFERENCE("UNRESOLVED_REFERENCE"),
+    
+    INVALID_RELATIONSHIP("INVALID_RELATIONSHIP"),
+    
+    UNRESOLVED_COLUMN("UNRESOLVED_COLUMN"),
+    
+    CHAR_BUDGET("CHAR_BUDGET");
 
     private String value;
 
@@ -123,6 +133,11 @@ public class ImportFailure implements Serializable {
   @SerializedName(SERIALIZED_NAME_MESSAGE)
   @javax.annotation.Nullable
   private String message;
+
+  public static final String SERIALIZED_NAME_ENTITY_KEY = "entity_key";
+  @SerializedName(SERIALIZED_NAME_ENTITY_KEY)
+  @javax.annotation.Nullable
+  private String entityKey;
 
   public ImportFailure() {
   }
@@ -202,6 +217,25 @@ public class ImportFailure implements Serializable {
     this.message = message;
   }
 
+
+  public ImportFailure entityKey(@javax.annotation.Nullable String entityKey) {
+    this.entityKey = entityKey;
+    return this;
+  }
+
+  /**
+   * Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later 
+   * @return entityKey
+   */
+  @javax.annotation.Nullable
+  public String getEntityKey() {
+    return entityKey;
+  }
+
+  public void setEntityKey(@javax.annotation.Nullable String entityKey) {
+    this.entityKey = entityKey;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -260,13 +294,14 @@ public class ImportFailure implements Serializable {
     return Objects.equals(this.lineNumber, importFailure.lineNumber) &&
         Objects.equals(this.reason, importFailure.reason) &&
         Objects.equals(this.fieldName, importFailure.fieldName) &&
-        Objects.equals(this.message, importFailure.message)&&
+        Objects.equals(this.message, importFailure.message) &&
+        Objects.equals(this.entityKey, importFailure.entityKey)&&
         Objects.equals(this.additionalProperties, importFailure.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lineNumber, reason, fieldName, message, additionalProperties);
+    return Objects.hash(lineNumber, reason, fieldName, message, entityKey, additionalProperties);
   }
 
   @Override
@@ -277,6 +312,7 @@ public class ImportFailure implements Serializable {
     sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    entityKey: ").append(toIndentedString(entityKey)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -304,6 +340,7 @@ public class ImportFailure implements Serializable {
     openapiFields.add("reason");
     openapiFields.add("field_name");
     openapiFields.add("message");
+    openapiFields.add("entity_key");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -334,6 +371,9 @@ public class ImportFailure implements Serializable {
       }
       if ((jsonObj.get("message") != null && !jsonObj.get("message").isJsonNull()) && !jsonObj.get("message").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `message` to be a primitive type in the JSON string but got `%s`", jsonObj.get("message").toString()));
+      }
+      if ((jsonObj.get("entity_key") != null && !jsonObj.get("entity_key").isJsonNull()) && !jsonObj.get("entity_key").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `entity_key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("entity_key").toString()));
       }
   }
 
