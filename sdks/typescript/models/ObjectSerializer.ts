@@ -296,6 +296,7 @@ export * from '../models/MetadataInput';
 export * from '../models/MetadataListItemInput';
 export * from '../models/MetadataObject';
 export * from '../models/MetadataResponse';
+export * from '../models/MetadataSearchReadinessResponse';
 export * from '../models/MetadataSearchResponse';
 export * from '../models/MetadataSearchSortOptions';
 export * from '../models/ModelTableList';
@@ -904,6 +905,7 @@ import { MetadataInput , MetadataInputTypeEnum   } from '../models/MetadataInput
 import { MetadataListItemInput   , MetadataListItemInputTypeEnum  , MetadataListItemInputSubtypesEnum   } from '../models/MetadataListItemInput';
 import { MetadataObject , MetadataObjectTypeEnum   } from '../models/MetadataObject';
 import { MetadataResponse  , MetadataResponseTypeEnum   } from '../models/MetadataResponse';
+import { MetadataSearchReadinessResponse, MetadataSearchReadinessResponseStateEnum       } from '../models/MetadataSearchReadinessResponse';
 import { MetadataSearchResponse  , MetadataSearchResponseMetadataTypeEnum           } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions, MetadataSearchSortOptionsFieldNameEnum  , MetadataSearchSortOptionsOrderEnum   } from '../models/MetadataSearchSortOptions';
 import { ModelTableList } from '../models/ModelTableList';
@@ -1362,6 +1364,7 @@ let enumsMap: Set<string> = new Set<string>([
     "MetadataListItemInputSubtypesEnum",
     "MetadataObjectTypeEnum",
     "MetadataResponseTypeEnum",
+    "MetadataSearchReadinessResponseStateEnum",
     "MetadataSearchResponseMetadataTypeEnum",
     "MetadataSearchSortOptionsFieldNameEnum",
     "MetadataSearchSortOptionsOrderEnum",
@@ -1869,6 +1872,7 @@ let typeMap: {[index: string]: any} = {
     "MetadataListItemInput": MetadataListItemInput,
     "MetadataObject": MetadataObject,
     "MetadataResponse": MetadataResponse,
+    "MetadataSearchReadinessResponse": MetadataSearchReadinessResponse,
     "MetadataSearchResponse": MetadataSearchResponse,
     "MetadataSearchSortOptions": MetadataSearchSortOptions,
     "ModelTableList": ModelTableList,

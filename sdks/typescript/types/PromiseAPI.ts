@@ -300,6 +300,7 @@ import { MetadataInput } from '../models/MetadataInput';
 import { MetadataListItemInput } from '../models/MetadataListItemInput';
 import { MetadataObject } from '../models/MetadataObject';
 import { MetadataResponse } from '../models/MetadataResponse';
+import { MetadataSearchReadinessResponse } from '../models/MetadataSearchReadinessResponse';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
 import { MetadataSearchSortOptions } from '../models/MetadataSearchSortOptions';
 import { ModelTableList } from '../models/ModelTableList';

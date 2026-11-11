@@ -310,6 +310,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.metadata_list_item_input import MetadataListItemInput
     from thoughtspot_rest_api_sdk.models.metadata_object import MetadataObject
     from thoughtspot_rest_api_sdk.models.metadata_response import MetadataResponse
+    from thoughtspot_rest_api_sdk.models.metadata_search_readiness_response import MetadataSearchReadinessResponse
     from thoughtspot_rest_api_sdk.models.metadata_search_response import MetadataSearchResponse
     from thoughtspot_rest_api_sdk.models.metadata_search_sort_options import MetadataSearchSortOptions
     from thoughtspot_rest_api_sdk.models.model_table_list import ModelTableList
@@ -925,6 +926,7 @@ from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput
 from thoughtspot_rest_api_sdk.models.metadata_list_item_input import MetadataListItemInput
 from thoughtspot_rest_api_sdk.models.metadata_object import MetadataObject
 from thoughtspot_rest_api_sdk.models.metadata_response import MetadataResponse
+from thoughtspot_rest_api_sdk.models.metadata_search_readiness_response import MetadataSearchReadinessResponse
 from thoughtspot_rest_api_sdk.models.metadata_search_response import MetadataSearchResponse
 from thoughtspot_rest_api_sdk.models.metadata_search_sort_options import MetadataSearchSortOptions
 from thoughtspot_rest_api_sdk.models.model_table_list import ModelTableList

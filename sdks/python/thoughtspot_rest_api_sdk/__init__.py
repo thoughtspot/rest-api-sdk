@@ -367,6 +367,7 @@ __all__ = [
     "MetadataListItemInput",
     "MetadataObject",
     "MetadataResponse",
+    "MetadataSearchReadinessResponse",
     "MetadataSearchResponse",
     "MetadataSearchSortOptions",
     "ModelTableList",
@@ -1026,6 +1027,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.metadata_list_item_input import MetadataListItemInput as MetadataListItemInput
     from thoughtspot_rest_api_sdk.models.metadata_object import MetadataObject as MetadataObject
     from thoughtspot_rest_api_sdk.models.metadata_response import MetadataResponse as MetadataResponse
+    from thoughtspot_rest_api_sdk.models.metadata_search_readiness_response import MetadataSearchReadinessResponse as MetadataSearchReadinessResponse
     from thoughtspot_rest_api_sdk.models.metadata_search_response import MetadataSearchResponse as MetadataSearchResponse
     from thoughtspot_rest_api_sdk.models.metadata_search_sort_options import MetadataSearchSortOptions as MetadataSearchSortOptions
     from thoughtspot_rest_api_sdk.models.model_table_list import ModelTableList as ModelTableList
@@ -1691,6 +1693,7 @@ from thoughtspot_rest_api_sdk.models.metadata_input import MetadataInput as Meta
 from thoughtspot_rest_api_sdk.models.metadata_list_item_input import MetadataListItemInput as MetadataListItemInput
 from thoughtspot_rest_api_sdk.models.metadata_object import MetadataObject as MetadataObject
 from thoughtspot_rest_api_sdk.models.metadata_response import MetadataResponse as MetadataResponse
+from thoughtspot_rest_api_sdk.models.metadata_search_readiness_response import MetadataSearchReadinessResponse as MetadataSearchReadinessResponse
 from thoughtspot_rest_api_sdk.models.metadata_search_response import MetadataSearchResponse as MetadataSearchResponse
 from thoughtspot_rest_api_sdk.models.metadata_search_sort_options import MetadataSearchSortOptions as MetadataSearchSortOptions
 from thoughtspot_rest_api_sdk.models.model_table_list import ModelTableList as ModelTableList

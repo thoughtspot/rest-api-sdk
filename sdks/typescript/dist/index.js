@@ -11069,6 +11069,50 @@ _MetadataResponse.attributeTypeMap = [
 ];
 var MetadataResponse = _MetadataResponse;
 
+// models/MetadataSearchReadinessResponse.ts
+var _MetadataSearchReadinessResponse = class _MetadataSearchReadinessResponse {
+  static getAttributeTypeMap() {
+    return _MetadataSearchReadinessResponse.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_MetadataSearchReadinessResponse.discriminator = void 0;
+_MetadataSearchReadinessResponse.mapping = void 0;
+_MetadataSearchReadinessResponse.attributeTypeMap = [
+  {
+    "name": "state",
+    "baseName": "state",
+    "type": "MetadataSearchReadinessResponseStateEnum",
+    "format": ""
+  },
+  {
+    "name": "metadata_id",
+    "baseName": "metadata_id",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "object_version",
+    "baseName": "object_version",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "indexed_version",
+    "baseName": "indexed_version",
+    "type": "number",
+    "format": "float"
+  },
+  {
+    "name": "detail",
+    "baseName": "detail",
+    "type": "string",
+    "format": ""
+  }
+];
+var MetadataSearchReadinessResponse = _MetadataSearchReadinessResponse;
+
 // models/MetadataSearchResponse.ts
 var _MetadataSearchResponse = class _MetadataSearchResponse {
   static getAttributeTypeMap() {
@@ -23726,6 +23770,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "MetadataListItemInputSubtypesEnum",
   "MetadataObjectTypeEnum",
   "MetadataResponseTypeEnum",
+  "MetadataSearchReadinessResponseStateEnum",
   "MetadataSearchResponseMetadataTypeEnum",
   "MetadataSearchSortOptionsFieldNameEnum",
   "MetadataSearchSortOptionsOrderEnum",
@@ -24232,6 +24277,7 @@ var typeMap = {
   "MetadataListItemInput": MetadataListItemInput,
   "MetadataObject": MetadataObject,
   "MetadataResponse": MetadataResponse,
+  "MetadataSearchReadinessResponse": MetadataSearchReadinessResponse,
   "MetadataSearchResponse": MetadataSearchResponse,
   "MetadataSearchSortOptions": MetadataSearchSortOptions,
   "ModelTableList": ModelTableList,
@@ -85630,6 +85676,7 @@ export {
   MetadataListItemInput,
   MetadataObject,
   MetadataResponse,
+  MetadataSearchReadinessResponse,
   MetadataSearchResponse,
   MetadataSearchSortOptions,
   ModelTableList,
