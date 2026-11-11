@@ -12939,7 +12939,7 @@
     "/api/rest/2.0/metadata/{logical_table_identifier}/build-index": {
       "post": {
         "operationId": "buildMetadataIndex",
-        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table, view, or model.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.\n\nNote: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nTriggers a rebuild of the search index of a logical table, such as a table or view.\n\nUse this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.\n\nRequires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.\n\nThe request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.\n\nNote: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.\n\n\n\n\n#### Endpoint URL\n",
         "tags": [
           "Metadata",
           "27.1.0.cl"
@@ -12962,7 +12962,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "GUID, name, or custom object ID of the logical table (such as a table, view, or model) whose search index to rebuild."
+            "description": "GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild."
           }
         ],
         "responses": {
@@ -13805,6 +13805,117 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SqlQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/{guid}/search-readiness": {
+      "get": {
+        "operationId": "fetchMetadataSearchReadiness",
+        "description": "\n <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nChecks whether a metadata object is available in Search.\n\nAfter you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object's latest version is available, for example before running a search query on a Model you just imported via TML.\n\nRequires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\nSpecify the GUID of the metadata object in the `guid` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).\n\nThe response `state` is one of the following:\n\n* `OBJECT_READY` - The object's latest version is available in Search.\n* `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval.\n* `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked.\n* `OBJECT_NOT_VALID` - `guid` is not a valid GUID, or no object with that GUID exists.\n\nThe response also includes `object_version`, the metadata version at which the object was last written, and `indexed_version`, the latest metadata version indexed by Search. The object is ready once `indexed_version` is greater than or equal to `object_version`.\n\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "guid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GUID of the metadata object to check. Supported object types are Tables and\nModels (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is\ndetected automatically from the GUID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the search readiness state of the object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataSearchReadinessResponse"
+                },
+                "examples": {
+                  "example_1": {
+                    "value": {
+                      "state": "OBJECT_READY",
+                      "metadata_id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": 18342,
+                      "indexed_version": 18350,
+                      "detail": "Object is available for Search"
+                    }
+                  },
+                  "example_2": {
+                    "value": {
+                      "state": "OBJECT_NOT_READY",
+                      "metadata_id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": 18342,
+                      "indexed_version": 18320,
+                      "detail": "Search is serving version 18320, object requires version 18342"
+                    }
+                  },
+                  "example_3": {
+                    "value": {
+                      "state": "TYPE_NOT_SUPPORTED",
+                      "metadata_id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": -1,
+                      "indexed_version": -1,
+                      "detail": "Object type 'ANSWER' is not supported. Supported types: LOGICAL_TABLE, USER, USER_GROUP"
+                    }
+                  },
+                  "example_4": {
+                    "value": {
+                      "state": "OBJECT_NOT_VALID",
+                      "metadata_id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+                      "object_version": -1,
+                      "indexed_version": -1,
+                      "detail": "Object not found"
+                    }
+                  }
                 }
               }
             }
@@ -41866,6 +41977,47 @@
           }
         },
         "description": "Response format associated with fetch SQL query api"
+      },
+      "MetadataSearchReadinessResponse": {
+        "type": "object",
+        "required": [
+          "state",
+          "metadata_id",
+          "object_version",
+          "indexed_version"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "OBJECT_NOT_VALID",
+              "TYPE_NOT_SUPPORTED",
+              "OBJECT_NOT_READY",
+              "OBJECT_READY"
+            ],
+            "description": "Readiness state of the object. OBJECT_READY means the object is available in\nSearch; OBJECT_NOT_READY means Search has not yet indexed its latest version;\nOBJECT_NOT_VALID means the identifier is not a valid GUID or no such object exists."
+          },
+          "metadata_id": {
+            "type": "string",
+            "description": "GUID of the metadata object that was checked."
+          },
+          "object_version": {
+            "type": "number",
+            "format": "float",
+            "description": "Metadata commit version at which the object was last written. Returns -1 when\nthe state is OBJECT_NOT_VALID or TYPE_NOT_SUPPORTED."
+          },
+          "indexed_version": {
+            "type": "number",
+            "format": "float",
+            "description": "Latest metadata version indexed by Search. The object is ready once this is\ngreater than or equal to object_version. Returns -1 when the state is\nOBJECT_NOT_VALID or TYPE_NOT_SUPPORTED, or when the Search service is\nunavailable."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Human-readable explanation of the readiness state.",
+            "nullable": true
+          }
+        },
+        "description": "Search readiness of a metadata object."
       },
       "PdfOptionsInput": {
         "type": "object",
