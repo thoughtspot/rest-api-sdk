@@ -28,6 +28,9 @@ __all__ = [
     "ThoughtSpotTokenProvider",
     "TokenResult",
     "AIApi",
+    "AIAnalystApi",
+    "AIConversationApi",
+    "AIManagementApi",
     "AuthenticationApi",
     "CollectionsApi",
     "ConnectionConfigurationsApi",
@@ -684,6 +687,9 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.token_provider import ThoughtSpotTokenProvider as ThoughtSpotTokenProvider
     from thoughtspot_rest_api_sdk.token_provider import TokenResult as TokenResult
     from thoughtspot_rest_api_sdk.api.ai_api import AIApi as AIApi
+    from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi as AIAnalystApi
+    from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi as AIConversationApi
+    from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi as AIManagementApi
     from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi as AuthenticationApi
     from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi as CollectionsApi
     from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi as ConnectionConfigurationsApi
@@ -1350,6 +1356,9 @@ else:
 from thoughtspot_rest_api_sdk.token_provider import ThoughtSpotTokenProvider as ThoughtSpotTokenProvider
 from thoughtspot_rest_api_sdk.token_provider import TokenResult as TokenResult
 from thoughtspot_rest_api_sdk.api.ai_api import AIApi as AIApi
+from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi as AIAnalystApi
+from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi as AIConversationApi
+from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi as AIManagementApi
 from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi as AuthenticationApi
 from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi as CollectionsApi
 from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi as ConnectionConfigurationsApi

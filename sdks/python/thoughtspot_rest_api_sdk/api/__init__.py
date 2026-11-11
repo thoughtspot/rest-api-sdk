@@ -3,6 +3,9 @@
 if __import__("typing").TYPE_CHECKING:
     # import apis into api package
     from thoughtspot_rest_api_sdk.api.ai_api import AIApi
+    from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi
+    from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi
+    from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi
     from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi
     from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi
     from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi
@@ -44,6 +47,9 @@ else:
             *as_package(__file__),
             """# import apis into api package
 from thoughtspot_rest_api_sdk.api.ai_api import AIApi
+from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi
+from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi
+from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi
 from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi
 from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi
 from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi

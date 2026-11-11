@@ -1,0 +1,2140 @@
+/*
+ * NOTE: This class is auto generated. Do not edit the class manually.
+ */
+
+package com.thoughtspot.client.api;
+
+import com.thoughtspot.client.ApiCallback;
+import com.thoughtspot.client.ApiClient;
+import com.thoughtspot.client.ApiClientConfiguration;
+import com.thoughtspot.client.ApiException;
+import com.thoughtspot.client.ApiResponse;
+import com.thoughtspot.client.Configuration;
+import com.thoughtspot.client.Pair;
+import com.thoughtspot.client.ProgressRequestBody;
+import com.thoughtspot.client.ProgressResponseBody;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+
+
+import com.thoughtspot.client.model.AgentConversation;
+import com.thoughtspot.client.model.Conversation;
+import com.thoughtspot.client.model.CreateAgentConversationRequest;
+import com.thoughtspot.client.model.CreateConversationRequest;
+import com.thoughtspot.client.model.ErrorResponse;
+import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
+import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
+import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
+import com.thoughtspot.client.model.GetDataSourceSuggestionsRequest;
+import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
+import com.thoughtspot.client.model.LoadAnswerResponse;
+import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
+import com.thoughtspot.client.model.ResponseMessage;
+import com.thoughtspot.client.model.SendAgentConversationMessageRequest;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreaming200Response;
+import com.thoughtspot.client.model.SendAgentConversationMessageStreamingRequest;
+import com.thoughtspot.client.model.SendAgentMessageRequest;
+import com.thoughtspot.client.model.SendAgentMessageResponse;
+import com.thoughtspot.client.model.SendAgentMessageStreamingRequest;
+import com.thoughtspot.client.model.SendMessageRequest;
+import com.thoughtspot.client.model.SingleAnswerRequest;
+import com.thoughtspot.client.model.StopConversationRequest;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.io.InputStream;
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+public class AiConversationApi {
+    private ApiClient localVarApiClient;
+    private ApiClientConfiguration localVarApiClientConfiguration;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
+
+    public AiConversationApi() {
+        this(Configuration.getDefaultApiClient());
+    }
+
+    public AiConversationApi(ApiClient apiClient) {
+        this.localVarApiClient = apiClient;
+    }
+
+    public AiConversationApi(ApiClientConfiguration apiClientConfiguration) {
+        this.localVarApiClientConfiguration = apiClientConfiguration;
+        this.localVarApiClient = new ApiClient(apiClientConfiguration);
+    }
+
+    public ApiClient getApiClient() {
+        return localVarApiClient;
+    }
+
+    public void setApiClient(ApiClient apiClient) {
+        this.localVarApiClient = apiClient;
+    }
+
+    public ApiClientConfiguration getApiClientConfiguration() {
+        return localVarApiClientConfiguration;
+    }
+
+    public void applyApiClientConfiguration(ApiClientConfiguration apiClientConfiguration) {
+        this.localVarApiClientConfiguration = apiClientConfiguration;
+        if (localVarApiClient != null) {
+            localVarApiClient.applyApiClientConfiguration(apiClientConfiguration);
+        } else {
+            localVarApiClient = new ApiClient(apiClientConfiguration);
+        }
+    }
+
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
+    /**
+     * Build call for createAgentConversation
+     * @param createAgentConversationRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAgentConversationCall(CreateAgentConversationRequest createAgentConversationRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createAgentConversationRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/conversation/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAgentConversationValidateBeforeCall(CreateAgentConversationRequest createAgentConversationRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createAgentConversationRequest' is set
+        if (createAgentConversationRequest == null) {
+            throw new ApiException("Missing the required parameter 'createAgentConversationRequest' when calling createAgentConversation(Async)");
+        }
+
+        return createAgentConversationCall(createAgentConversationRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.2.0.cl or later   Creates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in which creation settings they accept and in how validation errors are reported. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Conversations can carry &#x60;additional_instructions&#x60;, and of &#x60;conversation_settings&#x60; only &#x60;enable_save_chat&#x60; is used.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;]     }   },   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot;,   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it here and on every later request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60;: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60;: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60;: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;400&#x60;. - &#x60;additional_instructions&#x60; *(optional, this version only)*: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. Not allowed with &#x60;analyst_identifier&#x60;, since the analyst brings its own instructions. - &#x60;conversation_settings&#x60; *(optional)*: only &#x60;enable_save_chat&#x60; applies (default: &#x60;false&#x60;). When &#x60;true&#x60;, the conversation appears in &#x60;getConversationList&#x60; once it has messages. When &#x60;false&#x60;, it is kept out of the list but can still be continued and deleted by its identifier. The other settings are ignored.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation, together with &#x60;spotter_experience_version&#x60; &#x60;V2&#x60;. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;400&#x60;. A data source or analyst that does not exist or that the caller cannot view is reported as a &#x60;400&#x60; that lists those identifiers.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;     }   },   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;422&#x60;. - &#x60;conversation_settings&#x60; *(optional)*: controls which Spotter capabilities are enabled for the conversation:   - &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history - &#x60;additional_instructions&#x60;: not available in this version; returns a &#x60;400&#x60;.  &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;422&#x60;, and an &#x60;analyst_identifier&#x60; that does not exist in the caller&#39;s Org returns &#x60;404&#x60;.  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                             | | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, &#x60;additional_instructions&#x60; is set on &#x60;V1&#x60; or with &#x60;analyst_identifier&#x60;, or, on &#x60;V2&#x60;, the request fails validation. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in &#x60;analyst_identifier&#x60;. | | 404  | Not found — on &#x60;V1&#x60;, no analyst with the given &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org.                                                          | | 422  | Unprocessable entity — on &#x60;V1&#x60;, the request fails validation: both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60; were provided, neither was provided, or &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context without a data source identifier). |  &gt; ###### Note: &gt; &gt; - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, &#x60;additional_instructions&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationRequest  (required)
+     * @return AgentConversation
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public AgentConversation createAgentConversation(CreateAgentConversationRequest createAgentConversationRequest) throws ApiException {
+        ApiResponse<AgentConversation> localVarResp = createAgentConversationWithHttpInfo(createAgentConversationRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.2.0.cl or later   Creates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in which creation settings they accept and in how validation errors are reported. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Conversations can carry &#x60;additional_instructions&#x60;, and of &#x60;conversation_settings&#x60; only &#x60;enable_save_chat&#x60; is used.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;]     }   },   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot;,   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it here and on every later request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60;: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60;: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60;: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;400&#x60;. - &#x60;additional_instructions&#x60; *(optional, this version only)*: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. Not allowed with &#x60;analyst_identifier&#x60;, since the analyst brings its own instructions. - &#x60;conversation_settings&#x60; *(optional)*: only &#x60;enable_save_chat&#x60; applies (default: &#x60;false&#x60;). When &#x60;true&#x60;, the conversation appears in &#x60;getConversationList&#x60; once it has messages. When &#x60;false&#x60;, it is kept out of the list but can still be continued and deleted by its identifier. The other settings are ignored.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation, together with &#x60;spotter_experience_version&#x60; &#x60;V2&#x60;. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;400&#x60;. A data source or analyst that does not exist or that the caller cannot view is reported as a &#x60;400&#x60; that lists those identifiers.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;     }   },   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;422&#x60;. - &#x60;conversation_settings&#x60; *(optional)*: controls which Spotter capabilities are enabled for the conversation:   - &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history - &#x60;additional_instructions&#x60;: not available in this version; returns a &#x60;400&#x60;.  &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;422&#x60;, and an &#x60;analyst_identifier&#x60; that does not exist in the caller&#39;s Org returns &#x60;404&#x60;.  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                             | | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, &#x60;additional_instructions&#x60; is set on &#x60;V1&#x60; or with &#x60;analyst_identifier&#x60;, or, on &#x60;V2&#x60;, the request fails validation. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in &#x60;analyst_identifier&#x60;. | | 404  | Not found — on &#x60;V1&#x60;, no analyst with the given &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org.                                                          | | 422  | Unprocessable entity — on &#x60;V1&#x60;, the request fails validation: both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60; were provided, neither was provided, or &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context without a data source identifier). |  &gt; ###### Note: &gt; &gt; - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, &#x60;additional_instructions&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationRequest  (required)
+     * @return ApiResponse&lt;AgentConversation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AgentConversation> createAgentConversationWithHttpInfo(CreateAgentConversationRequest createAgentConversationRequest) throws ApiException {
+        okhttp3.Call localVarCall = createAgentConversationValidateBeforeCall(createAgentConversationRequest, null);
+        Type localVarReturnType = new TypeToken<AgentConversation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.2.0.cl or later   Creates a new Spotter agent conversation based on the provided context and settings. The endpoint was in Beta from 26.2.0.cl through 26.4.0.cl.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in which creation settings they accept and in how validation errors are reported. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Conversations can carry &#x60;additional_instructions&#x60;, and of &#x60;conversation_settings&#x60; only &#x60;enable_save_chat&#x60; is used.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifiers\&quot;: [\&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;]     }   },   \&quot;additional_instructions\&quot;: \&quot;Answer concisely and always report revenue in thousands.\&quot;,   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it here and on every later request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60;: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60;: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60;: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;400&#x60;. - &#x60;additional_instructions&#x60; *(optional, this version only)*: guidance appended to the agent&#39;s instructions on every message in this conversation. Use it to set a persona, a preferred output format, or domain rules. It cannot be changed after the conversation is created, and it is sent with every message, so keep it short. Not allowed with &#x60;analyst_identifier&#x60;, since the analyst brings its own instructions. - &#x60;conversation_settings&#x60; *(optional)*: only &#x60;enable_save_chat&#x60; applies (default: &#x60;false&#x60;). When &#x60;true&#x60;, the conversation appears in &#x60;getConversationList&#x60; once it has messages. When &#x60;false&#x60;, it is kept out of the list but can still be continued and deleted by its identifier. The other settings are ignored.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;8401773265129884672\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation, together with &#x60;spotter_experience_version&#x60; &#x60;V2&#x60;. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;400&#x60;. A data source or analyst that does not exist or that the caller cannot view is reported as a &#x60;400&#x60; that lists those identifiers.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/create&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;metadata_context\&quot;: {     \&quot;type\&quot;: \&quot;DATA_SOURCE\&quot;,     \&quot;data_source_context\&quot;: {       \&quot;data_source_identifier\&quot;: \&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890\&quot;     }   },   \&quot;conversation_settings\&quot;: { \&quot;enable_save_chat\&quot;: true } } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - The conversation context, defined by exactly one of:   - &#x60;metadata_context&#x60;: defines the conversation context by data source. The context type can be one of:     - &#x60;DATA_SOURCE&#x60; *(available from 26.5.0.cl)*: targets a specific data source. Provide &#x60;data_source_identifier&#x60; in &#x60;data_source_context&#x60; for a single data source, or &#x60;data_source_identifiers&#x60; for multi-data-source context. The deprecated &#x60;guid&#x60; field is accepted for backwards compatibility.     - &#x60;AUTO_MODE&#x60; *(available from 26.5.0.cl)*: automatically discovers and selects the most relevant datasets for the user&#39;s queries.   - &#x60;analyst_identifier&#x60; *(available from 26.10.0.cl)*: unique identifier of a Spotter Analyst to start the conversation from. The conversation uses the analyst&#39;s configuration — its data sources, agent instructions, and connectors — so &#x60;metadata_context&#x60; must be omitted. The caller must be the analyst&#39;s author, have the analyst shared with them, or hold admin / Spotter-management privileges.    Passing both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60;, or neither, returns a &#x60;422&#x60;. - &#x60;conversation_settings&#x60; *(optional)*: controls which Spotter capabilities are enabled for the conversation:   - &#x60;enable_contextual_change_analysis&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_natural_language_answer_generation&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_reasoning&#x60; (default: &#x60;true&#x60;, **deprecated from 26.2.0.cl**) — always enabled; setting this to &#x60;false&#x60; has no effect on versions &gt;&#x3D; 26.2.0.cl   - &#x60;enable_save_chat&#x60; (default: &#x60;false&#x60;, *available from 26.5.0.cl*) — enables saving the conversation for later retrieval via conversation history - &#x60;additional_instructions&#x60;: not available in this version; returns a &#x60;400&#x60;.  &gt; **Note for callers on versions 26.2.0.cl – 26.4.0.cl (Beta):** use the lowercase &#x60;data_source&#x60; enum value with the &#x60;guid&#x60; field instead of the above. Example: &#x60;{ \&quot;type\&quot;: \&quot;data_source\&quot;, \&quot;data_source_context\&quot;: { \&quot;guid\&quot;: \&quot;&lt;worksheet-id&gt;\&quot; } }&#x60;.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_id\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;conversation_identifier\&quot;: \&quot;wwHQ5j8O8dQC\&quot;,   \&quot;analyst_id\&quot;: null } &#x60;&#x60;&#x60;  - &#x60;conversation_identifier&#x60;: pass it to &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60; to send messages in this conversation. Treat it as an opaque string: store and return it as received rather than parsing or validating its shape. - &#x60;conversation_id&#x60;: the same value, kept for backwards compatibility; use &#x60;conversation_identifier&#x60; for new integrations. - &#x60;analyst_id&#x60;: the analyst&#39;s ID when the conversation is started from an analyst; &#x60;null&#x60; otherwise.  Validation failures return &#x60;422&#x60;, and an &#x60;analyst_identifier&#x60; that does not exist in the caller&#39;s Org returns &#x60;404&#x60;.  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                             | | ---- | --------------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, &#x60;additional_instructions&#x60; is set on &#x60;V1&#x60; or with &#x60;analyst_identifier&#x60;, or, on &#x60;V2&#x60;, the request fails validation. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege, lacks view permission on the specified metadata object, or has no access to the analyst specified in &#x60;analyst_identifier&#x60;. | | 404  | Not found — on &#x60;V1&#x60;, no analyst with the given &#x60;analyst_identifier&#x60; exists in the caller&#39;s Org.                                                          | | 422  | Unprocessable entity — on &#x60;V1&#x60;, the request fails validation: both &#x60;analyst_identifier&#x60; and &#x60;metadata_context&#x60; were provided, neither was provided, or &#x60;metadata_context&#x60; is malformed (for example, &#x60;DATA_SOURCE&#x60; context without a data source identifier). |  &gt; ###### Note: &gt; &gt; - This endpoint was in Beta from 26.2.0.cl through 26.4.0.cl and is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, &#x60;additional_instructions&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createAgentConversationRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAgentConversationAsync(CreateAgentConversationRequest createAgentConversationRequest, final ApiCallback<AgentConversation> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createAgentConversationValidateBeforeCall(createAgentConversationRequest, _callback);
+        Type localVarReturnType = new TypeToken<AgentConversation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createConversation
+     * @param createConversationRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call createConversationCall(CreateConversationRequest createConversationRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = createConversationRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/conversation/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createConversationValidateBeforeCall(CreateConversationRequest createConversationRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'createConversationRequest' is set
+        if (createConversationRequest == null) {
+            throw new ApiException("Missing the required parameter 'createConversationRequest' when calling createConversation(Async)");
+        }
+
+        return createConversationCall(createConversationRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; instead.  Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - &#x60;tokens&#x60;: a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item type],[state]\&quot;&#x60;)  If the request is successful, ThoughtSpot returns a unique &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createConversationRequest  (required)
+     * @return Conversation
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public Conversation createConversation(CreateConversationRequest createConversationRequest) throws ApiException {
+        ApiResponse<Conversation> localVarResp = createConversationWithHttpInfo(createConversationRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; instead.  Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - &#x60;tokens&#x60;: a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item type],[state]\&quot;&#x60;)  If the request is successful, ThoughtSpot returns a unique &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createConversationRequest  (required)
+     * @return ApiResponse&lt;Conversation&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<Conversation> createConversationWithHttpInfo(CreateConversationRequest createConversationRequest) throws ApiException {
+        okhttp3.Call localVarCall = createConversationValidateBeforeCall(createConversationRequest, null);
+        Type localVarReturnType = new TypeToken<Conversation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; instead.  Creates a new conversation session tied to a specific data model for AI-driven natural language querying.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;metadata_identifier&#x60;: the unique ID of the data source that provides context for the conversation  Optionally, you can provide: - &#x60;tokens&#x60;: a token string to set initial context for the conversation (e.g., &#x60;\&quot;[sales],[item type],[state]\&quot;&#x60;)  If the request is successful, ThoughtSpot returns a unique &#x60;conversation_identifier&#x60; that must be passed to &#x60;sendMessage&#x60; to continue the conversation.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param createConversationRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call createConversationAsync(CreateConversationRequest createConversationRequest, final ApiCallback<Conversation> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createConversationValidateBeforeCall(createConversationRequest, _callback);
+        Type localVarReturnType = new TypeToken<Conversation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getDataSourceSuggestions
+     * @param getDataSourceSuggestionsRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call getDataSourceSuggestionsCall(GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = getDataSourceSuggestionsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/data-source-suggestions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getDataSourceSuggestionsValidateBeforeCall(GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'getDataSourceSuggestionsRequest' is set
+        if (getDataSourceSuggestionsRequest == null) {
+            throw new ApiException("Missing the required parameter 'getDataSourceSuggestionsRequest' when calling getDataSourceSuggestions(Async)");
+        }
+
+        return getDataSourceSuggestionsCall(getDataSourceSuggestionsRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.15.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter selects the data source within the conversation.  Suggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to find relevant data sources for  If the request is successful, the API returns a ranked list of suggested data sources, each containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source   - &#x60;data_source_identifier&#x60;: the unique ID of the data source   - &#x60;data_source_name&#x60;: the display name of the data source   - &#x60;description&#x60;: a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining why the data source was recommended  #### Error responses  | Code | Description                                                                                                                                | |------|--------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the underlying metadata entities. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param getDataSourceSuggestionsRequest  (required)
+     * @return EurekaDataSourceSuggestionResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public EurekaDataSourceSuggestionResponse getDataSourceSuggestions(GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest) throws ApiException {
+        ApiResponse<EurekaDataSourceSuggestionResponse> localVarResp = getDataSourceSuggestionsWithHttpInfo(getDataSourceSuggestionsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.15.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter selects the data source within the conversation.  Suggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to find relevant data sources for  If the request is successful, the API returns a ranked list of suggested data sources, each containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source   - &#x60;data_source_identifier&#x60;: the unique ID of the data source   - &#x60;data_source_name&#x60;: the display name of the data source   - &#x60;description&#x60;: a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining why the data source was recommended  #### Error responses  | Code | Description                                                                                                                                | |------|--------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the underlying metadata entities. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param getDataSourceSuggestionsRequest  (required)
+     * @return ApiResponse&lt;EurekaDataSourceSuggestionResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<EurekaDataSourceSuggestionResponse> getDataSourceSuggestionsWithHttpInfo(GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest) throws ApiException {
+        okhttp3.Call localVarCall = getDataSourceSuggestionsValidateBeforeCall(getDataSourceSuggestionsRequest, null);
+        Type localVarReturnType = new TypeToken<EurekaDataSourceSuggestionResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.15.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter selects the data source within the conversation.  Suggests the most relevant data sources for a given natural language query, ranked by confidence with LLM-generated reasoning.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the underlying metadata entities referenced in the response.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to find relevant data sources for  If the request is successful, the API returns a ranked list of suggested data sources, each containing: - &#x60;confidence&#x60;: a float score indicating the model&#39;s confidence in the relevance of the suggestion - &#x60;details&#x60;: metadata about the data source   - &#x60;data_source_identifier&#x60;: the unique ID of the data source   - &#x60;data_source_name&#x60;: the display name of the data source   - &#x60;description&#x60;: a description of the data source - &#x60;reasoning&#x60;: LLM-generated rationale explaining why the data source was recommended  #### Error responses  | Code | Description                                                                                                                                | |------|--------------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                       | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the underlying metadata entities. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before it is made Generally Available. &gt; * This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param getDataSourceSuggestionsRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call getDataSourceSuggestionsAsync(GetDataSourceSuggestionsRequest getDataSourceSuggestionsRequest, final ApiCallback<EurekaDataSourceSuggestionResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getDataSourceSuggestionsValidateBeforeCall(getDataSourceSuggestionsRequest, _callback);
+        Type localVarReturnType = new TypeToken<EurekaDataSourceSuggestionResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getRelevantQuestions
+     * @param getRelevantQuestionsRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call getRelevantQuestionsCall(GetRelevantQuestionsRequest getRelevantQuestionsRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = getRelevantQuestionsRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/relevant-questions/";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getRelevantQuestionsValidateBeforeCall(GetRelevantQuestionsRequest getRelevantQuestionsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'getRelevantQuestionsRequest' is set
+        if (getRelevantQuestionsRequest == null) {
+            throw new ApiException("Missing the required parameter 'getRelevantQuestionsRequest' when calling getRelevantQuestions(Async)");
+        }
+
+        return getRelevantQuestionsCall(getRelevantQuestionsRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.13.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter decomposes the question within the conversation.  Breaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced metadata objects.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to decompose into analytical sub-questions - &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide question generation:   - &#x60;conversation_identifier&#x60; — an existing conversation session ID   - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs   - &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs   - &#x60;data_source_identifiers&#x60; — a list of data source GUIDs  Optional parameters for refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality   - &#x60;content&#x60; — supplementary text or CSV data as string input   - &#x60;instructions&#x60; — custom text instructions for the AI system - &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default: &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation instead of returning cached results  If the request is successful, the API returns a list of relevant analytical questions, each containing: - &#x60;query&#x60;: the generated sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data source  #### Error responses  | Code | Description                                                                                                                           | |------|---------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view access to the referenced metadata objects. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param getRelevantQuestionsRequest  (required)
+     * @return EurekaGetRelevantQuestionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public EurekaGetRelevantQuestionsResponse getRelevantQuestions(GetRelevantQuestionsRequest getRelevantQuestionsRequest) throws ApiException {
+        ApiResponse<EurekaGetRelevantQuestionsResponse> localVarResp = getRelevantQuestionsWithHttpInfo(getRelevantQuestionsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.13.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter decomposes the question within the conversation.  Breaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced metadata objects.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to decompose into analytical sub-questions - &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide question generation:   - &#x60;conversation_identifier&#x60; — an existing conversation session ID   - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs   - &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs   - &#x60;data_source_identifiers&#x60; — a list of data source GUIDs  Optional parameters for refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality   - &#x60;content&#x60; — supplementary text or CSV data as string input   - &#x60;instructions&#x60; — custom text instructions for the AI system - &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default: &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation instead of returning cached results  If the request is successful, the API returns a list of relevant analytical questions, each containing: - &#x60;query&#x60;: the generated sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data source  #### Error responses  | Code | Description                                                                                                                           | |------|---------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view access to the referenced metadata objects. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param getRelevantQuestionsRequest  (required)
+     * @return ApiResponse&lt;EurekaGetRelevantQuestionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<EurekaGetRelevantQuestionsResponse> getRelevantQuestionsWithHttpInfo(GetRelevantQuestionsRequest getRelevantQuestionsRequest) throws ApiException {
+        okhttp3.Call localVarCall = getRelevantQuestionsValidateBeforeCall(getRelevantQuestionsRequest, null);
+        Type localVarReturnType = new TypeToken<EurekaGetRelevantQuestionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.13.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead. Spotter decomposes the question within the conversation.  Breaks down a natural language query into a series of smaller analytical sub-questions, each mapped to a relevant data source.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view-level access to the referenced metadata objects.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: the natural language question to decompose into analytical sub-questions - &#x60;metadata_context&#x60;: at least one of the following context identifiers to guide question generation:   - &#x60;conversation_identifier&#x60; — an existing conversation session ID   - &#x60;answer_identifiers&#x60; — a list of Answer GUIDs   - &#x60;liveboard_identifiers&#x60; — a list of Liveboard GUIDs   - &#x60;data_source_identifiers&#x60; — a list of data source GUIDs  Optional parameters for refining the output: - &#x60;ai_context&#x60;: additional context to improve response quality   - &#x60;content&#x60; — supplementary text or CSV data as string input   - &#x60;instructions&#x60; — custom text instructions for the AI system - &#x60;limit_relevant_questions&#x60;: maximum number of questions to return (default: &#x60;5&#x60;) - &#x60;bypass_cache&#x60;: if &#x60;true&#x60;, forces fresh computation instead of returning cached results  If the request is successful, the API returns a list of relevant analytical questions, each containing: - &#x60;query&#x60;: the generated sub-question - &#x60;data_source_identifier&#x60;: the unique ID of the data source the question targets - &#x60;data_source_name&#x60;: the display name of the corresponding data source  #### Error responses  | Code | Description                                                                                                                           | |------|---------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                  | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view access to the referenced metadata objects. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl and will be removed in a future release. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param getRelevantQuestionsRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call getRelevantQuestionsAsync(GetRelevantQuestionsRequest getRelevantQuestionsRequest, final ApiCallback<EurekaGetRelevantQuestionsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getRelevantQuestionsValidateBeforeCall(getRelevantQuestionsRequest, _callback);
+        Type localVarReturnType = new TypeToken<EurekaGetRelevantQuestionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for loadAnswer
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param answerIdentifier Unique identifier of the answer to load. Use the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; returned by &#x60;getConversation&#x60;. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call loadAnswerCall(String conversationIdentifier, String answerIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()))
+            .replace("{" + "answer_identifier" + "}", localVarApiClient.escapeString(answerIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call loadAnswerValidateBeforeCall(String conversationIdentifier, String answerIdentifier, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling loadAnswer(Async)");
+        }
+
+        // verify the required parameter 'answerIdentifier' is set
+        if (answerIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'answerIdentifier' when calling loadAnswer(Async)");
+        }
+
+        return loadAnswerCall(conversationIdentifier, answerIdentifier, _callback);
+
+    }
+
+    /**
+     * 
+     *  Loads the full answer payload for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Pass the &#x60;answer_id&#x60; from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response as the &#x60;answer_identifier&#x60; parameter. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.    Version: 26.7.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead, which returns answers in the conversation response.  Loads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML token list, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation, as returned by &#x60;createAgentConversation&#x60; - &#x60;answer_identifier&#x60; *(path parameter)*: the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response  If the request is successful, the response contains an &#x60;answer&#x60; object with the following fields:  | Field | Type | Description | |-------|------|-------------| | &#x60;title&#x60; | &#x60;String&#x60; | Display title of the generated answer (e.g., &#x60;\&quot;sales by month\&quot;&#x60;). | | &#x60;description&#x60; | &#x60;String&#x60; | Optional description of the answer. | | &#x60;session_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the session in which this answer was generated. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation sequence number of this answer within the session. | | &#x60;tokens&#x60; | &#x60;[String]&#x60; | Ordered list of TML token strings that make up the answer query (e.g., &#x60;[\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;]&#x60;). | | &#x60;visualization_type&#x60; | &#x60;VizType&#x60; | Suggested visualization type: &#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;. &#x60;null&#x60; if no suggestion is available. | | &#x60;formulas&#x60; | &#x60;[String]&#x60; | List of formula names referenced in the answer. Empty if none are used. | | &#x60;parameters&#x60; | &#x60;[String]&#x60; | List of parameter names applied to the answer. Empty if none are used. | | &#x60;sub_queries&#x60; | &#x60;[JSON]&#x60; | List of sub-query objects used in the answer. Empty if none are present. | | &#x60;ac_state&#x60; | &#x60;ACState&#x60; | Agent context state, including &#x60;transaction_identifier&#x60; and &#x60;generation_number&#x60;, used to correlate this answer with a specific agent turn. |  #### ACState fields  | Field | Type | Description | |-------|------|-------------| | &#x60;transaction_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the agent transaction that produced this answer. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation number within the transaction. |  #### Example request  &#x60;&#x60;&#x60;bash GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;answer\&quot;: {     \&quot;title\&quot;: \&quot;sales by month\&quot;,     \&quot;description\&quot;: \&quot;\&quot;,     \&quot;session_identifier\&quot;: \&quot;7b00b801-73f4-4639-af5e-e775584ceba6\&quot;,     \&quot;generation_number\&quot;: 1,     \&quot;tokens\&quot;: [\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;],     \&quot;visualization_type\&quot;: null,     \&quot;formulas\&quot;: [],     \&quot;parameters\&quot;: [],     \&quot;sub_queries\&quot;: [],     \&quot;ac_state\&quot;: {       \&quot;transaction_identifier\&quot;: \&quot;7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\&quot;,       \&quot;generation_number\&quot;: 1     }   } } &#x60;&#x60;&#x60;  #### Typical usage scenario  1. Call &#x60;getConversation&#x60; to retrieve the full conversation history. 2. Locate an &#x60;AnswerResponseItem&#x60; in &#x60;response_items&#x60; — note its &#x60;answer_id&#x60; field. 3. Call &#x60;loadAnswer&#x60; with the &#x60;conversation_identifier&#x60; and &#x60;answer_id&#x60; as &#x60;answer_identifier&#x60;. 4. The returned &#x60;tokens&#x60; array can be used to open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | | 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. | | 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |  &gt; ###### Note: &gt; &gt; - This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; - This endpoint only loads answer-type messages. Other message types are not supported. &gt; - &#x60;visualization_type&#x60; may be &#x60;null&#x60; if the agent did not produce a visualization suggestion for this answer. &gt; - &#x60;formulas&#x60;, &#x60;parameters&#x60;, and &#x60;sub_queries&#x60; are returned as empty arrays when not applicable — they are never &#x60;null&#x60;. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param answerIdentifier Unique identifier of the answer to load. Use the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; returned by &#x60;getConversation&#x60;. (required)
+     * @return LoadAnswerResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public LoadAnswerResponse loadAnswer(String conversationIdentifier, String answerIdentifier) throws ApiException {
+        ApiResponse<LoadAnswerResponse> localVarResp = loadAnswerWithHttpInfo(conversationIdentifier, answerIdentifier);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Loads the full answer payload for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Pass the &#x60;answer_id&#x60; from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response as the &#x60;answer_identifier&#x60; parameter. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.    Version: 26.7.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead, which returns answers in the conversation response.  Loads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML token list, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation, as returned by &#x60;createAgentConversation&#x60; - &#x60;answer_identifier&#x60; *(path parameter)*: the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response  If the request is successful, the response contains an &#x60;answer&#x60; object with the following fields:  | Field | Type | Description | |-------|------|-------------| | &#x60;title&#x60; | &#x60;String&#x60; | Display title of the generated answer (e.g., &#x60;\&quot;sales by month\&quot;&#x60;). | | &#x60;description&#x60; | &#x60;String&#x60; | Optional description of the answer. | | &#x60;session_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the session in which this answer was generated. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation sequence number of this answer within the session. | | &#x60;tokens&#x60; | &#x60;[String]&#x60; | Ordered list of TML token strings that make up the answer query (e.g., &#x60;[\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;]&#x60;). | | &#x60;visualization_type&#x60; | &#x60;VizType&#x60; | Suggested visualization type: &#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;. &#x60;null&#x60; if no suggestion is available. | | &#x60;formulas&#x60; | &#x60;[String]&#x60; | List of formula names referenced in the answer. Empty if none are used. | | &#x60;parameters&#x60; | &#x60;[String]&#x60; | List of parameter names applied to the answer. Empty if none are used. | | &#x60;sub_queries&#x60; | &#x60;[JSON]&#x60; | List of sub-query objects used in the answer. Empty if none are present. | | &#x60;ac_state&#x60; | &#x60;ACState&#x60; | Agent context state, including &#x60;transaction_identifier&#x60; and &#x60;generation_number&#x60;, used to correlate this answer with a specific agent turn. |  #### ACState fields  | Field | Type | Description | |-------|------|-------------| | &#x60;transaction_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the agent transaction that produced this answer. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation number within the transaction. |  #### Example request  &#x60;&#x60;&#x60;bash GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;answer\&quot;: {     \&quot;title\&quot;: \&quot;sales by month\&quot;,     \&quot;description\&quot;: \&quot;\&quot;,     \&quot;session_identifier\&quot;: \&quot;7b00b801-73f4-4639-af5e-e775584ceba6\&quot;,     \&quot;generation_number\&quot;: 1,     \&quot;tokens\&quot;: [\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;],     \&quot;visualization_type\&quot;: null,     \&quot;formulas\&quot;: [],     \&quot;parameters\&quot;: [],     \&quot;sub_queries\&quot;: [],     \&quot;ac_state\&quot;: {       \&quot;transaction_identifier\&quot;: \&quot;7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\&quot;,       \&quot;generation_number\&quot;: 1     }   } } &#x60;&#x60;&#x60;  #### Typical usage scenario  1. Call &#x60;getConversation&#x60; to retrieve the full conversation history. 2. Locate an &#x60;AnswerResponseItem&#x60; in &#x60;response_items&#x60; — note its &#x60;answer_id&#x60; field. 3. Call &#x60;loadAnswer&#x60; with the &#x60;conversation_identifier&#x60; and &#x60;answer_id&#x60; as &#x60;answer_identifier&#x60;. 4. The returned &#x60;tokens&#x60; array can be used to open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | | 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. | | 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |  &gt; ###### Note: &gt; &gt; - This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; - This endpoint only loads answer-type messages. Other message types are not supported. &gt; - &#x60;visualization_type&#x60; may be &#x60;null&#x60; if the agent did not produce a visualization suggestion for this answer. &gt; - &#x60;formulas&#x60;, &#x60;parameters&#x60;, and &#x60;sub_queries&#x60; are returned as empty arrays when not applicable — they are never &#x60;null&#x60;. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param answerIdentifier Unique identifier of the answer to load. Use the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; returned by &#x60;getConversation&#x60;. (required)
+     * @return ApiResponse&lt;LoadAnswerResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<LoadAnswerResponse> loadAnswerWithHttpInfo(String conversationIdentifier, String answerIdentifier) throws ApiException {
+        okhttp3.Call localVarCall = loadAnswerValidateBeforeCall(conversationIdentifier, answerIdentifier, null);
+        Type localVarReturnType = new TypeToken<LoadAnswerResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Loads the full answer payload for a specific answer item in an agent conversation. Returns structured answer data including the TML query, token breakdown, visualization metadata, and agent context state. Pass the &#x60;answer_id&#x60; from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response as the &#x60;answer_identifier&#x60; parameter. Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.    Version: 26.7.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead, which returns answers in the conversation response.  Loads the answer details for a specific answer item in an agent conversation. Returns structured answer data including the TML token list, visualization metadata, and agent context state. Use this endpoint to retrieve the full answer representation for an answer item — for example, to re-render a chart, export a query, or inspect the generated TML.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Usage guidelines  The request must include:  - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation, as returned by &#x60;createAgentConversation&#x60; - &#x60;answer_identifier&#x60; *(path parameter)*: the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; in the &#x60;getConversation&#x60; response  If the request is successful, the response contains an &#x60;answer&#x60; object with the following fields:  | Field | Type | Description | |-------|------|-------------| | &#x60;title&#x60; | &#x60;String&#x60; | Display title of the generated answer (e.g., &#x60;\&quot;sales by month\&quot;&#x60;). | | &#x60;description&#x60; | &#x60;String&#x60; | Optional description of the answer. | | &#x60;session_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the session in which this answer was generated. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation sequence number of this answer within the session. | | &#x60;tokens&#x60; | &#x60;[String]&#x60; | Ordered list of TML token strings that make up the answer query (e.g., &#x60;[\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;]&#x60;). | | &#x60;visualization_type&#x60; | &#x60;VizType&#x60; | Suggested visualization type: &#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;. &#x60;null&#x60; if no suggestion is available. | | &#x60;formulas&#x60; | &#x60;[String]&#x60; | List of formula names referenced in the answer. Empty if none are used. | | &#x60;parameters&#x60; | &#x60;[String]&#x60; | List of parameter names applied to the answer. Empty if none are used. | | &#x60;sub_queries&#x60; | &#x60;[JSON]&#x60; | List of sub-query objects used in the answer. Empty if none are present. | | &#x60;ac_state&#x60; | &#x60;ACState&#x60; | Agent context state, including &#x60;transaction_identifier&#x60; and &#x60;generation_number&#x60;, used to correlate this answer with a specific agent turn. |  #### ACState fields  | Field | Type | Description | |-------|------|-------------| | &#x60;transaction_identifier&#x60; | &#x60;String&#x60; | Unique identifier of the agent transaction that produced this answer. | | &#x60;generation_number&#x60; | &#x60;Int&#x60; | Generation number within the transaction. |  #### Example request  &#x60;&#x60;&#x60;bash GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details &#x60;&#x60;&#x60;  #### Example response  &#x60;&#x60;&#x60;json {   \&quot;answer\&quot;: {     \&quot;title\&quot;: \&quot;sales by month\&quot;,     \&quot;description\&quot;: \&quot;\&quot;,     \&quot;session_identifier\&quot;: \&quot;7b00b801-73f4-4639-af5e-e775584ceba6\&quot;,     \&quot;generation_number\&quot;: 1,     \&quot;tokens\&quot;: [\&quot;[sales]\&quot;, \&quot;[date].&#39;monthly&#39;\&quot;],     \&quot;visualization_type\&quot;: null,     \&quot;formulas\&quot;: [],     \&quot;parameters\&quot;: [],     \&quot;sub_queries\&quot;: [],     \&quot;ac_state\&quot;: {       \&quot;transaction_identifier\&quot;: \&quot;7f6c9948-b4c7-4098-bb1f-6c67bc0e5699\&quot;,       \&quot;generation_number\&quot;: 1     }   } } &#x60;&#x60;&#x60;  #### Typical usage scenario  1. Call &#x60;getConversation&#x60; to retrieve the full conversation history. 2. Locate an &#x60;AnswerResponseItem&#x60; in &#x60;response_items&#x60; — note its &#x60;answer_id&#x60; field. 3. Call &#x60;loadAnswer&#x60; with the &#x60;conversation_identifier&#x60; and &#x60;answer_id&#x60; as &#x60;answer_identifier&#x60;. 4. The returned &#x60;tokens&#x60; array can be used to open the answer in the ThoughtSpot search interface or rendered as pill chips in the UI.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. | | 404  | Not Found — no conversation or message exists with the given identifiers for the authenticated user. | | 422  | Unprocessable Entity — the message does not contain an answer of the expected type. |  &gt; ###### Note: &gt; &gt; - This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; - This endpoint only loads answer-type messages. Other message types are not supported. &gt; - &#x60;visualization_type&#x60; may be &#x60;null&#x60; if the agent did not produce a visualization suggestion for this answer. &gt; - &#x60;formulas&#x60;, &#x60;parameters&#x60;, and &#x60;sub_queries&#x60; are returned as empty arrays when not applicable — they are never &#x60;null&#x60;. &gt; - Available from version 26.7.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param answerIdentifier Unique identifier of the answer to load. Use the &#x60;answer_id&#x60; field from an &#x60;AnswerResponseItem&#x60; returned by &#x60;getConversation&#x60;. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call loadAnswerAsync(String conversationIdentifier, String answerIdentifier, final ApiCallback<LoadAnswerResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = loadAnswerValidateBeforeCall(conversationIdentifier, answerIdentifier, _callback);
+        Type localVarReturnType = new TypeToken<LoadAnswerResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for queryGetDecomposedQuery
+     * @param queryGetDecomposedQueryRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call queryGetDecomposedQueryCall(QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = queryGetDecomposedQueryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/analytical-questions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call queryGetDecomposedQueryValidateBeforeCall(QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'queryGetDecomposedQueryRequest' is set
+        if (queryGetDecomposedQueryRequest == null) {
+            throw new ApiException("Missing the required parameter 'queryGetDecomposedQueryRequest' when calling queryGetDecomposedQuery(Async)");
+        }
+
+        return queryGetDecomposedQueryCall(queryGetDecomposedQueryRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.7.0.cl or later        
+     * @param queryGetDecomposedQueryRequest  (required)
+     * @return EurekaDecomposeQueryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public EurekaDecomposeQueryResponse queryGetDecomposedQuery(QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
+        ApiResponse<EurekaDecomposeQueryResponse> localVarResp = queryGetDecomposedQueryWithHttpInfo(queryGetDecomposedQueryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.7.0.cl or later        
+     * @param queryGetDecomposedQueryRequest  (required)
+     * @return ApiResponse&lt;EurekaDecomposeQueryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<EurekaDecomposeQueryResponse> queryGetDecomposedQueryWithHttpInfo(QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest) throws ApiException {
+        okhttp3.Call localVarCall = queryGetDecomposedQueryValidateBeforeCall(queryGetDecomposedQueryRequest, null);
+        Type localVarReturnType = new TypeToken<EurekaDecomposeQueryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.7.0.cl or later        
+     * @param queryGetDecomposedQueryRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call queryGetDecomposedQueryAsync(QueryGetDecomposedQueryRequest queryGetDecomposedQueryRequest, final ApiCallback<EurekaDecomposeQueryResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = queryGetDecomposedQueryValidateBeforeCall(queryGetDecomposedQueryRequest, _callback);
+        Type localVarReturnType = new TypeToken<EurekaDecomposeQueryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessage
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageCall(String conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageValidateBeforeCall(String conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling sendAgentConversationMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageRequest' is set
+        if (sendAgentConversationMessageRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentConversationMessageRequest' when calling sendAgentConversationMessage(Async)");
+        }
+
+        return sendAgentConversationMessageCall(conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.5.0.cl or later   Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the response shape: &#x60;AgentTurnResponse&#x60;, a list of events, on &#x60;V2&#x60;, and &#x60;AgentMessagesResponse&#x60;, a list of messages, on &#x60;V1&#x60;. See the sections below for each version&#39;s requests and responses.  The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the &#x60;SendAgentConversationMessageResponse&#x60; schema, which is one of &#x60;AgentMessagesResponse&#x60; or &#x60;AgentTurnResponse&#x60;.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  The response collects every event of the turn into one &#x60;events&#x60; array, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  &#x60;events&#x60; contains exactly what the streaming endpoint publishes on &#x60;V2&#x60;, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreaming&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint explains how the two differ.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;messages\&quot;: [     { \&quot;type\&quot;: \&quot;text\&quot;, \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot;, \&quot;metadata\&quot;: {} }   ] } &#x60;&#x60;&#x60;  The response contains a &#x60;messages&#x60; array, in order. Each message has:  - &#x60;type&#x60;: the kind of message — &#x60;text&#x60;, &#x60;answer&#x60;, &#x60;error&#x60;, and others - &#x60;metadata&#x60;: additional information depending on the type (for example, answer metadata includes analytics and visualization details) - the fields of that type: &#x60;text&#x60; for a &#x60;text&#x60; message, &#x60;title&#x60; and &#x60;session_id&#x60; for an &#x60;answer&#x60;, &#x60;code&#x60; and &#x60;message&#x60; for an &#x60;error&#x60;  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. | | 404  | Not found — on &#x60;V2&#x60;, no conversation with the given identifier exists for this user, or it belongs to another user. | | 504  | Gateway timeout — on &#x60;V2&#x60;, the turn did not finish in the time allowed. Retry, or use &#x60;sendAgentConversationMessageStreaming&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageRequest  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object sendAgentConversationMessage(String conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = sendAgentConversationMessageWithHttpInfo(conversationIdentifier, sendAgentConversationMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 26.5.0.cl or later   Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the response shape: &#x60;AgentTurnResponse&#x60;, a list of events, on &#x60;V2&#x60;, and &#x60;AgentMessagesResponse&#x60;, a list of messages, on &#x60;V1&#x60;. See the sections below for each version&#39;s requests and responses.  The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the &#x60;SendAgentConversationMessageResponse&#x60; schema, which is one of &#x60;AgentMessagesResponse&#x60; or &#x60;AgentTurnResponse&#x60;.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  The response collects every event of the turn into one &#x60;events&#x60; array, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  &#x60;events&#x60; contains exactly what the streaming endpoint publishes on &#x60;V2&#x60;, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreaming&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint explains how the two differ.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;messages\&quot;: [     { \&quot;type\&quot;: \&quot;text\&quot;, \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot;, \&quot;metadata\&quot;: {} }   ] } &#x60;&#x60;&#x60;  The response contains a &#x60;messages&#x60; array, in order. Each message has:  - &#x60;type&#x60;: the kind of message — &#x60;text&#x60;, &#x60;answer&#x60;, &#x60;error&#x60;, and others - &#x60;metadata&#x60;: additional information depending on the type (for example, answer metadata includes analytics and visualization details) - the fields of that type: &#x60;text&#x60; for a &#x60;text&#x60; message, &#x60;title&#x60; and &#x60;session_id&#x60; for an &#x60;answer&#x60;, &#x60;code&#x60; and &#x60;message&#x60; for an &#x60;error&#x60;  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. | | 404  | Not found — on &#x60;V2&#x60;, no conversation with the given identifier exists for this user, or it belongs to another user. | | 504  | Gateway timeout — on &#x60;V2&#x60;, the turn did not finish in the time allowed. Retry, or use &#x60;sendAgentConversationMessageStreaming&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageRequest  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> sendAgentConversationMessageWithHttpInfo(String conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentConversationMessageValidateBeforeCall(conversationIdentifier, sendAgentConversationMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 26.5.0.cl or later   Sends natural language messages to a Spotter agent conversation and returns the complete response synchronously.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  Use this when you want the finished answer in a single response — a scheduled job, a server-side integration, or any caller that cannot consume Server-Sent Events. For a response that arrives progressively, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the response shape: &#x60;AgentTurnResponse&#x60;, a list of events, on &#x60;V2&#x60;, and &#x60;AgentMessagesResponse&#x60;, a list of messages, on &#x60;V1&#x60;. See the sections below for each version&#39;s requests and responses.  The response is declared as a JSON object, so SDK methods return it untyped. For typed access, deserialize it into the &#x60;SendAgentConversationMessageResponse&#x60; schema, which is one of &#x60;AgentMessagesResponse&#x60; or &#x60;AgentTurnResponse&#x60;.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  The response collects every event of the turn into one &#x60;events&#x60; array, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the response body and in the &#x60;x-conversation-identifier&#x60; response header, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot;,   \&quot;events\&quot;: [     { \&quot;tool_call\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot; } },     { \&quot;progress\&quot;: { \&quot;code\&quot;: \&quot;TML_GEN\&quot;, \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot; } },     { \&quot;tool_result\&quot;: { \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;, \&quot;answer\&quot;: { \&quot;session_id\&quot;: \&quot;c5c25b33\&quot; } } },     {       \&quot;event\&quot;: {         \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot; }] }       }     },     { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } }   ] } &#x60;&#x60;&#x60;  This endpoint waits for Spotter to finish, so the request stays open for the length of the turn — commonly 10-60 seconds, longer for a question that runs several queries. Set your client&#39;s read timeout to several minutes; a turn that runs too long is ended with a &#x60;504&#x60;.  &#x60;events&#x60; contains exactly what the streaming endpoint publishes on &#x60;V2&#x60;, in the same order, collected into an array. Every key and its meaning is documented under &#x60;sendAgentConversationMessageStreaming&#x60; — &#x60;event&#x60;, &#x60;tool_call&#x60;, &#x60;progress&#x60;, &#x60;tool_result&#x60;, &#x60;error&#x60; and &#x60;done&#x60;.  To render the answer, concatenate &#x60;parts[].text&#x60; from each &#x60;event&#x60; frame in order, skipping parts marked &#x60;thought: true&#x60; if you do not want to show Spotter&#39;s reasoning. Text is published once — no part repeats content from an earlier one.  A turn that failed carries an &#x60;error&#x60; frame; &#x60;done&#x60; reports that the turn ended, not that it succeeded. An &#x60;event&#x60; can also carry an &#x60;error_code&#x60; when Spotter failed while producing that event; the streaming endpoint explains how the two differ.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  ##### Response  &#x60;&#x60;&#x60;json {   \&quot;messages\&quot;: [     { \&quot;type\&quot;: \&quot;text\&quot;, \&quot;text\&quot;: \&quot;Sales were highest in the West.\&quot;, \&quot;metadata\&quot;: {} }   ] } &#x60;&#x60;&#x60;  The response contains a &#x60;messages&#x60; array, in order. Each message has:  - &#x60;type&#x60;: the kind of message — &#x60;text&#x60;, &#x60;answer&#x60;, &#x60;error&#x60;, and others - &#x60;metadata&#x60;: additional information depending on the type (for example, answer metadata includes analytics and visualization details) - the fields of that type: &#x60;text&#x60; for a &#x60;text&#x60; message, &#x60;title&#x60; and &#x60;session_id&#x60; for an &#x60;answer&#x60;, &#x60;code&#x60; and &#x60;message&#x60; for an &#x60;error&#x60;  &lt;/details&gt;  #### Error responses  | Code | Description                                                                                                                      | |------|----------------------------------------------------------------------------------------------------------------------------------| | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. | | 404  | Not found — on &#x60;V2&#x60;, no conversation with the given identifier exists for this user, or it belongs to another user. | | 504  | Gateway timeout — on &#x60;V2&#x60;, the turn did not finish in the time allowed. Retry, or use &#x60;sendAgentConversationMessageStreaming&#x60; for questions that run long. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - For real-time streamed responses, use &#x60;sendAgentConversationMessageStreaming&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageAsync(String conversationIdentifier, SendAgentConversationMessageRequest sendAgentConversationMessageRequest, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentConversationMessageValidateBeforeCall(conversationIdentifier, sendAgentConversationMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentConversationMessageStreaming
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageStreamingRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingCall(String conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentConversationMessageStreamingRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentConversationMessageStreamingValidateBeforeCall(String conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling sendAgentConversationMessageStreaming(Async)");
+        }
+
+        // verify the required parameter 'sendAgentConversationMessageStreamingRequest' is set
+        if (sendAgentConversationMessageStreamingRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentConversationMessageStreamingRequest' when calling sendAgentConversationMessageStreaming(Async)");
+        }
+
+        return sendAgentConversationMessageStreamingCall(conversationIdentifier, sendAgentConversationMessageStreamingRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 26.5.0.cl or later   Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the events the stream carries. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header and in the final &#x60;done&#x60; event, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  ###### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  ###### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the conversation identifier.  ###### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A conversation that does not exist, or that belongs to another user, is reported the same way: an &#x60;error&#x60; event with &#x60;code&#x60; &#x60;\&quot;404\&quot;&#x60; and &#x60;error_bucket&#x60; &#x60;NEW_CHAT&#x60;, after a &#x60;200&#x60; response has started. The two cases cannot be told apart.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each line has the form &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event objects. Event types include:  - &#x60;ack&#x60;: confirms receipt of the request (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;, &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g. &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;, &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) - &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; - &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;, etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs  &lt;/details&gt;  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                                      | | ---- | -------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload, use &#x60;sendAgentConversationMessage&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageStreamingRequest  (required)
+     * @return SendAgentConversationMessageStreaming200Response
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public InputStream sendAgentConversationMessageStreaming(String conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest) throws ApiException {
+        InputStream localVarResp = sendAgentConversationMessageStreamingWithHttpInfo(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
+        return localVarResp;
+    }
+
+    /**
+     * 
+     *   Version: 26.5.0.cl or later   Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the events the stream carries. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header and in the final &#x60;done&#x60; event, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  ###### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  ###### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the conversation identifier.  ###### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A conversation that does not exist, or that belongs to another user, is reported the same way: an &#x60;error&#x60; event with &#x60;code&#x60; &#x60;\&quot;404\&quot;&#x60; and &#x60;error_bucket&#x60; &#x60;NEW_CHAT&#x60;, after a &#x60;200&#x60; response has started. The two cases cannot be told apart.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each line has the form &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event objects. Event types include:  - &#x60;ack&#x60;: confirms receipt of the request (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;, &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g. &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;, &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) - &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; - &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;, etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs  &lt;/details&gt;  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                                      | | ---- | -------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload, use &#x60;sendAgentConversationMessage&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageStreamingRequest  (required)
+     * @return ApiResponse&lt;SendAgentConversationMessageStreaming200Response&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public InputStream sendAgentConversationMessageStreamingWithHttpInfo(String conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentConversationMessageStreamingValidateBeforeCall(conversationIdentifier, sendAgentConversationMessageStreamingRequest, null);
+        Type localVarReturnType = new TypeToken<SendAgentConversationMessageStreaming200Response>(){}.getType();
+        return localVarApiClient.executeStream(localVarCall, localVarReturnType);
+    }
+    
+    /**
+     *  (asynchronously)
+     *   Version: 26.5.0.cl or later   Sends one or more natural language messages to a Spotter agent conversation and returns the response as a real-time Server-Sent Events stream.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the metadata object associated with the conversation. The user must have access to the conversation session referenced by &#x60;conversation_identifier&#x60;.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  The two versions differ in the events the stream carries. See the sections below for each version&#39;s requests and responses.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V2&lt;/code&gt;&lt;/summary&gt;  Each event is a single JSON object with one top-level key, and a message can be sent without a conversation identifier to start a new conversation.  Before you send requests, confirm that the cluster&#39;s **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**. If it isn&#39;t, requests return a &#x60;400&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;, or &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; to start a new conversation  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V2\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(required for this version)*: &#x60;V2&#x60;. A request that omits it runs on &#x60;V1&#x60;, the default, so pass it on every request for the conversation. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter, optional)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. Omit the segment — &#x60;POST /api/rest/2.0/ai/agent/conversation/send/stream&#x60; — to ask a one-off question. A conversation is created automatically, and its identifier is returned in the &#x60;x-conversation-identifier&#x60; response header and in the final &#x60;done&#x60; event, so a follow-up can continue it. The new conversation is not saved: it does not appear in &#x60;getConversationList&#x60;, but it can be continued by its identifier. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each event is a &#x60;data:&#x60; line carrying a single JSON object, with exactly one top-level key:  | Key           | Meaning                                                             | | ------------- | ------------------------------------------------------------------- | | &#x60;event&#x60;       | Text from Spotter — its reasoning or its answer.                    | | &#x60;tool_call&#x60;   | Spotter started a step, such as querying a data source.             | | &#x60;progress&#x60;    | A stage of a step in flight, so you can show what Spotter is doing. | | &#x60;tool_result&#x60; | A step finished; carries its result, including any answer produced. | | &#x60;error&#x60;       | The turn failed.                                                    | | &#x60;done&#x60;        | End of turn. Always last.                                           |  A turn that queries data runs them in this order:  &#x60;&#x60;&#x60; tool_call  →  progress (several)  →  tool_result  →  event (the answer text)  →  done &#x60;&#x60;&#x60;  &#x60;tool_call&#x60;, &#x60;progress&#x60; and &#x60;tool_result&#x60; for one step share a &#x60;tool_call_id&#x60;, so you can group them. A turn may run several steps, or none.  Ignore any key you don&#39;t recognise — new event types may be added.  Lines beginning with &#x60;:&#x60; are SSE keep-alive comments. They carry no data and exist only to hold the connection open while Spotter is thinking — standard SSE clients discard them automatically, and a hand-written client should skip any line starting with &#x60;:&#x60;.  An event with content has the shape:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;partial\&quot;: true,     \&quot;content\&quot;: {       \&quot;role\&quot;: \&quot;model\&quot;,       \&quot;parts\&quot;: [{ \&quot;text\&quot;: \&quot; asking for data\&quot;, \&quot;thought\&quot;: true }]     }   } } &#x60;&#x60;&#x60;  - &#x60;parts[].text&#x60; carries the text to render. Text arrives incrementally, so concatenate parts in the order received. - &#x60;parts[].thought&#x60; is &#x60;true&#x60; when the text is Spotter&#39;s reasoning rather than its answer. Use it to render reasoning separately, or to hide it. - &#x60;partial&#x60; is &#x60;true&#x60; for an incremental chunk and &#x60;false&#x60; for a frame that restates the accumulated text of a completed segment. - &#x60;invocation_id&#x60; is stable for one turn; &#x60;id&#x60; identifies a single event.  ###### Steps: tool_call, progress, tool_result  When Spotter needs to do something — query a data source, run code — it reports the step as it happens.  **&#x60;tool_call&#x60;** announces the step and the arguments it ran with:  &#x60;&#x60;&#x60;json {   \&quot;tool_call\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;args\&quot;: {       \&quot;dataset_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;english_query\&quot;: \&quot;total sales by region last quarter\&quot;     }   } } &#x60;&#x60;&#x60;  **&#x60;progress&#x60;** reports each stage while the step runs:  &#x60;&#x60;&#x60;json {   \&quot;progress\&quot;: {     \&quot;code\&quot;: \&quot;ANSWER_GEN\&quot;,     \&quot;message\&quot;: \&quot;Verifying results with the Trust Layer\&quot;,     \&quot;tool_call_id\&quot;: \&quot;toolu_01AMjCrr\&quot;   } } &#x60;&#x60;&#x60;  &#x60;message&#x60; is human-facing text you can show directly; it is absent for stages that have none. Treat an unfamiliar &#x60;code&#x60; as \&quot;still working\&quot; rather than an error.  **&#x60;tool_result&#x60;** carries what the step produced:  &#x60;&#x60;&#x60;json {   \&quot;tool_result\&quot;: {     \&quot;id\&quot;: \&quot;toolu_01AMjCrr\&quot;,     \&quot;name\&quot;: \&quot;spotter_tools_fetch_and_visualize_data\&quot;,     \&quot;is_error\&quot;: false,     \&quot;text\&quot;: \&quot;**total sales by region last quarter**\\nTML query: &#x60;[sales] [region] [date] &#x3D; &#39;last quarter&#39;&#x60;\\n...\&quot;,     \&quot;answer\&quot;: {       \&quot;title\&quot;: \&quot;total sales by region last quarter\&quot;,       \&quot;session_id\&quot;: \&quot;c5c25b33-74b8-4e83-b7f3-f7f384323903\&quot;,       \&quot;gen_no\&quot;: 2,       \&quot;transaction_id\&quot;: \&quot;6fafbc09-1b08-4c49-a017-fa331612a76f\&quot;,       \&quot;worksheet_id\&quot;: \&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,       \&quot;sage_query\&quot;: \&quot;[sales] [region] [date] &#x3D; &#39;last quarter&#39;\&quot;,       \&quot;visualization\&quot;: { \&quot;chart_type\&quot;: \&quot;ADVANCED_COLUMN\&quot; },       \&quot;table_data\&quot;: { \&quot;total_rows\&quot;: 5, \&quot;columns\&quot;: [{ \&quot;name\&quot;: \&quot;region\&quot;, \&quot;type\&quot;: \&quot;ATTRIBUTE\&quot; }] }     }   } } &#x60;&#x60;&#x60;  - &#x60;text&#x60; is the step&#39;s own human-readable summary. For a data query it includes a sample of the rows — a sample, not the result set; read &#x60;answer.table_data.total_rows&#x60; for the true count. - &#x60;answer&#x60; is present when the step produced a ThoughtSpot answer. Use &#x60;session_id&#x60; with &#x60;gen_no&#x60; to fetch or deep-link it, and &#x60;sage_query&#x60; to show how the question was interpreted. - &#x60;is_error&#x60; is &#x60;true&#x60; when the step failed. Spotter usually explains the failure in the text that follows, so this is a signal to read rather than a reason to stop.  &#x60;args&#x60; and &#x60;answer&#x60; are forwarded as the backend produces them, so both may carry fields not listed here, and may gain more over time. Read the fields you need and ignore the rest.  ###### End of turn  The stream ends with a terminal event:  &#x60;&#x60;&#x60;json { \&quot;done\&quot;: { \&quot;conversation_identifier\&quot;: \&quot;5612260428840173568\&quot; } } &#x60;&#x60;&#x60;  Nothing follows it. Treat its arrival — not the socket closing — as the signal that the turn is complete: a stream that ends _without_ a &#x60;done&#x60; event was interrupted, and whatever text arrived before it is partial. This is the only way to distinguish a finished answer from a truncated one.  &#x60;done&#x60; reports that the stream completed, not that the turn succeeded; a turn that emitted an &#x60;error&#x60; event still ends with &#x60;done&#x60;. Check for an &#x60;error&#x60; event to determine the outcome.  The &#x60;conversation_identifier&#x60; is repeated here so a client that cannot read response headers — a browser &#x60;EventSource&#x60;, for example — can still continue a conversation it created by omitting the conversation identifier.  ###### Errors during a turn  If the turn fails after streaming has begun, an event carries an error instead of content:  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;409\&quot;,     \&quot;source\&quot;: \&quot;transport\&quot;,     \&quot;display_message\&quot;: \&quot;Another request is still running in this conversation.\&quot;,     \&quot;error_bucket\&quot;: \&quot;RETRY\&quot;   } } &#x60;&#x60;&#x60;  Render &#x60;display_message&#x60;. &#x60;code&#x60; is always a string; quote it when reporting an issue. Branch on &#x60;error_bucket&#x60;: &#x60;RETRY&#x60; (retry the request), &#x60;REFRESH&#x60; (reload and retry), &#x60;NEW_CHAT&#x60; (start a new conversation), &#x60;SUPPORT&#x60; (contact support). Treat any unrecognized value as &#x60;SUPPORT&#x60;.  A conversation that does not exist, or that belongs to another user, is reported the same way: an &#x60;error&#x60; event with &#x60;code&#x60; &#x60;\&quot;404\&quot;&#x60; and &#x60;error_bucket&#x60; &#x60;NEW_CHAT&#x60;, after a &#x60;200&#x60; response has started. The two cases cannot be told apart.  A failure at the transport layer after streaming has begun cannot be surfaced as an HTTP error; in that case the stream will end with only a &#x60;done&#x60; event and no &#x60;error&#x60; event.  A failure can also be reported on an &#x60;event&#x60; itself, when Spotter fails while producing that event. Its &#x60;error_code&#x60; is set and its &#x60;parts&#x60; are empty:  &#x60;&#x60;&#x60;json {   \&quot;event\&quot;: {     \&quot;id\&quot;: \&quot;c506785a-0493-4273-97c0-128ab2bdd7aa\&quot;,     \&quot;invocation_id\&quot;: \&quot;e-613f7481-2ddf-4b6b-8b60-5e2d10c8c974\&quot;,     \&quot;error_code\&quot;: \&quot;MALFORMED_FUNCTION_CALL\&quot;,     \&quot;content\&quot;: { \&quot;role\&quot;: \&quot;model\&quot;, \&quot;parts\&quot;: [] }   } } &#x60;&#x60;&#x60;  The two report different things:  | Where                     | What failed                                                                   | What to do                                                                   | | ------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | | &#x60;error&#x60; frame             | The turn as a whole. Carries &#x60;display_message&#x60; and &#x60;error_bucket&#x60;.            | Show &#x60;display_message&#x60; and act on &#x60;error_bucket&#x60;.                            | | &#x60;event&#x60; with &#x60;error_code&#x60; | One event, while Spotter was producing it. Carries only the code, no message. | Treat the event as having no text. If an &#x60;error&#x60; frame follows, act on that. |  &#x60;error_code&#x60; is diagnostic, not a fixed set of values: quote it when reporting an issue rather than branching on it.  &lt;/details&gt;  &lt;details&gt; &lt;summary&gt;When &lt;code&gt;spotter_experience_version&lt;/code&gt; is &lt;code&gt;V1&lt;/code&gt;&lt;/summary&gt;  Use this version only if your cluster must stay on the previous experience. New Spotter capabilities ship in &#x60;V2&#x60;.  ##### Request  &#x60;POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/send/stream&#x60;  &#x60;&#x60;&#x60;json {   \&quot;spotter_experience_version\&quot;: \&quot;V1\&quot;,   \&quot;messages\&quot;: [\&quot;Which region had the highest sales last quarter?\&quot;] } &#x60;&#x60;&#x60;  - &#x60;spotter_experience_version&#x60; *(optional)*: &#x60;V1&#x60;, the default. A request that omits it runs on this version. - &#x60;conversation_identifier&#x60; *(path parameter, required)*: the conversation to send the messages in, as returned by &#x60;createAgentConversation&#x60;. - &#x60;messages&#x60;: an array of one or more text messages to send to the agent. The messages are sent together as one turn.  Send &#x60;Accept: text/event-stream&#x60; and read the response incrementally. With &#x60;curl&#x60;, use &#x60;-N&#x60; to disable buffering.  ##### Response  Each line has the form &#x60;data: [{\&quot;type\&quot;: \&quot;...\&quot;, ...}]&#x60; — a JSON array of event objects. Event types include:  - &#x60;ack&#x60;: confirms receipt of the request (&#x60;node_id&#x60;) - &#x60;conv_title&#x60;: conversation title (&#x60;title&#x60;, &#x60;conv_id&#x60;) - &#x60;notification&#x60;: status updates on operations (&#x60;group_id&#x60;, &#x60;metadata&#x60;, &#x60;code&#x60; — e.g. &#x60;TOOL_CALL_NOTIFICATION&#x60;, &#x60;nls_start&#x60;, &#x60;FINAL_RESPONSE_NOTIFICATION&#x60;) - &#x60;text-chunk&#x60;: incremental content chunks (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;format&#x60; and &#x60;type&#x60; such as &#x60;thinking&#x60; or &#x60;text&#x60;, &#x60;content&#x60;) - &#x60;text&#x60;: full text block with same structure as &#x60;text-chunk&#x60; - &#x60;answer&#x60;: structured answer with metadata (&#x60;id&#x60;, &#x60;group_id&#x60;, &#x60;metadata&#x60; with &#x60;sage_query&#x60;, &#x60;session_id&#x60;, &#x60;title&#x60;, etc., &#x60;title&#x60;) - &#x60;error&#x60;: if a failure occurs  &lt;/details&gt;  #### Error responses  Errors detected before streaming begins are returned as a normal HTTP response.  | Code | Description                                                                                                                      | | ---- | -------------------------------------------------------------------------------------------------------------------------------- | | 400  | Bad request — &#x60;messages&#x60; is missing or invalid, &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or the conversation identifier is omitted on &#x60;V1&#x60;. | | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                             | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks permission on the referenced conversation. |  &gt; ###### Note: &gt; &gt; - This endpoint is Generally Available from version 26.5.0.cl. &gt; - &#x60;spotter_experience_version&#x60;, the optional conversation identifier and &#x60;V2&#x60; support are in Beta from 26.12.0.cl. &gt; - This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster. &gt; - The streaming protocol uses Server-Sent Events (SSE). &gt; - For the complete response in a single payload, use &#x60;sendAgentConversationMessage&#x60; instead.      
+     * @param conversationIdentifier Unique identifier of the conversation. Optional: on V2, omit this path segment to start a new conversation; its identifier is returned in the response and the &#x60;x-conversation-identifier&#x60; header. (required)
+     * @param sendAgentConversationMessageStreamingRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAgentConversationMessageStreamingAsync(String conversationIdentifier, SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest, final ApiCallback<SendAgentConversationMessageStreaming200Response> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentConversationMessageStreamingValidateBeforeCall(conversationIdentifier, sendAgentConversationMessageStreamingRequest, _callback);
+        Type localVarReturnType = new TypeToken<SendAgentConversationMessageStreaming200Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentMessage
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context) (required)
+     * @param sendAgentMessageRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendAgentMessageCall(String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentMessageRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/{conversation_identifier}/converse"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentMessageValidateBeforeCall(String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling sendAgentMessage(Async)");
+        }
+
+        // verify the required parameter 'sendAgentMessageRequest' is set
+        if (sendAgentMessageRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentMessageRequest' when calling sendAgentMessage(Async)");
+        }
+
+        return sendAgentMessageCall(conversationIdentifier, sendAgentMessageRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 26.2.0.cl or later        
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context) (required)
+     * @param sendAgentMessageRequest  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public Object sendAgentMessage(String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest) throws ApiException {
+        ApiResponse<Object> localVarResp = sendAgentMessageWithHttpInfo(conversationIdentifier, sendAgentMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 26.2.0.cl or later        
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context) (required)
+     * @param sendAgentMessageRequest  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<Object> sendAgentMessageWithHttpInfo(String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentMessageValidateBeforeCall(conversationIdentifier, sendAgentMessageRequest, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 26.2.0.cl or later        
+     * @param conversationIdentifier Unique identifier for the conversation (used to track context) (required)
+     * @param sendAgentMessageRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendAgentMessageAsync(String conversationIdentifier, SendAgentMessageRequest sendAgentMessageRequest, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentMessageValidateBeforeCall(conversationIdentifier, sendAgentMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAgentMessageStreaming
+     * @param sendAgentMessageStreamingRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendAgentMessageStreamingCall(SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAgentMessageStreamingRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/converse/sse";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAgentMessageStreamingValidateBeforeCall(SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'sendAgentMessageStreamingRequest' is set
+        if (sendAgentMessageStreamingRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendAgentMessageStreamingRequest' when calling sendAgentMessageStreaming(Async)");
+        }
+
+        return sendAgentMessageStreamingCall(sendAgentMessageStreamingRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 26.2.0.cl or later        
+     * @param sendAgentMessageStreamingRequest  (required)
+     * @return SendAgentMessageResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public SendAgentMessageResponse sendAgentMessageStreaming(SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
+        ApiResponse<SendAgentMessageResponse> localVarResp = sendAgentMessageStreamingWithHttpInfo(sendAgentMessageStreamingRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 26.2.0.cl or later        
+     * @param sendAgentMessageStreamingRequest  (required)
+     * @return ApiResponse&lt;SendAgentMessageResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<SendAgentMessageResponse> sendAgentMessageStreamingWithHttpInfo(SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendAgentMessageStreamingValidateBeforeCall(sendAgentMessageStreamingRequest, null);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 26.2.0.cl or later        
+     * @param sendAgentMessageStreamingRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendAgentMessageStreamingAsync(SendAgentMessageStreamingRequest sendAgentMessageStreamingRequest, final ApiCallback<SendAgentMessageResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAgentMessageStreamingValidateBeforeCall(sendAgentMessageStreamingRequest, _callback);
+        Type localVarReturnType = new TypeToken<SendAgentMessageResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendMessage
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param sendMessageRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendMessageCall(String conversationIdentifier, SendMessageRequest sendMessageRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendMessageRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/conversation/{conversation_identifier}/converse"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendMessageValidateBeforeCall(String conversationIdentifier, SendMessageRequest sendMessageRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling sendMessage(Async)");
+        }
+
+        // verify the required parameter 'sendMessageRequest' is set
+        if (sendMessageRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendMessageRequest' when calling sendMessage(Async)");
+        }
+
+        return sendMessageCall(conversationIdentifier, sendMessageRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead.  Sends a follow-up message to an existing conversation within the context of a data model.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the &#x60;createConversation&#x60; API.  #### Usage guidelines  The request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned by &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data source used for the conversation - &#x60;message&#x60;: a natural language string with the follow-up question  If the request is successful, the API returns an array of response messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param sendMessageRequest  (required)
+     * @return List&lt;ResponseMessage&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public List<ResponseMessage> sendMessage(String conversationIdentifier, SendMessageRequest sendMessageRequest) throws ApiException {
+        ApiResponse<List<ResponseMessage>> localVarResp = sendMessageWithHttpInfo(conversationIdentifier, sendMessageRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead.  Sends a follow-up message to an existing conversation within the context of a data model.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the &#x60;createConversation&#x60; API.  #### Usage guidelines  The request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned by &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data source used for the conversation - &#x60;message&#x60;: a natural language string with the follow-up question  If the request is successful, the API returns an array of response messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param sendMessageRequest  (required)
+     * @return ApiResponse&lt;List&lt;ResponseMessage&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<List<ResponseMessage>> sendMessageWithHttpInfo(String conversationIdentifier, SendMessageRequest sendMessageRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendMessageValidateBeforeCall(conversationIdentifier, sendMessageRequest, null);
+        Type localVarReturnType = new TypeToken<List<ResponseMessage>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;sendAgentConversationMessage&#x60; instead.  Sends a follow-up message to an existing conversation within the context of a data model.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request. A conversation must first be created using the &#x60;createConversation&#x60; API.  #### Usage guidelines  The request must include: - &#x60;conversation_identifier&#x60;: the unique session ID returned by &#x60;createConversation&#x60; - &#x60;metadata_identifier&#x60;: the unique ID of the data source used for the conversation - &#x60;message&#x60;: a natural language string with the follow-up question  If the request is successful, the API returns an array of response messages, each containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param conversationIdentifier Unique identifier of the conversation. (required)
+     * @param sendMessageRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call sendMessageAsync(String conversationIdentifier, SendMessageRequest sendMessageRequest, final ApiCallback<List<ResponseMessage>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendMessageValidateBeforeCall(conversationIdentifier, sendMessageRequest, _callback);
+        Type localVarReturnType = new TypeToken<List<ResponseMessage>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for singleAnswer
+     * @param singleAnswerRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call singleAnswerCall(SingleAnswerRequest singleAnswerRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = singleAnswerRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/answer/create";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call singleAnswerValidateBeforeCall(SingleAnswerRequest singleAnswerRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'singleAnswerRequest' is set
+        if (singleAnswerRequest == null) {
+            throw new ApiException("Missing the required parameter 'singleAnswerRequest' when calling singleAnswer(Async)");
+        }
+
+        return singleAnswerCall(singleAnswerRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; followed by &#x60;sendAgentConversationMessage&#x60; instead.  Processes a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query against  If the request is successful, the API returns a response message containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; and &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param singleAnswerRequest  (required)
+     * @return ResponseMessage
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ResponseMessage singleAnswer(SingleAnswerRequest singleAnswerRequest) throws ApiException {
+        ApiResponse<ResponseMessage> localVarResp = singleAnswerWithHttpInfo(singleAnswerRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; followed by &#x60;sendAgentConversationMessage&#x60; instead.  Processes a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query against  If the request is successful, the API returns a response message containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; and &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param singleAnswerRequest  (required)
+     * @return ApiResponse&lt;ResponseMessage&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ApiResponse<ResponseMessage> singleAnswerWithHttpInfo(SingleAnswerRequest singleAnswerRequest) throws ApiException {
+        okhttp3.Call localVarCall = singleAnswerValidateBeforeCall(singleAnswerRequest, null);
+        Type localVarReturnType = new TypeToken<ResponseMessage>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Version: 10.4.0.cl or later   **Deprecated** — Use &#x60;createAgentConversation&#x60; followed by &#x60;sendAgentConversationMessage&#x60; instead.  Processes a natural language query against a specified data model and returns a single AI-generated answer without requiring a conversation session.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and at least view access to the metadata object specified in the request.  #### Usage guidelines  The request must include: - &#x60;query&#x60;: a natural language question (e.g., \&quot;What were total sales last quarter?\&quot;) - &#x60;metadata_identifier&#x60;: the unique ID of the data source to query against  If the request is successful, the API returns a response message containing: - &#x60;session_identifier&#x60;: the unique ID of the generated response - &#x60;generation_number&#x60;: the generation number of the response - &#x60;message_type&#x60;: the type of the response (e.g., &#x60;TSAnswer&#x60;) - &#x60;visualization_type&#x60;: the generated visualization type (&#x60;Chart&#x60;, &#x60;Table&#x60;, or &#x60;Undefined&#x60;) - &#x60;tokens&#x60; / &#x60;display_tokens&#x60;: the search tokens and user-friendly display tokens for the response  #### Error responses  | Code | Description                                                                                                                             | |------|-----------------------------------------------------------------------------------------------------------------------------------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid.                                                                    | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks view permission on the specified metadata object. |  &gt; ###### Note: &gt; * This endpoint is deprecated from 26.12.0.cl. Use &#x60;createAgentConversation&#x60; and &#x60;sendAgentConversationMessage&#x60; for new integrations. &gt; * This endpoint is currently in Beta. Breaking changes may be introduced before the endpoint is made Generally Available. &gt; * This endpoint requires Spotter - please contact ThoughtSpot support to enable Spotter on your cluster.      
+     * @param singleAnswerRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public okhttp3.Call singleAnswerAsync(SingleAnswerRequest singleAnswerRequest, final ApiCallback<ResponseMessage> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = singleAnswerValidateBeforeCall(singleAnswerRequest, _callback);
+        Type localVarReturnType = new TypeToken<ResponseMessage>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for stopConversation
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param stopConversationRequest  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call stopConversationCall(String conversationIdentifier, StopConversationRequest stopConversationRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = stopConversationRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response"
+            .replace("{" + "conversation_identifier" + "}", localVarApiClient.escapeString(conversationIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call stopConversationValidateBeforeCall(String conversationIdentifier, StopConversationRequest stopConversationRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'conversationIdentifier' is set
+        if (conversationIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'conversationIdentifier' when calling stopConversation(Async)");
+        }
+
+        return stopConversationCall(conversationIdentifier, stopConversationRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   &lt;span&gt;Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - &#x60;spotter_experience_version&#x60; *(body parameter; required for &#x60;V2&#x60;)*: the version the conversation was created on. A request that omits it runs on &#x60;V1&#x60;, the default, so a &#x60;V2&#x60; conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60;  A successful request returns an empty &#x60;204 No Content&#x60; response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;.  #### Example request  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response &#x60;&#x60;&#x60;  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or, on &#x60;V2&#x60;, no conversation with the given identifier exists for this user. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. |  &gt; ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not return an error. &gt; - The conversation context is preserved after stopping — previous messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; - &#x60;spotter_experience_version&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl.      
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param stopConversationRequest  (optional)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void stopConversation(String conversationIdentifier, StopConversationRequest stopConversationRequest) throws ApiException {
+        stopConversationWithHttpInfo(conversationIdentifier, stopConversationRequest);
+    }
+
+    /**
+     * 
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   &lt;span&gt;Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - &#x60;spotter_experience_version&#x60; *(body parameter; required for &#x60;V2&#x60;)*: the version the conversation was created on. A request that omits it runs on &#x60;V1&#x60;, the default, so a &#x60;V2&#x60; conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60;  A successful request returns an empty &#x60;204 No Content&#x60; response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;.  #### Example request  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response &#x60;&#x60;&#x60;  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or, on &#x60;V2&#x60;, no conversation with the given identifier exists for this user. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. |  &gt; ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not return an error. &gt; - The conversation context is preserved after stopping — previous messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; - &#x60;spotter_experience_version&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl.      
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param stopConversationRequest  (optional)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> stopConversationWithHttpInfo(String conversationIdentifier, StopConversationRequest stopConversationRequest) throws ApiException {
+        okhttp3.Call localVarCall = stopConversationValidateBeforeCall(conversationIdentifier, stopConversationRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Stops an in-progress agent conversation response.    Version: 26.6.0.cl or later   &lt;span&gt;Version: 26.6.0.cl or later   Stops an in-progress agent response for the specified conversation. Use this endpoint to cancel a response that is actively being generated — for example, when the user navigates away, reformulates their question, or no longer needs the current result.  Requires &#x60;CAN_USE_SPOTTER&#x60; privilege and access to the specified conversation.  #### Spotter version  &#x60;spotter_experience_version&#x60; *(available from 26.12.0.cl)* selects the version of Spotter a conversation runs on:  - &#x60;V2&#x60;: the new Spotter experience, the same one behind the **Liveboard side panel (New)**. New Spotter capabilities ship here. Requires a cluster admin to set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise returns a &#x60;400&#x60;. - &#x60;V1&#x60; (default): the Spotter conversation API available before 26.12.0.cl. Used when the parameter is omitted. Use it explicitly only if your cluster must stay on the previous experience.  **Keep the version consistent per conversation.** A conversation belongs to the version that created it. Pass the same value on every later request for that conversation, including when you continue it, stream a response, or retrieve its history. A request with a different value returns not found.  **Default: &#x60;V1&#x60;.** A request that omits the parameter runs on &#x60;V1&#x60; on every cluster, including one whose **Spotter 3 Liveboard experience** setting is **Liveboard side panel (New)**.  #### Usage guidelines  The request must include:  - &#x60;spotter_experience_version&#x60; *(body parameter; required for &#x60;V2&#x60;)*: the version the conversation was created on. A request that omits it runs on &#x60;V1&#x60;, the default, so a &#x60;V2&#x60; conversation is found only when the parameter is passed. Available only when a cluster admin has set **Spotter 3 Liveboard experience** to **Liveboard side panel (New)**; otherwise the request returns a &#x60;400&#x60;. - &#x60;conversation_identifier&#x60; *(path parameter)*: the unique ID of the conversation whose active response should be stopped, as returned by &#x60;createAgentConversation&#x60;  A successful request returns an empty &#x60;204 No Content&#x60; response. If there is no active response in progress at the time of the call, the request is still treated as successful.  After stopping a response, the conversation session remains active. You can continue sending messages using &#x60;sendAgentConversationMessage&#x60; or &#x60;sendAgentConversationMessageStreaming&#x60;.  #### Example request  &#x60;&#x60;&#x60;bash POST /api/rest/2.0/ai/agent/conversation/{conversation_identifier}/stop-response &#x60;&#x60;&#x60;  #### Typical usage scenario  This endpoint is useful when integrating Spotter into a chat UI where users can cancel a long-running query. For example:  1. User sends a message via &#x60;sendAgentConversationMessageStreaming&#x60;. 2. User clicks a \&quot;Stop generating\&quot; button while the response is streaming. 3. Your client calls &#x60;stopConversation&#x60; with the active &#x60;conversation_identifier&#x60;. 4. The stream is terminated and the user can ask a new question.  #### Error responses  | Code | Description | |------|-------------| | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 400  | Bad request — &#x60;spotter_experience_version&#x60; is &#x60;V2&#x60; and the cluster&#39;s **Spotter 3 Liveboard experience** setting is not **Liveboard side panel (New)**, the conversation identifier is malformed on &#x60;V2&#x60; (it must be letters, digits, &#x60;-&#x60; and &#x60;_&#x60;), or, on &#x60;V2&#x60;, no conversation with the given identifier exists for this user. | | 403  | Forbidden — the authenticated user does not have &#x60;CAN_USE_SPOTTER&#x60; privilege or lacks access to the specified conversation. |  &gt; ###### Note: &gt; &gt; - Calling this endpoint when no response is in progress does not return an error. &gt; - The conversation context is preserved after stopping — previous messages and answers remain accessible. &gt; - Available from version 26.6.0.cl and later. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster. &gt; - &#x60;spotter_experience_version&#x60; and &#x60;V2&#x60; support are in Beta from 26.12.0.cl.      
+     * @param conversationIdentifier Unique identifier of the conversation to stop. (required)
+     * @param stopConversationRequest  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully stopped the in-progress agent conversation response for the given. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call stopConversationAsync(String conversationIdentifier, StopConversationRequest stopConversationRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = stopConversationValidateBeforeCall(conversationIdentifier, stopConversationRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+}

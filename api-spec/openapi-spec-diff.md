@@ -43,6 +43,11 @@
 - :warning: removed the optional property `answer/sub_queries/items/formulas` from the response with the `201` status
 - :warning: removed the optional property `answer/sub_queries/items/tokens` from the response with the `200` status
 - :warning: removed the optional property `answer/sub_queries/items/tokens` from the response with the `201` status
+-  endpoint deprecated
+
+
+### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info
+-  endpoint deprecated
 
 
 ### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content
@@ -50,6 +55,7 @@
 - :warning: the `code_execution_files/items/created_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
+-  endpoint deprecated
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `200`
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `201`
 -  removed discriminator from `messages/items/user_prompt/attachments/items/` response property for the response status `200`
@@ -69,6 +75,7 @@
 - :warning: the `code_execution_files/items/created_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
+-  endpoint deprecated
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `200`
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `201`
 -  removed discriminator from `messages/items/user_prompt/attachments/items/` response property for the response status `200`
@@ -81,6 +88,35 @@
 -  the `messages/items/response_items/items/` response's property `type` was narrowed from `any` to `object` for status `201`
 -  the `messages/items/user_prompt/attachments/items/` response's property `type` was narrowed from `any` to `object` for status `200`
 -  the `messages/items/user_prompt/attachments/items/` response's property `type` was narrowed from `any` to `object` for status `201`
+
+
+### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/agent/converse/sse
+-  removed the non-success response with the status `401`
+-  removed the non-success response with the status `403`
+
+
+### POST /api/rest/2.0/ai/answer/create
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/conversation/create
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/conversation/{conversation_identifier}/converse
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/data-source-suggestions
+-  endpoint deprecated
+
+
+### POST /api/rest/2.0/ai/relevant-questions/
+-  endpoint deprecated
 
 
 ### POST /api/rest/2.0/ai/usage-data/search
