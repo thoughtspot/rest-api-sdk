@@ -21,6 +21,7 @@ MetadataType InputType used in Author API's
 | ANSWER | &quot;ANSWER&quot; |
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
 | CONNECTION | &quot;CONNECTION&quot; |
+| COLLECTION | &quot;COLLECTION&quot; |
 
 
 ## Implemented Interfaces

@@ -61,7 +61,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CONNECTION for value: CONNECTION
             /// </summary>
             [EnumMember(Value = "CONNECTION")]
-            CONNECTION = 4
+            CONNECTION = 4,
+
+            /// <summary>
+            /// Enum COLLECTION for value: COLLECTION
+            /// </summary>
+            [EnumMember(Value = "COLLECTION")]
+            COLLECTION = 5
         }
 
 

@@ -608,6 +608,10 @@
 -  response property `contents/items/data_rows/items/` list-of-types was narrowed by removing types `array` from media type `application/json` of response `200`
 
 
+### POST /api/rest/2.0/security/metadata/assign
+-  added the new `COLLECTION` enum value to the request property `metadata/items/type`
+
+
 ### POST /api/rest/2.0/security/metadata/fetch-object-privileges
 - :warning: the `metadata_object_privileges` response's property `type` changed from `array<object>` to `object` for status `200`
 

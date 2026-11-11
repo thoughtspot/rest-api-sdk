@@ -18325,6 +18325,8 @@ paths:
 
         If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `USER_ADMINISTRATION` (**Can manage users**) privilege and edit access to the objects are required.
 
+        The API supports Liveboards, Answers, Tables/Models, Connections and Collections.
+
 
 
 
@@ -36532,6 +36534,7 @@ components:
           - ANSWER
           - LOGICAL_TABLE
           - CONNECTION
+          - COLLECTION
           nullable: true
           type: string
         identifier:
