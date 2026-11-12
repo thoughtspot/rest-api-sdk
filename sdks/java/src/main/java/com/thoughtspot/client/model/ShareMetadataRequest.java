@@ -49,7 +49,7 @@ public class ShareMetadataRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection
+   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard
    */
   @JsonAdapter(MetadataTypeEnum.Adapter.class)
   public enum MetadataTypeEnum {
@@ -63,7 +63,9 @@ public class ShareMetadataRequest implements Serializable {
     
     CONNECTION("CONNECTION"),
     
-    COLLECTION("COLLECTION");
+    COLLECTION("COLLECTION"),
+    
+    PERSONALISED_VIEW("PERSONALISED_VIEW");
 
     private String value;
 
@@ -167,7 +169,7 @@ public class ShareMetadataRequest implements Serializable {
   }
 
   /**
-   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection
+   * Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard
    * @return metadataType
    */
   @javax.annotation.Nullable

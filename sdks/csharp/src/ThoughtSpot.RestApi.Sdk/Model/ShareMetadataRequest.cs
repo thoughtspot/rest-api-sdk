@@ -33,9 +33,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
     public partial class ShareMetadataRequest : IValidatableObject
     {
         /// <summary>
-        /// Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection
+        /// Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard
         /// </summary>
-        /// <value>Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection</value>
+        /// <value>Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MetadataTypeEnum
         {
@@ -73,14 +73,20 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum COLLECTION for value: COLLECTION
             /// </summary>
             [EnumMember(Value = "COLLECTION")]
-            COLLECTION = 6
+            COLLECTION = 6,
+
+            /// <summary>
+            /// Enum PERSONALISEDVIEW for value: PERSONALISED_VIEW
+            /// </summary>
+            [EnumMember(Value = "PERSONALISED_VIEW")]
+            PERSONALISEDVIEW = 7
         }
 
 
         /// <summary>
-        /// Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection
+        /// Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard
         /// </summary>
-        /// <value>Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection</value>
+        /// <value>Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard</value>
         [DataMember(Name = "metadata_type", EmitDefaultValue = false)]
         public MetadataTypeEnum? MetadataType { get; set; }
         /// <summary>
@@ -94,7 +100,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ShareMetadataRequest" /> class.
         /// </summary>
-        /// <param name="metadataType">Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection.</param>
+        /// <param name="metadataType">Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard.</param>
         /// <param name="metadataIdentifiers">Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type.</param>
         /// <param name="metadata">Metadata details for sharing objects..</param>
         /// <param name="permissions">Permission details for sharing the objects. (required).</param>

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MetadataType** | **string** | Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection | [optional] 
+**MetadataType** | **string** | Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard | [optional] 
 **MetadataIdentifiers** | **List&lt;string&gt;** | Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type | [optional] 
 **Metadata** | [**List&lt;ShareMetadataTypeInput&gt;**](ShareMetadataTypeInput.md) | Metadata details for sharing objects. | [optional] 
 **Permissions** | [**List&lt;SharePermissionsInput&gt;**](SharePermissionsInput.md) | Permission details for sharing the objects. | 

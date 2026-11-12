@@ -73,7 +73,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum COLLECTION for value: COLLECTION
             /// </summary>
             [EnumMember(Value = "COLLECTION")]
-            COLLECTION = 6
+            COLLECTION = 6,
+
+            /// <summary>
+            /// Enum PERSONALISEDVIEW for value: PERSONALISED_VIEW
+            /// </summary>
+            [EnumMember(Value = "PERSONALISED_VIEW")]
+            PERSONALISEDVIEW = 7
         }
 
 

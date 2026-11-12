@@ -18579,14 +18579,16 @@ paths:
         \ of all metadata objects that a user or group can access, specify the `type`\
         \ and GUID or name of the principal.\n* To get permission details for a specific\
         \ object, add the `type` and GUID or name of the metadata object to your API\
-        \ request.\n\nUpon successful execution, the API returns a list of metadata\
-        \ objects and permission details for each object.  \n\n**Warning**: This API\
-        \ sets `record_size` to `-1` by default, which fetches all records in a single\
-        \ response. On ThoughtSpot instances with a large number of objects or users,\
-        \ this can lead to slow responses, excessive logging, and out-of-memory failures.\
-        \ If the object or principal count is high, set `record_size` to a smaller\
-        \ value and iterate through pages programmatically instead of relying on the\
-        \ default.\n\n\n\n\n\n"
+        \ request.\n* To get permission details for a personalized view of a Liveboard,\
+        \ set `type` to `PERSONALISED_VIEW` and specify the view in `identifier`.\n\
+        \nUpon successful execution, the API returns a list of metadata objects and\
+        \ permission details for each object.  \n\n**Warning**: This API sets `record_size`\
+        \ to `-1` by default, which fetches all records in a single response. On ThoughtSpot\
+        \ instances with a large number of objects or users, this can lead to slow\
+        \ responses, excessive logging, and out-of-memory failures. If the object\
+        \ or principal count is high, set `record_size` to a smaller value and iterate\
+        \ through pages programmatically instead of relying on the default.\n\n\n\n\
+        \n\n"
       operationId: fetchPermissionsOfPrincipals
       parameters: []
       requestBody:
@@ -18620,6 +18622,27 @@ paths:
                             name: tsadmin
                           permission: READ_ONLY
                           shared_permission: NO_ACCESS
+                          group_permission: []
+                example_2:
+                  value:
+                    principal_permission_details:
+                    - principal_id: e1d4a6b2-8c37-4f95-b0a1-2d6f9e3c5b78
+                      principal_name: alice
+                      principal_type: USER
+                      principal_sub_type: LOCAL_USER
+                      metadata_permission_info:
+                      - metadata_type: PERSONALISED_VIEW
+                        metadata_permissions:
+                        - metadata_id: 3c2a9e1d-7b4f-4e8a-9d61-5f0c8b2e7a14
+                          metadata_name: "East region, last 30 days"
+                          metadata_owner:
+                            id: a62a5bf3-9f16-45b2-a174-7d30b3b577a9
+                            name: testing
+                          metadata_author:
+                            id: 7f5e7f87-09a1-487c-a1da-c4bb35e45270
+                            name: test_user
+                          permission: READ_ONLY
+                          shared_permission: READ_ONLY
                           group_permission: []
               schema:
                 $ref: "#/components/schemas/PermissionOfPrincipalsResponse"
@@ -18666,6 +18689,7 @@ paths:
 
         * To fetch a list of users and groups for a metadata object, specify `type` and GUID or name of the metadata object.
         * To get permission details for a specific user or group, add `type` and GUID or name of the principal object to your API request.
+        * To fetch permissions of a personalized view of a Liveboard, set `type` to `PERSONALISED_VIEW` and specify the view in `identifier`. With `permission_type` set to `DEFINED`, the response lists the users and groups the view is shared with.
 
         Upon successful execution, the API returns permission details and principal information for the object specified in the API request.
 
@@ -18722,6 +18746,35 @@ paths:
                           principal_name: tsadmin
                           permission: MODIFY
                           shared_permission: NO_ACCESS
+                          group_permission: []
+                example_2:
+                  value:
+                    metadata_permission_details:
+                    - metadata_id: 3c2a9e1d-7b4f-4e8a-9d61-5f0c8b2e7a14
+                      metadata_name: "East region, last 30 days"
+                      metadata_type: PERSONALISED_VIEW
+                      metadata_owner:
+                        id: a62a5bf3-9f16-45b2-a174-7d30b3b577a9
+                        name: testing
+                      metadata_author:
+                        id: 7f5e7f87-09a1-487c-a1da-c4bb35e45270
+                        name: test_user
+                      principal_permission_info:
+                      - principal_type: USER_GROUP
+                        principal_sub_type: LOCAL_GROUP
+                        principal_permissions:
+                        - principal_id: 5b9e2c71-3d8a-4f16-a0e4-9c27d1b64f83
+                          principal_name: Care Team East
+                          permission: READ_ONLY
+                          shared_permission: READ_ONLY
+                          group_permission: []
+                      - principal_type: USER
+                        principal_sub_type: LOCAL_USER
+                        principal_permissions:
+                        - principal_id: e1d4a6b2-8c37-4f95-b0a1-2d6f9e3c5b78
+                          principal_name: alice
+                          permission: READ_ONLY
+                          shared_permission: READ_ONLY
                           group_permission: []
               schema:
                 $ref: "#/components/schemas/PermissionOfMetadataResponse"
@@ -18897,6 +18950,7 @@ paths:
         * Views
         * Connections
         * Collections
+        * Personalized views of a Liveboard (`PERSONALISED_VIEW`)
 
         #### Object permissions
 
@@ -18909,6 +18963,16 @@ paths:
         * Sharing a visualization implicitly shares the entire Liveboard with the recipient.
         * Object permissions set for a shared visualization also apply to the Liveboard unless overridden by another API request or via UI.
         * If email notifications for object sharing are enabled, a notification with a link to the shared visualization will be sent to the recipient’s email address. Although this link opens the shared visualization, recipients can also access other visualizations in the Liveboard.
+
+        #### Sharing a personalized view
+
+        A personalized view is a saved set of filter and parameter values on a Liveboard. Sharing a view lets other users and groups apply it to the Liveboard. Use `metadata_type` or `type` set to `PERSONALISED_VIEW`. The following rules apply:
+
+        * Requires the `isPersonalizedViewsSharingEnabled` feature flag to grant access. Revoking access with `NO_ACCESS` works even when the flag is off.
+        * Only the author of the view or an administrator can share or unshare it. Recipients cannot share it further.
+        * Views are shared with view access only. Set `share_mode` to `READ_ONLY` to share, or `NO_ACCESS` to unshare. `MODIFY` is rejected, so recipients cannot edit or delete a shared view.
+        * Every user and group in the request must already have view access to the Liveboard of the view. If any of them does not, the request fails and nothing is shared. Sharing a view does not share its Liveboard or the Liveboard's data sources.
+        * Views created for KPI alerts cannot be shared.
 
         #### Sharing a collection
 
@@ -19036,6 +19100,48 @@ paths:
           "notification": {
             "notify_on_share": false
           }
+        }
+        ```
+
+        ### Share a personalized view
+        Share a personalized view with a user and a group. Both must already have view access to the Liveboard:
+
+        ```json
+        {
+          "metadata_type": "PERSONALISED_VIEW",
+          "metadata_identifiers": ["3c2a9e1d-7b4f-4e8a-9d61-5f0c8b2e7a14"],
+          "permissions": [{
+            "principal": {
+              "type": "USER",
+              "identifier": "alice@company.com"
+            },
+            "share_mode": "READ_ONLY"
+          }, {
+            "principal": {
+              "type": "USER_GROUP",
+              "identifier": "Care Team East"
+            },
+            "share_mode": "READ_ONLY"
+          }]
+        }
+        ```
+
+        ### Unshare a personalized view
+        Remove a user's access to a personalized view by setting `share_mode` to `NO_ACCESS`:
+
+        ```json
+        {
+          "metadata": [{
+            "type": "PERSONALISED_VIEW",
+            "identifier": "3c2a9e1d-7b4f-4e8a-9d61-5f0c8b2e7a14"
+          }],
+          "permissions": [{
+            "principal": {
+              "type": "USER",
+              "identifier": "alice@company.com"
+            },
+            "share_mode": "NO_ACCESS"
+          }]
         }
         ```
 
@@ -23081,6 +23187,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Forbidden access.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict. A variable with the same name already exists.
         "500":
           content:
             application/json:
@@ -23360,6 +23472,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
           description: Forbidden access.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Conflict. Another variable already has the requested name.
         "500":
           content:
             application/json:
@@ -28431,6 +28549,7 @@ components:
           - LOGICAL_COLUMN
           - CONNECTION
           - COLLECTION
+          - PERSONALISED_VIEW
           nullable: true
           type: string
         identifier:
@@ -36637,6 +36756,7 @@ components:
           - LOGICAL_COLUMN
           - CONNECTION
           - COLLECTION
+          - PERSONALISED_VIEW
           nullable: true
           type: string
         identifier:
@@ -47687,6 +47807,7 @@ components:
           - LOGICAL_COLUMN
           - CONNECTION
           - COLLECTION
+          - PERSONALISED_VIEW
           type: string
       required:
       - principals
@@ -47886,6 +48007,7 @@ components:
             4. LOGICAL_COLUMN
             5. Connection
             6. Collection
+            7. PERSONALISED_VIEW for a personalized view of a Liveboard
           enum:
           - LIVEBOARD
           - ANSWER
@@ -47893,6 +48015,7 @@ components:
           - LOGICAL_COLUMN
           - CONNECTION
           - COLLECTION
+          - PERSONALISED_VIEW
           type: string
         metadata_identifiers:
           description: "Unique ID or name of metadata objects. Note: All the names\

@@ -47,6 +47,7 @@ All URIs are relative to *CLUSTER_URL*
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **409** | Conflict. A variable with the same name already exists. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="deleteVariable"></a>
@@ -229,6 +230,7 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **409** | Conflict. Another variable already has the requested name. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="updateVariableValues"></a>

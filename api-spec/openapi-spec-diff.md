@@ -641,10 +641,26 @@
 
 ### POST /api/rest/2.0/security/metadata/fetch-permissions
 - :warning: the `metadata_permission_details` response's property `type` changed from `array<object>` to `object` for status `200`
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+
+
+### POST /api/rest/2.0/security/metadata/share
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata_type`
 
 
 ### POST /api/rest/2.0/security/principals/fetch-permissions
 - :warning: the `principal_permission_details` response's property `type` changed from `array<object>` to `object` for status `200`
+-  added the new `PERSONALISED_VIEW` enum value to the request property `default_metadata_type`
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+
+
+### POST /api/rest/2.0/template/variables/create
+-  added the non-success response with the status `409`
+
+
+### POST /api/rest/2.0/template/variables/{identifier}/update
+-  added the non-success response with the status `409`
 
 
 ### POST /api/rest/2.0/users/activate

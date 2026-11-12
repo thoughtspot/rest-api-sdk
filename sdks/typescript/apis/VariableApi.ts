@@ -416,6 +416,13 @@ export class VariableApiResponseProcessor {
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
         }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Conflict. A variable with the same name already exists.", body, response.headers);
+        }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -684,6 +691,13 @@ export class VariableApiResponseProcessor {
                 "ErrorResponse", ""
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Conflict. Another variable already has the requested name.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
