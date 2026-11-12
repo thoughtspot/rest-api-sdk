@@ -20,13 +20,21 @@ export class CreateAgentConversationRequest {
     */
     'metadata_context'?: ContextPayloadV2Input;
     /**
-    * Conversation settings.
+    * Conversation settings. Applies to V1 only.
     */
-    'conversation_settings': ConversationSettingsInput;
+    'conversation_settings'?: ConversationSettingsInput;
     /**
     * Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst\'s configuration (data sources, agent instructions, and connectors), and `metadata_context` must be omitted.    Version: 26.10.0.cl or later 
     */
     'analyst_identifier'?: string;
+    /**
+    * Guidance appended to the agent\'s instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with `analyst_identifier`.    Version: 26.12.0.cl or later 
+    */
+    'additional_instructions'?: string;
+    /**
+    * Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   `conversation_settings`. - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   `additional_instructions`. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+    */
+    'spotter_experience_version'?: CreateAgentConversationRequestSpotterExperienceVersionEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -50,6 +58,18 @@ export class CreateAgentConversationRequest {
             "baseName": "analyst_identifier",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "additional_instructions",
+            "baseName": "additional_instructions",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "spotter_experience_version",
+            "baseName": "spotter_experience_version",
+            "type": "CreateAgentConversationRequestSpotterExperienceVersionEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -59,3 +79,6 @@ export class CreateAgentConversationRequest {
     public constructor() {
     }
 }
+
+    export type CreateAgentConversationRequestSpotterExperienceVersionEnum = "V1" | "V2" ;
+

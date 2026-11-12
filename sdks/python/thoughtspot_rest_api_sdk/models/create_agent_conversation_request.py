@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.context_payload_v2_input import ContextPayloadV2Input
 from thoughtspot_rest_api_sdk.models.conversation_settings_input import ConversationSettingsInput
@@ -28,10 +28,22 @@ class CreateAgentConversationRequest(BaseModel):
     CreateAgentConversationRequest
     """ # noqa: E501
     metadata_context: Optional[ContextPayloadV2Input] = Field(default=None, description="Context for the conversation. Required unless `analyst_identifier` is provided; do not pass both.")
-    conversation_settings: ConversationSettingsInput = Field(description="Conversation settings.")
+    conversation_settings: Optional[ConversationSettingsInput] = Field(default=None, description="Conversation settings. Applies to V1 only.")
     analyst_identifier: Optional[StrictStr] = Field(default=None, description="Unique identifier of the Spotter Analyst to start the conversation from. When provided, the conversation uses the analyst's configuration (data sources, agent instructions, and connectors), and `metadata_context` must be omitted.    Version: 26.10.0.cl or later ")
+    additional_instructions: Optional[StrictStr] = Field(default=None, description="Guidance appended to the agent's instructions on every message in this conversation, such as a persona, an output format or domain rules. Cannot be changed after the conversation is created. V2 only, and not with `analyst_identifier`.    Version: 26.12.0.cl or later ")
+    spotter_experience_version: Optional[StrictStr] = Field(default='V1', description="Version of the Spotter experience the conversation runs on. The conversation stays on this version, so pass the same value on every later request for it. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Uses   `conversation_settings`. - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Accepts   `additional_instructions`. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["metadata_context", "conversation_settings", "analyst_identifier"]
+    __properties: ClassVar[List[str]] = ["metadata_context", "conversation_settings", "analyst_identifier", "additional_instructions", "spotter_experience_version"]
+
+    @field_validator('spotter_experience_version')
+    def spotter_experience_version_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['V1', 'V2']):
+            raise ValueError("must be one of enum values ('V1', 'V2')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -99,7 +111,9 @@ class CreateAgentConversationRequest(BaseModel):
         _obj = cls.model_validate({
             "metadata_context": ContextPayloadV2Input.from_dict(obj["metadata_context"]) if obj.get("metadata_context") is not None else None,
             "conversation_settings": ConversationSettingsInput.from_dict(obj["conversation_settings"]) if obj.get("conversation_settings") is not None else None,
-            "analyst_identifier": obj.get("analyst_identifier")
+            "analyst_identifier": obj.get("analyst_identifier"),
+            "additional_instructions": obj.get("additional_instructions"),
+            "spotter_experience_version": obj.get("spotter_experience_version") if obj.get("spotter_experience_version") is not None else 'V1'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

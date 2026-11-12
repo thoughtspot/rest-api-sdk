@@ -416,7 +416,7 @@ catch (ApiException e)
 
 <a id="updatestylecustomization"></a>
 # **UpdateStyleCustomization**
-> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
+> void UpdateStyleCustomization (string scope, string? operation = null, StyleResetOptionsInput? resetOptions = null, NavigationPanelInput? navigationPanel = null, AppColorThemeInput? appColorTheme = null, StyleColorPaletteInput? chartColorPalette = null, string? embeddedFooterText = null, VisualizationFontsInput? visualizationFonts = null, FileParameter? defaultLogo = null, FileParameter? wideLogo = null)
 
 
 
@@ -449,7 +449,8 @@ namespace Example
             var scope = "CLUSTER";  // string | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user's org. (default to ORG)
             var operation = "REPLACE";  // string? | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional)  (default to REPLACE)
             var resetOptions = new StyleResetOptionsInput?(); // StyleResetOptionsInput? | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional) 
-            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional) 
+            var navigationPanel = new NavigationPanelInput?(); // NavigationPanelInput? | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. (optional) 
+            var appColorTheme = new AppColorThemeInput?(); // AppColorThemeInput? | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\"APP_COLOR_THEME\\\"]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional) 
             var chartColorPalette = new StyleColorPaletteInput?(); // StyleColorPaletteInput? | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional) 
             var embeddedFooterText = "embeddedFooterText_example";  // string? | Custom footer text for the embedded application. An empty string clears the footer. (optional) 
             var visualizationFonts = new VisualizationFontsInput?(); // VisualizationFontsInput? | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional) 
@@ -458,7 +459,7 @@ namespace Example
 
             try
             {
-                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+                apiInstance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
             }
             catch (ApiException  e)
             {
@@ -477,7 +478,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+    apiInstance.UpdateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
 }
 catch (ApiException e)
 {
@@ -494,7 +495,8 @@ catch (ApiException e)
 | **scope** | **string** | Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. | [default to ORG] |
 | **operation** | **string?** | Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. | [optional] [default to REPLACE] |
 | **resetOptions** | [**StyleResetOptionsInput?**](StyleResetOptionsInput?.md) | Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. | [optional]  |
-| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. | [optional]  |
+| **navigationPanel** | [**NavigationPanelInput?**](NavigationPanelInput?.md) | Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme - - both update the same underlying color. | [optional]  |
+| **appColorTheme** | [**AppColorThemeInput?**](AppColorThemeInput?.md) | App color theme - - the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  | [optional]  |
 | **chartColorPalette** | [**StyleColorPaletteInput?**](StyleColorPaletteInput?.md) | Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. | [optional]  |
 | **embeddedFooterText** | **string?** | Custom footer text for the embedded application. An empty string clears the footer. | [optional]  |
 | **visualizationFonts** | [**VisualizationFontsInput?**](VisualizationFontsInput?.md) | Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. | [optional]  |

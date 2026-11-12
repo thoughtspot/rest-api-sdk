@@ -2385,6 +2385,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '302': None,
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2456,6 +2457,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '302': None,
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2527,6 +2529,7 @@ class AuthenticationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
+            '302': None,
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",

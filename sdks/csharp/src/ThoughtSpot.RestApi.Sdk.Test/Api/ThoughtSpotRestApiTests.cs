@@ -228,6 +228,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateCommit
+        /// </summary>
+        [Fact]
+        public void CreateCommitTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateCommitRequest createCommitRequest = null;
+            //var response = instance.CreateCommit(createCommitRequest);
+            //Assert.IsType<VersionControlCommitResponse>(response);
+        }
+
+        /// <summary>
         /// Test CreateConfig
         /// </summary>
         [Fact]
@@ -421,6 +433,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test CreateVersionControlConfig
+        /// </summary>
+        [Fact]
+        public void CreateVersionControlConfigTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //CreateVersionControlConfigRequest createVersionControlConfigRequest = null;
+            //var response = instance.CreateVersionControlConfig(createVersionControlConfigRequest);
+            //Assert.IsType<VersionControlConfig>(response);
+        }
+
+        /// <summary>
         /// Test CreateWebhookConfiguration
         /// </summary>
         [Fact]
@@ -594,7 +618,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.DeleteConversation(conversationIdentifier);
+            //string? spotterExperienceVersion = null;
+            //instance.DeleteConversation(conversationIdentifier, spotterExperienceVersion);
         }
 
         /// <summary>
@@ -810,6 +835,16 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteVersionControlConfig
+        /// </summary>
+        [Fact]
+        public void DeleteVersionControlConfigTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //instance.DeleteVersionControlConfig();
+        }
+
+        /// <summary>
         /// Test DeleteWebhookConfigurations
         /// </summary>
         [Fact]
@@ -831,6 +866,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //DeployCommitRequest deployCommitRequest = null;
             //var response = instance.DeployCommit(deployCommitRequest);
             //Assert.IsType<List<DeployResponse>>(response);
+        }
+
+        /// <summary>
+        /// Test DeployRevision
+        /// </summary>
+        [Fact]
+        public void DeployRevisionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeployRevisionRequest deployRevisionRequest = null;
+            //var response = instance.DeployRevision(deployRevisionRequest);
+            //Assert.IsType<VersionControlDeployResponse>(response);
         }
 
         /// <summary>
@@ -1118,7 +1165,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //int? limit = null;
             //int? offset = null;
             //bool? skipEmpty = null;
-            //var response = instance.GetConversationList(limit, offset, skipEmpty);
+            //string? spotterExperienceVersion = null;
+            //var response = instance.GetConversationList(limit, offset, skipEmpty, spotterExperienceVersion);
             //Assert.IsType<AgentConversationHistoryResponse>(response);
         }
 
@@ -1460,6 +1508,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test PromoteBranch
+        /// </summary>
+        [Fact]
+        public void PromoteBranchTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //PromoteBranchRequest promoteBranchRequest = null;
+            //var response = instance.PromoteBranch(promoteBranchRequest);
+            //Assert.IsType<VersionControlPromotionResponse>(response);
+        }
+
+        /// <summary>
         /// Test PublishMetadata
         /// </summary>
         [Fact]
@@ -1503,6 +1563,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //ResetUserPasswordRequest resetUserPasswordRequest = null;
             //instance.ResetUserPassword(resetUserPasswordRequest);
+        }
+
+        /// <summary>
+        /// Test RestoreRevision
+        /// </summary>
+        [Fact]
+        public void RestoreRevisionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //RestoreRevisionRequest restoreRevisionRequest = null;
+            //var response = instance.RestoreRevision(restoreRevisionRequest);
+            //Assert.IsType<VersionControlRestoreResponse>(response);
         }
 
         /// <summary>
@@ -1867,6 +1939,29 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test SearchVersionControlConfigs
+        /// </summary>
+        [Fact]
+        public void SearchVersionControlConfigsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //var response = instance.SearchVersionControlConfigs();
+            //Assert.IsType<VersionControlConfigList>(response);
+        }
+
+        /// <summary>
+        /// Test SearchVersionControlRuns
+        /// </summary>
+        [Fact]
+        public void SearchVersionControlRunsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //SearchVersionControlRunsRequest searchVersionControlRunsRequest = null;
+            //var response = instance.SearchVersionControlRuns(searchVersionControlRunsRequest);
+            //Assert.IsType<VersionControlRunList>(response);
+        }
+
+        /// <summary>
         /// Test SearchWebhookConfigurations
         /// </summary>
         [Fact]
@@ -1901,7 +1996,7 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string conversationIdentifier = null;
             //SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest = null;
             //var response = instance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
-            //Assert.IsType<SendAgentMessageResponse>(response);
+            //Assert.IsType<SendAgentConversationMessageStreaming200Response>(response);
         }
 
         /// <summary>
@@ -2022,7 +2117,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.StopConversation(conversationIdentifier);
+            //StopConversationRequest? stopConversationRequest = null;
+            //instance.StopConversation(conversationIdentifier, stopConversationRequest);
         }
 
         /// <summary>
@@ -2353,12 +2449,13 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string? operation = null;
             //StyleResetOptionsInput? resetOptions = null;
             //NavigationPanelInput? navigationPanel = null;
+            //AppColorThemeInput? appColorTheme = null;
             //StyleColorPaletteInput? chartColorPalette = null;
             //string? embeddedFooterText = null;
             //VisualizationFontsInput? visualizationFonts = null;
             //FileParameter? defaultLogo = null;
             //FileParameter? wideLogo = null;
-            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+            //instance.UpdateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
         }
 
         /// <summary>
@@ -2453,6 +2550,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //UpdateVariableValuesRequest updateVariableValuesRequest = null;
             //instance.UpdateVariableValues(updateVariableValuesRequest);
+        }
+
+        /// <summary>
+        /// Test UpdateVersionControlConfig
+        /// </summary>
+        [Fact]
+        public void UpdateVersionControlConfigTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //UpdateVersionControlConfigRequest updateVersionControlConfigRequest = null;
+            //instance.UpdateVersionControlConfig(updateVersionControlConfigRequest);
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.thoughtspot.client.model.StyleAppColorTheme;
 import com.thoughtspot.client.model.StyleChartColorPalette;
 import com.thoughtspot.client.model.StyleEmbeddedFooterText;
 import com.thoughtspot.client.model.StyleLogoStatus;
@@ -56,6 +57,14 @@ public class StylePreferenceTest {
     @Test
     public void navigationPanelTest() {
         // TODO: test navigationPanel
+    }
+
+    /**
+     * Test the property 'appColorTheme'
+     */
+    @Test
+    public void appColorThemeTest() {
+        // TODO: test appColorTheme
     }
 
     /**

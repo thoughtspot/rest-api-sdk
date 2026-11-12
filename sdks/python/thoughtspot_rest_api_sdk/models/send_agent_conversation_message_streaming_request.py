@@ -15,8 +15,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -26,8 +26,19 @@ class SendAgentConversationMessageStreamingRequest(BaseModel):
     SendAgentConversationMessageStreamingRequest
     """ # noqa: E501
     messages: List[StrictStr] = Field(description="messages to be sent to the agent")
+    spotter_experience_version: Optional[StrictStr] = Field(default='V1', description="Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Streams message events. - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Streams   `AgentStreamFrame` events and can start a new conversation without   `conversation_identifier`. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["messages"]
+    __properties: ClassVar[List[str]] = ["messages", "spotter_experience_version"]
+
+    @field_validator('spotter_experience_version')
+    def spotter_experience_version_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['V1', 'V2']):
+            raise ValueError("must be one of enum values ('V1', 'V2')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,7 +98,8 @@ class SendAgentConversationMessageStreamingRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "messages": obj.get("messages")
+            "messages": obj.get("messages"),
+            "spotter_experience_version": obj.get("spotter_experience_version") if obj.get("spotter_experience_version") is not None else 'V1'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

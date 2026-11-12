@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.thoughtspot.client.model.AppColorThemeInput;
 import com.thoughtspot.client.model.DeleteStyleFontsRequest;
 import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.ExportStyleLogosRequest;
@@ -686,7 +687,8 @@ public class StyleCustomizationApi {
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. (required)
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. (optional)
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer. (optional)
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)
@@ -706,7 +708,7 @@ public class StyleCustomizationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateStyleCustomizationCall(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updateStyleCustomizationCall(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, AppColorThemeInput appColorTheme, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -745,6 +747,10 @@ public class StyleCustomizationApi {
 
         if (navigationPanel != null) {
             localVarFormParams.put("navigation_panel", navigationPanel);
+        }
+
+        if (appColorTheme != null) {
+            localVarFormParams.put("app_color_theme", appColorTheme);
         }
 
         if (chartColorPalette != null) {
@@ -788,13 +794,13 @@ public class StyleCustomizationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateStyleCustomizationValidateBeforeCall(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateStyleCustomizationValidateBeforeCall(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, AppColorThemeInput appColorTheme, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'scope' is set
         if (scope == null) {
             throw new ApiException("Missing the required parameter 'scope' when calling updateStyleCustomization(Async)");
         }
 
-        return updateStyleCustomizationCall(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _callback);
+        return updateStyleCustomizationCall(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _callback);
 
     }
 
@@ -804,7 +810,8 @@ public class StyleCustomizationApi {
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. (required)
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. (optional)
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer. (optional)
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)
@@ -822,8 +829,8 @@ public class StyleCustomizationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public void updateStyleCustomization(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo) throws ApiException {
-        updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+    public void updateStyleCustomization(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, AppColorThemeInput appColorTheme, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo) throws ApiException {
+        updateStyleCustomizationWithHttpInfo(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
     }
 
     /**
@@ -832,7 +839,8 @@ public class StyleCustomizationApi {
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. (required)
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. (optional)
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer. (optional)
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)
@@ -851,8 +859,8 @@ public class StyleCustomizationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> updateStyleCustomizationWithHttpInfo(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo) throws ApiException {
-        okhttp3.Call localVarCall = updateStyleCustomizationValidateBeforeCall(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, null);
+    public ApiResponse<Void> updateStyleCustomizationWithHttpInfo(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, AppColorThemeInput appColorTheme, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo) throws ApiException {
+        okhttp3.Call localVarCall = updateStyleCustomizationValidateBeforeCall(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -862,7 +870,8 @@ public class StyleCustomizationApi {
      * @param scope Scope at which to apply the preferences. CLUSTER sets cluster-level defaults for all orgs. ORG applies to the authenticated user&#39;s org. (required)
      * @param operation Operation to perform. REPLACE (default) applies the provided fields and leaves omitted fields unchanged. RESET reverts fields listed in reset_options to defaults. (optional, default to REPLACE)
      * @param resetOptions Fields to reset when operation is RESET. Specify style fields and visualization areas to revert to defaults. (optional)
-     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. (optional)
+     * @param navigationPanel Navigation panel color. Provide theme and, when theme is CUSTOM, also provide base_color. Must not be provided together with app_color_theme -- both update the same underlying color. (optional)
+     * @param appColorTheme App color theme -- the same underlying color navigation_panel sets, expressed as a brand color plus how it is applied. brand_color and apply_as_top_nav_color may be set independently; each is left unchanged if omitted. To clear the brand color, use operation RESET with reset_options.style: [\\\&quot;APP_COLOR_THEME\\\&quot;]. Supported only when the app color theme is enabled on the cluster. Must not be provided together with navigation_panel.    Version: 26.10.0.cl or later  (optional)
      * @param chartColorPalette Chart color palette. When provided with operation REPLACE, exactly 8 color entries must be specified in colors. (optional)
      * @param embeddedFooterText Custom footer text for the embedded application. An empty string clears the footer. (optional)
      * @param visualizationFonts Font assignments per visualization area. Provide only the areas to update; omitted areas remain unchanged. (optional)
@@ -882,9 +891,9 @@ public class StyleCustomizationApi {
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateStyleCustomizationAsync(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call updateStyleCustomizationAsync(String scope, String operation, StyleResetOptionsInput resetOptions, NavigationPanelInput navigationPanel, AppColorThemeInput appColorTheme, StyleColorPaletteInput chartColorPalette, String embeddedFooterText, VisualizationFontsInput visualizationFonts, File defaultLogo, File wideLogo, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateStyleCustomizationValidateBeforeCall(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _callback);
+        okhttp3.Call localVarCall = updateStyleCustomizationValidateBeforeCall(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

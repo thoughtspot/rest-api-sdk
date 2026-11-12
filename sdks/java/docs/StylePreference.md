@@ -11,6 +11,7 @@ Style preferences for a single scope entry.
 |**scope** | [**ScopeEnum**](#ScopeEnum) | Scope at which these style preferences apply. |  [optional] |
 |**org** | [**StyleOrgInfo**](StyleOrgInfo.md) |  |  [optional] |
 |**navigationPanel** | [**StyleNavigationPanel**](StyleNavigationPanel.md) |  |  [optional] |
+|**appColorTheme** | [**StyleAppColorTheme**](StyleAppColorTheme.md) |  |  [optional] |
 |**chartColorPalette** | [**StyleChartColorPalette**](StyleChartColorPalette.md) |  |  [optional] |
 |**embeddedFooterText** | [**StyleEmbeddedFooterText**](StyleEmbeddedFooterText.md) |  |  [optional] |
 |**logo** | [**StyleLogoStatus**](StyleLogoStatus.md) |  |  [optional] |

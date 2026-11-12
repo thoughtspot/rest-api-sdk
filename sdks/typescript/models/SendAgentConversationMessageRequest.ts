@@ -17,6 +17,10 @@ export class SendAgentConversationMessageRequest {
     * messages to be sent to the agent
     */
     'messages': Array<string>;
+    /**
+    * Version of the Spotter experience the conversation runs on. A conversation stays on the version that created it, so pass the value used when it was created. - `V1` (default): the Spotter conversation API available before   26.12.0.cl. Used when the parameter is omitted. Returns a list of   messages (`AgentMessagesResponse`). - `V2`: the new Spotter experience, the same one behind the Liveboard side   panel (New); new Spotter capabilities ship here. Returns the turn\'s   events (`AgentTurnResponse`) and can start a new conversation without   `conversation_identifier`. Requires a cluster admin to set Spotter 3   Liveboard experience to Liveboard side panel (New); otherwise the   request returns a 400.    Version: 26.12.0.cl or later 
+    */
+    'spotter_experience_version'?: SendAgentConversationMessageRequestSpotterExperienceVersionEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +32,12 @@ export class SendAgentConversationMessageRequest {
             "baseName": "messages",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "spotter_experience_version",
+            "baseName": "spotter_experience_version",
+            "type": "SendAgentConversationMessageRequestSpotterExperienceVersionEnum",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -37,3 +47,6 @@ export class SendAgentConversationMessageRequest {
     public constructor() {
     }
 }
+
+    export type SendAgentConversationMessageRequestSpotterExperienceVersionEnum = "V1" | "V2" ;
+

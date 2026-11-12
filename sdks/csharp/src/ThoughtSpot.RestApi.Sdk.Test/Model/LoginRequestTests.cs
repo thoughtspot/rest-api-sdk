@@ -89,5 +89,23 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'RememberMe'
         }
+
+        /// <summary>
+        /// Test the property 'RedirectUrl'
+        /// </summary>
+        [Fact]
+        public void RedirectUrlTest()
+        {
+            // TODO unit test for the property 'RedirectUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'NoUrlRedirection'
+        /// </summary>
+        [Fact]
+        public void NoUrlRedirectionTest()
+        {
+            // TODO unit test for the property 'NoUrlRedirection'
+        }
     }
 }

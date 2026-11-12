@@ -1,6 +1,6 @@
 {
   "name": "@thoughtspot/rest-api-sdk",
-  "version": "2.30.0",
+  "version": "2.31.0",
   "description": "Api sdk for thoughtspot's public v2 rest api",
   "keywords": [
     "fetch",
@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --dts",
     "test" : "ts-mocha ./tests/ThoughtSpotRestApiTest.ts --timeout 6000",
+    "test:token-caching": "ts-mocha ./tests/tokenCaching/tokenManagerTest.ts --timeout 30000",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

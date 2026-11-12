@@ -54,4 +54,20 @@ public class CreateAgentConversationRequestTest {
         // TODO: test analystIdentifier
     }
 
+    /**
+     * Test the property 'additionalInstructions'
+     */
+    @Test
+    public void additionalInstructionsTest() {
+        // TODO: test additionalInstructions
+    }
+
+    /**
+     * Test the property 'spotterExperienceVersion'
+     */
+    @Test
+    public void spotterExperienceVersionTest() {
+        // TODO: test spotterExperienceVersion
+    }
+
 }

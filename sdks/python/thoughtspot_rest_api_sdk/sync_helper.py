@@ -5,6 +5,7 @@
 """  # noqa: E501
 
 import asyncio
+import contextvars
 import threading
 from typing import Any, Coroutine, Optional, TypeVar
 
@@ -46,5 +47,20 @@ def run_sync(coro: Coroutine[Any, Any, T]) -> T:
     Note: this must not be called from within a running event loop (i.e. from
     ``async`` code) as it would block that loop; use the ``await``-able async
     methods directly in that case.
+
+    The caller's context variables are carried into the coroutine, which would
+    otherwise run with the background thread's context. The token cache relies
+    on this to recognise a ``*_sync`` call made from inside ``get_token``.
     """
-    return asyncio.run_coroutine_threadsafe(coro, _get_sync_loop()).result()
+    ctx = contextvars.copy_context()
+    return asyncio.run_coroutine_threadsafe(
+        _run_in_context(coro, ctx), _get_sync_loop()
+    ).result()
+
+
+async def _run_in_context(coro: Coroutine[Any, Any, T], ctx: contextvars.Context) -> T:
+    # Each task runs in its own copy of the context, so these sets stay local
+    # to this call (asyncio.create_task(context=...) needs Python 3.11).
+    for var, value in ctx.items():
+        var.set(value)
+    return await coro
