@@ -396,7 +396,7 @@ public class VersionControlRunStatus implements Serializable {
   }
 
   /**
-   * Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal.
+   * Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING.
    * @return objects
    */
   @javax.annotation.Nonnull

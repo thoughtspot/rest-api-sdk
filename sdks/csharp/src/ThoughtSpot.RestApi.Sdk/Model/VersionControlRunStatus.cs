@@ -124,7 +124,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="author">author (required).</param>
         /// <param name="branch">Branch the run used, which is the Org&#39;s configured branch at admission. A later edit to the Org&#39;s configuration does not change it. (required).</param>
         /// <param name="revision">On a commit, the commit this run produced. On a deploy, the revision being deployed. On a restore, the restore commit. Absent until the commit is pushed, and on a run that failed before pushing..</param>
-        /// <param name="objects">Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal. (required).</param>
+        /// <param name="objects">Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING. (required).</param>
         public VersionControlRunStatus(string id = default, TypeEnum type = default, StateEnum state = default, string message = default, float acceptedTimeInMillis = default, float? endTimeInMillis = default, VersionControlPrincipal author = default, string branch = default, string revision = default, List<VersionControlObjectResult> objects = default)
         {
             // to ensure "id" is required (not null)
@@ -209,9 +209,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string Revision { get; set; }
 
         /// <summary>
-        /// Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal.
+        /// Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING.
         /// </summary>
-        /// <value>Per-object outcomes known so far. This grows while state is RUNNING, and is complete once the run is terminal.</value>
+        /// <value>Per-object outcomes. While state is RUNNING, an object the run has not reached yet is PENDING, and the list can still grow as a COMMIT run exports dependencies; once the run is terminal, it is complete and no object is PENDING.</value>
         [DataMember(Name = "objects", IsRequired = true, EmitDefaultValue = true)]
         public List<VersionControlObjectResult> Objects { get; set; }
 

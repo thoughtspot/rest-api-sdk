@@ -32,6 +32,11 @@
 -  added the new optional `query` request parameter `spotter_experience_version`
 
 
+### POST /api/rest/2.0/ai/agent/converse/sse
+-  removed the non-success response with the status `401`
+-  removed the non-success response with the status `403`
+
+
 ### POST /api/rest/2.0/auth/session/login
 -  added the new optional request property `no_url_redirection`
 -  added the new optional request property `redirect_url`

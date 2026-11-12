@@ -29,7 +29,7 @@ class UpdateVersionControlConfigRequest(BaseModel):
     provider: Optional[StrictStr] = Field(default=None, description="Version control provider hosting the repository. Omit this to leave the stored provider unchanged.")
     repository_url: Optional[StrictStr] = Field(default=None, description="HTTPS URL of the repository your Org versions to. Omit this to leave the stored repository unchanged.")
     commit_branch: Optional[StrictStr] = Field(default=None, description="Branch that versioning runs commit to. Omit this to leave the stored branch unchanged.")
-    root_dir: Optional[StrictStr] = Field(default=None, description="Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged.")
+    root_dir: Optional[StrictStr] = Field(default=None, description="Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged.")
     credential: Optional[VersionControlCredentialInput] = Field(default=None, description="Credential ThoughtSpot uses to reach the repository. Omit this to keep the stored credential, unless the provider, host or repository owner changed, in which case a new credential is required.")
     disabled_operations: Optional[List[StrictStr]] = Field(default=None, description="Operations to turn off for this Org, replacing whatever is stored. Send an empty array to disable nothing. Omit this to leave the stored set unchanged.")
     additional_properties: Dict[str, Any] = {}

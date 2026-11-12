@@ -25,6 +25,8 @@ Outcome for one object in a run.
 | LIVEBOARD | &quot;LIVEBOARD&quot; |
 | ANSWER | &quot;ANSWER&quot; |
 | LOGICAL_TABLE | &quot;LOGICAL_TABLE&quot; |
+| LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
+| TEMPLATE_VARIABLE | &quot;TEMPLATE_VARIABLE&quot; |
 
 
 
@@ -43,6 +45,7 @@ Outcome for one object in a run.
 
 | Name | Value |
 |---- | -----|
+| PENDING | &quot;PENDING&quot; |
 | SUCCESS | &quot;SUCCESS&quot; |
 | VALIDATED | &quot;VALIDATED&quot; |
 | FAILED | &quot;FAILED&quot; |

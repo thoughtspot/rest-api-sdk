@@ -26,7 +26,7 @@ class VersionControlObjectInput(BaseModel):
     One object a versioning run can report, used to filter run search.
     """ # noqa: E501
     identifier: StrictStr = Field(description="Object ID of the metadata object, such as a Liveboard, an Answer or a Model. This is the cross-Org object ID, not the Org-local GUID and not the object name.")
-    type: Optional[StrictStr] = Field(default=None, description="Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.")
+    type: Optional[StrictStr] = Field(default=None, description="Type of the metadata object. Runs are matched by object ID alone.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifier", "type"]
 
@@ -36,8 +36,8 @@ class VersionControlObjectInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'TEMPLATE_VARIABLE']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'TEMPLATE_VARIABLE')")
         return value
 
     model_config = ConfigDict(

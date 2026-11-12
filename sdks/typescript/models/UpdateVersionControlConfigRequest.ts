@@ -27,7 +27,7 @@ export class UpdateVersionControlConfigRequest {
     */
     'commit_branch'?: string;
     /**
-    * Repository-relative directory that every write must resolve under. Omit this to leave the stored directory unchanged.
+    * Repository-relative directory that every write must resolve under. Send an empty string to use the repository root. Omit this to leave the stored directory unchanged.
     */
     'root_dir'?: string;
     /**

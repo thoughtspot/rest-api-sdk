@@ -21,7 +21,7 @@ export class VersionControlObjectInput {
     */
     'identifier': string;
     /**
-    * Type of the metadata object. LOGICAL_TABLE matches runs that exported a logical table as a dependency.
+    * Type of the metadata object. Runs are matched by object ID alone.
     */
     'type'?: VersionControlObjectInputTypeEnum | null;
 
@@ -51,5 +51,5 @@ export class VersionControlObjectInput {
     }
 }
 
-    export type VersionControlObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
+    export type VersionControlObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "TEMPLATE_VARIABLE" ;
 

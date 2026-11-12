@@ -101,7 +101,7 @@ export class VersionControlObjectResult {
     }
 }
 
-    export type VersionControlObjectResultTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
+    export type VersionControlObjectResultTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "TEMPLATE_VARIABLE" ;
     export type VersionControlObjectResultActionEnum = "CREATE" | "UPDATE" | "UPSERT" | "DELETE" ;
-    export type VersionControlObjectResultStatusEnum = "SUCCESS" | "VALIDATED" | "FAILED" | "SKIPPED" ;
+    export type VersionControlObjectResultStatusEnum = "PENDING" | "SUCCESS" | "VALIDATED" | "FAILED" | "SKIPPED" ;
 

@@ -41,8 +41,8 @@ class VersionControlObjectResult(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'TEMPLATE_VARIABLE']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'TEMPLATE_VARIABLE')")
         return value
 
     @field_validator('action')
@@ -58,8 +58,8 @@ class VersionControlObjectResult(BaseModel):
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['SUCCESS', 'VALIDATED', 'FAILED', 'SKIPPED']):
-            raise ValueError("must be one of enum values ('SUCCESS', 'VALIDATED', 'FAILED', 'SKIPPED')")
+        if value not in set(['PENDING', 'SUCCESS', 'VALIDATED', 'FAILED', 'SKIPPED']):
+            raise ValueError("must be one of enum values ('PENDING', 'SUCCESS', 'VALIDATED', 'FAILED', 'SKIPPED')")
         return value
 
     model_config = ConfigDict(

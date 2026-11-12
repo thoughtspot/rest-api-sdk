@@ -55,7 +55,19 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum LOGICALTABLE for value: LOGICAL_TABLE
             /// </summary>
             [EnumMember(Value = "LOGICAL_TABLE")]
-            LOGICALTABLE = 3
+            LOGICALTABLE = 3,
+
+            /// <summary>
+            /// Enum LOGICALCOLUMN for value: LOGICAL_COLUMN
+            /// </summary>
+            [EnumMember(Value = "LOGICAL_COLUMN")]
+            LOGICALCOLUMN = 4,
+
+            /// <summary>
+            /// Enum TEMPLATEVARIABLE for value: TEMPLATE_VARIABLE
+            /// </summary>
+            [EnumMember(Value = "TEMPLATE_VARIABLE")]
+            TEMPLATEVARIABLE = 5
         }
 
 
@@ -112,28 +124,34 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public enum StatusEnum
         {
             /// <summary>
+            /// Enum PENDING for value: PENDING
+            /// </summary>
+            [EnumMember(Value = "PENDING")]
+            PENDING = 1,
+
+            /// <summary>
             /// Enum SUCCESS for value: SUCCESS
             /// </summary>
             [EnumMember(Value = "SUCCESS")]
-            SUCCESS = 1,
+            SUCCESS = 2,
 
             /// <summary>
             /// Enum VALIDATED for value: VALIDATED
             /// </summary>
             [EnumMember(Value = "VALIDATED")]
-            VALIDATED = 2,
+            VALIDATED = 3,
 
             /// <summary>
             /// Enum FAILED for value: FAILED
             /// </summary>
             [EnumMember(Value = "FAILED")]
-            FAILED = 3,
+            FAILED = 4,
 
             /// <summary>
             /// Enum SKIPPED for value: SKIPPED
             /// </summary>
             [EnumMember(Value = "SKIPPED")]
-            SKIPPED = 4
+            SKIPPED = 5
         }
 
 

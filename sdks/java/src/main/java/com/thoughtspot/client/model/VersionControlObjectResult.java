@@ -58,7 +58,11 @@ public class VersionControlObjectResult implements Serializable {
     
     ANSWER("ANSWER"),
     
-    LOGICAL_TABLE("LOGICAL_TABLE");
+    LOGICAL_TABLE("LOGICAL_TABLE"),
+    
+    LOGICAL_COLUMN("LOGICAL_COLUMN"),
+    
+    TEMPLATE_VARIABLE("TEMPLATE_VARIABLE");
 
     private String value;
 
@@ -179,6 +183,8 @@ public class VersionControlObjectResult implements Serializable {
    */
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
+    PENDING("PENDING"),
+    
     SUCCESS("SUCCESS"),
     
     VALIDATED("VALIDATED"),

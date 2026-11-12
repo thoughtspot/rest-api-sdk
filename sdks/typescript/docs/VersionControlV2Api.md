@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The runs\&#39; current outcomes. A run identifier that does not exist in the caller\&#39;s org is left out, not reported as an error. |  -  |
-**400** | Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER or LOGICAL_TABLE, an unknown run_type, and a record_offset or record_size out of range. |  -  |
+**400** | Invalid request. Covers a malformed body, a run identifier that is not a UUID, more than 100 run_identifiers, more than 50 objects, an object identifier that is not a well-formed object id, an object type other than LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN or TEMPLATE_VARIABLE, an unknown run_type, and a record_offset or record_size out of range. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
 **500** | Unexpected error |  -  |
