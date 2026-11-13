@@ -94,11 +94,6 @@
 -  endpoint deprecated
 
 
-### POST /api/rest/2.0/ai/agent/converse/sse
--  removed the non-success response with the status `401`
--  removed the non-success response with the status `403`
-
-
 ### POST /api/rest/2.0/ai/answer/create
 -  endpoint deprecated
 
@@ -679,14 +674,6 @@
 - :warning: the `items/incomplete_details` response's property `type` changed from `array<string>` to `object` for status `200`
 - :warning: removed the optional property `items/extended_properties/displayNameLastUpdatedBy` from the response with the `200` status
 -  added the optional property `items/last_active_time_in_millis` to the response with the `200` status
-
-
-### POST /api/rest/2.0/version-control/runs/search
-- :warning: added the new `LOGICAL_COLUMN` enum value to the `runs/items/objects/items/type` response property for the response status `200`
-- :warning: added the new `PENDING` enum value to the `runs/items/objects/items/status` response property for the response status `200`
-- :warning: added the new `TEMPLATE_VARIABLE` enum value to the `runs/items/objects/items/type` response property for the response status `200`
--  added the new `LOGICAL_COLUMN` enum value to the request property `objects/items/type`
--  added the new `TEMPLATE_VARIABLE` enum value to the request property `objects/items/type`
 
 
 ### GET /api/rest/2.0/webhooks/storage-config

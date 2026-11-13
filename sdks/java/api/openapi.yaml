@@ -2530,7 +2530,7 @@ paths:
     post:
       description: "\nDeletes Spotter usage pools. Users who no longer draw from any\
         \ pool are\nno longer metered: their Spotter usage is unlimited, not blocked.\n\
-        Requires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl or later\n\n\n\
+        Requires `ADMINISTRATION` privilege. \n  Version: 26.11.0.cl or later\n\n\n\
         Deletes Spotter usage pools. Use this API to remove a limit from a user, user\
         \ group, or Org, or to clear every pool before switching the scope the cluster\
         \ meters at.\n\nRequires `ADMINISTRATION` (Can administer ThoughtSpot) privilege.\
@@ -2546,10 +2546,8 @@ paths:
         #### Error conditions\n\n- `400` — `keys` is empty, or a key is missing its\
         \ `entity_type` or `entity_identifier`.\n- `401` — authentication token is\
         \ missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION`\
-        \ privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta.\
-        \ Breaking changes may be introduced before the endpoint is made Generally\
-        \ Available.\n> - This operation cannot be undone. Recreate a pool with `updateUsageData`;\
-        \ its usage restarts from `0`.\n\n\n\n\n\n"
+        \ privilege.\n\n> ###### Note:\n>\n> - This operation cannot be undone. Recreate\
+        \ a pool with `updateUsageData`; its usage restarts from `0`.\n\n\n\n\n\n"
       operationId: deleteUsageData
       parameters: []
       requestBody:
@@ -3883,7 +3881,7 @@ paths:
       description: "\nRetrieves a user's combined Spotter usage position: every pool\
         \ the user\ndraws from, with usage, warning limits, and limits summed across\
         \ them.\nAny user can retrieve their own usage. Retrieving another user's\
-        \ usage\nrequires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl or later\n\
+        \ usage\nrequires `ADMINISTRATION` privilege. \n  Version: 26.11.0.cl or later\n\
         \n\nRetrieves a user's combined Spotter usage: every usage pool the user draws\
         \ from, with usage, warning limits, and limits summed across them. Use this\
         \ API to show users how many Spotter questions they have left, or to check\
@@ -3908,9 +3906,7 @@ paths:
         \ pool is not metered: `pools` is empty and `is_at_limit` is `false`.\n\n\
         #### Error conditions\n\n- `401` — authentication token is missing, expired,\
         \ or invalid.\n- `403` — the caller requested another user's usage without\
-        \ `ADMINISTRATION` privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently\
-        \ in Beta. Breaking changes may be introduced before the endpoint is made\
-        \ Generally Available.\n\n\n\n\n\n"
+        \ `ADMINISTRATION` privilege.\n\n\n\n\n\n"
       operationId: getUsageDataForUser
       parameters:
       - description: |-
@@ -4278,7 +4274,7 @@ paths:
       description: "\nRetrieves Spotter usage pools: the question allowance configured\
         \ for each\nuser, user group, or Org and how much of it has been consumed.\
         \ Pass `keys`\nto fetch specific pools, or omit it to fetch every pool on\
-        \ the cluster.\nRequires `ADMINISTRATION` privilege. \n Version: 26.11.0.cl\
+        \ the cluster.\nRequires `ADMINISTRATION` privilege. \n  Version: 26.11.0.cl\
         \ or later\n\n\nRetrieves Spotter usage pools. A usage pool is the Spotter\
         \ question allowance configured for a user, user group, or Org, together with\
         \ how many questions have been consumed from it. Use this API to monitor usage\
@@ -4300,10 +4296,9 @@ paths:
         - `updated_time_in_millis` and `updated_by`: when and by whom the pool was\
         \ last configured.\n\n#### Error conditions\n\n- `401` — authentication token\
         \ is missing, expired, or invalid.\n- `403` — the caller does not have `ADMINISTRATION`\
-        \ privilege.\n\n> ###### Note:\n>\n> - This endpoint is currently in Beta.\
-        \ Breaking changes may be introduced before the endpoint is made Generally\
-        \ Available.\n> - Use `getUsageDataForUser` to see the combined usage of a\
-        \ single user across every pool they draw from.\n\n\n\n\n\n"
+        \ privilege.\n\n> ###### Note:\n>\n> - Use `getUsageDataForUser` to see the\
+        \ combined usage of a single user across every pool they draw from.\n\n\n\n\
+        \n\n"
       operationId: searchUsageData
       parameters: []
       requestBody:
@@ -4726,7 +4721,7 @@ paths:
         \ created;\nfields omitted from an update keep their current value.\nEvery\
         \ key must use the scope the cluster meters at. Switching scope\nrequires\
         \ deleting the existing pools first.\nRequires `ADMINISTRATION` privilege.\
-        \ \n Version: 26.11.0.cl or later\n\n\nCreates or updates Spotter usage pools.\
+        \ \n  Version: 26.11.0.cl or later\n\n\nCreates or updates Spotter usage pools.\
         \ A usage pool sets how many Spotter questions a user, user group, or Org\
         \ can ask. Use this API to provision limits for new users or groups, raise\
         \ or lower an existing limit, or reset usage at the start of a billing period.\n\
@@ -4749,9 +4744,7 @@ paths:
         \n- `400` — `updates` is empty, a key is missing its `entity_type` or `entity_identifier`,\
         \ or a key uses a different `entity_type` from the cluster's existing pools.\n\
         - `401` — authentication token is missing, expired, or invalid.\n- `403` —\
-        \ the caller does not have `ADMINISTRATION` privilege.\n\n> ###### Note:\n\
-        >\n> - This endpoint is currently in Beta. Breaking changes may be introduced\
-        \ before the endpoint is made Generally Available.\n\n\n\n\n\n"
+        \ the caller does not have `ADMINISTRATION` privilege.\n\n\n\n\n\n"
       operationId: updateUsageData
       parameters: []
       requestBody:
