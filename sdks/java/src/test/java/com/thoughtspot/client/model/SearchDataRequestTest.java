@@ -92,4 +92,12 @@ public class SearchDataRequestTest {
         // TODO: test runtimeParamOverride
     }
 
+    /**
+     * Test the property 'includeSqlQuery'
+     */
+    @Test
+    public void includeSqlQueryTest() {
+        // TODO: test includeSqlQuery
+    }
+
 }

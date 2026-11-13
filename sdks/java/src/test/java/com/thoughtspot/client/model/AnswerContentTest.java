@@ -86,4 +86,12 @@ public class AnswerContentTest {
         // TODO: test samplingRatio
     }
 
+    /**
+     * Test the property 'sqlQuery'
+     */
+    @Test
+    public void sqlQueryTest() {
+        // TODO: test sqlQuery
+    }
+
 }

@@ -78,7 +78,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="runtimeFilter">JSON object with representing filter condition to apply filters at runtime. For example, &lt;code&gt; {\&quot;col1\&quot;: \&quot;item type\&quot;, \&quot;op1\&quot;: \&quot;EQ\&quot;, \&quot;val1\&quot;: \&quot;Bags\&quot;} &lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)..</param>
         /// <param name="runtimeSort">JSON object representing columns to sort data at runtime. For example, &lt;code&gt; {\&quot;sortCol1\&quot;: \&quot;sales\&quot;, \&quot;asc1\&quot;: true} &lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)..</param>
         /// <param name="runtimeParamOverride">JSON object for setting values of parameters at runtime. For example, &lt;code&gt; {\&quot;param1\&quot;: \&quot;Double List Param\&quot;, \&quot;paramVal1\&quot;: 0.5}&lt;/code&gt;. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)..</param>
-        public SearchDataRequest(string queryString = default, string logicalTableIdentifier = default, DataFormatEnum? dataFormat = DataFormatEnum.COMPACT, int recordOffset = 0, int recordSize = 10, Object runtimeFilter = default, Object runtimeSort = default, Object runtimeParamOverride = default)
+        /// <param name="includeSqlQuery">When true, the SQL generated for the search is returned in &lt;code&gt;sql_query&lt;/code&gt; along with the rows; a successful response always has it set. When false, &lt;code&gt;sql_query&lt;/code&gt; is null.    Version: 27.1.0.cl or later  (default to false).</param>
+        public SearchDataRequest(string queryString = default, string logicalTableIdentifier = default, DataFormatEnum? dataFormat = DataFormatEnum.COMPACT, int recordOffset = 0, int recordSize = 10, Object runtimeFilter = default, Object runtimeSort = default, Object runtimeParamOverride = default, bool? includeSqlQuery = false)
         {
             // to ensure "queryString" is required (not null)
             if (queryString == null)
@@ -98,6 +99,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.RuntimeFilter = runtimeFilter;
             this.RuntimeSort = runtimeSort;
             this.RuntimeParamOverride = runtimeParamOverride;
+            // use default value if no "includeSqlQuery" provided
+            this.IncludeSqlQuery = includeSqlQuery ?? false;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -151,6 +154,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public Object RuntimeParamOverride { get; set; }
 
         /// <summary>
+        /// When true, the SQL generated for the search is returned in &lt;code&gt;sql_query&lt;/code&gt; along with the rows; a successful response always has it set. When false, &lt;code&gt;sql_query&lt;/code&gt; is null.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>When true, the SQL generated for the search is returned in &lt;code&gt;sql_query&lt;/code&gt; along with the rows; a successful response always has it set. When false, &lt;code&gt;sql_query&lt;/code&gt; is null.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "include_sql_query", EmitDefaultValue = true)]
+        public bool? IncludeSqlQuery { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -172,6 +182,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  RuntimeFilter: ").Append(RuntimeFilter).Append("\n");
             sb.Append("  RuntimeSort: ").Append(RuntimeSort).Append("\n");
             sb.Append("  RuntimeParamOverride: ").Append(RuntimeParamOverride).Append("\n");
+            sb.Append("  IncludeSqlQuery: ").Append(IncludeSqlQuery).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

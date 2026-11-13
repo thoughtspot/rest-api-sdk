@@ -45,6 +45,10 @@ export class SearchDataRequest {
     * JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).
     */
     'runtime_param_override'?: any | null;
+    /**
+    * When true, the SQL generated for the search is returned in <code>sql_query</code> along with the rows; a successful response always has it set. When false, <code>sql_query</code> is null.    Version: 27.1.0.cl or later 
+    */
+    'include_sql_query'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -97,6 +101,12 @@ export class SearchDataRequest {
             "name": "runtime_param_override",
             "baseName": "runtime_param_override",
             "type": "any",
+            "format": ""
+        },
+        {
+            "name": "include_sql_query",
+            "baseName": "include_sql_query",
+            "type": "boolean",
             "format": ""
         }    ];
 

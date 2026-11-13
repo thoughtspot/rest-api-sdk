@@ -81,6 +81,11 @@ public class AnswerContent implements Serializable {
   @javax.annotation.Nonnull
   private Float samplingRatio;
 
+  public static final String SERIALIZED_NAME_SQL_QUERY = "sql_query";
+  @SerializedName(SERIALIZED_NAME_SQL_QUERY)
+  @javax.annotation.Nullable
+  private String sqlQuery;
+
   public AnswerContent() {
   }
 
@@ -232,6 +237,25 @@ public class AnswerContent implements Serializable {
     this.samplingRatio = samplingRatio;
   }
 
+
+  public AnswerContent sqlQuery(@javax.annotation.Nullable String sqlQuery) {
+    this.sqlQuery = sqlQuery;
+    return this;
+  }
+
+  /**
+   * SQL that ThoughtSpot generated from &lt;code&gt;query_string&lt;/code&gt; on the data source in &lt;code&gt;logical_table_identifier&lt;/code&gt;, for the rows in this item. Null when &lt;code&gt;include_sql_query&lt;/code&gt; is false.    Version: 27.1.0.cl or later 
+   * @return sqlQuery
+   */
+  @javax.annotation.Nullable
+  public String getSqlQuery() {
+    return sqlQuery;
+  }
+
+  public void setSqlQuery(@javax.annotation.Nullable String sqlQuery) {
+    this.sqlQuery = sqlQuery;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -293,13 +317,14 @@ public class AnswerContent implements Serializable {
         Objects.equals(this.recordOffset, answerContent.recordOffset) &&
         Objects.equals(this.recordSize, answerContent.recordSize) &&
         Objects.equals(this.returnedDataRowCount, answerContent.returnedDataRowCount) &&
-        Objects.equals(this.samplingRatio, answerContent.samplingRatio)&&
+        Objects.equals(this.samplingRatio, answerContent.samplingRatio) &&
+        Objects.equals(this.sqlQuery, answerContent.sqlQuery)&&
         Objects.equals(this.additionalProperties, answerContent.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(availableDataRowCount, columnNames, dataRows, recordOffset, recordSize, returnedDataRowCount, samplingRatio, additionalProperties);
+    return Objects.hash(availableDataRowCount, columnNames, dataRows, recordOffset, recordSize, returnedDataRowCount, samplingRatio, sqlQuery, additionalProperties);
   }
 
   @Override
@@ -313,6 +338,7 @@ public class AnswerContent implements Serializable {
     sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
     sb.append("    returnedDataRowCount: ").append(toIndentedString(returnedDataRowCount)).append("\n");
     sb.append("    samplingRatio: ").append(toIndentedString(samplingRatio)).append("\n");
+    sb.append("    sqlQuery: ").append(toIndentedString(sqlQuery)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -343,6 +369,7 @@ public class AnswerContent implements Serializable {
     openapiFields.add("record_size");
     openapiFields.add("returned_data_row_count");
     openapiFields.add("sampling_ratio");
+    openapiFields.add("sql_query");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -386,6 +413,9 @@ public class AnswerContent implements Serializable {
         throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
       } else if (!jsonObj.get("data_rows").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `data_rows` to be an array in the JSON string but got `%s`", jsonObj.get("data_rows").toString()));
+      }
+      if ((jsonObj.get("sql_query") != null && !jsonObj.get("sql_query").isJsonNull()) && !jsonObj.get("sql_query").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `sql_query` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sql_query").toString()));
       }
   }
 

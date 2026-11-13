@@ -1739,6 +1739,12 @@ _AnswerContent.attributeTypeMap = [
     "baseName": "sampling_ratio",
     "type": "number",
     "format": "float"
+  },
+  {
+    "name": "sql_query",
+    "baseName": "sql_query",
+    "type": "string",
+    "format": ""
   }
 ];
 var AnswerContent = _AnswerContent;
@@ -8549,6 +8555,50 @@ _FetchPermissionsOnMetadataRequest.attributeTypeMap = [
 ];
 var FetchPermissionsOnMetadataRequest = _FetchPermissionsOnMetadataRequest;
 
+// models/FetchSqlQueryRequest.ts
+var _FetchSqlQueryRequest = class _FetchSqlQueryRequest {
+  static getAttributeTypeMap() {
+    return _FetchSqlQueryRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_FetchSqlQueryRequest.discriminator = void 0;
+_FetchSqlQueryRequest.mapping = void 0;
+_FetchSqlQueryRequest.attributeTypeMap = [
+  {
+    "name": "metadata",
+    "baseName": "metadata",
+    "type": "SqlMetadataInput",
+    "format": ""
+  },
+  {
+    "name": "query_string",
+    "baseName": "query_string",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "runtime_filter",
+    "baseName": "runtime_filter",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "runtime_sort",
+    "baseName": "runtime_sort",
+    "type": "any",
+    "format": ""
+  },
+  {
+    "name": "runtime_param_override",
+    "baseName": "runtime_param_override",
+    "type": "any",
+    "format": ""
+  }
+];
+var FetchSqlQueryRequest = _FetchSqlQueryRequest;
+
 // models/FileReference.ts
 var _FileReference = class _FileReference {
   static getAttributeTypeMap() {
@@ -15071,6 +15121,12 @@ _SearchDataRequest.attributeTypeMap = [
     "baseName": "runtime_param_override",
     "type": "any",
     "format": ""
+  },
+  {
+    "name": "include_sql_query",
+    "baseName": "include_sql_query",
+    "type": "boolean",
+    "format": ""
   }
 ];
 var SearchDataRequest = _SearchDataRequest;
@@ -17388,6 +17444,44 @@ _SortingOptions.attributeTypeMap = [
   }
 ];
 var SortingOptions = _SortingOptions;
+
+// models/SqlMetadataInput.ts
+var _SqlMetadataInput = class _SqlMetadataInput {
+  static getAttributeTypeMap() {
+    return _SqlMetadataInput.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_SqlMetadataInput.discriminator = void 0;
+_SqlMetadataInput.mapping = void 0;
+_SqlMetadataInput.attributeTypeMap = [
+  {
+    "name": "type",
+    "baseName": "type",
+    "type": "SqlMetadataInputTypeEnum",
+    "format": ""
+  },
+  {
+    "name": "identifier",
+    "baseName": "identifier",
+    "type": "string",
+    "format": ""
+  },
+  {
+    "name": "visualization_identifiers",
+    "baseName": "visualization_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  },
+  {
+    "name": "tml",
+    "baseName": "tml",
+    "type": "string",
+    "format": ""
+  }
+];
+var SqlMetadataInput = _SqlMetadataInput;
 
 // models/SqlQuery.ts
 var _SqlQuery = class _SqlQuery {
@@ -24121,6 +24215,7 @@ var enumsMap = /* @__PURE__ */ new Set([
   "SortOptionInputOrderEnum",
   "SortOptionsFieldNameEnum",
   "SortOptionsOrderEnum",
+  "SqlMetadataInputTypeEnum",
   "SqlQueryResponseMetadataTypeEnum",
   "StopConversationRequestSpotterExperienceVersionEnum",
   "StorageDestinationStorageTypeEnum",
@@ -24461,6 +24556,7 @@ var typeMap = {
   "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
   "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
   "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
+  "FetchSqlQueryRequest": FetchSqlQueryRequest,
   "FileReference": FileReference,
   "FileResponseItem": FileResponseItem,
   "FilterRules": FilterRules,
@@ -24692,6 +24788,7 @@ var typeMap = {
   "SortOptionInput": SortOptionInput,
   "SortOptions": SortOptions,
   "SortingOptions": SortingOptions,
+  "SqlMetadataInput": SqlMetadataInput,
   "SqlQuery": SqlQuery,
   "SqlQueryResponse": SqlQueryResponse,
   "StopConversationRequest": StopConversationRequest,
@@ -36405,7 +36502,7 @@ var DataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest 
    */
   async searchData(searchDataRequest, _options) {
@@ -49858,7 +49955,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest 
    */
   async searchData(searchDataRequest, _options) {
@@ -72357,7 +72454,7 @@ var ObservableDataApi = class {
     return this.fetchLiveboardDataWithHttpInfo(fetchLiveboardDataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchDataWithHttpInfo(searchDataRequest, _options) {
@@ -72376,7 +72473,7 @@ var ObservableDataApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchData(searchDataRequest, _options) {
@@ -78704,7 +78801,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.searchCustomActionsWithHttpInfo(searchCustomActionsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchDataWithHttpInfo(searchDataRequest, _options) {
@@ -78723,7 +78820,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchData(searchDataRequest, _options) {
@@ -84083,7 +84180,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchDataWithHttpInfo(searchDataRequest, _options) {
@@ -84092,7 +84189,7 @@ var PromiseDataApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchData(searchDataRequest, _options) {
@@ -88504,7 +88601,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchDataWithHttpInfo(searchDataRequest, _options) {
@@ -88513,7 +88610,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).       
+   *   Version: 9.0.0.cl or later   Generates an Answer from a given data source.  Requires at least view access to the data source object (Worksheet or View). If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_DOWNLOAD_DETAILED_DATA` (**Can download detailed data**) privilege is also required.  #### Usage guidelines  To search data, specify the data source GUID in `logical_table_identifier`. The data source can be a Worksheet, View, Table, or SQL view.  Pass search tokens in the `query_string` attribute in the API request as shown in the following example:  ``` {   \"query_string\": \"[sales] by [store]\",   \"logical_table_identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\", } ```  For more information about the `query_string` format and data source attribute, see [Search data API](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).    The `record_size` attribute determines the number of records to retrieve in an API call. For more information about pagination, record size, and maximum row limit, see [Pagination and record size settings](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_pagination_settings_for_data_and_report_api).    To get the SQL query generated for the search along with the data, set `include_sql_query` to `true`. The SQL is returned in `sql_query` in each item of `contents`, and is compiled from the same search that returned the rows; a successful response always has it set. When `include_sql_query` is `false`, `sql_query` is `null`. To get the SQL without running the query, use the [fetchSqlQuery](#/http/api-endpoints/metadata/fetch-sql-query) API with `metadata.type` set to `LOGICAL_TABLE`.      
    * @param searchDataRequest
    */
   searchData(searchDataRequest, _options) {
@@ -91137,6 +91234,7 @@ export {
   FetchObjectPrivilegesRequest,
   FetchPermissionsOfPrincipalsRequest,
   FetchPermissionsOnMetadataRequest,
+  FetchSqlQueryRequest,
   FileReference,
   FileResponseItem,
   FilterRules,
@@ -91390,6 +91488,7 @@ export {
   SortOptionInput,
   SortOptions,
   SortingOptions,
+  SqlMetadataInput,
   SqlQuery,
   SqlQueryResponse,
   StopConversationRequest,

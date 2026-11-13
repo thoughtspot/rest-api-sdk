@@ -16,7 +16,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Union
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -32,8 +32,9 @@ class AnswerContent(BaseModel):
     record_size: StrictInt = Field(description="The number of records that should be included.")
     returned_data_row_count: StrictInt = Field(description="Total returned data row count.")
     sampling_ratio: Union[StrictFloat, StrictInt] = Field(description="Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned.")
+    sql_query: Optional[StrictStr] = Field(default=None, description="SQL that ThoughtSpot generated from <code>query_string</code> on the data source in <code>logical_table_identifier</code>, for the rows in this item. Null when <code>include_sql_query</code> is false.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["available_data_row_count", "column_names", "data_rows", "record_offset", "record_size", "returned_data_row_count", "sampling_ratio"]
+    __properties: ClassVar[List[str]] = ["available_data_row_count", "column_names", "data_rows", "record_offset", "record_size", "returned_data_row_count", "sampling_ratio", "sql_query"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -81,6 +82,11 @@ class AnswerContent(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if sql_query (nullable) is None
+        # and model_fields_set contains the field
+        if self.sql_query is None and "sql_query" in self.model_fields_set:
+            _dict['sql_query'] = None
+
         return _dict
 
     @classmethod
@@ -99,7 +105,8 @@ class AnswerContent(BaseModel):
             "record_offset": obj.get("record_offset"),
             "record_size": obj.get("record_size"),
             "returned_data_row_count": obj.get("returned_data_row_count"),
-            "sampling_ratio": obj.get("sampling_ratio")
+            "sampling_ratio": obj.get("sampling_ratio"),
+            "sql_query": obj.get("sql_query")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

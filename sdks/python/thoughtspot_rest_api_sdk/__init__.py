@@ -304,6 +304,7 @@ __all__ = [
     "FetchObjectPrivilegesRequest",
     "FetchPermissionsOfPrincipalsRequest",
     "FetchPermissionsOnMetadataRequest",
+    "FetchSqlQueryRequest",
     "FileReference",
     "FileResponseItem",
     "FilterRules",
@@ -535,6 +536,7 @@ __all__ = [
     "SortOptionInput",
     "SortOptions",
     "SortingOptions",
+    "SqlMetadataInput",
     "SqlQuery",
     "SqlQueryResponse",
     "StopConversationRequest",
@@ -974,6 +976,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.fetch_object_privileges_request import FetchObjectPrivilegesRequest as FetchObjectPrivilegesRequest
     from thoughtspot_rest_api_sdk.models.fetch_permissions_of_principals_request import FetchPermissionsOfPrincipalsRequest as FetchPermissionsOfPrincipalsRequest
     from thoughtspot_rest_api_sdk.models.fetch_permissions_on_metadata_request import FetchPermissionsOnMetadataRequest as FetchPermissionsOnMetadataRequest
+    from thoughtspot_rest_api_sdk.models.fetch_sql_query_request import FetchSqlQueryRequest as FetchSqlQueryRequest
     from thoughtspot_rest_api_sdk.models.file_reference import FileReference as FileReference
     from thoughtspot_rest_api_sdk.models.file_response_item import FileResponseItem as FileResponseItem
     from thoughtspot_rest_api_sdk.models.filter_rules import FilterRules as FilterRules
@@ -1205,6 +1208,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput
     from thoughtspot_rest_api_sdk.models.sort_options import SortOptions as SortOptions
     from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions as SortingOptions
+    from thoughtspot_rest_api_sdk.models.sql_metadata_input import SqlMetadataInput as SqlMetadataInput
     from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery as SqlQuery
     from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse as SqlQueryResponse
     from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest as StopConversationRequest
@@ -1650,6 +1654,7 @@ from thoughtspot_rest_api_sdk.models.fetch_logs_request import FetchLogsRequest 
 from thoughtspot_rest_api_sdk.models.fetch_object_privileges_request import FetchObjectPrivilegesRequest as FetchObjectPrivilegesRequest
 from thoughtspot_rest_api_sdk.models.fetch_permissions_of_principals_request import FetchPermissionsOfPrincipalsRequest as FetchPermissionsOfPrincipalsRequest
 from thoughtspot_rest_api_sdk.models.fetch_permissions_on_metadata_request import FetchPermissionsOnMetadataRequest as FetchPermissionsOnMetadataRequest
+from thoughtspot_rest_api_sdk.models.fetch_sql_query_request import FetchSqlQueryRequest as FetchSqlQueryRequest
 from thoughtspot_rest_api_sdk.models.file_reference import FileReference as FileReference
 from thoughtspot_rest_api_sdk.models.file_response_item import FileResponseItem as FileResponseItem
 from thoughtspot_rest_api_sdk.models.filter_rules import FilterRules as FilterRules
@@ -1881,6 +1886,7 @@ from thoughtspot_rest_api_sdk.models.sort_option import SortOption as SortOption
 from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput as SortOptionInput
 from thoughtspot_rest_api_sdk.models.sort_options import SortOptions as SortOptions
 from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions as SortingOptions
+from thoughtspot_rest_api_sdk.models.sql_metadata_input import SqlMetadataInput as SqlMetadataInput
 from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery as SqlQuery
 from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse as SqlQueryResponse
 from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest as StopConversationRequest

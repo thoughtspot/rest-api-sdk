@@ -50,7 +50,8 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="recordSize">The number of records that should be included. (required).</param>
         /// <param name="returnedDataRowCount">Total returned data row count. (required).</param>
         /// <param name="samplingRatio">Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned. (required).</param>
-        public AnswerContent(int availableDataRowCount = default, List<string> columnNames = default, List<Object> dataRows = default, int recordOffset = default, int recordSize = default, int returnedDataRowCount = default, float samplingRatio = default)
+        /// <param name="sqlQuery">SQL that ThoughtSpot generated from &lt;code&gt;query_string&lt;/code&gt; on the data source in &lt;code&gt;logical_table_identifier&lt;/code&gt;, for the rows in this item. Null when &lt;code&gt;include_sql_query&lt;/code&gt; is false.    Version: 27.1.0.cl or later .</param>
+        public AnswerContent(int availableDataRowCount = default, List<string> columnNames = default, List<Object> dataRows = default, int recordOffset = default, int recordSize = default, int returnedDataRowCount = default, float samplingRatio = default, string sqlQuery = default)
         {
             this.AvailableDataRowCount = availableDataRowCount;
             // to ensure "columnNames" is required (not null)
@@ -69,6 +70,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.RecordSize = recordSize;
             this.ReturnedDataRowCount = returnedDataRowCount;
             this.SamplingRatio = samplingRatio;
+            this.SqlQuery = sqlQuery;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -122,6 +124,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public float SamplingRatio { get; set; }
 
         /// <summary>
+        /// SQL that ThoughtSpot generated from &lt;code&gt;query_string&lt;/code&gt; on the data source in &lt;code&gt;logical_table_identifier&lt;/code&gt;, for the rows in this item. Null when &lt;code&gt;include_sql_query&lt;/code&gt; is false.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>SQL that ThoughtSpot generated from &lt;code&gt;query_string&lt;/code&gt; on the data source in &lt;code&gt;logical_table_identifier&lt;/code&gt;, for the rows in this item. Null when &lt;code&gt;include_sql_query&lt;/code&gt; is false.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "sql_query", EmitDefaultValue = true)]
+        public string SqlQuery { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -142,6 +151,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  RecordSize: ").Append(RecordSize).Append("\n");
             sb.Append("  ReturnedDataRowCount: ").Append(ReturnedDataRowCount).Append("\n");
             sb.Append("  SamplingRatio: ").Append(SamplingRatio).Append("\n");
+            sb.Append("  SqlQuery: ").Append(SqlQuery).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
