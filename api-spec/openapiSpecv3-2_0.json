@@ -9556,10 +9556,8 @@
                   "example": {
                     "summary": "DBT connection created for a Snowflake connection",
                     "value": {
-                      "data": {
-                        "dbt_connection_identifier": "d3e4f5a6-0003-4b7c-8d9e-0f1a2b3c4d5e",
-                        "connection_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c"
-                      }
+                      "dbt_connection_identifier": "d3e4f5a6-0003-4b7c-8d9e-0f1a2b3c4d5e",
+                      "connection_id": "5e6b4a3c-2f1d-4e8a-9b7c-0d1e2f3a4b5c"
                     }
                   }
                 }
