@@ -24690,799 +24690,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /api/rest/2.0/version-control/commit:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.
-
-        Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: createCommit
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateCommitRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Commit run admitted; read per-object outcomes from
-                    run search
-                  value:
-                    run_id: 7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07
-                    accepted_time_in_millis: 1783500062000
-                    author:
-                      id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                      name: svc-version-control
-              schema:
-                $ref: '#/components/schemas/VersionControlCommitResponse'
-          description: "The request was admitted and the versioning run has started.\
-            \ The body is a receipt, not a result: nothing is committed or pushed\
-            \ yet."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Invalid request, and nothing was admitted. Covers a malformed\
-            \ body, object ids not enabled, an object that does not resolve or has\
-            \ no object id, a name given without its type, a type that does not match\
-            \ the object, a paused repository, and an org whose disabled_operations\
-            \ holds COMMIT. error.message names the reason."
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: The caller's org has no version control configuration.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Conflict. A name matches more than one object of the given
-            type; name the object by GUID or object id instead.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/config/create:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.
-
-        Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: createVersionControlConfig
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateVersionControlConfigRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: "Org connected to a GitHub repository, with both operations\
-                    \ enabled"
-                  value:
-                    org:
-                      id: 823630514
-                      name: dev-org
-                    provider: GITHUB
-                    repository_url: https://github.com/example-org/example-repo.git
-                    commit_branch: dev
-                    root_dir: analytics/dev
-                    credential:
-                      type: ACCESS_TOKEN
-                      username: svc-version-control
-                    disabled_operations: []
-                    created_by:
-                      id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                      name: svc-version-control
-                    creation_time_in_millis: 1785495800000
-                    last_modified_by:
-                      id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                      name: svc-version-control
-                    modification_time_in_millis: 1786612365000
-              schema:
-                $ref: '#/components/schemas/VersionControlConfig'
-          description: The stored configuration.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Conflict. The org is already configured, another org already\
-            \ commits to this repository and branch, or the org is still served by\
-            \ the legacy Callosum VCS surface."
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/config/delete:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.
-
-        Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: deleteVersionControlConfig
-      parameters: []
-      responses:
-        "204":
-          description: Successfully revoked version control for the Org.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/deploy:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: deployRevision
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeployRevisionRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Delta deploy admitted against the head of the configured
-                    branch
-                  value:
-                    run_id: 7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07
-                    target_deployment_revision: 4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b
-                    last_deployed_revision: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678
-                    accepted_time_in_millis: 1783500062000
-              schema:
-                $ref: '#/components/schemas/VersionControlDeployResponse'
-          description: "The request was admitted and the deploy run has started. The\
-            \ body is a receipt, not a result: nothing is imported yet."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Invalid request, and nothing was admitted. Covers a malformed\
-            \ body, an unknown, ambiguous or unreachable target_revision, a paused\
-            \ repository, and an org whose disabled_operations holds DEPLOY. error.message\
-            \ names the reason."
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: The caller's org has no version control configuration.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Conflict. Another deploy, restore or versioning run is already\
-            \ in flight for the caller's org. Nothing was started; retry once it finishes."
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/branch/promote:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Merges content from another Org's branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org's live content changes until a deploy.
-
-        `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: promoteBranch
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PromoteBranchRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Dry run reporting what a merge from dev into prod would
-                    change
-                  value:
-                    source:
-                      org:
-                        id: 823630514
-                        name: dev-org
-                      branch: dev
-                    target:
-                      org:
-                        id: 912847563
-                        name: prod-org
-                      branch: prod
-                    branch_divergence:
-                      ahead_by: 3
-                      behind_by: 1
-                    file_changes:
-                      total_count: 3
-                      added:
-                      - liveboards/revenue_dashboard_q3.liveboard.tml
-                      modified:
-                      - answers/top_accounts.answer.tml
-                      deleted:
-                      - answers/retired_metric.answer.tml
-                      conflicts: []
-                example_2:
-                  description: "Real promotion (dry_run false) merging dev into prod,\
-                    \ with the resulting revision"
-                  value:
-                    source:
-                      org:
-                        id: 823630514
-                        name: dev-org
-                      branch: dev
-                    target:
-                      org:
-                        id: 912847563
-                        name: prod-org
-                      branch: prod
-                    branch_divergence:
-                      ahead_by: 3
-                      behind_by: 1
-                    revision_details:
-                      revision: 9c1d4e7a2b8f0c3d5e6a1b4f7c9e2d0a8b3f5c71
-                      message: Promote dev into prod
-                      committed_time_in_millis: 1783500062000
-                      author:
-                        id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                        name: svc-version-control
-                    file_changes:
-                      total_count: 3
-                      added:
-                      - liveboards/revenue_dashboard_q3.liveboard.tml
-                      modified:
-                      - answers/top_accounts.answer.tml
-                      deleted:
-                      - answers/retired_metric.answer.tml
-                      conflicts: []
-              schema:
-                $ref: '#/components/schemas/VersionControlPromotionResponse'
-          description: "The promotion was carried out, or with dry_run true would\
-            \ have been. Conflicting content appears here only when conflict_policy\
-            \ resolved it."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "The promotion could not be carried out, and nothing was written.\
-            \ Covers a source that names both or neither of an org and a branch, a\
-            \ cherry-pick with no source_revision, a source org that versions to a\
-            \ different repository, a source_branch that no org in the caller's repository\
-            \ versions to, an unknown branch or commit, content that conflicts while\
-            \ conflict_policy is FAIL_REQUEST, which is equally a 400 on a dry run\
-            \ because the real promotion could not have completed either, branches\
-            \ with unrelated histories, and a target branch the provider protects.\
-            \ error.message names the reason."
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access. Also returned when the caller is neither
-            a tenant administrator nor an administrator of the source org.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "An org involved has no version control configuration: the\
-            \ caller's org, which then has no branch to promote into, or the org named\
-            \ by source.org_identifier, which then has none to promote from."
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/commit/restore:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.
-
-        Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: restoreRevision
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RestoreRevisionRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: Restore admitted; the restore commit appears in run
-                    search once pushed
-                  value:
-                    run_id: 7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07
-                    target_revision: 4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b
-                    accepted_time_in_millis: 1783500062000
-              schema:
-                $ref: '#/components/schemas/VersionControlRestoreResponse'
-          description: "The request was admitted and the restore run has started.\
-            \ The body is a receipt, not a result: nothing is committed or imported\
-            \ yet."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Invalid request, and nothing was admitted. Covers a malformed\
-            \ body, a target_revision that is unknown, ambiguous, unreachable from\
-            \ the branch or is its head, a paused repository, and an org whose disabled_operations\
-            \ holds COMMIT or DEPLOY. error.message names the reason."
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: The caller's org has no version control configuration.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Conflict. Another restore, deploy or versioning run is already\
-            \ in flight for the caller's org. Nothing was started; retry once it finishes."
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/config/search:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Returns your Org's version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.
-
-        Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: searchVersionControlConfigs
-      parameters: []
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: The caller's Org configuration
-                  value:
-                    configs:
-                    - org:
-                        id: 823630514
-                        name: dev-org
-                      provider: GITHUB
-                      repository_url: https://github.com/example-org/example-repo.git
-                      commit_branch: dev
-                      root_dir: analytics/dev
-                      credential:
-                        type: ACCESS_TOKEN
-                        username: svc-version-control
-                      disabled_operations: []
-                      created_by:
-                        id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                        name: svc-version-control
-                      creation_time_in_millis: 1785495800000
-                      last_modified_by:
-                        id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                        name: svc-version-control
-                      modification_time_in_millis: 1786612365000
-              schema:
-                $ref: '#/components/schemas/VersionControlConfigList'
-          description: Zero or one configuration.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/runs/search:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.
-
-        Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org's commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: searchVersionControlRuns
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SearchVersionControlRunsRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                example_1:
-                  description: "A commit run that partially succeeded, with its per-object\
-                    \ outcomes"
-                  value:
-                    runs:
-                    - id: 7c5d0b22-9a48-4de3-b0c1-2f8ab6119d07
-                      type: COMMIT
-                      state: PARTIAL_SUCCESS
-                      message: 1 of 2 requested objects committed
-                      accepted_time_in_millis: 1783500062000
-                      end_time_in_millis: 1783500064500
-                      author:
-                        id: 8e3f2a7b-9c4d-4e5f-8a1b-7c9d3e6f4a2b
-                        name: svc-version-control
-                      branch: dev
-                      revision: 4f9e2b7c1d3a5e8f0b2c4d6a8e0f1b3c5d7e9a1b
-                      objects:
-                      - obj_id: Revenue-Dashboard-d7f3a1c8
-                        type: LIVEBOARD
-                        file_name: liveboard/Revenue-Dashboard-d7f3a1c8.liveboard.tml
-                        action: UPDATE
-                        status: SUCCESS
-                        is_dependency: false
-                      - obj_id: Q3-Pipeline-b2c4d6a8
-                        type: ANSWER
-                        status: FAILED
-                        message: Cannot download TML due to lack of access to objects.
-                        is_dependency: false
-                      - obj_id: Sales-Model-a4e6c8d0
-                        type: LOGICAL_TABLE
-                        file_name: model/Sales-Model-a4e6c8d0.model.tml
-                        action: UPDATE
-                        status: SUCCESS
-                        is_dependency: true
-                    last_batch: true
-              schema:
-                $ref: '#/components/schemas/VersionControlRunList'
-          description: "The runs' current outcomes. A run identifier that does not\
-            \ exist in the caller's org is left out, not reported as an error."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Invalid request. Covers a malformed body, a run identifier\
-            \ that is not a UUID, more than 100 run_identifiers, more than 50 objects,\
-            \ an object identifier that is not a well-formed object id, an object\
-            \ type other than LIVEBOARD, ANSWER, LOGICAL_TABLE, LOGICAL_COLUMN or\
-            \ TEMPLATE_VARIABLE, an unknown run_type, and a record_offset or record_size\
-            \ out of range."
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unexpected error
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /api/rest/2.0/version-control/config/update:
-    post:
-      description: |2+
-
-        Version: 26.12.0.cl or later
-
-
-        Changes your Org's version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.
-
-        Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.
-
-        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
-
-
-
-
-
-      operationId: updateVersionControlConfig
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateVersionControlConfigRequest'
-        required: true
-      responses:
-        "204":
-          description: Successfully updated the version control configuration for
-            the Org.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized access.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Forbidden access.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Operation failed
-      tags:
-      - Version Control V2
-      - ThoughtSpotRest
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /api/rest/2.0/webhooks/create:
     post:
       description: |2+
@@ -29728,50 +28935,6 @@ components:
     VersionControlConfigList:
       description: The configurations you can read. Zero or one while the scope is
         your own Org.
-      example:
-        configs:
-        - root_dir: root_dir
-          credential:
-            type: ACCESS_TOKEN
-            username: username
-          disabled_operations:
-          - COMMIT
-          - COMMIT
-          creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: 6
-          provider: GITHUB
-          commit_branch: commit_branch
-          modification_time_in_millis: 6.0274563
-          repository_url: repository_url
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
-        - root_dir: root_dir
-          credential:
-            type: ACCESS_TOKEN
-            username: username
-          disabled_operations:
-          - COMMIT
-          - COMMIT
-          creation_time_in_millis: 0.8008282
-          org:
-            name: name
-            id: 6
-          provider: GITHUB
-          commit_branch: commit_branch
-          modification_time_in_millis: 6.0274563
-          repository_url: repository_url
-          last_modified_by:
-            name: name
-            id: id
-          created_by:
-            name: name
-            id: id
       properties:
         configs:
           description: The configurations.
@@ -29783,28 +28946,6 @@ components:
       type: object
     VersionControlConfig:
       description: An Org's stored version control configuration.
-      example:
-        root_dir: root_dir
-        credential:
-          type: ACCESS_TOKEN
-          username: username
-        disabled_operations:
-        - COMMIT
-        - COMMIT
-        creation_time_in_millis: 0.8008282
-        org:
-          name: name
-          id: 6
-        provider: GITHUB
-        commit_branch: commit_branch
-        modification_time_in_millis: 6.0274563
-        repository_url: repository_url
-        last_modified_by:
-          name: name
-          id: id
-        created_by:
-          name: name
-          id: id
       properties:
         org:
           $ref: '#/components/schemas/Org'
@@ -29866,9 +29007,6 @@ components:
       description: |-
         What is reported about a stored credential: its type and username. The
         credential itself is never returned.
-      example:
-        type: ACCESS_TOKEN
-        username: username
       properties:
         type:
           description: How the credential is held.
@@ -29886,9 +29024,6 @@ components:
       description: |-
         A user. Only the GUID is always carried; a display name is reported when one can
         be resolved without an extra lookup.
-      example:
-        name: name
-        id: id
       properties:
         id:
           description: GUID of the user.
@@ -29902,9 +29037,6 @@ components:
       type: object
     VersionControlObjectInput:
       description: "One object a versioning run can report, used to filter run search."
-      example:
-        identifier: identifier
-        type: LIVEBOARD
       properties:
         identifier:
           description: |-
@@ -29928,61 +29060,6 @@ components:
       type: object
     VersionControlRunList:
       description: "A page of runs in your Org, newest first."
-      example:
-        last_batch: true
-        runs:
-        - author:
-            name: name
-            id: id
-          objects:
-          - obj_id: obj_id
-            file_name: file_name
-            is_dependency: true
-            action: CREATE
-            type: LIVEBOARD
-            message: message
-            status: PENDING
-          - obj_id: obj_id
-            file_name: file_name
-            is_dependency: true
-            action: CREATE
-            type: LIVEBOARD
-            message: message
-            status: PENDING
-          id: id
-          state: RUNNING
-          accepted_time_in_millis: 0.8008282
-          type: COMMIT
-          message: message
-          branch: branch
-          end_time_in_millis: 6.0274563
-          revision: revision
-        - author:
-            name: name
-            id: id
-          objects:
-          - obj_id: obj_id
-            file_name: file_name
-            is_dependency: true
-            action: CREATE
-            type: LIVEBOARD
-            message: message
-            status: PENDING
-          - obj_id: obj_id
-            file_name: file_name
-            is_dependency: true
-            action: CREATE
-            type: LIVEBOARD
-            message: message
-            status: PENDING
-          id: id
-          state: RUNNING
-          accepted_time_in_millis: 0.8008282
-          type: COMMIT
-          message: message
-          branch: branch
-          end_time_in_millis: 6.0274563
-          revision: revision
       properties:
         runs:
           description: "Current outcome of each matching run, newest first."
@@ -30000,33 +29077,6 @@ components:
       type: object
     VersionControlRunStatus:
       description: Current outcome of one run.
-      example:
-        author:
-          name: name
-          id: id
-        objects:
-        - obj_id: obj_id
-          file_name: file_name
-          is_dependency: true
-          action: CREATE
-          type: LIVEBOARD
-          message: message
-          status: PENDING
-        - obj_id: obj_id
-          file_name: file_name
-          is_dependency: true
-          action: CREATE
-          type: LIVEBOARD
-          message: message
-          status: PENDING
-        id: id
-        state: RUNNING
-        accepted_time_in_millis: 0.8008282
-        type: COMMIT
-        message: message
-        branch: branch
-        end_time_in_millis: 6.0274563
-        revision: revision
       properties:
         id:
           description: "ID of the run, as returned when it was admitted."
@@ -30095,14 +29145,6 @@ components:
       type: object
     VersionControlObjectResult:
       description: Outcome for one object in a run.
-      example:
-        obj_id: obj_id
-        file_name: file_name
-        is_dependency: true
-        action: CREATE
-        type: LIVEBOARD
-        message: message
-        status: PENDING
       properties:
         obj_id:
           description: |-
@@ -37749,9 +36791,6 @@ components:
       type: object
     VersionControlCommitObjectInput:
       description: One object to version on the commit endpoint.
-      example:
-        identifier: identifier
-        type: LIVEBOARD
       properties:
         identifier:
           description: |-
@@ -37775,12 +36814,6 @@ components:
       description: |-
         Admission receipt for a versioning run. It confirms the request was accepted and
         identifies the run; it says nothing about what was committed.
-      example:
-        run_id: run_id
-        author:
-          name: name
-          id: id
-        accepted_time_in_millis: 0.8008282
       properties:
         run_id:
           description: |-
@@ -37852,41 +36885,6 @@ components:
       type: object
     VersionControlPromotionResponse:
       description: "What a promotion did, or on a dry run what one would do."
-      example:
-        branch_divergence:
-          behind_by: 6
-          ahead_by: 0
-        source:
-          org:
-            name: name
-            id: 6
-          branch: branch
-        file_changes:
-          deleted:
-          - deleted
-          - deleted
-          added:
-          - added
-          - added
-          total_count: 5
-          modified:
-          - modified
-          - modified
-          conflicts:
-          - conflicts
-          - conflicts
-        target:
-          org:
-            name: name
-            id: 6
-          branch: branch
-        revision_details:
-          committed_time_in_millis: 1.4658129
-          author:
-            name: name
-            id: id
-          message: message
-          revision: revision
       properties:
         source:
           $ref: '#/components/schemas/VersionControlOrgBranch'
@@ -37905,11 +36903,6 @@ components:
       type: object
     VersionControlOrgBranch:
       description: "An Org and the branch it versions to, as resolved by ThoughtSpot."
-      example:
-        org:
-          name: name
-          id: 6
-        branch: branch
       properties:
         org:
           $ref: '#/components/schemas/Org'
@@ -37922,9 +36915,6 @@ components:
       type: object
     VersionControlBranchDivergence:
       description: How far apart two branches are.
-      example:
-        behind_by: 6
-        ahead_by: 0
       properties:
         ahead_by:
           description: Commits on the source that are not yet on the target.
@@ -37941,13 +36931,6 @@ components:
       description: |-
         The revision the target branch points at after a promotion. Absent on a dry run,
         since nothing was written.
-      example:
-        committed_time_in_millis: 1.4658129
-        author:
-          name: name
-          id: id
-        message: message
-        revision: revision
       properties:
         revision:
           description: |-
@@ -37974,20 +36957,6 @@ components:
         Files a promotion changed, or would change on a dry run, one list per kind of
         change. Every list is present and empty when that kind has none, so total_count
         is the sum of their lengths.
-      example:
-        deleted:
-        - deleted
-        - deleted
-        added:
-        - added
-        - added
-        total_count: 5
-        modified:
-        - modified
-        - modified
-        conflicts:
-        - conflicts
-        - conflicts
       properties:
         total_count:
           description: "Total files changed, across all kinds of change."
@@ -38027,11 +36996,6 @@ components:
       description: |-
         Admission receipt for a deploy run. It identifies the run and the revisions it
         was admitted against; it says nothing about what was imported.
-      example:
-        run_id: run_id
-        target_deployment_revision: target_deployment_revision
-        last_deployed_revision: last_deployed_revision
-        accepted_time_in_millis: 0.8008282
       properties:
         run_id:
           description: |-
@@ -38064,10 +37028,6 @@ components:
         started; it says nothing about what was restored. The restore commit is not here
         because it does not exist until the run pushes it: read it from run search as
         the run's revision, along with the per-object outcomes.
-      example:
-        run_id: run_id
-        target_revision: target_revision
-        accepted_time_in_millis: 0.8008282
       properties:
         run_id:
           description: |-
@@ -50518,14 +49478,6 @@ components:
       - target_branch_name
       type: object
     CreateCommitRequest:
-      example:
-        objects:
-        - identifier: identifier
-          type: LIVEBOARD
-        - identifier: identifier
-          type: LIVEBOARD
-        commit_message: commit_message
-        prune_deleted_object_files: false
       properties:
         objects:
           description: |-
@@ -50554,15 +49506,6 @@ components:
       - objects
       type: object
     CreateVersionControlConfigRequest:
-      example:
-        root_dir: root_dir
-        credential: ""
-        disabled_operations:
-        - COMMIT
-        - COMMIT
-        provider: GITHUB
-        commit_branch: commit_branch
-        repository_url: repository_url
       properties:
         provider:
           description: |-
@@ -50613,10 +49556,6 @@ components:
       - repository_url
       type: object
     DeployRevisionRequest:
-      example:
-        target_revision: target_revision
-        deploy_type: DELTA
-        deploy_policy: ALL_OR_NONE
       properties:
         target_revision:
           description: |-
@@ -50645,11 +49584,6 @@ components:
           type: string
       type: object
     PromoteBranchRequest:
-      example:
-        dry_run: true
-        source: ""
-        commit_message: commit_message
-        strategy: ""
       properties:
         source:
           allOf:
@@ -50677,9 +49611,6 @@ components:
       - strategy
       type: object
     RestoreRevisionRequest:
-      example:
-        target_revision: target_revision
-        restore_policy: ALL_OR_NONE
       properties:
         target_revision:
           description: |-
@@ -50702,18 +49633,6 @@ components:
       - target_revision
       type: object
     SearchVersionControlRunsRequest:
-      example:
-        objects:
-        - identifier: identifier
-          type: LIVEBOARD
-        - identifier: identifier
-          type: LIVEBOARD
-        record_size: 6
-        run_type: COMMIT
-        run_identifiers:
-        - run_identifiers
-        - run_identifiers
-        record_offset: 0
       properties:
         run_identifiers:
           description: |-
@@ -50757,15 +49676,6 @@ components:
           type: integer
       type: object
     UpdateVersionControlConfigRequest:
-      example:
-        root_dir: root_dir
-        credential: ""
-        disabled_operations:
-        - COMMIT
-        - COMMIT
-        provider: GITHUB
-        commit_branch: commit_branch
-        repository_url: repository_url
       properties:
         provider:
           description: |-

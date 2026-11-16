@@ -27,12 +27,72 @@ interface CachedToken {
   tokenBufferMs?: number;
 }
 
-const normalize = (result: TokenResult): CachedToken => {
+const decodeBase64 = (value: string): string | null => {
+  const b64 = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
+  const g = globalThis as any;
+  try {
+    if (typeof g.atob === "function") {
+      return g.atob(padded);
+    }
+    if (g.Buffer) {
+      return g.Buffer.from(padded, "base64").toString("binary");
+    }
+  } catch {
+    // not base64
+  }
+  return null;
+};
+
+const toEpochMs = (ts: number): number => (ts < 1e12 ? ts * 1000 : ts);
+
+const epochFromColonParts = (decoded: string | null): number | null => {
+  const parts = decoded?.split(":");
+  if (!parts || parts.length < 3 || !/^\d+$/.test(parts[1])) {
+    return null;
+  }
+  return toEpochMs(Number(parts[1]));
+};
+
+const jwtExpiry = (token: string): number | null => {
+  const parts = token.split(".");
+  if (parts.length !== 3) {
+    return null;
+  }
+  try {
+    const exp = JSON.parse(decodeBase64(parts[1]) ?? "").exp;
+    return typeof exp === "number" ? toEpochMs(exp) : null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Best-effort expiry hint from the token itself, when `embedExpiryInAuthToken` is on:
+ * `base64(userId:expiry:hash)`, `base64(username:base64(userId:expiry:hash))` or a JWT `exp`.
+ */
+export const extractTokenExpiry = (token: string): number | null => {
+  const jwt = jwtExpiry(token);
+  if (jwt !== null) {
+    return jwt;
+  }
+  const decoded = decodeBase64(token);
+  // username may contain ":" but the inner base64 cannot, so split on the last one
+  const inner = decoded && decoded.includes(":") ? decodeBase64(decoded.slice(decoded.lastIndexOf(":") + 1)) : null;
+  return epochFromColonParts(inner) ?? epochFromColonParts(decoded);
+};
+
+const normalize = (result: TokenResult, now: number): CachedToken => {
   const cached = typeof result === "string" ? { token: result } : result;
   if (!cached || typeof cached.token !== "string" || cached.token === "") {
     throw new Error("getToken must return a non-empty token string or { token, expiresAt }");
   }
-  return cached;
+  if (cached.expiresAt !== undefined) {
+    return cached;
+  }
+  const hinted = extractTokenExpiry(cached.token);
+  // a misread or stale value must not force a fetch on every request; the 401 retry covers it
+  return hinted !== null && hinted > now ? { ...cached, expiresAt: hinted } : cached;
 };
 
 const errorName = (e: unknown): string => (e instanceof Error ? e.name : typeof e);
@@ -118,7 +178,7 @@ export class TokenManager implements TokenProvider {
 
   private async fetchNew(reason: TokenFetchReason): Promise<CachedToken> {
     this.logger(`calling getToken (reason: ${reason})`);
-    const fresh = normalize(await this.fetchToken());
+    const fresh = normalize(await this.fetchToken(), this.now());
     this.cached = fresh;
     this.warnIfShortLived(fresh);
     return fresh;
