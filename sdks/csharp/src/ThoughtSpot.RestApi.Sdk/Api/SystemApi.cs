@@ -499,7 +499,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
         /// <summary>
         /// The <see cref="ThoughtSpot.RestApi.Sdk.ApiClientConfiguration"/> that was used to create or last
-        /// reconfigure this instance via <see cref="CreateAsync"/> or <see cref="ApplyConfigurationAsync"/>.
+        /// reconfigure this instance via <see cref="CreateAsync(ThoughtSpot.RestApi.Sdk.ApiClientConfiguration, System.Threading.CancellationToken)"/> or <see cref="ApplyConfigurationAsync"/>.
         /// Use this with a <c>with</c> expression to produce a modified copy for
         /// <see cref="ApplyConfigurationAsync"/>:
         /// <code>await api.ApplyConfigurationAsync(api.Config with { Host = "https://new-host" });</code>
@@ -667,17 +667,25 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <remarks>This is the required entry point when streaming methods (XxxStreamAsync) are needed — direct constructor use leaves streaming unavailable.</remarks>
         /// <param name="config">Connection settings including host, credentials, and SSL options.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
-        public static async System.Threading.Tasks.Task<SystemApi> CreateAsync(
+        public static System.Threading.Tasks.Task<SystemApi> CreateAsync(
             ThoughtSpot.RestApi.Sdk.ApiClientConfiguration config,
             System.Threading.CancellationToken cancellationToken = default)
+            => CreateAsync(config, ThoughtSpot.RestApi.Sdk.Client.SdkRuntime.Default, cancellationToken);
+
+        internal static async System.Threading.Tasks.Task<SystemApi> CreateAsync(
+            ThoughtSpot.RestApi.Sdk.ApiClientConfiguration config,
+            ThoughtSpot.RestApi.Sdk.Client.SdkRuntime runtime,
+            System.Threading.CancellationToken cancellationToken)
         {
-            var built = await BuildFromConfigAsync(config, cancellationToken).ConfigureAwait(false);
-            var instance = new SystemApi(createAsyncSentinel: true);
+            var built = await BuildFromConfigAsync(config, runtime, cancellationToken).ConfigureAwait(false);
+            var instance = new SystemApi(createAsyncSentinel: true) { _runtime = runtime };
             var apiClient = new ThoughtSpot.RestApi.Sdk.Client.ApiClient(built.HttpClient, built.Cfg.BasePath, null);
             apiClient.RetryPipeline = config.EnableRetries ? config.RetryPipeline : Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>.Empty;
             instance._state = new ApiState(apiClient, built.HttpClient, built.BareClient, built.BareHandler, built.Cfg, config, built.RefCounter);
             return instance;
         }
+
+        private ThoughtSpot.RestApi.Sdk.Client.SdkRuntime _runtime = ThoughtSpot.RestApi.Sdk.Client.SdkRuntime.Default;
 
         /// <summary>
         /// Applies a new <see cref="ThoughtSpot.RestApi.Sdk.ApiClientConfiguration"/> to this instance, replacing the
@@ -694,7 +702,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             ThoughtSpot.RestApi.Sdk.ApiClientConfiguration config,
             System.Threading.CancellationToken cancellationToken = default)
         {
-            var built = await BuildFromConfigAsync(config, cancellationToken).ConfigureAwait(false);
+            var built = await BuildFromConfigAsync(config, _runtime, cancellationToken).ConfigureAwait(false);
 
             var newApiClient = new ThoughtSpot.RestApi.Sdk.Client.ApiClient(built.HttpClient, built.Cfg.BasePath, null);
             newApiClient.RetryPipeline = config.EnableRetries ? config.RetryPipeline : Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>.Empty;
@@ -731,14 +739,22 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
         private static async System.Threading.Tasks.Task<ConfigBuildResult> BuildFromConfigAsync(
             ThoughtSpot.RestApi.Sdk.ApiClientConfiguration config,
+            ThoughtSpot.RestApi.Sdk.Client.SdkRuntime runtime,
             System.Threading.CancellationToken cancellationToken)
         {
             var hasPassword  = config.Username is not null && config.Password  is not null;
             var hasSecretKey = config.Username is not null && config.SecretKey is not null;
 
-            if (!hasPassword && !hasSecretKey && config.TokenProvider is null && config.BearerToken is null)
+            if (!hasPassword && !hasSecretKey && config.TokenProvider is null && config.BearerToken is null && config.GetToken is null)
                 throw new ArgumentException(
-                    "Provide Username+Password, Username+SecretKey, a TokenProvider, or a BearerToken.");
+                    "Provide Username+Password, Username+SecretKey, a TokenProvider, a BearerToken, or GetToken.");
+
+#pragma warning disable CS0618
+            if (config.GetToken is not null && (config.TokenProvider is not null || config.BearerToken is not null
+                || config.Username is not null || config.Password is not null || config.SecretKey is not null))
+                throw new ArgumentException(
+                    "GetToken cannot be combined with TokenProvider, BearerToken, Username, Password or SecretKey.");
+#pragma warning restore CS0618
 
             System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<string>>? tokenProvider = null;
 
@@ -757,9 +773,13 @@ namespace ThoughtSpot.RestApi.Sdk.Api
                     RemoteCertificateValidationCallback = (_, _, _, _) => true,
                 };
 
+            ThoughtSpot.RestApi.Sdk.Client.TokenSource tokenSource = config.GetToken is { } getToken
+                ? new ThoughtSpot.RestApi.Sdk.Client.TokenCache(getToken, config.TokenRefreshBuffer, config.GetTokenTimeout, runtime.Time, config.OnTokenEvent)
+                : new ThoughtSpot.RestApi.Sdk.Client.CallerManagedTokenSource(
+                    async (ct) => tokenProvider is null ? string.Empty : await tokenProvider(ct));
             var injectingHandler = new ThoughtSpot.RestApi.Sdk.Client.TokenInjectingHandler(
-                async (ct) => tokenProvider is null ? string.Empty : await tokenProvider(ct),
-                socketsHandler);
+                tokenSource,
+                runtime.CreateTransport?.Invoke(config) ?? socketsHandler);
 
             // RefCountingHandler sits outermost so every request — including SSE streaming —
             // is tracked. ApplyConfigurationAsync waits for the count to reach zero before
@@ -802,7 +822,7 @@ namespace ThoughtSpot.RestApi.Sdk.Api
                 tokenProvider = _ => System.Threading.Tasks.Task.FromResult(config.BearerToken);
 #pragma warning restore CS0618
             }
-            else
+            else if (config.GetToken is null)
             {
                 var tokenRequest = new ThoughtSpot.RestApi.Sdk.Model.GetFullAccessTokenRequest(
                     username:          config.Username!,

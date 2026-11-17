@@ -42,6 +42,7 @@ import com.thoughtspot.client.model.CreateAgentConversationRequest;
 import com.thoughtspot.client.model.CreateAnalystRequest;
 import com.thoughtspot.client.model.CreateCalendarRequest;
 import com.thoughtspot.client.model.CreateCollectionRequest;
+import com.thoughtspot.client.model.CreateCommitRequest;
 import com.thoughtspot.client.model.CreateConfigRequest;
 import com.thoughtspot.client.model.CreateConnectionConfigurationRequest;
 import com.thoughtspot.client.model.CreateConnectionRequest;
@@ -60,6 +61,7 @@ import com.thoughtspot.client.model.CreateTagRequest;
 import com.thoughtspot.client.model.CreateUserGroupRequest;
 import com.thoughtspot.client.model.CreateUserRequest;
 import com.thoughtspot.client.model.CreateVariableRequest;
+import com.thoughtspot.client.model.CreateVersionControlConfigRequest;
 import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
@@ -77,6 +79,7 @@ import com.thoughtspot.client.model.DeleteVariablesRequest;
 import com.thoughtspot.client.model.DeleteWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.DeployCommitRequest;
 import com.thoughtspot.client.model.DeployResponse;
+import com.thoughtspot.client.model.DeployRevisionRequest;
 import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.EurekaDataSourceSuggestionResponse;
 import com.thoughtspot.client.model.EurekaDecomposeQueryResponse;
@@ -142,6 +145,7 @@ import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
 import com.thoughtspot.client.model.PermissionOfMetadataResponse;
 import com.thoughtspot.client.model.PermissionOfPrincipalsResponse;
+import com.thoughtspot.client.model.PromoteBranchRequest;
 import com.thoughtspot.client.model.PublishMetadataRequest;
 import com.thoughtspot.client.model.PutVariableValuesRequest;
 import com.thoughtspot.client.model.QueryGetDecomposedQueryRequest;
@@ -153,6 +157,7 @@ import com.thoughtspot.client.model.ResponseCustomAction;
 import com.thoughtspot.client.model.ResponseMessage;
 import com.thoughtspot.client.model.ResponseSchedule;
 import com.thoughtspot.client.model.ResponseWorksheetToModelConversion;
+import com.thoughtspot.client.model.RestoreRevisionRequest;
 import com.thoughtspot.client.model.RevertCommitRequest;
 import com.thoughtspot.client.model.RevertResponse;
 import com.thoughtspot.client.model.RevokeRefreshTokensRequest;
@@ -191,6 +196,7 @@ import com.thoughtspot.client.model.SearchUsageDataRequest;
 import com.thoughtspot.client.model.SearchUserGroupsRequest;
 import com.thoughtspot.client.model.SearchUsersRequest;
 import com.thoughtspot.client.model.SearchVariablesRequest;
+import com.thoughtspot.client.model.SearchVersionControlRunsRequest;
 import com.thoughtspot.client.model.SearchWebhookConfigurationsRequest;
 import com.thoughtspot.client.model.SecuritySettingsResponse;
 import com.thoughtspot.client.model.SemanticIntegrationResponse;
@@ -257,6 +263,7 @@ import com.thoughtspot.client.model.UpdateUserGroupRequest;
 import com.thoughtspot.client.model.UpdateUserRequest;
 import com.thoughtspot.client.model.UpdateVariableRequest;
 import com.thoughtspot.client.model.UpdateVariableValuesRequest;
+import com.thoughtspot.client.model.UpdateVersionControlConfigRequest;
 import com.thoughtspot.client.model.UpdateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.UsageDataForUserResponse;
 import com.thoughtspot.client.model.UsageDataResponse;
@@ -266,6 +273,13 @@ import com.thoughtspot.client.model.ValidateCommunicationChannelRequest;
 import com.thoughtspot.client.model.ValidateMergeRequest;
 import com.thoughtspot.client.model.ValidateTokenRequest;
 import com.thoughtspot.client.model.Variable;
+import com.thoughtspot.client.model.VersionControlCommitResponse;
+import com.thoughtspot.client.model.VersionControlConfig;
+import com.thoughtspot.client.model.VersionControlConfigList;
+import com.thoughtspot.client.model.VersionControlDeployResponse;
+import com.thoughtspot.client.model.VersionControlPromotionResponse;
+import com.thoughtspot.client.model.VersionControlRestoreResponse;
+import com.thoughtspot.client.model.VersionControlRunList;
 import com.thoughtspot.client.model.VisualizationFontsInput;
 import com.thoughtspot.client.model.WebhookDeleteResponse;
 import com.thoughtspot.client.model.WebhookResponse;
@@ -469,6 +483,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createCommitTest() throws ApiException {
+        CreateCommitRequest createCommitRequest = null;
+        VersionControlCommitResponse response = api.createCommit(createCommitRequest);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has &#x60;repo&#x60; scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid&#x3D;git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
      *
      * @throws ApiException if the Api call fails
@@ -658,6 +684,18 @@ public class ThoughtSpotRestApiTest {
     public void createVariableTest() throws ApiException {
         CreateVariableRequest createVariableRequest = null;
         Variable response = api.createVariable(createVariableRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send &#x60;disabled_operations&#x60; on the update endpoint instead of deleting the configuration.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void createVersionControlConfigTest() throws ApiException {
+        CreateVersionControlConfigRequest createVersionControlConfigRequest = null;
+        VersionControlConfig response = api.createVersionControlConfig(createVersionControlConfigRequest);
         // TODO: test validations
     }
 
@@ -1075,6 +1113,17 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set &#x60;disabled_operations&#x60; on the update endpoint instead.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteVersionControlConfigTest() throws ApiException {
+        api.deleteVersionControlConfig();
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 10.14.0.cl or later   Deletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;DEVELOPER&#x60; (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with &#x60;CAN_MANAGE_WEBHOOKS&#x60; (**Can manage webhooks**) privilege are also authorized to perform this action.      
      *
      * @throws ApiException if the Api call fails
@@ -1095,6 +1144,18 @@ public class ThoughtSpotRestApiTest {
     public void deployCommitTest() throws ApiException {
         DeployCommitRequest deployCommitRequest = null;
         List<DeployResponse> response = api.deployCommit(deployCommitRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60; and the pinned revision.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deployRevisionTest() throws ApiException {
+        DeployRevisionRequest deployRevisionRequest = null;
+        VersionControlDeployResponse response = api.deployRevision(deployRevisionRequest);
         // TODO: test validations
     }
 
@@ -1733,6 +1794,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Merges content from another Org&#39;s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org&#39;s live content changes until a deploy.  &#x60;dry_run&#x60; defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or &#x60;ADMINISTRATION&#x60; privilege in the source Org.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void promoteBranchTest() throws ApiException {
+        PromoteBranchRequest promoteBranchRequest = null;
+        VersionControlPromotionResponse response = api.promoteBranch(promoteBranchRequest);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it&#39;s dependencies to the org admins of the orgs to which it is being published.      
      *
      * @throws ApiException if the Api call fails
@@ -1778,6 +1851,18 @@ public class ThoughtSpotRestApiTest {
     public void resetUserPasswordTest() throws ApiException {
         ResetUserPasswordRequest resetUserPasswordRequest = null;
         api.resetUserPassword(resetUserPasswordRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a &#x60;run_id&#x60;.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void restoreRevisionTest() throws ApiException {
+        RestoreRevisionRequest restoreRevisionRequest = null;
+        VersionControlRestoreResponse response = api.restoreRevision(restoreRevisionRequest);
         // TODO: test validations
     }
 
@@ -2140,6 +2225,29 @@ public class ThoughtSpotRestApiTest {
     public void searchVariablesTest() throws ApiException {
         SearchVariablesRequest searchVariablesRequest = null;
         List<Variable> response = api.searchVariables(searchVariablesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns your Org&#39;s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchVersionControlConfigsTest() throws ApiException {
+        VersionControlConfigList response = api.searchVersionControlConfigs();
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a &#x60;run_id&#x60;.  Use this to follow a run to completion, to explain a &#x60;PARTIAL_SUCCESS&#x60;, or to read an Org&#39;s commit history by filtering on &#x60;run_type&#x60; &#x60;COMMIT&#x60;. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with &#x60;record_offset&#x60; and &#x60;record_size&#x60;, which accepts between 1 and 100 runs.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchVersionControlRunsTest() throws ApiException {
+        SearchVersionControlRunsRequest searchVersionControlRunsRequest = null;
+        VersionControlRunList response = api.searchVersionControlRuns(searchVersionControlRunsRequest);
         // TODO: test validations
     }
 
@@ -2760,6 +2868,18 @@ public class ThoughtSpotRestApiTest {
     public void updateVariableValuesTest() throws ApiException {
         UpdateVariableValuesRequest updateVariableValuesRequest = null;
         api.updateVariableValues(updateVariableValuesRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Changes your Org&#39;s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through &#x60;disabled_operations&#x60;. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateVersionControlConfigTest() throws ApiException {
+        UpdateVersionControlConfigRequest updateVersionControlConfigRequest = null;
+        api.updateVersionControlConfig(updateVersionControlConfigRequest);
         // TODO: test validations
     }
 

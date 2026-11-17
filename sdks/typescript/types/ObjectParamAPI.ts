@@ -6982,6 +6982,15 @@ export interface ThoughtSpotRestApiCreateCollectionRequest {
     createCollectionRequest: CreateCollectionRequest
 }
 
+export interface ThoughtSpotRestApiCreateCommitRequest {
+    /**
+     * 
+     * @type CreateCommitRequest
+     * @memberof ThoughtSpotRestApicreateCommit
+     */
+    createCommitRequest: CreateCommitRequest
+}
+
 export interface ThoughtSpotRestApiCreateConfigRequest {
     /**
      * 
@@ -7131,6 +7140,15 @@ export interface ThoughtSpotRestApiCreateVariableRequest {
      * @memberof ThoughtSpotRestApicreateVariable
      */
     createVariableRequest: CreateVariableRequest
+}
+
+export interface ThoughtSpotRestApiCreateVersionControlConfigRequest {
+    /**
+     * 
+     * @type CreateVersionControlConfigRequest
+     * @memberof ThoughtSpotRestApicreateVersionControlConfig
+     */
+    createVersionControlConfigRequest: CreateVersionControlConfigRequest
 }
 
 export interface ThoughtSpotRestApiCreateWebhookConfigurationRequest {
@@ -7570,6 +7588,9 @@ export interface ThoughtSpotRestApiDeleteVariablesRequest {
     deleteVariablesRequest: DeleteVariablesRequest
 }
 
+export interface ThoughtSpotRestApiDeleteVersionControlConfigRequest {
+}
+
 export interface ThoughtSpotRestApiDeleteWebhookConfigurationsRequest {
     /**
      * 
@@ -7586,6 +7607,15 @@ export interface ThoughtSpotRestApiDeployCommitRequest {
      * @memberof ThoughtSpotRestApideployCommit
      */
     deployCommitRequest: DeployCommitRequest
+}
+
+export interface ThoughtSpotRestApiDeployRevisionRequest {
+    /**
+     * 
+     * @type DeployRevisionRequest
+     * @memberof ThoughtSpotRestApideployRevision
+     */
+    deployRevisionRequest: DeployRevisionRequest
 }
 
 export interface ThoughtSpotRestApiDownloadConnectionMetadataChangesRequest {
@@ -8070,6 +8100,15 @@ export interface ThoughtSpotRestApiParameterizeMetadataFieldsRequest {
     parameterizeMetadataFieldsRequest: ParameterizeMetadataFieldsRequest
 }
 
+export interface ThoughtSpotRestApiPromoteBranchRequest {
+    /**
+     * 
+     * @type PromoteBranchRequest
+     * @memberof ThoughtSpotRestApipromoteBranch
+     */
+    promoteBranchRequest: PromoteBranchRequest
+}
+
 export interface ThoughtSpotRestApiPublishMetadataRequest {
     /**
      * 
@@ -8111,6 +8150,15 @@ export interface ThoughtSpotRestApiResetUserPasswordRequest {
      * @memberof ThoughtSpotRestApiresetUserPassword
      */
     resetUserPasswordRequest: ResetUserPasswordRequest
+}
+
+export interface ThoughtSpotRestApiRestoreRevisionRequest {
+    /**
+     * 
+     * @type RestoreRevisionRequest
+     * @memberof ThoughtSpotRestApirestoreRevision
+     */
+    restoreRevisionRequest: RestoreRevisionRequest
 }
 
 export interface ThoughtSpotRestApiRevertCommitRequest {
@@ -8395,6 +8443,18 @@ export interface ThoughtSpotRestApiSearchVariablesRequest {
      * @memberof ThoughtSpotRestApisearchVariables
      */
     searchVariablesRequest: SearchVariablesRequest
+}
+
+export interface ThoughtSpotRestApiSearchVersionControlConfigsRequest {
+}
+
+export interface ThoughtSpotRestApiSearchVersionControlRunsRequest {
+    /**
+     * 
+     * @type SearchVersionControlRunsRequest
+     * @memberof ThoughtSpotRestApisearchVersionControlRuns
+     */
+    searchVersionControlRunsRequest: SearchVersionControlRunsRequest
 }
 
 export interface ThoughtSpotRestApiSearchWebhookConfigurationsRequest {
@@ -9139,6 +9199,15 @@ export interface ThoughtSpotRestApiUpdateVariableValuesRequest {
     updateVariableValuesRequest: UpdateVariableValuesRequest
 }
 
+export interface ThoughtSpotRestApiUpdateVersionControlConfigRequest {
+    /**
+     * 
+     * @type UpdateVersionControlConfigRequest
+     * @memberof ThoughtSpotRestApiupdateVersionControlConfig
+     */
+    updateVersionControlConfigRequest: UpdateVersionControlConfigRequest
+}
+
 export interface ThoughtSpotRestApiUpdateWebhookConfigurationRequest {
     /**
      * Unique ID or name of the webhook configuration.
@@ -9478,6 +9547,22 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createCommitWithHttpInfo(param: ThoughtSpotRestApiCreateCommitRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlCommitResponse>> {
+        return this.api.createCommitWithHttpInfo(param.createCommitRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createCommit(param: ThoughtSpotRestApiCreateCommitRequest, options?: ConfigurationOptions): Promise<VersionControlCommitResponse> {
+        return this.api.createCommit(param.createCommitRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Allows you to connect a ThoughtSpot instance to a Git repository.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.  You can use this API endpoint to connect your ThoughtSpot development and production environments to the development and production branches of a Git repository.  Before using this endpoint to connect your ThoughtSpot instance to a Git repository, check the following prerequisites:  * You have a Git repository. If you are using GitHub, make sure you have a valid account and an access token to connect ThoughtSpot to GitHub. For information about generating a token, see [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).  * Your access token has `repo` scope that grants full access to public and private repositories. * Your Git repository has a branch that can be configured as a default branch in ThoughtSpot.  For more information, see [Git integration documentation](https://developers.thoughtspot.com/docs/?pageid=git-integration).  **Note**: ThoughtSpot supports only GitHub / itHub Enterprise for CI/CD.      
      * @param param the request object
      */
@@ -9731,6 +9816,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public createVariable(param: ThoughtSpotRestApiCreateVariableRequest, options?: ConfigurationOptions): Promise<Variable> {
         return this.api.createVariable(param.createVariableRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createVersionControlConfigWithHttpInfo(param: ThoughtSpotRestApiCreateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlConfig>> {
+        return this.api.createVersionControlConfigWithHttpInfo(param.createVersionControlConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createVersionControlConfig(param: ThoughtSpotRestApiCreateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<VersionControlConfig> {
+        return this.api.createVersionControlConfig(param.createVersionControlConfigRequest,  options).toPromise();
     }
 
     /**
@@ -10262,6 +10363,22 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteVersionControlConfigWithHttpInfo(param: ThoughtSpotRestApiDeleteVersionControlConfigRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.deleteVersionControlConfigWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteVersionControlConfig(param: ThoughtSpotRestApiDeleteVersionControlConfigRequest = {}, options?: ConfigurationOptions): Promise<void> {
+        return this.api.deleteVersionControlConfig( options).toPromise();
+    }
+
+    /**
      *   Version: 10.14.0.cl or later   Deletes one or more webhook configurations by their unique id or name. Returns status of each deletion operation, including successfully deleted webhooks and any failures with error details.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) or `DEVELOPER` (**Has developer privilege**) privilege. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, users with `CAN_MANAGE_WEBHOOKS` (**Can manage webhooks**) privilege are also authorized to perform this action.      
      * @param param the request object
      */
@@ -10291,6 +10408,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public deployCommit(param: ThoughtSpotRestApiDeployCommitRequest, options?: ConfigurationOptions): Promise<Array<DeployResponse>> {
         return this.api.deployCommit(param.deployCommitRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deployRevisionWithHttpInfo(param: ThoughtSpotRestApiDeployRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlDeployResponse>> {
+        return this.api.deployRevisionWithHttpInfo(param.deployRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deployRevision(param: ThoughtSpotRestApiDeployRevisionRequest, options?: ConfigurationOptions): Promise<VersionControlDeployResponse> {
+        return this.api.deployRevision(param.deployRevisionRequest,  options).toPromise();
     }
 
     /**
@@ -11142,6 +11275,22 @@ export class ObjectThoughtSpotRestApi {
     }
 
     /**
+     *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public promoteBranchWithHttpInfo(param: ThoughtSpotRestApiPromoteBranchRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlPromotionResponse>> {
+        return this.api.promoteBranchWithHttpInfo(param.promoteBranchRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public promoteBranch(param: ThoughtSpotRestApiPromoteBranchRequest, options?: ConfigurationOptions): Promise<VersionControlPromotionResponse> {
+        return this.api.promoteBranch(param.promoteBranchRequest,  options).toPromise();
+    }
+
+    /**
      *   Version: 26.10.0.cl or later   Allows publishing metadata objects across organizations in ThoughtSpot.  Requires ADMINISTRATION role and TENANT scope.  The API endpoint allows publishing the following types of metadata objects: * Liveboards * Answers * Logical Tables  This API will essentially share the objects along with it\'s dependencies to the org admins of the orgs to which it is being published.      
      * @param param the request object
      */
@@ -11203,6 +11352,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public resetUserPassword(param: ThoughtSpotRestApiResetUserPasswordRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetUserPassword(param.resetUserPasswordRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public restoreRevisionWithHttpInfo(param: ThoughtSpotRestApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlRestoreResponse>> {
+        return this.api.restoreRevisionWithHttpInfo(param.restoreRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public restoreRevision(param: ThoughtSpotRestApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<VersionControlRestoreResponse> {
+        return this.api.restoreRevision(param.restoreRevisionRequest,  options).toPromise();
     }
 
     /**
@@ -11683,6 +11848,38 @@ export class ObjectThoughtSpotRestApi {
      */
     public searchVariables(param: ThoughtSpotRestApiSearchVariablesRequest, options?: ConfigurationOptions): Promise<Array<Variable>> {
         return this.api.searchVariables(param.searchVariablesRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlConfigsWithHttpInfo(param: ThoughtSpotRestApiSearchVersionControlConfigsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlConfigList>> {
+        return this.api.searchVersionControlConfigsWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlConfigs(param: ThoughtSpotRestApiSearchVersionControlConfigsRequest = {}, options?: ConfigurationOptions): Promise<VersionControlConfigList> {
+        return this.api.searchVersionControlConfigs( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlRunsWithHttpInfo(param: ThoughtSpotRestApiSearchVersionControlRunsRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlRunList>> {
+        return this.api.searchVersionControlRunsWithHttpInfo(param.searchVersionControlRunsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlRuns(param: ThoughtSpotRestApiSearchVersionControlRunsRequest, options?: ConfigurationOptions): Promise<VersionControlRunList> {
+        return this.api.searchVersionControlRuns(param.searchVersionControlRunsRequest,  options).toPromise();
     }
 
     /**
@@ -12451,6 +12648,22 @@ export class ObjectThoughtSpotRestApi {
      */
     public updateVariableValues(param: ThoughtSpotRestApiUpdateVariableValuesRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateVariableValues(param.updateVariableValuesRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public updateVersionControlConfigWithHttpInfo(param: ThoughtSpotRestApiUpdateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.updateVersionControlConfigWithHttpInfo(param.updateVersionControlConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public updateVersionControlConfig(param: ThoughtSpotRestApiUpdateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.updateVersionControlConfig(param.updateVersionControlConfigRequest,  options).toPromise();
     }
 
     /**
@@ -13263,6 +13476,231 @@ export class ObjectVersionControlApi {
      */
     public validateMerge(param: VersionControlApiValidateMergeRequest, options?: ConfigurationOptions): Promise<Array<DeployResponse>> {
         return this.api.validateMerge(param.validateMergeRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableVersionControlV2Api } from "./ObservableAPI";
+import { VersionControlV2ApiRequestFactory, VersionControlV2ApiResponseProcessor} from "../apis/VersionControlV2Api";
+
+export interface VersionControlV2ApiCreateCommitRequest {
+    /**
+     * 
+     * @type CreateCommitRequest
+     * @memberof VersionControlV2ApicreateCommit
+     */
+    createCommitRequest: CreateCommitRequest
+}
+
+export interface VersionControlV2ApiCreateVersionControlConfigRequest {
+    /**
+     * 
+     * @type CreateVersionControlConfigRequest
+     * @memberof VersionControlV2ApicreateVersionControlConfig
+     */
+    createVersionControlConfigRequest: CreateVersionControlConfigRequest
+}
+
+export interface VersionControlV2ApiDeleteVersionControlConfigRequest {
+}
+
+export interface VersionControlV2ApiDeployRevisionRequest {
+    /**
+     * 
+     * @type DeployRevisionRequest
+     * @memberof VersionControlV2ApideployRevision
+     */
+    deployRevisionRequest: DeployRevisionRequest
+}
+
+export interface VersionControlV2ApiPromoteBranchRequest {
+    /**
+     * 
+     * @type PromoteBranchRequest
+     * @memberof VersionControlV2ApipromoteBranch
+     */
+    promoteBranchRequest: PromoteBranchRequest
+}
+
+export interface VersionControlV2ApiRestoreRevisionRequest {
+    /**
+     * 
+     * @type RestoreRevisionRequest
+     * @memberof VersionControlV2ApirestoreRevision
+     */
+    restoreRevisionRequest: RestoreRevisionRequest
+}
+
+export interface VersionControlV2ApiSearchVersionControlConfigsRequest {
+}
+
+export interface VersionControlV2ApiSearchVersionControlRunsRequest {
+    /**
+     * 
+     * @type SearchVersionControlRunsRequest
+     * @memberof VersionControlV2ApisearchVersionControlRuns
+     */
+    searchVersionControlRunsRequest: SearchVersionControlRunsRequest
+}
+
+export interface VersionControlV2ApiUpdateVersionControlConfigRequest {
+    /**
+     * 
+     * @type UpdateVersionControlConfigRequest
+     * @memberof VersionControlV2ApiupdateVersionControlConfig
+     */
+    updateVersionControlConfigRequest: UpdateVersionControlConfigRequest
+}
+
+export class ObjectVersionControlV2Api {
+    private api: ObservableVersionControlV2Api
+
+    public constructor(configuration: Configuration, requestFactory?: VersionControlV2ApiRequestFactory, responseProcessor?: VersionControlV2ApiResponseProcessor) {
+        this.api = new ObservableVersionControlV2Api(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createCommitWithHttpInfo(param: VersionControlV2ApiCreateCommitRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlCommitResponse>> {
+        return this.api.createCommitWithHttpInfo(param.createCommitRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createCommit(param: VersionControlV2ApiCreateCommitRequest, options?: ConfigurationOptions): Promise<VersionControlCommitResponse> {
+        return this.api.createCommit(param.createCommitRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createVersionControlConfigWithHttpInfo(param: VersionControlV2ApiCreateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlConfig>> {
+        return this.api.createVersionControlConfigWithHttpInfo(param.createVersionControlConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Configures version control for your Org, connecting it to a Git repository and the branch that versioning runs commit to.  Use this once per Org before any commit, deploy or restore. To stop versioning without discarding the settings, send `disabled_operations` on the update endpoint instead of deleting the configuration.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public createVersionControlConfig(param: VersionControlV2ApiCreateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<VersionControlConfig> {
+        return this.api.createVersionControlConfig(param.createVersionControlConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteVersionControlConfigWithHttpInfo(param: VersionControlV2ApiDeleteVersionControlConfigRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.deleteVersionControlConfigWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Revokes version control for your Org. The configuration is deleted, the stored credential is destroyed, and any versioning run in flight for the Org fails.  Use this to disconnect an Org from its repository for good. To stop versioning but keep the settings and credential, set `disabled_operations` on the update endpoint instead.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deleteVersionControlConfig(param: VersionControlV2ApiDeleteVersionControlConfigRequest = {}, options?: ConfigurationOptions): Promise<void> {
+        return this.api.deleteVersionControlConfig( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deployRevisionWithHttpInfo(param: VersionControlV2ApiDeployRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlDeployResponse>> {
+        return this.api.deployRevisionWithHttpInfo(param.deployRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that imports repository content from the branch your Org versions to into the Org itself. The run is asynchronous: the response is an admission receipt carrying a `run_id` and the pinned revision.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public deployRevision(param: VersionControlV2ApiDeployRevisionRequest, options?: ConfigurationOptions): Promise<VersionControlDeployResponse> {
+        return this.api.deployRevision(param.deployRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public promoteBranchWithHttpInfo(param: VersionControlV2ApiPromoteBranchRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlPromotionResponse>> {
+        return this.api.promoteBranchWithHttpInfo(param.promoteBranchRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Merges content from another Org\'s branch, or from a branch named directly, into the branch your Org versions to, and pushes the result. This is a repository-only operation: no Org\'s live content changes until a deploy.  `dry_run` defaults to true, so a request that omits it reports what would change and writes nothing. Name the source by Org or by branch; a branch must be the one some Org in your repository versions to, and the source Org must use the same repository as yours. Promoting from any Org other than your own also requires tenant administration privilege, or `ADMINISTRATION` privilege in the source Org.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public promoteBranch(param: VersionControlV2ApiPromoteBranchRequest, options?: ConfigurationOptions): Promise<VersionControlPromotionResponse> {
+        return this.api.promoteBranch(param.promoteBranchRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public restoreRevisionWithHttpInfo(param: VersionControlV2ApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlRestoreResponse>> {
+        return this.api.restoreRevisionWithHttpInfo(param.restoreRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Starts a run that restores the branch your Org versions to, and the Org itself, to an earlier revision. The revision must be reachable from the configured branch and must not be its head. The run is asynchronous and returns an admission receipt carrying a `run_id`.  Use this to roll an Org back to a known-good revision. It both commits and deploys, so it carries the same consequences as a deploy: the Org is overwritten, and objects whose files are not present at the target revision are deleted.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public restoreRevision(param: VersionControlV2ApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<VersionControlRestoreResponse> {
+        return this.api.restoreRevision(param.restoreRevisionRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlConfigsWithHttpInfo(param: VersionControlV2ApiSearchVersionControlConfigsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlConfigList>> {
+        return this.api.searchVersionControlConfigsWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns your Org\'s version control configuration, or an empty list when the Org is not configured. The stored credential is never included; only its type and username are reported.  Use this to confirm which repository and branch an Org versions to before starting a run. The response is a list because the scope will widen to several Orgs in a later release.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlConfigs(param: VersionControlV2ApiSearchVersionControlConfigsRequest = {}, options?: ConfigurationOptions): Promise<VersionControlConfigList> {
+        return this.api.searchVersionControlConfigs( options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlRunsWithHttpInfo(param: VersionControlV2ApiSearchVersionControlRunsRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionControlRunList>> {
+        return this.api.searchVersionControlRunsWithHttpInfo(param.searchVersionControlRunsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Returns the commit, deploy and restore runs for your Org, newest first, each with its current state and its per-object outcomes. This is the only place per-object results are reported: a commit, deploy or restore receipt carries only a `run_id`.  Use this to follow a run to completion, to explain a `PARTIAL_SUCCESS`, or to read an Org\'s commit history by filtering on `run_type` `COMMIT`. Filters combine with AND. Filter by object using object IDs; a deleted object can still be named, so its history stays searchable. Page through the results with `record_offset` and `record_size`, which accepts between 1 and 100 runs.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public searchVersionControlRuns(param: VersionControlV2ApiSearchVersionControlRunsRequest, options?: ConfigurationOptions): Promise<VersionControlRunList> {
+        return this.api.searchVersionControlRuns(param.searchVersionControlRunsRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public updateVersionControlConfigWithHttpInfo(param: VersionControlV2ApiUpdateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.updateVersionControlConfigWithHttpInfo(param.updateVersionControlConfigRequest,  options).toPromise();
+    }
+
+    /**
+     *  Version: 26.12.0.cl or later   Changes your Org\'s version control configuration. Every field is optional and an omitted field keeps its stored value, so nothing is reset by leaving it out.  Use this to rotate a credential, move to a different branch, or turn individual operations off through `disabled_operations`. Changing the provider, repository, branch, directory or credential fails any versioning run already in flight.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     * @param param the request object
+     */
+    public updateVersionControlConfig(param: VersionControlV2ApiUpdateVersionControlConfigRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.updateVersionControlConfig(param.updateVersionControlConfigRequest,  options).toPromise();
     }
 
 }

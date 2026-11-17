@@ -3,7 +3,9 @@
 // </auto-generated>
 #nullable enable
 
-using System;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -11,30 +13,86 @@ using System.Threading.Tasks;
 
 namespace ThoughtSpot.RestApi.Sdk.Client;
 
-/// <summary>
-/// DelegatingHandler that injects a fresh bearer token and standard SDK headers
-/// into every outgoing HTTP request before it hits the wire.
-///
-/// The <c>getToken</c> delegate is called before every request. Use a closure
-/// to implement caching and automatic refresh — see <see cref="ThoughtSpot.RestApi.Sdk.ApiClientConfiguration"/>.
-/// </summary>
-internal sealed class TokenInjectingHandler(
-    Func<CancellationToken, Task<string>> getToken,
-    HttpMessageHandler innerHandler) : DelegatingHandler(innerHandler)
+internal sealed class TokenInjectingHandler : DelegatingHandler
 {
+    private readonly TokenSource _tokens;
+
+    internal TokenInjectingHandler(TokenSource tokens, HttpMessageHandler innerHandler) : base(innerHandler)
+    {
+        _tokens = tokens;
+    }
+
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        var token = await getToken(cancellationToken);
-        if (!string.IsNullOrEmpty(token))
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
         request.Headers.TryAddWithoutValidation("Accept", "application/json");
-        ///request.Headers.TryAddWithoutValidation("Accept", "application/json, */*");
-        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.31.0");
-        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.31.0");
+        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.32.0");
+        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.32.0");
 
-        return await base.SendAsync(request, cancellationToken);
+        var sent = await _tokens.GetAsync(cancellationToken).ConfigureAwait(false);
+        SetBearer(request, sent);
+        var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        if (response.StatusCode != HttpStatusCode.Unauthorized)
+            return response;
+
+        if (!RequestBody.CanResend(request.Content))
+        {
+            _tokens.Discard(sent);
+            return response;
+        }
+
+        CachedToken? renewed;
+        try
+        {
+            renewed = await _tokens.RenewAfterUnauthorizedAsync(sent, cancellationToken).ConfigureAwait(false);
+        }
+        catch
+        {
+            response.Dispose();
+            throw;
+        }
+        if (renewed is null)
+            return response;
+
+        response.Dispose();
+        SetBearer(request, renewed);
+        // Resending the same HttpRequestMessage is allowed below HttpClient: its "already sent" guard lives in HttpClient.
+        return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing) _tokens.Dispose();
+        base.Dispose(disposing);
+    }
+
+    private static void SetBearer(HttpRequestMessage request, CachedToken token)
+    {
+        if (!string.IsNullOrEmpty(token.Token))
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+    }
+}
+
+internal static class RequestBody
+{
+    internal static bool CanResend(HttpContent? content) => content switch
+    {
+        null => true,
+        ByteArrayContent => true,
+        SdkStreamContent stream => stream.CanRewind,
+        MultipartContent parts => parts.All(CanResend),
+        _ => false,
+    };
+}
+
+// StreamContent seeks a seekable stream back to its start position each time it is serialized, which is what lets
+// a resend carry the full body.
+internal sealed class SdkStreamContent : StreamContent
+{
+    internal SdkStreamContent(Stream content) : base(content)
+    {
+        CanRewind = content.CanSeek;
+    }
+
+    internal bool CanRewind { get; }
 }
