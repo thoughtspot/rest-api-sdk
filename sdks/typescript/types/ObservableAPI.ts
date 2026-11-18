@@ -7790,7 +7790,7 @@ export class ObservableSystemApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
      * @param updateSystemConfigRequest
      */
     public updateSystemConfigWithHttpInfo(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
@@ -7814,7 +7814,7 @@ export class ObservableSystemApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
      * @param updateSystemConfigRequest
      */
     public updateSystemConfig(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: ConfigurationOptions): Observable<void> {
@@ -14662,7 +14662,7 @@ export class ObservableThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
      * @param updateSystemConfigRequest
      */
     public updateSystemConfigWithHttpInfo(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
@@ -14686,7 +14686,7 @@ export class ObservableThoughtSpotRestApi {
     }
 
     /**
-     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+     *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
      * @param updateSystemConfigRequest
      */
     public updateSystemConfig(updateSystemConfigRequest: UpdateSystemConfigRequest, _options?: ConfigurationOptions): Observable<void> {

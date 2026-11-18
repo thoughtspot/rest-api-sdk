@@ -44885,7 +44885,7 @@ var SystemApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest 
    */
   async updateSystemConfig(updateSystemConfigRequest, _options) {
@@ -52875,7 +52875,7 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest 
    */
   async updateSystemConfig(updateSystemConfigRequest, _options) {
@@ -75545,7 +75545,7 @@ var ObservableSystemApi = class {
     return this.searchSecuritySettingsWithHttpInfo(searchSecuritySettingsRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfigWithHttpInfo(updateSystemConfigRequest, _options) {
@@ -75564,7 +75564,7 @@ var ObservableSystemApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfig(updateSystemConfigRequest, _options) {
@@ -81135,7 +81135,7 @@ var ObservableThoughtSpotRestApi = class {
     return this.updateStyleFontWithHttpInfo(fontIdentifier, updateStyleFontRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfigWithHttpInfo(updateSystemConfigRequest, _options) {
@@ -81154,7 +81154,7 @@ var ObservableThoughtSpotRestApi = class {
     }));
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfig(updateSystemConfigRequest, _options) {
@@ -86549,7 +86549,7 @@ var PromiseSystemApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfigWithHttpInfo(updateSystemConfigRequest, _options) {
@@ -86558,7 +86558,7 @@ var PromiseSystemApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfig(updateSystemConfigRequest, _options) {
@@ -90455,7 +90455,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfigWithHttpInfo(updateSystemConfigRequest, _options) {
@@ -90464,7 +90464,7 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
-   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.      
+   *   Version: 9.2.0.cl or later   Updates the current configuration of the cluster. You must send the configuration data in JSON format.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privileges. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the `APPLICATION_ADMINISTRATION` (**Can manage application settings**) privilege is required.  If Orgs are enabled on your instance, only users with cluster administration privileges (`ADMINISTRATION` in the Primary Org) can update cluster-wide settings. Org administrators can update only their own Org\'s value in these per-Org settings: `automaticTranslationOfObjectMetadataPerOrg`, `manualTranslationOfObjectMetadataPerOrg`, `liveboardVizDataCacheAllLiveboardsPerOrg`, and `liveboardVizDataCacheLiveboardIdsPerOrg`. If the request includes any other setting, the API returns a 403 error.      
    * @param updateSystemConfigRequest
    */
   updateSystemConfig(updateSystemConfigRequest, _options) {
