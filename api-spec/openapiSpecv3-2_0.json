@@ -44734,7 +44734,8 @@
               "FALCON",
               "FALCON_ONPREM",
               "CLICKHOUSE",
-              "IOMETE"
+              "IOMETE",
+              "DORIS"
             ],
             "description": "Type of data warehouse."
           },
@@ -48692,7 +48693,8 @@
               "FALCON",
               "FALCON_ONPREM",
               "CLICKHOUSE",
-              "IOMETE"
+              "IOMETE",
+              "DORIS"
             ],
             "nullable": true
           },
@@ -53342,7 +53344,8 @@
               "FALCON",
               "FALCON_ONPREM",
               "CLICKHOUSE",
-              "IOMETE"
+              "IOMETE",
+              "DORIS"
             ],
             "description": "Type of data warehouse."
           },
@@ -59332,7 +59335,8 @@
               "FALCON",
               "FALCON_ONPREM",
               "CLICKHOUSE",
-              "IOMETE"
+              "IOMETE",
+              "DORIS"
             ]
           },
           "data_warehouse_config": {
@@ -59439,7 +59443,8 @@
                 "FALCON",
                 "FALCON_ONPREM",
                 "CLICKHOUSE",
-                "IOMETE"
+                "IOMETE",
+                "DORIS"
               ]
             }
           },
