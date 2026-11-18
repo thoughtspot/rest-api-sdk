@@ -43156,7 +43156,11 @@
                   "type": "string"
                 },
                 "principal_type": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "USER",
+                    "USER_GROUP"
+                  ]
                 },
                 "principal_sub_type": {
                   "type": "string"
@@ -43167,7 +43171,16 @@
                     "type": "object",
                     "properties": {
                       "metadata_type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "LIVEBOARD",
+                          "ANSWER",
+                          "LOGICAL_TABLE",
+                          "LOGICAL_COLUMN",
+                          "CONNECTION",
+                          "COLLECTION",
+                          "PERSONALISED_VIEW"
+                        ]
                       },
                       "metadata_permissions": {
                         "type": "array",
@@ -43205,10 +43218,20 @@
                               "title": "Metadata Permissions Metadata Author"
                             },
                             "permission": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "READ_ONLY",
+                                "MODIFY",
+                                "NO_ACCESS"
+                              ]
                             },
                             "shared_permission": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "READ_ONLY",
+                                "MODIFY",
+                                "NO_ACCESS"
+                              ]
                             },
                             "group_permission": {
                               "type": "array",
@@ -43306,7 +43329,16 @@
                   "type": "string"
                 },
                 "metadata_type": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "LIVEBOARD",
+                    "ANSWER",
+                    "LOGICAL_TABLE",
+                    "LOGICAL_COLUMN",
+                    "CONNECTION",
+                    "COLLECTION",
+                    "PERSONALISED_VIEW"
+                  ]
                 },
                 "metadata_owner": {
                   "type": "object",
@@ -43338,7 +43370,11 @@
                     "type": "object",
                     "properties": {
                       "principal_type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "USER",
+                          "USER_GROUP"
+                        ]
                       },
                       "principal_sub_type": {
                         "type": "string"
@@ -43355,10 +43391,20 @@
                               "type": "string"
                             },
                             "permission": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "READ_ONLY",
+                                "MODIFY",
+                                "NO_ACCESS"
+                              ]
                             },
                             "shared_permission": {
-                              "type": "string"
+                              "type": "string",
+                              "enum": [
+                                "READ_ONLY",
+                                "MODIFY",
+                                "NO_ACCESS"
+                              ]
                             },
                             "group_permission": {
                               "type": "array",
@@ -43524,7 +43570,11 @@
                     "type": "object",
                     "properties": {
                       "principal_type": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "USER",
+                          "USER_GROUP"
+                        ]
                       },
                       "principal_object_privileges": {
                         "type": "array",
