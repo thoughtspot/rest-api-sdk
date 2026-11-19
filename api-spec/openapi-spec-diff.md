@@ -198,6 +198,7 @@
 - :warning: removed the optional property `configuration/role` from the response with the `200` status
 - :warning: removed the optional property `configuration/user` from the response with the `200` status
 - :warning: removed the optional property `configuration/warehouse` from the response with the `200` status
+- :warning: added the new `DORIS` enum value to the `data_warehouse_type` response property for the response status `200`
 
 
 ### POST /api/rest/2.0/connection-configurations/search
@@ -205,6 +206,7 @@
 - :warning: removed the optional property `items/configuration/role` from the response with the `200` status
 - :warning: removed the optional property `items/configuration/user` from the response with the `200` status
 - :warning: removed the optional property `items/configuration/warehouse` from the response with the `200` status
+- :warning: added the new `DORIS` enum value to the `items/data_warehouse_type` response property for the response status `200`
 
 
 ### POST /api/rest/2.0/connection/create
@@ -229,6 +231,8 @@
 - :warning: removed the optional property `details/tables` from the response with the `200` status
 - :warning: removed the optional property `details/tags` from the response with the `200` status
 - :warning: removed the optional property `details/type` from the response with the `200` status
+- :warning: added the new `DORIS` enum value to the `data_warehouse_type` response property for the response status `200`
+-  added the new `DORIS` enum value to the request property `data_warehouse_type`
 
 
 ### POST /api/rest/2.0/connection/search
@@ -258,6 +262,8 @@
 - :warning: removed the optional property `items/details/tables` from the response with the `200` status
 - :warning: removed the optional property `items/details/tags` from the response with the `200` status
 - :warning: removed the optional property `items/details/type` from the response with the `200` status
+- :warning: added the new `DORIS` enum value to the `items/data_warehouse_type` response property for the response status `200`
+-  added the new `DORIS` enum value to the request property `data_warehouse_types/items/`
 
 
 ### POST /api/rest/2.0/customization/email

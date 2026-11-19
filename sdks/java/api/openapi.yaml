@@ -30484,6 +30484,7 @@ components:
           - FALCON_ONPREM
           - CLICKHOUSE
           - IOMETE
+          - DORIS
           type: string
         data_warehouse_objects:
           $ref: '#/components/schemas/DataWarehouseObjects'
@@ -33479,6 +33480,7 @@ components:
           - FALCON_ONPREM
           - CLICKHOUSE
           - IOMETE
+          - DORIS
           nullable: true
           type: string
         policy_type:
@@ -38139,6 +38141,7 @@ components:
           - FALCON_ONPREM
           - CLICKHOUSE
           - IOMETE
+          - DORIS
           type: string
         details:
           description: Details of the connection.
@@ -43600,6 +43603,7 @@ components:
           - FALCON_ONPREM
           - CLICKHOUSE
           - IOMETE
+          - DORIS
           type: string
         data_warehouse_config:
           description: "Connection configuration attributes in JSON format. To create\
@@ -43745,6 +43749,7 @@ components:
             - FALCON_ONPREM
             - CLICKHOUSE
             - IOMETE
+            - DORIS
             type: string
           type: array
         record_offset:

@@ -52,6 +52,7 @@
 | FALCON_ONPREM | &quot;FALCON_ONPREM&quot; |
 | CLICKHOUSE | &quot;CLICKHOUSE&quot; |
 | IOMETE | &quot;IOMETE&quot; |
+| DORIS | &quot;DORIS&quot; |
 
 
 ## Implemented Interfaces

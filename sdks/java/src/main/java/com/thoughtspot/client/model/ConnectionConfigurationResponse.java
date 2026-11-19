@@ -208,7 +208,9 @@ public class ConnectionConfigurationResponse implements Serializable {
     
     CLICKHOUSE("CLICKHOUSE"),
     
-    IOMETE("IOMETE");
+    IOMETE("IOMETE"),
+    
+    DORIS("DORIS");
 
     private String value;
 

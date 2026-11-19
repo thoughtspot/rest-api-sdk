@@ -265,7 +265,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum IOMETE for value: IOMETE
             /// </summary>
             [EnumMember(Value = "IOMETE")]
-            IOMETE = 34
+            IOMETE = 34,
+
+            /// <summary>
+            /// Enum DORIS for value: DORIS
+            /// </summary>
+            [EnumMember(Value = "DORIS")]
+            DORIS = 35
         }
 
 
