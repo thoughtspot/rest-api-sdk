@@ -333,7 +333,7 @@ namespace ThoughtSpot.RestApi.Sdk.Client
                 {
                     foreach (var file in fileParam.Value)
                     {
-                        var content = new StreamContent(file.Content);
+                        var content = new SdkStreamContent(file.Content);
                         content.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
                         multipartContent.Add(content, fileParam.Key, file.Name);
                     }
@@ -422,7 +422,7 @@ namespace ThoughtSpot.RestApi.Sdk.Client
                     {
                         contentType = contentType ?? "application/octet-stream";
 
-                        var streamContent = new StreamContent(fp.Content);
+                        var streamContent = new SdkStreamContent(fp.Content);
                         streamContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
                         request.Content = streamContent;
                     }

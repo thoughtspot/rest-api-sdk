@@ -15,7 +15,7 @@ namespace ThoughtSpot.RestApi.Sdk;
 
 /// <summary>
 /// Configuration for <see cref="ThoughtSpotRestApi"/>.
-/// Provide one of: Username+Password, Username+SecretKey, BearerToken, or TokenProvider.
+/// Provide one of: Username+Password, Username+SecretKey, BearerToken, TokenProvider, or GetToken.
 /// </summary>
 public record ApiClientConfiguration
 {
@@ -53,10 +53,64 @@ public record ApiClientConfiguration
 
     /// <summary>
     /// Async function called before every request to retrieve the current token.
-    /// You are responsible for caching and refresh logic inside this function.
+    /// You are responsible for caching and refresh logic inside this function, and a 401 is not retried.
+    /// Use <see cref="GetToken"/> to have the SDK cache, refresh and recover from a 401.
     /// Example: <c>TokenProvider = async () => await vault.GetTokenAsync()</c>
     /// </summary>
     public Func<CancellationToken, Task<string>>? TokenProvider { get; init; }
+
+    /// <summary>
+    /// Supplies bearer tokens that the SDK caches for this client.
+    /// <list type="bullet">
+    /// <item><description>Called on the first request (not in <c>CreateAsync</c>), then only when the cached token is
+    /// within <see cref="TokenRefreshBuffer"/> of <see cref="TokenResult.ExpiresAt"/>, or after a 401.</description></item>
+    /// <item><description>After a 401 the SDK calls it once and resends the request once. A second 401 throws
+    /// <c>ApiException</c> with <c>ErrorCode</c> 401. The resend is separate from <see cref="EnableRetries"/>.</description></item>
+    /// <item><description>Concurrent requests share one call. The cache belongs to one client instance.</description></item>
+    /// <item><description>Must not call the client it supplies tokens for: that request would wait for its own token.</description></item>
+    /// </list>
+    /// Cannot be combined with <see cref="TokenProvider"/>, <see cref="BearerToken"/>, <see cref="Username"/>,
+    /// <see cref="Password"/> or <see cref="SecretKey"/>.
+    /// </summary>
+    public Func<CancellationToken, Task<TokenResult>>? GetToken { get; init; }
+
+    /// <summary>
+    /// How long before a <see cref="GetToken"/> token's expiry the SDK fetches a new one. Default 30 seconds.
+    /// <see cref="TokenResult.RefreshBuffer"/> overrides it per token.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">The value is negative.</exception>
+    public TimeSpan TokenRefreshBuffer
+    {
+        get => _tokenRefreshBuffer;
+        init => _tokenRefreshBuffer = value >= TimeSpan.Zero
+            ? value
+            : throw new ArgumentOutOfRangeException(nameof(TokenRefreshBuffer), "TokenRefreshBuffer must not be negative.");
+    }
+    private readonly TimeSpan _tokenRefreshBuffer = TimeSpan.FromSeconds(30);
+
+    /// <summary>
+    /// Longest a <see cref="GetToken"/> call may take. Default 5 minutes. When it runs out, the SDK cancels the
+    /// call's <see cref="CancellationToken"/> and the requests waiting on it throw <see cref="TimeoutException"/>.
+    /// The next request calls <see cref="GetToken"/> again. During an early refresh, a timeout is handled like any
+    /// other failed refresh.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">The value is not positive.</exception>
+    public TimeSpan GetTokenTimeout
+    {
+        get => _getTokenTimeout;
+        init => _getTokenTimeout = value > TimeSpan.Zero
+            ? value
+            : throw new ArgumentOutOfRangeException(nameof(GetTokenTimeout), "GetTokenTimeout must be positive.");
+    }
+    private readonly TimeSpan _getTokenTimeout = TimeSpan.FromMinutes(5);
+
+    /// <summary>
+    /// Receives <see cref="GetToken"/> cache diagnostics for this client: each fetch and its reason, failed fetches,
+    /// a token that expires within the buffer, and a 401 that was not resent. <c>null</c> (the default) means the SDK
+    /// reports nothing. Events never contain tokens. The callback runs outside any lock, and an exception it throws
+    /// is ignored.
+    /// </summary>
+    public Action<TokenEvent>? OnTokenEvent { get; init; }
 
     // ── HTTP ──────────────────────────────────────────────────────────────────
 

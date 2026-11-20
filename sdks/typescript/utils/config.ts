@@ -1,5 +1,8 @@
 import { AuthMethodsConfiguration, TokenProvider } from "../auth/auth";
+import { TokenManager, TokenResult } from "../auth/tokenManager";
 import { createConfiguration } from "../configuration";
+import { TokenRefreshHttpLibrary } from "../http/tokenRefreshHttpLibrary";
+import { IsomorphicFetchHttpLibrary } from "../http/isomorphic-fetch";
 import { GetFullAccessTokenRequest } from "../models/GetFullAccessTokenRequest";
 import { BaseServerConfiguration, ServerConfiguration } from "../servers";
 import { PromiseAuthenticationApi } from "../types/PromiseAPI";
@@ -20,6 +23,13 @@ export interface ConfigurationOptions {
    * ```
    */
   additionalHeaders?: Record<string, string>;
+  /**
+   * Milliseconds before a token's `expiresAt` at which it is refreshed. Defaults to 30000.
+   * Keep it well below the token validity, otherwise every request refetches.
+   */
+  refreshBufferMs?: number;
+  /** Receives a message whenever the token function is called and why. Never receives a token. */
+  tokenLogger?: (message: string) => void;
 }
 
 /**
@@ -50,9 +60,13 @@ const createAdditionalHeadersMiddleware = (additionalHeaders: Record<string, str
 /**
   * creates a bearer authentication configuration using params or a token provider
   * @param thoughtSpotHost thoughtSpotHost URL
-  * @param paramOrTokenProvider either a GetFullAccessTokenRequest or a TokenProvider , 
-  * Pass a GetFullAccessTokenRequest which contains the object body required to get a full access token , or
-  * function which returns a promise of a string which is the full access token
+  * @param paramOrTokenProvider a GetFullAccessTokenRequest, `{ getToken }`, a token function or a static token string.
+  * - GetFullAccessTokenRequest: the SDK gets a token from `/auth/token/full` and caches it.
+  * - `{ getToken }`: getToken returns a token string or `{ token, expiresAt }` (`expiresAt` in epoch ms, e.g.
+  *   `expiration_time_in_millis` from `/auth/token/*`). The SDK caches the result, calls getToken again
+  *   `refreshBufferMs` before `expiresAt` and after a 401.
+  * - A function returning a token string: called on every request, never cached.
+  * - A static string: sent as is and never refreshed.
   * @param options - Optional configuration for custom headers and other settings
   * @returns Configuration object ready for authenticated API calls 
   * @example
@@ -69,7 +83,11 @@ const createAdditionalHeadersMiddleware = (additionalHeaders: Record<string, str
  */
 export const createBearerAuthenticationConfig = (
   thoughtSpotHost: string,
-  paramOrTokenProvider: GetFullAccessTokenRequest | (() => Promise<string>),
+  paramOrTokenProvider:
+    | GetFullAccessTokenRequest
+    | { getToken: () => Promise<TokenResult> | TokenResult }
+    | (() => Promise<string> | string)
+    | string,
   options?: ConfigurationOptions
 ) => {
   const serverConfig: BaseServerConfiguration = new ServerConfiguration<{}>(
@@ -90,36 +108,42 @@ export const createBearerAuthenticationConfig = (
 
   const authApiClient = new PromiseAuthenticationApi(config);
 
-  let configTokenProvider;
+  let tokenProvider: TokenProvider;
+  let tokenManager: TokenManager | undefined;
+  const managerOptions = {
+    refreshBufferMs: options?.refreshBufferMs,
+    logger: options?.tokenLogger,
+  };
 
-  if (paramOrTokenProvider.hasOwnProperty("username")) {
-    // user passed a GetFullAccessTokenRequest
-    configTokenProvider = {
-      getToken: async () => {
-        const token = (await authApiClient.getFullAccessToken(paramOrTokenProvider as GetFullAccessTokenRequest)).token;
-        return token;
-      },
-    }
+  if (typeof paramOrTokenProvider === "string") {
+    tokenProvider = { getToken: () => paramOrTokenProvider };
   } else if (typeof paramOrTokenProvider === "function") {
-    // user passed a function which returns a token
-    configTokenProvider = {
-      getToken: paramOrTokenProvider,
-    }
-  }
-  else {
-    throw new Error("Pass a proper GetFullAccessTokenRequest or a function which returns a token");
+    tokenProvider = { getToken: paramOrTokenProvider };
+  } else if (paramOrTokenProvider && "getToken" in paramOrTokenProvider) {
+    const source = paramOrTokenProvider;
+    tokenProvider = tokenManager = new TokenManager(() => source.getToken(), managerOptions);
+  } else if (paramOrTokenProvider?.hasOwnProperty("username")) {
+    tokenProvider = tokenManager = new TokenManager(async () => {
+      const resp = await authApiClient.getFullAccessToken(paramOrTokenProvider as GetFullAccessTokenRequest);
+      return { token: resp.token, expiresAt: resp.expiration_time_in_millis };
+    }, managerOptions);
+  } else {
+    throw new Error("Pass a proper GetFullAccessTokenRequest, { getToken }, a token string or a function which returns a token");
   }
 
   const authConfig: AuthMethodsConfiguration = {
     bearerAuth: {
-      tokenProvider: configTokenProvider as TokenProvider,
+      tokenProvider,
     },
   };
 
   const globalConfig = createConfiguration({
     authMethods: authConfig,
     baseServer: serverConfig,
-    promiseMiddleware: middleware, 
+    promiseMiddleware: middleware,
+    httpApi: tokenManager
+      ? new TokenRefreshHttpLibrary(new IsomorphicFetchHttpLibrary(), tokenManager)
+      : undefined,
   });
 
   return globalConfig;

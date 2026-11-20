@@ -3,6 +3,11 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/ai/agent/converse/sse
+-  removed the non-success response with the status `401`
+-  removed the non-success response with the status `403`
+
+
 ### POST /api/rest/2.0/ai/usage-data/delete
 -  endpoint added
 

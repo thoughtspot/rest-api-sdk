@@ -20,7 +20,7 @@ Install-Package ThoughtSpot.RestApi.Sdk -Version 2.30.0
 
 ## Usage
 
-Create an `ApiClientConfiguration`, then build a per-tag class (e.g. `AuthenticationApi`, `UsersApi`) or the aggregate `ThoughtSpotRestApi` via `CreateAsync`. `CreateAsync` is the recommended entry point — it's required for streaming methods, and for automatic token refresh when using `Username`+`Password`, `Username`+`SecretKey`, or `TokenProvider`.
+Create an `ApiClientConfiguration`, then build a per-tag class (e.g. `AuthenticationApi`, `UsersApi`) or the aggregate `ThoughtSpotRestApi` via `CreateAsync`. `CreateAsync` is the recommended entry point — it's required for streaming methods, and for automatic token refresh when using `Username`+`Password`, `Username`+`SecretKey`, `TokenProvider`, or `GetToken`.
 
 ```csharp
 using ThoughtSpot.RestApi.Sdk.Api;
@@ -91,7 +91,7 @@ var api = await AuthenticationApi.CreateAsync(config);
 var config = new ApiClientConfiguration { Host = HOST, Username = "user", SecretKey = "secret" };
 ```
 
-**3. TokenProvider** — for any other identity source. It is invoked before every request, so it doubles as the refresh hook, and may wrap your own caching:
+**3. TokenProvider** — invoked before every request. The SDK does not cache its result and does not retry a 401, so use it when you cache tokens yourself:
 
 ```csharp
 var config = new ApiClientConfiguration
@@ -101,7 +101,79 @@ var config = new ApiClientConfiguration
 };
 ```
 
-A static `BearerToken` is also accepted but is obsolete — it never refreshes, so requests start failing with 401 once it expires. Prefer one of the three options above.
+**4. GetToken** — for any other identity source: your own backend, a secrets vault, or a separate ThoughtSpot client. You return a token, and optionally when it expires. The SDK caches it, fetches a new one before it expires, and recovers from a 401.
+
+Return a `TokenResult` with an expiry. `/auth/token/*` responses give the expiry in epoch milliseconds:
+
+```csharp
+var api = await ThoughtSpotRestApi.CreateAsync(new ApiClientConfiguration
+{
+    Host = HOST,
+    GetToken = async cancellationToken =>
+    {
+        var minted = await myBackend.MintThoughtSpotTokenAsync(userId, cancellationToken);
+        return TokenResult.FromEpochMilliseconds(minted.Token, minted.ExpiresAtEpochMs);
+    },
+});
+```
+
+Or return a plain string. A token without an expiry is reused until the server rejects it with a 401:
+
+```csharp
+var config = new ApiClientConfiguration
+{
+    Host = HOST,
+    GetToken = async cancellationToken => await vault.ReadSecretAsync("thoughtspot/bearer", cancellationToken),
+};
+```
+
+To mint the token with the SDK itself, use a separate client, and keep it alive as long as `api`. Take the expiry from your own clock, captured before the call: the SDK models type `ExpirationTimeInMillis` as a `float`, which can be off by about a minute.
+
+```csharp
+using var minter = new AuthenticationApi(HOST);
+var api = await ThoughtSpotRestApi.CreateAsync(new ApiClientConfiguration
+{
+    Host = HOST,
+    GetToken = async cancellationToken =>
+    {
+        const int validitySeconds = 3600;
+        var expiresAt = DateTimeOffset.UtcNow.AddSeconds(validitySeconds);
+        var minted = await minter.GetFullAccessTokenAsync(
+            new GetFullAccessTokenRequest(username: "svc-reporting", secretKey: secretKey, validityTimeInSec: validitySeconds),
+            cancellationToken: cancellationToken);
+        return new TokenResult(minted.VarToken, expiresAt);
+    },
+});
+```
+
+> **Important:** `GetToken` must not call the client it supplies tokens for. That request waits for its own token, so both fail with `TimeoutException` once `GetTokenTimeout` (default 5 minutes) runs out.
+
+A static `BearerToken` is also accepted but is obsolete — it never refreshes, so requests start failing with 401 once it expires. Prefer one of the options above. `GetToken` cannot be combined with any other option. `CreateAsync` throws `ArgumentException` if it is.
+
+### GetToken caching and 401 recovery
+
+- The SDK reuses the cached token without validating it against the server.
+- It fetches a new token when `TokenRefreshBuffer` (default 30 seconds) or less of validity remains. `TokenResult.RefreshBuffer` overrides the buffer for one token. A token that already expires within the buffer when it is fetched is fetched again on every request.
+- If a refresh fails while the cached token is still valid, the SDK keeps using the cached token and tries again on the next request. Once the token has expired, the error goes to the caller. Errors are never cached.
+- Concurrent requests share one fetch.
+- A `GetToken` call that takes longer than `GetTokenTimeout` (default 5 minutes) is cancelled, the requests waiting on it throw `TimeoutException`, and the next request calls `GetToken` again.
+- Each client instance has its own cache: each `CreateAsync` call, and each per-tag class. Use `ThoughtSpotRestApi` to share one cache across all endpoints. `ApplyConfigurationAsync` starts a new cache.
+- After a 401, the SDK fetches one new token and resends the request once. If the resend also gets a 401, the call throws `ApiException` with `ErrorCode` 401. A burst of 401s on the same token causes one fetch.
+- An upload from a stream that cannot seek cannot be sent twice. For such a request the SDK returns the 401 to the caller, and the next request fetches a new token.
+
+Set `OnTokenEvent` to see when and why the SDK fetches a token. Events carry a kind, a reason (`Cold`, `Expiry` or `Unauthorized`) and, for failures, the exception type. They never contain a token. With no callback set, the SDK reports nothing:
+
+```csharp
+var config = new ApiClientConfiguration
+{
+    Host = HOST,
+    GetToken = getToken,
+    TokenRefreshBuffer = TimeSpan.FromMinutes(2),
+    OnTokenEvent = e => Console.WriteLine($"ThoughtSpot token event: {e.Kind} {e.Reason} {e.ExceptionType?.Name}"),
+};
+```
+
+`TokenEventKind.TokenExpiresWithinRefreshBuffer` usually means the expiry was given in seconds instead of milliseconds, or the token lifetime is shorter than the buffer.
 
 ## Streaming
 
@@ -186,6 +258,8 @@ RetryConfiguration.Default = new ResiliencePipelineBuilder<HttpResponseMessage>(
     .Build();
 ```
 
+The `GetToken` 401 recovery is separate from this pipeline. It runs inside one attempt, so it does not use up a retry and it works with `EnableRetries = false`. Do not add `401` to a custom pipeline's `ShouldHandle`: each retry would repeat the token renewal and the resend.
+
 ## Configuration
 
 | Option | Default | Description |
@@ -193,6 +267,10 @@ RetryConfiguration.Default = new ResiliencePipelineBuilder<HttpResponseMessage>(
 | `Host` | — | Cluster URL, e.g. `https://your-cluster.thoughtspot.cloud` |
 | `Username` / `Password` | `null` | Password-based auth; fetches and refreshes a token automatically via `CreateAsync` |
 | `Username` / `SecretKey` | `null` | Trusted-authentication auth |
+| `GetToken` | `null` | Async callable returning a token (or `TokenResult`); the SDK caches it, refreshes it and recovers from a 401 |
+| `TokenRefreshBuffer` | `30s` | How long before a `GetToken` token's expiry the SDK fetches a new one |
+| `GetTokenTimeout` | `5min` | Longest a `GetToken` call may take before it is cancelled and waiting requests throw `TimeoutException` |
+| `OnTokenEvent` | `null` | Callback for `GetToken` fetch diagnostics; never receives tokens |
 | `BearerToken` | `null` | Static token (obsolete — does not refresh) |
 | `TokenProvider` | `null` | Async callable invoked before every request; you own caching/refresh |
 | `TokenValiditySeconds` | `300` | How long a fetched token is considered valid before the SDK refreshes it |
