@@ -5526,7 +5526,8 @@
     "/api/rest/2.0/auth/token/object": {
       "post": {
         "operationId": "getObjectAccessToken",
-        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\nGenerates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.\n\nTo add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\n\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "description": "\n <span class=\"since-beta-tag\">Version: 9.0.0.cl or later</span>\n\n**Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.\n\nGenerates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).\n\n#### Usage guidelines\n\nYou can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.\n\n**Note**:\n* When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence.\n* If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.\n\nThe token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.\n\n#### Just-in-time provisioning\n\nFor [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:\n\n* `auto_create`\n* `username`\n* `display_name`\n* `email`\n* `group_identifiers`\n\nSet `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.\n\nTo add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.\n\n#### Important point to note\n\nAll options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.\n\n\n\n\n#### Endpoint URL\n",
+        "deprecated": true,
         "tags": [
           "Authentication",
           "9.0.0.cl"
@@ -26620,7 +26621,7 @@
             }
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26697,7 +26698,7 @@
             "description": "Deleting the variable is successful."
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26763,7 +26764,7 @@
             "description": "Deletion of variable(s) is successful."
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26839,7 +26840,7 @@
             "description": "Variable values updated successfully."
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable's data type.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26859,7 +26860,7 @@
             }
           },
           "403": {
-            "description": "Forbidden access.",
+            "description": "Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\"Variable value update is only allowed in default org\"); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26991,7 +26992,7 @@
             "description": "Variable name updated successfully."
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include no variable matching the identifier, or an invalid name.",
             "content": {
               "application/json": {
                 "schema": {
@@ -27011,7 +27012,7 @@
             }
           },
           "403": {
-            "description": "Forbidden access.",
+            "description": "Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\"Variable update is only allowed in default org\"); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in.",
             "content": {
               "application/json": {
                 "schema": {
@@ -27068,7 +27069,7 @@
             "description": "Variable values updated successfully."
           },
           "400": {
-            "description": "Invalid request.",
+            "description": "Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org.",
             "content": {
               "application/json": {
                 "schema": {
@@ -27088,7 +27089,7 @@
             }
           },
           "403": {
-            "description": "Forbidden access.",
+            "description": "Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\"Variable value update is only allowed in default org\"); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in.",
             "content": {
               "application/json": {
                 "schema": {
@@ -33790,7 +33791,10 @@
                 "CAN_MANAGE_INPUT_TABLES",
                 "CAN_EDIT_INPUT_TABLES",
                 "CAN_CREATE_DATA_APP",
-                "CAN_CREATE_MUZE_STUDIO_TEMPLATES"
+                "CAN_CREATE_MUZE_STUDIO_TEMPLATES",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -39010,7 +39014,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             },
             "description": "Privileges that will be assigned to the group. Note: AUTHORING is a no-op — always inherited via ALL_GROUP, assigning it has no effect.",
@@ -40421,7 +40428,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             },
             "description": "Privileges granted to the role."
@@ -44681,7 +44691,7 @@
             ]
           },
           "reset_option": {
-            "description": "<div><span class=\"since-beta-tag\">Version: 10.8.0.cl or later</span></div>\n\nThe attributes to clear when `persist_option` is `RESET`: `GROUPS`, `FILTER_RULES` or `PARAMETERS`. If empty, all of them are cleared. With `GROUPS`, the user keeps only the All group of the Org.",
+            "description": "<div><span class=\"since-beta-tag\">Version: 27.2.0.cl or later</span></div>\n\nThe attributes to clear when `persist_option` is `RESET`: `GROUPS`, `FILTER_RULES` or `PARAMETERS`. If empty, all of them are cleared. With `GROUPS`, the user keeps only the All group of the Org.",
             "type": "array",
             "items": {
               "type": "string",
@@ -44729,7 +44739,7 @@
             "type": "string"
           },
           "groups": {
-            "description": "ID or name of the groups to assign to the user. For a new user (just-in-time provisioning), the user is created in these groups. For an existing user, `persist_option` sets how they apply: `APPEND` adds them, `REPLACE` replaces the user's groups, and `NONE` ignores them; with `RESET`, use `reset_option` instead. With `auto_create` set to true, missing groups are created; with `auto_create` set to false, a missing group returns 400. Updating the groups of an existing user needs JWT RBAC to be enabled on the cluster.",
+            "description": "ID or name of the groups to assign to the user. For a new user (just-in-time provisioning), the user is created in these groups. For an existing user, `persist_option` sets how they apply: `APPEND` adds them, `REPLACE` replaces the user's groups, and `NONE` ignores them; with `RESET`, use `reset_option` instead. With `auto_create` set to true, missing groups are created; with `auto_create` set to false, a missing group returns 400. Updating the groups of an existing user needs JWT RBAC to be enabled on the cluster. If it is not enabled, the groups and `reset_option` `GROUPS` are ignored for an existing user, and the request returns 200; `FILTER_RULES` and `PARAMETERS` are still cleared.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Group_Object"
@@ -46449,7 +46459,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
@@ -46613,7 +46626,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
@@ -46758,7 +46774,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
@@ -48169,7 +48188,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
@@ -48278,7 +48300,10 @@
                 "CAN_MANAGE_INPUT_TABLES",
                 "CAN_EDIT_INPUT_TABLES",
                 "CAN_CREATE_DATA_APP",
-                "CAN_CREATE_MUZE_STUDIO_TEMPLATES"
+                "CAN_CREATE_MUZE_STUDIO_TEMPLATES",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
@@ -48377,7 +48402,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           }
@@ -51036,7 +51064,10 @@
                 "CAN_CREATE_ANSWERS",
                 "CAN_ANALYZE_DATA",
                 "CAN_ADMINISTER_SCHEDULES",
-                "CAN_CREATE_KPI_ALERTS"
+                "CAN_CREATE_KPI_ALERTS",
+                "CAN_CREATE_AGENTSPOT_AGENTS",
+                "CAN_CREATE_AGENTSPOT_APPS",
+                "CAN_CREATE_AGENTSPOT_WORKFLOWS"
               ]
             }
           },
