@@ -65,6 +65,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ExportManualTranslationTemplate
+        /// </summary>
+        [Fact]
+        public void ExportManualTranslationTemplateTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest = null;
+            //instance.ExportManualTranslationTemplate(exportManualTranslationTemplateRequest);
+        }
+
+        /// <summary>
         /// Test ExportManualTranslations
         /// </summary>
         [Fact]

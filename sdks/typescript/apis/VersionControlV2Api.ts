@@ -30,7 +30,7 @@ import { VersionControlRunList } from '../models/VersionControlRunList';
 export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type `LOGICAL_TABLE` and committed to a file named by its own type, such as `model/<object ID>.model.tml`. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
      * @param createCommitRequest 
      */
     public async createCommit(createCommitRequest: CreateCommitRequest, _options?: Configuration): Promise<RequestContext> {
@@ -48,8 +48,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -97,8 +97,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -139,8 +139,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -177,8 +177,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -226,8 +226,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -275,8 +275,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -317,8 +317,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -355,8 +355,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -404,8 +404,8 @@ export class VersionControlV2ApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -459,7 +459,7 @@ export class VersionControlV2ApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ErrorResponse", ""
             ) as ErrorResponse;
-            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason.", body, response.headers);
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason.", body, response.headers);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(

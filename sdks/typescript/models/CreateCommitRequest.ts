@@ -15,7 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class CreateCommitRequest {
     /**
-    * Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50.
+    * Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard, an Answer, or a table, Model, view or SQL view. An object named more than once is versioned once. A run carries at most 50.
     */
     'objects': Array<VersionControlCommitObjectInput>;
     /**

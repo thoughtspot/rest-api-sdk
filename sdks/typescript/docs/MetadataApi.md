@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**buildMetadataIndex**](MetadataApi.md#buildMetadataIndex) | **POST** /api/rest/2.0/metadata/{logical_table_identifier}/build-index | 
 [**convertWorksheetToModel**](MetadataApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert | 
 [**copyObject**](MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject | 
 [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete | 
@@ -12,6 +13,8 @@ Method | HTTP request | Description
 [**fetchAnswerSqlQuery**](MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql | 
 [**fetchAsyncImportTaskStatus**](MetadataApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status | 
 [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql | 
+[**fetchMetadataSearchReadiness**](MetadataApi.md#fetchMetadataSearchReadiness) | **GET** /api/rest/2.0/metadata/{guid}/search-readiness | 
+[**fetchSqlQuery**](MetadataApi.md#fetchSqlQuery) | **POST** /api/rest/2.0/metadata/sql/fetch | 
 [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import | 
 [**importMetadataTMLAsync**](MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import | 
 [**parameterizeMetadata**](MetadataApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize | 
@@ -21,6 +24,71 @@ Method | HTTP request | Description
 [**updateMetadataHeader**](MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update | 
 [**updateMetadataObjId**](MetadataApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id | 
 
+
+# **buildMetadataIndex**
+> void buildMetadataIndex(buildMetadataIndexRequest)
+
+  Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn\'t been indexed yet is picked up by the next scheduled indexing run instead.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, BuildMetadataIndexRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.buildMetadataIndex(
+  // string | GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.
+  "logical_table_identifier_example" , 
+  // BuildMetadataIndexRequest
+  {
+    org_identifier: "org_identifier_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **buildMetadataIndexRequest** | **BuildMetadataIndexRequest**|  |
+ **logicalTableIdentifier** | [**string**] | GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Reindex of the logical table is queued and will run in the background. |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **convertWorksheetToModel**
 > ResponseWorksheetToModelConversion convertWorksheetToModel(convertWorksheetToModelRequest)
@@ -542,6 +610,132 @@ apiInstance.fetchLiveboardSqlQuery(
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fetchLiveboardSqlQueryRequest** | **FetchLiveboardSqlQueryRequest**|  |
+
+
+### Return type
+
+**SqlQueryResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Fetching SQL query of specified metadata object is successful. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **fetchMetadataSearchReadiness**
+> MetadataSearchReadinessResponse fetchMetadataSearchReadiness()
+
+  Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object\'s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the `guid` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).  The response `state` is one of the following:  * `OBJECT_READY` - The object\'s latest version is available in Search. * `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked. * `OBJECT_NOT_VALID` - `guid` is not a valid GUID, or no object with that GUID exists.  The response also includes `object_version`, the metadata version at which the object was last written, and `indexed_version`, the latest metadata version indexed by Search. The object is ready once `indexed_version` is greater than or equal to `object_version`.       
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, FetchMetadataSearchReadinessRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.fetchMetadataSearchReadiness(
+  // string | GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.
+  "guid_example" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **guid** | [**string**] | GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. | defaults to undefined
+
+
+### Return type
+
+**MetadataSearchReadinessResponse**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns the search readiness state of the object. |  -  |
+**400** | Invalid request. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **fetchSqlQuery**
+> SqlQueryResponse fetchSqlQuery(fetchSqlQueryRequest)
+
+  Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in `metadata` that the type of the object uses:  | `metadata.type` | Fields in `metadata` | Object | | --- | --- | --- | | `ANSWER` | `identifier` | Saved Answer | | `ANSWER` | `tml` | Unsaved Answer, sent as Answer TML | | `LIVEBOARD` | `identifier`, optional `visualization_identifiers` | Saved Liveboard | | `LOGICAL_TABLE` | `identifier` (Model, View, or Table) | Search query on a data source; also set `query_string` |  `metadata.type` is optional. It is required if `identifier` is a name. If it is not set, the type is taken from the request, in this order: `tml` means `ANSWER`, `query_string` means `LOGICAL_TABLE`, and a GUID in `identifier` means the type of that object.  `query_string` is a top-level parameter. It holds the search tokens to apply on the data source. It is required with `LOGICAL_TABLE` and not supported with other types.  The runtime overrides `runtime_filter`, `runtime_sort`, and `runtime_param_override` are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and `LOGICAL_TABLE`, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with `tml`: set the filters and parameter values in the TML instead.  The API returns a 400 error if `metadata` is missing a field that its type requires or contains a field that its type does not use, if `query_string` is missing with `LOGICAL_TABLE` or set with another type, or if a runtime override is set with `tml`.  #### Required access  - Saved Answer and `LIVEBOARD`: at least view access to the object. - Unsaved Answer and `LOGICAL_TABLE`: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required.  #### Usage guidelines  - `LIVEBOARD`: if `visualization_identifiers` is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in `tml`, with `type` set to `ANSWER` or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - `LOGICAL_TABLE`: pass the search tokens in `query_string`. The SQL is generated for the table visualization of the search and has no `LIMIT` or `OFFSET` clause. `metadata_id` in the response is the GUID of the data source, `metadata_name` is the query string, and `metadata_type` is `LOGICAL_TABLE`. To get the data and the SQL in one call, use the searchData API with `include_sql_query` set to `true`.  Example request for a search query: ``` {    \"metadata\":{       \"type\":\"LOGICAL_TABLE\",       \"identifier\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\"    },    \"query_string\":\"[sales] [region]\",    \"runtime_filter\":{\"col1\":\"region\",\"op1\":\"EQ\",\"val1\":\"West\"} } ```  Upon successful execution, the API returns the SQL query as shown in this example: ``` {    \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",    \"metadata_name\":\"[sales] [region]\",    \"metadata_type\":\"LOGICAL_TABLE\",    \"sql_queries\":[       {          \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",          \"metadata_name\":\"[sales] [region]\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nWHERE \\\"ta_1\\\".\\\"REGION\\\" = \'West\'\\nGROUP BY \\\"ca_1\\\"\"       }    ] } ```      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, MetadataApi, FetchSqlQueryRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new MetadataApi(configuration);
+
+apiInstance.fetchSqlQuery(
+  // FetchSqlQueryRequest
+  {
+    metadata: null,
+    query_string: "query_string_example",
+    runtime_filter: null,
+    runtime_sort: null,
+    runtime_param_override: null,
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fetchSqlQueryRequest** | **FetchSqlQueryRequest**|  |
 
 
 ### Return type

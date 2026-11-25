@@ -426,7 +426,25 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CANCREATEMUZESTUDIOTEMPLATES for value: CAN_CREATE_MUZE_STUDIO_TEMPLATES
             /// </summary>
             [EnumMember(Value = "CAN_CREATE_MUZE_STUDIO_TEMPLATES")]
-            CANCREATEMUZESTUDIOTEMPLATES = 65
+            CANCREATEMUZESTUDIOTEMPLATES = 65,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTAGENTS for value: CAN_CREATE_AGENTSPOT_AGENTS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_AGENTS")]
+            CANCREATEAGENTSPOTAGENTS = 66,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTAPPS for value: CAN_CREATE_AGENTSPOT_APPS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_APPS")]
+            CANCREATEAGENTSPOTAPPS = 67,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTWORKFLOWS for value: CAN_CREATE_AGENTSPOT_WORKFLOWS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_WORKFLOWS")]
+            CANCREATEAGENTSPOTWORKFLOWS = 68
         }
 
         /// <summary>

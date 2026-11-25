@@ -10,6 +10,7 @@ All URIs are relative to *https://localhost:443*
 | [**DeleteAnalyst**](AIApi.md#deleteanalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |  |
 | [**DeleteConversation**](AIApi.md#deleteconversation) | **DELETE** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/delete |  |
 | [**DeleteUsageData**](AIApi.md#deleteusagedata) | **POST** /api/rest/2.0/ai/usage-data/delete |  |
+| [**ExportContext**](AIApi.md#exportcontext) | **POST** /api/rest/2.0/ai/context/export |  |
 | [**ExportMemory**](AIApi.md#exportmemory) | **POST** /api/rest/2.0/ai/memory/export |  |
 | [**GetAgentInstructions**](AIApi.md#getagentinstructions) | **GET** /api/rest/2.0/ai/agent/instructions/get |  |
 | [**GetConversation**](AIApi.md#getconversation) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/messages |  |
@@ -20,6 +21,7 @@ All URIs are relative to *https://localhost:443*
 | [**GetShareInfo**](AIApi.md#getshareinfo) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info |  |
 | [**GetSharedContent**](AIApi.md#getsharedcontent) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content |  |
 | [**GetUsageDataForUser**](AIApi.md#getusagedataforuser) | **GET** /api/rest/2.0/ai/usage-data/user |  |
+| [**ImportContext**](AIApi.md#importcontext) | **POST** /api/rest/2.0/ai/context/import |  |
 | [**ImportMemory**](AIApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
 | [**LoadAnswer**](AIApi.md#loadanswer) | **GET** /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/answers/{answer_identifier}/details |  |
 | [**QueryGetDecomposedQuery**](AIApi.md#querygetdecomposedquery) | **POST** /api/rest/2.0/ai/analytical-questions |  |
@@ -620,6 +622,107 @@ catch (ApiException e)
 ### Return type
 
 [**DeleteUsageDataResponse**](DeleteUsageDataResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="exportcontext"></a>
+# **ExportContext**
+> ExportContextResponse ExportContext (ExportContextRequest exportContextRequest)
+
+
+
+ Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter's context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the `importContext` API in the target.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - `model_identifiers`: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - `analyst_identifiers`: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - `include_analyst_models`: when `true`, also selects every model the selected analysts use. - `include_org_level_context`: when `true`, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - `export_all_org_context`: when `true`, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - `content`: the YAML file. Pass it to `importContext` as is or after editing. - `summary`: what the file holds per owner, each entry with its `scope` and `exported_count`. The `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With `export_all_org_context`, only the owners that have context have an entry. - `additional_model_identifiers` and `additional_analyst_identifiers`: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn't replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in `additional_model_identifiers`.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in `additional_analyst_identifiers`.   - With `include_analyst_models`, analyst A's models are selected. A metric scoped to A's model M1 and to model M3, which A doesn't use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With `include_analyst_models`, the file lists the models the analysts use in the source, and the import replaces those models' context even if the analysts use other models in the target. - With `export_all_org_context`, the import replaces all of the target Org's context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model's own context also applies inside every analyst that uses it, so replacing it changes those analysts' answers too; the import's dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — nothing is selected, `export_all_org_context` is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn't use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn't have Spotter access, or doesn't have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ExportContextExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var exportContextRequest = new ExportContextRequest(); // ExportContextRequest | 
+
+            try
+            {
+                ExportContextResponse result = apiInstance.ExportContext(exportContextRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.ExportContext: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ExportContextWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ExportContextResponse> response = apiInstance.ExportContextWithHttpInfo(exportContextRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.ExportContextWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **exportContextRequest** | [**ExportContextRequest**](ExportContextRequest.md) |  |  |
+
+### Return type
+
+[**ExportContextResponse**](ExportContextResponse.md)
 
 ### Authorization
 
@@ -1639,6 +1742,107 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="importcontext"></a>
+# **ImportContext**
+> ImportContextResponse ImportContext (ImportContextRequest importContextRequest)
+
+
+
+ Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file's entities with new IDs, then deletes the rest of that context. Run with `dry_run` set to `true` first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the `exportContext` API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with `dry_run` set to `true` first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  A scope you can't write is reported as an `ACCESS_DENIED` validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - `content`: the YAML file, typically the `content` returned by `exportContext`, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - `dry_run`: required, with no default. `true` validates the file and previews the changes; `false` applies them.  An import is a full replace. The file's entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - `status`: `SUCCESS` (in a dry run, the preview is complete), `VALIDATION_FAILED` (the file has problems, listed in `validation_failures`; nothing was written) or `FAILED` (a valid file hit a server error; see `diagnostics`). - `summary`: per owner, the entities before the import (`existing_record_count`), deleted and inserted. Previews in a dry run. Each entry's `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - `validation_failures`: every problem in the file, each with its `line_number`, `entity_key`, `field_name`, `reason` and `message`, so you can fix the file in one pass. - `diagnostics`: warnings and failure causes, grouped by `sub_status` (`WARNING`, `FAILURE` or `ROLLED_BACK`). Warnings include a selected model or analyst left with no context, an analyst's context deleted on a model the file doesn't name, analysts outside the selection whose answers change through a replaced model's context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - `operation_id`: include it when contacting support.  #### What is replaced  Only the file's selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1's own context and all of A's context, including A's context on models the file never names. It keeps analyst B's context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file's `selection`, the `models` and `analysts` it refers to by alias, and its `entities`:  ```yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. ```  The identifiers in the file are for reference only and aren't stored as written:  - Entity `id`s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (`gtm`, `sales`) only link the entities' scopes to the `models` and `analysts` entries. - The `guid`, `obj_id`, `id` and `name` values under `models` and `analysts` are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target's own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |- -- -- -- -|- -- -- -- --| | `SCHEMA` | The YAML is invalid, or has an unknown field or a bad value. | | `VALIDATION` | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | `CHAR_LIMIT` | A field is longer than its limit. | | `CHAR_BUDGET` | A scope's non-semantic instructions or guardrails together exceed their character budget. | | `SCOPE` | An entity is outside the file's selection, is personal context, or names a model that isn't one of its analyst's models. | | `UNRESOLVED_SOURCE` | A model or analyst isn't found in this environment. | | `UNRESOLVED_COLUMN` | A column isn't found by name in its model. | | `UNRESOLVED_REFERENCE` | A reference or relationship names an entity key that isn't in the file. | | `INVALID_RELATIONSHIP` | A relationship isn't allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | `ACCESS_DENIED` | You can't write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |- -- -- --|- -- -- --|- -- -- -- -- -- -| | File size | 10 MiB | A `400` error, before the file is validated | | Entities per file | 10,000 | `VALIDATION` | | Title of an entity | 120 characters | `CHAR_LIMIT` | | Any other text field of an entity | 4,000 characters | `CHAR_LIMIT` | | `NON_SEMANTIC_INSTRUCTION` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | `GUARDRAIL` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | Depth of a chain of relationships | 10 | `INVALID_RELATIONSHIP` |  A `DATA_GUIDE` entity must also name at least one model and no analyst; otherwise it fails with `SCOPE`.  #### Error responses  Problems in the file are not errors: the call returns `200` with `VALIDATION_FAILED`, and the details are in `validation_failures`.  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — `dry_run` is missing, the file is over 10 MiB, or the Org doesn't use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn't have Spotter access. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Important: > Never run with `dry_run` set to `false` without first checking a dry run. A real import deletes and replaces the context the file's selection covers.  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ImportContextExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new AIApi(httpClient, config, httpClientHandler);
+            var importContextRequest = new ImportContextRequest(); // ImportContextRequest | 
+
+            try
+            {
+                ImportContextResponse result = apiInstance.ImportContext(importContextRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.ImportContext: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ImportContextWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ImportContextResponse> response = apiInstance.ImportContextWithHttpInfo(importContextRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.ImportContextWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **importContextRequest** | [**ImportContextRequest**](ImportContextRequest.md) |  |  |
+
+### Return type
+
+[**ImportContextResponse**](ImportContextResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 

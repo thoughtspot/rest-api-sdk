@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.thoughtspot.client.model.BuildMetadataIndexRequest;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
@@ -28,10 +29,12 @@ import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
 import com.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
+import com.thoughtspot.client.model.FetchSqlQueryRequest;
 import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
 import com.thoughtspot.client.model.ImportMetadataTMLRequest;
+import com.thoughtspot.client.model.MetadataSearchReadinessResponse;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.ParameterizeMetadataFieldsRequest;
 import com.thoughtspot.client.model.ParameterizeMetadataRequest;
@@ -107,6 +110,155 @@ public class MetadataApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    /**
+     * Build call for buildMetadataIndex
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call buildMetadataIndexCall(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = buildMetadataIndexRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/{logical_table_identifier}/build-index"
+            .replace("{" + "logical_table_identifier" + "}", localVarApiClient.escapeString(logicalTableIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call buildMetadataIndexValidateBeforeCall(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'logicalTableIdentifier' is set
+        if (logicalTableIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'logicalTableIdentifier' when calling buildMetadataIndex(Async)");
+        }
+
+        // verify the required parameter 'buildMetadataIndexRequest' is set
+        if (buildMetadataIndexRequest == null) {
+            throw new ApiException("Missing the required parameter 'buildMetadataIndexRequest' when calling buildMetadataIndex(Async)");
+        }
+
+        return buildMetadataIndexCall(logicalTableIdentifier, buildMetadataIndexRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void buildMetadataIndex(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest) throws ApiException {
+        buildMetadataIndexWithHttpInfo(logicalTableIdentifier, buildMetadataIndexRequest);
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> buildMetadataIndexWithHttpInfo(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest) throws ApiException {
+        okhttp3.Call localVarCall = buildMetadataIndexValidateBeforeCall(logicalTableIdentifier, buildMetadataIndexRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call buildMetadataIndexAsync(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = buildMetadataIndexValidateBeforeCall(logicalTableIdentifier, buildMetadataIndexRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
     /**
      * Build call for convertWorksheetToModel
      * @param convertWorksheetToModelRequest  (required)
@@ -1247,6 +1399,292 @@ public class MetadataApi {
     public okhttp3.Call fetchLiveboardSqlQueryAsync(FetchLiveboardSqlQueryRequest fetchLiveboardSqlQueryRequest, final ApiCallback<SqlQueryResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = fetchLiveboardSqlQueryValidateBeforeCall(fetchLiveboardSqlQueryRequest, _callback);
+        Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for fetchMetadataSearchReadiness
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchMetadataSearchReadinessCall(String guid, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/{guid}/search-readiness"
+            .replace("{" + "guid" + "}", localVarApiClient.escapeString(guid.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchMetadataSearchReadinessValidateBeforeCall(String guid, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'guid' is set
+        if (guid == null) {
+            throw new ApiException("Missing the required parameter 'guid' when calling fetchMetadataSearchReadiness(Async)");
+        }
+
+        return fetchMetadataSearchReadinessCall(guid, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @return MetadataSearchReadinessResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public MetadataSearchReadinessResponse fetchMetadataSearchReadiness(String guid) throws ApiException {
+        ApiResponse<MetadataSearchReadinessResponse> localVarResp = fetchMetadataSearchReadinessWithHttpInfo(guid);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @return ApiResponse&lt;MetadataSearchReadinessResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<MetadataSearchReadinessResponse> fetchMetadataSearchReadinessWithHttpInfo(String guid) throws ApiException {
+        okhttp3.Call localVarCall = fetchMetadataSearchReadinessValidateBeforeCall(guid, null);
+        Type localVarReturnType = new TypeToken<MetadataSearchReadinessResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchMetadataSearchReadinessAsync(String guid, final ApiCallback<MetadataSearchReadinessResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = fetchMetadataSearchReadinessValidateBeforeCall(guid, _callback);
+        Type localVarReturnType = new TypeToken<MetadataSearchReadinessResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for fetchSqlQuery
+     * @param fetchSqlQueryRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchSqlQueryCall(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fetchSqlQueryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/sql/fetch";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchSqlQueryValidateBeforeCall(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'fetchSqlQueryRequest' is set
+        if (fetchSqlQueryRequest == null) {
+            throw new ApiException("Missing the required parameter 'fetchSqlQueryRequest' when calling fetchSqlQuery(Async)");
+        }
+
+        return fetchSqlQueryCall(fetchSqlQueryRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @return SqlQueryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public SqlQueryResponse fetchSqlQuery(FetchSqlQueryRequest fetchSqlQueryRequest) throws ApiException {
+        ApiResponse<SqlQueryResponse> localVarResp = fetchSqlQueryWithHttpInfo(fetchSqlQueryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @return ApiResponse&lt;SqlQueryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<SqlQueryResponse> fetchSqlQueryWithHttpInfo(FetchSqlQueryRequest fetchSqlQueryRequest) throws ApiException {
+        okhttp3.Call localVarCall = fetchSqlQueryValidateBeforeCall(fetchSqlQueryRequest, null);
+        Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchSqlQueryAsync(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback<SqlQueryResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = fetchSqlQueryValidateBeforeCall(fetchSqlQueryRequest, _callback);
         Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

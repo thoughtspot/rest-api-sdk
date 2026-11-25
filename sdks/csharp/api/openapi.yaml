@@ -2543,6 +2543,266 @@ paths:
       - AI Management
       - AI
       - ThoughtSpotRest
+  /api/rest/2.0/ai/context/export:
+    post:
+      description: "\nExports the context that a selection of models, Spotter analysts\
+        \ and\norg-level context covers, as a YAML file to edit and import into another\n\
+        environment with importContext.\nRequires Spotter access and the right to\
+        \ write each selected scope: on each\nmodel, edit access, or view access together\
+        \ with the `CAN_MANAGE_SPOTTER`\nprivilege or the `SPOTTER_COACHING_PRIVILEGE`\
+        \ on that model; on each\nSpotter analyst, having created it, having it shared\
+        \ with you in `MODIFY`\nmode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER`\
+        \ privilege\ntogether with view access to it; and the `ADMINISTRATION` privilege\
+        \ for\norg-level and all-org context. \n  Version: 27.1.0.cl or later\n\n\n\
+        Exports Spotter's context for a selection of models, Spotter analysts and\
+        \ org-level context as a single YAML file. Context is the knowledge Spotter\
+        \ uses to answer questions: metrics, business definitions, answer plans, instructions,\
+        \ guardrails and data guides.\n\nUse it to move context between environments,\
+        \ for example from development to production: export from the source, edit\
+        \ the file if needed, and pass it to the `importContext` API in the target.\n\
+        \nRequires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER`\
+        \ privilege. You also need the right to write each selected scope:\n\n- Each\
+        \ model: edit access, or view access together with the `CAN_MANAGE_SPOTTER`\
+        \ privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model.\n- Each Spotter\
+        \ analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode`\
+        \ of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or\
+        \ you have the `CAN_MANAGE_SPOTTER` privilege together with view access to\
+        \ it.\n- Org-level context or the whole Org: the `ADMINISTRATION` privilege.\n\
+        \nUse a bearer token for the Org whose context you are exporting.\n\n####\
+        \ Usage guidelines\n\nSelect what to export with any combination of these\
+        \ fields. A request that selects nothing is rejected, and so is one whose\
+        \ selection covers no context, since the file would have nothing to import.\n\
+        \n- `model_identifiers`: GUIDs or obj_ids of models. Exports the context each\
+        \ model owns: entities scoped to that model alone, or to several models that\
+        \ are all selected.\n- `analyst_identifiers`: IDs of Spotter analysts. Exports\
+        \ every entity that names only selected analysts, including entities that\
+        \ also name models.\n- `include_analyst_models`: when `true`, also selects\
+        \ every model the selected analysts use.\n- `include_org_level_context`: when\
+        \ `true`, also selects the org-level context, which names no model and no\
+        \ analyst and applies to every question in the Org.\n- `export_all_org_context`:\
+        \ when `true`, selects everything in the Org. Use it on its own, without the\
+        \ other fields.\n\nEvery kind of context entity is always included; there\
+        \ is no filter by type. Personal context that a user saved for themselves\
+        \ is never exported.\n\nThe response contains:\n\n- `content`: the YAML file.\
+        \ Pass it to `importContext` as is or after editing.\n- `summary`: what the\
+        \ file holds per owner, each entry with its `scope` and `exported_count`.\
+        \ The `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers`\
+        \ of the models or analysts, empty for `ORG`. Every selected model and analyst\
+        \ has an entry, even with a count of 0, and so does the Org when org-level\
+        \ context is selected. With `export_all_org_context`, only the owners that\
+        \ have context have an entry.\n- `additional_model_identifiers` and `additional_analyst_identifiers`:\
+        \ context that a selected model or analyst shares with models or analysts\
+        \ outside the selection is left out of the file, because importing this selection\
+        \ wouldn't replace it. These lists name those other models and analysts: add\
+        \ them to the selection and export again to include that context. Empty when\
+        \ nothing was left out. For example:\n  - A metric scoped to models M1 and\
+        \ M2 belongs to both. Selecting only M1 leaves it out and lists M2 in `additional_model_identifiers`.\n\
+        \  - An instruction scoped to analysts A and B belongs to both. Selecting\
+        \ only A leaves it out and lists B in `additional_analyst_identifiers`.\n\
+        \  - With `include_analyst_models`, analyst A's models are selected. A metric\
+        \ scoped to A's model M1 and to model M3, which A doesn't use, is left out,\
+        \ and M3 is listed.\n\n#### What an import of this file replaces\n\nThe file\
+        \ records its selection. Importing it replaces exactly the context that selection\
+        \ covers in the target, and nothing else:\n\n- With `include_analyst_models`,\
+        \ the file lists the models the analysts use in the source, and the import\
+        \ replaces those models' context even if the analysts use other models in\
+        \ the target.\n- With `export_all_org_context`, the import replaces all of\
+        \ the target Org's context, including context on models and analysts that\
+        \ exist only in the target.\n\nContext of other analysts on a selected model\
+        \ is kept. A model's own context also applies inside every analyst that uses\
+        \ it, so replacing it changes those analysts' answers too; the import's dry\
+        \ run lists them.\n\n#### Limits\n\nAn export fails rather than truncating\
+        \ when the selection is over the limits: 10,000 entities or a 10 MiB file.\
+        \ Export a smaller selection instead.\n\n#### Error responses\n\n| Code |\
+        \ Description |\n|------|-------------|\n| 400  | Bad request — nothing is\
+        \ selected, `export_all_org_context` is combined with other fields, a model\
+        \ or analyst is unknown, the selection covers no context, the Org doesn't\
+        \ use the context layer, or the selection is over the export limits. |\n|\
+        \ 401  | Unauthorized — authentication token is missing, expired, or invalid.\
+        \ |\n| 403  | Forbidden — the user doesn't have Spotter access, or doesn't\
+        \ have the right to write a selected model, analyst, org-level context or\
+        \ the whole Org, as listed above. |\n| 500  | Unexpected error — include the\
+        \ `incident_id_guid` from the error response when contacting support. |\n\n\
+        > ###### Note:\n> - Available from version 27.1.0.cl and later, for Orgs that\
+        \ use the context layer. Orgs that store Spotter memory instead use the `exportMemory`\
+        \ and `importMemory` APIs.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: exportContext
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExportContextRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: The exported YAML file and what it holds per owner
+                  value:
+                    content: |
+                      selection: { models: [gtm] }
+                      models:
+                        gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }
+                      entities:
+                      - id: ctx_2a7c11
+                        type: BUSINESS_DEFINITION
+                        title: Region
+                        scope: { models: [gtm] }
+                        definition: Region means sales territory, not billing country.
+                      - id: ctx_8f2a61
+                        type: METRIC
+                        title: ARR
+                        scope: { models: [gtm] }
+                        expression:
+                          formula: sum ( [Contract Value] ) where [Recurring] = 'true'
+                          columns: { gtm: [Contract Value, Recurring] }
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      exported_count: 2
+                    additional_model_identifiers: []
+                    additional_analyst_identifiers: []
+                example_2:
+                  summary: "An analyst with its model and the org-level context: the\
+                    \ Org has an entry with no identifiers, here with no org-level\
+                    \ context to export"
+                  value:
+                    content: |
+                      selection: { models: [gtm], analysts: [sales], org_level_context: true }
+                      models:
+                        gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }
+                      analysts:
+                        sales: { id: 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b, name: Sales analyst }
+                      entities:
+                      - id: ctx_2a7c11
+                        type: BUSINESS_DEFINITION
+                        title: Region
+                        scope: { models: [gtm] }
+                        definition: Region means sales territory, not billing country.
+                      - id: ctx_51c3d0
+                        type: NON_SEMANTIC_INSTRUCTION
+                        title: Answer format
+                        scope: { analysts: [sales] }
+                        instruction: Lead with a short table, then one sentence.
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      exported_count: 1
+                    - scope:
+                        type: ANALYST
+                        identifiers:
+                        - 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b
+                      exported_count: 1
+                    - scope:
+                        type: ORG
+                        identifiers: []
+                      exported_count: 0
+                    additional_model_identifiers: []
+                    additional_analyst_identifiers: []
+                example_3:
+                  summary: "A model and an analyst, with context left out because\
+                    \ a selected model shares it with an unselected one"
+                  value:
+                    content: |
+                      selection: { models: [gtm], analysts: [sales] }
+                      models:
+                        gtm: { guid: 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c, obj_id: gtm_model }
+                      analysts:
+                        sales: { id: 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b, name: Sales analyst }
+                      entities:
+                      - id: ctx_2a7c11
+                        type: BUSINESS_DEFINITION
+                        title: Region
+                        scope: { models: [gtm] }
+                        definition: Region means sales territory, not billing country.
+                      - id: ctx_51c3d0
+                        type: NON_SEMANTIC_INSTRUCTION
+                        title: Answer format
+                        scope: { analysts: [sales] }
+                        instruction: Lead with a short table, then one sentence.
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      exported_count: 1
+                    - scope:
+                        type: ANALYST
+                        identifiers:
+                        - 9b7d41c0-1c2d-4e5f-8a9b-0c1d2e3f4a5b
+                      exported_count: 1
+                    additional_model_identifiers:
+                    - 7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d
+                    additional_analyst_identifiers: []
+              schema:
+                $ref: "#/components/schemas/ExportContextResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportContextResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              examples:
+                no_rights_on_model:
+                  summary: No right to write a selected model
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 2104
+                          incident_id_guid: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                          trace_id_guid: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                          debug: "[\"no edit rights on data model 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c\"\
+                            ]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              examples:
+                no_rights_on_model:
+                  summary: No right to write a selected model
+                  value:
+                    error:
+                      message:
+                        debug:
+                          code: 2104
+                          incident_id_guid: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                          trace_id_guid: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                          debug: "[\"no edit rights on data model 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c\"\
+                            ]"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI Management
+      - AI
+      - ThoughtSpotRest
   /api/rest/2.0/ai/memory/export:
     post:
       description: "\nExports memory entries (rules, recipes, and always-apply rules)\
@@ -3858,6 +4118,248 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UsageDataForUserResponse"
+          description: Common error response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - AI Management
+      - AI
+      - ThoughtSpotRest
+  /api/rest/2.0/ai/context/import:
+    post:
+      description: "\nImports a YAML file of context, usually from exportContext,\
+        \ and replaces\nthe context its selection covers in this environment: it inserts\
+        \ the file's\nentities with new IDs, then deletes the rest of that context.\
+        \ Run with\n`dry_run` set to `true` first to validate the file and preview\
+        \ the changes.\nRequires Spotter access and the right to write every scope\
+        \ in the file: on\neach model, edit access, or view access together with the\n\
+        `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that\n\
+        model; on each Spotter analyst, having created it, having it shared with\n\
+        you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the\n`CAN_MANAGE_SPOTTER`\
+        \ privilege together with view access to it; and the\n`ADMINISTRATION` privilege\
+        \ for org-level and all-org context. \n  Version: 27.1.0.cl or later\n\n\n\
+        Imports a YAML file of Spotter context, usually one produced by the `exportContext`\
+        \ API, and replaces the context its selection covers in this environment.\
+        \ Context is the knowledge Spotter uses to answer questions: metrics, business\
+        \ definitions, answer plans, instructions, guardrails and data guides.\n\n\
+        Use it to move context between environments, for example from development\
+        \ to production. Always run it with `dry_run` set to `true` first: the dry\
+        \ run validates the whole file and shows what the import would delete and\
+        \ insert, without writing anything.\n\nRequires Spotter access: the `ADMINISTRATION`,\
+        \ `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right\
+        \ to write every scope in the file:\n\n- Each model: edit access, or view\
+        \ access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE`\
+        \ on that model.\n- Each Spotter analyst: you created it, it is shared with\
+        \ you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have\
+        \ the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege\
+        \ together with view access to it.\n- Org-level context or the whole Org:\
+        \ the `ADMINISTRATION` privilege.\n\nA scope you can't write is reported as\
+        \ an `ACCESS_DENIED` validation failure. Use a bearer token for the Org you\
+        \ are importing into.\n\n#### Usage guidelines\n\nThe request must include:\n\
+        \n- `content`: the YAML file, typically the `content` returned by `exportContext`,\
+        \ as is or edited. The file names its own selection, so no other identifiers\
+        \ are needed. Up to 10 MiB.\n- `dry_run`: required, with no default. `true`\
+        \ validates the file and previews the changes; `false` applies them.\n\nAn\
+        \ import is a full replace. The file's entities are inserted as new entities\
+        \ with new IDs, then everything else its selection covers is deleted. Nothing\
+        \ outside the selection changes, except that an entity outside it can gain\
+        \ a relationship the file lists.\n\nThe response contains:\n\n- `status`:\
+        \ `SUCCESS` (in a dry run, the preview is complete), `VALIDATION_FAILED` (the\
+        \ file has problems, listed in `validation_failures`; nothing was written)\
+        \ or `FAILED` (a valid file hit a server error; see `diagnostics`).\n- `summary`:\
+        \ per owner, the entities before the import (`existing_record_count`), deleted\
+        \ and inserted. Previews in a dry run. Each entry's `scope` has a `type` (`DATA_MODEL`,\
+        \ `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty\
+        \ for `ORG`. Every selected model and analyst has an entry, and so does the\
+        \ Org when the file selects org-level context. When the file selects the whole\
+        \ Org, only the owners with context in this environment or in the file have\
+        \ an entry.\n- `validation_failures`: every problem in the file, each with\
+        \ its `line_number`, `entity_key`, `field_name`, `reason` and `message`, so\
+        \ you can fix the file in one pass.\n- `diagnostics`: warnings and failure\
+        \ causes, grouped by `sub_status` (`WARNING`, `FAILURE` or `ROLLED_BACK`).\
+        \ Warnings include a selected model or analyst left with no context, an analyst's\
+        \ context deleted on a model the file doesn't name, analysts outside the selection\
+        \ whose answers change through a replaced model's context, and entities outside\
+        \ the import whose references or relationships into the replaced context break,\
+        \ because the entities they point at get new IDs.\n- `operation_id`: include\
+        \ it when contacting support.\n\n#### What is replaced\n\nOnly the file's\
+        \ selection decides what is replaced; the entities in the file neither widen\
+        \ nor narrow it. Each entity belongs to exactly one owner, decided by the\
+        \ names in its scope:\n\n- An entity that names analysts belongs to those\
+        \ analysts.\n- Otherwise, an entity that names models belongs to those models.\n\
+        - Otherwise, it is org-level context.\n\nAn entity is replaced when the selection\
+        \ includes every part of its owner. For example, a file that selects analyst\
+        \ A and model M1 replaces M1's own context and all of A's context, including\
+        \ A's context on models the file never names. It keeps analyst B's context\
+        \ on M1, and entities that also name an unselected model or analyst.\n\n####\
+        \ File format\n\nThe file is YAML with the file's `selection`, the `models`\
+        \ and `analysts` it refers to by alias, and its `entities`:\n\n```yaml\nselection:\
+        \ { models: [gtm], analysts: [sales] }\nmodels:\n  gtm: { guid: 3f1c0e2a-…\
+        , obj_id: gtm_model }    # used to find the model; not stored\nanalysts:\n\
+        \  sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst;\
+        \ not stored\nentities:\n- id: ctx_2a7c11                                \
+        \ # a key within this file; not stored\n  type: BUSINESS_DEFINITION\n  title:\
+        \ Region\n  scope: { models: [gtm] }\n  definition: Region means sales territory,\
+        \ not billing country.\n- id: ctx_51c3d0\n  type: NON_SEMANTIC_INSTRUCTION\n\
+        \  title: Answer format\n  scope: { analysts: [sales] }\n  instruction: Lead\
+        \ with a short table, then one sentence.\n```\n\nThe identifiers in the file\
+        \ are for reference only and aren't stored as written:\n\n- Entity `id`s are\
+        \ keys within the file, which references and relationships use to point at\
+        \ each other. The target gives every entity a new ID.\n- The aliases (`gtm`,\
+        \ `sales`) only link the entities' scopes to the `models` and `analysts` entries.\n\
+        - The `guid`, `obj_id`, `id` and `name` values under `models` and `analysts`\
+        \ are only used to find each model and analyst in the target: models by obj_id,\
+        \ then by GUID; analysts by ID, then by name. Stored context points at the\
+        \ target's own objects.\n\n#### Validations\n\nThe whole file is validated\
+        \ before anything is written, in a dry run and a real import alike. If anything\
+        \ fails, nothing is written and every failure is returned together.\n\nEach\
+        \ failure has one of these reasons:\n\n| Reason | Meaning |\n|--------|---------|\n\
+        | `SCHEMA` | The YAML is invalid, or has an unknown field or a bad value.\
+        \ |\n| `VALIDATION` | A required field is missing, a key is duplicated, the\
+        \ file has no entities, or a limit is passed. |\n| `CHAR_LIMIT` | A field\
+        \ is longer than its limit. |\n| `CHAR_BUDGET` | A scope's non-semantic instructions\
+        \ or guardrails together exceed their character budget. |\n| `SCOPE` | An\
+        \ entity is outside the file's selection, is personal context, or names a\
+        \ model that isn't one of its analyst's models. |\n| `UNRESOLVED_SOURCE` |\
+        \ A model or analyst isn't found in this environment. |\n| `UNRESOLVED_COLUMN`\
+        \ | A column isn't found by name in its model. |\n| `UNRESOLVED_REFERENCE`\
+        \ | A reference or relationship names an entity key that isn't in the file.\
+        \ |\n| `INVALID_RELATIONSHIP` | A relationship isn't allowed between those\
+        \ kinds of entity, forms a loop, or is part of a chain deeper than 10. |\n\
+        | `ACCESS_DENIED` | You can't write a scope the file involves. |\n\n#### Limits\n\
+        \nThe current limits, and what a file over each one fails with:\n\n| Limit\
+        \ | Value | Fails with |\n|-------|-------|------------|\n| File size | 10\
+        \ MiB | A `400` error, before the file is validated |\n| Entities per file\
+        \ | 10,000 | `VALIDATION` |\n| Title of an entity | 120 characters | `CHAR_LIMIT`\
+        \ |\n| Any other text field of an entity | 4,000 characters | `CHAR_LIMIT`\
+        \ |\n| `NON_SEMANTIC_INSTRUCTION` entities of one scope, combined | 2,000\
+        \ characters | `CHAR_BUDGET` |\n| `GUARDRAIL` entities of one scope, combined\
+        \ | 2,000 characters | `CHAR_BUDGET` |\n| Depth of a chain of relationships\
+        \ | 10 | `INVALID_RELATIONSHIP` |\n\nA `DATA_GUIDE` entity must also name\
+        \ at least one model and no analyst; otherwise it fails with `SCOPE`.\n\n\
+        #### Error responses\n\nProblems in the file are not errors: the call returns\
+        \ `200` with `VALIDATION_FAILED`, and the details are in `validation_failures`.\n\
+        \n| Code | Description |\n|------|-------------|\n| 400  | Bad request — `dry_run`\
+        \ is missing, the file is over 10 MiB, or the Org doesn't use the context\
+        \ layer. |\n| 401  | Unauthorized — authentication token is missing, expired,\
+        \ or invalid. |\n| 403  | Forbidden — the user doesn't have Spotter access.\
+        \ |\n| 500  | Unexpected error — include the `incident_id_guid` from the error\
+        \ response when contacting support. |\n\n> ###### Important:\n> Never run\
+        \ with `dry_run` set to `false` without first checking a dry run. A real import\
+        \ deletes and replaces the context the file's selection covers.\n\n> ######\
+        \ Note:\n> - Available from version 27.1.0.cl and later, for Orgs that use\
+        \ the context layer. Orgs that store Spotter memory instead use the `exportMemory`\
+        \ and `importMemory` APIs.\n> - This endpoint requires Spotter — please contact\
+        \ ThoughtSpot Support to enable Spotter on your cluster.\n\n\n\n\n\n"
+      operationId: importContext
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportContextRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  summary: Dry run preview
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      existing_record_count: 4
+                      deleted_record_count: 4
+                      inserted_record_count: 2
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 66666666-6666-6666-6666-666666666666
+                example_2:
+                  summary: Import applied after checking the dry run
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      existing_record_count: 4
+                      deleted_record_count: 4
+                      inserted_record_count: 2
+                    validation_failures: []
+                    diagnostics: []
+                    operation_id: 66666666-6666-6666-6666-666666666668
+                example_3:
+                  summary: "Dry run with a warning: an analyst outside the selection\
+                    \ is affected"
+                  value:
+                    status: SUCCESS
+                    summary:
+                    - scope:
+                        type: DATA_MODEL
+                        identifiers:
+                        - 3f1c0e2a-7b4d-4c1e-9a2f-5d6e7f8a9b0c
+                      existing_record_count: 4
+                      deleted_record_count: 4
+                      inserted_record_count: 2
+                    validation_failures: []
+                    diagnostics:
+                    - sub_status: WARNING
+                      messages:
+                      - "Analyst Pricing uses model gtm_model, whose context is replaced;\
+                        \ its answers on gtm_model change"
+                    operation_id: 66666666-6666-6666-6666-666666666669
+                example_4:
+                  summary: "Validation failures: nothing was written"
+                  value:
+                    status: VALIDATION_FAILED
+                    summary: []
+                    validation_failures:
+                    - entity_key: ctx_8f2a61
+                      line_number: 16
+                      field_name: expression.columns
+                      reason: UNRESOLVED_COLUMN
+                      message: Column 'Recurring' isn't in model gtm_model
+                    diagnostics:
+                    - sub_status: FAILURE
+                      messages:
+                      - 1 validation failure; nothing was written
+                    operation_id: 66666666-6666-6666-6666-666666666667
+              schema:
+                $ref: "#/components/schemas/ImportContextResponse"
+          description: Common successful response
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportContextResponse"
           description: Common error response
         "400":
           content:
@@ -5576,10 +6078,13 @@ paths:
       - ThoughtSpotRest
   /api/rest/2.0/auth/token/object:
     post:
+      deprecated: true
       description: |2+
 
          Version: 9.0.0.cl or later
 
+
+        **Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.
 
         Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).
 
@@ -12177,6 +12682,96 @@ paths:
       tags:
       - Manual Translation
       - ThoughtSpotRest
+  /api/rest/2.0/localizations/manual-translation/template/export:
+    post:
+      description: "\nExport a CSV template of the translatable strings of Liveboards.\
+        \ \n  Version: 27.1.0.cl or later\n\n\nExports a CSV template with the translatable\
+        \ strings of one or more Liveboards. Translate the strings in the template\
+        \ and upload it with the API that imports manual translations.\n\nRequires\
+        \ `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION`\
+        \ (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer\
+        \ application**) privilege.\n\n#### Usage guidelines\n\n- The CSV file has\
+        \ the same columns as the import file: `content`, `locale`, `translated-content`.\
+        \ Each row lists one string in `content` and leaves `locale` and `translated-content`\
+        \ empty. Fill them in, then upload the file with `POST /api/rest/2.0/localizations/manual-translation/import`.\n\
+        - The template includes the Liveboard title and description, tab names, the\
+        \ names of the Liveboard's personalized views, the titles and descriptions\
+        \ of visualizations and groups, and the text of note tiles.\n- Note tile text\
+        \ is listed the way it is matched when the Liveboard is displayed: each heading,\
+        \ paragraph, list item, table cell, and line is a separate row, and so is\
+        \ each part of a line that has its own formatting or link. Manual translations\
+        \ are applied to a note tile only when every one of its rows is translated.\n\
+        - A string that appears more than once is listed once.\n- Strings that the\
+        \ import does not accept are left out: text longer than 2000 characters, text\
+        \ that starts with `=`, `+`, `-`, `@`, a tab, or a carriage return, and text\
+        \ that contains HTML tags, script content, or control characters. The number\
+        \ of strings left out is returned in the `X-ThoughtSpot-Excluded-Content-Count`\
+        \ response header.\n- Specify 1 to 50 Liveboards by GUID or name. Names are\
+        \ resolved in the current Org; if more than one Liveboard has the given name,\
+        \ use its GUID. If a Liveboard is not found or you cannot access it, the request\
+        \ fails and no file is returned.\n\n\n\n\n\n"
+      operationId: exportManualTranslationTemplate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExportManualTranslationTemplateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            text/csv: {}
+          description: Translation template downloaded successfully.
+          headers:
+            Content-Disposition:
+              description: Indicates that the response is a file attachment.
+              explode: false
+              schema:
+                example: attachment; filename=manual-translation-template.csv
+                type: string
+              style: simple
+            X-ThoughtSpot-Excluded-Content-Count:
+              description: Number of strings left out of the template because the
+                import would reject them.
+              explode: false
+              schema:
+                example: 0
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Invalid request, or a Liveboard was not found."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Forbidden access, or no access to a Liveboard."
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: More than one Liveboard has the given name.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error.
+      tags:
+      - Manual Translation
+      - ThoughtSpotRest
   /api/rest/2.0/localizations/manual-translation/locales/{locale}/export:
     post:
       description: "\nGet translations bundle for a locale. \n  Version: 26.7.0.cl\
@@ -12299,6 +12894,75 @@ paths:
           description: Operation failed
       tags:
       - Manual Translation
+      - ThoughtSpotRest
+  /api/rest/2.0/metadata/{logical_table_identifier}/build-index:
+    post:
+      description: |2+
+
+         Version: 27.1.0.cl or later
+
+
+        Triggers a rebuild of the search index of a logical table, such as a table or view.
+
+        Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.
+
+        Requires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.
+
+        The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.
+
+        Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.
+
+
+
+
+
+      operationId: buildMetadataIndex
+      parameters:
+      - description: "GUID, name, or custom object ID of the logical table (such as\
+          \ a table or view) whose search index to rebuild."
+        explode: false
+        in: path
+        name: logical_table_identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BuildMetadataIndexRequest"
+        required: true
+      responses:
+        "204":
+          description: Reindex of the logical table is queued and will run in the
+            background.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Operation failed
+      tags:
+      - Metadata
       - ThoughtSpotRest
   /api/rest/2.0/metadata/worksheets/convert:
     post:
@@ -13006,6 +13670,292 @@ paths:
         "200":
           content:
             application/json:
+              schema:
+                $ref: "#/components/schemas/SqlQueryResponse"
+          description: Fetching SQL query of specified metadata object is successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+  /api/rest/2.0/metadata/{guid}/search-readiness:
+    get:
+      description: |2+
+
+         Version: 27.1.0.cl or later
+
+
+        Checks whether a metadata object is available in Search.
+
+        After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object's latest version is available, for example before running a search query on a Model you just imported via TML.
+
+        Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.
+
+        #### Usage guidelines
+
+        Specify the GUID of the metadata object in the `guid` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).
+
+        The response `state` is one of the following:
+
+        * `OBJECT_READY` - The object's latest version is available in Search.
+        * `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval.
+        * `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked.
+        * `OBJECT_NOT_VALID` - `guid` is not a valid GUID, or no object with that GUID exists.
+
+        The response also includes `object_version`, the metadata version at which the object was last written, and `indexed_version`, the latest metadata version indexed by Search. The object is ready once `indexed_version` is greater than or equal to `object_version`.
+
+
+
+
+
+
+      operationId: fetchMetadataSearchReadiness
+      parameters:
+      - description: |-
+          GUID of the metadata object to check. Supported object types are Tables and
+          Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is
+          detected automatically from the GUID.
+        explode: false
+        in: path
+        name: guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    state: OBJECT_READY
+                    metadata_id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                    object_version: 18342
+                    indexed_version: 18350
+                    detail: Object is available for Search
+                example_2:
+                  value:
+                    state: OBJECT_NOT_READY
+                    metadata_id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                    object_version: 18342
+                    indexed_version: 18320
+                    detail: "Search is serving version 18320, object requires version\
+                      \ 18342"
+                example_3:
+                  value:
+                    state: TYPE_NOT_SUPPORTED
+                    metadata_id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                    object_version: -1
+                    indexed_version: -1
+                    detail: "Object type 'ANSWER' is not supported. Supported types:\
+                      \ LOGICAL_TABLE, USER, USER_GROUP"
+                example_4:
+                  value:
+                    state: OBJECT_NOT_VALID
+                    metadata_id: 4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b
+                    object_version: -1
+                    indexed_version: -1
+                    detail: Object not found
+              schema:
+                $ref: "#/components/schemas/MetadataSearchReadinessResponse"
+          description: Returns the search readiness state of the object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+  /api/rest/2.0/metadata/sql/fetch:
+    post:
+      description: |2+
+
+         Version: 27.1.0.cl or later
+
+
+        Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.
+
+        Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.
+
+        Set only the fields in `metadata` that the type of the object uses:
+
+        | `metadata.type` | Fields in `metadata` | Object |
+        | --- | --- | --- |
+        | `ANSWER` | `identifier` | Saved Answer |
+        | `ANSWER` | `tml` | Unsaved Answer, sent as Answer TML |
+        | `LIVEBOARD` | `identifier`, optional `visualization_identifiers` | Saved Liveboard |
+        | `LOGICAL_TABLE` | `identifier` (Model, View, or Table) | Search query on a data source; also set `query_string` |
+
+        `metadata.type` is optional. It is required if `identifier` is a name. If it is not set, the type is taken from the request, in this order: `tml` means `ANSWER`, `query_string` means `LOGICAL_TABLE`, and a GUID in `identifier` means the type of that object.
+
+        `query_string` is a top-level parameter. It holds the search tokens to apply on the data source. It is required with `LOGICAL_TABLE` and not supported with other types.
+
+        The runtime overrides `runtime_filter`, `runtime_sort`, and `runtime_param_override` are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and `LOGICAL_TABLE`, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with `tml`: set the filters and parameter values in the TML instead.
+
+        The API returns a 400 error if `metadata` is missing a field that its type requires or contains a field that its type does not use, if `query_string` is missing with `LOGICAL_TABLE` or set with another type, or if a runtime override is set with `tml`.
+
+        #### Required access
+
+        - Saved Answer and `LIVEBOARD`: at least view access to the object.
+        - Unsaved Answer and `LOGICAL_TABLE`: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required.
+
+        #### Usage guidelines
+
+        - `LIVEBOARD`: if `visualization_identifiers` is not set, the API returns the SQL of all visualizations.
+        - Unsaved Answer: send it as Answer TML in YAML or JSON format in `tml`, with `type` set to `ANSWER` or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported.
+        - `LOGICAL_TABLE`: pass the search tokens in `query_string`. The SQL is generated for the table visualization of the search and has no `LIMIT` or `OFFSET` clause. `metadata_id` in the response is the GUID of the data source, `metadata_name` is the query string, and `metadata_type` is `LOGICAL_TABLE`. To get the data and the SQL in one call, use the searchData API with `include_sql_query` set to `true`.
+
+        Example request for a search query:
+        ```
+        {
+           "metadata":{
+              "type":"LOGICAL_TABLE",
+              "identifier":"cd252e5c-b552-49a8-821d-3eadaa049cca"
+           },
+           "query_string":"[sales] [region]",
+           "runtime_filter":{"col1":"region","op1":"EQ","val1":"West"}
+        }
+        ```
+
+        Upon successful execution, the API returns the SQL query as shown in this example:
+        ```
+        {
+           "metadata_id":"cd252e5c-b552-49a8-821d-3eadaa049cca",
+           "metadata_name":"[sales] [region]",
+           "metadata_type":"LOGICAL_TABLE",
+           "sql_queries":[
+              {
+                 "metadata_id":"cd252e5c-b552-49a8-821d-3eadaa049cca",
+                 "metadata_name":"[sales] [region]",
+                 "sql_query":"SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nWHERE \"ta_1\".\"REGION\" = 'West'\nGROUP BY \"ca_1\""
+              }
+           ]
+        }
+        ```
+
+
+
+
+
+      operationId: fetchSqlQuery
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FetchSqlQueryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                answer:
+                  summary: type ANSWER
+                  value:
+                    metadata_id: 8fbe44a8-46ad-4b16-8d39-184b2fada490
+                    metadata_name: Sales by region
+                    metadata_type: ANSWER
+                    sql_queries:
+                    - metadata_id: 8fbe44a8-46ad-4b16-8d39-184b2fada490
+                      metadata_name: Sales by region
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                liveboard:
+                  summary: type LIVEBOARD
+                  value:
+                    metadata_id: fa68ae91-7588-4136-bacd-d71fb12dda69
+                    metadata_name: Total Sales
+                    metadata_type: LIVEBOARD
+                    sql_queries:
+                    - metadata_id: b3b6d2b9-089a-490c-8e16-b144650b7843
+                      metadata_name: "Total quantity purchased, Total sales by region"
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"QUANTITYPURCHASED\") IS NOT NULL\
+                        \ THEN sum(\"ta_2\".\"QUANTITYPURCHASED\")\n    ELSE 0\n \
+                        \ END \"ca_2\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\"\
+                        ) IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n \
+                        \ END \"ca_3\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\"\
+                        \ \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\"\
+                        \ \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\
+                        \nGROUP BY \"ca_1\""
+                tml:
+                  summary: "type ANSWER, unsaved (tml)"
+                  value:
+                    metadata_id: 3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b
+                    metadata_name: Sales by region
+                    metadata_type: ANSWER
+                    sql_queries:
+                    - metadata_id: 3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b
+                      metadata_name: Sales by region
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                logical_table:
+                  summary: type LOGICAL_TABLE
+                  value:
+                    metadata_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                    metadata_name: "[sales] [region]"
+                    metadata_type: LOGICAL_TABLE
+                    sql_queries:
+                    - metadata_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                      metadata_name: "[sales] [region]"
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
               schema:
                 $ref: "#/components/schemas/SqlQueryResponse"
           description: Fetching SQL query of specified metadata object is successful.
@@ -23175,7 +24125,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include an invalid variable\
+            \ name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that\
+            \ is not supported or not applicable to the variable type."
         "401":
           content:
             application/json:
@@ -23233,7 +24185,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include a missing identifier,\
+            \ or a variable that is still referenced by other objects (error code\
+            \ DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents).\
+            \ Remove the references and retry."
         "401":
           content:
             application/json:
@@ -23281,7 +24236,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include a missing or malformed\
+            \ identifiers array, or a variable that is still referenced by other objects\
+            \ (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents).\
+            \ Remove the references and retry. Deletion is all or none, so no variable\
+            \ is deleted."
         "401":
           content:
             application/json:
@@ -23347,7 +24306,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include a missing identifier,\
+            \ a missing or malformed variable_assignment, an empty, blank or non-scalar\
+            \ value for an ADD or REPLACE operation on a variable type other than\
+            \ FORMULA_VARIABLE, more than one value for such a type, an org_identifier\
+            \ that does not match any org, or a default_value that is set on a sensitive\
+            \ variable or does not match the variable's data type."
         "401":
           content:
             application/json:
@@ -23359,7 +24323,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
+          description: "Forbidden access. Possible causes include: the caller lacks\
+            \ the required privilege; a FORMULA_VARIABLE owned by the primary org\
+            \ is modified from a secondary-org session (\"Variable value update is\
+            \ only allowed in default org\"); a FORMULA_VARIABLE owned by a secondary\
+            \ org is modified from an org it is not present in; a value is assigned\
+            \ to an org the session may not write to, or that the variable is not\
+            \ present in; or a default_value sent by an admin outside the primary\
+            \ org."
         "500":
           content:
             application/json:
@@ -23460,7 +24431,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include no variable matching\
+            \ the identifier, or an invalid name."
         "401":
           content:
             application/json:
@@ -23472,7 +24444,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
+          description: "Forbidden access. Possible causes include: the caller lacks\
+            \ the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE\
+            \ owned by the primary org, renamed from a secondary-org session (\"Variable\
+            \ update is only allowed in default org\"); or a FORMULA_VARIABLE owned\
+            \ by a secondary org renamed from an org it is not present in."
         "409":
           content:
             application/json:
@@ -23526,7 +24502,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Invalid request.
+          description: "Invalid request. Possible causes include a missing or malformed\
+            \ variable_assignment or variable_value_scope, variable_values that is\
+            \ not an array, an empty, blank or non-scalar value for an ADD or REPLACE\
+            \ operation on a variable type other than FORMULA_VARIABLE, more than\
+            \ one value for such a type, or an org_identifier that does not match\
+            \ any org."
         "401":
           content:
             application/json:
@@ -23538,7 +24519,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: Forbidden access.
+          description: "Forbidden access. Possible causes include: the caller lacks\
+            \ the required privilege; a FORMULA_VARIABLE owned by the primary org\
+            \ is modified from a secondary-org session (\"Variable value update is\
+            \ only allowed in default org\"); a FORMULA_VARIABLE owned by a secondary\
+            \ org is modified from an org it is not present in; or a value is assigned\
+            \ to an org the session may not write to, or that the variable is not\
+            \ present in."
         "500":
           content:
             application/json:
@@ -24124,7 +25111,7 @@ paths:
         Version: 26.12.0.cl or later
 
 
-        Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.
+        Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type `LOGICAL_TABLE` and committed to a file named by its own type, such as `model/<object ID>.model.tml`. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.
 
         Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.
 
@@ -24169,8 +25156,9 @@ paths:
           description: "Invalid request, and nothing was admitted. Covers a malformed\
             \ body, object ids not enabled, an object that does not resolve or has\
             \ no object id, a name given without its type, a type that does not match\
-            \ the object, a paused repository, and an org whose disabled_operations\
-            \ holds COMMIT. error.message names the reason."
+            \ the object, a LOGICAL_TABLE that is not a table, Model, view or SQL\
+            \ view, a paused repository, and an org whose disabled_operations holds\
+            \ COMMIT. error.message names the reason."
         "401":
           content:
             application/json:
@@ -27978,6 +28966,12 @@ components:
       type: object
     MetadataSearchReadinessResponse:
       description: Search readiness of a metadata object.
+      example:
+        state: OBJECT_NOT_VALID
+        metadata_id: metadata_id
+        object_version: 0.8008282
+        indexed_version: 6.0274563
+        detail: detail
       properties:
         state:
           description: |-
@@ -30470,6 +31464,9 @@ components:
             - CAN_EDIT_INPUT_TABLES
             - CAN_CREATE_DATA_APP
             - CAN_CREATE_MUZE_STUDIO_TEMPLATES
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         permission:
@@ -32449,6 +33446,27 @@ components:
     ExportContextResponse:
       description: "Response from exportContext: the exported file, and what it holds\
         \ per owner."
+      example:
+        content: content
+        summary:
+        - scope:
+            type: DATA_MODEL
+            identifiers:
+            - identifiers
+            - identifiers
+          exported_count: 0
+        - scope:
+            type: DATA_MODEL
+            identifiers:
+            - identifiers
+            - identifiers
+          exported_count: 0
+        additional_model_identifiers:
+        - additional_model_identifiers
+        - additional_model_identifiers
+        additional_analyst_identifiers:
+        - additional_analyst_identifiers
+        - additional_analyst_identifiers
       properties:
         content:
           description: |-
@@ -32493,6 +33511,13 @@ components:
       type: object
     ContextExportSummary:
       description: What an export wrote to the file for one owner.
+      example:
+        scope:
+          type: DATA_MODEL
+          identifiers:
+          - identifiers
+          - identifiers
+        exported_count: 0
       properties:
         scope:
           $ref: "#/components/schemas/ContextScope"
@@ -32506,6 +33531,11 @@ components:
       description: |-
         The owner of a group of context entities: a kind of owner and its
         identifiers.
+      example:
+        type: DATA_MODEL
+        identifiers:
+        - identifiers
+        - identifiers
       properties:
         type:
           description: "What owns the entities: models, Spotter analysts or the Org."
@@ -36207,6 +37237,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           nullable: true
           type: array
@@ -37145,9 +38178,9 @@ components:
       properties:
         identifier:
           description: |-
-            GUID, object ID, or name of the metadata object, such as a Liveboard or an
-            Answer. It is resolved in your Org and sent to version control by its
-            cross-Org object ID, so object IDs must be enabled on the cluster.
+            GUID, object ID, or name of the metadata object, such as a Liveboard, an
+            Answer or a Model. It is resolved in your Org and sent to version control by
+            its cross-Org object ID, so object IDs must be enabled on the cluster.
           type: string
         type:
           description: |-
@@ -37156,6 +38189,7 @@ components:
           enum:
           - LIVEBOARD
           - ANSWER
+          - LOGICAL_TABLE
           nullable: true
           type: string
       required:
@@ -37708,6 +38742,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         permission:
@@ -39551,6 +40588,46 @@ components:
       description: |-
         Response from importContext. `status` says how the import ended; the other
         fields say what it changed, or would change in a dry run, and why it failed.
+      example:
+        status: SUCCESS
+        summary:
+        - scope:
+            type: DATA_MODEL
+            identifiers:
+            - identifiers
+            - identifiers
+          existing_record_count: 0
+          deleted_record_count: 6
+          inserted_record_count: 1
+        - scope:
+            type: DATA_MODEL
+            identifiers:
+            - identifiers
+            - identifiers
+          existing_record_count: 0
+          deleted_record_count: 6
+          inserted_record_count: 1
+        validation_failures:
+        - line_number: 5
+          reason: UNKNOWN_FAILURE_REASON
+          field_name: field_name
+          message: message
+          entity_key: entity_key
+        - line_number: 5
+          reason: UNKNOWN_FAILURE_REASON
+          field_name: field_name
+          message: message
+          entity_key: entity_key
+        diagnostics:
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        - sub_status: UNKNOWN
+          messages:
+          - messages
+          - messages
+        operation_id: operation_id
       properties:
         status:
           description: |-
@@ -39605,6 +40682,15 @@ components:
     ContextImportSummary:
       description: "What an import changes for one owner, or would change in a dry\
         \ run."
+      example:
+        scope:
+          type: DATA_MODEL
+          identifiers:
+          - identifiers
+          - identifiers
+        existing_record_count: 0
+        deleted_record_count: 6
+        inserted_record_count: 1
       properties:
         scope:
           $ref: "#/components/schemas/ContextScope"
@@ -41861,6 +42947,16 @@ components:
       - keys
       type: object
     ExportContextRequest:
+      example:
+        model_identifiers:
+        - model_identifiers
+        - model_identifiers
+        analyst_identifiers:
+        - analyst_identifiers
+        - analyst_identifiers
+        include_analyst_models: false
+        include_org_level_context: false
+        export_all_org_context: false
       properties:
         model_identifiers:
           default: []
@@ -41939,6 +43035,9 @@ components:
       - data_source_identifier
       type: object
     ImportContextRequest:
+      example:
+        content: content
+        dry_run: true
       properties:
         content:
           description: |-
@@ -44157,6 +45256,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         sub_group_identifiers:
@@ -44373,6 +45475,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         sub_group_identifiers:
@@ -44526,6 +45631,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         sub_group_identifiers:
@@ -44817,6 +45925,10 @@ components:
           type: string
       type: object
     ExportManualTranslationTemplateRequest:
+      example:
+        liveboard_identifiers:
+        - liveboard_identifiers
+        - liveboard_identifiers
       properties:
         liveboard_identifiers:
           description: |-
@@ -44829,6 +45941,8 @@ components:
       - liveboard_identifiers
       type: object
     BuildMetadataIndexRequest:
+      example:
+        org_identifier: org_identifier
       properties:
         org_identifier:
           description: Unique ID or name of the Org that contains the logical table.
@@ -45146,6 +46260,12 @@ components:
       - metadata_identifier
       type: object
     FetchSqlQueryRequest:
+      example:
+        metadata: ""
+        query_string: query_string
+        runtime_filter: ""
+        runtime_sort: ""
+        runtime_param_override: ""
       properties:
         metadata:
           allOf:
@@ -46102,6 +47222,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         read_only:
@@ -46222,6 +47345,9 @@ components:
             - CAN_EDIT_INPUT_TABLES
             - CAN_CREATE_DATA_APP
             - CAN_CREATE_MUZE_STUDIO_TEMPLATES
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         deprecated:
@@ -46316,6 +47442,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
       required:
@@ -49190,6 +50319,9 @@ components:
             - CAN_ANALYZE_DATA
             - CAN_ADMINISTER_SCHEDULES
             - CAN_CREATE_KPI_ALERTS
+            - CAN_CREATE_AGENTSPOT_AGENTS
+            - CAN_CREATE_AGENTSPOT_APPS
+            - CAN_CREATE_AGENTSPOT_WORKFLOWS
             type: string
           type: array
         account_type:
@@ -49924,8 +51056,8 @@ components:
           description: |-
             Objects to version in this run, each named by GUID, object ID, or name with
             its type. Every object must already exist in your Org, must have an object
-            ID, and must be a Liveboard or an Answer. An object named more than once is
-            versioned once. A run carries at most 50.
+            ID, and must be a Liveboard, an Answer, or a table, Model, view or SQL view.
+            An object named more than once is versioned once. A run carries at most 50.
           items:
             $ref: "#/components/schemas/VersionControlCommitObjectInput"
           type: array

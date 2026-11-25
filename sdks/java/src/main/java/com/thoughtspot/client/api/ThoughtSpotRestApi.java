@@ -31,6 +31,7 @@ import com.thoughtspot.client.model.AnswerDataResponse;
 import com.thoughtspot.client.model.AppColorThemeInput;
 import com.thoughtspot.client.model.AssignChangeAuthorRequest;
 import com.thoughtspot.client.model.AssignTagRequest;
+import com.thoughtspot.client.model.BuildMetadataIndexRequest;
 import com.thoughtspot.client.model.CalendarResponse;
 import com.thoughtspot.client.model.ChangeUserPasswordRequest;
 import com.thoughtspot.client.model.Collection;
@@ -101,7 +102,10 @@ import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
+import com.thoughtspot.client.model.ExportContextRequest;
+import com.thoughtspot.client.model.ExportContextResponse;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
+import com.thoughtspot.client.model.ExportManualTranslationTemplateRequest;
 import com.thoughtspot.client.model.ExportManualTranslationsRequest;
 import com.thoughtspot.client.model.ExportMemoryRequest;
 import com.thoughtspot.client.model.ExportMemoryResponse;
@@ -122,6 +126,7 @@ import com.thoughtspot.client.model.FetchLogsRequest;
 import com.thoughtspot.client.model.FetchObjectPrivilegesRequest;
 import com.thoughtspot.client.model.FetchPermissionsOfPrincipalsRequest;
 import com.thoughtspot.client.model.FetchPermissionsOnMetadataRequest;
+import com.thoughtspot.client.model.FetchSqlQueryRequest;
 import java.io.File;
 import com.thoughtspot.client.model.ForceLogoutUsersRequest;
 import com.thoughtspot.client.model.GenerateCSVRequest;
@@ -133,6 +138,8 @@ import com.thoughtspot.client.model.GetNLInstructionsRequest;
 import com.thoughtspot.client.model.GetObjectAccessTokenRequest;
 import com.thoughtspot.client.model.GetRelevantQuestionsRequest;
 import com.thoughtspot.client.model.GetTokenResponse;
+import com.thoughtspot.client.model.ImportContextRequest;
+import com.thoughtspot.client.model.ImportContextResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMemoryRequest;
 import com.thoughtspot.client.model.ImportMemoryResponse;
@@ -151,6 +158,7 @@ import com.thoughtspot.client.model.LoadAnswerResponse;
 import com.thoughtspot.client.model.LogResponse;
 import com.thoughtspot.client.model.LoginRequest;
 import com.thoughtspot.client.model.ManageObjectPrivilegeRequest;
+import com.thoughtspot.client.model.MetadataSearchReadinessResponse;
 import com.thoughtspot.client.model.MetadataSearchResponse;
 import com.thoughtspot.client.model.NavigationPanelInput;
 import com.thoughtspot.client.model.ObjectPrivilegesOfMetadataResponse;
@@ -782,6 +790,155 @@ public class ThoughtSpotRestApi {
     public okhttp3.Call assignTagAsync(AssignTagRequest assignTagRequest, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = assignTagValidateBeforeCall(assignTagRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for buildMetadataIndex
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call buildMetadataIndexCall(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = buildMetadataIndexRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/{logical_table_identifier}/build-index"
+            .replace("{" + "logical_table_identifier" + "}", localVarApiClient.escapeString(logicalTableIdentifier.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call buildMetadataIndexValidateBeforeCall(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'logicalTableIdentifier' is set
+        if (logicalTableIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'logicalTableIdentifier' when calling buildMetadataIndex(Async)");
+        }
+
+        // verify the required parameter 'buildMetadataIndexRequest' is set
+        if (buildMetadataIndexRequest == null) {
+            throw new ApiException("Missing the required parameter 'buildMetadataIndexRequest' when calling buildMetadataIndex(Async)");
+        }
+
+        return buildMetadataIndexCall(logicalTableIdentifier, buildMetadataIndexRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void buildMetadataIndex(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest) throws ApiException {
+        buildMetadataIndexWithHttpInfo(logicalTableIdentifier, buildMetadataIndexRequest);
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> buildMetadataIndexWithHttpInfo(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest) throws ApiException {
+        okhttp3.Call localVarCall = buildMetadataIndexValidateBeforeCall(logicalTableIdentifier, buildMetadataIndexRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. (required)
+     * @param buildMetadataIndexRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Reindex of the logical table is queued and will run in the background. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call buildMetadataIndexAsync(String logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = buildMetadataIndexValidateBeforeCall(logicalTableIdentifier, buildMetadataIndexRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -2508,7 +2665,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
@@ -2574,7 +2731,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type &#x60;LOGICAL_TABLE&#x60; and committed to a file named by its own type, such as &#x60;model/&lt;object ID&gt;.model.tml&#x60;. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
      * @param createCommitRequest  (required)
      * @return VersionControlCommitResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2583,7 +2740,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
@@ -2598,7 +2755,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type &#x60;LOGICAL_TABLE&#x60; and committed to a file named by its own type, such as &#x60;model/&lt;object ID&gt;.model.tml&#x60;. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
      * @param createCommitRequest  (required)
      * @return ApiResponse&lt;VersionControlCommitResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2607,7 +2764,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
@@ -2623,7 +2780,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
+     *  Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type &#x60;LOGICAL_TABLE&#x60; and committed to a file named by its own type, such as &#x60;model/&lt;object ID&gt;.model.tml&#x60;. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a &#x60;run_id&#x60;, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned &#x60;run_id&#x60;.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.      
      * @param createCommitRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2633,7 +2790,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> The caller&#39;s org has no version control configuration. </td><td>  -  </td></tr>
@@ -4848,7 +5005,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -4922,7 +5079,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -4945,7 +5102,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -4970,7 +5127,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -9689,7 +9846,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9764,7 +9921,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9787,7 +9944,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9812,7 +9969,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9837,7 +9994,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9909,7 +10066,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9930,7 +10087,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -9953,7 +10110,7 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -10820,6 +10977,153 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for exportContext
+     * @param exportContextRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportContextCall(ExportContextRequest exportContextRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportContextRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/context/export";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportContextValidateBeforeCall(ExportContextRequest exportContextRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'exportContextRequest' is set
+        if (exportContextRequest == null) {
+            throw new ApiException("Missing the required parameter 'exportContextRequest' when calling exportContext(Async)");
+        }
+
+        return exportContextCall(exportContextRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter&#39;s context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the &#x60;importContext&#x60; API in the target.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - &#x60;model_identifiers&#x60;: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - &#x60;analyst_identifiers&#x60;: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - &#x60;include_analyst_models&#x60;: when &#x60;true&#x60;, also selects every model the selected analysts use. - &#x60;include_org_level_context&#x60;: when &#x60;true&#x60;, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - &#x60;export_all_org_context&#x60;: when &#x60;true&#x60;, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - &#x60;content&#x60;: the YAML file. Pass it to &#x60;importContext&#x60; as is or after editing. - &#x60;summary&#x60;: what the file holds per owner, each entry with its &#x60;scope&#x60; and &#x60;exported_count&#x60;. The &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With &#x60;export_all_org_context&#x60;, only the owners that have context have an entry. - &#x60;additional_model_identifiers&#x60; and &#x60;additional_analyst_identifiers&#x60;: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn&#39;t replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in &#x60;additional_model_identifiers&#x60;.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in &#x60;additional_analyst_identifiers&#x60;.   - With &#x60;include_analyst_models&#x60;, analyst A&#39;s models are selected. A metric scoped to A&#39;s model M1 and to model M3, which A doesn&#39;t use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With &#x60;include_analyst_models&#x60;, the file lists the models the analysts use in the source, and the import replaces those models&#39; context even if the analysts use other models in the target. - With &#x60;export_all_org_context&#x60;, the import replaces all of the target Org&#39;s context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model&#39;s own context also applies inside every analyst that uses it, so replacing it changes those analysts&#39; answers too; the import&#39;s dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad request — nothing is selected, &#x60;export_all_org_context&#x60; is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn&#39;t use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access, or doesn&#39;t have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param exportContextRequest  (required)
+     * @return ExportContextResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ExportContextResponse exportContext(ExportContextRequest exportContextRequest) throws ApiException {
+        ApiResponse<ExportContextResponse> localVarResp = exportContextWithHttpInfo(exportContextRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter&#39;s context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the &#x60;importContext&#x60; API in the target.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - &#x60;model_identifiers&#x60;: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - &#x60;analyst_identifiers&#x60;: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - &#x60;include_analyst_models&#x60;: when &#x60;true&#x60;, also selects every model the selected analysts use. - &#x60;include_org_level_context&#x60;: when &#x60;true&#x60;, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - &#x60;export_all_org_context&#x60;: when &#x60;true&#x60;, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - &#x60;content&#x60;: the YAML file. Pass it to &#x60;importContext&#x60; as is or after editing. - &#x60;summary&#x60;: what the file holds per owner, each entry with its &#x60;scope&#x60; and &#x60;exported_count&#x60;. The &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With &#x60;export_all_org_context&#x60;, only the owners that have context have an entry. - &#x60;additional_model_identifiers&#x60; and &#x60;additional_analyst_identifiers&#x60;: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn&#39;t replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in &#x60;additional_model_identifiers&#x60;.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in &#x60;additional_analyst_identifiers&#x60;.   - With &#x60;include_analyst_models&#x60;, analyst A&#39;s models are selected. A metric scoped to A&#39;s model M1 and to model M3, which A doesn&#39;t use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With &#x60;include_analyst_models&#x60;, the file lists the models the analysts use in the source, and the import replaces those models&#39; context even if the analysts use other models in the target. - With &#x60;export_all_org_context&#x60;, the import replaces all of the target Org&#39;s context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model&#39;s own context also applies inside every analyst that uses it, so replacing it changes those analysts&#39; answers too; the import&#39;s dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad request — nothing is selected, &#x60;export_all_org_context&#x60; is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn&#39;t use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access, or doesn&#39;t have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param exportContextRequest  (required)
+     * @return ApiResponse&lt;ExportContextResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ExportContextResponse> exportContextWithHttpInfo(ExportContextRequest exportContextRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportContextValidateBeforeCall(exportContextRequest, null);
+        Type localVarReturnType = new TypeToken<ExportContextResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter&#39;s context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the &#x60;importContext&#x60; API in the target.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - &#x60;model_identifiers&#x60;: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - &#x60;analyst_identifiers&#x60;: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - &#x60;include_analyst_models&#x60;: when &#x60;true&#x60;, also selects every model the selected analysts use. - &#x60;include_org_level_context&#x60;: when &#x60;true&#x60;, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - &#x60;export_all_org_context&#x60;: when &#x60;true&#x60;, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - &#x60;content&#x60;: the YAML file. Pass it to &#x60;importContext&#x60; as is or after editing. - &#x60;summary&#x60;: what the file holds per owner, each entry with its &#x60;scope&#x60; and &#x60;exported_count&#x60;. The &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With &#x60;export_all_org_context&#x60;, only the owners that have context have an entry. - &#x60;additional_model_identifiers&#x60; and &#x60;additional_analyst_identifiers&#x60;: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn&#39;t replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in &#x60;additional_model_identifiers&#x60;.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in &#x60;additional_analyst_identifiers&#x60;.   - With &#x60;include_analyst_models&#x60;, analyst A&#39;s models are selected. A metric scoped to A&#39;s model M1 and to model M3, which A doesn&#39;t use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With &#x60;include_analyst_models&#x60;, the file lists the models the analysts use in the source, and the import replaces those models&#39; context even if the analysts use other models in the target. - With &#x60;export_all_org_context&#x60;, the import replaces all of the target Org&#39;s context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model&#39;s own context also applies inside every analyst that uses it, so replacing it changes those analysts&#39; answers too; the import&#39;s dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad request — nothing is selected, &#x60;export_all_org_context&#x60; is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn&#39;t use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access, or doesn&#39;t have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param exportContextRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportContextAsync(ExportContextRequest exportContextRequest, final ApiCallback<ExportContextResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportContextValidateBeforeCall(exportContextRequest, _callback);
+        Type localVarReturnType = new TypeToken<ExportContextResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for exportLiveboardReport
      * @param exportLiveboardReportRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -10961,6 +11265,150 @@ public class ThoughtSpotRestApi {
         okhttp3.Call localVarCall = exportLiveboardReportValidateBeforeCall(exportLiveboardReportRequest, _callback);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for exportManualTranslationTemplate
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportManualTranslationTemplateCall(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportManualTranslationTemplateRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/localizations/manual-translation/template/export";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/csv",
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportManualTranslationTemplateValidateBeforeCall(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'exportManualTranslationTemplateRequest' is set
+        if (exportManualTranslationTemplateRequest == null) {
+            throw new ApiException("Missing the required parameter 'exportManualTranslationTemplateRequest' when calling exportManualTranslationTemplate(Async)");
+        }
+
+        return exportManualTranslationTemplateCall(exportManualTranslationTemplateRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public void exportManualTranslationTemplate(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest) throws ApiException {
+        exportManualTranslationTemplateWithHttpInfo(exportManualTranslationTemplateRequest);
+    }
+
+    /**
+     * 
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> exportManualTranslationTemplateWithHttpInfo(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportManualTranslationTemplateValidateBeforeCall(exportManualTranslationTemplateRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportManualTranslationTemplateAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportManualTranslationTemplateValidateBeforeCall(exportManualTranslationTemplateRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
@@ -12838,6 +13286,149 @@ public class ThoughtSpotRestApi {
         return localVarCall;
     }
     /**
+     * Build call for fetchMetadataSearchReadiness
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchMetadataSearchReadinessCall(String guid, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/{guid}/search-readiness"
+            .replace("{" + "guid" + "}", localVarApiClient.escapeString(guid.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchMetadataSearchReadinessValidateBeforeCall(String guid, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'guid' is set
+        if (guid == null) {
+            throw new ApiException("Missing the required parameter 'guid' when calling fetchMetadataSearchReadiness(Async)");
+        }
+
+        return fetchMetadataSearchReadinessCall(guid, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @return MetadataSearchReadinessResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public MetadataSearchReadinessResponse fetchMetadataSearchReadiness(String guid) throws ApiException {
+        ApiResponse<MetadataSearchReadinessResponse> localVarResp = fetchMetadataSearchReadinessWithHttpInfo(guid);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @return ApiResponse&lt;MetadataSearchReadinessResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<MetadataSearchReadinessResponse> fetchMetadataSearchReadinessWithHttpInfo(String guid) throws ApiException {
+        okhttp3.Call localVarCall = fetchMetadataSearchReadinessValidateBeforeCall(guid, null);
+        Type localVarReturnType = new TypeToken<MetadataSearchReadinessResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Returns the search readiness state of the object. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchMetadataSearchReadinessAsync(String guid, final ApiCallback<MetadataSearchReadinessResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = fetchMetadataSearchReadinessValidateBeforeCall(guid, _callback);
+        Type localVarReturnType = new TypeToken<MetadataSearchReadinessResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for fetchObjectPrivileges
      * @param fetchObjectPrivilegesRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -13263,6 +13854,149 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = fetchPermissionsOnMetadataValidateBeforeCall(fetchPermissionsOnMetadataRequest, _callback);
         Type localVarReturnType = new TypeToken<PermissionOfMetadataResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for fetchSqlQuery
+     * @param fetchSqlQueryRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchSqlQueryCall(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fetchSqlQueryRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/sql/fetch";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call fetchSqlQueryValidateBeforeCall(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'fetchSqlQueryRequest' is set
+        if (fetchSqlQueryRequest == null) {
+            throw new ApiException("Missing the required parameter 'fetchSqlQueryRequest' when calling fetchSqlQuery(Async)");
+        }
+
+        return fetchSqlQueryCall(fetchSqlQueryRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @return SqlQueryResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public SqlQueryResponse fetchSqlQuery(FetchSqlQueryRequest fetchSqlQueryRequest) throws ApiException {
+        ApiResponse<SqlQueryResponse> localVarResp = fetchSqlQueryWithHttpInfo(fetchSqlQueryRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @return ApiResponse&lt;SqlQueryResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<SqlQueryResponse> fetchSqlQueryWithHttpInfo(FetchSqlQueryRequest fetchSqlQueryRequest) throws ApiException {
+        okhttp3.Call localVarCall = fetchSqlQueryValidateBeforeCall(fetchSqlQueryRequest, null);
+        Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+     * @param fetchSqlQueryRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Fetching SQL query of specified metadata object is successful. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call fetchSqlQueryAsync(FetchSqlQueryRequest fetchSqlQueryRequest, final ApiCallback<SqlQueryResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = fetchSqlQueryValidateBeforeCall(fetchSqlQueryRequest, _callback);
+        Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -15032,7 +15766,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call getObjectAccessTokenCall(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -15078,6 +15814,7 @@ public class ThoughtSpotRestApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getObjectAccessTokenValidateBeforeCall(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'getObjectAccessTokenRequest' is set
@@ -15091,7 +15828,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
+     *   Version: 9.0.0.cl or later   **Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.  Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
      * @param getObjectAccessTokenRequest  (required)
      * @return Token
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -15105,7 +15842,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public Token getObjectAccessToken(GetObjectAccessTokenRequest getObjectAccessTokenRequest) throws ApiException {
         ApiResponse<Token> localVarResp = getObjectAccessTokenWithHttpInfo(getObjectAccessTokenRequest);
         return localVarResp.getData();
@@ -15113,7 +15852,7 @@ public class ThoughtSpotRestApi {
 
     /**
      * 
-     *   Version: 9.0.0.cl or later   Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
+     *   Version: 9.0.0.cl or later   **Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.  Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
      * @param getObjectAccessTokenRequest  (required)
      * @return ApiResponse&lt;Token&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -15127,7 +15866,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<Token> getObjectAccessTokenWithHttpInfo(GetObjectAccessTokenRequest getObjectAccessTokenRequest) throws ApiException {
         okhttp3.Call localVarCall = getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, null);
         Type localVarReturnType = new TypeToken<Token>(){}.getType();
@@ -15136,7 +15877,7 @@ public class ThoughtSpotRestApi {
 
     /**
      *  (asynchronously)
-     *   Version: 9.0.0.cl or later   Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
+     *   Version: 9.0.0.cl or later   **Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.  Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a &#x60;username&#x60; and &#x60;password&#x60;, or by using the &#x60;secret_key&#x60; generated for your instance. To generate a &#x60;secret_key&#x60;, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** &gt; **Customizations** &gt; **Security Settings** page.  **Note**: * When both &#x60;password&#x60; and &#x60;secret_key&#x60; are included in the API request, &#x60;secret_key&#x60; takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with &#x60;username&#x60; and &#x60;password&#x60; returns an error. You can switch to token-based authentication with &#x60;secret_key&#x60; or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * &#x60;auto_create&#x60; * &#x60;username&#x60; * &#x60;display_name&#x60; * &#x60;email&#x60; * &#x60;group_identifiers&#x60;  Set &#x60;auto_create&#x60; to &#x60;true&#x60; if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the &#x60;auto_create&#x60; parameter is set to &#x60;true&#x60;, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CONTROL_TRUSTED_AUTH&#x60;(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, &#x60;auto_create:true&#x60; will create the user when the authentication token is created.      
      * @param getObjectAccessTokenRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -15151,7 +15892,9 @@ public class ThoughtSpotRestApi {
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call getObjectAccessTokenAsync(GetObjectAccessTokenRequest getObjectAccessTokenRequest, final ApiCallback<Token> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getObjectAccessTokenValidateBeforeCall(getObjectAccessTokenRequest, _callback);
@@ -16301,6 +17044,153 @@ public class ThoughtSpotRestApi {
 
         okhttp3.Call localVarCall = getWebhookStorageConfigValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<WebhookStorageConfigInfo>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for importContext
+     * @param importContextRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importContextCall(ImportContextRequest importContextRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = importContextRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/ai/context/import";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call importContextValidateBeforeCall(ImportContextRequest importContextRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'importContextRequest' is set
+        if (importContextRequest == null) {
+            throw new ApiException("Missing the required parameter 'importContextRequest' when calling importContext(Async)");
+        }
+
+        return importContextCall(importContextRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file&#39;s entities with new IDs, then deletes the rest of that context. Run with &#x60;dry_run&#x60; set to &#x60;true&#x60; first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the &#x60;exportContext&#x60; API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with &#x60;dry_run&#x60; set to &#x60;true&#x60; first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  A scope you can&#39;t write is reported as an &#x60;ACCESS_DENIED&#x60; validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - &#x60;content&#x60;: the YAML file, typically the &#x60;content&#x60; returned by &#x60;exportContext&#x60;, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - &#x60;dry_run&#x60;: required, with no default. &#x60;true&#x60; validates the file and previews the changes; &#x60;false&#x60; applies them.  An import is a full replace. The file&#39;s entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - &#x60;status&#x60;: &#x60;SUCCESS&#x60; (in a dry run, the preview is complete), &#x60;VALIDATION_FAILED&#x60; (the file has problems, listed in &#x60;validation_failures&#x60;; nothing was written) or &#x60;FAILED&#x60; (a valid file hit a server error; see &#x60;diagnostics&#x60;). - &#x60;summary&#x60;: per owner, the entities before the import (&#x60;existing_record_count&#x60;), deleted and inserted. Previews in a dry run. Each entry&#39;s &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - &#x60;validation_failures&#x60;: every problem in the file, each with its &#x60;line_number&#x60;, &#x60;entity_key&#x60;, &#x60;field_name&#x60;, &#x60;reason&#x60; and &#x60;message&#x60;, so you can fix the file in one pass. - &#x60;diagnostics&#x60;: warnings and failure causes, grouped by &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60; or &#x60;ROLLED_BACK&#x60;). Warnings include a selected model or analyst left with no context, an analyst&#39;s context deleted on a model the file doesn&#39;t name, analysts outside the selection whose answers change through a replaced model&#39;s context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - &#x60;operation_id&#x60;: include it when contacting support.  #### What is replaced  Only the file&#39;s selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1&#39;s own context and all of A&#39;s context, including A&#39;s context on models the file never names. It keeps analyst B&#39;s context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file&#39;s &#x60;selection&#x60;, the &#x60;models&#x60; and &#x60;analysts&#x60; it refers to by alias, and its &#x60;entities&#x60;:  &#x60;&#x60;&#x60;yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. &#x60;&#x60;&#x60;  The identifiers in the file are for reference only and aren&#39;t stored as written:  - Entity &#x60;id&#x60;s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (&#x60;gtm&#x60;, &#x60;sales&#x60;) only link the entities&#39; scopes to the &#x60;models&#x60; and &#x60;analysts&#x60; entries. - The &#x60;guid&#x60;, &#x60;obj_id&#x60;, &#x60;id&#x60; and &#x60;name&#x60; values under &#x60;models&#x60; and &#x60;analysts&#x60; are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target&#39;s own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |--------|---------| | &#x60;SCHEMA&#x60; | The YAML is invalid, or has an unknown field or a bad value. | | &#x60;VALIDATION&#x60; | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | &#x60;CHAR_LIMIT&#x60; | A field is longer than its limit. | | &#x60;CHAR_BUDGET&#x60; | A scope&#39;s non-semantic instructions or guardrails together exceed their character budget. | | &#x60;SCOPE&#x60; | An entity is outside the file&#39;s selection, is personal context, or names a model that isn&#39;t one of its analyst&#39;s models. | | &#x60;UNRESOLVED_SOURCE&#x60; | A model or analyst isn&#39;t found in this environment. | | &#x60;UNRESOLVED_COLUMN&#x60; | A column isn&#39;t found by name in its model. | | &#x60;UNRESOLVED_REFERENCE&#x60; | A reference or relationship names an entity key that isn&#39;t in the file. | | &#x60;INVALID_RELATIONSHIP&#x60; | A relationship isn&#39;t allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | &#x60;ACCESS_DENIED&#x60; | You can&#39;t write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |-------|-------|------------| | File size | 10 MiB | A &#x60;400&#x60; error, before the file is validated | | Entities per file | 10,000 | &#x60;VALIDATION&#x60; | | Title of an entity | 120 characters | &#x60;CHAR_LIMIT&#x60; | | Any other text field of an entity | 4,000 characters | &#x60;CHAR_LIMIT&#x60; | | &#x60;NON_SEMANTIC_INSTRUCTION&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | &#x60;GUARDRAIL&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | Depth of a chain of relationships | 10 | &#x60;INVALID_RELATIONSHIP&#x60; |  A &#x60;DATA_GUIDE&#x60; entity must also name at least one model and no analyst; otherwise it fails with &#x60;SCOPE&#x60;.  #### Error responses  Problems in the file are not errors: the call returns &#x60;200&#x60; with &#x60;VALIDATION_FAILED&#x60;, and the details are in &#x60;validation_failures&#x60;.  | Code | Description | |------|-------------| | 400  | Bad request — &#x60;dry_run&#x60; is missing, the file is over 10 MiB, or the Org doesn&#39;t use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Important: &gt; Never run with &#x60;dry_run&#x60; set to &#x60;false&#x60; without first checking a dry run. A real import deletes and replaces the context the file&#39;s selection covers.  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param importContextRequest  (required)
+     * @return ImportContextResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ImportContextResponse importContext(ImportContextRequest importContextRequest) throws ApiException {
+        ApiResponse<ImportContextResponse> localVarResp = importContextWithHttpInfo(importContextRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     *  Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file&#39;s entities with new IDs, then deletes the rest of that context. Run with &#x60;dry_run&#x60; set to &#x60;true&#x60; first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the &#x60;exportContext&#x60; API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with &#x60;dry_run&#x60; set to &#x60;true&#x60; first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  A scope you can&#39;t write is reported as an &#x60;ACCESS_DENIED&#x60; validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - &#x60;content&#x60;: the YAML file, typically the &#x60;content&#x60; returned by &#x60;exportContext&#x60;, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - &#x60;dry_run&#x60;: required, with no default. &#x60;true&#x60; validates the file and previews the changes; &#x60;false&#x60; applies them.  An import is a full replace. The file&#39;s entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - &#x60;status&#x60;: &#x60;SUCCESS&#x60; (in a dry run, the preview is complete), &#x60;VALIDATION_FAILED&#x60; (the file has problems, listed in &#x60;validation_failures&#x60;; nothing was written) or &#x60;FAILED&#x60; (a valid file hit a server error; see &#x60;diagnostics&#x60;). - &#x60;summary&#x60;: per owner, the entities before the import (&#x60;existing_record_count&#x60;), deleted and inserted. Previews in a dry run. Each entry&#39;s &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - &#x60;validation_failures&#x60;: every problem in the file, each with its &#x60;line_number&#x60;, &#x60;entity_key&#x60;, &#x60;field_name&#x60;, &#x60;reason&#x60; and &#x60;message&#x60;, so you can fix the file in one pass. - &#x60;diagnostics&#x60;: warnings and failure causes, grouped by &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60; or &#x60;ROLLED_BACK&#x60;). Warnings include a selected model or analyst left with no context, an analyst&#39;s context deleted on a model the file doesn&#39;t name, analysts outside the selection whose answers change through a replaced model&#39;s context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - &#x60;operation_id&#x60;: include it when contacting support.  #### What is replaced  Only the file&#39;s selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1&#39;s own context and all of A&#39;s context, including A&#39;s context on models the file never names. It keeps analyst B&#39;s context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file&#39;s &#x60;selection&#x60;, the &#x60;models&#x60; and &#x60;analysts&#x60; it refers to by alias, and its &#x60;entities&#x60;:  &#x60;&#x60;&#x60;yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. &#x60;&#x60;&#x60;  The identifiers in the file are for reference only and aren&#39;t stored as written:  - Entity &#x60;id&#x60;s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (&#x60;gtm&#x60;, &#x60;sales&#x60;) only link the entities&#39; scopes to the &#x60;models&#x60; and &#x60;analysts&#x60; entries. - The &#x60;guid&#x60;, &#x60;obj_id&#x60;, &#x60;id&#x60; and &#x60;name&#x60; values under &#x60;models&#x60; and &#x60;analysts&#x60; are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target&#39;s own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |--------|---------| | &#x60;SCHEMA&#x60; | The YAML is invalid, or has an unknown field or a bad value. | | &#x60;VALIDATION&#x60; | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | &#x60;CHAR_LIMIT&#x60; | A field is longer than its limit. | | &#x60;CHAR_BUDGET&#x60; | A scope&#39;s non-semantic instructions or guardrails together exceed their character budget. | | &#x60;SCOPE&#x60; | An entity is outside the file&#39;s selection, is personal context, or names a model that isn&#39;t one of its analyst&#39;s models. | | &#x60;UNRESOLVED_SOURCE&#x60; | A model or analyst isn&#39;t found in this environment. | | &#x60;UNRESOLVED_COLUMN&#x60; | A column isn&#39;t found by name in its model. | | &#x60;UNRESOLVED_REFERENCE&#x60; | A reference or relationship names an entity key that isn&#39;t in the file. | | &#x60;INVALID_RELATIONSHIP&#x60; | A relationship isn&#39;t allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | &#x60;ACCESS_DENIED&#x60; | You can&#39;t write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |-------|-------|------------| | File size | 10 MiB | A &#x60;400&#x60; error, before the file is validated | | Entities per file | 10,000 | &#x60;VALIDATION&#x60; | | Title of an entity | 120 characters | &#x60;CHAR_LIMIT&#x60; | | Any other text field of an entity | 4,000 characters | &#x60;CHAR_LIMIT&#x60; | | &#x60;NON_SEMANTIC_INSTRUCTION&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | &#x60;GUARDRAIL&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | Depth of a chain of relationships | 10 | &#x60;INVALID_RELATIONSHIP&#x60; |  A &#x60;DATA_GUIDE&#x60; entity must also name at least one model and no analyst; otherwise it fails with &#x60;SCOPE&#x60;.  #### Error responses  Problems in the file are not errors: the call returns &#x60;200&#x60; with &#x60;VALIDATION_FAILED&#x60;, and the details are in &#x60;validation_failures&#x60;.  | Code | Description | |------|-------------| | 400  | Bad request — &#x60;dry_run&#x60; is missing, the file is over 10 MiB, or the Org doesn&#39;t use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Important: &gt; Never run with &#x60;dry_run&#x60; set to &#x60;false&#x60; without first checking a dry run. A real import deletes and replaces the context the file&#39;s selection covers.  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param importContextRequest  (required)
+     * @return ApiResponse&lt;ImportContextResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ImportContextResponse> importContextWithHttpInfo(ImportContextRequest importContextRequest) throws ApiException {
+        okhttp3.Call localVarCall = importContextValidateBeforeCall(importContextRequest, null);
+        Type localVarReturnType = new TypeToken<ImportContextResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file&#39;s entities with new IDs, then deletes the rest of that context. Run with &#x60;dry_run&#x60; set to &#x60;true&#x60; first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model; on each Spotter analyst, having created it, having it shared with you in &#x60;MODIFY&#x60; mode, the &#x60;ADMINISTRATION&#x60; privilege, or the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it; and the &#x60;ADMINISTRATION&#x60; privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the &#x60;exportContext&#x60; API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with &#x60;dry_run&#x60; set to &#x60;true&#x60; first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the &#x60;ADMINISTRATION&#x60;, &#x60;CAN_MANAGE_SPOTTER&#x60; or &#x60;CAN_USE_SPOTTER&#x60; privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege or the &#x60;SPOTTER_COACHING_PRIVILEGE&#x60; on that model. - Each Spotter analyst: you created it, it is shared with you in &#x60;MODIFY&#x60; mode (the &#x60;share_mode&#x60; of the &#x60;shareAnalyst&#x60; API), you have the &#x60;ADMINISTRATION&#x60; privilege, or you have the &#x60;CAN_MANAGE_SPOTTER&#x60; privilege together with view access to it. - Org-level context or the whole Org: the &#x60;ADMINISTRATION&#x60; privilege.  A scope you can&#39;t write is reported as an &#x60;ACCESS_DENIED&#x60; validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - &#x60;content&#x60;: the YAML file, typically the &#x60;content&#x60; returned by &#x60;exportContext&#x60;, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - &#x60;dry_run&#x60;: required, with no default. &#x60;true&#x60; validates the file and previews the changes; &#x60;false&#x60; applies them.  An import is a full replace. The file&#39;s entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - &#x60;status&#x60;: &#x60;SUCCESS&#x60; (in a dry run, the preview is complete), &#x60;VALIDATION_FAILED&#x60; (the file has problems, listed in &#x60;validation_failures&#x60;; nothing was written) or &#x60;FAILED&#x60; (a valid file hit a server error; see &#x60;diagnostics&#x60;). - &#x60;summary&#x60;: per owner, the entities before the import (&#x60;existing_record_count&#x60;), deleted and inserted. Previews in a dry run. Each entry&#39;s &#x60;scope&#x60; has a &#x60;type&#x60; (&#x60;DATA_MODEL&#x60;, &#x60;ANALYST&#x60; or &#x60;ORG&#x60;) and the &#x60;identifiers&#x60; of the models or analysts, empty for &#x60;ORG&#x60;. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - &#x60;validation_failures&#x60;: every problem in the file, each with its &#x60;line_number&#x60;, &#x60;entity_key&#x60;, &#x60;field_name&#x60;, &#x60;reason&#x60; and &#x60;message&#x60;, so you can fix the file in one pass. - &#x60;diagnostics&#x60;: warnings and failure causes, grouped by &#x60;sub_status&#x60; (&#x60;WARNING&#x60;, &#x60;FAILURE&#x60; or &#x60;ROLLED_BACK&#x60;). Warnings include a selected model or analyst left with no context, an analyst&#39;s context deleted on a model the file doesn&#39;t name, analysts outside the selection whose answers change through a replaced model&#39;s context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - &#x60;operation_id&#x60;: include it when contacting support.  #### What is replaced  Only the file&#39;s selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1&#39;s own context and all of A&#39;s context, including A&#39;s context on models the file never names. It keeps analyst B&#39;s context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file&#39;s &#x60;selection&#x60;, the &#x60;models&#x60; and &#x60;analysts&#x60; it refers to by alias, and its &#x60;entities&#x60;:  &#x60;&#x60;&#x60;yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. &#x60;&#x60;&#x60;  The identifiers in the file are for reference only and aren&#39;t stored as written:  - Entity &#x60;id&#x60;s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (&#x60;gtm&#x60;, &#x60;sales&#x60;) only link the entities&#39; scopes to the &#x60;models&#x60; and &#x60;analysts&#x60; entries. - The &#x60;guid&#x60;, &#x60;obj_id&#x60;, &#x60;id&#x60; and &#x60;name&#x60; values under &#x60;models&#x60; and &#x60;analysts&#x60; are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target&#39;s own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |--------|---------| | &#x60;SCHEMA&#x60; | The YAML is invalid, or has an unknown field or a bad value. | | &#x60;VALIDATION&#x60; | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | &#x60;CHAR_LIMIT&#x60; | A field is longer than its limit. | | &#x60;CHAR_BUDGET&#x60; | A scope&#39;s non-semantic instructions or guardrails together exceed their character budget. | | &#x60;SCOPE&#x60; | An entity is outside the file&#39;s selection, is personal context, or names a model that isn&#39;t one of its analyst&#39;s models. | | &#x60;UNRESOLVED_SOURCE&#x60; | A model or analyst isn&#39;t found in this environment. | | &#x60;UNRESOLVED_COLUMN&#x60; | A column isn&#39;t found by name in its model. | | &#x60;UNRESOLVED_REFERENCE&#x60; | A reference or relationship names an entity key that isn&#39;t in the file. | | &#x60;INVALID_RELATIONSHIP&#x60; | A relationship isn&#39;t allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | &#x60;ACCESS_DENIED&#x60; | You can&#39;t write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |-------|-------|------------| | File size | 10 MiB | A &#x60;400&#x60; error, before the file is validated | | Entities per file | 10,000 | &#x60;VALIDATION&#x60; | | Title of an entity | 120 characters | &#x60;CHAR_LIMIT&#x60; | | Any other text field of an entity | 4,000 characters | &#x60;CHAR_LIMIT&#x60; | | &#x60;NON_SEMANTIC_INSTRUCTION&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | &#x60;GUARDRAIL&#x60; entities of one scope, combined | 2,000 characters | &#x60;CHAR_BUDGET&#x60; | | Depth of a chain of relationships | 10 | &#x60;INVALID_RELATIONSHIP&#x60; |  A &#x60;DATA_GUIDE&#x60; entity must also name at least one model and no analyst; otherwise it fails with &#x60;SCOPE&#x60;.  #### Error responses  Problems in the file are not errors: the call returns &#x60;200&#x60; with &#x60;VALIDATION_FAILED&#x60;, and the details are in &#x60;validation_failures&#x60;.  | Code | Description | |------|-------------| | 400  | Bad request — &#x60;dry_run&#x60; is missing, the file is over 10 MiB, or the Org doesn&#39;t use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn&#39;t have Spotter access. | | 500  | Unexpected error — include the &#x60;incident_id_guid&#x60; from the error response when contacting support. |  &gt; ###### Important: &gt; Never run with &#x60;dry_run&#x60; set to &#x60;false&#x60; without first checking a dry run. A real import deletes and replaces the context the file&#39;s selection covers.  &gt; ###### Note: &gt; - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the &#x60;exportMemory&#x60; and &#x60;importMemory&#x60; APIs. &gt; - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+     * @param importContextRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Common successful response </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Common error response </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importContextAsync(ImportContextRequest importContextRequest, final ApiCallback<ImportContextResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = importContextValidateBeforeCall(importContextRequest, _callback);
+        Type localVarReturnType = new TypeToken<ImportContextResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -18483,9 +19373,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -18562,9 +19452,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -18584,9 +19474,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -18608,9 +19498,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -30673,9 +31563,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -30753,9 +31643,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -30776,9 +31666,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -30801,9 +31691,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -30825,9 +31715,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -30900,9 +31790,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -30923,9 +31813,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -30948,9 +31838,9 @@ public class ThoughtSpotRestApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated

@@ -8,6 +8,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { BuildMetadataIndexRequest } from '../models/BuildMetadataIndexRequest';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest } from '../models/CopyObjectRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
@@ -17,10 +18,12 @@ import { ExportMetadataTMLRequest } from '../models/ExportMetadataTMLRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
 import { FetchAsyncImportTaskStatusRequest } from '../models/FetchAsyncImportTaskStatusRequest';
 import { FetchLiveboardSqlQueryRequest } from '../models/FetchLiveboardSqlQueryRequest';
+import { FetchSqlQueryRequest } from '../models/FetchSqlQueryRequest';
 import { GetAsyncImportStatusResponse } from '../models/GetAsyncImportStatusResponse';
 import { ImportEPackAsyncTaskStatus } from '../models/ImportEPackAsyncTaskStatus';
 import { ImportMetadataTMLAsyncRequest } from '../models/ImportMetadataTMLAsyncRequest';
 import { ImportMetadataTMLRequest } from '../models/ImportMetadataTMLRequest';
+import { MetadataSearchReadinessResponse } from '../models/MetadataSearchReadinessResponse';
 import { MetadataSearchResponse } from '../models/MetadataSearchResponse';
 import { ParameterizeMetadataFieldsRequest } from '../models/ParameterizeMetadataFieldsRequest';
 import { ParameterizeMetadataRequest } from '../models/ParameterizeMetadataRequest';
@@ -36,6 +39,63 @@ import { UpdateMetadataObjIdRequest } from '../models/UpdateMetadataObjIdRequest
  * no description
  */
 export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     *   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn\'t been indexed yet is picked up by the next scheduled indexing run instead.      
+     * @param logicalTableIdentifier GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.
+     * @param buildMetadataIndexRequest 
+     */
+    public async buildMetadataIndex(logicalTableIdentifier: string, buildMetadataIndexRequest: BuildMetadataIndexRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'logicalTableIdentifier' is not null or undefined
+        if (logicalTableIdentifier === null || logicalTableIdentifier === undefined) {
+            throw new RequiredError("MetadataApi", "buildMetadataIndex", "logicalTableIdentifier");
+        }
+
+
+        // verify required parameter 'buildMetadataIndexRequest' is not null or undefined
+        if (buildMetadataIndexRequest === null || buildMetadataIndexRequest === undefined) {
+            throw new RequiredError("MetadataApi", "buildMetadataIndex", "buildMetadataIndexRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/{logical_table_identifier}/build-index'
+            .replace('{logical_table_identifier}', encodeURIComponent(String(logicalTableIdentifier)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(buildMetadataIndexRequest, "BuildMetadataIndexRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
 
     /**
      *  Convert worksheets to models    Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - `DATAMANAGEMENT` (Can manage data) or `ADMINISTRATION` (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (Can manage data models).  ---  ## Usage Guidelines  ### Parameters  1. **worksheet_ids**      - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.      - **Usage:**        - Used only when `convert_all` is set to `false`.        - Leave empty or omit when `convert_all` is set to `true`.  2. **exclude_worksheet_ids**      - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.      - **Usage:**        - Useful when `convert_all` is set to `true` and specific Worksheets should not be converted.  3. **convert_all**      - **Description:** Sets the scope of conversion.    - **Options:**        - `true`: Converts all Worksheets in the system, except those specified in `exclude_worksheet_ids`.        - `false`: Converts only the Worksheets listed in `worksheet_ids`.  4. **apply_changes**      - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.    - **Options:**        - `true`: Applies conversion changes directly to ThoughtSpot.      - `false`: Generates only a preview of the changes and does not apply any changes to ThoughtSpot  ---  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the conversion process  2. **Partial Conversion for Testing:**      Test the conversion process by setting `convert_all` to `false` and specifying a small number of `worksheet_ids`.  3. **Verify Dependencies:**      Check for dependent objects, such as Tables and Connections, to avoid invalid references.  4. **Review Changes:**      Use `apply_changes: false` to preview the impact of the conversion before applying changes.  ---  ## Examples  ### Convert Specific Worksheets ```json {   \"worksheet_ids\": [\"guid1\", \"guid2\", \"guid3\"],   \"exclude_worksheet_ids\": [],   \"convert_all\": false,   \"apply_changes\": true } ```  ### Convert All Accessible Worksheets ```json {   \"worksheet_ids\": [],   \"exclude_worksheet_ids\": [],   \"convert_all\": true,   \"apply_changes\": true } ```  ### Exclude Specific Worksheets While Converting All Accessible Worksheets ```json {   \"worksheet_ids\": [],   \"exclude_worksheet_ids\": [\"abc\"],   \"convert_all\": true,   \"apply_changes\": true } ```     
@@ -56,8 +116,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -105,8 +165,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -154,8 +214,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -203,8 +263,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -252,8 +312,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -301,8 +361,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -350,8 +410,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -399,8 +459,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -410,6 +470,94 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(fetchLiveboardSqlQueryRequest, "FetchLiveboardSqlQueryRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object\'s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the `guid` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).  The response `state` is one of the following:  * `OBJECT_READY` - The object\'s latest version is available in Search. * `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked. * `OBJECT_NOT_VALID` - `guid` is not a valid GUID, or no object with that GUID exists.  The response also includes `object_version`, the metadata version at which the object was last written, and `indexed_version`, the latest metadata version indexed by Search. The object is ready once `indexed_version` is greater than or equal to `object_version`.       
+     * @param guid GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.
+     */
+    public async fetchMetadataSearchReadiness(guid: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'guid' is not null or undefined
+        if (guid === null || guid === undefined) {
+            throw new RequiredError("MetadataApi", "fetchMetadataSearchReadiness", "guid");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/{guid}/search-readiness'
+            .replace('{guid}', encodeURIComponent(String(guid)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in `metadata` that the type of the object uses:  | `metadata.type` | Fields in `metadata` | Object | | --- | --- | --- | | `ANSWER` | `identifier` | Saved Answer | | `ANSWER` | `tml` | Unsaved Answer, sent as Answer TML | | `LIVEBOARD` | `identifier`, optional `visualization_identifiers` | Saved Liveboard | | `LOGICAL_TABLE` | `identifier` (Model, View, or Table) | Search query on a data source; also set `query_string` |  `metadata.type` is optional. It is required if `identifier` is a name. If it is not set, the type is taken from the request, in this order: `tml` means `ANSWER`, `query_string` means `LOGICAL_TABLE`, and a GUID in `identifier` means the type of that object.  `query_string` is a top-level parameter. It holds the search tokens to apply on the data source. It is required with `LOGICAL_TABLE` and not supported with other types.  The runtime overrides `runtime_filter`, `runtime_sort`, and `runtime_param_override` are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and `LOGICAL_TABLE`, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with `tml`: set the filters and parameter values in the TML instead.  The API returns a 400 error if `metadata` is missing a field that its type requires or contains a field that its type does not use, if `query_string` is missing with `LOGICAL_TABLE` or set with another type, or if a runtime override is set with `tml`.  #### Required access  - Saved Answer and `LIVEBOARD`: at least view access to the object. - Unsaved Answer and `LOGICAL_TABLE`: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required.  #### Usage guidelines  - `LIVEBOARD`: if `visualization_identifiers` is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in `tml`, with `type` set to `ANSWER` or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - `LOGICAL_TABLE`: pass the search tokens in `query_string`. The SQL is generated for the table visualization of the search and has no `LIMIT` or `OFFSET` clause. `metadata_id` in the response is the GUID of the data source, `metadata_name` is the query string, and `metadata_type` is `LOGICAL_TABLE`. To get the data and the SQL in one call, use the searchData API with `include_sql_query` set to `true`.  Example request for a search query: ``` {    \"metadata\":{       \"type\":\"LOGICAL_TABLE\",       \"identifier\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\"    },    \"query_string\":\"[sales] [region]\",    \"runtime_filter\":{\"col1\":\"region\",\"op1\":\"EQ\",\"val1\":\"West\"} } ```  Upon successful execution, the API returns the SQL query as shown in this example: ``` {    \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",    \"metadata_name\":\"[sales] [region]\",    \"metadata_type\":\"LOGICAL_TABLE\",    \"sql_queries\":[       {          \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",          \"metadata_name\":\"[sales] [region]\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nWHERE \\\"ta_1\\\".\\\"REGION\\\" = \'West\'\\nGROUP BY \\\"ca_1\\\"\"       }    ] } ```      
+     * @param fetchSqlQueryRequest 
+     */
+    public async fetchSqlQuery(fetchSqlQueryRequest: FetchSqlQueryRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'fetchSqlQueryRequest' is not null or undefined
+        if (fetchSqlQueryRequest === null || fetchSqlQueryRequest === undefined) {
+            throw new RequiredError("MetadataApi", "fetchSqlQuery", "fetchSqlQueryRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/sql/fetch';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(fetchSqlQueryRequest, "FetchSqlQueryRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -448,8 +596,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -497,8 +645,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -548,8 +696,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -597,8 +745,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -646,8 +794,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -695,8 +843,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -744,8 +892,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -793,8 +941,8 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.32.0")
-        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.32.0")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
 
 
         // Body Params
@@ -826,6 +974,59 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
 }
 
 export class MetadataApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to buildMetadataIndex
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async buildMetadataIndexWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -1237,6 +1438,120 @@ export class MetadataApiResponseProcessor {
      * @throws ApiException if the response code was not in [200, 299]
      */
      public async fetchLiveboardSqlQueryWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SqlQueryResponse >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SqlQueryResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SqlQueryResponse", ""
+            ) as SqlQueryResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SqlQueryResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SqlQueryResponse", ""
+            ) as SqlQueryResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchMetadataSearchReadiness
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchMetadataSearchReadinessWithHttpInfo(response: ResponseContext): Promise<HttpInfo<MetadataSearchReadinessResponse >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: MetadataSearchReadinessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "MetadataSearchReadinessResponse", ""
+            ) as MetadataSearchReadinessResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Invalid request.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: MetadataSearchReadinessResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "MetadataSearchReadinessResponse", ""
+            ) as MetadataSearchReadinessResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to fetchSqlQuery
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async fetchSqlQueryWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SqlQueryResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SqlQueryResponse = ObjectSerializer.deserialize(

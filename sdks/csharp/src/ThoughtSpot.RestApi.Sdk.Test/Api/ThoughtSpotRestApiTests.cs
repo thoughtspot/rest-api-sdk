@@ -88,6 +88,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test BuildMetadataIndex
+        /// </summary>
+        [Fact]
+        public void BuildMetadataIndexTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string logicalTableIdentifier = null;
+            //BuildMetadataIndexRequest buildMetadataIndexRequest = null;
+            //instance.BuildMetadataIndex(logicalTableIdentifier, buildMetadataIndexRequest);
+        }
+
+        /// <summary>
         /// Test ChangeUserPassword
         /// </summary>
         [Fact]
@@ -905,6 +917,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ExportContext
+        /// </summary>
+        [Fact]
+        public void ExportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportContextRequest exportContextRequest = null;
+            //var response = instance.ExportContext(exportContextRequest);
+            //Assert.IsType<ExportContextResponse>(response);
+        }
+
+        /// <summary>
         /// Test ExportLiveboardReport
         /// </summary>
         [Fact]
@@ -914,6 +938,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //ExportLiveboardReportRequest exportLiveboardReportRequest = null;
             //var response = instance.ExportLiveboardReport(exportLiveboardReportRequest);
             //Assert.IsType<FileParameter>(response);
+        }
+
+        /// <summary>
+        /// Test ExportManualTranslationTemplate
+        /// </summary>
+        [Fact]
+        public void ExportManualTranslationTemplateTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest = null;
+            //instance.ExportManualTranslationTemplate(exportManualTranslationTemplateRequest);
         }
 
         /// <summary>
@@ -1074,6 +1109,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test FetchMetadataSearchReadiness
+        /// </summary>
+        [Fact]
+        public void FetchMetadataSearchReadinessTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string guid = null;
+            //var response = instance.FetchMetadataSearchReadiness(guid);
+            //Assert.IsType<MetadataSearchReadinessResponse>(response);
+        }
+
+        /// <summary>
         /// Test FetchObjectPrivileges
         /// </summary>
         [Fact]
@@ -1107,6 +1154,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //FetchPermissionsOnMetadataRequest fetchPermissionsOnMetadataRequest = null;
             //var response = instance.FetchPermissionsOnMetadata(fetchPermissionsOnMetadataRequest);
             //Assert.IsType<PermissionOfMetadataResponse>(response);
+        }
+
+        /// <summary>
+        /// Test FetchSqlQuery
+        /// </summary>
+        [Fact]
+        public void FetchSqlQueryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //FetchSqlQueryRequest fetchSqlQueryRequest = null;
+            //var response = instance.FetchSqlQuery(fetchSqlQueryRequest);
+            //Assert.IsType<SqlQueryResponse>(response);
         }
 
         /// <summary>
@@ -1354,6 +1413,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.GetWebhookStorageConfig();
             //Assert.IsType<List<WebhookStorageConfigInfo>>(response);
+        }
+
+        /// <summary>
+        /// Test ImportContext
+        /// </summary>
+        [Fact]
+        public void ImportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ImportContextRequest importContextRequest = null;
+            //var response = instance.ImportContext(importContextRequest);
+            //Assert.IsType<ImportContextResponse>(response);
         }
 
         /// <summary>

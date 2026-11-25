@@ -43,7 +43,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateCommitRequest" /> class.
         /// </summary>
-        /// <param name="objects">Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50. (required).</param>
+        /// <param name="objects">Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard, an Answer, or a table, Model, view or SQL view. An object named more than once is versioned once. A run carries at most 50. (required).</param>
         /// <param name="commitMessage">Message for the single Git commit this run produces. Omit this to let ThoughtSpot generate one..</param>
         /// <param name="pruneDeletedObjectFiles">Also check every file on the branch against the objects in your Org, and remove the file of any object that no longer exists there, so the branch stops carrying deleted content. This is not limited to the objects in this request. (default to false).</param>
         public CreateCommitRequest(List<VersionControlCommitObjectInput> objects = default, string commitMessage = default, bool? pruneDeletedObjectFiles = false)
@@ -61,9 +61,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50.
+        /// Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard, an Answer, or a table, Model, view or SQL view. An object named more than once is versioned once. A run carries at most 50.
         /// </summary>
-        /// <value>Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard or an Answer. An object named more than once is versioned once. A run carries at most 50.</value>
+        /// <value>Objects to version in this run, each named by GUID, object ID, or name with its type. Every object must already exist in your Org, must have an object ID, and must be a Liveboard, an Answer, or a table, Model, view or SQL view. An object named more than once is versioned once. A run carries at most 50.</value>
         [DataMember(Name = "objects", IsRequired = true, EmitDefaultValue = true)]
         public List<VersionControlCommitObjectInput> Objects { get; set; }
 

@@ -282,7 +282,25 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum CANCREATEKPIALERTS for value: CAN_CREATE_KPI_ALERTS
             /// </summary>
             [EnumMember(Value = "CAN_CREATE_KPI_ALERTS")]
-            CANCREATEKPIALERTS = 41
+            CANCREATEKPIALERTS = 41,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTAGENTS for value: CAN_CREATE_AGENTSPOT_AGENTS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_AGENTS")]
+            CANCREATEAGENTSPOTAGENTS = 42,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTAPPS for value: CAN_CREATE_AGENTSPOT_APPS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_APPS")]
+            CANCREATEAGENTSPOTAPPS = 43,
+
+            /// <summary>
+            /// Enum CANCREATEAGENTSPOTWORKFLOWS for value: CAN_CREATE_AGENTSPOT_WORKFLOWS
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_AGENTSPOT_WORKFLOWS")]
+            CANCREATEAGENTSPOTWORKFLOWS = 44
         }
 
         /// <summary>

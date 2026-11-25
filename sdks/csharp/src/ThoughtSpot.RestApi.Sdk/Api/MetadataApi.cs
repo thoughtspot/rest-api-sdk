@@ -31,6 +31,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <returns></returns>
+        void BuildMetadataIndex(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> BuildMetadataIndexWithHttpInfo(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///  Convert worksheets to models    Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - &#x60;DATAMANAGEMENT&#x60; (Can manage data) or &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (Can manage data models).  - --  ## Usage Guidelines  ### Parameters  1. **worksheet_ids**      - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.      - **Usage:**        - Used only when &#x60;convert_all&#x60; is set to &#x60;false&#x60;.        - Leave empty or omit when &#x60;convert_all&#x60; is set to &#x60;true&#x60;.  2. **exclude_worksheet_ids**      - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.      - **Usage:**        - Useful when &#x60;convert_all&#x60; is set to &#x60;true&#x60; and specific Worksheets should not be converted.  3. **convert_all**      - **Description:** Sets the scope of conversion.    - **Options:**        - &#x60;true&#x60;: Converts all Worksheets in the system, except those specified in &#x60;exclude_worksheet_ids&#x60;.        - &#x60;false&#x60;: Converts only the Worksheets listed in &#x60;worksheet_ids&#x60;.  4. **apply_changes**      - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.    - **Options:**        - &#x60;true&#x60;: Applies conversion changes directly to ThoughtSpot.      - &#x60;false&#x60;: Generates only a preview of the changes and does not apply any changes to ThoughtSpot  - --  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the conversion process  2. **Partial Conversion for Testing:**      Test the conversion process by setting &#x60;convert_all&#x60; to &#x60;false&#x60; and specifying a small number of &#x60;worksheet_ids&#x60;.  3. **Verify Dependencies:**      Check for dependent objects, such as Tables and Connections, to avoid invalid references.  4. **Review Changes:**      Use &#x60;apply_changes: false&#x60; to preview the impact of the conversion before applying changes.  - --  ## Examples  ### Convert Specific Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [\&quot;guid1\&quot;, \&quot;guid2\&quot;, \&quot;guid3\&quot;],   \&quot;exclude_worksheet_ids\&quot;: [],   \&quot;convert_all\&quot;: false,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;  ### Convert All Accessible Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [],   \&quot;exclude_worksheet_ids\&quot;: [],   \&quot;convert_all\&quot;: true,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;  ### Exclude Specific Worksheets While Converting All Accessible Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [],   \&quot;exclude_worksheet_ids\&quot;: [\&quot;abc\&quot;],   \&quot;convert_all\&quot;: true,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;     
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -195,6 +218,48 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="fetchLiveboardSqlQueryRequest"></param>
         /// <returns>ApiResponse of SqlQueryResponse</returns>
         ApiResponse<SqlQueryResponse> FetchLiveboardSqlQueryWithHttpInfo(FetchLiveboardSqlQueryRequest fetchLiveboardSqlQueryRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <returns>MetadataSearchReadinessResponse</returns>
+        MetadataSearchReadinessResponse FetchMetadataSearchReadiness(string guid);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <returns>ApiResponse of MetadataSearchReadinessResponse</returns>
+        ApiResponse<MetadataSearchReadinessResponse> FetchMetadataSearchReadinessWithHttpInfo(string guid);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <returns>SqlQueryResponse</returns>
+        SqlQueryResponse FetchSqlQuery(FetchSqlQueryRequest fetchSqlQueryRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <returns>ApiResponse of SqlQueryResponse</returns>
+        ApiResponse<SqlQueryResponse> FetchSqlQueryWithHttpInfo(FetchSqlQueryRequest fetchSqlQueryRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -374,6 +439,31 @@ namespace ThoughtSpot.RestApi.Sdk.Api
     public interface IMetadataApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task BuildMetadataIndexAsync(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> BuildMetadataIndexWithHttpInfoAsync(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -558,6 +648,52 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SqlQueryResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<SqlQueryResponse>> FetchLiveboardSqlQueryWithHttpInfoAsync(FetchLiveboardSqlQueryRequest fetchLiveboardSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of MetadataSearchReadinessResponse</returns>
+        System.Threading.Tasks.Task<MetadataSearchReadinessResponse> FetchMetadataSearchReadinessAsync(string guid, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (MetadataSearchReadinessResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<MetadataSearchReadinessResponse>> FetchMetadataSearchReadinessWithHttpInfoAsync(string guid, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SqlQueryResponse</returns>
+        System.Threading.Tasks.Task<SqlQueryResponse> FetchSqlQueryAsync(FetchSqlQueryRequest fetchSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///   Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SqlQueryResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SqlQueryResponse>> FetchSqlQueryWithHttpInfoAsync(FetchSqlQueryRequest fetchSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -1313,6 +1449,148 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             }
             set { _exceptionFactory = value; }
         }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <returns></returns>
+        public void BuildMetadataIndex(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest)
+        {
+            BuildMetadataIndexWithHttpInfo(logicalTableIdentifier, buildMetadataIndexRequest);
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> BuildMetadataIndexWithHttpInfo(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest)
+        {
+            // verify the required parameter 'logicalTableIdentifier' is set
+            if (logicalTableIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'logicalTableIdentifier' when calling MetadataApi->BuildMetadataIndex");
+
+            // verify the required parameter 'buildMetadataIndexRequest' is set
+            if (buildMetadataIndexRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'buildMetadataIndexRequest' when calling MetadataApi->BuildMetadataIndex");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("logical_table_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(logicalTableIdentifier)); // path parameter
+            localVarRequestOptions.Data = buildMetadataIndexRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/metadata/{logical_table_identifier}/build-index", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("BuildMetadataIndex", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task BuildMetadataIndexAsync(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await BuildMetadataIndexWithHttpInfoAsync(logicalTableIdentifier, buildMetadataIndexRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="logicalTableIdentifier">GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.</param>
+        /// <param name="buildMetadataIndexRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> BuildMetadataIndexWithHttpInfoAsync(string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'logicalTableIdentifier' is set
+            if (logicalTableIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'logicalTableIdentifier' when calling MetadataApi->BuildMetadataIndex");
+
+            // verify the required parameter 'buildMetadataIndexRequest' is set
+            if (buildMetadataIndexRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'buildMetadataIndexRequest' when calling MetadataApi->BuildMetadataIndex");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("logical_table_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(logicalTableIdentifier)); // path parameter
+            localVarRequestOptions.Data = buildMetadataIndexRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/metadata/{logical_table_identifier}/build-index", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("BuildMetadataIndex", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
 
         /// <summary>
         ///   Convert worksheets to models    Version: 10.6.0.cl or later   ## Prerequisites - **Privileges Required:**   - &#x60;DATAMANAGEMENT&#x60; (Can manage data) or &#x60;ADMINISTRATION&#x60; (Can administer ThoughtSpot). - **Additional Privileges (if RBAC is enabled):**   - &#x60;CAN_MANAGE_WORKSHEET_VIEWS_TABLES&#x60; (Can manage data models).  - --  ## Usage Guidelines  ### Parameters  1. **worksheet_ids**      - **Description:** A comma-separated list of GUIDs (Globally Unique Identifiers) specifying the Worksheets to be converted.      - **Usage:**        - Used only when &#x60;convert_all&#x60; is set to &#x60;false&#x60;.        - Leave empty or omit when &#x60;convert_all&#x60; is set to &#x60;true&#x60;.  2. **exclude_worksheet_ids**      - **Description:** A comma-separated list of GUIDs specifying Worksheets to be excluded from conversion.      - **Usage:**        - Useful when &#x60;convert_all&#x60; is set to &#x60;true&#x60; and specific Worksheets should not be converted.  3. **convert_all**      - **Description:** Sets the scope of conversion.    - **Options:**        - &#x60;true&#x60;: Converts all Worksheets in the system, except those specified in &#x60;exclude_worksheet_ids&#x60;.        - &#x60;false&#x60;: Converts only the Worksheets listed in &#x60;worksheet_ids&#x60;.  4. **apply_changes**      - **Description:** Specifies whether to apply changes directly to ThoughtSpot or to generate a preview before applying any changes.Used for validation of conversion.    - **Options:**        - &#x60;true&#x60;: Applies conversion changes directly to ThoughtSpot.      - &#x60;false&#x60;: Generates only a preview of the changes and does not apply any changes to ThoughtSpot  - --  ## Best Practices  1. **Backup Before Conversion:**      Always export metadata as a backup before initiating the conversion process  2. **Partial Conversion for Testing:**      Test the conversion process by setting &#x60;convert_all&#x60; to &#x60;false&#x60; and specifying a small number of &#x60;worksheet_ids&#x60;.  3. **Verify Dependencies:**      Check for dependent objects, such as Tables and Connections, to avoid invalid references.  4. **Review Changes:**      Use &#x60;apply_changes: false&#x60; to preview the impact of the conversion before applying changes.  - --  ## Examples  ### Convert Specific Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [\&quot;guid1\&quot;, \&quot;guid2\&quot;, \&quot;guid3\&quot;],   \&quot;exclude_worksheet_ids\&quot;: [],   \&quot;convert_all\&quot;: false,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;  ### Convert All Accessible Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [],   \&quot;exclude_worksheet_ids\&quot;: [],   \&quot;convert_all\&quot;: true,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;  ### Exclude Specific Worksheets While Converting All Accessible Worksheets &#x60;&#x60;&#x60;json {   \&quot;worksheet_ids\&quot;: [],   \&quot;exclude_worksheet_ids\&quot;: [\&quot;abc\&quot;],   \&quot;convert_all\&quot;: true,   \&quot;apply_changes\&quot;: true } &#x60;&#x60;&#x60;     
@@ -2345,6 +2623,264 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FetchLiveboardSqlQuery", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <returns>MetadataSearchReadinessResponse</returns>
+        public MetadataSearchReadinessResponse FetchMetadataSearchReadiness(string guid)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<MetadataSearchReadinessResponse> localVarResponse = FetchMetadataSearchReadinessWithHttpInfo(guid);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <returns>ApiResponse of MetadataSearchReadinessResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<MetadataSearchReadinessResponse> FetchMetadataSearchReadinessWithHttpInfo(string guid)
+        {
+            // verify the required parameter 'guid' is set
+            if (guid == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'guid' when calling MetadataApi->FetchMetadataSearchReadiness");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("guid", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(guid)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<MetadataSearchReadinessResponse>("/api/rest/2.0/metadata/{guid}/search-readiness", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FetchMetadataSearchReadiness", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of MetadataSearchReadinessResponse</returns>
+        public async System.Threading.Tasks.Task<MetadataSearchReadinessResponse> FetchMetadataSearchReadinessAsync(string guid, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<MetadataSearchReadinessResponse> localVarResponse = await FetchMetadataSearchReadinessWithHttpInfoAsync(guid, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guid">GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (MetadataSearchReadinessResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<MetadataSearchReadinessResponse>> FetchMetadataSearchReadinessWithHttpInfoAsync(string guid, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'guid' is set
+            if (guid == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'guid' when calling MetadataApi->FetchMetadataSearchReadiness");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("guid", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(guid)); // path parameter
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<MetadataSearchReadinessResponse>("/api/rest/2.0/metadata/{guid}/search-readiness", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FetchMetadataSearchReadiness", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <returns>SqlQueryResponse</returns>
+        public SqlQueryResponse FetchSqlQuery(FetchSqlQueryRequest fetchSqlQueryRequest)
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SqlQueryResponse> localVarResponse = FetchSqlQueryWithHttpInfo(fetchSqlQueryRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <returns>ApiResponse of SqlQueryResponse</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SqlQueryResponse> FetchSqlQueryWithHttpInfo(FetchSqlQueryRequest fetchSqlQueryRequest)
+        {
+            // verify the required parameter 'fetchSqlQueryRequest' is set
+            if (fetchSqlQueryRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'fetchSqlQueryRequest' when calling MetadataApi->FetchSqlQuery");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = fetchSqlQueryRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SqlQueryResponse>("/api/rest/2.0/metadata/sql/fetch", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FetchSqlQuery", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SqlQueryResponse</returns>
+        public async System.Threading.Tasks.Task<SqlQueryResponse> FetchSqlQueryAsync(FetchSqlQueryRequest fetchSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SqlQueryResponse> localVarResponse = await FetchSqlQueryWithHttpInfoAsync(fetchSqlQueryRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///    Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | - -- | - -- | - -- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="fetchSqlQueryRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SqlQueryResponse)</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<SqlQueryResponse>> FetchSqlQueryWithHttpInfoAsync(FetchSqlQueryRequest fetchSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'fetchSqlQueryRequest' is set
+            if (fetchSqlQueryRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'fetchSqlQueryRequest' when calling MetadataApi->FetchSqlQuery");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = fetchSqlQueryRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SqlQueryResponse>("/api/rest/2.0/metadata/sql/fetch", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FetchSqlQuery", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

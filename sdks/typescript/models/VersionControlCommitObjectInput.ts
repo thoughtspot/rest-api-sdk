@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class VersionControlCommitObjectInput {
     /**
-    * GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
+    * GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
     */
     'identifier': string;
     /**
@@ -51,5 +51,5 @@ export class VersionControlCommitObjectInput {
     }
 }
 
-    export type VersionControlCommitObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" ;
+    export type VersionControlCommitObjectInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" ;
 

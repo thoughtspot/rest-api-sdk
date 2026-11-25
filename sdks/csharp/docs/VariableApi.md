@@ -105,7 +105,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Create variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **409** | Conflict. A variable with the same name already exists. |  -  |
@@ -202,7 +202,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Deleting the variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
@@ -298,7 +298,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Deletion of variable(s) is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
@@ -396,9 +396,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable values updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -594,9 +594,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable name updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include no variable matching the identifier, or an invalid name. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. |  -  |
 | **409** | Conflict. Another variable already has the requested name. |  -  |
 | **500** | Unexpected error |  -  |
 
@@ -691,9 +691,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable values updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -52,6 +52,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <returns></returns>
+        void ExportManualTranslationTemplate(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> ExportManualTranslationTemplateWithHttpInfo(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///  Export manual translations as a CSV file.    Version: 26.7.0.cl or later   Downloads all manual translations for the org as a CSV file.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The response is a CSV file with columns: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. - Defaults to &#x60;ORG&#x60; scope if not specified. - Set &#x60;scope&#x60; to &#x60;CLUSTER&#x60; to export translations from the All-Org context. - &#x60;scope&#x60; accepts only &#x60;ORG&#x60; (default) and &#x60;CLUSTER&#x60;, in uppercase. Any other value returns a &#x60;400&#x60; error. - Returns a &#x60;400&#x60; error if no translations exist for the targeted org or cluster scope.      
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -145,6 +166,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteManualTranslationsWithHttpInfoAsync(DeleteManualTranslationsRequest deleteManualTranslationsRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ExportManualTranslationTemplateAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ExportManualTranslationTemplateWithHttpInfoAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -907,6 +951,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeleteManualTranslations", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <returns></returns>
+        public void ExportManualTranslationTemplate(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest)
+        {
+            ExportManualTranslationTemplateWithHttpInfo(exportManualTranslationTemplateRequest);
+        }
+
+        /// <summary>
+        ///   Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ExportManualTranslationTemplateWithHttpInfo(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest)
+        {
+            // verify the required parameter 'exportManualTranslationTemplateRequest' is set
+            if (exportManualTranslationTemplateRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'exportManualTranslationTemplateRequest' when calling ManualTranslationApi->ExportManualTranslationTemplate");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/csv",
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = exportManualTranslationTemplateRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/localizations/manual-translation/template/export", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExportManualTranslationTemplate", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task ExportManualTranslationTemplateAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await ExportManualTranslationTemplateWithHttpInfoAsync(exportManualTranslationTemplateRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportManualTranslationTemplateRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ExportManualTranslationTemplateWithHttpInfoAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'exportManualTranslationTemplateRequest' is set
+            if (exportManualTranslationTemplateRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'exportManualTranslationTemplateRequest' when calling ManualTranslationApi->ExportManualTranslationTemplate");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/csv",
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = exportManualTranslationTemplateRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/localizations/manual-translation/template/export", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExportManualTranslationTemplate", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

@@ -49,7 +49,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum ANSWER for value: ANSWER
             /// </summary>
             [EnumMember(Value = "ANSWER")]
-            ANSWER = 2
+            ANSWER = 2,
+
+            /// <summary>
+            /// Enum LOGICALTABLE for value: LOGICAL_TABLE
+            /// </summary>
+            [EnumMember(Value = "LOGICAL_TABLE")]
+            LOGICALTABLE = 3
         }
 
 
@@ -70,7 +76,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="VersionControlCommitObjectInput" /> class.
         /// </summary>
-        /// <param name="identifier">GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster. (required).</param>
+        /// <param name="identifier">GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster. (required).</param>
         /// <param name="type">Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type..</param>
         public VersionControlCommitObjectInput(string identifier = default, TypeEnum? type = default)
         {
@@ -85,9 +91,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
+        /// GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
         /// </summary>
-        /// <value>GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.</value>
+        /// <value>GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.</value>
         [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = true)]
         public string Identifier { get; set; }
 

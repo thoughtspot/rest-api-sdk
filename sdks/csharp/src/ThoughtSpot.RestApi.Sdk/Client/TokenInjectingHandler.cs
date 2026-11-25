@@ -26,8 +26,8 @@ internal sealed class TokenInjectingHandler : DelegatingHandler
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
         request.Headers.TryAddWithoutValidation("Accept", "application/json");
-        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.32.0");
-        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.32.0");
+        request.Headers.TryAddWithoutValidation("User-Agent", "ThoughtSpot-Client/csharp/2.33.0");
+        request.Headers.TryAddWithoutValidation("X-ThoughtSpot-Client", "ThoughtSpot-csharp-client/2.33.0");
 
         var sent = await _tokens.GetAsync(cancellationToken).ConfigureAwait(false);
         SetBearer(request, sent);

@@ -25,7 +25,7 @@ class VersionControlCommitObjectInput(BaseModel):
     """
     One object to version on the commit endpoint.
     """ # noqa: E501
-    identifier: StrictStr = Field(description="GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.")
+    identifier: StrictStr = Field(description="GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.")
     type: Optional[StrictStr] = Field(default=None, description="Type of the metadata object. Required when the identifier is a name, since a name can belong to more than one type.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["identifier", "type"]
@@ -36,8 +36,8 @@ class VersionControlCommitObjectInput(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE')")
         return value
 
     model_config = ConfigDict(

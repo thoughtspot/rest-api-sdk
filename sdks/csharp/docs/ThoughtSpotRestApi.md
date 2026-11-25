@@ -7,6 +7,7 @@ All URIs are relative to *https://localhost:443*
 | [**ActivateUser**](ThoughtSpotRestApi.md#activateuser) | **POST** /api/rest/2.0/users/activate |  |
 | [**AssignChangeAuthor**](ThoughtSpotRestApi.md#assignchangeauthor) | **POST** /api/rest/2.0/security/metadata/assign |  |
 | [**AssignTag**](ThoughtSpotRestApi.md#assigntag) | **POST** /api/rest/2.0/tags/assign |  |
+| [**BuildMetadataIndex**](ThoughtSpotRestApi.md#buildmetadataindex) | **POST** /api/rest/2.0/metadata/{logical_table_identifier}/build-index |  |
 | [**ChangeUserPassword**](ThoughtSpotRestApi.md#changeuserpassword) | **POST** /api/rest/2.0/users/change-password |  |
 | [**CommitBranch**](ThoughtSpotRestApi.md#commitbranch) | **POST** /api/rest/2.0/vcs/git/branches/commit |  |
 | [**ConfigureAuthSettings**](ThoughtSpotRestApi.md#configureauthsettings) | **POST** /api/rest/2.0/auth/configure |  |
@@ -76,7 +77,9 @@ All URIs are relative to *https://localhost:443*
 | [**DeployRevision**](ThoughtSpotRestApi.md#deployrevision) | **POST** /api/rest/2.0/version-control/deploy |  |
 | [**DownloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadconnectionmetadatachanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |  |
 | [**ExportAnswerReport**](ThoughtSpotRestApi.md#exportanswerreport) | **POST** /api/rest/2.0/report/answer |  |
+| [**ExportContext**](ThoughtSpotRestApi.md#exportcontext) | **POST** /api/rest/2.0/ai/context/export |  |
 | [**ExportLiveboardReport**](ThoughtSpotRestApi.md#exportliveboardreport) | **POST** /api/rest/2.0/report/liveboard |  |
+| [**ExportManualTranslationTemplate**](ThoughtSpotRestApi.md#exportmanualtranslationtemplate) | **POST** /api/rest/2.0/localizations/manual-translation/template/export |  |
 | [**ExportManualTranslations**](ThoughtSpotRestApi.md#exportmanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/export |  |
 | [**ExportMemory**](ThoughtSpotRestApi.md#exportmemory) | **POST** /api/rest/2.0/ai/memory/export |  |
 | [**ExportMetadataTML**](ThoughtSpotRestApi.md#exportmetadatatml) | **POST** /api/rest/2.0/metadata/tml/export |  |
@@ -90,9 +93,11 @@ All URIs are relative to *https://localhost:443*
 | [**FetchLiveboardData**](ThoughtSpotRestApi.md#fetchliveboarddata) | **POST** /api/rest/2.0/metadata/liveboard/data |  |
 | [**FetchLiveboardSqlQuery**](ThoughtSpotRestApi.md#fetchliveboardsqlquery) | **POST** /api/rest/2.0/metadata/liveboard/sql |  |
 | [**FetchLogs**](ThoughtSpotRestApi.md#fetchlogs) | **POST** /api/rest/2.0/logs/fetch |  |
+| [**FetchMetadataSearchReadiness**](ThoughtSpotRestApi.md#fetchmetadatasearchreadiness) | **GET** /api/rest/2.0/metadata/{guid}/search-readiness |  |
 | [**FetchObjectPrivileges**](ThoughtSpotRestApi.md#fetchobjectprivileges) | **POST** /api/rest/2.0/security/metadata/fetch-object-privileges |  |
 | [**FetchPermissionsOfPrincipals**](ThoughtSpotRestApi.md#fetchpermissionsofprincipals) | **POST** /api/rest/2.0/security/principals/fetch-permissions |  |
 | [**FetchPermissionsOnMetadata**](ThoughtSpotRestApi.md#fetchpermissionsonmetadata) | **POST** /api/rest/2.0/security/metadata/fetch-permissions |  |
+| [**FetchSqlQuery**](ThoughtSpotRestApi.md#fetchsqlquery) | **POST** /api/rest/2.0/metadata/sql/fetch |  |
 | [**ForceLogoutUsers**](ThoughtSpotRestApi.md#forcelogoutusers) | **POST** /api/rest/2.0/users/force-logout |  |
 | [**GenerateCSV**](ThoughtSpotRestApi.md#generatecsv) | **POST** /api/rest/2.0/calendars/generate-csv |  |
 | [**GetAgentInstructions**](ThoughtSpotRestApi.md#getagentinstructions) | **GET** /api/rest/2.0/ai/agent/instructions/get |  |
@@ -114,6 +119,7 @@ All URIs are relative to *https://localhost:443*
 | [**GetSystemOverrideInfo**](ThoughtSpotRestApi.md#getsystemoverrideinfo) | **GET** /api/rest/2.0/system/config-overrides |  |
 | [**GetUsageDataForUser**](ThoughtSpotRestApi.md#getusagedataforuser) | **GET** /api/rest/2.0/ai/usage-data/user |  |
 | [**GetWebhookStorageConfig**](ThoughtSpotRestApi.md#getwebhookstorageconfig) | **GET** /api/rest/2.0/webhooks/storage-config |  |
+| [**ImportContext**](ThoughtSpotRestApi.md#importcontext) | **POST** /api/rest/2.0/ai/context/import |  |
 | [**ImportManualTranslations**](ThoughtSpotRestApi.md#importmanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import |  |
 | [**ImportMemory**](ThoughtSpotRestApi.md#importmemory) | **POST** /api/rest/2.0/ai/memory/import |  |
 | [**ImportMetadataTML**](ThoughtSpotRestApi.md#importmetadatatml) | **POST** /api/rest/2.0/metadata/tml/import |  |
@@ -510,6 +516,104 @@ void (empty response body)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="buildmetadataindex"></a>
+# **BuildMetadataIndex**
+> void BuildMetadataIndex (string logicalTableIdentifier, BuildMetadataIndexRequest buildMetadataIndexRequest)
+
+
+
+  Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or `ADMINISTRATION` (**Can administer ThoughtSpot**) or `ORG_ADMINISTRATION` (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn't been indexed yet is picked up by the next scheduled indexing run instead.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class BuildMetadataIndexExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var logicalTableIdentifier = "logicalTableIdentifier_example";  // string | GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild.
+            var buildMetadataIndexRequest = new BuildMetadataIndexRequest(); // BuildMetadataIndexRequest | 
+
+            try
+            {
+                apiInstance.BuildMetadataIndex(logicalTableIdentifier, buildMetadataIndexRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.BuildMetadataIndex: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the BuildMetadataIndexWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.BuildMetadataIndexWithHttpInfo(logicalTableIdentifier, buildMetadataIndexRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.BuildMetadataIndexWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **logicalTableIdentifier** | **string** | GUID, name, or custom object ID of the logical table (such as a table or view) whose search index to rebuild. |  |
+| **buildMetadataIndexRequest** | [**BuildMetadataIndexRequest**](BuildMetadataIndexRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Reindex of the logical table is queued and will run in the background. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1706,7 +1810,7 @@ catch (ApiException e)
 
 
 
- Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards and Answers, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
+ Version: 26.12.0.cl or later   Starts a versioning run that exports the named objects, such as Liveboards, Answers and Models, and commits them to the branch your Org versions to. Name each object by GUID, object ID, or name with its type; it is resolved in your Org and committed by its cross-Org object ID, so object IDs must be enabled on the cluster. A table, Model, view or SQL view is named with the type `LOGICAL_TABLE` and committed to a file named by its own type, such as `model/<object ID>.model.tml`. An object named more than once is committed once. The run is asynchronous: the response is an admission receipt carrying a `run_id`, and nothing is committed or pushed before it returns.  Admission is all or nothing, so a 4xx means nothing was admitted and the request is safe to correct and retry. Read the per-object outcomes from the run search endpoint using the returned `run_id`.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.      
 
 ### Example
 ```csharp
@@ -1793,7 +1897,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The request was admitted and the versioning run has started. The body is a receipt, not a result: nothing is committed or pushed yet. |  -  |
-| **400** | Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. |  -  |
+| **400** | Invalid request, and nothing was admitted. Covers a malformed body, object ids not enabled, an object that does not resolve or has no object id, a name given without its type, a type that does not match the object, a LOGICAL_TABLE that is not a table, Model, view or SQL view, a paused repository, and an org whose disabled_operations holds COMMIT. error.message names the reason. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **404** | The caller&#39;s org has no version control configuration. |  -  |
@@ -3401,7 +3505,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Create variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **409** | Conflict. A variable with the same name already exists. |  -  |
@@ -6648,7 +6752,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Deleting the variable is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
@@ -6744,7 +6848,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Deletion of variable(s) is successful. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
@@ -7344,6 +7448,107 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="exportcontext"></a>
+# **ExportContext**
+> ExportContextResponse ExportContext (ExportContextRequest exportContextRequest)
+
+
+
+ Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter's context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the `importContext` API in the target.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - `model_identifiers`: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - `analyst_identifiers`: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - `include_analyst_models`: when `true`, also selects every model the selected analysts use. - `include_org_level_context`: when `true`, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - `export_all_org_context`: when `true`, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - `content`: the YAML file. Pass it to `importContext` as is or after editing. - `summary`: what the file holds per owner, each entry with its `scope` and `exported_count`. The `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With `export_all_org_context`, only the owners that have context have an entry. - `additional_model_identifiers` and `additional_analyst_identifiers`: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn't replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in `additional_model_identifiers`.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in `additional_analyst_identifiers`.   - With `include_analyst_models`, analyst A's models are selected. A metric scoped to A's model M1 and to model M3, which A doesn't use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With `include_analyst_models`, the file lists the models the analysts use in the source, and the import replaces those models' context even if the analysts use other models in the target. - With `export_all_org_context`, the import replaces all of the target Org's context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model's own context also applies inside every analyst that uses it, so replacing it changes those analysts' answers too; the import's dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — nothing is selected, `export_all_org_context` is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn't use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn't have Spotter access, or doesn't have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ExportContextExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var exportContextRequest = new ExportContextRequest(); // ExportContextRequest | 
+
+            try
+            {
+                ExportContextResponse result = apiInstance.ExportContext(exportContextRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ExportContext: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ExportContextWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ExportContextResponse> response = apiInstance.ExportContextWithHttpInfo(exportContextRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ExportContextWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **exportContextRequest** | [**ExportContextRequest**](ExportContextRequest.md) |  |  |
+
+### Return type
+
+[**ExportContextResponse**](ExportContextResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="exportliveboardreport"></a>
 # **ExportLiveboardReport**
 > FileParameter ExportLiveboardReport (ExportLiveboardReportRequest exportLiveboardReportRequest)
@@ -7441,6 +7646,103 @@ catch (ApiException e)
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="exportmanualtranslationtemplate"></a>
+# **ExportManualTranslationTemplate**
+> void ExportManualTranslationTemplate (ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest)
+
+
+
+ Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: `content`, `locale`, `translated-content`. Each row lists one string in `content` and leaves `locale` and `translated-content` empty. Fill them in, then upload the file with `POST /api/rest/2.0/localizations/manual-translation/import`. - The template includes the Liveboard title and description, tab names, the names of the Liveboard's personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with `=`, `+`, `-`, `@`, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the `X-ThoughtSpot-Excluded-Content-Count` response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ExportManualTranslationTemplateExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var exportManualTranslationTemplateRequest = new ExportManualTranslationTemplateRequest(); // ExportManualTranslationTemplateRequest | 
+
+            try
+            {
+                apiInstance.ExportManualTranslationTemplate(exportManualTranslationTemplateRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ExportManualTranslationTemplate: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ExportManualTranslationTemplateWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.ExportManualTranslationTemplateWithHttpInfo(exportManualTranslationTemplateRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ExportManualTranslationTemplateWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **exportManualTranslationTemplateRequest** | [**ExportManualTranslationTemplateRequest**](ExportManualTranslationTemplateRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: text/csv, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Translation template downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  |
+| **400** | Invalid request, or a Liveboard was not found. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access, or no access to a Liveboard. |  -  |
+| **409** | More than one Liveboard has the given name. |  -  |
+| **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -8747,6 +9049,106 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="fetchmetadatasearchreadiness"></a>
+# **FetchMetadataSearchReadiness**
+> MetadataSearchReadinessResponse FetchMetadataSearchReadiness (string guid)
+
+
+
+  Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object's latest version is available, for example before running a search query on a Model you just imported via TML.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the `guid` path parameter. The object type is detected automatically. Supported types are Tables and Models (`LOGICAL_TABLE`), users (`USER`), and groups (`USER_GROUP`).  The response `state` is one of the following:  * `OBJECT_READY` - The object's latest version is available in Search. * `OBJECT_NOT_READY` - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * `TYPE_NOT_SUPPORTED` - The object exists, but its type cannot be checked. * `OBJECT_NOT_VALID` - `guid` is not a valid GUID, or no object with that GUID exists.  The response also includes `object_version`, the metadata version at which the object was last written, and `indexed_version`, the latest metadata version indexed by Search. The object is ready once `indexed_version` is greater than or equal to `object_version`.       
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class FetchMetadataSearchReadinessExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var guid = "guid_example";  // string | GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID.
+
+            try
+            {
+                MetadataSearchReadinessResponse result = apiInstance.FetchMetadataSearchReadiness(guid);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.FetchMetadataSearchReadiness: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the FetchMetadataSearchReadinessWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<MetadataSearchReadinessResponse> response = apiInstance.FetchMetadataSearchReadinessWithHttpInfo(guid);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.FetchMetadataSearchReadinessWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **guid** | **string** | GUID of the metadata object to check. Supported object types are Tables and Models (LOGICAL_TABLE), users (USER), and groups (USER_GROUP); the type is detected automatically from the GUID. |  |
+
+### Return type
+
+[**MetadataSearchReadinessResponse**](MetadataSearchReadinessResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns the search readiness state of the object. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="fetchobjectprivileges"></a>
 # **FetchObjectPrivileges**
 > ObjectPrivilegesOfMetadataResponse FetchObjectPrivileges (FetchObjectPrivilegesRequest fetchObjectPrivilegesRequest)
@@ -9040,6 +9442,106 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Fetching permissions of metadata objects is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="fetchsqlquery"></a>
+# **FetchSqlQuery**
+> SqlQueryResponse FetchSqlQuery (FetchSqlQueryRequest fetchSqlQueryRequest)
+
+
+
+  Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in `metadata` that the type of the object uses:  | `metadata.type` | Fields in `metadata` | Object | | - -- | - -- | - -- | | `ANSWER` | `identifier` | Saved Answer | | `ANSWER` | `tml` | Unsaved Answer, sent as Answer TML | | `LIVEBOARD` | `identifier`, optional `visualization_identifiers` | Saved Liveboard | | `LOGICAL_TABLE` | `identifier` (Model, View, or Table) | Search query on a data source; also set `query_string` |  `metadata.type` is optional. It is required if `identifier` is a name. If it is not set, the type is taken from the request, in this order: `tml` means `ANSWER`, `query_string` means `LOGICAL_TABLE`, and a GUID in `identifier` means the type of that object.  `query_string` is a top-level parameter. It holds the search tokens to apply on the data source. It is required with `LOGICAL_TABLE` and not supported with other types.  The runtime overrides `runtime_filter`, `runtime_sort`, and `runtime_param_override` are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and `LOGICAL_TABLE`, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with `tml`: set the filters and parameter values in the TML instead.  The API returns a 400 error if `metadata` is missing a field that its type requires or contains a field that its type does not use, if `query_string` is missing with `LOGICAL_TABLE` or set with another type, or if a runtime override is set with `tml`.  #### Required access  - Saved Answer and `LIVEBOARD`: at least view access to the object. - Unsaved Answer and `LOGICAL_TABLE`: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required.  #### Usage guidelines  - `LIVEBOARD`: if `visualization_identifiers` is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in `tml`, with `type` set to `ANSWER` or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - `LOGICAL_TABLE`: pass the search tokens in `query_string`. The SQL is generated for the table visualization of the search and has no `LIMIT` or `OFFSET` clause. `metadata_id` in the response is the GUID of the data source, `metadata_name` is the query string, and `metadata_type` is `LOGICAL_TABLE`. To get the data and the SQL in one call, use the searchData API with `include_sql_query` set to `true`.  Example request for a search query: ``` {    \"metadata\":{       \"type\":\"LOGICAL_TABLE\",       \"identifier\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\"    },    \"query_string\":\"[sales] [region]\",    \"runtime_filter\":{\"col1\":\"region\",\"op1\":\"EQ\",\"val1\":\"West\"} } ```  Upon successful execution, the API returns the SQL query as shown in this example: ``` {    \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",    \"metadata_name\":\"[sales] [region]\",    \"metadata_type\":\"LOGICAL_TABLE\",    \"sql_queries\":[       {          \"metadata_id\":\"cd252e5c-b552-49a8-821d-3eadaa049cca\",          \"metadata_name\":\"[sales] [region]\",          \"sql_query\":\"SELECT \\n  \\\"ta_1\\\".\\\"REGION\\\" \\\"ca_1\\\", \\n  CASE\\n    WHEN sum(\\\"ta_2\\\".\\\"SALES\\\") IS NOT NULL THEN sum(\\\"ta_2\\\".\\\"SALES\\\")\\n    ELSE 0\\n  END \\\"ca_2\\\"\\nFROM \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"FACT_RETAPP_SALES\\\" \\\"ta_2\\\"\\n  JOIN \\\"RETAILAPPAREL\\\".\\\"PUBLIC\\\".\\\"DIM_RETAPP_STORES\\\" \\\"ta_1\\\"\\n    ON \\\"ta_2\\\".\\\"STOREID\\\" = \\\"ta_1\\\".\\\"STOREID\\\"\\nWHERE \\\"ta_1\\\".\\\"REGION\\\" = 'West'\\nGROUP BY \\\"ca_1\\\"\"       }    ] } ```      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class FetchSqlQueryExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var fetchSqlQueryRequest = new FetchSqlQueryRequest(); // FetchSqlQueryRequest | 
+
+            try
+            {
+                SqlQueryResponse result = apiInstance.FetchSqlQuery(fetchSqlQueryRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.FetchSqlQuery: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the FetchSqlQueryWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<SqlQueryResponse> response = apiInstance.FetchSqlQueryWithHttpInfo(fetchSqlQueryRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.FetchSqlQueryWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **fetchSqlQueryRequest** | [**FetchSqlQueryRequest**](FetchSqlQueryRequest.md) |  |  |
+
+### Return type
+
+[**SqlQueryResponse**](SqlQueryResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fetching SQL query of specified metadata object is successful. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
@@ -10241,7 +10743,7 @@ catch (ApiException e)
 
 
 
-  Version: 9.0.0.cl or later   Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
+  Version: 9.0.0.cl or later   **Note:** This API endpoint is deprecated from 27.2.0.cl and will be removed from ThoughtSpot in 27.6.0.cl. Use [POST /api/rest/2.0/auth/token/custom](/api/rest/2.0/auth/token/custom) instead.  Generates an authentication token that provides access to a specific metadata object. This object list is intersected with the list of objects the user is allowed to access via group membership. For more information, see [Object security](https://docs.thoughtspot.com/cloud/latest/security-data-object#object_security).  #### Usage guidelines  You can generate a token for a user by providing a `username` and `password`, or by using the `secret_key` generated for your instance. To generate a `secret_key`, the administrator must enable [Trusted authentication](https://developers.thoughtspot.com/docs/trusted-auth-secret-key) in the **Develop** > **Customizations** > **Security Settings** page.  **Note**: * When both `password` and `secret_key` are included in the API request, `secret_key` takes precedence. * If [Multi-Factor Authentication (MFA)](https://docs.thoughtspot.com/cloud/latest/authentication-local-mfa) is enabled on your instance, the API login request with `username` and `password` returns an error. You can switch to token-based authentication with `secret_key` or contact ThoughtSpot Support for assistance.  The token obtained from ThoughtSpot is valid for 5 minutes by default. You can configure the token expiration time as required.  #### Just-in-time provisioning  For [just-in-time user creation and provisioning](https://developers.thoughtspot.com/docs/just-in-time-provisioning), specify the following attributes in the API request:  * `auto_create` * `username` * `display_name` * `email` * `group_identifiers`  Set `auto_create` to `true` if the user is not available in ThoughtSpot. If the user already exists in ThoughtSpot and the `auto_create` parameter is set to `true`, user properties such as display name, email, and group assignment will be updated.  To add a new user and assign privileges, the `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege is required. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CONTROL_TRUSTED_AUTH`(**Can Enable or Disable Trusted Authentication**) privilege is required.  #### Important point to note  All options in the token creation APIs that define user access to data in ThoughtSpot will take effect during token creation, not when the token is used for authentication. For example, `auto_create:true` will create the user when the authentication token is created.      
 
 ### Example
 ```csharp
@@ -11113,6 +11615,107 @@ This endpoint does not need any parameter.
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="importcontext"></a>
+# **ImportContext**
+> ImportContextResponse ImportContext (ImportContextRequest importContextRequest)
+
+
+
+ Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file's entities with new IDs, then deletes the rest of that context. Run with `dry_run` set to `true` first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the `exportContext` API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with `dry_run` set to `true` first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  A scope you can't write is reported as an `ACCESS_DENIED` validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - `content`: the YAML file, typically the `content` returned by `exportContext`, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - `dry_run`: required, with no default. `true` validates the file and previews the changes; `false` applies them.  An import is a full replace. The file's entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - `status`: `SUCCESS` (in a dry run, the preview is complete), `VALIDATION_FAILED` (the file has problems, listed in `validation_failures`; nothing was written) or `FAILED` (a valid file hit a server error; see `diagnostics`). - `summary`: per owner, the entities before the import (`existing_record_count`), deleted and inserted. Previews in a dry run. Each entry's `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - `validation_failures`: every problem in the file, each with its `line_number`, `entity_key`, `field_name`, `reason` and `message`, so you can fix the file in one pass. - `diagnostics`: warnings and failure causes, grouped by `sub_status` (`WARNING`, `FAILURE` or `ROLLED_BACK`). Warnings include a selected model or analyst left with no context, an analyst's context deleted on a model the file doesn't name, analysts outside the selection whose answers change through a replaced model's context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - `operation_id`: include it when contacting support.  #### What is replaced  Only the file's selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1's own context and all of A's context, including A's context on models the file never names. It keeps analyst B's context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file's `selection`, the `models` and `analysts` it refers to by alias, and its `entities`:  ```yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. ```  The identifiers in the file are for reference only and aren't stored as written:  - Entity `id`s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (`gtm`, `sales`) only link the entities' scopes to the `models` and `analysts` entries. - The `guid`, `obj_id`, `id` and `name` values under `models` and `analysts` are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target's own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |- -- -- -- -|- -- -- -- --| | `SCHEMA` | The YAML is invalid, or has an unknown field or a bad value. | | `VALIDATION` | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | `CHAR_LIMIT` | A field is longer than its limit. | | `CHAR_BUDGET` | A scope's non-semantic instructions or guardrails together exceed their character budget. | | `SCOPE` | An entity is outside the file's selection, is personal context, or names a model that isn't one of its analyst's models. | | `UNRESOLVED_SOURCE` | A model or analyst isn't found in this environment. | | `UNRESOLVED_COLUMN` | A column isn't found by name in its model. | | `UNRESOLVED_REFERENCE` | A reference or relationship names an entity key that isn't in the file. | | `INVALID_RELATIONSHIP` | A relationship isn't allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | `ACCESS_DENIED` | You can't write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |- -- -- --|- -- -- --|- -- -- -- -- -- -| | File size | 10 MiB | A `400` error, before the file is validated | | Entities per file | 10,000 | `VALIDATION` | | Title of an entity | 120 characters | `CHAR_LIMIT` | | Any other text field of an entity | 4,000 characters | `CHAR_LIMIT` | | `NON_SEMANTIC_INSTRUCTION` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | `GUARDRAIL` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | Depth of a chain of relationships | 10 | `INVALID_RELATIONSHIP` |  A `DATA_GUIDE` entity must also name at least one model and no analyst; otherwise it fails with `SCOPE`.  #### Error responses  Problems in the file are not errors: the call returns `200` with `VALIDATION_FAILED`, and the details are in `validation_failures`.  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | 400  | Bad request — `dry_run` is missing, the file is over 10 MiB, or the Org doesn't use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn't have Spotter access. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Important: > Never run with `dry_run` set to `false` without first checking a dry run. A real import deletes and replaces the context the file's selection covers.  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ImportContextExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ThoughtSpotRestApi(httpClient, config, httpClientHandler);
+            var importContextRequest = new ImportContextRequest(); // ImportContextRequest | 
+
+            try
+            {
+                ImportContextResponse result = apiInstance.ImportContext(importContextRequest);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ThoughtSpotRestApi.ImportContext: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ImportContextWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    ApiResponse<ImportContextResponse> response = apiInstance.ImportContextWithHttpInfo(importContextRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ThoughtSpotRestApi.ImportContextWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **importContextRequest** | [**ImportContextRequest**](ImportContextRequest.md) |  |  |
+
+### Return type
+
+[**ImportContextResponse**](ImportContextResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Common successful response |  -  |
+| **201** | Common error response |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -12683,9 +13286,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable values updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -20872,9 +21475,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable name updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include no variable matching the identifier, or an invalid name. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. |  -  |
 | **409** | Conflict. Another variable already has the requested name. |  -  |
 | **500** | Unexpected error |  -  |
 
@@ -20969,9 +21572,9 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Variable values updated successfully. |  -  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. |  -  |
 | **401** | Unauthorized access. |  -  |
-| **403** | Forbidden access. |  -  |
+| **403** | Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

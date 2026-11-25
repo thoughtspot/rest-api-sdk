@@ -56,7 +56,9 @@ public class VersionControlCommitObjectInput implements Serializable {
   public enum TypeEnum {
     LIVEBOARD("LIVEBOARD"),
     
-    ANSWER("ANSWER");
+    ANSWER("ANSWER"),
+    
+    LOGICAL_TABLE("LOGICAL_TABLE");
 
     private String value;
 
@@ -115,7 +117,7 @@ public class VersionControlCommitObjectInput implements Serializable {
   }
 
   /**
-   * GUID, object ID, or name of the metadata object, such as a Liveboard or an Answer. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
+   * GUID, object ID, or name of the metadata object, such as a Liveboard, an Answer or a Model. It is resolved in your Org and sent to version control by its cross-Org object ID, so object IDs must be enabled on the cluster.
    * @return identifier
    */
   @javax.annotation.Nonnull

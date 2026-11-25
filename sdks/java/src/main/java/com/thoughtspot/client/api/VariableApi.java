@@ -103,7 +103,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -177,7 +177,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -200,7 +200,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -225,7 +225,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Create variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include an invalid variable name, sensitive set to true for a FORMULA_VARIABLE, or a data_type that is not supported or not applicable to the variable type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. A variable with the same name already exists. </td><td>  -  </td></tr>
@@ -250,7 +250,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -325,7 +325,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -348,7 +348,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -373,7 +373,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deleting the variable is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -398,7 +398,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -470,7 +470,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -491,7 +491,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -514,7 +514,7 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Deletion of variable(s) is successful. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed identifiers array, or a variable that is still referenced by other objects (error code DELETE_FAILED_DEPENDENT_OBJECTS; the message lists the dependents). Remove the references and retry. Deletion is all or none, so no variable is deleted. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
@@ -538,9 +538,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -617,9 +617,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -639,9 +639,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -663,9 +663,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing identifier, a missing or malformed variable_assignment, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, an org_identifier that does not match any org, or a default_value that is set on a sensitive variable or does not match the variable&#39;s data type. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; a value is assigned to an org the session may not write to, or that the variable is not present in; or a default_value sent by an admin outside the primary org. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -830,9 +830,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -910,9 +910,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -933,9 +933,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -958,9 +958,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable name updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include no variable matching the identifier, or an invalid name. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a cluster-wide variable type, or a FORMULA_VARIABLE owned by the primary org, renamed from a secondary-org session (\&quot;Variable update is only allowed in default org\&quot;); or a FORMULA_VARIABLE owned by a secondary org renamed from an org it is not present in. </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict. Another variable already has the requested name. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
@@ -982,9 +982,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -1057,9 +1057,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -1080,9 +1080,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated
@@ -1105,9 +1105,9 @@ public class VariableApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 204 </td><td> Variable values updated successfully. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request. Possible causes include a missing or malformed variable_assignment or variable_value_scope, variable_values that is not an array, an empty, blank or non-scalar value for an ADD or REPLACE operation on a variable type other than FORMULA_VARIABLE, more than one value for such a type, or an org_identifier that does not match any org. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. Possible causes include: the caller lacks the required privilege; a FORMULA_VARIABLE owned by the primary org is modified from a secondary-org session (\&quot;Variable value update is only allowed in default org\&quot;); a FORMULA_VARIABLE owned by a secondary org is modified from an org it is not present in; or a value is assigned to an org the session may not write to, or that the variable is not present in. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      * @deprecated

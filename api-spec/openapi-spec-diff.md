@@ -1,4 +1,4 @@
-# API Changelog - app_ib_dev vs. 26.12.0.cl
+# API Changelog - app_ib_dev vs. 27.1.0.cl
 
 
 ## API Changes
@@ -43,11 +43,6 @@
 - :warning: removed the optional property `answer/sub_queries/items/formulas` from the response with the `201` status
 - :warning: removed the optional property `answer/sub_queries/items/tokens` from the response with the `200` status
 - :warning: removed the optional property `answer/sub_queries/items/tokens` from the response with the `201` status
--  endpoint deprecated
-
-
-### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-share-info
--  endpoint deprecated
 
 
 ### GET /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/get-shared-content
@@ -55,7 +50,6 @@
 - :warning: the `code_execution_files/items/created_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
--  endpoint deprecated
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `200`
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `201`
 -  removed discriminator from `messages/items/user_prompt/attachments/items/` response property for the response status `200`
@@ -75,7 +69,6 @@
 - :warning: the `code_execution_files/items/created_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `messages/items/timestamp_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `201`
--  endpoint deprecated
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `200`
 -  removed discriminator from `messages/items/response_items/items/` response property for the response status `201`
 -  removed discriminator from `messages/items/user_prompt/attachments/items/` response property for the response status `200`
@@ -88,53 +81,6 @@
 -  the `messages/items/response_items/items/` response's property `type` was narrowed from `any` to `object` for status `201`
 -  the `messages/items/user_prompt/attachments/items/` response's property `type` was narrowed from `any` to `object` for status `200`
 -  the `messages/items/user_prompt/attachments/items/` response's property `type` was narrowed from `any` to `object` for status `201`
-
-
-### POST /api/rest/2.0/ai/agent/conversations/{conversation_identifier}/update
--  endpoint deprecated
-
-
-### POST /api/rest/2.0/ai/answer/create
--  endpoint deprecated
-
-
-### POST /api/rest/2.0/ai/context/export
--  endpoint added
-
-
-### POST /api/rest/2.0/ai/context/import
--  endpoint added
-
-
-### POST /api/rest/2.0/ai/conversation/create
--  endpoint deprecated
-
-
-### POST /api/rest/2.0/ai/conversation/{conversation_identifier}/converse
--  endpoint deprecated
-
-
-### POST /api/rest/2.0/ai/data-source-suggestions
--  endpoint deprecated
-
-
-### POST /api/rest/2.0/ai/memory/import
-- :warning: added the new `CHAR_BUDGET` enum value to the `validation_failures/items/reason` response property for the response status `200`
-- :warning: added the new `CHAR_BUDGET` enum value to the `validation_failures/items/reason` response property for the response status `201`
-- :warning: added the new `INVALID_RELATIONSHIP` enum value to the `validation_failures/items/reason` response property for the response status `200`
-- :warning: added the new `INVALID_RELATIONSHIP` enum value to the `validation_failures/items/reason` response property for the response status `201`
-- :warning: added the new `SCOPE` enum value to the `validation_failures/items/reason` response property for the response status `200`
-- :warning: added the new `SCOPE` enum value to the `validation_failures/items/reason` response property for the response status `201`
-- :warning: added the new `UNRESOLVED_COLUMN` enum value to the `validation_failures/items/reason` response property for the response status `200`
-- :warning: added the new `UNRESOLVED_COLUMN` enum value to the `validation_failures/items/reason` response property for the response status `201`
-- :warning: added the new `UNRESOLVED_REFERENCE` enum value to the `validation_failures/items/reason` response property for the response status `200`
-- :warning: added the new `UNRESOLVED_REFERENCE` enum value to the `validation_failures/items/reason` response property for the response status `201`
--  added the optional property `validation_failures/items/entity_key` to the response with the `200` status
--  added the optional property `validation_failures/items/entity_key` to the response with the `201` status
-
-
-### POST /api/rest/2.0/ai/relevant-questions/
--  endpoint deprecated
 
 
 ### POST /api/rest/2.0/ai/usage-data/search
@@ -184,13 +130,14 @@
 ### GET /api/rest/2.0/auth/session/user
 - :warning: the `incomplete_details` response's property `type` changed from `array<string>` to `object` for status `200`
 - :warning: removed the optional property `extended_properties/displayNameLastUpdatedBy` from the response with the `200` status
--  added the optional property `last_active_time_in_millis` to the response with the `200` status
+
+
+### POST /api/rest/2.0/auth/token/object
+-  endpoint deprecated
 
 
 ### POST /api/rest/2.0/configurations/features/search
 - :warning: removed the optional property `items/features/items/element_config/label` from the response with the `200` status
--  added the optional property `items/docs_new_window` to the response with the `200` status
--  added the optional property `items/features/items/docs_new_window` to the response with the `200` status
 
 
 ### POST /api/rest/2.0/connection-configurations/create
@@ -348,32 +295,37 @@
 
 ### POST /api/rest/2.0/groups/create
 - :warning: removed the optional property `content/schemaVersion` from the response with the `200` status
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
+
+
+### POST /api/rest/2.0/groups/import
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `groups/items/privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `groups/items/privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `groups/items/privileges/items/`
 
 
 ### POST /api/rest/2.0/groups/search
 - :warning: removed the optional property `items/content/schemaVersion` from the response with the `200` status
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
 
 
-### POST /api/rest/2.0/localizations/manual-translation/export
--  removed the non-success response with the status `404`
+### POST /api/rest/2.0/groups/{group_identifier}/update
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
 
 
 ### POST /api/rest/2.0/localizations/manual-translation/locales/{locale}/export
 - :warning: removed the optional property `translations` from the response with the `200` status
 
 
-### POST /api/rest/2.0/localizations/manual-translation/template/export
--  endpoint added
-
-
 ### POST /api/rest/2.0/metadata/answer/data
 -  added the optional property `contents/items/sql_query` to the response with the `200` status
 -  response property `contents/items/data_rows/items/` list-of-types was narrowed by removing types `array` from media type `application/json` of response `200`
-
-
-### POST /api/rest/2.0/metadata/delete
--  added the new optional request property `delete_mode`
--  added the new optional request property `delete_reason`
 
 
 ### POST /api/rest/2.0/metadata/liveboard/data
@@ -587,42 +539,37 @@
 - :warning: removed the optional property `items/response` from the response with the `200` status
 
 
-### GET /api/rest/2.0/metadata/{guid}/search-readiness
--  endpoint added
-
-
-### POST /api/rest/2.0/metadata/{logical_table_identifier}/build-index
--  endpoint added
-
-
-### POST /api/rest/2.0/orgs/search
--  added the new optional request property `record_offset`
--  added the new optional request property `record_size`
-
-
 ### POST /api/rest/2.0/roles/create
 - :warning: the `creation_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `modification_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the `privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the `privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the `privileges/items/` response property for the response status `200`
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
 
 
 ### POST /api/rest/2.0/roles/search
 - :warning: the `items/creation_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `items/modification_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
-- :warning: added the new `CAN_CREATE_DATA_APP` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_EDIT_INPUT_TABLES` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_MANAGE_INPUT_TABLES` enum value to the `items/privileges/items/` response property for the response status `200`
-- :warning: added the new `CAN_MODIFY_FOLDERS` enum value to the `items/privileges/items/` response property for the response status `200`
--  added the new `CAN_CREATE_DATA_APP` enum value to the request property `privileges/items/`
--  added the new `CAN_CREATE_MUZE_STUDIO_TEMPLATES` enum value to the request property `privileges/items/`
--  added the new `CAN_EDIT_INPUT_TABLES` enum value to the request property `privileges/items/`
--  added the new `CAN_MANAGE_INPUT_TABLES` enum value to the request property `privileges/items/`
--  added the new `CAN_MODIFY_FOLDERS` enum value to the request property `privileges/items/`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the `items/privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the `items/privileges/items/` response property for the response status `200`
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
 
 
 ### POST /api/rest/2.0/roles/{role_identifier}/update
 - :warning: the `creation_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
 - :warning: the `modification_time_in_millis` response's property `type/format` changed from `integer/int64` to `object` for status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the `privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the `privileges/items/` response property for the response status `200`
+- :warning: added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the `privileges/items/` response property for the response status `200`
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
 
 
 ### POST /api/rest/2.0/schedules/create
@@ -639,54 +586,38 @@
 -  response property `contents/items/data_rows/items/` list-of-types was narrowed by removing types `array` from media type `application/json` of response `200`
 
 
-### POST /api/rest/2.0/security/metadata/assign
--  added the new `COLLECTION` enum value to the request property `metadata/items/type`
-
-
 ### POST /api/rest/2.0/security/metadata/fetch-object-privileges
 - :warning: the `metadata_object_privileges` response's property `type` changed from `array<object>` to `object` for status `200`
 
 
 ### POST /api/rest/2.0/security/metadata/fetch-permissions
 - :warning: the `metadata_permission_details` response's property `type` changed from `array<object>` to `object` for status `200`
--  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
-
-
-### POST /api/rest/2.0/security/metadata/share
--  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
--  added the new `PERSONALISED_VIEW` enum value to the request property `metadata_type`
 
 
 ### POST /api/rest/2.0/security/principals/fetch-permissions
 - :warning: the `principal_permission_details` response's property `type` changed from `array<object>` to `object` for status `200`
--  added the new `PERSONALISED_VIEW` enum value to the request property `default_metadata_type`
--  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
-
-
-### POST /api/rest/2.0/template/variables/create
--  added the non-success response with the status `409`
-
-
-### POST /api/rest/2.0/template/variables/{identifier}/update
--  added the non-success response with the status `409`
 
 
 ### POST /api/rest/2.0/users/activate
 - :warning: the `incomplete_details` response's property `type` changed from `array<string>` to `object` for status `200`
 - :warning: removed the optional property `extended_properties/displayNameLastUpdatedBy` from the response with the `200` status
--  added the optional property `last_active_time_in_millis` to the response with the `200` status
 
 
 ### POST /api/rest/2.0/users/create
 - :warning: the `incomplete_details` response's property `type` changed from `array<string>` to `object` for status `200`
 - :warning: removed the optional property `extended_properties/displayNameLastUpdatedBy` from the response with the `200` status
--  added the optional property `last_active_time_in_millis` to the response with the `200` status
 
 
 ### POST /api/rest/2.0/users/search
 - :warning: the `items/incomplete_details` response's property `type` changed from `array<string>` to `object` for status `200`
 - :warning: removed the optional property `items/extended_properties/displayNameLastUpdatedBy` from the response with the `200` status
--  added the optional property `items/last_active_time_in_millis` to the response with the `200` status
+-  added the new `CAN_CREATE_AGENTSPOT_AGENTS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_APPS` enum value to the request property `privileges/items/`
+-  added the new `CAN_CREATE_AGENTSPOT_WORKFLOWS` enum value to the request property `privileges/items/`
+
+
+### POST /api/rest/2.0/version-control/commit
+-  added the new `LOGICAL_TABLE` enum value to the request property `objects/items/type`
 
 
 ### GET /api/rest/2.0/webhooks/storage-config

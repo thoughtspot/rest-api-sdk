@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 | Method | HTTP request |
 |------------- | ------------- |
+| [**buildMetadataIndex**](MetadataApi.md#buildMetadataIndex) | **POST** /api/rest/2.0/metadata/{logical_table_identifier}/build-index |
 | [**convertWorksheetToModel**](MetadataApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
 | [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |
@@ -12,6 +13,8 @@ All URIs are relative to *CLUSTER_URL*
 | [**fetchAnswerSqlQuery**](MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql |
 | [**fetchAsyncImportTaskStatus**](MetadataApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status |
 | [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql |
+| [**fetchMetadataSearchReadiness**](MetadataApi.md#fetchMetadataSearchReadiness) | **GET** /api/rest/2.0/metadata/{guid}/search-readiness |
+| [**fetchSqlQuery**](MetadataApi.md#fetchSqlQuery) | **POST** /api/rest/2.0/metadata/sql/fetch |
 | [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
 | [**parameterizeMetadata**](MetadataApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
@@ -21,6 +24,43 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateMetadataHeader**](MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](MetadataApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 
+
+<a id="buildMetadataIndex"></a>
+# **buildMetadataIndex**
+> buildMetadataIndex(logicalTableIdentifier, buildMetadataIndexRequest)
+
+
+
+  Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **logicalTableIdentifier** | **String**
+| **buildMetadataIndexRequest** | [**BuildMetadataIndexRequest**](BuildMetadataIndexRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Reindex of the logical table is queued and will run in the background. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="convertWorksheetToModel"></a>
 # **convertWorksheetToModel**
@@ -288,6 +328,78 @@ null (empty response body)
 | Name | Type |
 |------------- | ------------- |
 | **fetchLiveboardSqlQueryRequest** | [**FetchLiveboardSqlQueryRequest**](FetchLiveboardSqlQueryRequest.md)
+
+### Return type
+
+[**SqlQueryResponse**](SqlQueryResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fetching SQL query of specified metadata object is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="fetchMetadataSearchReadiness"></a>
+# **fetchMetadataSearchReadiness**
+> MetadataSearchReadinessResponse fetchMetadataSearchReadiness(guid)
+
+
+
+  Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **guid** | **String**
+
+### Return type
+
+[**MetadataSearchReadinessResponse**](MetadataSearchReadinessResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns the search readiness state of the object. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="fetchSqlQuery"></a>
+# **fetchSqlQuery**
+> SqlQueryResponse fetchSqlQuery(fetchSqlQueryRequest)
+
+
+
+  Version: 27.1.0.cl or later   Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.  Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.  Set only the fields in &#x60;metadata&#x60; that the type of the object uses:  | &#x60;metadata.type&#x60; | Fields in &#x60;metadata&#x60; | Object | | --- | --- | --- | | &#x60;ANSWER&#x60; | &#x60;identifier&#x60; | Saved Answer | | &#x60;ANSWER&#x60; | &#x60;tml&#x60; | Unsaved Answer, sent as Answer TML | | &#x60;LIVEBOARD&#x60; | &#x60;identifier&#x60;, optional &#x60;visualization_identifiers&#x60; | Saved Liveboard | | &#x60;LOGICAL_TABLE&#x60; | &#x60;identifier&#x60; (Model, View, or Table) | Search query on a data source; also set &#x60;query_string&#x60; |  &#x60;metadata.type&#x60; is optional. It is required if &#x60;identifier&#x60; is a name. If it is not set, the type is taken from the request, in this order: &#x60;tml&#x60; means &#x60;ANSWER&#x60;, &#x60;query_string&#x60; means &#x60;LOGICAL_TABLE&#x60;, and a GUID in &#x60;identifier&#x60; means the type of that object.  &#x60;query_string&#x60; is a top-level parameter. It holds the search tokens to apply on the data source. It is required with &#x60;LOGICAL_TABLE&#x60; and not supported with other types.  The runtime overrides &#x60;runtime_filter&#x60;, &#x60;runtime_sort&#x60;, and &#x60;runtime_param_override&#x60; are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and &#x60;LOGICAL_TABLE&#x60;, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with &#x60;tml&#x60;: set the filters and parameter values in the TML instead.  The API returns a 400 error if &#x60;metadata&#x60; is missing a field that its type requires or contains a field that its type does not use, if &#x60;query_string&#x60; is missing with &#x60;LOGICAL_TABLE&#x60; or set with another type, or if a runtime override is set with &#x60;tml&#x60;.  #### Required access  - Saved Answer and &#x60;LIVEBOARD&#x60;: at least view access to the object. - Unsaved Answer and &#x60;LOGICAL_TABLE&#x60;: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the &#x60;CAN_CREATE_ANSWERS&#x60; privilege is also required.  #### Usage guidelines  - &#x60;LIVEBOARD&#x60;: if &#x60;visualization_identifiers&#x60; is not set, the API returns the SQL of all visualizations. - Unsaved Answer: send it as Answer TML in YAML or JSON format in &#x60;tml&#x60;, with &#x60;type&#x60; set to &#x60;ANSWER&#x60; or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported. - &#x60;LOGICAL_TABLE&#x60;: pass the search tokens in &#x60;query_string&#x60;. The SQL is generated for the table visualization of the search and has no &#x60;LIMIT&#x60; or &#x60;OFFSET&#x60; clause. &#x60;metadata_id&#x60; in the response is the GUID of the data source, &#x60;metadata_name&#x60; is the query string, and &#x60;metadata_type&#x60; is &#x60;LOGICAL_TABLE&#x60;. To get the data and the SQL in one call, use the searchData API with &#x60;include_sql_query&#x60; set to &#x60;true&#x60;.  Example request for a search query: &#x60;&#x60;&#x60; {    \&quot;metadata\&quot;:{       \&quot;type\&quot;:\&quot;LOGICAL_TABLE\&quot;,       \&quot;identifier\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;    },    \&quot;query_string\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;runtime_filter\&quot;:{\&quot;col1\&quot;:\&quot;region\&quot;,\&quot;op1\&quot;:\&quot;EQ\&quot;,\&quot;val1\&quot;:\&quot;West\&quot;} } &#x60;&#x60;&#x60;  Upon successful execution, the API returns the SQL query as shown in this example: &#x60;&#x60;&#x60; {    \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,    \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,    \&quot;metadata_type\&quot;:\&quot;LOGICAL_TABLE\&quot;,    \&quot;sql_queries\&quot;:[       {          \&quot;metadata_id\&quot;:\&quot;cd252e5c-b552-49a8-821d-3eadaa049cca\&quot;,          \&quot;metadata_name\&quot;:\&quot;[sales] [region]\&quot;,          \&quot;sql_query\&quot;:\&quot;SELECT \\n  \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; \\\&quot;ca_1\\\&quot;, \\n  CASE\\n    WHEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;) IS NOT NULL THEN sum(\\\&quot;ta_2\\\&quot;.\\\&quot;SALES\\\&quot;)\\n    ELSE 0\\n  END \\\&quot;ca_2\\\&quot;\\nFROM \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;FACT_RETAPP_SALES\\\&quot; \\\&quot;ta_2\\\&quot;\\n  JOIN \\\&quot;RETAILAPPAREL\\\&quot;.\\\&quot;PUBLIC\\\&quot;.\\\&quot;DIM_RETAPP_STORES\\\&quot; \\\&quot;ta_1\\\&quot;\\n    ON \\\&quot;ta_2\\\&quot;.\\\&quot;STOREID\\\&quot; &#x3D; \\\&quot;ta_1\\\&quot;.\\\&quot;STOREID\\\&quot;\\nWHERE \\\&quot;ta_1\\\&quot;.\\\&quot;REGION\\\&quot; &#x3D; &#39;West&#39;\\nGROUP BY \\\&quot;ca_1\\\&quot;\&quot;       }    ] } &#x60;&#x60;&#x60;      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **fetchSqlQueryRequest** | [**FetchSqlQueryRequest**](FetchSqlQueryRequest.md)
 
 ### Return type
 

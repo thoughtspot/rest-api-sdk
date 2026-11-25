@@ -78,6 +78,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test ExportContext
+        /// </summary>
+        [Fact]
+        public void ExportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportContextRequest exportContextRequest = null;
+            //var response = instance.ExportContext(exportContextRequest);
+            //Assert.IsType<ExportContextResponse>(response);
+        }
+
+        /// <summary>
         /// Test ExportMemory
         /// </summary>
         [Fact]
@@ -173,6 +185,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string? userIdentifier = null;
             //var response = instance.GetUsageDataForUser(userIdentifier);
             //Assert.IsType<UsageDataForUserResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ImportContext
+        /// </summary>
+        [Fact]
+        public void ImportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ImportContextRequest importContextRequest = null;
+            //var response = instance.ImportContext(importContextRequest);
+            //Assert.IsType<ImportContextResponse>(response);
         }
 
         /// <summary>
