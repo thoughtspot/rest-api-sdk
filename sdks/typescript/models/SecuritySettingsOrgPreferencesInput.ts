@@ -22,7 +22,7 @@ export class SecuritySettingsOrgPreferencesInput {
     */
     'org_identifier': string;
     /**
-    * Allowed origins for CORS for this org.
+    * Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.
     */
     'cors_whitelisted_urls'?: Array<string> | null;
     'non_embed_access'?: OrgNonEmbedAccessInput;

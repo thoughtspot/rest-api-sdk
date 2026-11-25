@@ -17,7 +17,7 @@ import { HttpFile } from '../http/http';
 */
 export class StyleResetOptionsInput {
     /**
-    * Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, DEFAULT_LOGO, WIDE_LOGO.
+    * Style fields to reset. Supported values: CHART_COLOR_PALETTE, EMBEDDED_FOOTER_TEXT, NAV_PANEL_COLOR, APP_COLOR_THEME, DEFAULT_LOGO, WIDE_LOGO.
     */
     'style'?: Array<StyleResetOptionsInputStyleEnum> | null;
     /**
@@ -51,6 +51,6 @@ export class StyleResetOptionsInput {
     }
 }
 
-    export type StyleResetOptionsInputStyleEnum = "CHART_COLOR_PALETTE" | "EMBEDDED_FOOTER_TEXT" | "NAV_PANEL_COLOR" | "DEFAULT_LOGO" | "WIDE_LOGO" ;
+    export type StyleResetOptionsInputStyleEnum = "CHART_COLOR_PALETTE" | "EMBEDDED_FOOTER_TEXT" | "NAV_PANEL_COLOR" | "APP_COLOR_THEME" | "DEFAULT_LOGO" | "WIDE_LOGO" ;
     export type StyleResetOptionsInputVisualizationAreasEnum = "CHART_X_AXIS_LABELS" | "CHART_X_AXIS_TITLE" | "CHART_Y_AXIS_LABELS" | "CHART_Y_AXIS_TITLE" | "CHART_TOOLTIP" | "CHART_SCATTER_DATA_LABELS" | "CHART_DONUT_DATA_LABELS" | "CHART_LINE_DATA_LABELS" | "CHART_COLUMN_DATA_LABELS" | "CHART_BAR_DATA_LABELS" | "CHART_AREA_DATA_LABELS" | "TABLE_VALUE_CELLS" | "ADVANCED_CHART_LABELS" ;
 

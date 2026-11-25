@@ -51,5 +51,5 @@ export class AuthorMetadataTypeInput {
     }
 }
 
-    export type AuthorMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" ;
+    export type AuthorMetadataTypeInputTypeEnum = "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "CONNECTION" | "COLLECTION" ;
 

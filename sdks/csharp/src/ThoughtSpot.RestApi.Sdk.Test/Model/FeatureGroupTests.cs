@@ -73,6 +73,15 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DocsNewWindow'
+        /// </summary>
+        [Fact]
+        public void DocsNewWindowTest()
+        {
+            // TODO unit test for the property 'DocsNewWindow'
+        }
+
+        /// <summary>
         /// Test the property 'Features'
         /// </summary>
         [Fact]

@@ -5,6 +5,7 @@ All URIs are relative to *https://localhost:443*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**DeleteManualTranslations**](ManualTranslationApi.md#deletemanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/delete |  |
+| [**ExportManualTranslationTemplate**](ManualTranslationApi.md#exportmanualtranslationtemplate) | **POST** /api/rest/2.0/localizations/manual-translation/template/export |  |
 | [**ExportManualTranslations**](ManualTranslationApi.md#exportmanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/export |  |
 | [**GetManualTranslationBundle**](ManualTranslationApi.md#getmanualtranslationbundle) | **POST** /api/rest/2.0/localizations/manual-translation/locales/{locale}/export |  |
 | [**ImportManualTranslations**](ManualTranslationApi.md#importmanualtranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import |  |
@@ -105,6 +106,103 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="exportmanualtranslationtemplate"></a>
+# **ExportManualTranslationTemplate**
+> void ExportManualTranslationTemplate (ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest)
+
+
+
+ Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**), `ORG_ADMINISTRATION` (**Can administer Org**), or `APPLICATION_ADMINISTRATION` (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: `content`, `locale`, `translated-content`. Each row lists one string in `content` and leaves `locale` and `translated-content` empty. Fill them in, then upload the file with `POST /api/rest/2.0/localizations/manual-translation/import`. - The template includes the Liveboard title and description, tab names, the names of the Liveboard's personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with `=`, `+`, `-`, `@`, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the `X-ThoughtSpot-Excluded-Content-Count` response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using ThoughtSpot.RestApi.Sdk.Api;
+using ThoughtSpot.RestApi.Sdk.Client;
+using ThoughtSpot.RestApi.Sdk.Model;
+
+namespace Example
+{
+    public class ExportManualTranslationTemplateExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://localhost:443";
+            // Configure Bearer token for authorization: bearerAuth
+            config.AccessToken = "YOUR_BEARER_TOKEN";
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new ManualTranslationApi(httpClient, config, httpClientHandler);
+            var exportManualTranslationTemplateRequest = new ExportManualTranslationTemplateRequest(); // ExportManualTranslationTemplateRequest | 
+
+            try
+            {
+                apiInstance.ExportManualTranslationTemplate(exportManualTranslationTemplateRequest);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ManualTranslationApi.ExportManualTranslationTemplate: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ExportManualTranslationTemplateWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    apiInstance.ExportManualTranslationTemplateWithHttpInfo(exportManualTranslationTemplateRequest);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ManualTranslationApi.ExportManualTranslationTemplateWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **exportManualTranslationTemplateRequest** | [**ExportManualTranslationTemplateRequest**](ExportManualTranslationTemplateRequest.md) |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: text/csv, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Translation template downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  |
+| **400** | Invalid request, or a Liveboard was not found. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access, or no access to a Liveboard. |  -  |
+| **409** | More than one Liveboard has the given name. |  -  |
+| **500** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="exportmanualtranslations"></a>
 # **ExportManualTranslations**
 > FileParameter ExportManualTranslations (ExportManualTranslationsRequest exportManualTranslationsRequest)
@@ -198,10 +296,9 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | CSV file downloaded successfully. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
-| **400** | Invalid request. |  -  |
+| **400** | Invalid request, or no translations exist for the requested scope. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
-| **404** | No translations file found. |  -  |
 | **500** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

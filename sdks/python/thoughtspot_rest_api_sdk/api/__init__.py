@@ -3,6 +3,9 @@
 if __import__("typing").TYPE_CHECKING:
     # import apis into api package
     from thoughtspot_rest_api_sdk.api.ai_api import AIApi
+    from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi
+    from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi
+    from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi
     from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi
     from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi
     from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi
@@ -12,7 +15,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi
     from thoughtspot_rest_api_sdk.api.data_api import DataApi
     from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
-    from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
+    from thoughtspot_rest_api_sdk.api.feature_delegation_api import FeatureDelegationApi
     from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
     from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi
     from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
@@ -33,6 +36,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.api.users_api import UsersApi
     from thoughtspot_rest_api_sdk.api.variable_api import VariableApi
     from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi
+    from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api
     from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi
     
 else:
@@ -43,6 +47,9 @@ else:
             *as_package(__file__),
             """# import apis into api package
 from thoughtspot_rest_api_sdk.api.ai_api import AIApi
+from thoughtspot_rest_api_sdk.api.ai_analyst_api import AIAnalystApi
+from thoughtspot_rest_api_sdk.api.ai_conversation_api import AIConversationApi
+from thoughtspot_rest_api_sdk.api.ai_management_api import AIManagementApi
 from thoughtspot_rest_api_sdk.api.authentication_api import AuthenticationApi
 from thoughtspot_rest_api_sdk.api.collections_api import CollectionsApi
 from thoughtspot_rest_api_sdk.api.connection_configurations_api import ConnectionConfigurationsApi
@@ -52,7 +59,7 @@ from thoughtspot_rest_api_sdk.api.custom_calendars_api import CustomCalendarsApi
 from thoughtspot_rest_api_sdk.api.dbt_api import DBTApi
 from thoughtspot_rest_api_sdk.api.data_api import DataApi
 from thoughtspot_rest_api_sdk.api.email_customization_api import EmailCustomizationApi
-from thoughtspot_rest_api_sdk.api.feature_management_api import FeatureManagementApi
+from thoughtspot_rest_api_sdk.api.feature_delegation_api import FeatureDelegationApi
 from thoughtspot_rest_api_sdk.api.groups_api import GroupsApi
 from thoughtspot_rest_api_sdk.api.input_tables_api import InputTablesApi
 from thoughtspot_rest_api_sdk.api.jobs_api import JobsApi
@@ -73,6 +80,7 @@ from thoughtspot_rest_api_sdk.api.thought_spot_rest_api import ThoughtSpotRestAp
 from thoughtspot_rest_api_sdk.api.users_api import UsersApi
 from thoughtspot_rest_api_sdk.api.variable_api import VariableApi
 from thoughtspot_rest_api_sdk.api.version_control_api import VersionControlApi
+from thoughtspot_rest_api_sdk.api.version_control_v2_api import VersionControlV2Api
 from thoughtspot_rest_api_sdk.api.webhooks_api import WebhooksApi
 
 """,

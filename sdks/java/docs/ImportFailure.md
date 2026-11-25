@@ -12,6 +12,7 @@ One per-item import failure surfaced by importMemory. `line_number` is the best-
 |**reason** | [**ReasonEnum**](#ReasonEnum) | Machine-readable category for the failure (e.g. &#x60;VALIDATION&#x60;, &#x60;ACCESS_DENIED&#x60;, &#x60;CHAR_LIMIT&#x60;). |  [optional] |
 |**fieldName** | **String** | Dotted path to the offending field within the item (e.g. &#x60;content.rule_definition&#x60;) for inline highlighting. Absent when the failure is item-level rather than field-level. |  [optional] |
 |**message** | **String** | Human-readable description of the failure. |  [optional] |
+|**entityKey** | **String** | Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later  |  [optional] |
 
 
 
@@ -25,6 +26,11 @@ One per-item import failure surfaced by importMemory. `line_number` is the best-
 | ACCESS_DENIED | &quot;ACCESS_DENIED&quot; |
 | CHAR_LIMIT | &quot;CHAR_LIMIT&quot; |
 | SCHEMA | &quot;SCHEMA&quot; |
+| SCOPE | &quot;SCOPE&quot; |
+| UNRESOLVED_REFERENCE | &quot;UNRESOLVED_REFERENCE&quot; |
+| INVALID_RELATIONSHIP | &quot;INVALID_RELATIONSHIP&quot; |
+| UNRESOLVED_COLUMN | &quot;UNRESOLVED_COLUMN&quot; |
+| CHAR_BUDGET | &quot;CHAR_BUDGET&quot; |
 
 
 ## Implemented Interfaces

@@ -103,4 +103,12 @@ public class FeatureDetailTest {
         // TODO: test docsUrl
     }
 
+    /**
+     * Test the property 'docsNewWindow'
+     */
+    @Test
+    public void docsNewWindowTest() {
+        // TODO: test docsNewWindow
+    }
+
 }

@@ -29,8 +29,9 @@ class ImportFailure(BaseModel):
     reason: Optional[StrictStr] = Field(default=None, description="Machine-readable category for the failure (e.g. `VALIDATION`, `ACCESS_DENIED`, `CHAR_LIMIT`).")
     field_name: Optional[StrictStr] = Field(default=None, description="Dotted path to the offending field within the item (e.g. `content.rule_definition`) for inline highlighting. Absent when the failure is item-level rather than field-level.")
     message: Optional[StrictStr] = Field(default=None, description="Human-readable description of the failure.")
+    entity_key: Optional[StrictStr] = Field(default=None, description="Key of the entity in the imported file that failed, as written in its `id` field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["line_number", "reason", "field_name", "message"]
+    __properties: ClassVar[List[str]] = ["line_number", "reason", "field_name", "message", "entity_key"]
 
     @field_validator('reason')
     def reason_validate_enum(cls, value):
@@ -38,8 +39,8 @@ class ImportFailure(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UNKNOWN_FAILURE_REASON', 'VALIDATION', 'UNRESOLVED_SOURCE', 'ACCESS_DENIED', 'CHAR_LIMIT', 'SCHEMA']):
-            raise ValueError("must be one of enum values ('UNKNOWN_FAILURE_REASON', 'VALIDATION', 'UNRESOLVED_SOURCE', 'ACCESS_DENIED', 'CHAR_LIMIT', 'SCHEMA')")
+        if value not in set(['UNKNOWN_FAILURE_REASON', 'VALIDATION', 'UNRESOLVED_SOURCE', 'ACCESS_DENIED', 'CHAR_LIMIT', 'SCHEMA', 'SCOPE', 'UNRESOLVED_REFERENCE', 'INVALID_RELATIONSHIP', 'UNRESOLVED_COLUMN', 'CHAR_BUDGET']):
+            raise ValueError("must be one of enum values ('UNKNOWN_FAILURE_REASON', 'VALIDATION', 'UNRESOLVED_SOURCE', 'ACCESS_DENIED', 'CHAR_LIMIT', 'SCHEMA', 'SCOPE', 'UNRESOLVED_REFERENCE', 'INVALID_RELATIONSHIP', 'UNRESOLVED_COLUMN', 'CHAR_BUDGET')")
         return value
 
     model_config = ConfigDict(
@@ -108,6 +109,11 @@ class ImportFailure(BaseModel):
         if self.message is None and "message" in self.model_fields_set:
             _dict['message'] = None
 
+        # set to None if entity_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.entity_key is None and "entity_key" in self.model_fields_set:
+            _dict['entity_key'] = None
+
         return _dict
 
     @classmethod
@@ -123,7 +129,8 @@ class ImportFailure(BaseModel):
             "line_number": obj.get("line_number"),
             "reason": obj.get("reason"),
             "field_name": obj.get("field_name"),
-            "message": obj.get("message")
+            "message": obj.get("message"),
+            "entity_key": obj.get("entity_key")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

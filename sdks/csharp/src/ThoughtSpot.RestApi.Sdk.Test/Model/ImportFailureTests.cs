@@ -89,5 +89,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'Message'
         }
+
+        /// <summary>
+        /// Test the property 'EntityKey'
+        /// </summary>
+        [Fact]
+        public void EntityKeyTest()
+        {
+            // TODO unit test for the property 'EntityKey'
+        }
     }
 }

@@ -175,6 +175,16 @@ public class SearchOrgsRequest implements Serializable {
   @javax.annotation.Nullable
   private List<String> userIdentifiers;
 
+  public static final String SERIALIZED_NAME_RECORD_OFFSET = "record_offset";
+  @SerializedName(SERIALIZED_NAME_RECORD_OFFSET)
+  @javax.annotation.Nullable
+  private Integer recordOffset = 0;
+
+  public static final String SERIALIZED_NAME_RECORD_SIZE = "record_size";
+  @SerializedName(SERIALIZED_NAME_RECORD_SIZE)
+  @javax.annotation.Nullable
+  private Integer recordSize = 10;
+
   public SearchOrgsRequest() {
   }
 
@@ -280,6 +290,44 @@ public class SearchOrgsRequest implements Serializable {
     this.userIdentifiers = userIdentifiers;
   }
 
+
+  public SearchOrgsRequest recordOffset(@javax.annotation.Nullable Integer recordOffset) {
+    this.recordOffset = recordOffset;
+    return this;
+  }
+
+  /**
+   * The starting record number from where the records should be included.    Version: 27.1.0.cl or later 
+   * @return recordOffset
+   */
+  @javax.annotation.Nullable
+  public Integer getRecordOffset() {
+    return recordOffset;
+  }
+
+  public void setRecordOffset(@javax.annotation.Nullable Integer recordOffset) {
+    this.recordOffset = recordOffset;
+  }
+
+
+  public SearchOrgsRequest recordSize(@javax.annotation.Nullable Integer recordSize) {
+    this.recordSize = recordSize;
+    return this;
+  }
+
+  /**
+   * The number of records that should be included.    Version: 27.1.0.cl or later 
+   * @return recordSize
+   */
+  @javax.annotation.Nullable
+  public Integer getRecordSize() {
+    return recordSize;
+  }
+
+  public void setRecordSize(@javax.annotation.Nullable Integer recordSize) {
+    this.recordSize = recordSize;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -339,13 +387,15 @@ public class SearchOrgsRequest implements Serializable {
         Objects.equals(this.description, searchOrgsRequest.description) &&
         Objects.equals(this.visibility, searchOrgsRequest.visibility) &&
         Objects.equals(this.status, searchOrgsRequest.status) &&
-        Objects.equals(this.userIdentifiers, searchOrgsRequest.userIdentifiers)&&
+        Objects.equals(this.userIdentifiers, searchOrgsRequest.userIdentifiers) &&
+        Objects.equals(this.recordOffset, searchOrgsRequest.recordOffset) &&
+        Objects.equals(this.recordSize, searchOrgsRequest.recordSize)&&
         Objects.equals(this.additionalProperties, searchOrgsRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orgIdentifier, description, visibility, status, userIdentifiers, additionalProperties);
+    return Objects.hash(orgIdentifier, description, visibility, status, userIdentifiers, recordOffset, recordSize, additionalProperties);
   }
 
   @Override
@@ -357,6 +407,8 @@ public class SearchOrgsRequest implements Serializable {
     sb.append("    visibility: ").append(toIndentedString(visibility)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    userIdentifiers: ").append(toIndentedString(userIdentifiers)).append("\n");
+    sb.append("    recordOffset: ").append(toIndentedString(recordOffset)).append("\n");
+    sb.append("    recordSize: ").append(toIndentedString(recordSize)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -385,6 +437,8 @@ public class SearchOrgsRequest implements Serializable {
     openapiFields.add("visibility");
     openapiFields.add("status");
     openapiFields.add("user_identifiers");
+    openapiFields.add("record_offset");
+    openapiFields.add("record_size");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

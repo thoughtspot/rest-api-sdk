@@ -13,7 +13,8 @@ Name | Type | Description | Notes
 **ElementType** | **string** | UI element type hint for the feature. Populated in the org-admin view. | [optional] 
 **ElementConfig** | **Object** | UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field. | [optional] 
 **ElementValue** | **string** | Current value of the feature for the requested Org. Populated in the org-admin view. | [optional] 
-**DocsUrl** | **string** | Per-feature documentation URL, when available. | [optional] 
+**DocsUrl** | **string** | Documentation URL of the feature itself, when it has one. Not inherited from its group. | [optional] 
+**DocsNewWindow** | **bool?** | &#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

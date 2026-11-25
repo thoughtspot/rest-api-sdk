@@ -211,6 +211,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="external">Indicates whether the user is external..</param>
         /// <param name="favoriteMetadata">Metadata objects to add to the users&#39; favorites list..</param>
         /// <param name="firstLoginTimeInMillis">Timestamp of the first login session of the user in milliseconds..</param>
+        /// <param name="lastActiveTimeInMillis">Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later .</param>
         /// <param name="groupMask">Group mask of the user..</param>
         /// <param name="hidden">Indicates whether the user is hidden..</param>
         /// <param name="homeLiveboard">homeLiveboard.</param>
@@ -240,7 +241,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="userParameters">User Parameters which are specified for the user via JWToken.</param>
         /// <param name="accessControlProperties">Access Control Properties which are specified for the user via JWToken.</param>
         /// <param name="variableValues">Formula Variables which are specified for the user via JWToken.</param>
-        public User(string id = default, string name = default, string displayName = default, VisibilityEnum visibility = default, string authorId = default, bool? canChangePassword = default, bool? completeDetail = default, float? creationTimeInMillis = default, Org currentOrg = default, bool? deleted = default, bool? deprecated = default, AccountTypeEnum? accountType = default, AccountStatusEnum? accountStatus = default, string email = default, float? expirationTimeInMillis = default, bool? external = default, List<FavoriteMetadataItem> favoriteMetadata = default, float? firstLoginTimeInMillis = default, int? groupMask = default, bool? hidden = default, ObjectIDAndName homeLiveboard = default, Object incompleteDetails = default, bool? isFirstLogin = default, float? modificationTimeInMillis = default, string modifierId = default, bool? notifyOnShare = default, bool? onboardingExperienceCompleted = default, List<Org> orgs = default, string ownerId = default, ParentTypeEnum? parentType = default, List<string> privileges = default, bool? showOnboardingExperience = default, bool? superUser = default, bool? systemUser = default, List<ObjectIDAndName> tags = default, string tenantId = default, List<ObjectIDAndName> userGroups = default, List<ObjectIDAndName> userInheritedGroups = default, bool? welcomeEmailSent = default, Object orgPrivileges = default, string preferredLocale = default, bool? useBrowserLanguage = default, Object extendedProperties = default, Object extendedPreferences = default, Object userParameters = default, Object accessControlProperties = default, Object variableValues = default)
+        public User(string id = default, string name = default, string displayName = default, VisibilityEnum visibility = default, string authorId = default, bool? canChangePassword = default, bool? completeDetail = default, float? creationTimeInMillis = default, Org currentOrg = default, bool? deleted = default, bool? deprecated = default, AccountTypeEnum? accountType = default, AccountStatusEnum? accountStatus = default, string email = default, float? expirationTimeInMillis = default, bool? external = default, List<FavoriteMetadataItem> favoriteMetadata = default, float? firstLoginTimeInMillis = default, float? lastActiveTimeInMillis = default, int? groupMask = default, bool? hidden = default, ObjectIDAndName homeLiveboard = default, Object incompleteDetails = default, bool? isFirstLogin = default, float? modificationTimeInMillis = default, string modifierId = default, bool? notifyOnShare = default, bool? onboardingExperienceCompleted = default, List<Org> orgs = default, string ownerId = default, ParentTypeEnum? parentType = default, List<string> privileges = default, bool? showOnboardingExperience = default, bool? superUser = default, bool? systemUser = default, List<ObjectIDAndName> tags = default, string tenantId = default, List<ObjectIDAndName> userGroups = default, List<ObjectIDAndName> userInheritedGroups = default, bool? welcomeEmailSent = default, Object orgPrivileges = default, string preferredLocale = default, bool? useBrowserLanguage = default, Object extendedProperties = default, Object extendedPreferences = default, Object userParameters = default, Object accessControlProperties = default, Object variableValues = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -275,6 +276,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.External = external;
             this.FavoriteMetadata = favoriteMetadata;
             this.FirstLoginTimeInMillis = firstLoginTimeInMillis;
+            this.LastActiveTimeInMillis = lastActiveTimeInMillis;
             this.GroupMask = groupMask;
             this.Hidden = hidden;
             this.HomeLiveboard = homeLiveboard;
@@ -410,6 +412,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <value>Timestamp of the first login session of the user in milliseconds.</value>
         [DataMember(Name = "first_login_time_in_millis", EmitDefaultValue = true)]
         public float? FirstLoginTimeInMillis { get; set; }
+
+        /// <summary>
+        /// Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "last_active_time_in_millis", EmitDefaultValue = true)]
+        public float? LastActiveTimeInMillis { get; set; }
 
         /// <summary>
         /// Group mask of the user.
@@ -638,6 +647,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  External: ").Append(External).Append("\n");
             sb.Append("  FavoriteMetadata: ").Append(FavoriteMetadata).Append("\n");
             sb.Append("  FirstLoginTimeInMillis: ").Append(FirstLoginTimeInMillis).Append("\n");
+            sb.Append("  LastActiveTimeInMillis: ").Append(LastActiveTimeInMillis).Append("\n");
             sb.Append("  GroupMask: ").Append(GroupMask).Append("\n");
             sb.Append("  Hidden: ").Append(Hidden).Append("\n");
             sb.Append("  HomeLiveboard: ").Append(HomeLiveboard).Append("\n");

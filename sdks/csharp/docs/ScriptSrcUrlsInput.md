@@ -6,7 +6,7 @@ Input for script-src CSP settings.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Enabled** | **bool?** | Whether script-src customization is enabled. | [optional] 
-**Urls** | **List&lt;string&gt;** | Allowed URLs for script-src directive. Can only be set if enabled is true. | [optional] 
+**Urls** | **List&lt;string&gt;** | Allowed URLs for script-src directive. Can only be set if enabled is true. Replaces the existing list. Values not included in the request are removed. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

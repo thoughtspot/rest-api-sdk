@@ -50,9 +50,13 @@ export class FeatureDetail {
     */
     'element_value'?: string | null;
     /**
-    * Per-feature documentation URL, when available.
+    * Documentation URL of the feature itself, when it has one. Not inherited from its group.
     */
     'docs_url'?: string | null;
+    /**
+    * `true` when the feature\'s documentation link should open in a new browser tab, the default, or `false` for the same tab. Omitted when there is no `docs_url`.
+    */
+    'docs_new_window'?: boolean | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -111,6 +115,12 @@ export class FeatureDetail {
             "name": "docs_url",
             "baseName": "docs_url",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "docs_new_window",
+            "baseName": "docs_new_window",
+            "type": "boolean",
             "format": ""
         }    ];
 

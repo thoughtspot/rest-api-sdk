@@ -27,7 +27,7 @@ class ShareMetadataRequest(BaseModel):
     """
     ShareMetadataRequest
     """ # noqa: E501
-    metadata_type: Optional[StrictStr] = Field(default=None, description="Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection")
+    metadata_type: Optional[StrictStr] = Field(default=None, description="Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard")
     metadata_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type")
     metadata: Optional[List[ShareMetadataTypeInput]] = Field(default=None, description="Metadata details for sharing objects.")
     permissions: List[SharePermissionsInput] = Field(description="Permission details for sharing the objects.")
@@ -46,8 +46,8 @@ class ShareMetadataRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION']):
-            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION')")
+        if value not in set(['LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION', 'PERSONALISED_VIEW']):
+            raise ValueError("must be one of enum values ('LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION', 'PERSONALISED_VIEW')")
         return value
 
     model_config = ConfigDict(

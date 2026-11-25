@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from thoughtspot_rest_api_sdk.models.feature_detail import FeatureDetail
 from typing import Optional, Set
@@ -27,10 +27,11 @@ class FeatureGroup(BaseModel):
     A named group of related features. Returned by searchFeatures; the contents of features depend on the requested scope (cluster-admin vs. org-admin view).
     """ # noqa: E501
     feature_group: Optional[StrictStr] = Field(default=None, description="Display name of the feature group.")
-    docs_url: Optional[StrictStr] = Field(default=None, description="Documentation URL for the feature group, when available.")
+    docs_url: Optional[StrictStr] = Field(default=None, description="Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group.")
+    docs_new_window: Optional[StrictBool] = Field(default=None, description="`true` when the group's documentation link should open in a new browser tab, the default, or `false` for the same tab. Omitted when there is no `docs_url`.")
     features: List[FeatureDetail] = Field(description="Feature details within this group. Each entry contains the fields relevant to the requested scope; org-admin-only and cluster-admin-only fields are null in the other view.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["feature_group", "docs_url", "features"]
+    __properties: ClassVar[List[str]] = ["feature_group", "docs_url", "docs_new_window", "features"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -95,6 +96,11 @@ class FeatureGroup(BaseModel):
         if self.docs_url is None and "docs_url" in self.model_fields_set:
             _dict['docs_url'] = None
 
+        # set to None if docs_new_window (nullable) is None
+        # and model_fields_set contains the field
+        if self.docs_new_window is None and "docs_new_window" in self.model_fields_set:
+            _dict['docs_new_window'] = None
+
         return _dict
 
     @classmethod
@@ -109,6 +115,7 @@ class FeatureGroup(BaseModel):
         _obj = cls.model_validate({
             "feature_group": obj.get("feature_group"),
             "docs_url": obj.get("docs_url"),
+            "docs_new_window": obj.get("docs_new_window"),
             "features": [FeatureDetail.from_dict(_item) for _item in obj["features"]] if obj.get("features") is not None else None
         })
         # store additional fields in additional_properties

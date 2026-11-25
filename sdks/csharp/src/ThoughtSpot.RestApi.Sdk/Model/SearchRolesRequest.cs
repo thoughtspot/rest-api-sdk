@@ -303,100 +303,130 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             CANVIEWFOLDERS = 44,
 
             /// <summary>
+            /// Enum CANMODIFYFOLDERS for value: CAN_MODIFY_FOLDERS
+            /// </summary>
+            [EnumMember(Value = "CAN_MODIFY_FOLDERS")]
+            CANMODIFYFOLDERS = 45,
+
+            /// <summary>
             /// Enum CANMODIDYFOLDERS for value: CAN_MODIDY_FOLDERS
             /// </summary>
             [EnumMember(Value = "CAN_MODIDY_FOLDERS")]
-            CANMODIDYFOLDERS = 45,
+            CANMODIDYFOLDERS = 46,
 
             /// <summary>
             /// Enum CANMANAGEVARIABLES for value: CAN_MANAGE_VARIABLES
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_VARIABLES")]
-            CANMANAGEVARIABLES = 46,
+            CANMANAGEVARIABLES = 47,
 
             /// <summary>
             /// Enum CANMANAGEAGENTSPOT for value: CAN_MANAGE_AGENTSPOT
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_AGENTSPOT")]
-            CANMANAGEAGENTSPOT = 47,
+            CANMANAGEAGENTSPOT = 48,
 
             /// <summary>
             /// Enum CANACCESSAGENTSPOT for value: CAN_ACCESS_AGENTSPOT
             /// </summary>
             [EnumMember(Value = "CAN_ACCESS_AGENTSPOT")]
-            CANACCESSAGENTSPOT = 48,
+            CANACCESSAGENTSPOT = 49,
 
             /// <summary>
             /// Enum PREVIEWDOCUMENTSEARCH for value: PREVIEW_DOCUMENT_SEARCH
             /// </summary>
             [EnumMember(Value = "PREVIEW_DOCUMENT_SEARCH")]
-            PREVIEWDOCUMENTSEARCH = 49,
+            PREVIEWDOCUMENTSEARCH = 50,
 
             /// <summary>
             /// Enum CANSETUPVERSIONCONTROL for value: CAN_SETUP_VERSION_CONTROL
             /// </summary>
             [EnumMember(Value = "CAN_SETUP_VERSION_CONTROL")]
-            CANSETUPVERSIONCONTROL = 50,
+            CANSETUPVERSIONCONTROL = 51,
 
             /// <summary>
             /// Enum CANMANAGEWEBHOOKS for value: CAN_MANAGE_WEBHOOKS
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_WEBHOOKS")]
-            CANMANAGEWEBHOOKS = 51,
+            CANMANAGEWEBHOOKS = 52,
 
             /// <summary>
             /// Enum CANDOWNLOADVISUALS for value: CAN_DOWNLOAD_VISUALS
             /// </summary>
             [EnumMember(Value = "CAN_DOWNLOAD_VISUALS")]
-            CANDOWNLOADVISUALS = 52,
+            CANDOWNLOADVISUALS = 53,
 
             /// <summary>
             /// Enum CANDOWNLOADDETAILEDDATA for value: CAN_DOWNLOAD_DETAILED_DATA
             /// </summary>
             [EnumMember(Value = "CAN_DOWNLOAD_DETAILED_DATA")]
-            CANDOWNLOADDETAILEDDATA = 53,
+            CANDOWNLOADDETAILEDDATA = 54,
 
             /// <summary>
             /// Enum CANUSESPOTTER for value: CAN_USE_SPOTTER
             /// </summary>
             [EnumMember(Value = "CAN_USE_SPOTTER")]
-            CANUSESPOTTER = 54,
+            CANUSESPOTTER = 55,
 
             /// <summary>
             /// Enum CANMANAGESPOTTER for value: CAN_MANAGE_SPOTTER
             /// </summary>
             [EnumMember(Value = "CAN_MANAGE_SPOTTER")]
-            CANMANAGESPOTTER = 55,
+            CANMANAGESPOTTER = 56,
 
             /// <summary>
             /// Enum CANCREATELIVEBOARD for value: CAN_CREATE_LIVEBOARD
             /// </summary>
             [EnumMember(Value = "CAN_CREATE_LIVEBOARD")]
-            CANCREATELIVEBOARD = 56,
+            CANCREATELIVEBOARD = 57,
 
             /// <summary>
             /// Enum CANCREATEANSWERS for value: CAN_CREATE_ANSWERS
             /// </summary>
             [EnumMember(Value = "CAN_CREATE_ANSWERS")]
-            CANCREATEANSWERS = 57,
+            CANCREATEANSWERS = 58,
 
             /// <summary>
             /// Enum CANANALYZEDATA for value: CAN_ANALYZE_DATA
             /// </summary>
             [EnumMember(Value = "CAN_ANALYZE_DATA")]
-            CANANALYZEDATA = 58,
+            CANANALYZEDATA = 59,
 
             /// <summary>
             /// Enum CANADMINISTERSCHEDULES for value: CAN_ADMINISTER_SCHEDULES
             /// </summary>
             [EnumMember(Value = "CAN_ADMINISTER_SCHEDULES")]
-            CANADMINISTERSCHEDULES = 59,
+            CANADMINISTERSCHEDULES = 60,
 
             /// <summary>
             /// Enum CANCREATEKPIALERTS for value: CAN_CREATE_KPI_ALERTS
             /// </summary>
             [EnumMember(Value = "CAN_CREATE_KPI_ALERTS")]
-            CANCREATEKPIALERTS = 60
+            CANCREATEKPIALERTS = 61,
+
+            /// <summary>
+            /// Enum CANMANAGEINPUTTABLES for value: CAN_MANAGE_INPUT_TABLES
+            /// </summary>
+            [EnumMember(Value = "CAN_MANAGE_INPUT_TABLES")]
+            CANMANAGEINPUTTABLES = 62,
+
+            /// <summary>
+            /// Enum CANEDITINPUTTABLES for value: CAN_EDIT_INPUT_TABLES
+            /// </summary>
+            [EnumMember(Value = "CAN_EDIT_INPUT_TABLES")]
+            CANEDITINPUTTABLES = 63,
+
+            /// <summary>
+            /// Enum CANCREATEDATAAPP for value: CAN_CREATE_DATA_APP
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_DATA_APP")]
+            CANCREATEDATAAPP = 64,
+
+            /// <summary>
+            /// Enum CANCREATEMUZESTUDIOTEMPLATES for value: CAN_CREATE_MUZE_STUDIO_TEMPLATES
+            /// </summary>
+            [EnumMember(Value = "CAN_CREATE_MUZE_STUDIO_TEMPLATES")]
+            CANCREATEMUZESTUDIOTEMPLATES = 65
         }
 
         /// <summary>

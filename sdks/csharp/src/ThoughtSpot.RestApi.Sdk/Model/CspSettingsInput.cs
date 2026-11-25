@@ -35,13 +35,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CspSettingsInput" /> class.
         /// </summary>
-        /// <param name="connectSrcUrls">Allowed URLs for connect-src directive..</param>
-        /// <param name="fontSrcUrls">Allowed URLs for font-src directive..</param>
-        /// <param name="visualEmbedHosts">Allowed hosts for visual embed (frame-ancestors directive)..</param>
-        /// <param name="iframeSrcUrls">Allowed URLs for frame-src directive..</param>
-        /// <param name="imgSrcUrls">Allowed URLs for img-src directive..</param>
+        /// <param name="connectSrcUrls">Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed..</param>
+        /// <param name="fontSrcUrls">Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed..</param>
+        /// <param name="visualEmbedHosts">Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed..</param>
+        /// <param name="iframeSrcUrls">Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed..</param>
+        /// <param name="imgSrcUrls">Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed..</param>
         /// <param name="scriptSrcUrls">scriptSrcUrls.</param>
-        /// <param name="styleSrcUrls">Allowed URLs for style-src directive..</param>
+        /// <param name="styleSrcUrls">Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed..</param>
         public CspSettingsInput(List<string> connectSrcUrls = default, List<string> fontSrcUrls = default, List<string> visualEmbedHosts = default, List<string> iframeSrcUrls = default, List<string> imgSrcUrls = default, ScriptSrcUrlsInput scriptSrcUrls = default, List<string> styleSrcUrls = default)
         {
             this.ConnectSrcUrls = connectSrcUrls;
@@ -55,37 +55,37 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         }
 
         /// <summary>
-        /// Allowed URLs for connect-src directive.
+        /// Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for connect-src directive.</value>
+        /// <value>Allowed URLs for connect-src directive. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "connect_src_urls", EmitDefaultValue = true)]
         public List<string> ConnectSrcUrls { get; set; }
 
         /// <summary>
-        /// Allowed URLs for font-src directive.
+        /// Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for font-src directive.</value>
+        /// <value>Allowed URLs for font-src directive. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "font_src_urls", EmitDefaultValue = true)]
         public List<string> FontSrcUrls { get; set; }
 
         /// <summary>
-        /// Allowed hosts for visual embed (frame-ancestors directive).
+        /// Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed hosts for visual embed (frame-ancestors directive).</value>
+        /// <value>Allowed hosts for visual embed (frame-ancestors directive). Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "visual_embed_hosts", EmitDefaultValue = true)]
         public List<string> VisualEmbedHosts { get; set; }
 
         /// <summary>
-        /// Allowed URLs for frame-src directive.
+        /// Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for frame-src directive.</value>
+        /// <value>Allowed URLs for frame-src directive. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "iframe_src_urls", EmitDefaultValue = true)]
         public List<string> IframeSrcUrls { get; set; }
 
         /// <summary>
-        /// Allowed URLs for img-src directive.
+        /// Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for img-src directive.</value>
+        /// <value>Allowed URLs for img-src directive. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "img_src_urls", EmitDefaultValue = true)]
         public List<string> ImgSrcUrls { get; set; }
 
@@ -96,9 +96,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public ScriptSrcUrlsInput ScriptSrcUrls { get; set; }
 
         /// <summary>
-        /// Allowed URLs for style-src directive.
+        /// Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.
         /// </summary>
-        /// <value>Allowed URLs for style-src directive.</value>
+        /// <value>Allowed URLs for style-src directive. Replaces the existing list. Values not included in the request are removed.</value>
         [DataMember(Name = "style_src_urls", EmitDefaultValue = true)]
         public List<string> StyleSrcUrls { get; set; }
 

@@ -6,7 +6,7 @@ Input for cluster-level non-embed access configuration.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BlockFullAppAccess** | **bool?** | Block full application access for non-embedded usage. | [optional] 
-**GroupsIdentifiersWithAccess** | **List&lt;string&gt;** | Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true. | [optional] 
+**GroupsIdentifiersWithAccess** | **List&lt;string&gt;** | Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

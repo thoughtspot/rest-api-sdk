@@ -4,6 +4,7 @@ All URIs are relative to *CLUSTER_URL*
 
 | Method | HTTP request |
 |------------- | ------------- |
+| [**buildMetadataIndex**](MetadataApi.md#buildMetadataIndex) | **POST** /api/rest/2.0/metadata/{logical_table_identifier}/build-index |
 | [**convertWorksheetToModel**](MetadataApi.md#convertWorksheetToModel) | **POST** /api/rest/2.0/metadata/worksheets/convert |
 | [**copyObject**](MetadataApi.md#copyObject) | **POST** /api/rest/2.0/metadata/copyobject |
 | [**deleteMetadata**](MetadataApi.md#deleteMetadata) | **POST** /api/rest/2.0/metadata/delete |
@@ -12,6 +13,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**fetchAnswerSqlQuery**](MetadataApi.md#fetchAnswerSqlQuery) | **POST** /api/rest/2.0/metadata/answer/sql |
 | [**fetchAsyncImportTaskStatus**](MetadataApi.md#fetchAsyncImportTaskStatus) | **POST** /api/rest/2.0/metadata/tml/async/status |
 | [**fetchLiveboardSqlQuery**](MetadataApi.md#fetchLiveboardSqlQuery) | **POST** /api/rest/2.0/metadata/liveboard/sql |
+| [**fetchMetadataSearchReadiness**](MetadataApi.md#fetchMetadataSearchReadiness) | **GET** /api/rest/2.0/metadata/{guid}/search-readiness |
 | [**importMetadataTML**](MetadataApi.md#importMetadataTML) | **POST** /api/rest/2.0/metadata/tml/import |
 | [**importMetadataTMLAsync**](MetadataApi.md#importMetadataTMLAsync) | **POST** /api/rest/2.0/metadata/tml/async/import |
 | [**parameterizeMetadata**](MetadataApi.md#parameterizeMetadata) | **POST** /api/rest/2.0/metadata/parameterize |
@@ -21,6 +23,43 @@ All URIs are relative to *CLUSTER_URL*
 | [**updateMetadataHeader**](MetadataApi.md#updateMetadataHeader) | **POST** /api/rest/2.0/metadata/headers/update |
 | [**updateMetadataObjId**](MetadataApi.md#updateMetadataObjId) | **POST** /api/rest/2.0/metadata/update-obj-id |
 
+
+<a id="buildMetadataIndex"></a>
+# **buildMetadataIndex**
+> buildMetadataIndex(logicalTableIdentifier, buildMetadataIndexRequest)
+
+
+
+  Version: 27.1.0.cl or later   Triggers a rebuild of the search index of a logical table, such as a table or view.  Use this endpoint after loading new data into a table, so that its new column values become searchable without waiting for the next scheduled indexing run.  Requires edit access to the logical table, or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) or &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**) privilege. Reindexing a table in another Org requires cluster administrator privileges.  The request is non-blocking: a successful response means the reindex request was accepted, not that indexing has finished. Indexing runs in the background, and its duration depends on the size of the table.  Note: This endpoint reindexes a table that has already been indexed at least once. A table that hasn&#39;t been indexed yet is picked up by the next scheduled indexing run instead.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **logicalTableIdentifier** | **String**
+| **buildMetadataIndexRequest** | [**BuildMetadataIndexRequest**](BuildMetadataIndexRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Reindex of the logical table is queued and will run in the background. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="convertWorksheetToModel"></a>
 # **convertWorksheetToModel**
@@ -306,6 +345,42 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Fetching SQL query of specified metadata object is successful. |  -  |
+| **400** | Invalid request. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="fetchMetadataSearchReadiness"></a>
+# **fetchMetadataSearchReadiness**
+> MetadataSearchReadinessResponse fetchMetadataSearchReadiness(guid)
+
+
+
+  Version: 27.1.0.cl or later   Checks whether a metadata object is available in Search.  After you create or update a Table, Model, user, or group, Search indexes the change asynchronously, so the object may not appear in search results right away. Use this API endpoint to poll until the object&#39;s latest version is available, for example before running a search query on a Model you just imported via TML.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  Specify the GUID of the metadata object in the &#x60;guid&#x60; path parameter. The object type is detected automatically. Supported types are Tables and Models (&#x60;LOGICAL_TABLE&#x60;), users (&#x60;USER&#x60;), and groups (&#x60;USER_GROUP&#x60;).  The response &#x60;state&#x60; is one of the following:  * &#x60;OBJECT_READY&#x60; - The object&#39;s latest version is available in Search. * &#x60;OBJECT_NOT_READY&#x60; - The object exists, but Search has not yet indexed its latest version. Retry after a short interval. * &#x60;TYPE_NOT_SUPPORTED&#x60; - The object exists, but its type cannot be checked. * &#x60;OBJECT_NOT_VALID&#x60; - &#x60;guid&#x60; is not a valid GUID, or no object with that GUID exists.  The response also includes &#x60;object_version&#x60;, the metadata version at which the object was last written, and &#x60;indexed_version&#x60;, the latest metadata version indexed by Search. The object is ready once &#x60;indexed_version&#x60; is greater than or equal to &#x60;object_version&#x60;.       
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **guid** | **String**
+
+### Return type
+
+[**MetadataSearchReadinessResponse**](MetadataSearchReadinessResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns the search readiness state of the object. |  -  |
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |

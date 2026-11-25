@@ -124,6 +124,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -195,6 +196,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -266,6 +268,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -2079,6 +2082,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -2154,6 +2158,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(
@@ -2229,6 +2234,7 @@ class VariableApi:
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
+            '409': "ErrorResponse",
             '500': "ErrorResponse",
         }
         response_data = await self.api_client.call_api(

@@ -69,9 +69,15 @@ public class GetFullAccessTokenRequest implements Serializable {
   private Integer validityTimeInSec = 300;
 
   public static final String SERIALIZED_NAME_ORG_ID = "org_id";
+  @Deprecated
   @SerializedName(SERIALIZED_NAME_ORG_ID)
   @javax.annotation.Nullable
   private Integer orgId;
+
+  public static final String SERIALIZED_NAME_ORG_IDENTIFIER = "org_identifier";
+  @SerializedName(SERIALIZED_NAME_ORG_IDENTIFIER)
+  @javax.annotation.Nullable
+  private String orgIdentifier;
 
   public static final String SERIALIZED_NAME_SCOPE = "scope";
   @SerializedName(SERIALIZED_NAME_SCOPE)
@@ -182,6 +188,7 @@ public class GetFullAccessTokenRequest implements Serializable {
   }
 
 
+  @Deprecated
   public GetFullAccessTokenRequest orgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
     return this;
@@ -190,14 +197,36 @@ public class GetFullAccessTokenRequest implements Serializable {
   /**
    * ID of the Org context to log in to. If the Org ID is not specified and secret key is provided then user will be logged into the org corresponding to the secret key, and if secret key is not provided then user will be logged in to the Org context of their previous login session.
    * @return orgId
+   * @deprecated
    */
+  @Deprecated
   @javax.annotation.Nullable
   public Integer getOrgId() {
     return orgId;
   }
 
+  @Deprecated
   public void setOrgId(@javax.annotation.Nullable Integer orgId) {
     this.orgId = orgId;
+  }
+
+
+  public GetFullAccessTokenRequest orgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
+    this.orgIdentifier = orgIdentifier;
+    return this;
+  }
+
+  /**
+   * ID or name of the Org context to log in to. Takes precedence over org_id when both are provided. If neither is specified and a secret key is provided, the user will be logged into the org corresponding to the secret key; otherwise, the user will be logged in to the Org context of their previous login session.    Version: 26.12.0.cl or later 
+   * @return orgIdentifier
+   */
+  @javax.annotation.Nullable
+  public String getOrgIdentifier() {
+    return orgIdentifier;
+  }
+
+  public void setOrgIdentifier(@javax.annotation.Nullable String orgIdentifier) {
+    this.orgIdentifier = orgIdentifier;
   }
 
 
@@ -382,6 +411,7 @@ public class GetFullAccessTokenRequest implements Serializable {
         Objects.equals(this.secretKey, getFullAccessTokenRequest.secretKey) &&
         Objects.equals(this.validityTimeInSec, getFullAccessTokenRequest.validityTimeInSec) &&
         Objects.equals(this.orgId, getFullAccessTokenRequest.orgId) &&
+        Objects.equals(this.orgIdentifier, getFullAccessTokenRequest.orgIdentifier) &&
         Objects.equals(this.scope, getFullAccessTokenRequest.scope) &&
         Objects.equals(this.email, getFullAccessTokenRequest.email) &&
         Objects.equals(this.displayName, getFullAccessTokenRequest.displayName) &&
@@ -393,7 +423,7 @@ public class GetFullAccessTokenRequest implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, password, secretKey, validityTimeInSec, orgId, scope, email, displayName, autoCreate, groupIdentifiers, userParameters, additionalProperties);
+    return Objects.hash(username, password, secretKey, validityTimeInSec, orgId, orgIdentifier, scope, email, displayName, autoCreate, groupIdentifiers, userParameters, additionalProperties);
   }
 
   @Override
@@ -405,6 +435,7 @@ public class GetFullAccessTokenRequest implements Serializable {
     sb.append("    secretKey: ").append(toIndentedString(secretKey)).append("\n");
     sb.append("    validityTimeInSec: ").append(toIndentedString(validityTimeInSec)).append("\n");
     sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
+    sb.append("    orgIdentifier: ").append(toIndentedString(orgIdentifier)).append("\n");
     sb.append("    scope: ").append(toIndentedString(scope)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
@@ -439,6 +470,7 @@ public class GetFullAccessTokenRequest implements Serializable {
     openapiFields.add("secret_key");
     openapiFields.add("validity_time_in_sec");
     openapiFields.add("org_id");
+    openapiFields.add("org_identifier");
     openapiFields.add("scope");
     openapiFields.add("email");
     openapiFields.add("display_name");
@@ -479,6 +511,9 @@ public class GetFullAccessTokenRequest implements Serializable {
       }
       if ((jsonObj.get("secret_key") != null && !jsonObj.get("secret_key").isJsonNull()) && !jsonObj.get("secret_key").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `secret_key` to be a primitive type in the JSON string but got `%s`", jsonObj.get("secret_key").toString()));
+      }
+      if ((jsonObj.get("org_identifier") != null && !jsonObj.get("org_identifier").isJsonNull()) && !jsonObj.get("org_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `org_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("org_identifier").toString()));
       }
       // validate the optional field `scope`
       if (jsonObj.get("scope") != null && !jsonObj.get("scope").isJsonNull()) {

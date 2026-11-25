@@ -98,5 +98,23 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'UserIdentifiers'
         }
+
+        /// <summary>
+        /// Test the property 'RecordOffset'
+        /// </summary>
+        [Fact]
+        public void RecordOffsetTest()
+        {
+            // TODO unit test for the property 'RecordOffset'
+        }
+
+        /// <summary>
+        /// Test the property 'RecordSize'
+        /// </summary>
+        [Fact]
+        public void RecordSizeTest()
+        {
+            // TODO unit test for the property 'RecordSize'
+        }
     }
 }

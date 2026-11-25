@@ -109,7 +109,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.DeleteConversation(conversationIdentifier);
+            //string? spotterExperienceVersion = null;
+            //instance.DeleteConversation(conversationIdentifier, spotterExperienceVersion);
         }
 
         /// <summary>
@@ -122,6 +123,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //DeleteUsageDataRequest deleteUsageDataRequest = null;
             //var response = instance.DeleteUsageData(deleteUsageDataRequest);
             //Assert.IsType<DeleteUsageDataResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ExportContext
+        /// </summary>
+        [Fact]
+        public void ExportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportContextRequest exportContextRequest = null;
+            //var response = instance.ExportContext(exportContextRequest);
+            //Assert.IsType<ExportContextResponse>(response);
         }
 
         /// <summary>
@@ -169,7 +182,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //int? limit = null;
             //int? offset = null;
             //bool? skipEmpty = null;
-            //var response = instance.GetConversationList(limit, offset, skipEmpty);
+            //string? spotterExperienceVersion = null;
+            //var response = instance.GetConversationList(limit, offset, skipEmpty, spotterExperienceVersion);
             //Assert.IsType<AgentConversationHistoryResponse>(response);
         }
 
@@ -243,6 +257,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string? userIdentifier = null;
             //var response = instance.GetUsageDataForUser(userIdentifier);
             //Assert.IsType<UsageDataForUserResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ImportContext
+        /// </summary>
+        [Fact]
+        public void ImportContextTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ImportContextRequest importContextRequest = null;
+            //var response = instance.ImportContext(importContextRequest);
+            //Assert.IsType<ImportContextResponse>(response);
         }
 
         /// <summary>
@@ -329,7 +355,7 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //string conversationIdentifier = null;
             //SendAgentConversationMessageStreamingRequest sendAgentConversationMessageStreamingRequest = null;
             //var response = instance.SendAgentConversationMessageStreaming(conversationIdentifier, sendAgentConversationMessageStreamingRequest);
-            //Assert.IsType<SendAgentMessageResponse>(response);
+            //Assert.IsType<SendAgentConversationMessageStreaming200Response>(response);
         }
 
         /// <summary>
@@ -439,7 +465,8 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string conversationIdentifier = null;
-            //instance.StopConversation(conversationIdentifier);
+            //StopConversationRequest? stopConversationRequest = null;
+            //instance.StopConversation(conversationIdentifier, stopConversationRequest);
         }
 
         /// <summary>

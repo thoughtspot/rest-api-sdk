@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Reason** | **string** | Machine-readable category for the failure (e.g. &#x60;VALIDATION&#x60;, &#x60;ACCESS_DENIED&#x60;, &#x60;CHAR_LIMIT&#x60;). | [optional] 
 **FieldName** | **string** | Dotted path to the offending field within the item (e.g. &#x60;content.rule_definition&#x60;) for inline highlighting. Absent when the failure is item-level rather than field-level. | [optional] 
 **Message** | **string** | Human-readable description of the failure. | [optional] 
+**EntityKey** | **string** | Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

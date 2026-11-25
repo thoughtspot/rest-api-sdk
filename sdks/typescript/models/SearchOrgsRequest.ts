@@ -33,6 +33,14 @@ export class SearchOrgsRequest {
     * GUIDs or names of the users for which you want to retrieve the Orgs data
     */
     'user_identifiers'?: Array<string>;
+    /**
+    * The starting record number from where the records should be included.    Version: 27.1.0.cl or later 
+    */
+    'record_offset'?: number;
+    /**
+    * The number of records that should be included.    Version: 27.1.0.cl or later 
+    */
+    'record_size'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -68,6 +76,18 @@ export class SearchOrgsRequest {
             "baseName": "user_identifiers",
             "type": "Array<string>",
             "format": ""
+        },
+        {
+            "name": "record_offset",
+            "baseName": "record_offset",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "record_size",
+            "baseName": "record_size",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

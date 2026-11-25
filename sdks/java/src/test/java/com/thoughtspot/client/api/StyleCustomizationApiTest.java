@@ -5,6 +5,7 @@
 package com.thoughtspot.client.api;
 
 import com.thoughtspot.client.ApiException;
+import com.thoughtspot.client.model.AppColorThemeInput;
 import com.thoughtspot.client.model.DeleteStyleFontsRequest;
 import com.thoughtspot.client.model.ErrorResponse;
 import com.thoughtspot.client.model.ExportStyleLogosRequest;
@@ -97,12 +98,13 @@ public class StyleCustomizationApiTest {
         String operation = null;
         StyleResetOptionsInput resetOptions = null;
         NavigationPanelInput navigationPanel = null;
+        AppColorThemeInput appColorTheme = null;
         StyleColorPaletteInput chartColorPalette = null;
         String embeddedFooterText = null;
         VisualizationFontsInput visualizationFonts = null;
         File defaultLogo = null;
         File wideLogo = null;
-        api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
+        api.updateStyleCustomization(scope, operation, resetOptions, navigationPanel, appColorTheme, chartColorPalette, embeddedFooterText, visualizationFonts, defaultLogo, wideLogo);
         // TODO: test validations
     }
 

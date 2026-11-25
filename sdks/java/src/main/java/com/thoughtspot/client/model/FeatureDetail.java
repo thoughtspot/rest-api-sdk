@@ -92,6 +92,11 @@ public class FeatureDetail implements Serializable {
   @javax.annotation.Nullable
   private String docsUrl;
 
+  public static final String SERIALIZED_NAME_DOCS_NEW_WINDOW = "docs_new_window";
+  @SerializedName(SERIALIZED_NAME_DOCS_NEW_WINDOW)
+  @javax.annotation.Nullable
+  private Boolean docsNewWindow;
+
   public FeatureDetail() {
   }
 
@@ -261,7 +266,7 @@ public class FeatureDetail implements Serializable {
   }
 
   /**
-   * Per-feature documentation URL, when available.
+   * Documentation URL of the feature itself, when it has one. Not inherited from its group.
    * @return docsUrl
    */
   @javax.annotation.Nullable
@@ -271,6 +276,25 @@ public class FeatureDetail implements Serializable {
 
   public void setDocsUrl(@javax.annotation.Nullable String docsUrl) {
     this.docsUrl = docsUrl;
+  }
+
+
+  public FeatureDetail docsNewWindow(@javax.annotation.Nullable Boolean docsNewWindow) {
+    this.docsNewWindow = docsNewWindow;
+    return this;
+  }
+
+  /**
+   * &#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.
+   * @return docsNewWindow
+   */
+  @javax.annotation.Nullable
+  public Boolean getDocsNewWindow() {
+    return docsNewWindow;
+  }
+
+  public void setDocsNewWindow(@javax.annotation.Nullable Boolean docsNewWindow) {
+    this.docsNewWindow = docsNewWindow;
   }
 
   /**
@@ -336,13 +360,14 @@ public class FeatureDetail implements Serializable {
         Objects.equals(this.elementType, featureDetail.elementType) &&
         Objects.equals(this.elementConfig, featureDetail.elementConfig) &&
         Objects.equals(this.elementValue, featureDetail.elementValue) &&
-        Objects.equals(this.docsUrl, featureDetail.docsUrl)&&
+        Objects.equals(this.docsUrl, featureDetail.docsUrl) &&
+        Objects.equals(this.docsNewWindow, featureDetail.docsNewWindow)&&
         Objects.equals(this.additionalProperties, featureDetail.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(featureId, featureName, assignedOrgs, isOrgAware, featureValue, elementType, elementConfig, elementValue, docsUrl, additionalProperties);
+    return Objects.hash(featureId, featureName, assignedOrgs, isOrgAware, featureValue, elementType, elementConfig, elementValue, docsUrl, docsNewWindow, additionalProperties);
   }
 
   @Override
@@ -358,6 +383,7 @@ public class FeatureDetail implements Serializable {
     sb.append("    elementConfig: ").append(toIndentedString(elementConfig)).append("\n");
     sb.append("    elementValue: ").append(toIndentedString(elementValue)).append("\n");
     sb.append("    docsUrl: ").append(toIndentedString(docsUrl)).append("\n");
+    sb.append("    docsNewWindow: ").append(toIndentedString(docsNewWindow)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -390,6 +416,7 @@ public class FeatureDetail implements Serializable {
     openapiFields.add("element_config");
     openapiFields.add("element_value");
     openapiFields.add("docs_url");
+    openapiFields.add("docs_new_window");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

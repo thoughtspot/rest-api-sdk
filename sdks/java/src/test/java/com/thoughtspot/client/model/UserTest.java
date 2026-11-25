@@ -178,6 +178,14 @@ public class UserTest {
     }
 
     /**
+     * Test the property 'lastActiveTimeInMillis'
+     */
+    @Test
+    public void lastActiveTimeInMillisTest() {
+        // TODO: test lastActiveTimeInMillis
+    }
+
+    /**
      * Test the property 'groupMask'
      */
     @Test

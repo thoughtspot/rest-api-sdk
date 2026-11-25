@@ -57,6 +57,11 @@ public class FeatureGroup implements Serializable {
   @javax.annotation.Nullable
   private String docsUrl;
 
+  public static final String SERIALIZED_NAME_DOCS_NEW_WINDOW = "docs_new_window";
+  @SerializedName(SERIALIZED_NAME_DOCS_NEW_WINDOW)
+  @javax.annotation.Nullable
+  private Boolean docsNewWindow;
+
   public static final String SERIALIZED_NAME_FEATURES = "features";
   @SerializedName(SERIALIZED_NAME_FEATURES)
   @javax.annotation.Nonnull
@@ -90,7 +95,7 @@ public class FeatureGroup implements Serializable {
   }
 
   /**
-   * Documentation URL for the feature group, when available.
+   * Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group.
    * @return docsUrl
    */
   @javax.annotation.Nullable
@@ -100,6 +105,25 @@ public class FeatureGroup implements Serializable {
 
   public void setDocsUrl(@javax.annotation.Nullable String docsUrl) {
     this.docsUrl = docsUrl;
+  }
+
+
+  public FeatureGroup docsNewWindow(@javax.annotation.Nullable Boolean docsNewWindow) {
+    this.docsNewWindow = docsNewWindow;
+    return this;
+  }
+
+  /**
+   * &#x60;true&#x60; when the group&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.
+   * @return docsNewWindow
+   */
+  @javax.annotation.Nullable
+  public Boolean getDocsNewWindow() {
+    return docsNewWindow;
+  }
+
+  public void setDocsNewWindow(@javax.annotation.Nullable Boolean docsNewWindow) {
+    this.docsNewWindow = docsNewWindow;
   }
 
 
@@ -186,13 +210,14 @@ public class FeatureGroup implements Serializable {
     FeatureGroup featureGroup = (FeatureGroup) o;
     return Objects.equals(this.featureGroup, featureGroup.featureGroup) &&
         Objects.equals(this.docsUrl, featureGroup.docsUrl) &&
+        Objects.equals(this.docsNewWindow, featureGroup.docsNewWindow) &&
         Objects.equals(this.features, featureGroup.features)&&
         Objects.equals(this.additionalProperties, featureGroup.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(featureGroup, docsUrl, features, additionalProperties);
+    return Objects.hash(featureGroup, docsUrl, docsNewWindow, features, additionalProperties);
   }
 
   @Override
@@ -201,6 +226,7 @@ public class FeatureGroup implements Serializable {
     sb.append("class FeatureGroup {\n");
     sb.append("    featureGroup: ").append(toIndentedString(featureGroup)).append("\n");
     sb.append("    docsUrl: ").append(toIndentedString(docsUrl)).append("\n");
+    sb.append("    docsNewWindow: ").append(toIndentedString(docsNewWindow)).append("\n");
     sb.append("    features: ").append(toIndentedString(features)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -227,6 +253,7 @@ public class FeatureGroup implements Serializable {
     openapiFields = new HashSet<String>();
     openapiFields.add("feature_group");
     openapiFields.add("docs_url");
+    openapiFields.add("docs_new_window");
     openapiFields.add("features");
 
     // a set of required properties/fields (JSON key names)

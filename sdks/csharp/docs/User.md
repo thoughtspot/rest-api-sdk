@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **External** | **bool?** | Indicates whether the user is external. | [optional] 
 **FavoriteMetadata** | [**List&lt;FavoriteMetadataItem&gt;**](FavoriteMetadataItem.md) | Metadata objects to add to the users&#39; favorites list. | [optional] 
 **FirstLoginTimeInMillis** | **float?** | Timestamp of the first login session of the user in milliseconds. | [optional] 
+**LastActiveTimeInMillis** | **float?** | Timestamp of the last active session of the user in milliseconds.    Version: 27.1.0.cl or later  | [optional] 
 **GroupMask** | **int?** | Group mask of the user. | [optional] 
 **Hidden** | **bool?** | Indicates whether the user is hidden. | [optional] 
 **HomeLiveboard** | [**ObjectIDAndName**](ObjectIDAndName.md) |  | [optional] 

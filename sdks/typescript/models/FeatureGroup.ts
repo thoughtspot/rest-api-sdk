@@ -22,9 +22,13 @@ export class FeatureGroup {
     */
     'feature_group'?: string | null;
     /**
-    * Documentation URL for the feature group, when available.
+    * Documentation URL of the feature group itself, when it has one. Not inherited from, or by, the features in the group.
     */
     'docs_url'?: string | null;
+    /**
+    * `true` when the group\'s documentation link should open in a new browser tab, the default, or `false` for the same tab. Omitted when there is no `docs_url`.
+    */
+    'docs_new_window'?: boolean | null;
     /**
     * Feature details within this group. Each entry contains the fields relevant to the requested scope; org-admin-only and cluster-admin-only fields are null in the other view.
     */
@@ -45,6 +49,12 @@ export class FeatureGroup {
             "name": "docs_url",
             "baseName": "docs_url",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "docs_new_window",
+            "baseName": "docs_new_window",
+            "type": "boolean",
             "format": ""
         },
         {

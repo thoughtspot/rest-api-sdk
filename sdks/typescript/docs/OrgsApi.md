@@ -160,6 +160,8 @@ apiInstance.searchOrgs(
     user_identifiers: [
       "user_identifiers_example",
     ],
+    record_offset: 0,
+    record_size: 10,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

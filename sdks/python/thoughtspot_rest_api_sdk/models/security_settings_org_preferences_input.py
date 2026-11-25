@@ -27,7 +27,7 @@ class SecuritySettingsOrgPreferencesInput(BaseModel):
     Input for org-level security preferences configuration. Note: cross-org operations are not supported currently.
     """ # noqa: E501
     org_identifier: StrictStr = Field(description="Unique identifier or name of the org")
-    cors_whitelisted_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed origins for CORS for this org.")
+    cors_whitelisted_urls: Optional[List[StrictStr]] = Field(default=None, description="Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.")
     non_embed_access: Optional[OrgNonEmbedAccessInput] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["org_identifier", "cors_whitelisted_urls", "non_embed_access"]

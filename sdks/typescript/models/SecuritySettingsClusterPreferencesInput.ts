@@ -23,12 +23,12 @@ export class SecuritySettingsClusterPreferencesInput {
     */
     'enable_partitioned_cookies'?: boolean | null;
     /**
-    * Allowed origins for CORS.
+    * Allowed origins for CORS. Replaces the existing list. Values not included in the request are removed.
     */
     'cors_whitelisted_urls'?: Array<string> | null;
     'csp_settings'?: CspSettingsInput;
     /**
-    * Allowed redirect hosts for SAML login.
+    * Allowed redirect hosts for SAML login. Replaces the existing list. Values not included in the request are removed.
     */
     'saml_redirect_urls'?: Array<string> | null;
     'non_embed_access'?: ClusterNonEmbedAccessInput;

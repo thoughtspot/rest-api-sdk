@@ -34,9 +34,10 @@ class FeatureDetail(BaseModel):
     element_type: Optional[StrictStr] = Field(default=None, description="UI element type hint for the feature. Populated in the org-admin view.")
     element_config: Optional[Any] = Field(default=None, description="UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by `element_type`; a `label` string is the common envelope field.")
     element_value: Optional[StrictStr] = Field(default=None, description="Current value of the feature for the requested Org. Populated in the org-admin view.")
-    docs_url: Optional[StrictStr] = Field(default=None, description="Per-feature documentation URL, when available.")
+    docs_url: Optional[StrictStr] = Field(default=None, description="Documentation URL of the feature itself, when it has one. Not inherited from its group.")
+    docs_new_window: Optional[StrictBool] = Field(default=None, description="`true` when the feature's documentation link should open in a new browser tab, the default, or `false` for the same tab. Omitted when there is no `docs_url`.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["feature_id", "feature_name", "assigned_orgs", "is_org_aware", "feature_value", "element_type", "element_config", "element_value", "docs_url"]
+    __properties: ClassVar[List[str]] = ["feature_id", "feature_name", "assigned_orgs", "is_org_aware", "feature_value", "element_type", "element_config", "element_value", "docs_url", "docs_new_window"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -131,6 +132,11 @@ class FeatureDetail(BaseModel):
         if self.docs_url is None and "docs_url" in self.model_fields_set:
             _dict['docs_url'] = None
 
+        # set to None if docs_new_window (nullable) is None
+        # and model_fields_set contains the field
+        if self.docs_new_window is None and "docs_new_window" in self.model_fields_set:
+            _dict['docs_new_window'] = None
+
         return _dict
 
     @classmethod
@@ -151,7 +157,8 @@ class FeatureDetail(BaseModel):
             "element_type": obj.get("element_type"),
             "element_config": obj.get("element_config"),
             "element_value": obj.get("element_value"),
-            "docs_url": obj.get("docs_url")
+            "docs_url": obj.get("docs_url"),
+            "docs_new_window": obj.get("docs_new_window")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

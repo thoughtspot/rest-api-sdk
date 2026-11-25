@@ -26,7 +26,7 @@ class OrgNonEmbedAccessInput(BaseModel):
     Input for org-level non-embed access configuration.
     """ # noqa: E501
     block_full_app_access: Optional[StrictBool] = Field(default=None, description="Block full application access for non-embedded usage.")
-    groups_identifiers_with_access: Optional[List[StrictStr]] = Field(default=None, description="Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true.")
+    groups_identifiers_with_access: Optional[List[StrictStr]] = Field(default=None, description="Group identifiers that are allowed non-embed full app access. Can only be set if block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["block_full_app_access", "groups_identifiers_with_access"]
 

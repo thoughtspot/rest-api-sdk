@@ -55,7 +55,9 @@ public class AuthorMetadataTypeInput implements Serializable {
     
     LOGICAL_TABLE("LOGICAL_TABLE"),
     
-    CONNECTION("CONNECTION");
+    CONNECTION("CONNECTION"),
+    
+    COLLECTION("COLLECTION");
 
     private String value;
 

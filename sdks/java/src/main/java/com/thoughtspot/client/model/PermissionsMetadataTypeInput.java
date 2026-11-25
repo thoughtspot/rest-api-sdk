@@ -59,7 +59,9 @@ public class PermissionsMetadataTypeInput implements Serializable {
     
     CONNECTION("CONNECTION"),
     
-    COLLECTION("COLLECTION");
+    COLLECTION("COLLECTION"),
+    
+    PERSONALISED_VIEW("PERSONALISED_VIEW");
 
     private String value;
 

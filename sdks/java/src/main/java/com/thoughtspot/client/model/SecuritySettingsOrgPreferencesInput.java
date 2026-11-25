@@ -98,7 +98,7 @@ public class SecuritySettingsOrgPreferencesInput implements Serializable {
   }
 
   /**
-   * Allowed origins for CORS for this org.
+   * Allowed origins for CORS for this org. Replaces the existing list. Values not included in the request are removed.
    * @return corsWhitelistedUrls
    */
   @javax.annotation.Nullable

@@ -51,8 +51,9 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="elementType">UI element type hint for the feature. Populated in the org-admin view..</param>
         /// <param name="elementConfig">UI element configuration for the feature. Populated in the org-admin view. An opaque blob whose structure varies by &#x60;element_type&#x60;; a &#x60;label&#x60; string is the common envelope field..</param>
         /// <param name="elementValue">Current value of the feature for the requested Org. Populated in the org-admin view..</param>
-        /// <param name="docsUrl">Per-feature documentation URL, when available..</param>
-        public FeatureDetail(string featureId = default, string featureName = default, List<FeatureOrgInfo> assignedOrgs = default, bool? isOrgAware = default, string featureValue = default, string elementType = default, Object elementConfig = default, string elementValue = default, string docsUrl = default)
+        /// <param name="docsUrl">Documentation URL of the feature itself, when it has one. Not inherited from its group..</param>
+        /// <param name="docsNewWindow">&#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;..</param>
+        public FeatureDetail(string featureId = default, string featureName = default, List<FeatureOrgInfo> assignedOrgs = default, bool? isOrgAware = default, string featureValue = default, string elementType = default, Object elementConfig = default, string elementValue = default, string docsUrl = default, bool? docsNewWindow = default)
         {
             // to ensure "featureId" is required (not null)
             if (featureId == null)
@@ -68,6 +69,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             this.ElementConfig = elementConfig;
             this.ElementValue = elementValue;
             this.DocsUrl = docsUrl;
+            this.DocsNewWindow = docsNewWindow;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -128,11 +130,18 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string ElementValue { get; set; }
 
         /// <summary>
-        /// Per-feature documentation URL, when available.
+        /// Documentation URL of the feature itself, when it has one. Not inherited from its group.
         /// </summary>
-        /// <value>Per-feature documentation URL, when available.</value>
+        /// <value>Documentation URL of the feature itself, when it has one. Not inherited from its group.</value>
         [DataMember(Name = "docs_url", EmitDefaultValue = true)]
         public string DocsUrl { get; set; }
+
+        /// <summary>
+        /// &#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.
+        /// </summary>
+        /// <value>&#x60;true&#x60; when the feature&#39;s documentation link should open in a new browser tab, the default, or &#x60;false&#x60; for the same tab. Omitted when there is no &#x60;docs_url&#x60;.</value>
+        [DataMember(Name = "docs_new_window", EmitDefaultValue = true)]
+        public bool? DocsNewWindow { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -157,6 +166,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  ElementConfig: ").Append(ElementConfig).Append("\n");
             sb.Append("  ElementValue: ").Append(ElementValue).Append("\n");
             sb.Append("  DocsUrl: ").Append(DocsUrl).Append("\n");
+            sb.Append("  DocsNewWindow: ").Append(DocsNewWindow).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

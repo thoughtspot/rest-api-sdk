@@ -41,8 +41,8 @@ class FetchPermissionsOfPrincipalsRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ALL', 'LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION']):
-            raise ValueError("must be one of enum values ('ALL', 'LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION')")
+        if value not in set(['ALL', 'LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION', 'PERSONALISED_VIEW']):
+            raise ValueError("must be one of enum values ('ALL', 'LIVEBOARD', 'ANSWER', 'LOGICAL_TABLE', 'LOGICAL_COLUMN', 'CONNECTION', 'COLLECTION', 'PERSONALISED_VIEW')")
         return value
 
     model_config = ConfigDict(

@@ -70,4 +70,20 @@ public class SearchOrgsRequestTest {
         // TODO: test userIdentifiers
     }
 
+    /**
+     * Test the property 'recordOffset'
+     */
+    @Test
+    public void recordOffsetTest() {
+        // TODO: test recordOffset
+    }
+
+    /**
+     * Test the property 'recordSize'
+     */
+    @Test
+    public void recordSizeTest() {
+        // TODO: test recordSize
+    }
+
 }

@@ -54,6 +54,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test BuildMetadataIndex
+        /// </summary>
+        [Fact]
+        public void BuildMetadataIndexTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string logicalTableIdentifier = null;
+            //BuildMetadataIndexRequest buildMetadataIndexRequest = null;
+            //instance.BuildMetadataIndex(logicalTableIdentifier, buildMetadataIndexRequest);
+        }
+
+        /// <summary>
         /// Test ConvertWorksheetToModel
         /// </summary>
         [Fact]
@@ -146,6 +158,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //FetchLiveboardSqlQueryRequest fetchLiveboardSqlQueryRequest = null;
             //var response = instance.FetchLiveboardSqlQuery(fetchLiveboardSqlQueryRequest);
             //Assert.IsType<SqlQueryResponse>(response);
+        }
+
+        /// <summary>
+        /// Test FetchMetadataSearchReadiness
+        /// </summary>
+        [Fact]
+        public void FetchMetadataSearchReadinessTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string guid = null;
+            //var response = instance.FetchMetadataSearchReadiness(guid);
+            //Assert.IsType<MetadataSearchReadinessResponse>(response);
         }
 
         /// <summary>

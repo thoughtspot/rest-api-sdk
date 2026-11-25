@@ -73,6 +73,14 @@ public class GetFullAccessTokenRequestTest {
     }
 
     /**
+     * Test the property 'orgIdentifier'
+     */
+    @Test
+    public void orgIdentifierTest() {
+        // TODO: test orgIdentifier
+    }
+
+    /**
      * Test the property 'scope'
      */
     @Test

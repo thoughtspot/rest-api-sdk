@@ -73,7 +73,37 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             /// Enum SCHEMA for value: SCHEMA
             /// </summary>
             [EnumMember(Value = "SCHEMA")]
-            SCHEMA = 6
+            SCHEMA = 6,
+
+            /// <summary>
+            /// Enum SCOPE for value: SCOPE
+            /// </summary>
+            [EnumMember(Value = "SCOPE")]
+            SCOPE = 7,
+
+            /// <summary>
+            /// Enum UNRESOLVEDREFERENCE for value: UNRESOLVED_REFERENCE
+            /// </summary>
+            [EnumMember(Value = "UNRESOLVED_REFERENCE")]
+            UNRESOLVEDREFERENCE = 8,
+
+            /// <summary>
+            /// Enum INVALIDRELATIONSHIP for value: INVALID_RELATIONSHIP
+            /// </summary>
+            [EnumMember(Value = "INVALID_RELATIONSHIP")]
+            INVALIDRELATIONSHIP = 9,
+
+            /// <summary>
+            /// Enum UNRESOLVEDCOLUMN for value: UNRESOLVED_COLUMN
+            /// </summary>
+            [EnumMember(Value = "UNRESOLVED_COLUMN")]
+            UNRESOLVEDCOLUMN = 10,
+
+            /// <summary>
+            /// Enum CHARBUDGET for value: CHAR_BUDGET
+            /// </summary>
+            [EnumMember(Value = "CHAR_BUDGET")]
+            CHARBUDGET = 11
         }
 
 
@@ -90,12 +120,14 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         /// <param name="reason">Machine-readable category for the failure (e.g. &#x60;VALIDATION&#x60;, &#x60;ACCESS_DENIED&#x60;, &#x60;CHAR_LIMIT&#x60;)..</param>
         /// <param name="fieldName">Dotted path to the offending field within the item (e.g. &#x60;content.rule_definition&#x60;) for inline highlighting. Absent when the failure is item-level rather than field-level..</param>
         /// <param name="message">Human-readable description of the failure..</param>
-        public ImportFailure(int? lineNumber = default, ReasonEnum? reason = default, string fieldName = default, string message = default)
+        /// <param name="entityKey">Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later .</param>
+        public ImportFailure(int? lineNumber = default, ReasonEnum? reason = default, string fieldName = default, string message = default, string entityKey = default)
         {
             this.LineNumber = lineNumber;
             this.Reason = reason;
             this.FieldName = fieldName;
             this.Message = message;
+            this.EntityKey = entityKey;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -121,6 +153,13 @@ namespace ThoughtSpot.RestApi.Sdk.Model
         public string Message { get; set; }
 
         /// <summary>
+        /// Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later 
+        /// </summary>
+        /// <value>Key of the entity in the imported file that failed, as written in its &#x60;id&#x60; field. Set by importContext only; empty when the failure concerns the file as a whole.    Version: 27.1.0.cl or later </value>
+        [DataMember(Name = "entity_key", EmitDefaultValue = true)]
+        public string EntityKey { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -138,6 +177,7 @@ namespace ThoughtSpot.RestApi.Sdk.Model
             sb.Append("  Reason: ").Append(Reason).Append("\n");
             sb.Append("  FieldName: ").Append(FieldName).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  EntityKey: ").Append(EntityKey).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

@@ -80,5 +80,5 @@ export class FetchPermissionsOfPrincipalsRequest {
     }
 }
 
-    export type FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum = "ALL" | "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "COLLECTION" ;
+    export type FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum = "ALL" | "LIVEBOARD" | "ANSWER" | "LOGICAL_TABLE" | "LOGICAL_COLUMN" | "CONNECTION" | "COLLECTION" | "PERSONALISED_VIEW" ;
 

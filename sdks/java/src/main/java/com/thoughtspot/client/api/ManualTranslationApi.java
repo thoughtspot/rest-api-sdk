@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import com.thoughtspot.client.model.DeleteManualTranslationsRequest;
 import com.thoughtspot.client.model.ErrorResponse;
+import com.thoughtspot.client.model.ExportManualTranslationTemplateRequest;
 import com.thoughtspot.client.model.ExportManualTranslationsRequest;
 import java.io.File;
 
@@ -228,6 +229,150 @@ public class ManualTranslationApi {
         return localVarCall;
     }
     /**
+     * Build call for exportManualTranslationTemplate
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportManualTranslationTemplateCall(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportManualTranslationTemplateRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/localizations/manual-translation/template/export";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/csv",
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportManualTranslationTemplateValidateBeforeCall(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'exportManualTranslationTemplateRequest' is set
+        if (exportManualTranslationTemplateRequest == null) {
+            throw new ApiException("Missing the required parameter 'exportManualTranslationTemplateRequest' when calling exportManualTranslationTemplate(Async)");
+        }
+
+        return exportManualTranslationTemplateCall(exportManualTranslationTemplateRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public void exportManualTranslationTemplate(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest) throws ApiException {
+        exportManualTranslationTemplateWithHttpInfo(exportManualTranslationTemplateRequest);
+    }
+
+    /**
+     * 
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> exportManualTranslationTemplateWithHttpInfo(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportManualTranslationTemplateValidateBeforeCall(exportManualTranslationTemplateRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Export a CSV template of the translatable strings of Liveboards.    Version: 27.1.0.cl or later   Exports a CSV template with the translatable strings of one or more Liveboards. Translate the strings in the template and upload it with the API that imports manual translations.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**), &#x60;ORG_ADMINISTRATION&#x60; (**Can administer Org**), or &#x60;APPLICATION_ADMINISTRATION&#x60; (**Can administer application**) privilege.  #### Usage guidelines  - The CSV file has the same columns as the import file: &#x60;content&#x60;, &#x60;locale&#x60;, &#x60;translated-content&#x60;. Each row lists one string in &#x60;content&#x60; and leaves &#x60;locale&#x60; and &#x60;translated-content&#x60; empty. Fill them in, then upload the file with &#x60;POST /api/rest/2.0/localizations/manual-translation/import&#x60;. - The template includes the Liveboard title and description, tab names, the names of the Liveboard&#39;s personalized views, the titles and descriptions of visualizations and groups, and the text of note tiles. - Note tile text is listed the way it is matched when the Liveboard is displayed: each heading, paragraph, list item, table cell, and line is a separate row, and so is each part of a line that has its own formatting or link. Manual translations are applied to a note tile only when every one of its rows is translated. - A string that appears more than once is listed once. - Strings that the import does not accept are left out: text longer than 2000 characters, text that starts with &#x60;&#x3D;&#x60;, &#x60;+&#x60;, &#x60;-&#x60;, &#x60;@&#x60;, a tab, or a carriage return, and text that contains HTML tags, script content, or control characters. The number of strings left out is returned in the &#x60;X-ThoughtSpot-Excluded-Content-Count&#x60; response header. - Specify 1 to 50 Liveboards by GUID or name. Names are resolved in the current Org; if more than one Liveboard has the given name, use its GUID. If a Liveboard is not found or you cannot access it, the request fails and no file is returned.      
+     * @param exportManualTranslationTemplateRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Translation template downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  * X-ThoughtSpot-Excluded-Content-Count - Number of strings left out of the template because the import would reject them. <br>  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or a Liveboard was not found. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access, or no access to a Liveboard. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> More than one Liveboard has the given name. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportManualTranslationTemplateAsync(ExportManualTranslationTemplateRequest exportManualTranslationTemplateRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportManualTranslationTemplateValidateBeforeCall(exportManualTranslationTemplateRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for exportManualTranslations
      * @param exportManualTranslationsRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -238,10 +383,9 @@ public class ManualTranslationApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or no translations exist for the requested scope. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No translations file found. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -313,10 +457,9 @@ public class ManualTranslationApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or no translations exist for the requested scope. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No translations file found. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -336,10 +479,9 @@ public class ManualTranslationApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or no translations exist for the requested scope. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No translations file found. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -361,10 +503,9 @@ public class ManualTranslationApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> CSV file downloaded successfully. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
-        <tr><td> 400 </td><td> Invalid request. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Invalid request, or no translations exist for the requested scope. </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No translations file found. </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

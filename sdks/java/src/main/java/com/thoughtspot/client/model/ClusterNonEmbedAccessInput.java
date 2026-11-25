@@ -92,7 +92,7 @@ public class ClusterNonEmbedAccessInput implements Serializable {
   }
 
   /**
-   * Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true.
+   * Group identifiers that are allowed non-embed full app access. Can only be set when orgs feature is disabled and block_full_app_access is true. Replaces the existing list. Groups not included in the request lose access.
    * @return groupsIdentifiersWithAccess
    */
   @javax.annotation.Nullable
