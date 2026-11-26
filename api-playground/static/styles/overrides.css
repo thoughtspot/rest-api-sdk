@@ -128,6 +128,17 @@ html[data-rest-api-playground-ready] body {
     border-bottom: 1px solid #e7e9f2 !important;
 }
 
+#left-navbar-parent,
+#left-navbar-parent > :first-child {
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    float: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
 #left-navbar-parent > :first-child ~ * {
     display: none !important;
 }
