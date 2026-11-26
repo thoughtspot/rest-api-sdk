@@ -184,7 +184,6 @@ html[data-rest-api-playground-ready] body {
     margin-top: 0 !important;
 }
 
-
 [data-testid='navbar-outer-wrapper'] {
     width: 35% !important;
     flex-shrink: 0 !important;
