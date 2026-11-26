@@ -67,10 +67,18 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
-const getRequestedThemeMode = () => {
+const getQueryParam = (name) => {
   const [beforeHash] = window.location.href.split('#');
   const pairs = beforeHash.split(/[?&]/).slice(1).join('&');
-  const isDarkMode = new URLSearchParams(pairs).get('isDarkMode');
+  return new URLSearchParams(pairs).get(name);
+};
+
+if (getQueryParam('isTopNavbar') === 'true') {
+  document.documentElement.dataset.tsTopNavbar = '1';
+}
+
+const getRequestedThemeMode = () => {
+  const isDarkMode = getQueryParam('isDarkMode');
   if (isDarkMode === 'true') return 'dark';
   if (isDarkMode === 'false') return 'light';
   return null;

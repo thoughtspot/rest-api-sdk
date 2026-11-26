@@ -115,78 +115,80 @@ html[data-rest-api-playground-ready] body {
 }
 
 @media screen and (min-width: 991px) {
-    :has(> * > #left-navbar-parent) {
-        flex-direction: column !important;
-    }
+    html[data-ts-top-navbar] {
+        :has(> * > #left-navbar-parent) {
+            flex-direction: column !important;
+        }
 
-    :has(> #left-navbar-parent) {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 70px !important;
-        padding: 0 20px !important;
-        position: static !important;
-        flex: 0 0 auto !important;
-        border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
-    }
+        :has(> #left-navbar-parent) {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 70px !important;
+            padding: 0 20px !important;
+            position: static !important;
+            flex: 0 0 auto !important;
+            border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
+        }
 
-    #left-navbar-parent,
-    #left-navbar-parent > :first-child {
-        flex-direction: row-reverse !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        float: none !important;
-        max-width: none !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
+        #left-navbar-parent,
+        #left-navbar-parent > :first-child {
+            flex-direction: row-reverse !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            float: none !important;
+            max-width: none !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
 
-    #left-navbar-parent > :first-child ~ * {
-        display: none !important;
-    }
+        #left-navbar-parent > :first-child ~ * {
+            display: none !important;
+        }
 
-    #outsideClickWrapper {
-        display: flex !important;
-        align-items: center;
-        justify-content: flex-start;
-    }
+        #outsideClickWrapper {
+            display: flex !important;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
-    #outsideClickWrapper > :first-child {
-        display: flex !important;
-    }
+        #outsideClickWrapper > :first-child {
+            display: flex !important;
+        }
 
-    #outsideClickWrapper > :first-child ~ * {
-        display: none !important;
-        position: absolute !important;
-        top: 75px !important;
-        left: 0 !important;
-        z-index: 100 !important;
-        width: 100% !important;
-        max-width: 355px !important;
-        height: calc(100vh - 140px) !important;
-        margin-top: 0 !important;
-        padding-top: 8px !important;
-        background-color: inherit !important;
-        border: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
-        border-radius: 8px !important;
-        box-shadow: 0 4px 12px rgb(0 0 0 / 0.2) !important;
-    }
+        #outsideClickWrapper > :first-child ~ * {
+            display: none !important;
+            position: absolute !important;
+            top: 75px !important;
+            left: 0 !important;
+            z-index: 100 !important;
+            width: 100% !important;
+            max-width: 355px !important;
+            height: calc(100vh - 140px) !important;
+            margin-top: 0 !important;
+            padding-top: 8px !important;
+            background-color: inherit !important;
+            border: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.2) !important;
+        }
 
-    #left-navbar-parent :has(#outsideClickWrapper),
-    #outsideClickWrapper {
-        background-color: inherit !important;
-    }
+        #left-navbar-parent :has(#outsideClickWrapper),
+        #outsideClickWrapper {
+            background-color: inherit !important;
+        }
 
-    #left-navbar-parent[data-menu-open] #outsideClickWrapper > :first-child ~ * {
-        display: block !important;
-    }
+        #left-navbar-parent[data-menu-open] #outsideClickWrapper > :first-child ~ * {
+            display: block !important;
+        }
 
-    #left-navbar-parent #outsideClickWrapper > :first-child ~ * > :first-child {
-        width: 100% !important;
-        margin-top: 0 !important;
-    }
+        #left-navbar-parent #outsideClickWrapper > :first-child ~ * > :first-child {
+            width: 100% !important;
+            margin-top: 0 !important;
+        }
 
-    [data-testid='navbar-outer-wrapper'] {
-        width: 25% !important;
-        flex-shrink: 0 !important;
+        [data-testid='navbar-outer-wrapper'] {
+            width: 25% !important;
+            flex-shrink: 0 !important;
+        }
     }
 }
