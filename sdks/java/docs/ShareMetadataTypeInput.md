@@ -22,6 +22,7 @@
 | LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
 | CONNECTION | &quot;CONNECTION&quot; |
 | COLLECTION | &quot;COLLECTION&quot; |
+| PERSONALISED_VIEW | &quot;PERSONALISED_VIEW&quot; |
 
 
 ## Implemented Interfaces

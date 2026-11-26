@@ -3,6 +3,11 @@
 
 ## API Changes
 
+### POST /api/rest/2.0/ai/agent/converse/sse
+-  removed the non-success response with the status `401`
+-  removed the non-success response with the status `403`
+
+
 ### POST /api/rest/2.0/ai/usage-data/delete
 -  endpoint added
 
@@ -64,6 +69,20 @@
 
 
 ### POST /api/rest/2.0/metadata/update-obj-id
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+
+
+### POST /api/rest/2.0/security/metadata/fetch-permissions
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+
+
+### POST /api/rest/2.0/security/metadata/share
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
+-  added the new `PERSONALISED_VIEW` enum value to the request property `metadata_type`
+
+
+### POST /api/rest/2.0/security/principals/fetch-permissions
+-  added the new `PERSONALISED_VIEW` enum value to the request property `default_metadata_type`
 -  added the new `PERSONALISED_VIEW` enum value to the request property `metadata/items/type`
 
 

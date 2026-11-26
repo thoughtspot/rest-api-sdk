@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection |  [optional] |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) | Type of metadata. Required if identifier in metadata_identifies is a name. 1. Liveboard 2. Answers 3. LOGICAL_TABLE for any data object such as table, worksheet or view. 4. LOGICAL_COLUMN 5. Connection 6. Collection 7. PERSONALISED_VIEW for a personalized view of a Liveboard |  [optional] |
 |**metadataIdentifiers** | **List&lt;String&gt;** | Unique ID or name of metadata objects. Note: All the names should belong to same metadata_type |  [optional] |
 |**metadata** | [**List&lt;ShareMetadataTypeInput&gt;**](ShareMetadataTypeInput.md) | Metadata details for sharing objects. |  [optional] |
 |**permissions** | [**List&lt;SharePermissionsInput&gt;**](SharePermissionsInput.md) | Permission details for sharing the objects. |  |
@@ -30,6 +30,7 @@
 | LOGICAL_COLUMN | &quot;LOGICAL_COLUMN&quot; |
 | CONNECTION | &quot;CONNECTION&quot; |
 | COLLECTION | &quot;COLLECTION&quot; |
+| PERSONALISED_VIEW | &quot;PERSONALISED_VIEW&quot; |
 
 
 ## Implemented Interfaces
