@@ -21,7 +21,8 @@ from typing import Any, AsyncIterator, Dict, Optional, Union
 
 import httpx
 
-from thoughtspot_rest_api_sdk.exceptions import ApiException, ApiValueError
+from thoughtspot_rest_api_sdk.exceptions import ApiException, ApiValueError, UnauthorizedException
+from thoughtspot_rest_api_sdk.token_provider import _TokenCache, logger as _logger
 
 RESTResponseType = httpx.Response
 
@@ -85,6 +86,77 @@ class _TokenAuth(httpx.Auth):
         )
 
 
+def _rewind_request_body(request) -> bool:
+    """Rewind multipart file parts so ``request`` can be resent.
+
+    httpx already seeks file parts to 0 when it re-renders a multipart body;
+    the explicit seek keeps that guarantee independent of httpx internals. The
+    return value is what matters: False when a part cannot be rewound (e.g. a
+    pipe or socket), in which case the request must not be retried.
+    """
+    for part in getattr(request.stream, "fields", None) or ():
+        file = getattr(part, "file", None)
+        if file is None or isinstance(file, (bytes, str)):
+            continue
+        seek = getattr(file, "seek", None)
+        if not callable(seek):
+            return False
+        try:
+            seek(0)
+        except (OSError, ValueError):
+            return False
+    return True
+
+
+class _CachedTokenAuth(httpx.Auth):
+    """CUSTOM (ThoughtSpot): Bearer auth from ``Configuration.get_token``.
+
+    The token comes from the client's ``_TokenCache`` (cached, refreshed before
+    expiry, single-flight). On a 401 the cache is cleared, ``get_token`` is
+    called once and the request is resent once; a second 401 is returned as-is
+    so ``ApiClient.response_deserialize`` raises ``UnauthorizedException``.
+
+    The retry happens inside one ``httpx.AsyncClient.request`` call, so it does
+    not consume the ``Configuration.retries`` budget. SSE streams go through the
+    same flow: the token is fetched before the stream opens, and a 401 on open
+    is retried once before any event is read.
+
+    A request made from inside this client's own ``get_token`` (e.g. minting
+    through the same ApiClient) is sent as-is, without the managed token and
+    without a 401 retry: waiting for the token there would wait on the very
+    call that issued the request.
+    """
+
+    requires_request_body = False
+    requires_response_body = False
+
+    def __init__(self, token_cache: _TokenCache) -> None:
+        self._token_cache = token_cache
+
+    async def async_auth_flow(self, request):
+        if self._token_cache.is_fetching_in_context():
+            yield request
+            return
+        token = await self._token_cache.get()
+        request.headers["Authorization"] = f"Bearer {token}"
+        response = yield request
+        if response.status_code != 401:
+            return
+        if not _rewind_request_body(request):
+            _logger.debug("Received 401 on a request whose body cannot be resent; not retrying")
+            self._token_cache.invalidate(token)
+            return
+        _logger.debug("Received 401; refreshing token and retrying once")
+        token = await self._token_cache.get_after_unauthorized(token)
+        request.headers["Authorization"] = f"Bearer {token}"
+        yield request
+
+    def sync_auth_flow(self, request):
+        raise NotImplementedError(
+            "_CachedTokenAuth supports async flow only; use the generated *_sync methods."
+        )
+
+
 class RESTClientObject:
 
     def __init__(self, configuration) -> None:
@@ -93,6 +165,20 @@ class RESTClientObject:
         # access_token. A str uses Configuration.auth_settings(); a callable
         # becomes a per-request _TokenAuth (token refresh at the HTTP layer).
         self._configuration = configuration
+
+        # CUSTOM: Configuration.get_token gets a token cache owned by this
+        # client (one per ApiClient), so cached tokens are never shared across
+        # clients even when they share a Configuration.
+        get_token = getattr(configuration, "get_token", None)
+        self._token_cache: Optional[_TokenCache] = (
+            _TokenCache(
+                get_token,
+                getattr(configuration, "token_refresh_buffer_ms", None),
+                get_token_timeout=getattr(configuration, "get_token_timeout", None),
+            )
+            if get_token is not None
+            else None
+        )
 
         # maxsize is number of requests to host that are allowed in parallel
         self.maxsize = configuration.connection_pool_maxsize
@@ -142,7 +228,12 @@ class RESTClientObject:
 
     # CUSTOM: retry helpers (used by request() when Configuration.retries > 0).
     def _retry_statuses(self):
-        return getattr(self._configuration, "retry_statuses", None) or {429, 502, 503, 504}
+        statuses = getattr(self._configuration, "retry_statuses", None) or {429, 502, 503, 504}
+        # With get_token, 401 is owned by _CachedTokenAuth (one refresh + one
+        # retry); retrying it here too would multiply requests and mints.
+        if self._token_cache is not None:
+            statuses = set(statuses) - {401}
+        return statuses
 
     def _retry_method_ok(self, method):
         methods = getattr(self._configuration, "retry_methods", None)
@@ -315,13 +406,20 @@ class RESTClientObject:
                 headers=self.proxy_headers
             )
 
-        # CUSTOM: when access_token is a callable (sync or async), wrap it in a
-        # _TokenAuth so a fresh token is fetched per request at the HTTP layer —
-        # shared by any API class (per-tag, mega-facade) and the generated
-        # *_sync methods. A plain-str access_token is left to
-        # Configuration.auth_settings() (static header, no refresh).
+        # CUSTOM: get_token wins (cached token + 401 retry). Otherwise, when
+        # access_token is a callable (sync or async), wrap it in a _TokenAuth
+        # so a fresh token is fetched per request at the HTTP layer — shared by
+        # any API class (per-tag, mega-facade) and the generated *_sync
+        # methods. A plain-str access_token is left to
+        # Configuration.auth_settings() (static header, no refresh, no retry).
         token = getattr(self._configuration, "access_token", None)
-        custom_auth = _TokenAuth(token) if callable(token) else None
+        custom_auth: Optional[httpx.Auth]
+        if self._token_cache is not None:
+            custom_auth = _CachedTokenAuth(self._token_cache)
+        elif callable(token):
+            custom_auth = _TokenAuth(token)
+        else:
+            custom_auth = None
 
         return httpx.AsyncClient(
             auth=custom_auth,
@@ -383,6 +481,13 @@ async def stream_sse_via_serialized(
         json=body,
         timeout=DEFAULT_SSE_TIMEOUT,
     ) as response:
+        # CUSTOM: with get_token, a 401 that survives _CachedTokenAuth's single
+        # retry raises UnauthorizedException, as non-streaming calls do. Other
+        # auth modes keep raising httpx.HTTPStatusError (existing behaviour).
+        if response.status_code == 401 and rest._token_cache is not None:
+            http_resp = RESTResponse(response)
+            await http_resp.read()
+            raise UnauthorizedException(http_resp=http_resp)
         response.raise_for_status()
         buf = ""
         async for chunk in response.aiter_text():

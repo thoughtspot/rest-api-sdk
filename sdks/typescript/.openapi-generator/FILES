@@ -36,6 +36,7 @@ apis/WebhooksApi.ts
 apis/baseapi.ts
 apis/exception.ts
 auth/auth.ts
+auth/tokenManager.ts
 configuration.ts
 docs/AIApi.md
 docs/AuthenticationApi.md
@@ -72,6 +73,7 @@ docs/WebhooksApi.md
 git_push.sh
 http/http.ts
 http/isomorphic-fetch.ts
+http/tokenRefreshHttpLibrary.ts
 index.ts
 middleware.ts
 models/ACState.ts

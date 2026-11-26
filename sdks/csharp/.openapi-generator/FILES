@@ -1244,6 +1244,8 @@ src/ThoughtSpot.RestApi.Sdk/Client/RefCountingHandler.cs
 src/ThoughtSpot.RestApi.Sdk/Client/RequestOptions.cs
 src/ThoughtSpot.RestApi.Sdk/Client/RetryConfiguration.cs
 src/ThoughtSpot.RestApi.Sdk/Client/TokenInjectingHandler.cs
+src/ThoughtSpot.RestApi.Sdk/Client/TokenResult.cs
+src/ThoughtSpot.RestApi.Sdk/Client/TokenSource.cs
 src/ThoughtSpot.RestApi.Sdk/Client/WebRequestPathBuilder.cs
 src/ThoughtSpot.RestApi.Sdk/Model/ACState.cs
 src/ThoughtSpot.RestApi.Sdk/Model/AIContext.cs
