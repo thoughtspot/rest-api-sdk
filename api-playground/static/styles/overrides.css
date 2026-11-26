@@ -113,28 +113,22 @@ body {
 html[data-rest-api-playground-ready] body {
     opacity: 1;
 }
-*:has(> * > #left-navbar-parent) {
+
+:has(> * > #left-navbar-parent) {
     flex-direction: column !important;
 }
 
-/* The nav's own column -> full width, hugging its content. */
-*:has(> #left-navbar-parent) {
+:has(> #left-navbar-parent) {
     width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
+    max-width: 100% !important;
+    height: 70px !important;
+    padding: 0 20px !important;
+    position: static !important;
     flex: 0 0 auto !important;
+    border-bottom: 1px solid #e7e9f2 !important;
 }
 
-#left-navbar-parent {
-    flex-direction: row-reverse !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    float: none !important;
-    max-width: none !important;
-    width: 100% !important;
-    height: 60px !important;
-}
-
+#left-navbar-parent,
 #left-navbar-parent > :first-child {
     flex-direction: row-reverse !important;
     align-items: center !important;
@@ -147,4 +141,47 @@ html[data-rest-api-playground-ready] body {
 
 #left-navbar-parent > :first-child ~ * {
     display: none !important;
+}
+
+#outsideClickWrapper > :first-child {
+    display: flex !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper {
+    display: block !important;
+    height: 32px !important;
+    margin: 0 !important;
+}
+
+#left-navbar-parent .search-text {
+    display: none !important;
+}
+
+#left-navbar-parent [aria-label*='search' i] {
+    width: 38px !important;
+    min-width: 37px !important;
+    height: 32px !important;
+    max-width: 200px !important;
+    margin: 0 !important;
+}
+
+#outsideClickWrapper > :first-child ~ * {
+    display: none !important;
+    position: absolute !important;
+    top: 70px !important;
+    left: 0 !important;
+    z-index: 100 !important;
+    width: 100% !important;
+    max-width: 355px !important;
+    height: calc(100vh - 140px) !important;
+    margin-top: 0 !important;
+    padding-top: 8px !important;
+    background: #f5f7f8 !important;
+    border: 1px solid #e7e9f2 !important;
+    border-radius: 8px !important;
+    box-shadow: #ced2e2 1px 5px 6px !important;
+}
+
+#left-navbar-parent[data-menu-open] #outsideClickWrapper > :first-child ~ * {
+    display: block !important;
 }

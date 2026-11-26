@@ -83,6 +83,20 @@ const applyRequestedThemeMode = () => {
   }
 };
 
+document.addEventListener(
+  'click',
+  (event) => {
+    const nav = document.getElementById('left-navbar-parent');
+    if (!nav || !event.target.closest) return;
+    if (event.target.closest('[data-testid="menu-select"]')) {
+      nav.toggleAttribute('data-menu-open');
+    } else {
+      nav.removeAttribute('data-menu-open');
+    }
+  },
+  true,
+);
+
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
     isApiMaticPortalReady = true;
