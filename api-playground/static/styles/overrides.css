@@ -113,3 +113,38 @@ body {
 html[data-rest-api-playground-ready] body {
     opacity: 1;
 }
+*:has(> * > #left-navbar-parent) {
+    flex-direction: column !important;
+}
+
+/* The nav's own column -> full width, hugging its content. */
+*:has(> #left-navbar-parent) {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
+}
+
+#left-navbar-parent {
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    float: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 60px !important;
+}
+
+#left-navbar-parent > :first-child {
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    float: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#left-navbar-parent > :first-child ~ * {
+    display: none !important;
+}
