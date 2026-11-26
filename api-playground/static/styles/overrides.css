@@ -235,3 +235,8 @@ html[data-rest-api-playground-ready] body {
 #left-navbar-parent .platform-selector-wrapper .rc-menu-submenu-title svg:not([aria-label='expand-icon']) {
     display: none !important;
 }
+
+#left-navbar-parent #outsideClickWrapper > :first-child ~ * > :first-child {
+    width: 100% !important;
+    margin-top: 0 !important;
+}
