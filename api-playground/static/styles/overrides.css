@@ -156,7 +156,7 @@ html[data-rest-api-playground-ready] body {
 #outsideClickWrapper > :first-child ~ * {
     display: none !important;
     position: absolute !important;
-    top: 70px !important;
+    top: 75px !important;
     left: 0 !important;
     z-index: 100 !important;
     width: 100% !important;
@@ -185,6 +185,6 @@ html[data-rest-api-playground-ready] body {
 }
 
 [data-testid='navbar-outer-wrapper'] {
-    width: 35% !important;
+    width: 25% !important;
     flex-shrink: 0 !important;
 }
