@@ -125,7 +125,7 @@ html[data-rest-api-playground-ready] body {
     padding: 0 20px !important;
     position: static !important;
     flex: 0 0 auto !important;
-    /* border-bottom: 1px solid #e7e9f2 !important; */
+    border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
 }
 
 #left-navbar-parent,
@@ -164,10 +164,15 @@ html[data-rest-api-playground-ready] body {
     height: calc(100vh - 140px) !important;
     margin-top: 0 !important;
     padding-top: 8px !important;
-    /* background: #f5f7f8 !important; */
-    /* border: 1px solid #e7e9f2 !important; */
+    background-color: inherit !important;
+    border: 1px solid color-mix(in srgb, currentColor 18%, transparent) !important;
     border-radius: 8px !important;
-    /* box-shadow: #ced2e2 1px 5px 6px !important; */
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.2) !important;
+}
+
+#left-navbar-parent :has(#outsideClickWrapper),
+#outsideClickWrapper {
+    background-color: inherit !important;
 }
 
 #left-navbar-parent[data-menu-open] #outsideClickWrapper > :first-child ~ * {
@@ -179,3 +184,8 @@ html[data-rest-api-playground-ready] body {
     margin-top: 0 !important;
 }
 
+
+[data-testid='navbar-outer-wrapper'] {
+    width: 35% !important;
+    flex-shrink: 0 !important;
+}
