@@ -173,6 +173,18 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test FetchSqlQuery
+        /// </summary>
+        [Fact]
+        public void FetchSqlQueryTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //FetchSqlQueryRequest fetchSqlQueryRequest = null;
+            //var response = instance.FetchSqlQuery(fetchSqlQueryRequest);
+            //Assert.IsType<SqlQueryResponse>(response);
+        }
+
+        /// <summary>
         /// Test ImportMetadataTML
         /// </summary>
         [Fact]

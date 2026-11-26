@@ -361,6 +361,7 @@
 
 
 ### POST /api/rest/2.0/metadata/answer/data
+-  added the optional property `contents/items/sql_query` to the response with the `200` status
 -  response property `contents/items/data_rows/items/` list-of-types was narrowed by removing types `array` from media type `application/json` of response `200`
 
 
@@ -547,6 +548,10 @@
 -  the `items/dependent_objects` response's property `type` was narrowed from `any` to `object` for status `200`
 
 
+### POST /api/rest/2.0/metadata/sql/fetch
+-  endpoint added
+
+
 ### POST /api/rest/2.0/metadata/tml/async/import
 - :warning: removed the optional property `import_response/object` from the response with the `200` status
 - :warning: removed the optional property `import_response/status` from the response with the `200` status
@@ -623,6 +628,8 @@
 
 
 ### POST /api/rest/2.0/searchdata
+-  added the new optional request property `include_sql_query`
+-  added the optional property `contents/items/sql_query` to the response with the `200` status
 -  response property `contents/items/data_rows/items/` list-of-types was narrowed by removing types `array` from media type `application/json` of response `200`
 
 

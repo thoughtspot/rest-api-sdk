@@ -15,7 +15,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,8 +33,9 @@ class SearchDataRequest(BaseModel):
     runtime_filter: Optional[Any] = Field(default=None, description="JSON object with representing filter condition to apply filters at runtime. For example, <code> {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>. You can add multiple keys by incrementing the number at the end, for example, col2, op2, val2, and col3, op3, val3. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters).")
     runtime_sort: Optional[Any] = Field(default=None, description="JSON object representing columns to sort data at runtime. For example, <code> {\"sortCol1\": \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing the number at the end, for example, sortCol1, asc2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort).")
     runtime_param_override: Optional[Any] = Field(default=None, description="JSON object for setting values of parameters at runtime. For example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple keys by incrementing the number at the end, for example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters).")
+    include_sql_query: Optional[StrictBool] = Field(default=False, description="When true, the SQL generated for the search is returned in <code>sql_query</code> along with the rows; a successful response always has it set. When false, <code>sql_query</code> is null.    Version: 27.1.0.cl or later ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["query_string", "logical_table_identifier", "data_format", "record_offset", "record_size", "runtime_filter", "runtime_sort", "runtime_param_override"]
+    __properties: ClassVar[List[str]] = ["query_string", "logical_table_identifier", "data_format", "record_offset", "record_size", "runtime_filter", "runtime_sort", "runtime_param_override", "include_sql_query"]
 
     @field_validator('data_format')
     def data_format_validate_enum(cls, value):
@@ -107,6 +108,11 @@ class SearchDataRequest(BaseModel):
         if self.runtime_param_override is None and "runtime_param_override" in self.model_fields_set:
             _dict['runtime_param_override'] = None
 
+        # set to None if include_sql_query (nullable) is None
+        # and model_fields_set contains the field
+        if self.include_sql_query is None and "include_sql_query" in self.model_fields_set:
+            _dict['include_sql_query'] = None
+
         return _dict
 
     @classmethod
@@ -126,7 +132,8 @@ class SearchDataRequest(BaseModel):
             "record_size": obj.get("record_size") if obj.get("record_size") is not None else 10,
             "runtime_filter": obj.get("runtime_filter"),
             "runtime_sort": obj.get("runtime_sort"),
-            "runtime_param_override": obj.get("runtime_param_override")
+            "runtime_param_override": obj.get("runtime_param_override"),
+            "include_sql_query": obj.get("include_sql_query") if obj.get("include_sql_query") is not None else False
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

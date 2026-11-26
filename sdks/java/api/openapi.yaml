@@ -14152,6 +14152,186 @@ paths:
       - ThoughtSpotRest
       x-accepts:
       - application/json
+  /api/rest/2.0/metadata/sql/fetch:
+    post:
+      description: |2+
+
+         Version: 27.1.0.cl or later
+
+
+        Fetches the SQL query of a saved Answer, a saved Liveboard, an unsaved Answer, or a search query on a data source. The query is not executed.
+
+        Use this API to inspect or audit the SQL that ThoughtSpot sends to your data warehouse, or to check the SQL of an Answer before you save it.
+
+        Set only the fields in `metadata` that the type of the object uses:
+
+        | `metadata.type` | Fields in `metadata` | Object |
+        | --- | --- | --- |
+        | `ANSWER` | `identifier` | Saved Answer |
+        | `ANSWER` | `tml` | Unsaved Answer, sent as Answer TML |
+        | `LIVEBOARD` | `identifier`, optional `visualization_identifiers` | Saved Liveboard |
+        | `LOGICAL_TABLE` | `identifier` (Model, View, or Table) | Search query on a data source; also set `query_string` |
+
+        `metadata.type` is optional. It is required if `identifier` is a name. If it is not set, the type is taken from the request, in this order: `tml` means `ANSWER`, `query_string` means `LOGICAL_TABLE`, and a GUID in `identifier` means the type of that object.
+
+        `query_string` is a top-level parameter. It holds the search tokens to apply on the data source. It is required with `LOGICAL_TABLE` and not supported with other types.
+
+        The runtime overrides `runtime_filter`, `runtime_sort`, and `runtime_param_override` are top-level parameters, with the same format as in the data APIs. They apply to saved Answers, Liveboards, and `LOGICAL_TABLE`, so the SQL matches the query that fetching the data with the same overrides would run. They are not supported with `tml`: set the filters and parameter values in the TML instead.
+
+        The API returns a 400 error if `metadata` is missing a field that its type requires or contains a field that its type does not use, if `query_string` is missing with `LOGICAL_TABLE` or set with another type, or if a runtime override is set with `tml`.
+
+        #### Required access
+
+        - Saved Answer and `LIVEBOARD`: at least view access to the object.
+        - Unsaved Answer and `LOGICAL_TABLE`: access to every data source that the query uses. If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled, the `CAN_CREATE_ANSWERS` privilege is also required.
+
+        #### Usage guidelines
+
+        - `LIVEBOARD`: if `visualization_identifiers` is not set, the API returns the SQL of all visualizations.
+        - Unsaved Answer: send it as Answer TML in YAML or JSON format in `tml`, with `type` set to `ANSWER` or not set. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The TML of other object types, such as a Liveboard or a Model, is not supported.
+        - `LOGICAL_TABLE`: pass the search tokens in `query_string`. The SQL is generated for the table visualization of the search and has no `LIMIT` or `OFFSET` clause. `metadata_id` in the response is the GUID of the data source, `metadata_name` is the query string, and `metadata_type` is `LOGICAL_TABLE`. To get the data and the SQL in one call, use the searchData API with `include_sql_query` set to `true`.
+
+        Example request for a search query:
+        ```
+        {
+           "metadata":{
+              "type":"LOGICAL_TABLE",
+              "identifier":"cd252e5c-b552-49a8-821d-3eadaa049cca"
+           },
+           "query_string":"[sales] [region]",
+           "runtime_filter":{"col1":"region","op1":"EQ","val1":"West"}
+        }
+        ```
+
+        Upon successful execution, the API returns the SQL query as shown in this example:
+        ```
+        {
+           "metadata_id":"cd252e5c-b552-49a8-821d-3eadaa049cca",
+           "metadata_name":"[sales] [region]",
+           "metadata_type":"LOGICAL_TABLE",
+           "sql_queries":[
+              {
+                 "metadata_id":"cd252e5c-b552-49a8-821d-3eadaa049cca",
+                 "metadata_name":"[sales] [region]",
+                 "sql_query":"SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\nWHERE \"ta_1\".\"REGION\" = 'West'\nGROUP BY \"ca_1\""
+              }
+           ]
+        }
+        ```
+
+
+
+
+
+      operationId: fetchSqlQuery
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchSqlQueryRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                answer:
+                  summary: type ANSWER
+                  value:
+                    metadata_id: 8fbe44a8-46ad-4b16-8d39-184b2fada490
+                    metadata_name: Sales by region
+                    metadata_type: ANSWER
+                    sql_queries:
+                    - metadata_id: 8fbe44a8-46ad-4b16-8d39-184b2fada490
+                      metadata_name: Sales by region
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                liveboard:
+                  summary: type LIVEBOARD
+                  value:
+                    metadata_id: fa68ae91-7588-4136-bacd-d71fb12dda69
+                    metadata_name: Total Sales
+                    metadata_type: LIVEBOARD
+                    sql_queries:
+                    - metadata_id: b3b6d2b9-089a-490c-8e16-b144650b7843
+                      metadata_name: "Total quantity purchased, Total sales by region"
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"QUANTITYPURCHASED\") IS NOT NULL\
+                        \ THEN sum(\"ta_2\".\"QUANTITYPURCHASED\")\n    ELSE 0\n \
+                        \ END \"ca_2\", \n  CASE\n    WHEN sum(\"ta_2\".\"SALES\"\
+                        ) IS NOT NULL THEN sum(\"ta_2\".\"SALES\")\n    ELSE 0\n \
+                        \ END \"ca_3\"\nFROM \"RETAILAPPAREL\".\"PUBLIC\".\"FACT_RETAPP_SALES\"\
+                        \ \"ta_2\"\n  JOIN \"RETAILAPPAREL\".\"PUBLIC\".\"DIM_RETAPP_STORES\"\
+                        \ \"ta_1\"\n    ON \"ta_2\".\"STOREID\" = \"ta_1\".\"STOREID\"\
+                        \nGROUP BY \"ca_1\""
+                tml:
+                  summary: "type ANSWER, unsaved (tml)"
+                  value:
+                    metadata_id: 3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b
+                    metadata_name: Sales by region
+                    metadata_type: ANSWER
+                    sql_queries:
+                    - metadata_id: 3c2b8f0e-5a1d-4f6e-9b7a-2d4c6e8f0a1b
+                      metadata_name: Sales by region
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+                logical_table:
+                  summary: type LOGICAL_TABLE
+                  value:
+                    metadata_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                    metadata_name: "[sales] [region]"
+                    metadata_type: LOGICAL_TABLE
+                    sql_queries:
+                    - metadata_id: cd252e5c-b552-49a8-821d-3eadaa049cca
+                      metadata_name: "[sales] [region]"
+                      sql_query: "SELECT \n  \"ta_1\".\"REGION\" \"ca_1\", \n  CASE\n\
+                        \    WHEN sum(\"ta_2\".\"SALES\") IS NOT NULL THEN sum(\"\
+                        ta_2\".\"SALES\")\n    ELSE 0\n  END \"ca_2\"\nFROM \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"FACT_RETAPP_SALES\" \"ta_2\"\n  JOIN \"RETAILAPPAREL\"\
+                        .\"PUBLIC\".\"DIM_RETAPP_STORES\" \"ta_1\"\n    ON \"ta_2\"\
+                        .\"STOREID\" = \"ta_1\".\"STOREID\"\nGROUP BY \"ca_1\""
+              schema:
+                $ref: '#/components/schemas/SqlQueryResponse'
+          description: Fetching SQL query of specified metadata object is successful.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized access.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden access.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unexpected error
+      tags:
+      - Metadata
+      - ThoughtSpotRest
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /api/rest/2.0/metadata/tml/import:
     post:
       description: |2+
@@ -29422,6 +29602,42 @@ components:
       - object_version
       - state
       type: object
+    SqlMetadataInput:
+      description: Object to fetch the SQL query of. Set only the fields that its
+        type uses.
+      properties:
+        type:
+          description: "Type of the object. Required if <code>identifier</code> is\
+            \ a name. If not set, the type is taken from the request: <code>tml</code>\
+            \ means <code>ANSWER</code>, <code>query_string</code> means <code>LOGICAL_TABLE</code>,\
+            \ and a GUID in <code>identifier</code> means the type of that object."
+          enum:
+          - ANSWER
+          - LIVEBOARD
+          - LOGICAL_TABLE
+          nullable: true
+          type: string
+        identifier:
+          description: "GUID or name of the saved Answer, saved Liveboard, or data\
+            \ source (Model, View, or Table). Required for <code>ANSWER</code>, <code>LIVEBOARD</code>,\
+            \ and <code>LOGICAL_TABLE</code>."
+          nullable: true
+          type: string
+        visualization_identifiers:
+          description: "GUIDs or names of visualizations on the Liveboard. If not\
+            \ set, the API returns the SQL of all visualizations. Only for <code>LIVEBOARD</code>."
+          items:
+            type: string
+          nullable: true
+          type: array
+        tml:
+          description: |-
+            The unsaved Answer, as Answer TML in YAML or JSON format. An unsaved Answer is not a saved object in ThoughtSpot and has no GUID. The API does not save the Answer and does not run the query. Only for <code>ANSWER</code>, and not with <code>identifier</code>.
+
+            **Note: TML in YAML format, when coming directly from our Playground, currently requires manual formatting. For more details on the workaround, please click [here](https://developers.thoughtspot.com/docs/known-issues#_version_9_12_0_cl)**
+          nullable: true
+          type: string
+      type: object
     PdfOptionsInput:
       properties:
         page_size:
@@ -30101,6 +30317,7 @@ components:
         - data_rows:
           - ""
           - ""
+          sql_query: sql_query
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -30112,6 +30329,7 @@ components:
         - data_rows:
           - ""
           - ""
+          sql_query: sql_query
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -30134,6 +30352,7 @@ components:
         data_rows:
         - ""
         - ""
+        sql_query: sql_query
         record_size: 1
         available_data_row_count: 0
         sampling_ratio: 5.637377
@@ -30176,6 +30395,13 @@ components:
             \ is returned."
           format: float
           type: number
+        sql_query:
+          description: "SQL that ThoughtSpot generated from <code>query_string</code>\
+            \ on the data source in <code>logical_table_identifier</code>, for the\
+            \ rows in this item. Null when <code>include_sql_query</code> is false.\
+            \ \n  Version: 27.1.0.cl or later\n"
+          nullable: true
+          type: string
       required:
       - available_data_row_count
       - column_names
@@ -30307,6 +30533,7 @@ components:
         - data_rows:
           - ""
           - ""
+          sql_query: sql_query
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -30318,6 +30545,7 @@ components:
         - data_rows:
           - ""
           - ""
+          sql_query: sql_query
           record_size: 1
           available_data_row_count: 0
           sampling_ratio: 5.637377
@@ -45288,6 +45516,7 @@ components:
         data_format: COMPACT
         runtime_filter: ""
         logical_table_identifier: logical_table_identifier
+        include_sql_query: false
         record_size: 6
         runtime_sort: ""
         runtime_param_override: ""
@@ -45339,6 +45568,14 @@ components:
             \ example, <code> {\"param1\": \"Double List Param\", \"paramVal1\": 0.5}</code>.\
             \ You can add multiple keys by incrementing the number at the end, for\
             \ example, param2, paramVal2. For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
+        include_sql_query:
+          default: false
+          description: "When true, the SQL generated for the search is returned in\
+            \ <code>sql_query</code> along with the rows; a successful response always\
+            \ has it set. When false, <code>sql_query</code> is null. \n  Version:\
+            \ 27.1.0.cl or later\n"
+          nullable: true
+          type: boolean
       required:
       - logical_table_identifier
       - query_string
@@ -46588,6 +46825,47 @@ components:
           type: array
       required:
       - metadata_identifier
+      type: object
+    FetchSqlQueryRequest:
+      example:
+        metadata: ""
+        runtime_filter: ""
+        runtime_sort: ""
+        runtime_param_override: ""
+        query_string: query_string
+      properties:
+        metadata:
+          allOf:
+          - $ref: '#/components/schemas/SqlMetadataInput'
+          description: "Object to fetch the SQL query of. For example, <code>{\"type\"\
+            : \"LOGICAL_TABLE\", \"identifier\": \"cd252e5c-b552-49a8-821d-3eadaa049cca\"\
+            }</code>."
+        query_string:
+          description: "Query string with search tokens to apply on the data source.\
+            \ For example, <code>[Sales][Region]</code>. See [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_search_data_api).\
+            \ Required for <code>LOGICAL_TABLE</code>; not supported with other types."
+          type: string
+        runtime_filter:
+          description: "JSON object with representing filter condition to apply filters\
+            \ at runtime. Not supported with <code>tml</code>. For example, <code>\
+            \ {\"col1\": \"item type\", \"op1\": \"EQ\", \"val1\": \"Bags\"} </code>.\
+            \ You can add multiple keys by incrementing the number at the end, for\
+            \ example, col2, op2, val2, and col3, op3, val3. For more information,\
+            \ see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_filters)."
+        runtime_sort:
+          description: "JSON object representing columns to sort data at runtime.\
+            \ Not supported with <code>tml</code>. For example, <code> {\"sortCol1\"\
+            : \"sales\", \"asc1\": true} </code>. You can add multiple keys by incrementing\
+            \ the number at the end, for example, sortCol1, asc2. For more information,\
+            \ see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_sort)."
+        runtime_param_override:
+          description: "JSON object for setting values of parameters at runtime. Not\
+            \ supported with <code>tml</code>. For example, <code> {\"param1\": \"\
+            Double List Param\", \"paramVal1\": 0.5}</code>. You can add multiple\
+            \ keys by incrementing the number at the end, for example, param2, paramVal2.\
+            \ For more information, see [API Documentation](https://developers.thoughtspot.com/docs/fetch-data-and-report-apis#_runtime_parameters)."
+      required:
+      - metadata
       type: object
     ImportMetadataTMLRequest:
       example:

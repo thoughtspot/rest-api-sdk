@@ -244,6 +244,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.fetch_object_privileges_request import FetchObjectPrivilegesRequest
     from thoughtspot_rest_api_sdk.models.fetch_permissions_of_principals_request import FetchPermissionsOfPrincipalsRequest
     from thoughtspot_rest_api_sdk.models.fetch_permissions_on_metadata_request import FetchPermissionsOnMetadataRequest
+    from thoughtspot_rest_api_sdk.models.fetch_sql_query_request import FetchSqlQueryRequest
     from thoughtspot_rest_api_sdk.models.file_reference import FileReference
     from thoughtspot_rest_api_sdk.models.file_response_item import FileResponseItem
     from thoughtspot_rest_api_sdk.models.filter_rules import FilterRules
@@ -475,6 +476,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput
     from thoughtspot_rest_api_sdk.models.sort_options import SortOptions
     from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions
+    from thoughtspot_rest_api_sdk.models.sql_metadata_input import SqlMetadataInput
     from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery
     from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse
     from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest
@@ -867,6 +869,7 @@ from thoughtspot_rest_api_sdk.models.fetch_logs_request import FetchLogsRequest
 from thoughtspot_rest_api_sdk.models.fetch_object_privileges_request import FetchObjectPrivilegesRequest
 from thoughtspot_rest_api_sdk.models.fetch_permissions_of_principals_request import FetchPermissionsOfPrincipalsRequest
 from thoughtspot_rest_api_sdk.models.fetch_permissions_on_metadata_request import FetchPermissionsOnMetadataRequest
+from thoughtspot_rest_api_sdk.models.fetch_sql_query_request import FetchSqlQueryRequest
 from thoughtspot_rest_api_sdk.models.file_reference import FileReference
 from thoughtspot_rest_api_sdk.models.file_response_item import FileResponseItem
 from thoughtspot_rest_api_sdk.models.filter_rules import FilterRules
@@ -1098,6 +1101,7 @@ from thoughtspot_rest_api_sdk.models.sort_option import SortOption
 from thoughtspot_rest_api_sdk.models.sort_option_input import SortOptionInput
 from thoughtspot_rest_api_sdk.models.sort_options import SortOptions
 from thoughtspot_rest_api_sdk.models.sorting_options import SortingOptions
+from thoughtspot_rest_api_sdk.models.sql_metadata_input import SqlMetadataInput
 from thoughtspot_rest_api_sdk.models.sql_query import SqlQuery
 from thoughtspot_rest_api_sdk.models.sql_query_response import SqlQueryResponse
 from thoughtspot_rest_api_sdk.models.stop_conversation_request import StopConversationRequest

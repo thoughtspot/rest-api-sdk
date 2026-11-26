@@ -41,6 +41,10 @@ export class AnswerContent {
     * Sampling ratio (0 to 1). If the query was sampled, it is the ratio of keys returned in the data set to the total number of keys expected in the query. If the value is 1.0, this means that the complete result is returned.
     */
     'sampling_ratio': number;
+    /**
+    * SQL that ThoughtSpot generated from <code>query_string</code> on the data source in <code>logical_table_identifier</code>, for the rows in this item. Null when <code>include_sql_query</code> is false.    Version: 27.1.0.cl or later 
+    */
+    'sql_query'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -88,6 +92,12 @@ export class AnswerContent {
             "baseName": "sampling_ratio",
             "type": "number",
             "format": "float"
+        },
+        {
+            "name": "sql_query",
+            "baseName": "sql_query",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

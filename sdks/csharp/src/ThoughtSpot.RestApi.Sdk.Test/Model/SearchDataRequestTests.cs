@@ -125,5 +125,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'RuntimeParamOverride'
         }
+
+        /// <summary>
+        /// Test the property 'IncludeSqlQuery'
+        /// </summary>
+        [Fact]
+        public void IncludeSqlQueryTest()
+        {
+            // TODO unit test for the property 'IncludeSqlQuery'
+        }
     }
 }

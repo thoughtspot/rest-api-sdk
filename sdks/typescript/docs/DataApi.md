@@ -177,6 +177,7 @@ apiInstance.searchData(
     runtime_filter: null,
     runtime_sort: null,
     runtime_param_override: null,
+    include_sql_query: false,
   } 
 ).then((data:any) => {
   console.log('API called successfully. Returned data: ' + data);

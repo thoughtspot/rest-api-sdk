@@ -136,6 +136,11 @@ public class SearchDataRequest implements Serializable {
   @javax.annotation.Nullable
   private Object runtimeParamOverride = null;
 
+  public static final String SERIALIZED_NAME_INCLUDE_SQL_QUERY = "include_sql_query";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_SQL_QUERY)
+  @javax.annotation.Nullable
+  private Boolean includeSqlQuery = false;
+
   public SearchDataRequest() {
   }
 
@@ -290,6 +295,25 @@ public class SearchDataRequest implements Serializable {
     this.runtimeParamOverride = runtimeParamOverride;
   }
 
+
+  public SearchDataRequest includeSqlQuery(@javax.annotation.Nullable Boolean includeSqlQuery) {
+    this.includeSqlQuery = includeSqlQuery;
+    return this;
+  }
+
+  /**
+   * When true, the SQL generated for the search is returned in &lt;code&gt;sql_query&lt;/code&gt; along with the rows; a successful response always has it set. When false, &lt;code&gt;sql_query&lt;/code&gt; is null.    Version: 27.1.0.cl or later 
+   * @return includeSqlQuery
+   */
+  @javax.annotation.Nullable
+  public Boolean getIncludeSqlQuery() {
+    return includeSqlQuery;
+  }
+
+  public void setIncludeSqlQuery(@javax.annotation.Nullable Boolean includeSqlQuery) {
+    this.includeSqlQuery = includeSqlQuery;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -352,13 +376,14 @@ public class SearchDataRequest implements Serializable {
         Objects.equals(this.recordSize, searchDataRequest.recordSize) &&
         Objects.equals(this.runtimeFilter, searchDataRequest.runtimeFilter) &&
         Objects.equals(this.runtimeSort, searchDataRequest.runtimeSort) &&
-        Objects.equals(this.runtimeParamOverride, searchDataRequest.runtimeParamOverride)&&
+        Objects.equals(this.runtimeParamOverride, searchDataRequest.runtimeParamOverride) &&
+        Objects.equals(this.includeSqlQuery, searchDataRequest.includeSqlQuery)&&
         Objects.equals(this.additionalProperties, searchDataRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(queryString, logicalTableIdentifier, dataFormat, recordOffset, recordSize, runtimeFilter, runtimeSort, runtimeParamOverride, additionalProperties);
+    return Objects.hash(queryString, logicalTableIdentifier, dataFormat, recordOffset, recordSize, runtimeFilter, runtimeSort, runtimeParamOverride, includeSqlQuery, additionalProperties);
   }
 
   @Override
@@ -373,6 +398,7 @@ public class SearchDataRequest implements Serializable {
     sb.append("    runtimeFilter: ").append(toIndentedString(runtimeFilter)).append("\n");
     sb.append("    runtimeSort: ").append(toIndentedString(runtimeSort)).append("\n");
     sb.append("    runtimeParamOverride: ").append(toIndentedString(runtimeParamOverride)).append("\n");
+    sb.append("    includeSqlQuery: ").append(toIndentedString(includeSqlQuery)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -404,6 +430,7 @@ public class SearchDataRequest implements Serializable {
     openapiFields.add("runtime_filter");
     openapiFields.add("runtime_sort");
     openapiFields.add("runtime_param_override");
+    openapiFields.add("include_sql_query");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

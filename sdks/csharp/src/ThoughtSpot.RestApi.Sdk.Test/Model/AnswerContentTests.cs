@@ -116,5 +116,14 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Model
         {
             // TODO unit test for the property 'SamplingRatio'
         }
+
+        /// <summary>
+        /// Test the property 'SqlQuery'
+        /// </summary>
+        [Fact]
+        public void SqlQueryTest()
+        {
+            // TODO unit test for the property 'SqlQuery'
+        }
     }
 }

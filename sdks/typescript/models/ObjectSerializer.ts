@@ -230,6 +230,7 @@ export * from '../models/FetchLogsRequest';
 export * from '../models/FetchObjectPrivilegesRequest';
 export * from '../models/FetchPermissionsOfPrincipalsRequest';
 export * from '../models/FetchPermissionsOnMetadataRequest';
+export * from '../models/FetchSqlQueryRequest';
 export * from '../models/FileReference';
 export * from '../models/FileResponseItem';
 export * from '../models/FilterRules';
@@ -461,6 +462,7 @@ export * from '../models/SortOption';
 export * from '../models/SortOptionInput';
 export * from '../models/SortOptions';
 export * from '../models/SortingOptions';
+export * from '../models/SqlMetadataInput';
 export * from '../models/SqlQuery';
 export * from '../models/SqlQueryResponse';
 export * from '../models/StopConversationRequest';
@@ -846,6 +848,7 @@ import { FetchLogsRequest, FetchLogsRequestLogTypeEnum      } from '../models/Fe
 import { FetchObjectPrivilegesRequest } from '../models/FetchObjectPrivilegesRequest';
 import { FetchPermissionsOfPrincipalsRequest    , FetchPermissionsOfPrincipalsRequestDefaultMetadataTypeEnum   } from '../models/FetchPermissionsOfPrincipalsRequest';
 import { FetchPermissionsOnMetadataRequest } from '../models/FetchPermissionsOnMetadataRequest';
+import { FetchSqlQueryRequest } from '../models/FetchSqlQueryRequest';
 import { FileReference } from '../models/FileReference';
 import { FileResponseItem } from '../models/FileResponseItem';
 import { FilterRules , FilterRulesOperatorEnum    } from '../models/FilterRules';
@@ -1021,7 +1024,7 @@ import { SearchConfigRequest } from '../models/SearchConfigRequest';
 import { SearchConnectionRequest , SearchConnectionRequestDataWarehouseTypesEnum     , SearchConnectionRequestDataWarehouseObjectTypeEnum     , SearchConnectionRequestAuthenticationTypeEnum    } from '../models/SearchConnectionRequest';
 import { SearchConnectionResponse    , SearchConnectionResponseDataWarehouseTypeEnum     } from '../models/SearchConnectionResponse';
 import { SearchCustomActionsRequest      , SearchCustomActionsRequestTypeEnum   } from '../models/SearchCustomActionsRequest';
-import { SearchDataRequest  , SearchDataRequestDataFormatEnum        } from '../models/SearchDataRequest';
+import { SearchDataRequest  , SearchDataRequestDataFormatEnum         } from '../models/SearchDataRequest';
 import { SearchDataResponse } from '../models/SearchDataResponse';
 import { SearchDatasetsResponseItem } from '../models/SearchDatasetsResponseItem';
 import { SearchEmailCustomizationRequest } from '../models/SearchEmailCustomizationRequest';
@@ -1077,6 +1080,7 @@ import { SortOption, SortOptionFieldNameEnum  , SortOptionOrderEnum   } from '..
 import { SortOptionInput, SortOptionInputFieldNameEnum  , SortOptionInputOrderEnum   } from '../models/SortOptionInput';
 import { SortOptions, SortOptionsFieldNameEnum  , SortOptionsOrderEnum   } from '../models/SortOptions';
 import { SortingOptions } from '../models/SortingOptions';
+import { SqlMetadataInput, SqlMetadataInputTypeEnum      } from '../models/SqlMetadataInput';
 import { SqlQuery } from '../models/SqlQuery';
 import { SqlQueryResponse  , SqlQueryResponseMetadataTypeEnum    } from '../models/SqlQueryResponse';
 import { StopConversationRequest, StopConversationRequestSpotterExperienceVersionEnum   } from '../models/StopConversationRequest';
@@ -1481,6 +1485,7 @@ let enumsMap: Set<string> = new Set<string>([
     "SortOptionInputOrderEnum",
     "SortOptionsFieldNameEnum",
     "SortOptionsOrderEnum",
+    "SqlMetadataInputTypeEnum",
     "SqlQueryResponseMetadataTypeEnum",
     "StopConversationRequestSpotterExperienceVersionEnum",
     "StorageDestinationStorageTypeEnum",
@@ -1822,6 +1827,7 @@ let typeMap: {[index: string]: any} = {
     "FetchObjectPrivilegesRequest": FetchObjectPrivilegesRequest,
     "FetchPermissionsOfPrincipalsRequest": FetchPermissionsOfPrincipalsRequest,
     "FetchPermissionsOnMetadataRequest": FetchPermissionsOnMetadataRequest,
+    "FetchSqlQueryRequest": FetchSqlQueryRequest,
     "FileReference": FileReference,
     "FileResponseItem": FileResponseItem,
     "FilterRules": FilterRules,
@@ -2053,6 +2059,7 @@ let typeMap: {[index: string]: any} = {
     "SortOptionInput": SortOptionInput,
     "SortOptions": SortOptions,
     "SortingOptions": SortingOptions,
+    "SqlMetadataInput": SqlMetadataInput,
     "SqlQuery": SqlQuery,
     "SqlQueryResponse": SqlQueryResponse,
     "StopConversationRequest": StopConversationRequest,
