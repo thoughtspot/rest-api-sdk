@@ -185,3 +185,47 @@ html[data-rest-api-playground-ready] body {
 #left-navbar-parent[data-menu-open] #outsideClickWrapper > :first-child ~ * {
     display: block !important;
 }
+
+#left-navbar-parent > :first-child > :first-child {
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+}
+
+#left-navbar-parent .NavBar-Wrapper {
+    flex-wrap: nowrap !important;
+}
+
+#left-navbar-parent .NavBar-Wrapper > :last-child {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+#left-navbar-parent .Sub-NavBar-Wrapper {
+    flex: 0 0 auto !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper > :first-child {
+    display: none !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper .rc-menu-root.rc-menu-horizontal {
+    display: inline-block !important;
+    background-color: #fff !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper .rc-menu-submenu-title {
+    line-height: 30px !important;
+    padding: 0 8px !important;
+    border: 1px solid #e7e9f2 !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper .rc-menu-submenu-selected,
+#left-navbar-parent .platform-selector-wrapper .rc-menu-submenu-active > .rc-menu-submenu-title {
+    background-color: #fff !important;
+    border-color: #e7e9f2 !important;
+}
+
+#left-navbar-parent .platform-selector-wrapper .rc-menu-submenu-title svg:not([aria-label='expand-icon']) {
+    display: none !important;
+}
