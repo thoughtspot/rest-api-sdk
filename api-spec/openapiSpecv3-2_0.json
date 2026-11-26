@@ -44691,14 +44691,15 @@
             ]
           },
           "reset_option": {
-            "description": "<div><span class=\"since-beta-tag\">Version: 27.2.0.cl or later</span></div>\n\nThe attributes to clear when `persist_option` is `RESET`: `GROUPS`, `FILTER_RULES` or `PARAMETERS`. If empty, all of them are cleared. With `GROUPS`, the user keeps only the All group of the Org.",
+            "description": "<div><span class=\"since-beta-tag\">Version: 27.2.0.cl or later</span></div>\n\nThe attributes to clear when `persist_option` is `RESET`: `GROUPS`, `PARAMETERS` or `VARIABLE_VALUES`. `FILTER_RULES` is deprecated but still clears the filter rules. If empty, `GROUPS`, `PARAMETERS` and the filter rules are cleared; `VARIABLE_VALUES` is cleared only when it is listed, and clears the user's `variable_values` in the Org. With `GROUPS`, the user keeps only the All group of the Org.",
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
                 "FILTER_RULES",
                 "PARAMETERS",
-                "GROUPS"
+                "GROUPS",
+                "VARIABLE_VALUES"
               ]
             }
           },
@@ -44739,7 +44740,7 @@
             "type": "string"
           },
           "groups": {
-            "description": "ID or name of the groups to assign to the user. For a new user (just-in-time provisioning), the user is created in these groups. For an existing user, `persist_option` sets how they apply: `APPEND` adds them, `REPLACE` replaces the user's groups, and `NONE` ignores them; with `RESET`, use `reset_option` instead. With `auto_create` set to true, missing groups are created; with `auto_create` set to false, a missing group returns 400. Updating the groups of an existing user needs JWT RBAC to be enabled on the cluster. If it is not enabled, the groups and `reset_option` `GROUPS` are ignored for an existing user, and the request returns 200; `FILTER_RULES` and `PARAMETERS` are still cleared.",
+            "description": "ID or name of the groups to assign to the user. For a new user (just-in-time provisioning), the user is created in these groups. For an existing user, `persist_option` sets how they apply: `APPEND` adds them, `REPLACE` replaces the user's groups, and `NONE` ignores them; with `RESET`, use `reset_option` instead. With `auto_create` set to true, missing groups are created; with `auto_create` set to false, a missing group returns 400. Updating the groups of an existing user needs JWT RBAC to be enabled on the cluster. If it is not enabled, the groups and `reset_option` `GROUPS` are ignored for an existing user, and the request returns 200; the other `reset_option` values are still cleared.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Group_Object"
