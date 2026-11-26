@@ -90,9 +90,15 @@ document.addEventListener(
     if (!nav || !event.target.closest) return;
     if (event.target.closest('[data-testid="menu-select"]')) {
       nav.toggleAttribute('data-menu-open');
-    } else {
-      nav.removeAttribute('data-menu-open');
+      return;
     }
+    if (
+      event.target.closest('#outsideClickWrapper') &&
+      !event.target.closest('a[href]')
+    ) {
+      return;
+    }
+    nav.removeAttribute('data-menu-open');
   },
   true,
 );
