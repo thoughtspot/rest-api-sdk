@@ -30072,6 +30072,245 @@
           }
         }
       }
+    },
+    "/api/rest/2.0/metadata/column-aliases/delete": {
+      "post": {
+        "operationId": "deleteColumnAliases",
+        "description": "\nDelete all column aliases of one or more models. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nDeletes all column aliases of one or more models. Use it to clear a model's column aliases before importing a new set, or to remove them altogether.\n\nRequires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\n- This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first.\n- All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted.\n- The column aliases of every Org and group on the model are deleted, not only those of your current Org.\n- To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteColumnAliasesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the column aliases."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/column-aliases/export": {
+      "post": {
+        "operationId": "exportColumnAliases",
+        "description": "\nExport the column aliases of a model as a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nExports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.\n\nRequires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\n- The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns.\n- If the model name contains a slash (/), use the model's GUID or custom object ID.\n- The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model's column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportColumnAliasesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful export of translations as a CSV file.",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates that the response is a file attachment.",
+                "schema": {
+                  "type": "string",
+                  "example": "attachment; filename=\"table_name.translations.csv\""
+                }
+              }
+            },
+            "content": {
+              "text/csv": {}
+            }
+          },
+          "400": {
+            "description": "Bad Request. Unable to fetch table for the given identifiers or other input issues.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. User lacks permission to download translations for the specified table.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/2.0/metadata/column-aliases/import": {
+      "post": {
+        "operationId": "importColumnAliases",
+        "description": "\nImport column aliases for a model from a CSV file. <br/>  <span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\n<span class=\"since-beta-tag\">Version: 27.1.0.cl or later</span>\n\nImports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.\n\nRequires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.\n\n#### Usage guidelines\n\n- Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`.\n- The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row's `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out.\n- When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional.\n- The `operation` column is optional and is used only with `DELTA`.\n- Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group.\n- Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`.\n- Requests must include a `Content-Length` header; a request without one is rejected with a `411` error.\n- Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.\n\n#### Import policies\n\n- `ALL_OR_NONE` (default): replaces all of the model's column aliases with the contents of the file. Column aliases that are not in the file are deleted.\n- `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.\n\n`DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.\n\nWith either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.\n\n#### Errors and retries\n\n- `409`: another `DELTA` import is running on the same model. Retry after it finishes.\n- `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import.\n- With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller's responsibility.\n\n\n\n\n#### Endpoint URL\n",
+        "tags": [
+          "Metadata",
+          "27.1.0.cl"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "model_identifier": {
+                    "description": "GUID, name or custom object ID of the model whose column aliases are\nimported. Names and IDs are matched exactly and are case-sensitive.",
+                    "type": "string"
+                  },
+                  "column_aliases_file": {
+                    "description": "CSV file with one column alias per row. Required columns: `column` (the\ncolumn name in the model), `locale` (for example `fr-FR`, or\n`TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's\n`alias` or `description` can be empty, and with `DELTA` either column can\nbe left out. `org_name` and `group_name` target an alias at an Org or a\ngroup; they are required when Org and group targeting is enabled on the\ninstance. Optional column: `operation` (`UPSERT` or `DELETE`, used only\nwhen `import_policy` is `DELTA`). Files of up to 25 MB are supported.",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "separator": {
+                    "description": "Character that separates columns in the CSV file. Defaults to a comma.",
+                    "default": ",",
+                    "type": "string"
+                  },
+                  "import_policy": {
+                    "description": "How the file is applied to the model's existing column aliases. `ALL_OR_NONE`\n(default) replaces all of them with the file's contents. `DELTA` adds,\nupdates or deletes only the rows in the file and leaves every other column\nalias unchanged.",
+                    "default": "ALL_OR_NONE",
+                    "type": "string",
+                    "enum": [
+                      "ALL_OR_NONE",
+                      "DELTA"
+                    ]
+                  }
+                },
+                "required": [
+                  "model_identifier",
+                  "column_aliases_file"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successfully imported the column aliases."
+          },
+          "400": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden access.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Operation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -66935,6 +67174,33 @@
             }
           }
         }
+      },
+      "DeleteColumnAliasesRequest": {
+        "type": "object",
+        "properties": {
+          "model_identifiers": {
+            "description": "GUIDs, names or custom object IDs of the models whose column aliases are\ndeleted. Names and IDs are matched exactly and are case-sensitive.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "model_identifiers"
+        ]
+      },
+      "ExportColumnAliasesRequest": {
+        "type": "object",
+        "properties": {
+          "model_identifier": {
+            "description": "GUID, name or custom object ID of the model whose column aliases are\nexported. Names and IDs are matched exactly and are case-sensitive.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "model_identifier"
+        ]
       }
     },
     "securitySchemes": {
