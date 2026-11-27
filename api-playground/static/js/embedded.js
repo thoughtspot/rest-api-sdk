@@ -67,10 +67,18 @@ function getElementByIdAsync(id) {
 
 document.getElementsByClassName('portal-header')[0].style.display = 'none';
 
-const getRequestedThemeMode = () => {
+const getQueryParam = (name) => {
   const [beforeHash] = window.location.href.split('#');
   const pairs = beforeHash.split(/[?&]/).slice(1).join('&');
-  const isDarkMode = new URLSearchParams(pairs).get('isDarkMode');
+  return new URLSearchParams(pairs).get(name);
+};
+
+if (getQueryParam('isTopNavbar') === 'true') {
+  document.documentElement.dataset.tsTopNavbar = '1';
+}
+
+const getRequestedThemeMode = () => {
+  const isDarkMode = getQueryParam('isDarkMode');
   if (isDarkMode === 'true') return 'dark';
   if (isDarkMode === 'false') return 'light';
   return null;
@@ -82,6 +90,26 @@ const applyRequestedThemeMode = () => {
     window.APIMaticDevPortal.setThemeMode(themeMode);
   }
 };
+
+document.addEventListener(
+  'click',
+  (event) => {
+    const nav = document.getElementById('left-navbar-parent');
+    if (!nav || !event.target.closest) return;
+    if (event.target.closest('[data-testid="menu-select"]')) {
+      nav.toggleAttribute('data-menu-open');
+      return;
+    }
+    if (
+      event.target.closest('#outsideClickWrapper') &&
+      !event.target.closest('a[href]')
+    ) {
+      return;
+    }
+    nav.removeAttribute('data-menu-open');
+  },
+  true,
+);
 
 const setAPIMaticPortalConfig = () => {
   APIMaticDevPortal.ready(({ setConfig }) => {
