@@ -1,0 +1,67 @@
+name: C# SDK registry check
+
+# Confirms the C# SDK version on the branch is installable from nuget.org by
+# compiling and running a fresh consumer project against the published package.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_run:
+    workflows: [Publish C# SDK to NuGet]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch whose C# SDK version to check
+        default: release
+      version:
+        description: Check this version instead of the one on the branch
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.ref || 'release' }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      # Version branches may predate these scripts, so only their SDK sources are used.
+      - name: Check out the C# SDK to check
+        env:
+          REF: ${{ github.event.workflow_run.head_branch || inputs.ref || 'release' }}
+        run: |
+          git fetch --depth=1 origin "refs/heads/$REF"
+          git checkout FETCH_HEAD -- sdks/csharp
+      - name: Probe nuget.org and consume
+        env:
+          VERSION: ${{ inputs.version }}
+          # NuGet can take minutes to index a fresh publish.
+          SMOKE_REGISTRY_WAIT: ${{ github.event_name == 'workflow_run' && 900 || 0 }}
+        run: |
+          branch=$(.github/scripts/csharp-sdk-smoke.sh version)
+          v=${VERSION:-$branch}
+          rc=0
+          .github/scripts/csharp-sdk-smoke.sh registry "$v" || rc=$?
+          case $rc in
+            0) found=yes consumer=ok ;;
+            44) found=NO consumer=skipped ;;
+            *) found=yes consumer=FAILED ;;
+          esac
+          {
+            echo '| Branch version | Checked version | On nuget.org | Consumer |'
+            echo '| --- | --- | --- | --- |'
+            echo "| $branch | $v | $found | $consumer |"
+          } >>"$GITHUB_STEP_SUMMARY"
+          if [ "$rc" != 0 ]; then
+            echo "::error title=C# SDK::registry check failed for $v (on nuget.org: $found, consumer: $consumer)"
+          fi
+          exit "$rc"
