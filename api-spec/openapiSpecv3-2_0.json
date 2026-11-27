@@ -50329,7 +50329,8 @@
               "LIVEBOARD",
               "ANSWER",
               "LOGICAL_TABLE",
-              "CONNECTION"
+              "CONNECTION",
+              "COLLECTION"
             ],
             "description": "  Type of metadata.\n  \n\nRequired if the name of the object is set as the identifier. This attribute is optional when the object GUID is specified as the identifier.",
             "nullable": true
