@@ -47,6 +47,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deleteAnalyst**](ThoughtSpotRestApi.md#deleteAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete |
 | [**deleteCalendar**](ThoughtSpotRestApi.md#deleteCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete |
 | [**deleteCollection**](ThoughtSpotRestApi.md#deleteCollection) | **POST** /api/rest/2.0/collections/delete |
+| [**deleteColumnAliases**](ThoughtSpotRestApi.md#deleteColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/delete |
 | [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete |
 | [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete |
 | [**deleteConnectionConfiguration**](ThoughtSpotRestApi.md#deleteConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/delete |
@@ -77,6 +78,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**deployRevision**](ThoughtSpotRestApi.md#deployRevision) | **POST** /api/rest/2.0/version-control/deploy |
 | [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} |
 | [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer |
+| [**exportColumnAliases**](ThoughtSpotRestApi.md#exportColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/export |
 | [**exportContext**](ThoughtSpotRestApi.md#exportContext) | **POST** /api/rest/2.0/ai/context/export |
 | [**exportLiveboardReport**](ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard |
 | [**exportManualTranslationTemplate**](ThoughtSpotRestApi.md#exportManualTranslationTemplate) | **POST** /api/rest/2.0/localizations/manual-translation/template/export |
@@ -119,6 +121,7 @@ All URIs are relative to *CLUSTER_URL*
 | [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides |
 | [**getUsageDataForUser**](ThoughtSpotRestApi.md#getUsageDataForUser) | **GET** /api/rest/2.0/ai/usage-data/user |
 | [**getWebhookStorageConfig**](ThoughtSpotRestApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/storage-config |
+| [**importColumnAliases**](ThoughtSpotRestApi.md#importColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/import |
 | [**importContext**](ThoughtSpotRestApi.md#importContext) | **POST** /api/rest/2.0/ai/context/import |
 | [**importManualTranslations**](ThoughtSpotRestApi.md#importManualTranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import |
 | [**importMemory**](ThoughtSpotRestApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import |
@@ -1804,6 +1807,42 @@ null (empty response body)
 | **404** | Resource not found. |  -  |
 | **500** | Unexpected error |  -  |
 
+<a id="deleteColumnAliases"></a>
+# **deleteColumnAliases**
+> deleteColumnAliases(deleteColumnAliasesRequest)
+
+
+
+ Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **deleteColumnAliasesRequest** | [**DeleteColumnAliasesRequest**](DeleteColumnAliasesRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully deleted the column aliases. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
+
 <a id="deleteConfig"></a>
 # **deleteConfig**
 > deleteConfig(deleteConfigRequest)
@@ -2883,6 +2922,42 @@ null (empty response body)
 | **400** | Invalid request. |  -  |
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
+| **500** | Unexpected error |  -  |
+
+<a id="exportColumnAliases"></a>
+# **exportColumnAliases**
+> exportColumnAliases(exportColumnAliasesRequest)
+
+
+
+ Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **exportColumnAliasesRequest** | [**ExportColumnAliasesRequest**](ExportColumnAliasesRequest.md)
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: text/csv, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful export of translations as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
+| **400** | Bad Request. Unable to fetch table for the given identifiers or other input issues. |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden. User lacks permission to download translations for the specified table. |  -  |
 | **500** | Unexpected error |  -  |
 
 <a id="exportContext"></a>
@@ -4393,6 +4468,45 @@ This endpoint does not need any parameter.
 | **401** | Unauthorized access. |  -  |
 | **403** | Forbidden access. |  -  |
 | **500** | Unexpected error |  -  |
+
+<a id="importColumnAliases"></a>
+# **importColumnAliases**
+> importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy)
+
+
+
+ Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+
+### Parameters
+
+| Name | Type |
+|------------- | ------------- |
+| **modelIdentifier** | **String**
+| **columnAliasesFile** | **File**
+| **separator** | **String**
+| **importPolicy** | **String**
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successfully imported the column aliases. |  -  |
+| **400** | Operation failed |  -  |
+| **401** | Unauthorized access. |  -  |
+| **403** | Forbidden access. |  -  |
+| **500** | Operation failed |  -  |
 
 <a id="importContext"></a>
 # **importContext**

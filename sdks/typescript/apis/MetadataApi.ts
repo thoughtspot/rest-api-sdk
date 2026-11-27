@@ -11,8 +11,10 @@ import {SecurityAuthentication} from '../auth/auth';
 import { BuildMetadataIndexRequest } from '../models/BuildMetadataIndexRequest';
 import { ConvertWorksheetToModelRequest } from '../models/ConvertWorksheetToModelRequest';
 import { CopyObjectRequest } from '../models/CopyObjectRequest';
+import { DeleteColumnAliasesRequest } from '../models/DeleteColumnAliasesRequest';
 import { DeleteMetadataRequest } from '../models/DeleteMetadataRequest';
 import { ErrorResponse } from '../models/ErrorResponse';
+import { ExportColumnAliasesRequest } from '../models/ExportColumnAliasesRequest';
 import { ExportMetadataTMLBatchedRequest } from '../models/ExportMetadataTMLBatchedRequest';
 import { ExportMetadataTMLRequest } from '../models/ExportMetadataTMLRequest';
 import { FetchAnswerSqlQueryRequest } from '../models/FetchAnswerSqlQueryRequest';
@@ -196,6 +198,55 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+     * @param deleteColumnAliasesRequest 
+     */
+    public async deleteColumnAliases(deleteColumnAliasesRequest: DeleteColumnAliasesRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'deleteColumnAliasesRequest' is not null or undefined
+        if (deleteColumnAliasesRequest === null || deleteColumnAliasesRequest === undefined) {
+            throw new RequiredError("MetadataApi", "deleteColumnAliases", "deleteColumnAliasesRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/column-aliases/delete';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(deleteColumnAliasesRequest, "DeleteColumnAliasesRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
      * @param deleteMetadataRequest 
      */
@@ -225,6 +276,55 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(deleteMetadataRequest, "DeleteMetadataRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest 
+     */
+    public async exportColumnAliases(exportColumnAliasesRequest: ExportColumnAliasesRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'exportColumnAliasesRequest' is not null or undefined
+        if (exportColumnAliasesRequest === null || exportColumnAliasesRequest === undefined) {
+            throw new RequiredError("MetadataApi", "exportColumnAliases", "exportColumnAliasesRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/column-aliases/export';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(exportColumnAliasesRequest, "ExportColumnAliasesRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -561,6 +661,94 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
             contentType
         );
         requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["bearerAuth"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+     * @param separator Character that separates columns in the CSV file. Defaults to a comma.
+     * @param importPolicy How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+     */
+    public async importColumnAliases(modelIdentifier: string, columnAliasesFile: HttpFile, separator?: string, importPolicy?: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'modelIdentifier' is not null or undefined
+        if (modelIdentifier === null || modelIdentifier === undefined) {
+            throw new RequiredError("MetadataApi", "importColumnAliases", "modelIdentifier");
+        }
+
+
+        // verify required parameter 'columnAliasesFile' is not null or undefined
+        if (columnAliasesFile === null || columnAliasesFile === undefined) {
+            throw new RequiredError("MetadataApi", "importColumnAliases", "columnAliasesFile");
+        }
+
+
+
+
+        // Path Params
+        const localVarPath = '/api/rest/2.0/metadata/column-aliases/import';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+        requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0")
+        requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0")
+
+        // Form Params
+        const useForm = canConsumeForm([
+            'multipart/form-data',
+        ]);
+
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
+        }
+
+        if (modelIdentifier !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('model_identifier', modelIdentifier as any);
+        }
+        if (columnAliasesFile !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('column_aliases_file', columnAliasesFile, columnAliasesFile.name);
+             }
+        }
+        if (separator !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('separator', separator as any);
+        }
+        if (importPolicy !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('import_policy', importPolicy as any);
+        }
+
+        requestContext.setBody(localVarFormParams);
+
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -1153,6 +1341,59 @@ export class MetadataApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to deleteColumnAliases
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async deleteColumnAliasesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to deleteMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1181,6 +1422,59 @@ export class MetadataApiResponseProcessor {
                 "ErrorResponse", ""
             ) as ErrorResponse;
             throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unexpected error", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to exportColumnAliases
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async exportColumnAliasesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Bad Request. Unable to fetch table for the given identifiers or other input issues.", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden. User lacks permission to download translations for the specified table.", body, response.headers);
         }
         if (isCodeInRange("500", response.httpStatusCode)) {
             const body: ErrorResponse = ObjectSerializer.deserialize(
@@ -1595,6 +1889,59 @@ export class MetadataApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SqlQueryResponse", ""
             ) as SqlQueryResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Blob | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to importColumnAliases
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async importColumnAliasesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Forbidden access.", body, response.headers);
+        }
+        if (isCodeInRange("500", response.httpStatusCode)) {
+            const body: ErrorResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "ErrorResponse", ""
+            ) as ErrorResponse;
+            throw new ApiException<ErrorResponse>(response.httpStatusCode, "Operation failed", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

@@ -47,6 +47,7 @@ Method | HTTP request | Description
 [**deleteAnalyst**](ThoughtSpotRestApi.md#deleteAnalyst) | **POST** /api/rest/2.0/ai/agent/analysts/{analyst_identifier}/delete | 
 [**deleteCalendar**](ThoughtSpotRestApi.md#deleteCalendar) | **POST** /api/rest/2.0/calendars/{calendar_identifier}/delete | 
 [**deleteCollection**](ThoughtSpotRestApi.md#deleteCollection) | **POST** /api/rest/2.0/collections/delete | 
+[**deleteColumnAliases**](ThoughtSpotRestApi.md#deleteColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/delete | 
 [**deleteConfig**](ThoughtSpotRestApi.md#deleteConfig) | **POST** /api/rest/2.0/vcs/git/config/delete | 
 [**deleteConnection**](ThoughtSpotRestApi.md#deleteConnection) | **POST** /api/rest/2.0/connection/delete | 
 [**deleteConnectionConfiguration**](ThoughtSpotRestApi.md#deleteConnectionConfiguration) | **POST** /api/rest/2.0/connection-configurations/delete | 
@@ -77,6 +78,7 @@ Method | HTTP request | Description
 [**deployRevision**](ThoughtSpotRestApi.md#deployRevision) | **POST** /api/rest/2.0/version-control/deploy | 
 [**downloadConnectionMetadataChanges**](ThoughtSpotRestApi.md#downloadConnectionMetadataChanges) | **POST** /api/rest/2.0/connections/download-connection-metadata-changes/{connection_identifier} | 
 [**exportAnswerReport**](ThoughtSpotRestApi.md#exportAnswerReport) | **POST** /api/rest/2.0/report/answer | 
+[**exportColumnAliases**](ThoughtSpotRestApi.md#exportColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/export | 
 [**exportContext**](ThoughtSpotRestApi.md#exportContext) | **POST** /api/rest/2.0/ai/context/export | 
 [**exportLiveboardReport**](ThoughtSpotRestApi.md#exportLiveboardReport) | **POST** /api/rest/2.0/report/liveboard | 
 [**exportManualTranslationTemplate**](ThoughtSpotRestApi.md#exportManualTranslationTemplate) | **POST** /api/rest/2.0/localizations/manual-translation/template/export | 
@@ -119,6 +121,7 @@ Method | HTTP request | Description
 [**getSystemOverrideInfo**](ThoughtSpotRestApi.md#getSystemOverrideInfo) | **GET** /api/rest/2.0/system/config-overrides | 
 [**getUsageDataForUser**](ThoughtSpotRestApi.md#getUsageDataForUser) | **GET** /api/rest/2.0/ai/usage-data/user | 
 [**getWebhookStorageConfig**](ThoughtSpotRestApi.md#getWebhookStorageConfig) | **GET** /api/rest/2.0/webhooks/storage-config | 
+[**importColumnAliases**](ThoughtSpotRestApi.md#importColumnAliases) | **POST** /api/rest/2.0/metadata/column-aliases/import | 
 [**importContext**](ThoughtSpotRestApi.md#importContext) | **POST** /api/rest/2.0/ai/context/import | 
 [**importManualTranslations**](ThoughtSpotRestApi.md#importManualTranslations) | **POST** /api/rest/2.0/localizations/manual-translation/import | 
 [**importMemory**](ThoughtSpotRestApi.md#importMemory) | **POST** /api/rest/2.0/ai/memory/import | 
@@ -3214,6 +3217,70 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
+# **deleteColumnAliases**
+> void deleteColumnAliases(deleteColumnAliasesRequest)
+
+ Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, DeleteColumnAliasesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.deleteColumnAliases(
+  // DeleteColumnAliasesRequest
+  {
+    model_identifiers: [
+      "model_identifiers_example",
+    ],
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deleteColumnAliasesRequest** | **DeleteColumnAliasesRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfully deleted the column aliases. |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
 # **deleteConfig**
 > void deleteConfig(deleteConfigRequest)
 
@@ -5077,6 +5144,68 @@ Name | Type | Description  | Notes
 **400** | Invalid request. |  -  |
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
+**500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **exportColumnAliases**
+> void exportColumnAliases(exportColumnAliasesRequest)
+
+ Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ExportColumnAliasesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.exportColumnAliases(
+  // ExportColumnAliasesRequest
+  {
+    model_identifier: "model_identifier_example",
+  } 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exportColumnAliasesRequest** | **ExportColumnAliasesRequest**|  |
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: text/csv, application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful export of translations as a CSV file. |  * Content-Disposition - Indicates that the response is a file attachment. <br>  |
+**400** | Bad Request. Unable to fetch table for the given identifiers or other input issues. |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden. User lacks permission to download translations for the specified table. |  -  |
 **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
@@ -7851,6 +7980,75 @@ This endpoint does not need any parameter.
 **401** | Unauthorized access. |  -  |
 **403** | Forbidden access. |  -  |
 **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+
+# **importColumnAliases**
+> void importColumnAliases()
+
+ Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+
+### Example
+
+
+```typescript
+import { createBearerAuthenticationConfig, ThoughtSpotRestApi, ImportColumnAliasesRequest } from '@thoughtspot/rest-api-sdk';
+
+const configuration = createBearerAuthenticationConfig("CLUSTER_SERVER_URL", {
+    username: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+});
+const apiInstance = new ThoughtSpotRestApi(configuration);
+
+apiInstance.importColumnAliases(
+  // string | GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+  "modelIdentifier_example" , 
+  // HttpFile | CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row\\\'s `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.
+  { data: Buffer.from(fs.readFileSync('/path/to/file', 'utf-8')), name: '/path/to/file' } , 
+  // string | Character that separates columns in the CSV file. Defaults to a comma. (optional)
+  "," , 
+  // string | How the file is applied to the model\\\'s existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file\\\'s contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional)
+  "ALL_OR_NONE" 
+).then((data:any) => {
+  console.log('API called successfully. Returned data: ' + data);
+}).catch((error:any) => console.error(error));
+
+
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **modelIdentifier** | [**string**] | GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. | defaults to undefined
+ **columnAliasesFile** | [**HttpFile**] | CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported. | defaults to undefined
+ **separator** | [**string**] | Character that separates columns in the CSV file. Defaults to a comma. | (optional) defaults to ','
+ **importPolicy** | [**string**]**Array<&#39;ALL_OR_NONE&#39; &#124; &#39;DELTA&#39;>** | How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. | (optional) defaults to 'ALL_OR_NONE'
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[bearerAuth](README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfully imported the column aliases. |  -  |
+**400** | Operation failed |  -  |
+**401** | Unauthorized access. |  -  |
+**403** | Forbidden access. |  -  |
+**500** | Operation failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 

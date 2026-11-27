@@ -22,14 +22,17 @@ import java.io.IOException;
 import com.thoughtspot.client.model.BuildMetadataIndexRequest;
 import com.thoughtspot.client.model.ConvertWorksheetToModelRequest;
 import com.thoughtspot.client.model.CopyObjectRequest;
+import com.thoughtspot.client.model.DeleteColumnAliasesRequest;
 import com.thoughtspot.client.model.DeleteMetadataRequest;
 import com.thoughtspot.client.model.ErrorResponse;
+import com.thoughtspot.client.model.ExportColumnAliasesRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLBatchedRequest;
 import com.thoughtspot.client.model.ExportMetadataTMLRequest;
 import com.thoughtspot.client.model.FetchAnswerSqlQueryRequest;
 import com.thoughtspot.client.model.FetchAsyncImportTaskStatusRequest;
 import com.thoughtspot.client.model.FetchLiveboardSqlQueryRequest;
 import com.thoughtspot.client.model.FetchSqlQueryRequest;
+import java.io.File;
 import com.thoughtspot.client.model.GetAsyncImportStatusResponse;
 import com.thoughtspot.client.model.ImportEPackAsyncTaskStatus;
 import com.thoughtspot.client.model.ImportMetadataTMLAsyncRequest;
@@ -550,6 +553,145 @@ public class MetadataApi {
         return localVarCall;
     }
     /**
+     * Build call for deleteColumnAliases
+     * @param deleteColumnAliasesRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully deleted the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteColumnAliasesCall(DeleteColumnAliasesRequest deleteColumnAliasesRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = deleteColumnAliasesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/column-aliases/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteColumnAliasesValidateBeforeCall(DeleteColumnAliasesRequest deleteColumnAliasesRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'deleteColumnAliasesRequest' is set
+        if (deleteColumnAliasesRequest == null) {
+            throw new ApiException("Missing the required parameter 'deleteColumnAliasesRequest' when calling deleteColumnAliases(Async)");
+        }
+
+        return deleteColumnAliasesCall(deleteColumnAliasesRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+     * @param deleteColumnAliasesRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully deleted the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void deleteColumnAliases(DeleteColumnAliasesRequest deleteColumnAliasesRequest) throws ApiException {
+        deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest);
+    }
+
+    /**
+     * 
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+     * @param deleteColumnAliasesRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully deleted the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> deleteColumnAliasesWithHttpInfo(DeleteColumnAliasesRequest deleteColumnAliasesRequest) throws ApiException {
+        okhttp3.Call localVarCall = deleteColumnAliasesValidateBeforeCall(deleteColumnAliasesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+     * @param deleteColumnAliasesRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully deleted the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteColumnAliasesAsync(DeleteColumnAliasesRequest deleteColumnAliasesRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteColumnAliasesValidateBeforeCall(deleteColumnAliasesRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for deleteMetadata
      * @param deleteMetadataRequest  (required)
      * @param _callback Callback for upload/download progress
@@ -685,6 +827,146 @@ public class MetadataApi {
     public okhttp3.Call deleteMetadataAsync(DeleteMetadataRequest deleteMetadataRequest, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = deleteMetadataValidateBeforeCall(deleteMetadataRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for exportColumnAliases
+     * @param exportColumnAliasesRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful export of translations as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
+        <tr><td> 400 </td><td> Bad Request. Unable to fetch table for the given identifiers or other input issues. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden. User lacks permission to download translations for the specified table. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportColumnAliasesCall(ExportColumnAliasesRequest exportColumnAliasesRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = exportColumnAliasesRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/column-aliases/export";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/csv",
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call exportColumnAliasesValidateBeforeCall(ExportColumnAliasesRequest exportColumnAliasesRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'exportColumnAliasesRequest' is set
+        if (exportColumnAliasesRequest == null) {
+            throw new ApiException("Missing the required parameter 'exportColumnAliasesRequest' when calling exportColumnAliases(Async)");
+        }
+
+        return exportColumnAliasesCall(exportColumnAliasesRequest, _callback);
+
+    }
+
+    /**
+     * 
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful export of translations as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
+        <tr><td> 400 </td><td> Bad Request. Unable to fetch table for the given identifiers or other input issues. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden. User lacks permission to download translations for the specified table. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void exportColumnAliases(ExportColumnAliasesRequest exportColumnAliasesRequest) throws ApiException {
+        exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest);
+    }
+
+    /**
+     * 
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful export of translations as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
+        <tr><td> 400 </td><td> Bad Request. Unable to fetch table for the given identifiers or other input issues. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden. User lacks permission to download translations for the specified table. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> exportColumnAliasesWithHttpInfo(ExportColumnAliasesRequest exportColumnAliasesRequest) throws ApiException {
+        okhttp3.Call localVarCall = exportColumnAliasesValidateBeforeCall(exportColumnAliasesRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful export of translations as a CSV file. </td><td>  * Content-Disposition - Indicates that the response is a file attachment. <br>  </td></tr>
+        <tr><td> 400 </td><td> Bad Request. Unable to fetch table for the given identifiers or other input issues. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden. User lacks permission to download translations for the specified table. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call exportColumnAliasesAsync(ExportColumnAliasesRequest exportColumnAliasesRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = exportColumnAliasesValidateBeforeCall(exportColumnAliasesRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1687,6 +1969,178 @@ public class MetadataApi {
         okhttp3.Call localVarCall = fetchSqlQueryValidateBeforeCall(fetchSqlQueryRequest, _callback);
         Type localVarReturnType = new TypeToken<SqlQueryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for importColumnAliases
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported. (required)
+     * @param separator Character that separates columns in the CSV file. Defaults to a comma. (optional, default to ,)
+     * @param importPolicy How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully imported the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importColumnAliasesCall(String modelIdentifier, File columnAliasesFile, String separator, String importPolicy, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/rest/2.0/metadata/column-aliases/import";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (modelIdentifier != null) {
+            localVarFormParams.put("model_identifier", modelIdentifier);
+        }
+
+        if (columnAliasesFile != null) {
+            localVarFormParams.put("column_aliases_file", columnAliasesFile);
+        }
+
+        if (separator != null) {
+            localVarFormParams.put("separator", separator);
+        }
+
+        if (importPolicy != null) {
+            localVarFormParams.put("import_policy", importPolicy);
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "multipart/form-data"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "bearerAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call importColumnAliasesValidateBeforeCall(String modelIdentifier, File columnAliasesFile, String separator, String importPolicy, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'modelIdentifier' is set
+        if (modelIdentifier == null) {
+            throw new ApiException("Missing the required parameter 'modelIdentifier' when calling importColumnAliases(Async)");
+        }
+
+        // verify the required parameter 'columnAliasesFile' is set
+        if (columnAliasesFile == null) {
+            throw new ApiException("Missing the required parameter 'columnAliasesFile' when calling importColumnAliases(Async)");
+        }
+
+        return importColumnAliasesCall(modelIdentifier, columnAliasesFile, separator, importPolicy, _callback);
+
+    }
+
+    /**
+     * 
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported. (required)
+     * @param separator Character that separates columns in the CSV file. Defaults to a comma. (optional, default to ,)
+     * @param importPolicy How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully imported the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public void importColumnAliases(String modelIdentifier, File columnAliasesFile, String separator, String importPolicy) throws ApiException {
+        importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy);
+    }
+
+    /**
+     * 
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported. (required)
+     * @param separator Character that separates columns in the CSV file. Defaults to a comma. (optional, default to ,)
+     * @param importPolicy How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully imported the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> importColumnAliasesWithHttpInfo(String modelIdentifier, File columnAliasesFile, String separator, String importPolicy) throws ApiException {
+        okhttp3.Call localVarCall = importColumnAliasesValidateBeforeCall(modelIdentifier, columnAliasesFile, separator, importPolicy, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported. (required)
+     * @param separator Character that separates columns in the CSV file. Defaults to a comma. (optional, default to ,)
+     * @param importPolicy How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 204 </td><td> Successfully imported the column aliases. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Operation failed </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized access. </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden access. </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Operation failed </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call importColumnAliasesAsync(String modelIdentifier, File columnAliasesFile, String separator, String importPolicy, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = importColumnAliasesValidateBeforeCall(modelIdentifier, columnAliasesFile, separator, importPolicy, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**

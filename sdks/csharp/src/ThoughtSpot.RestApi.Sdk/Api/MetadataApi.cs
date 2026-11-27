@@ -96,6 +96,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <returns></returns>
+        void DeleteColumnAliases(DeleteColumnAliasesRequest deleteColumnAliasesRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteColumnAliasesWithHttpInfo(DeleteColumnAliasesRequest deleteColumnAliasesRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -113,6 +134,27 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="deleteMetadataRequest"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteMetadataWithHttpInfo(DeleteMetadataRequest deleteMetadataRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <returns></returns>
+        void ExportColumnAliases(ExportColumnAliasesRequest exportColumnAliasesRequest);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> ExportColumnAliasesWithHttpInfo(ExportColumnAliasesRequest exportColumnAliasesRequest);
         /// <summary>
         /// 
         /// </summary>
@@ -260,6 +302,33 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="fetchSqlQueryRequest"></param>
         /// <returns>ApiResponse of SqlQueryResponse</returns>
         ApiResponse<SqlQueryResponse> FetchSqlQueryWithHttpInfo(FetchSqlQueryRequest fetchSqlQueryRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <returns></returns>
+        void ImportColumnAliases(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> ImportColumnAliasesWithHttpInfo(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?));
         /// <summary>
         /// 
         /// </summary>
@@ -514,6 +583,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// 
         /// </summary>
         /// <remarks>
+        ///  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteColumnAliasesAsync(DeleteColumnAliasesRequest deleteColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteColumnAliasesWithHttpInfoAsync(DeleteColumnAliasesRequest deleteColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
         ///   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
         /// </remarks>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -533,6 +625,29 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteMetadataWithHttpInfoAsync(DeleteMetadataRequest deleteMetadataRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ExportColumnAliasesAsync(ExportColumnAliasesRequest exportColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ExportColumnAliasesWithHttpInfoAsync(ExportColumnAliasesRequest exportColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -694,6 +809,35 @@ namespace ThoughtSpot.RestApi.Sdk.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SqlQueryResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<SqlQueryResponse>> FetchSqlQueryWithHttpInfoAsync(FetchSqlQueryRequest fetchSqlQueryRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task ImportColumnAliasesAsync(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        ///  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </remarks>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> ImportColumnAliasesWithHttpInfoAsync(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -1853,6 +1997,134 @@ namespace ThoughtSpot.RestApi.Sdk.Api
 
 
         /// <summary>
+        ///   Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <returns></returns>
+        public void DeleteColumnAliases(DeleteColumnAliasesRequest deleteColumnAliasesRequest)
+        {
+            DeleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest);
+        }
+
+        /// <summary>
+        ///   Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> DeleteColumnAliasesWithHttpInfo(DeleteColumnAliasesRequest deleteColumnAliasesRequest)
+        {
+            // verify the required parameter 'deleteColumnAliasesRequest' is set
+            if (deleteColumnAliasesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'deleteColumnAliasesRequest' when calling MetadataApi->DeleteColumnAliases");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = deleteColumnAliasesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/metadata/column-aliases/delete", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteColumnAliases", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteColumnAliasesAsync(DeleteColumnAliasesRequest deleteColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await DeleteColumnAliasesWithHttpInfoAsync(deleteColumnAliasesRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deleteColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> DeleteColumnAliasesWithHttpInfoAsync(DeleteColumnAliasesRequest deleteColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'deleteColumnAliasesRequest' is set
+            if (deleteColumnAliasesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'deleteColumnAliasesRequest' when calling MetadataApi->DeleteColumnAliases");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = deleteColumnAliasesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/metadata/column-aliases/delete", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteColumnAliases", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
         ///    Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
         /// </summary>
         /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1973,6 +2245,136 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeleteMetadata", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <returns></returns>
+        public void ExportColumnAliases(ExportColumnAliasesRequest exportColumnAliasesRequest)
+        {
+            ExportColumnAliasesWithHttpInfo(exportColumnAliasesRequest);
+        }
+
+        /// <summary>
+        ///   Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ExportColumnAliasesWithHttpInfo(ExportColumnAliasesRequest exportColumnAliasesRequest)
+        {
+            // verify the required parameter 'exportColumnAliasesRequest' is set
+            if (exportColumnAliasesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'exportColumnAliasesRequest' when calling MetadataApi->ExportColumnAliases");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/csv",
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = exportColumnAliasesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/metadata/column-aliases/export", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExportColumnAliases", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task ExportColumnAliasesAsync(ExportColumnAliasesRequest exportColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await ExportColumnAliasesWithHttpInfoAsync(exportColumnAliasesRequest, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="exportColumnAliasesRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ExportColumnAliasesWithHttpInfoAsync(ExportColumnAliasesRequest exportColumnAliasesRequest, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'exportColumnAliasesRequest' is set
+            if (exportColumnAliasesRequest == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'exportColumnAliasesRequest' when calling MetadataApi->ExportColumnAliases");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/csv",
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = exportColumnAliasesRequest;
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/metadata/column-aliases/export", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ExportColumnAliases", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -2881,6 +3283,172 @@ namespace ThoughtSpot.RestApi.Sdk.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FetchSqlQuery", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+
+        /// <summary>
+        ///   Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <returns></returns>
+        public void ImportColumnAliases(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?))
+        {
+            ImportColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy);
+        }
+
+        /// <summary>
+        ///   Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object> ImportColumnAliasesWithHttpInfo(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?))
+        {
+            // verify the required parameter 'modelIdentifier' is set
+            if (modelIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'modelIdentifier' when calling MetadataApi->ImportColumnAliases");
+
+            // verify the required parameter 'columnAliasesFile' is set
+            if (columnAliasesFile == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'columnAliasesFile' when calling MetadataApi->ImportColumnAliases");
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "multipart/form-data"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.FormParameters.Add("model_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(modelIdentifier)); // form parameter
+            localVarRequestOptions.FileParameters.Add("column_aliases_file", columnAliasesFile);
+            if (separator != null)
+            {
+                localVarRequestOptions.FormParameters.Add("separator", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(separator)); // form parameter
+            }
+            if (importPolicy != null)
+            {
+                localVarRequestOptions.FormParameters.Add("import_policy", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(importPolicy)); // form parameter
+            }
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/api/rest/2.0/metadata/column-aliases/import", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportColumnAliases", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///   Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task ImportColumnAliasesAsync(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            await ImportColumnAliasesWithHttpInfoAsync(modelIdentifier, columnAliasesFile, separator, importPolicy, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///   Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+        /// </summary>
+        /// <exception cref="ThoughtSpot.RestApi.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="modelIdentifier">GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.</param>
+        /// <param name="columnAliasesFile">CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.</param>
+        /// <param name="separator">Character that separates columns in the CSV file. Defaults to a comma. (optional, default to &quot;,&quot;)</param>
+        /// <param name="importPolicy">How the file is applied to the model&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged. (optional, default to ALL_OR_NONE)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ThoughtSpot.RestApi.Sdk.Client.ApiResponse<Object>> ImportColumnAliasesWithHttpInfoAsync(string modelIdentifier, FileParameter columnAliasesFile, string? separator = default(string?), string? importPolicy = default(string?), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'modelIdentifier' is set
+            if (modelIdentifier == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'modelIdentifier' when calling MetadataApi->ImportColumnAliases");
+
+            // verify the required parameter 'columnAliasesFile' is set
+            if (columnAliasesFile == null)
+                throw new ThoughtSpot.RestApi.Sdk.Client.ApiException(400, "Missing required parameter 'columnAliasesFile' when calling MetadataApi->ImportColumnAliases");
+
+
+            ThoughtSpot.RestApi.Sdk.Client.RequestOptions localVarRequestOptions = new ThoughtSpot.RestApi.Sdk.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "multipart/form-data"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = ThoughtSpot.RestApi.Sdk.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.FormParameters.Add("model_identifier", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(modelIdentifier)); // form parameter
+            localVarRequestOptions.FileParameters.Add("column_aliases_file", columnAliasesFile);
+            if (separator != null)
+            {
+                localVarRequestOptions.FormParameters.Add("separator", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(separator)); // form parameter
+            }
+            if (importPolicy != null)
+            {
+                localVarRequestOptions.FormParameters.Add("import_policy", ThoughtSpot.RestApi.Sdk.Client.ClientUtils.ParameterToString(importPolicy)); // form parameter
+            }
+
+            // authentication (bearerAuth) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/api/rest/2.0/metadata/column-aliases/import", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportColumnAliases", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

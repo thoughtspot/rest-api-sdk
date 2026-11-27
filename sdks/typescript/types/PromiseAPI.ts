@@ -173,6 +173,7 @@ import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
 import { DefaultActionConfigSearchInput } from '../models/DefaultActionConfigSearchInput';
 import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
+import { DeleteColumnAliasesRequest } from '../models/DeleteColumnAliasesRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
@@ -202,6 +203,7 @@ import { EventChannelConfig } from '../models/EventChannelConfig';
 import { EventChannelConfigInput } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest } from '../models/ExportAnswerReportRequest';
+import { ExportColumnAliasesRequest } from '../models/ExportColumnAliasesRequest';
 import { ExportContextRequest } from '../models/ExportContextRequest';
 import { ExportContextResponse } from '../models/ExportContextResponse';
 import { ExportLiveboardReportRequest } from '../models/ExportLiveboardReportRequest';
@@ -4196,6 +4198,26 @@ export class PromiseMetadataApi {
     }
 
     /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+     * @param deleteColumnAliasesRequest
+     */
+    public deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest: DeleteColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+     * @param deleteColumnAliasesRequest
+     */
+    public deleteColumnAliases(deleteColumnAliasesRequest: DeleteColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.deleteColumnAliases(deleteColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
      *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
      * @param deleteMetadataRequest
      */
@@ -4212,6 +4234,26 @@ export class PromiseMetadataApi {
     public deleteMetadata(deleteMetadataRequest: DeleteMetadataRequest, _options?: PromiseConfigurationOptions): Promise<void> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.deleteMetadata(deleteMetadataRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest
+     */
+    public exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest: ExportColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest
+     */
+    public exportColumnAliases(exportColumnAliasesRequest: ExportColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.exportColumnAliases(exportColumnAliasesRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -4352,6 +4394,32 @@ export class PromiseMetadataApi {
     public fetchSqlQuery(fetchSqlQueryRequest: FetchSqlQueryRequest, _options?: PromiseConfigurationOptions): Promise<SqlQueryResponse> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.fetchSqlQuery(fetchSqlQueryRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+     * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+     * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+     */
+    public importColumnAliasesWithHttpInfo(modelIdentifier: string, columnAliasesFile: HttpFile, separator?: string, importPolicy?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+     * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+     * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+     */
+    public importColumnAliases(modelIdentifier: string, columnAliasesFile: HttpFile, separator?: string, importPolicy?: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
         return result.toPromise();
     }
 
@@ -6634,6 +6702,26 @@ export class PromiseThoughtSpotRestApi {
     }
 
     /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+     * @param deleteColumnAliasesRequest
+     */
+    public deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest: DeleteColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+     * @param deleteColumnAliasesRequest
+     */
+    public deleteColumnAliases(deleteColumnAliasesRequest: DeleteColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.deleteColumnAliases(deleteColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
      * @param deleteConfigRequest
      */
@@ -7232,6 +7320,26 @@ export class PromiseThoughtSpotRestApi {
     public exportAnswerReport(exportAnswerReportRequest: ExportAnswerReportRequest, _options?: PromiseConfigurationOptions): Promise<HttpFile> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.exportAnswerReport(exportAnswerReportRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest
+     */
+    public exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest: ExportColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+     * @param exportColumnAliasesRequest
+     */
+    public exportColumnAliases(exportColumnAliasesRequest: ExportColumnAliasesRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.exportColumnAliases(exportColumnAliasesRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -8066,6 +8174,32 @@ export class PromiseThoughtSpotRestApi {
     public getWebhookStorageConfig(_options?: PromiseConfigurationOptions): Promise<Array<WebhookStorageConfigInfo>> {
         const observableOptions = wrapOptions(_options);
         const result = this.api.getWebhookStorageConfig(observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+     * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+     * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+     */
+    public importColumnAliasesWithHttpInfo(modelIdentifier: string, columnAliasesFile: HttpFile, separator?: string, importPolicy?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+     * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+     * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+     * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+     * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+     */
+    public importColumnAliases(modelIdentifier: string, columnAliasesFile: HttpFile, separator?: string, importPolicy?: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        const observableOptions = wrapOptions(_options);
+        const result = this.api.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
         return result.toPromise();
     }
 

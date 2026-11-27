@@ -77,6 +77,7 @@ from thoughtspot_rest_api_sdk.models.create_webhook_configuration_request import
 from thoughtspot_rest_api_sdk.models.dbt_search_response import DbtSearchResponse
 from thoughtspot_rest_api_sdk.models.deactivate_user_request import DeactivateUserRequest
 from thoughtspot_rest_api_sdk.models.delete_collection_request import DeleteCollectionRequest
+from thoughtspot_rest_api_sdk.models.delete_column_aliases_request import DeleteColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.delete_config_request import DeleteConfigRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_configuration_request import DeleteConnectionConfigurationRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_request import DeleteConnectionRequest
@@ -97,6 +98,7 @@ from thoughtspot_rest_api_sdk.models.eureka_get_nl_instructions_response import 
 from thoughtspot_rest_api_sdk.models.eureka_get_relevant_questions_response import EurekaGetRelevantQuestionsResponse
 from thoughtspot_rest_api_sdk.models.eureka_set_nl_instructions_response import EurekaSetNLInstructionsResponse
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest
+from thoughtspot_rest_api_sdk.models.export_column_aliases_request import ExportColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest
 from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
@@ -17388,6 +17390,394 @@ class ThoughtSpotRestApi:
 
 
     @validate_call
+    async def delete_column_aliases(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_column_aliases
+
+         Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model's column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+
+        :param delete_column_aliases_request: (required)
+        :type delete_column_aliases_request: DeleteColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_column_aliases_serialize(
+            delete_column_aliases_request=delete_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_column_aliases_with_http_info(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_column_aliases
+
+         Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model's column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+
+        :param delete_column_aliases_request: (required)
+        :type delete_column_aliases_request: DeleteColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_column_aliases_serialize(
+            delete_column_aliases_request=delete_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_column_aliases_without_preload_content(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_column_aliases
+
+         Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model's column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+
+        :param delete_column_aliases_request: (required)
+        :type delete_column_aliases_request: DeleteColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_column_aliases_serialize(
+            delete_column_aliases_request=delete_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def delete_column_aliases_sync(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`delete_column_aliases`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_column_aliases(
+                delete_column_aliases_request=delete_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_column_aliases_sync_with_http_info(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`delete_column_aliases_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_column_aliases_with_http_info(
+                delete_column_aliases_request=delete_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def delete_column_aliases_sync_without_preload_content(
+        self,
+        delete_column_aliases_request: DeleteColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`delete_column_aliases_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.delete_column_aliases_without_preload_content(
+                delete_column_aliases_request=delete_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _delete_column_aliases_serialize(
+        self,
+        delete_column_aliases_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if delete_column_aliases_request is not None:
+            _body_params = delete_column_aliases_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/metadata/column-aliases/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def delete_config(
         self,
         delete_config_request: DeleteConfigRequest,
@@ -28834,6 +29224,395 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/rest/2.0/report/answer',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def export_column_aliases(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """export_column_aliases
+
+         Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model's GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model's column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+
+        :param export_column_aliases_request: (required)
+        :type export_column_aliases_request: ExportColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._export_column_aliases_serialize(
+            export_column_aliases_request=export_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def export_column_aliases_with_http_info(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """export_column_aliases
+
+         Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model's GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model's column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+
+        :param export_column_aliases_request: (required)
+        :type export_column_aliases_request: ExportColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._export_column_aliases_serialize(
+            export_column_aliases_request=export_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def export_column_aliases_without_preload_content(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """export_column_aliases
+
+         Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model's GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model's column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+
+        :param export_column_aliases_request: (required)
+        :type export_column_aliases_request: ExportColumnAliasesRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._export_column_aliases_serialize(
+            export_column_aliases_request=export_column_aliases_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def export_column_aliases_sync(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """export_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`export_column_aliases`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.export_column_aliases(
+                export_column_aliases_request=export_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def export_column_aliases_sync_with_http_info(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """export_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`export_column_aliases_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.export_column_aliases_with_http_info(
+                export_column_aliases_request=export_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def export_column_aliases_sync_without_preload_content(
+        self,
+        export_column_aliases_request: ExportColumnAliasesRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """export_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`export_column_aliases_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.export_column_aliases_without_preload_content(
+                export_column_aliases_request=export_column_aliases_request,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _export_column_aliases_serialize(
+        self,
+        export_column_aliases_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if export_column_aliases_request is not None:
+            _body_params = export_column_aliases_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'text/csv', 
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/metadata/column-aliases/export',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -44943,6 +45722,457 @@ class ThoughtSpotRestApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/api/rest/2.0/webhooks/storage-config',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def import_column_aliases(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """import_column_aliases
+
+         Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row's `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model's column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller's responsibility.      
+
+        :param model_identifier: GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+        :type model_identifier: str
+        :param column_aliases_file: CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported. (required)
+        :type column_aliases_file: bytes
+        :param separator: Character that separates columns in the CSV file. Defaults to a comma.
+        :type separator: str
+        :param import_policy: How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+        :type import_policy: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._import_column_aliases_serialize(
+            model_identifier=model_identifier,
+            column_aliases_file=column_aliases_file,
+            separator=separator,
+            import_policy=import_policy,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def import_column_aliases_with_http_info(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """import_column_aliases
+
+         Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row's `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model's column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller's responsibility.      
+
+        :param model_identifier: GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+        :type model_identifier: str
+        :param column_aliases_file: CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported. (required)
+        :type column_aliases_file: bytes
+        :param separator: Character that separates columns in the CSV file. Defaults to a comma.
+        :type separator: str
+        :param import_policy: How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+        :type import_policy: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._import_column_aliases_serialize(
+            model_identifier=model_identifier,
+            column_aliases_file=column_aliases_file,
+            separator=separator,
+            import_policy=import_policy,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def import_column_aliases_without_preload_content(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """import_column_aliases
+
+         Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row's `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model's column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller's responsibility.      
+
+        :param model_identifier: GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive. (required)
+        :type model_identifier: str
+        :param column_aliases_file: CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported. (required)
+        :type column_aliases_file: bytes
+        :param separator: Character that separates columns in the CSV file. Defaults to a comma.
+        :type separator: str
+        :param import_policy: How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+        :type import_policy: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._import_column_aliases_serialize(
+            model_identifier=model_identifier,
+            column_aliases_file=column_aliases_file,
+            separator=separator,
+            import_policy=import_policy,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '500': "ErrorResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    @validate_call
+    def import_column_aliases_sync(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """import_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`import_column_aliases`. It calls the asynchronous
+        method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.import_column_aliases(
+                model_identifier=model_identifier,
+                column_aliases_file=column_aliases_file,
+                separator=separator,
+                import_policy=import_policy,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def import_column_aliases_sync_with_http_info(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """import_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`import_column_aliases_with_http_info`. It calls the
+        asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.import_column_aliases_with_http_info(
+                model_identifier=model_identifier,
+                column_aliases_file=column_aliases_file,
+                separator=separator,
+                import_policy=import_policy,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    @validate_call
+    def import_column_aliases_sync_without_preload_content(
+        self,
+        model_identifier: Annotated[StrictStr, Field(description="GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.")],
+        column_aliases_file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="CSV file with one column alias per row. Required columns: `column` (the column name in the model), `locale` (for example `fr-FR`, or `TS_WILDCARD_ALL` for every locale), `alias` and `description`; a row's `alias` or `description` can be empty, and with `DELTA` either column can be left out. `org_name` and `group_name` target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: `operation` (`UPSERT` or `DELETE`, used only when `import_policy` is `DELTA`). Files of up to 25 MB are supported.")],
+        separator: Annotated[Optional[StrictStr], Field(description="Character that separates columns in the CSV file. Defaults to a comma.")] = None,
+        import_policy: Annotated[Optional[StrictStr], Field(description="How the file is applied to the model's existing column aliases. `ALL_OR_NONE` (default) replaces all of them with the file's contents. `DELTA` adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """import_column_aliases (synchronous)
+
+        Synchronous variant of :meth:`import_column_aliases_without_preload_content`. It calls
+        the asynchronous method and blocks until it completes.
+        """ # noqa: E501
+        return run_sync(
+            self.import_column_aliases_without_preload_content(
+                model_identifier=model_identifier,
+                column_aliases_file=column_aliases_file,
+                separator=separator,
+                import_policy=import_policy,
+                _request_timeout=_request_timeout,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+
+    def _import_column_aliases_serialize(
+        self,
+        model_identifier,
+        column_aliases_file,
+        separator,
+        import_policy,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if model_identifier is not None:
+            _form_params.append(('model_identifier', model_identifier))
+        if column_aliases_file is not None:
+            _files['column_aliases_file'] = column_aliases_file
+        if separator is not None:
+            _form_params.append(('separator', separator))
+        if import_policy is not None:
+            _form_params.append(('import_policy', import_policy))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/rest/2.0/metadata/column-aliases/import',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

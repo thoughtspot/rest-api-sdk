@@ -579,6 +579,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteColumnAliases
+        /// </summary>
+        [Fact]
+        public void DeleteColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeleteColumnAliasesRequest deleteColumnAliasesRequest = null;
+            //instance.DeleteColumnAliases(deleteColumnAliasesRequest);
+        }
+
+        /// <summary>
         /// Test DeleteConfig
         /// </summary>
         [Fact]
@@ -914,6 +925,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //ExportAnswerReportRequest exportAnswerReportRequest = null;
             //var response = instance.ExportAnswerReport(exportAnswerReportRequest);
             //Assert.IsType<FileParameter>(response);
+        }
+
+        /// <summary>
+        /// Test ExportColumnAliases
+        /// </summary>
+        [Fact]
+        public void ExportColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportColumnAliasesRequest exportColumnAliasesRequest = null;
+            //instance.ExportColumnAliases(exportColumnAliasesRequest);
         }
 
         /// <summary>
@@ -1413,6 +1435,20 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.GetWebhookStorageConfig();
             //Assert.IsType<List<WebhookStorageConfigInfo>>(response);
+        }
+
+        /// <summary>
+        /// Test ImportColumnAliases
+        /// </summary>
+        [Fact]
+        public void ImportColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string modelIdentifier = null;
+            //FileParameter columnAliasesFile = null;
+            //string? separator = null;
+            //string? importPolicy = null;
+            //instance.ImportColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy);
         }
 
         /// <summary>

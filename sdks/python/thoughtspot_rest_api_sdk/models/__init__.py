@@ -183,6 +183,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.default_action_config_input_create import DefaultActionConfigInputCreate
     from thoughtspot_rest_api_sdk.models.default_action_config_search_input import DefaultActionConfigSearchInput
     from thoughtspot_rest_api_sdk.models.delete_collection_request import DeleteCollectionRequest
+    from thoughtspot_rest_api_sdk.models.delete_column_aliases_request import DeleteColumnAliasesRequest
     from thoughtspot_rest_api_sdk.models.delete_config_request import DeleteConfigRequest
     from thoughtspot_rest_api_sdk.models.delete_connection_configuration_request import DeleteConnectionConfigurationRequest
     from thoughtspot_rest_api_sdk.models.delete_connection_request import DeleteConnectionRequest
@@ -212,6 +213,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput
     from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput
     from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest
+    from thoughtspot_rest_api_sdk.models.export_column_aliases_request import ExportColumnAliasesRequest
     from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest
     from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest
@@ -808,6 +810,7 @@ from thoughtspot_rest_api_sdk.models.default_action_config_input import DefaultA
 from thoughtspot_rest_api_sdk.models.default_action_config_input_create import DefaultActionConfigInputCreate
 from thoughtspot_rest_api_sdk.models.default_action_config_search_input import DefaultActionConfigSearchInput
 from thoughtspot_rest_api_sdk.models.delete_collection_request import DeleteCollectionRequest
+from thoughtspot_rest_api_sdk.models.delete_column_aliases_request import DeleteColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.delete_config_request import DeleteConfigRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_configuration_request import DeleteConnectionConfigurationRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_request import DeleteConnectionRequest
@@ -837,6 +840,7 @@ from thoughtspot_rest_api_sdk.models.event_channel_config import EventChannelCon
 from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput
 from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest
+from thoughtspot_rest_api_sdk.models.export_column_aliases_request import ExportColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest
 from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest

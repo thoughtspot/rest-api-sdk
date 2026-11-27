@@ -90,6 +90,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteColumnAliases
+        /// </summary>
+        [Fact]
+        public void DeleteColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //DeleteColumnAliasesRequest deleteColumnAliasesRequest = null;
+            //instance.DeleteColumnAliases(deleteColumnAliasesRequest);
+        }
+
+        /// <summary>
         /// Test DeleteMetadata
         /// </summary>
         [Fact]
@@ -98,6 +109,17 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //DeleteMetadataRequest deleteMetadataRequest = null;
             //instance.DeleteMetadata(deleteMetadataRequest);
+        }
+
+        /// <summary>
+        /// Test ExportColumnAliases
+        /// </summary>
+        [Fact]
+        public void ExportColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ExportColumnAliasesRequest exportColumnAliasesRequest = null;
+            //instance.ExportColumnAliases(exportColumnAliasesRequest);
         }
 
         /// <summary>
@@ -182,6 +204,20 @@ namespace ThoughtSpot.RestApi.Sdk.Test.Api
             //FetchSqlQueryRequest fetchSqlQueryRequest = null;
             //var response = instance.FetchSqlQuery(fetchSqlQueryRequest);
             //Assert.IsType<SqlQueryResponse>(response);
+        }
+
+        /// <summary>
+        /// Test ImportColumnAliases
+        /// </summary>
+        [Fact]
+        public void ImportColumnAliasesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string modelIdentifier = null;
+            //FileParameter columnAliasesFile = null;
+            //string? separator = null;
+            //string? importPolicy = null;
+            //instance.ImportColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy);
         }
 
         /// <summary>

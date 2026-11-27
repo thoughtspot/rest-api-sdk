@@ -67,6 +67,7 @@ import com.thoughtspot.client.model.CreateWebhookConfigurationRequest;
 import com.thoughtspot.client.model.DbtSearchResponse;
 import com.thoughtspot.client.model.DeactivateUserRequest;
 import com.thoughtspot.client.model.DeleteCollectionRequest;
+import com.thoughtspot.client.model.DeleteColumnAliasesRequest;
 import com.thoughtspot.client.model.DeleteConfigRequest;
 import com.thoughtspot.client.model.DeleteConnectionConfigurationRequest;
 import com.thoughtspot.client.model.DeleteConnectionRequest;
@@ -88,6 +89,7 @@ import com.thoughtspot.client.model.EurekaGetNLInstructionsResponse;
 import com.thoughtspot.client.model.EurekaGetRelevantQuestionsResponse;
 import com.thoughtspot.client.model.EurekaSetNLInstructionsResponse;
 import com.thoughtspot.client.model.ExportAnswerReportRequest;
+import com.thoughtspot.client.model.ExportColumnAliasesRequest;
 import com.thoughtspot.client.model.ExportContextRequest;
 import com.thoughtspot.client.model.ExportContextResponse;
 import com.thoughtspot.client.model.ExportLiveboardReportRequest;
@@ -844,6 +846,18 @@ public class ThoughtSpotRestApiTest {
     }
 
     /**
+     *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model&#39;s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (&#x60;400&#x60;) or you lack edit access to it (&#x60;403&#x60;), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the &#x60;DELTA&#x60; import policy and set &#x60;operation&#x60; to &#x60;DELETE&#x60; on the rows to delete.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteColumnAliasesTest() throws ApiException {
+        DeleteColumnAliasesRequest deleteColumnAliasesRequest = null;
+        api.deleteColumnAliases(deleteColumnAliasesRequest);
+        // TODO: test validations
+    }
+
+    /**
      *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the &#x60;CAN_SETUP_VERSION_CONTROL&#x60; (**Can set up version control**) privilege.      
      *
      * @throws ApiException if the Api call fails
@@ -1201,6 +1215,18 @@ public class ThoughtSpotRestApiTest {
     public void exportAnswerReportTest() throws ApiException {
         ExportAnswerReportRequest exportAnswerReportRequest = null;
         File response = api.exportAnswerReport(exportAnswerReportRequest);
+        // TODO: test validations
+    }
+
+    /**
+     *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the &#x60;DELTA&#x60; import policy.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. When Org- and group-level column aliases are enabled on the instance, the file also has &#x60;org_name&#x60; and &#x60;group_name&#x60; columns. - If the model name contains a slash (/), use the model&#39;s GUID or custom object ID. - The file has no &#x60;operation&#x60; column. Importing it unchanged with the &#x60;ALL_OR_NONE&#x60; policy restores the model&#39;s column aliases to the exported state. Importing it with &#x60;DELTA&#x60; does not delete column aliases added after the export.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void exportColumnAliasesTest() throws ApiException {
+        ExportColumnAliasesRequest exportColumnAliasesRequest = null;
+        api.exportColumnAliases(exportColumnAliasesRequest);
         // TODO: test validations
     }
 
@@ -1702,6 +1728,21 @@ public class ThoughtSpotRestApiTest {
     @Test
     public void getWebhookStorageConfigTest() throws ApiException {
         List<WebhookStorageConfigInfo> response = api.getWebhookStorageConfig();
+        // TODO: test validations
+    }
+
+    /**
+     *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the &#x60;DATAMANAGEMENT&#x60; (**Can manage data**), **Can manage data models** or &#x60;ADMINISTRATION&#x60; (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as &#x60;multipart/form-data&#x60;, with the CSV file in &#x60;column_aliases_file&#x60;. - The CSV file must have a header row with the columns &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;alias&#x60; and &#x60;description&#x60;. A row&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty. With &#x60;DELTA&#x60;, either the &#x60;alias&#x60; or the &#x60;description&#x60; column can be left out. - When Org and group targeting is enabled on the instance, the &#x60;org_name&#x60; and &#x60;group_name&#x60; columns are also required. Otherwise they are optional. - The &#x60;operation&#x60; column is optional and is used only with &#x60;DELTA&#x60;. - Use &#x60;TS_WILDCARD_ALL&#x60; in &#x60;locale&#x60;, &#x60;org_name&#x60; or &#x60;group_name&#x60; to apply an alias to every locale, Org or group. - Each column alias is identified by its &#x60;column&#x60;, &#x60;locale&#x60;, &#x60;org_name&#x60; and &#x60;group_name&#x60;. - Requests must include a &#x60;Content-Length&#x60; header; a request without one is rejected with a &#x60;411&#x60; error. - Files of up to **25 MB** are supported; a larger request is rejected with a &#x60;413&#x60; error. To import more column aliases, split them into several files and import them one after another with &#x60;import_policy&#x60; set to &#x60;DELTA&#x60;.  #### Import policies  - &#x60;ALL_OR_NONE&#x60; (default): replaces all of the model&#39;s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - &#x60;DELTA&#x60;: applies only the rows in the file and leaves every other column alias unchanged. A row whose &#x60;operation&#x60; is &#x60;UPSERT&#x60; or blank adds the column alias or updates the existing one. A row whose &#x60;operation&#x60; is &#x60;DELETE&#x60; deletes that column alias; its &#x60;alias&#x60; and &#x60;description&#x60; can be empty. Deleting a column alias that does not exist is not an error.  &#x60;DELTA&#x60; is available only when it is enabled on the instance. Otherwise the request returns a &#x60;400&#x60; error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - &#x60;409&#x60;: another &#x60;DELTA&#x60; import is running on the same model. Retry after it finishes. - &#x60;500&#x60; during a &#x60;DELTA&#x60; import: some rows may already be applied. Importing the same file again is safe and completes the import. - With &#x60;DELTA&#x60;, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller&#39;s responsibility.      
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void importColumnAliasesTest() throws ApiException {
+        String modelIdentifier = null;
+        File columnAliasesFile = null;
+        String separator = null;
+        String importPolicy = null;
+        api.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy);
         // TODO: test validations
     }
 

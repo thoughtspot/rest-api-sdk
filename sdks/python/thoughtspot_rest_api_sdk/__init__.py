@@ -243,6 +243,7 @@ __all__ = [
     "DefaultActionConfigInputCreate",
     "DefaultActionConfigSearchInput",
     "DeleteCollectionRequest",
+    "DeleteColumnAliasesRequest",
     "DeleteConfigRequest",
     "DeleteConnectionConfigurationRequest",
     "DeleteConnectionRequest",
@@ -272,6 +273,7 @@ __all__ = [
     "EventChannelConfigInput",
     "ExcludeMetadataListItemInput",
     "ExportAnswerReportRequest",
+    "ExportColumnAliasesRequest",
     "ExportContextRequest",
     "ExportContextResponse",
     "ExportLiveboardReportRequest",
@@ -915,6 +917,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.default_action_config_input_create import DefaultActionConfigInputCreate as DefaultActionConfigInputCreate
     from thoughtspot_rest_api_sdk.models.default_action_config_search_input import DefaultActionConfigSearchInput as DefaultActionConfigSearchInput
     from thoughtspot_rest_api_sdk.models.delete_collection_request import DeleteCollectionRequest as DeleteCollectionRequest
+    from thoughtspot_rest_api_sdk.models.delete_column_aliases_request import DeleteColumnAliasesRequest as DeleteColumnAliasesRequest
     from thoughtspot_rest_api_sdk.models.delete_config_request import DeleteConfigRequest as DeleteConfigRequest
     from thoughtspot_rest_api_sdk.models.delete_connection_configuration_request import DeleteConnectionConfigurationRequest as DeleteConnectionConfigurationRequest
     from thoughtspot_rest_api_sdk.models.delete_connection_request import DeleteConnectionRequest as DeleteConnectionRequest
@@ -944,6 +947,7 @@ if __import__("typing").TYPE_CHECKING:
     from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput as EventChannelConfigInput
     from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
     from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
+    from thoughtspot_rest_api_sdk.models.export_column_aliases_request import ExportColumnAliasesRequest as ExportColumnAliasesRequest
     from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest as ExportContextRequest
     from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse as ExportContextResponse
     from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest
@@ -1593,6 +1597,7 @@ from thoughtspot_rest_api_sdk.models.default_action_config_input import DefaultA
 from thoughtspot_rest_api_sdk.models.default_action_config_input_create import DefaultActionConfigInputCreate as DefaultActionConfigInputCreate
 from thoughtspot_rest_api_sdk.models.default_action_config_search_input import DefaultActionConfigSearchInput as DefaultActionConfigSearchInput
 from thoughtspot_rest_api_sdk.models.delete_collection_request import DeleteCollectionRequest as DeleteCollectionRequest
+from thoughtspot_rest_api_sdk.models.delete_column_aliases_request import DeleteColumnAliasesRequest as DeleteColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.delete_config_request import DeleteConfigRequest as DeleteConfigRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_configuration_request import DeleteConnectionConfigurationRequest as DeleteConnectionConfigurationRequest
 from thoughtspot_rest_api_sdk.models.delete_connection_request import DeleteConnectionRequest as DeleteConnectionRequest
@@ -1622,6 +1627,7 @@ from thoughtspot_rest_api_sdk.models.event_channel_config import EventChannelCon
 from thoughtspot_rest_api_sdk.models.event_channel_config_input import EventChannelConfigInput as EventChannelConfigInput
 from thoughtspot_rest_api_sdk.models.exclude_metadata_list_item_input import ExcludeMetadataListItemInput as ExcludeMetadataListItemInput
 from thoughtspot_rest_api_sdk.models.export_answer_report_request import ExportAnswerReportRequest as ExportAnswerReportRequest
+from thoughtspot_rest_api_sdk.models.export_column_aliases_request import ExportColumnAliasesRequest as ExportColumnAliasesRequest
 from thoughtspot_rest_api_sdk.models.export_context_request import ExportContextRequest as ExportContextRequest
 from thoughtspot_rest_api_sdk.models.export_context_response import ExportContextResponse as ExportContextResponse
 from thoughtspot_rest_api_sdk.models.export_liveboard_report_request import ExportLiveboardReportRequest as ExportLiveboardReportRequest

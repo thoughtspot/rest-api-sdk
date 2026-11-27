@@ -6531,6 +6531,26 @@ _DeleteCollectionRequest.attributeTypeMap = [
 ];
 var DeleteCollectionRequest = _DeleteCollectionRequest;
 
+// models/DeleteColumnAliasesRequest.ts
+var _DeleteColumnAliasesRequest = class _DeleteColumnAliasesRequest {
+  static getAttributeTypeMap() {
+    return _DeleteColumnAliasesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_DeleteColumnAliasesRequest.discriminator = void 0;
+_DeleteColumnAliasesRequest.mapping = void 0;
+_DeleteColumnAliasesRequest.attributeTypeMap = [
+  {
+    "name": "model_identifiers",
+    "baseName": "model_identifiers",
+    "type": "Array<string>",
+    "format": ""
+  }
+];
+var DeleteColumnAliasesRequest = _DeleteColumnAliasesRequest;
+
 // models/DeleteConfigRequest.ts
 var _DeleteConfigRequest = class _DeleteConfigRequest {
   static getAttributeTypeMap() {
@@ -7320,6 +7340,26 @@ _ExportAnswerReportRequest.attributeTypeMap = [
   }
 ];
 var ExportAnswerReportRequest = _ExportAnswerReportRequest;
+
+// models/ExportColumnAliasesRequest.ts
+var _ExportColumnAliasesRequest = class _ExportColumnAliasesRequest {
+  static getAttributeTypeMap() {
+    return _ExportColumnAliasesRequest.attributeTypeMap;
+  }
+  constructor() {
+  }
+};
+_ExportColumnAliasesRequest.discriminator = void 0;
+_ExportColumnAliasesRequest.mapping = void 0;
+_ExportColumnAliasesRequest.attributeTypeMap = [
+  {
+    "name": "model_identifier",
+    "baseName": "model_identifier",
+    "type": "string",
+    "format": ""
+  }
+];
+var ExportColumnAliasesRequest = _ExportColumnAliasesRequest;
 
 // models/ExportContextRequest.ts
 var _ExportContextRequest = class _ExportContextRequest {
@@ -24495,6 +24535,7 @@ var typeMap = {
   "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
   "DefaultActionConfigSearchInput": DefaultActionConfigSearchInput,
   "DeleteCollectionRequest": DeleteCollectionRequest,
+  "DeleteColumnAliasesRequest": DeleteColumnAliasesRequest,
   "DeleteConfigRequest": DeleteConfigRequest,
   "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
   "DeleteConnectionRequest": DeleteConnectionRequest,
@@ -24524,6 +24565,7 @@ var typeMap = {
   "EventChannelConfigInput": EventChannelConfigInput,
   "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
   "ExportAnswerReportRequest": ExportAnswerReportRequest,
+  "ExportColumnAliasesRequest": ExportColumnAliasesRequest,
   "ExportContextRequest": ExportContextRequest,
   "ExportContextResponse": ExportContextResponse,
   "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
@@ -39827,6 +39869,40 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest 
+   */
+  async deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (deleteColumnAliasesRequest === null || deleteColumnAliasesRequest === void 0) {
+      throw new RequiredError("MetadataApi", "deleteColumnAliases", "deleteColumnAliasesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/delete";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(deleteColumnAliasesRequest, "DeleteColumnAliasesRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
    * @param deleteMetadataRequest 
    */
@@ -39846,6 +39922,40 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(deleteMetadataRequest, "DeleteMetadataRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest 
+   */
+  async exportColumnAliases(exportColumnAliasesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (exportColumnAliasesRequest === null || exportColumnAliasesRequest === void 0) {
+      throw new RequiredError("MetadataApi", "exportColumnAliases", "exportColumnAliasesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/export";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(exportColumnAliasesRequest, "ExportColumnAliasesRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -40078,6 +40188,67 @@ var MetadataApiRequestFactory = class extends BaseAPIRequestFactory {
       contentType
     );
     requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param separator Character that separates columns in the CSV file. Defaults to a comma.
+   * @param importPolicy How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  async importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    let _config = _options || this.configuration;
+    if (modelIdentifier === null || modelIdentifier === void 0) {
+      throw new RequiredError("MetadataApi", "importColumnAliases", "modelIdentifier");
+    }
+    if (columnAliasesFile === null || columnAliasesFile === void 0) {
+      throw new RequiredError("MetadataApi", "importColumnAliases", "columnAliasesFile");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/import";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const useForm = canConsumeForm([
+      "multipart/form-data"
+    ]);
+    let localVarFormParams;
+    if (useForm) {
+      localVarFormParams = new FormData();
+    } else {
+      localVarFormParams = new URLSearchParams();
+    }
+    if (modelIdentifier !== void 0) {
+      localVarFormParams.append("model_identifier", modelIdentifier);
+    }
+    if (columnAliasesFile !== void 0) {
+      if (localVarFormParams instanceof FormData) {
+        localVarFormParams.append("column_aliases_file", columnAliasesFile, columnAliasesFile.name);
+      }
+    }
+    if (separator !== void 0) {
+      localVarFormParams.append("separator", separator);
+    }
+    if (importPolicy !== void 0) {
+      localVarFormParams.append("import_policy", importPolicy);
+    }
+    requestContext.setBody(localVarFormParams);
+    if (!useForm) {
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "multipart/form-data"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+    }
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -40549,6 +40720,60 @@ var MetadataApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to deleteColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to deleteMetadata
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -40580,6 +40805,60 @@ var MetadataApiResponseProcessor = class {
         ""
       );
       throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to exportColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async exportColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad Request. Unable to fetch table for the given identifiers or other input issues.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden. User lacks permission to download translations for the specified table.", body, response.headers);
     }
     if (isCodeInRange("500", response.httpStatusCode)) {
       const body = ObjectSerializer.deserialize(
@@ -41006,6 +41285,60 @@ var MetadataApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "SqlQueryResponse",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to importColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async importColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -47641,6 +47974,40 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     return requestContext;
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest 
+   */
+  async deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (deleteColumnAliasesRequest === null || deleteColumnAliasesRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "deleteColumnAliases", "deleteColumnAliasesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/delete";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(deleteColumnAliasesRequest, "DeleteColumnAliasesRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
    *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
    * @param deleteConfigRequest 
    */
@@ -48505,6 +48872,40 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     requestContext.setHeaderParam("Content-Type", contentType);
     const serializedBody = ObjectSerializer.stringify(
       ObjectSerializer.serialize(exportAnswerReportRequest, "ExportAnswerReportRequest", ""),
+      contentType
+    );
+    requestContext.setBody(serializedBody);
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest 
+   */
+  async exportColumnAliases(exportColumnAliasesRequest, _options) {
+    let _config = _options || this.configuration;
+    if (exportColumnAliasesRequest === null || exportColumnAliasesRequest === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "exportColumnAliases", "exportColumnAliasesRequest");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/export";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const contentType = ObjectSerializer.getPreferredMediaType([
+      "application/json"
+    ]);
+    requestContext.setHeaderParam("Content-Type", contentType);
+    const serializedBody = ObjectSerializer.stringify(
+      ObjectSerializer.serialize(exportColumnAliasesRequest, "ExportColumnAliasesRequest", ""),
       contentType
     );
     requestContext.setBody(serializedBody);
@@ -49784,6 +50185,67 @@ var ThoughtSpotRestApiRequestFactory = class extends BaseAPIRequestFactory {
     requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
     requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
     requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    let authMethod;
+    authMethod = _config.authMethods["bearerAuth"];
+    if (authMethod?.applySecurityAuthentication) {
+      await authMethod?.applySecurityAuthentication(requestContext);
+    }
+    const defaultAuth = _config?.authMethods?.default;
+    if (defaultAuth?.applySecurityAuthentication) {
+      await defaultAuth?.applySecurityAuthentication(requestContext);
+    }
+    return requestContext;
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param separator Character that separates columns in the CSV file. Defaults to a comma.
+   * @param importPolicy How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  async importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    let _config = _options || this.configuration;
+    if (modelIdentifier === null || modelIdentifier === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "importColumnAliases", "modelIdentifier");
+    }
+    if (columnAliasesFile === null || columnAliasesFile === void 0) {
+      throw new RequiredError("ThoughtSpotRestApi", "importColumnAliases", "columnAliasesFile");
+    }
+    const localVarPath = "/api/rest/2.0/metadata/column-aliases/import";
+    const requestContext = _config.baseServer.makeRequestContext(localVarPath, "POST" /* POST */);
+    requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8");
+    requestContext.setHeaderParam("User-Agent", "ThoughtSpot-Client/typescript/2.33.0");
+    requestContext.setHeaderParam("X-ThoughtSpot-Client", "ThoughtSpot-ts-client/2.33.0");
+    const useForm = canConsumeForm([
+      "multipart/form-data"
+    ]);
+    let localVarFormParams;
+    if (useForm) {
+      localVarFormParams = new FormData();
+    } else {
+      localVarFormParams = new URLSearchParams();
+    }
+    if (modelIdentifier !== void 0) {
+      localVarFormParams.append("model_identifier", modelIdentifier);
+    }
+    if (columnAliasesFile !== void 0) {
+      if (localVarFormParams instanceof FormData) {
+        localVarFormParams.append("column_aliases_file", columnAliasesFile, columnAliasesFile.name);
+      }
+    }
+    if (separator !== void 0) {
+      localVarFormParams.append("separator", separator);
+    }
+    if (importPolicy !== void 0) {
+      localVarFormParams.append("import_policy", importPolicy);
+    }
+    requestContext.setBody(localVarFormParams);
+    if (!useForm) {
+      const contentType = ObjectSerializer.getPreferredMediaType([
+        "multipart/form-data"
+      ]);
+      requestContext.setHeaderParam("Content-Type", contentType);
+    }
     let authMethod;
     authMethod = _config.authMethods["bearerAuth"];
     if (authMethod?.applySecurityAuthentication) {
@@ -56277,6 +56739,60 @@ var ThoughtSpotRestApiResponseProcessor = class {
    * Unwraps the actual response sent by the server from the response context and deserializes the response content
    * to the expected objects
    *
+   * @params response Response returned by the server for a request to deleteColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async deleteColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
    * @params response Response returned by the server for a request to deleteConfig
    * @throws ApiException if the response code was not in [200, 299]
    */
@@ -57931,6 +58447,60 @@ var ThoughtSpotRestApiResponseProcessor = class {
         ObjectSerializer.parse(await response.body.text(), contentType),
         "HttpFile",
         "binary"
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to exportColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async exportColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("200", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Bad Request. Unable to fetch table for the given identifiers or other input issues.", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden. User lacks permission to download translations for the specified table.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unexpected error", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
+        ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
     }
@@ -60498,6 +61068,60 @@ var ThoughtSpotRestApiResponseProcessor = class {
       const body = ObjectSerializer.deserialize(
         ObjectSerializer.parse(await response.body.text(), contentType),
         "Array<WebhookStorageConfigInfo>",
+        ""
+      );
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+    }
+    throw new ApiException(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+  }
+  /**
+   * Unwraps the actual response sent by the server from the response context and deserializes the response content
+   * to the expected objects
+   *
+   * @params response Response returned by the server for a request to importColumnAliases
+   * @throws ApiException if the response code was not in [200, 299]
+   */
+  async importColumnAliasesWithHttpInfo(response) {
+    const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+    if (isCodeInRange("204", response.httpStatusCode)) {
+      return new HttpInfo(response.httpStatusCode, response.headers, response.body, void 0);
+    }
+    if (isCodeInRange("400", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (isCodeInRange("401", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Unauthorized access.", body, response.headers);
+    }
+    if (isCodeInRange("403", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Forbidden access.", body, response.headers);
+    }
+    if (isCodeInRange("500", response.httpStatusCode)) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "ErrorResponse",
+        ""
+      );
+      throw new ApiException(response.httpStatusCode, "Operation failed", body, response.headers);
+    }
+    if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+      const body = ObjectSerializer.deserialize(
+        ObjectSerializer.parse(await response.body.text(), contentType),
+        "void",
         ""
       );
       return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
@@ -74803,6 +75427,32 @@ var ObservableMetadataApi = class {
     return this.copyObjectWithHttpInfo(copyObjectRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteColumnAliases(deleteColumnAliasesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    return this.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
    * @param deleteMetadataRequest
    */
@@ -74827,6 +75477,32 @@ var ObservableMetadataApi = class {
    */
   deleteMetadata(deleteMetadataRequest, _options) {
     return this.deleteMetadataWithHttpInfo(deleteMetadataRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.exportColumnAliases(exportColumnAliasesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.exportColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliases(exportColumnAliasesRequest, _options) {
+    return this.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 9.0.0.cl or later   Exports the [TML](https://docs.thoughtspot.com/cloud/latest/tml) representation of metadata objects in JSON or YAML format.  Requires `DATADOWNLOADING` (**Can download Data**) and at least view access to the metadata object.  #### Usage guidelines  * You can export one or several objects by passing metadata object GUIDs in the `metadata` array. * When exporting TML content for a Liveboard or Answer object, you can set `export_associated` to `true` to retrieve TML content for underlying Worksheets, Tables, or Views, including the GUID of each object within the headers. When   `export_associated` is set to `true`, consider retrieving one metadata object at a time. * Set `export_fqns` to `true` to add FQNs of the referenced objects in the TML content. For example, if you send an API request to retrieve TML for a Liveboard and its associated objects, the API returns the TML content with FQNs of the referenced Worksheet. Exporting TML with FQNs is useful if ThoughtSpot has multiple objects with the same name and you want to eliminate ambiguity when importing TML files into ThoughtSpot. It eliminates the need for adding FQNs of the referenced objects manually during the import operation. * To export only the TML of feedbacks associated with an object, set the GUID of the object as `identifier`, and set the `type` as `FEEDBACK` in the `metadata` array. * To export the TML of an object along with the feedbacks associated with it, set the GUID of the object as `identifier`, set the `type` as `LOGIAL_TABLE` in the `metadata` array, and set `export_with_associated_feedbacks` in `export_options` to true.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_export_a_tml).  For more information on feedbacks, see [Feedback Documentation](https://docs.thoughtspot.com/cloud/latest/sage-feedback).     
@@ -75009,6 +75685,38 @@ var ObservableMetadataApi = class {
    */
   fetchSqlQuery(fetchSqlQueryRequest, _options) {
     return this.fetchSqlQueryWithHttpInfo(fetchSqlQueryRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.importColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    return this.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *   Version: 9.0.0.cl or later   Imports [TML](https://docs.thoughtspot.com/cloud/latest/tml) files into ThoughtSpot.  Requires `DATAMANAGEMENT` (**Can manage data**) or `ADMINISTRATION` (**Can administer ThoughtsSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance, the following Data control privileges may be required: - `CAN_CREATE_OR_EDIT_CONNECTIONS` (**Can create/edit Connections**) - `CAN_MANAGE_WORKSHEET_VIEWS_TABLES` (**Can manage data models**)  #### Usage guidelines  *  Import all related objects in a single TML Import API call. For example, Tables that use the same Connection object and Worksheets connected to these Tables. * Include the `fqn` property to distinguish objects that have the same name.   For example, if you have multiple Connections or Worksheets with the same name on ThoughtSpot and the Connection or Worksheet referenced in your TML file does not have a unique name to distinguish, it may result in invalid object references.   Adding `fqn` helps ThoughtSpot differentiate a Table from another with the same name.   We recommend [exporting TML with FQNs](#/http/api-endpoints/metadata/export-metadata-tml) and using these during the import operation. * You can upload multiple TML files at a time.   If you import a Worksheet along with Liveboards, Answers, and other dependent objects in a single API call, the imported objects will be immediately available for use.   When you import only a Worksheet object, it may take some time for the Worksheet to become available in the ThoughtSpot system. Please wait for a few minutes, and then proceed to create an Answer and Liveboard from the newly imported Worksheet.  For more information, see [TML Documentation](https://developers.thoughtspot.com/docs/tml#_import_a_tml).      
@@ -77775,6 +78483,32 @@ var ObservableThoughtSpotRestApi = class {
     return this.deleteCollectionWithHttpInfo(deleteCollectionRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.deleteColumnAliases(deleteColumnAliasesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.deleteColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    return this.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
    *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
    * @param deleteConfigRequest
    */
@@ -78555,6 +79289,32 @@ var ObservableThoughtSpotRestApi = class {
    */
   exportAnswerReport(exportAnswerReportRequest, _options) {
     return this.exportAnswerReportWithHttpInfo(exportAnswerReportRequest, _options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.exportColumnAliases(exportColumnAliasesRequest, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.exportColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliases(exportColumnAliasesRequest, _options) {
+    return this.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *  Exports the context that a selection of models, Spotter analysts and org-level context covers, as a YAML file to edit and import into another environment with importContext. Requires Spotter access and the right to write each selected scope: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Exports Spotter\'s context for a selection of models, Spotter analysts and org-level context as a single YAML file. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production: export from the source, edit the file if needed, and pass it to the `importContext` API in the target.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write each selected scope:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  Use a bearer token for the Org whose context you are exporting.  #### Usage guidelines  Select what to export with any combination of these fields. A request that selects nothing is rejected, and so is one whose selection covers no context, since the file would have nothing to import.  - `model_identifiers`: GUIDs or obj_ids of models. Exports the context each model owns: entities scoped to that model alone, or to several models that are all selected. - `analyst_identifiers`: IDs of Spotter analysts. Exports every entity that names only selected analysts, including entities that also name models. - `include_analyst_models`: when `true`, also selects every model the selected analysts use. - `include_org_level_context`: when `true`, also selects the org-level context, which names no model and no analyst and applies to every question in the Org. - `export_all_org_context`: when `true`, selects everything in the Org. Use it on its own, without the other fields.  Every kind of context entity is always included; there is no filter by type. Personal context that a user saved for themselves is never exported.  The response contains:  - `content`: the YAML file. Pass it to `importContext` as is or after editing. - `summary`: what the file holds per owner, each entry with its `scope` and `exported_count`. The `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, even with a count of 0, and so does the Org when org-level context is selected. With `export_all_org_context`, only the owners that have context have an entry. - `additional_model_identifiers` and `additional_analyst_identifiers`: context that a selected model or analyst shares with models or analysts outside the selection is left out of the file, because importing this selection wouldn\'t replace it. These lists name those other models and analysts: add them to the selection and export again to include that context. Empty when nothing was left out. For example:   - A metric scoped to models M1 and M2 belongs to both. Selecting only M1 leaves it out and lists M2 in `additional_model_identifiers`.   - An instruction scoped to analysts A and B belongs to both. Selecting only A leaves it out and lists B in `additional_analyst_identifiers`.   - With `include_analyst_models`, analyst A\'s models are selected. A metric scoped to A\'s model M1 and to model M3, which A doesn\'t use, is left out, and M3 is listed.  #### What an import of this file replaces  The file records its selection. Importing it replaces exactly the context that selection covers in the target, and nothing else:  - With `include_analyst_models`, the file lists the models the analysts use in the source, and the import replaces those models\' context even if the analysts use other models in the target. - With `export_all_org_context`, the import replaces all of the target Org\'s context, including context on models and analysts that exist only in the target.  Context of other analysts on a selected model is kept. A model\'s own context also applies inside every analyst that uses it, so replacing it changes those analysts\' answers too; the import\'s dry run lists them.  #### Limits  An export fails rather than truncating when the selection is over the limits: 10,000 entities or a 10 MiB file. Export a smaller selection instead.  #### Error responses  | Code | Description | |------|-------------| | 400  | Bad request — nothing is selected, `export_all_org_context` is combined with other fields, a model or analyst is unknown, the selection covers no context, the Org doesn\'t use the context layer, or the selection is over the export limits. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn\'t have Spotter access, or doesn\'t have the right to write a selected model, analyst, org-level context or the whole Org, as listed above. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
@@ -79641,6 +80401,38 @@ var ObservableThoughtSpotRestApi = class {
    */
   getWebhookStorageConfig(_options) {
     return this.getWebhookStorageConfigWithHttpInfo(_options).pipe(map((apiResponse) => apiResponse.data));
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const _config = mergeConfiguration(this.configuration, _options);
+    const requestContextPromise = this.requestFactory.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _config);
+    let middlewarePreObservable = from(requestContextPromise);
+    for (const middleware of _config.middleware) {
+      middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx) => middleware.pre(ctx)));
+    }
+    return middlewarePreObservable.pipe(mergeMap((ctx) => _config.httpApi.send(ctx))).pipe(mergeMap((response) => {
+      let middlewarePostObservable = of(response);
+      for (const middleware of _config.middleware.reverse()) {
+        middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp) => middleware.post(rsp)));
+      }
+      return middlewarePostObservable.pipe(map((rsp) => this.responseProcessor.importColumnAliasesWithHttpInfo(rsp)));
+    }));
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    return this.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options).pipe(map((apiResponse) => apiResponse.data));
   }
   /**
    *  Imports a YAML file of context, usually from exportContext, and replaces the context its selection covers in this environment: it inserts the file\'s entities with new IDs, then deletes the rest of that context. Run with `dry_run` set to `true` first to validate the file and preview the changes. Requires Spotter access and the right to write every scope in the file: on each model, edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model; on each Spotter analyst, having created it, having it shared with you in `MODIFY` mode, the `ADMINISTRATION` privilege, or the `CAN_MANAGE_SPOTTER` privilege together with view access to it; and the `ADMINISTRATION` privilege for org-level and all-org context.    Version: 27.1.0.cl or later   Imports a YAML file of Spotter context, usually one produced by the `exportContext` API, and replaces the context its selection covers in this environment. Context is the knowledge Spotter uses to answer questions: metrics, business definitions, answer plans, instructions, guardrails and data guides.  Use it to move context between environments, for example from development to production. Always run it with `dry_run` set to `true` first: the dry run validates the whole file and shows what the import would delete and insert, without writing anything.  Requires Spotter access: the `ADMINISTRATION`, `CAN_MANAGE_SPOTTER` or `CAN_USE_SPOTTER` privilege. You also need the right to write every scope in the file:  - Each model: edit access, or view access together with the `CAN_MANAGE_SPOTTER` privilege or the `SPOTTER_COACHING_PRIVILEGE` on that model. - Each Spotter analyst: you created it, it is shared with you in `MODIFY` mode (the `share_mode` of the `shareAnalyst` API), you have the `ADMINISTRATION` privilege, or you have the `CAN_MANAGE_SPOTTER` privilege together with view access to it. - Org-level context or the whole Org: the `ADMINISTRATION` privilege.  A scope you can\'t write is reported as an `ACCESS_DENIED` validation failure. Use a bearer token for the Org you are importing into.  #### Usage guidelines  The request must include:  - `content`: the YAML file, typically the `content` returned by `exportContext`, as is or edited. The file names its own selection, so no other identifiers are needed. Up to 10 MiB. - `dry_run`: required, with no default. `true` validates the file and previews the changes; `false` applies them.  An import is a full replace. The file\'s entities are inserted as new entities with new IDs, then everything else its selection covers is deleted. Nothing outside the selection changes, except that an entity outside it can gain a relationship the file lists.  The response contains:  - `status`: `SUCCESS` (in a dry run, the preview is complete), `VALIDATION_FAILED` (the file has problems, listed in `validation_failures`; nothing was written) or `FAILED` (a valid file hit a server error; see `diagnostics`). - `summary`: per owner, the entities before the import (`existing_record_count`), deleted and inserted. Previews in a dry run. Each entry\'s `scope` has a `type` (`DATA_MODEL`, `ANALYST` or `ORG`) and the `identifiers` of the models or analysts, empty for `ORG`. Every selected model and analyst has an entry, and so does the Org when the file selects org-level context. When the file selects the whole Org, only the owners with context in this environment or in the file have an entry. - `validation_failures`: every problem in the file, each with its `line_number`, `entity_key`, `field_name`, `reason` and `message`, so you can fix the file in one pass. - `diagnostics`: warnings and failure causes, grouped by `sub_status` (`WARNING`, `FAILURE` or `ROLLED_BACK`). Warnings include a selected model or analyst left with no context, an analyst\'s context deleted on a model the file doesn\'t name, analysts outside the selection whose answers change through a replaced model\'s context, and entities outside the import whose references or relationships into the replaced context break, because the entities they point at get new IDs. - `operation_id`: include it when contacting support.  #### What is replaced  Only the file\'s selection decides what is replaced; the entities in the file neither widen nor narrow it. Each entity belongs to exactly one owner, decided by the names in its scope:  - An entity that names analysts belongs to those analysts. - Otherwise, an entity that names models belongs to those models. - Otherwise, it is org-level context.  An entity is replaced when the selection includes every part of its owner. For example, a file that selects analyst A and model M1 replaces M1\'s own context and all of A\'s context, including A\'s context on models the file never names. It keeps analyst B\'s context on M1, and entities that also name an unselected model or analyst.  #### File format  The file is YAML with the file\'s `selection`, the `models` and `analysts` it refers to by alias, and its `entities`:  ```yaml selection: { models: [gtm], analysts: [sales] } models:   gtm: { guid: 3f1c0e2a-…, obj_id: gtm_model }    # used to find the model; not stored analysts:   sales: { id: 9b7d41c0-…, name: Sales analyst }  # used to find the analyst; not stored entities: - id: ctx_2a7c11                                 # a key within this file; not stored   type: BUSINESS_DEFINITION   title: Region   scope: { models: [gtm] }   definition: Region means sales territory, not billing country. - id: ctx_51c3d0   type: NON_SEMANTIC_INSTRUCTION   title: Answer format   scope: { analysts: [sales] }   instruction: Lead with a short table, then one sentence. ```  The identifiers in the file are for reference only and aren\'t stored as written:  - Entity `id`s are keys within the file, which references and relationships use to point at each other. The target gives every entity a new ID. - The aliases (`gtm`, `sales`) only link the entities\' scopes to the `models` and `analysts` entries. - The `guid`, `obj_id`, `id` and `name` values under `models` and `analysts` are only used to find each model and analyst in the target: models by obj_id, then by GUID; analysts by ID, then by name. Stored context points at the target\'s own objects.  #### Validations  The whole file is validated before anything is written, in a dry run and a real import alike. If anything fails, nothing is written and every failure is returned together.  Each failure has one of these reasons:  | Reason | Meaning | |--------|---------| | `SCHEMA` | The YAML is invalid, or has an unknown field or a bad value. | | `VALIDATION` | A required field is missing, a key is duplicated, the file has no entities, or a limit is passed. | | `CHAR_LIMIT` | A field is longer than its limit. | | `CHAR_BUDGET` | A scope\'s non-semantic instructions or guardrails together exceed their character budget. | | `SCOPE` | An entity is outside the file\'s selection, is personal context, or names a model that isn\'t one of its analyst\'s models. | | `UNRESOLVED_SOURCE` | A model or analyst isn\'t found in this environment. | | `UNRESOLVED_COLUMN` | A column isn\'t found by name in its model. | | `UNRESOLVED_REFERENCE` | A reference or relationship names an entity key that isn\'t in the file. | | `INVALID_RELATIONSHIP` | A relationship isn\'t allowed between those kinds of entity, forms a loop, or is part of a chain deeper than 10. | | `ACCESS_DENIED` | You can\'t write a scope the file involves. |  #### Limits  The current limits, and what a file over each one fails with:  | Limit | Value | Fails with | |-------|-------|------------| | File size | 10 MiB | A `400` error, before the file is validated | | Entities per file | 10,000 | `VALIDATION` | | Title of an entity | 120 characters | `CHAR_LIMIT` | | Any other text field of an entity | 4,000 characters | `CHAR_LIMIT` | | `NON_SEMANTIC_INSTRUCTION` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | `GUARDRAIL` entities of one scope, combined | 2,000 characters | `CHAR_BUDGET` | | Depth of a chain of relationships | 10 | `INVALID_RELATIONSHIP` |  A `DATA_GUIDE` entity must also name at least one model and no analyst; otherwise it fails with `SCOPE`.  #### Error responses  Problems in the file are not errors: the call returns `200` with `VALIDATION_FAILED`, and the details are in `validation_failures`.  | Code | Description | |------|-------------| | 400  | Bad request — `dry_run` is missing, the file is over 10 MiB, or the Org doesn\'t use the context layer. | | 401  | Unauthorized — authentication token is missing, expired, or invalid. | | 403  | Forbidden — the user doesn\'t have Spotter access. | | 500  | Unexpected error — include the `incident_id_guid` from the error response when contacting support. |  > ###### Important: > Never run with `dry_run` set to `false` without first checking a dry run. A real import deletes and replaces the context the file\'s selection covers.  > ###### Note: > - Available from version 27.1.0.cl and later, for Orgs that use the context layer. Orgs that store Spotter memory instead use the `exportMemory` and `importMemory` APIs. > - This endpoint requires Spotter — please contact ThoughtSpot Support to enable Spotter on your cluster.      
@@ -86591,6 +87383,24 @@ var PromiseMetadataApi = class {
     return result.toPromise();
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteColumnAliases(deleteColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.0.0.cl or later   Removes the specified metadata object from the ThoughtSpot system.  Requires edit access to the metadata object.       
    * @param deleteMetadataRequest
    */
@@ -86606,6 +87416,24 @@ var PromiseMetadataApi = class {
   deleteMetadata(deleteMetadataRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.deleteMetadata(deleteMetadataRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliases(exportColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.exportColumnAliases(exportColumnAliasesRequest, observableOptions);
     return result.toPromise();
   }
   /**
@@ -86732,6 +87560,30 @@ var PromiseMetadataApi = class {
   fetchSqlQuery(fetchSqlQueryRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.fetchSqlQuery(fetchSqlQueryRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
     return result.toPromise();
   }
   /**
@@ -88671,6 +89523,24 @@ var PromiseThoughtSpotRestApi = class {
     return result.toPromise();
   }
   /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteColumnAliasesWithHttpInfo(deleteColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Delete all column aliases of one or more models.    Version: 27.1.0.cl or later   Deletes all column aliases of one or more models. Use it to clear a model\'s column aliases before importing a new set, or to remove them altogether.  Requires edit access to each model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - This deletes **all** column aliases of the specified models, for every locale, Org and group. The operation cannot be undone. To keep a copy, export the column aliases first. - All models are checked first. If any model is not found (`400`) or you lack edit access to it (`403`), the request fails and no column aliases are deleted. - The column aliases of every Org and group on the model are deleted, not only those of your current Org. - To delete only some column aliases, import a file with the `DELTA` import policy and set `operation` to `DELETE` on the rows to delete.      
+   * @param deleteColumnAliasesRequest
+   */
+  deleteColumnAliases(deleteColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.deleteColumnAliases(deleteColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
    *   Version: 9.2.0.cl or later   Deletes Git repository configuration from your ThoughtSpot instance.  Requires `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  If [Role-Based Access Control (RBAC)](https://developers.thoughtspot.com/docs/rbac) is enabled on your instance on your instance, the `CAN_SETUP_VERSION_CONTROL` (**Can set up version control**) privilege.      
    * @param deleteConfigRequest
    */
@@ -89210,6 +90080,24 @@ var PromiseThoughtSpotRestApi = class {
   exportAnswerReport(exportAnswerReportRequest, _options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.exportAnswerReport(exportAnswerReportRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.exportColumnAliasesWithHttpInfo(exportColumnAliasesRequest, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Export the column aliases of a model as a CSV file.    Version: 27.1.0.cl or later   Exports the column aliases of a model as a CSV file. Use it to check the result of an import, or as the starting point for a file to import with the `DELTA` import policy.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - The response is a CSV file in the format that the import accepts, with the columns `column`, `locale`, `alias` and `description`. When Org- and group-level column aliases are enabled on the instance, the file also has `org_name` and `group_name` columns. - If the model name contains a slash (/), use the model\'s GUID or custom object ID. - The file has no `operation` column. Importing it unchanged with the `ALL_OR_NONE` policy restores the model\'s column aliases to the exported state. Importing it with `DELTA` does not delete column aliases added after the export.      
+   * @param exportColumnAliasesRequest
+   */
+  exportColumnAliases(exportColumnAliasesRequest, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.exportColumnAliases(exportColumnAliasesRequest, observableOptions);
     return result.toPromise();
   }
   /**
@@ -89960,6 +90848,30 @@ var PromiseThoughtSpotRestApi = class {
   getWebhookStorageConfig(_options) {
     const observableOptions = wrapOptions(_options);
     const result = this.api.getWebhookStorageConfig(observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.importColumnAliasesWithHttpInfo(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
+    return result.toPromise();
+  }
+  /**
+   *  Import column aliases for a model from a CSV file.    Version: 27.1.0.cl or later   Imports column aliases for a model from a CSV file. Column aliases set the column name and description that users see, per locale and optionally per Org and group, without changing the model.  Requires edit access to the model and the `DATAMANAGEMENT` (**Can manage data**), **Can manage data models** or `ADMINISTRATION` (**Can administer ThoughtSpot**) privilege.  #### Usage guidelines  - Send the request as `multipart/form-data`, with the CSV file in `column_aliases_file`. - The CSV file must have a header row with the columns `column`, `locale`, `alias` and `description`. A row\'s `alias` or `description` can be empty. With `DELTA`, either the `alias` or the `description` column can be left out. - When Org and group targeting is enabled on the instance, the `org_name` and `group_name` columns are also required. Otherwise they are optional. - The `operation` column is optional and is used only with `DELTA`. - Use `TS_WILDCARD_ALL` in `locale`, `org_name` or `group_name` to apply an alias to every locale, Org or group. - Each column alias is identified by its `column`, `locale`, `org_name` and `group_name`. - Requests must include a `Content-Length` header; a request without one is rejected with a `411` error. - Files of up to **25 MB** are supported; a larger request is rejected with a `413` error. To import more column aliases, split them into several files and import them one after another with `import_policy` set to `DELTA`.  #### Import policies  - `ALL_OR_NONE` (default): replaces all of the model\'s column aliases with the contents of the file. Column aliases that are not in the file are deleted. - `DELTA`: applies only the rows in the file and leaves every other column alias unchanged. A row whose `operation` is `UPSERT` or blank adds the column alias or updates the existing one. A row whose `operation` is `DELETE` deletes that column alias; its `alias` and `description` can be empty. Deleting a column alias that does not exist is not an error.  `DELTA` is available only when it is enabled on the instance. Otherwise the request returns a `400` error.  With either policy, the whole file is validated before anything is written. If any row is invalid, no column alias is changed, and the error lists the invalid rows.  #### Errors and retries  - `409`: another `DELTA` import is running on the same model. Retry after it finishes. - `500` during a `DELTA` import: some rows may already be applied. Importing the same file again is safe and completes the import. - With `DELTA`, two columns can be given the same alias in the same locale, Org and group. Keeping aliases unique is the caller\'s responsibility.      
+   * @param modelIdentifier GUID, name or custom object ID of the model whose column aliases are imported. Names and IDs are matched exactly and are case-sensitive.
+   * @param columnAliasesFile CSV file with one column alias per row. Required columns: &#x60;column&#x60; (the column name in the model), &#x60;locale&#x60; (for example &#x60;fr-FR&#x60;, or &#x60;TS_WILDCARD_ALL&#x60; for every locale), &#x60;alias&#x60; and &#x60;description&#x60;; a row\\\&#39;s &#x60;alias&#x60; or &#x60;description&#x60; can be empty, and with &#x60;DELTA&#x60; either column can be left out. &#x60;org_name&#x60; and &#x60;group_name&#x60; target an alias at an Org or a group; they are required when Org and group targeting is enabled on the instance. Optional column: &#x60;operation&#x60; (&#x60;UPSERT&#x60; or &#x60;DELETE&#x60;, used only when &#x60;import_policy&#x60; is &#x60;DELTA&#x60;). Files of up to 25 MB are supported.
+   * @param [separator] Character that separates columns in the CSV file. Defaults to a comma.
+   * @param [importPolicy] How the file is applied to the model\\\&#39;s existing column aliases. &#x60;ALL_OR_NONE&#x60; (default) replaces all of them with the file\\\&#39;s contents. &#x60;DELTA&#x60; adds, updates or deletes only the rows in the file and leaves every other column alias unchanged.
+   */
+  importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, _options) {
+    const observableOptions = wrapOptions(_options);
+    const result = this.api.importColumnAliases(modelIdentifier, columnAliasesFile, separator, importPolicy, observableOptions);
     return result.toPromise();
   }
   /**
@@ -93183,6 +94095,7 @@ export {
   DefaultActionConfigInputCreate,
   DefaultActionConfigSearchInput,
   DeleteCollectionRequest,
+  DeleteColumnAliasesRequest,
   DeleteConfigRequest,
   DeleteConnectionConfigurationRequest,
   DeleteConnectionRequest,
@@ -93213,6 +94126,7 @@ export {
   EventChannelConfigInput,
   ExcludeMetadataListItemInput,
   ExportAnswerReportRequest,
+  ExportColumnAliasesRequest,
   ExportContextRequest,
   ExportContextResponse,
   ExportLiveboardReportRequest,

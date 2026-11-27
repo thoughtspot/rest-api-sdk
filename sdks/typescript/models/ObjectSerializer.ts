@@ -169,6 +169,7 @@ export * from '../models/DefaultActionConfigInput';
 export * from '../models/DefaultActionConfigInputCreate';
 export * from '../models/DefaultActionConfigSearchInput';
 export * from '../models/DeleteCollectionRequest';
+export * from '../models/DeleteColumnAliasesRequest';
 export * from '../models/DeleteConfigRequest';
 export * from '../models/DeleteConnectionConfigurationRequest';
 export * from '../models/DeleteConnectionRequest';
@@ -198,6 +199,7 @@ export * from '../models/EventChannelConfig';
 export * from '../models/EventChannelConfigInput';
 export * from '../models/ExcludeMetadataListItemInput';
 export * from '../models/ExportAnswerReportRequest';
+export * from '../models/ExportColumnAliasesRequest';
 export * from '../models/ExportContextRequest';
 export * from '../models/ExportContextResponse';
 export * from '../models/ExportLiveboardReportRequest';
@@ -787,6 +789,7 @@ import { DefaultActionConfigInput } from '../models/DefaultActionConfigInput';
 import { DefaultActionConfigInputCreate } from '../models/DefaultActionConfigInputCreate';
 import { DefaultActionConfigSearchInput } from '../models/DefaultActionConfigSearchInput';
 import { DeleteCollectionRequest } from '../models/DeleteCollectionRequest';
+import { DeleteColumnAliasesRequest } from '../models/DeleteColumnAliasesRequest';
 import { DeleteConfigRequest } from '../models/DeleteConfigRequest';
 import { DeleteConnectionConfigurationRequest } from '../models/DeleteConnectionConfigurationRequest';
 import { DeleteConnectionRequest } from '../models/DeleteConnectionRequest';
@@ -816,6 +819,7 @@ import { EventChannelConfig, EventChannelConfigEventTypeEnum  , EventChannelConf
 import { EventChannelConfigInput, EventChannelConfigInputEventTypeEnum  , EventChannelConfigInputChannelsEnum   } from '../models/EventChannelConfigInput';
 import { ExcludeMetadataListItemInput , ExcludeMetadataListItemInputTypeEnum   } from '../models/ExcludeMetadataListItemInput';
 import { ExportAnswerReportRequest   , ExportAnswerReportRequestFileFormatEnum        , ExportAnswerReportRequestTypeEnum   } from '../models/ExportAnswerReportRequest';
+import { ExportColumnAliasesRequest } from '../models/ExportColumnAliasesRequest';
 import { ExportContextRequest } from '../models/ExportContextRequest';
 import { ExportContextResponse } from '../models/ExportContextResponse';
 import { ExportLiveboardReportRequest     , ExportLiveboardReportRequestFileFormatEnum          } from '../models/ExportLiveboardReportRequest';
@@ -1766,6 +1770,7 @@ let typeMap: {[index: string]: any} = {
     "DefaultActionConfigInputCreate": DefaultActionConfigInputCreate,
     "DefaultActionConfigSearchInput": DefaultActionConfigSearchInput,
     "DeleteCollectionRequest": DeleteCollectionRequest,
+    "DeleteColumnAliasesRequest": DeleteColumnAliasesRequest,
     "DeleteConfigRequest": DeleteConfigRequest,
     "DeleteConnectionConfigurationRequest": DeleteConnectionConfigurationRequest,
     "DeleteConnectionRequest": DeleteConnectionRequest,
@@ -1795,6 +1800,7 @@ let typeMap: {[index: string]: any} = {
     "EventChannelConfigInput": EventChannelConfigInput,
     "ExcludeMetadataListItemInput": ExcludeMetadataListItemInput,
     "ExportAnswerReportRequest": ExportAnswerReportRequest,
+    "ExportColumnAliasesRequest": ExportColumnAliasesRequest,
     "ExportContextRequest": ExportContextRequest,
     "ExportContextResponse": ExportContextResponse,
     "ExportLiveboardReportRequest": ExportLiveboardReportRequest,
